@@ -3,9 +3,10 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
 import { useDropzone } from "react-dropzone";
-import { FileUp, ShieldCheck, Zap, HardDrive, LayoutGrid, X, GripVertical, FileText, Loader2, Download } from "lucide-react";
+import { FileUp, ShieldCheck, Zap, HardDrive, LayoutGrid, X, GripVertical, FileText, Loader2, Download, Eraser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 
 interface VaultFile {
   id: string;
@@ -129,6 +130,20 @@ export default function Home() {
               Your Browser.<br />
               <span className="text-emerald-500">Zero Uploads.</span>
             </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center space-x-4 pt-4"
+            >
+              <Link href="/tools/redact">
+                <Button variant="outline" className="border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/10">
+                  <Eraser className="mr-2 h-4 w-4" />
+                  Try PDF Redactor
+                </Button>
+              </Link>
+            </motion.div>
           </div>
 
           {/* Conditional UI: Dropzone or File List */}

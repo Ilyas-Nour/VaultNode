@@ -1,0 +1,21 @@
+
+> vault-node@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 6.0s
+  Running TypeScript ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/5) ...
+Warning: Please use the `legacy` build in Node.js environments.
+Error occurred prerendering page "/tools/redact". Read more: https://nextjs.org/docs/messages/prerender-error
+ReferenceError: DOMMatrix is not defined
+    at module evaluation (C:\Users\pc\VaultNode\.next\server\chunks\ssr\_33719dd4._.js:2:131172)
+    at instantiateModule (C:\Users\pc\VaultNode\.next\server\chunks\ssr\[turbopack]_runtime.js:740:9)
+    at getOrInstantiateModuleFromParent (C:\Users\pc\VaultNode\.next\server\chunks\ssr\[turbopack]_runtime.js:763:12)
+    at Context.commonJsRequire [as r] (C:\Users\pc\VaultNode\.next\server\chunks\ssr\[turbopack]_runtime.js:249:12) {
+  digest: '4206264292'
+}
+⨯ Next.js build worker exited with code: 1 and signal: null
