@@ -1,23 +1,12 @@
-"use client";
+import type { Metadata } from "next";
+import RedactClient from "@/components/RedactClient";
 
-import dynamic from "next/dynamic";
-import { Loader2 } from "lucide-react";
-
-/**
- * PRODUCTION-READY WRAPPER
- * Since pdfjs-dist and HTML5 Canvas are strictly client-side, we use Next.js 
- * dynamic imports with { ssr: false } to prevent build-time prerendering errors.
- */
-const RedactorTool = dynamic(() => import("@/components/RedactorTool"), {
-    ssr: false,
-    loading: () => (
-        <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center space-y-4">
-            <Loader2 className="w-10 h-10 text-emerald-500 animate-spin" />
-            <p className="text-zinc-500 font-medium animate-pulse">Initializing Secure Sandbox...</p>
-        </div>
-    )
-});
+export const metadata: Metadata = {
+    title: "Secure PDF Redactor",
+    description: "Permanently blackout sensitive information in PDFs. 100% client-side rasterization ensures zero-trace data removal.",
+    keywords: ["pdf redaction tool", "secure blackout pdf", "private pdf editor", "offline redaction", "vaultnode redact"]
+};
 
 export default function RedactPage() {
-    return <RedactorTool />;
+    return <RedactClient />;
 }
