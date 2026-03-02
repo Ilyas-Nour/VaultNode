@@ -18,7 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
-import * as pdfjs from "pdfjs-dist";
+import * as pdfjsLib from "pdfjs-dist";
 import { PDFDocument } from "pdf-lib";
 
 // Constants for Coordinate Translation & Security
@@ -44,9 +44,9 @@ export default function RedactorTool() {
     const interactiveOverlayRef = useRef<HTMLCanvasElement>(null);
     const hiddenBaseCanvasRef = useRef<HTMLCanvasElement>(null);
 
-    // Initialize pdf.js worker locally from CDN (Production-ready)
+    // Initialize pdf.js worker locally from CDN (Next.js 15 Fix)
     useEffect(() => {
-        pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
     }, []);
 
     /**
@@ -56,7 +56,7 @@ export default function RedactorTool() {
     const renderPdfToCanvas = useCallback(async (pdfFile: File) => {
         try {
             const arrayBuffer = await pdfFile.arrayBuffer();
-            const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             const page = await pdf.getPage(1); // Redacting page 1 for initial release
 
             const uiViewport = page.getViewport({ scale: UI_RENDER_SCALE });
@@ -195,8 +195,8 @@ export default function RedactorTool() {
                 );
             });
 
-            // 2. Image Flattening: Convert to high-quality JPEG (Destructive export)
-            const imgData = baseCanvas.toDataURL("image/jpeg", 1.0);
+            // 2. Image Flattening: Convert to high-quality JPEG (Destructive export at 0.95 quality)
+            const imgData = baseCanvas.toDataURL("image/jpeg", 0.95);
 
             // 3. Document Reconstruction: Build final PDF from the flattened image
             const pdfDoc = await PDFDocument.create();
