@@ -114,20 +114,19 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-sm font-medium"
+              className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs sm:text-sm font-bold tracking-tight uppercase"
             >
-              <ShieldCheck className="w-4 h-4" />
-              <span>100% Private. Local Processing.</span>
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>100% Private Local Processing</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl font-bold tracking-tight text-white"
+              className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.9] lg:leading-[0.85]"
             >
               Your Files.<br />
-              Your Browser.<br />
               <span className="text-emerald-500">Zero Uploads.</span>
             </motion.h1>
 
@@ -135,12 +134,12 @@ export default function Home() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex items-center space-x-4 pt-4"
+              className="flex items-center justify-center lg:justify-start space-x-4 pt-6"
             >
               <Link href="/tools/redact">
-                <Button variant="outline" className="border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/10">
+                <Button variant="outline" className="h-12 border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 rounded-xl px-6 font-bold transition-all hover:scale-105 active:scale-95">
                   <Eraser className="mr-2 h-4 w-4" />
-                  Try PDF Redactor
+                  Try Secure Redactor
                 </Button>
               </Link>
             </motion.div>
@@ -160,30 +159,27 @@ export default function Home() {
                   <div
                     {...getRootProps()}
                     className={`
-                      relative w-full aspect-[16/10] sm:aspect-[16/8] rounded-3xl border-2 border-dashed 
-                      transition-all duration-500 cursor-pointer flex flex-col items-center justify-center space-y-6
-                      ${isDragActive
-                        ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_30px_rgba(16,185,129,0.2)]"
-                        : "border-zinc-800 bg-zinc-900/30 hover:border-zinc-700"
+                        relative w-full aspect-[4/3] sm:aspect-[16/8] rounded-[2.5rem] border-2 border-dashed 
+                        transition-all duration-700 cursor-pointer flex flex-col items-center justify-center space-y-6
+                        ${isDragActive
+                        ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_80px_rgba(16,185,129,0.1)] scale-102"
+                        : "border-zinc-800 bg-zinc-900/20 hover:border-zinc-700"
                       }
-                    `}
+                      `}
                   >
                     <input {...getInputProps()} />
-                    <div className={`p-4 rounded-2xl bg-zinc-900 border border-zinc-800 transition-all duration-500 ${isDragActive ? "scale-110 shadow-lg border-emerald-500/50" : ""}`}>
-                      <FileUp className={`w-10 h-10 transition-colors duration-500 ${isDragActive ? "text-emerald-500" : "text-zinc-500"}`} />
+                    <div className={`p-6 rounded-[2rem] bg-zinc-900 border border-zinc-800 transition-all duration-700 shadow-2xl ${isDragActive ? "scale-110 border-emerald-500/50" : ""}`}>
+                      <FileUp className={`w-10 h-10 transition-colors duration-500 ${isDragActive ? "text-emerald-500" : "text-zinc-600"}`} />
                     </div>
 
-                    <div className="text-center space-y-2 px-4">
-                      <h3 className="text-xl font-semibold text-white">
-                        Drag & drop PDF files here
+                    <div className="text-center space-y-2 px-8">
+                      <h3 className="text-xl font-bold tracking-tight text-white">
+                        Drop Files Locally
                       </h3>
-                      <p className="text-zinc-500">
-                        or click to browse from your computer
+                      <p className="text-zinc-500 text-sm leading-relaxed">
+                        Your PDF data stays in your RAM.<br />
+                        <span className="italic">100% Client-Side.</span>
                       </p>
-                    </div>
-
-                    <div className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden">
-                      <div className={`absolute inset-0 pulse-emerald opacity-0 transition-opacity duration-500 ${isDragActive ? "opacity-100" : ""}`} />
                     </div>
                   </div>
                 </motion.div>
@@ -193,18 +189,22 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
-                  className="space-y-6"
+                  className="space-y-8 w-full"
                 >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-medium text-white flex items-center space-x-2">
-                      <FileText className="w-5 h-5 text-emerald-500" />
-                      <span>{files.length} Files Ready</span>
-                    </h3>
+                  <div className="flex items-center justify-between px-2">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <h3 className="text-lg font-bold tracking-tight text-white">
+                        {files.length} {files.length === 1 ? 'Document' : 'Documents'}
+                      </h3>
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => setFiles([])}
-                      className="text-zinc-500 hover:text-white"
+                      className="text-zinc-500 hover:text-white font-bold"
                     >
                       Clear All
                     </Button>
@@ -214,7 +214,7 @@ export default function Home() {
                     axis="y"
                     values={files}
                     onReorder={setFiles}
-                    className="space-y-3"
+                    className="space-y-4 max-h-[40vh] overflow-y-auto px-1 py-1 custom-scroll"
                   >
                     {files.map((file) => (
                       <Reorder.Item
@@ -222,17 +222,17 @@ export default function Home() {
                         value={file}
                         className="touch-none"
                       >
-                        <Card className="p-4 bg-zinc-900/50 border-zinc-800/50 flex items-center space-x-4 glow-hover cursor-grab active:cursor-grabbing">
-                          <GripVertical className="w-4 h-4 text-zinc-700 shrink-0" />
+                        <Card className="p-5 bg-zinc-900/40 border-zinc-800/50 flex items-center space-x-4 backdrop-blur-xl rounded-2xl hover:bg-zinc-900/60 transition-colors">
+                          <GripVertical className="w-4 h-4 text-zinc-800 shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-white truncate">{file.name}</p>
-                            <p className="text-xs text-zinc-500">{formatFileSize(file.size)}</p>
+                            <p className="text-sm font-bold text-white truncate pr-4">{file.name}</p>
+                            <p className="text-[10px] uppercase font-black tracking-widest text-zinc-600 mt-1">{formatFileSize(file.size)}</p>
                           </div>
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={(e: React.MouseEvent) => { e.stopPropagation(); removeFile(file.id); }}
-                            className="h-8 w-8 text-zinc-600 hover:text-zinc-400 hover:bg-zinc-800"
+                            className="h-10 w-10 text-zinc-700 hover:text-red-500 hover:bg-red-500/10 rounded-xl"
                           >
                             <X className="h-4 w-4" />
                           </Button>
@@ -241,27 +241,30 @@ export default function Home() {
                     ))}
                   </Reorder.Group>
 
-                  <div className="flex flex-col space-y-4">
+                  <div className="flex flex-col space-y-6 pt-4">
                     <Button
                       onClick={handleMerge}
                       disabled={isProcessing || files.length < 2}
-                      className="w-full h-14 bg-emerald-500 hover:bg-emerald-600 text-emerald-950 font-bold text-lg rounded-2xl shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300"
+                      className="w-full h-16 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black text-xl rounded-2xl shadow-xl transition-all duration-500 active:scale-95"
                     >
                       {isProcessing ? (
                         <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Processing PDFs...
+                          <Loader2 className="mr-3 h-6 w-6 animate-spin" />
+                          Processing...
                         </>
                       ) : (
                         <>
-                          <Download className="mr-2 h-5 w-5" />
-                          Merge PDFs Locally
+                          <Download className="mr-3 h-5 w-5" />
+                          Merge Locally
                         </>
                       )}
                     </Button>
-                    <p className="text-center text-xs text-zinc-500">
-                      Privacy Shield Active: Files are processed 100% in-browser using WebAssembly.
-                    </p>
+                    <div className="flex items-center justify-center space-x-2 text-zinc-600">
+                      <ShieldCheck className="w-3 h-3" />
+                      <p className="text-[10px] font-bold uppercase tracking-widest">
+                        Privacy Shield: Local processing active
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -269,22 +272,26 @@ export default function Home() {
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-2xl pt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-2xl pt-8">
             {[
-              { icon: Zap, title: "Instant", desc: "No queueing." },
-              { icon: HardDrive, title: "Offline", desc: "Works without net." },
-              { icon: LayoutGrid, title: "Private", desc: "Local-only." }
+              { icon: Zap, title: "Instant", desc: "No latency." },
+              { icon: HardDrive, title: "Private", desc: "Vault local." },
+              { icon: LayoutGrid, title: "Unified", desc: "Solid UX." }
             ].map((f, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800/50 flex flex-col items-center space-y-2 text-center glow-hover"
+                className={`${i === 2 ? 'col-span-2 sm:col-span-1' : ''} p-5 rounded-3xl bg-zinc-950 border border-zinc-900 flex flex-col items-center justify-center space-y-2 text-center hover:border-emerald-500/30 transition-all duration-500 group`}
               >
-                <f.icon className="w-5 h-5 text-emerald-500" />
-                <span className="text-sm font-semibold text-white">{f.title}</span>
-                <span className="text-xs text-zinc-500">{f.desc}</span>
+                <div className="p-2 rounded-xl bg-zinc-900 group-hover:bg-emerald-500/10 transition-colors">
+                  <f.icon className="w-4 h-4 text-emerald-500" />
+                </div>
+                <div className="space-y-0.5">
+                  <span className="text-xs font-black uppercase tracking-tighter text-white">{f.title}</span>
+                  <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">{f.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -293,10 +300,23 @@ export default function Home() {
 
         {/* Sidebar / Desktop AdSense Placeholder */}
         <aside className="hidden lg:block space-y-6">
-          <div className="sticky top-12 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800 min-h-[600px] flex flex-col items-center justify-center text-center space-y-4">
-            <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Advertisement</span>
-            <div className="w-[300px] h-[600px] bg-zinc-800/20 flex items-center justify-center text-xs text-zinc-600 border border-dashed border-zinc-800">
-              300 x 600 STICKY BANNER
+          <div className="sticky top-12 p-8 rounded-[2.5rem] bg-zinc-900/30 border border-zinc-900 min-h-[600px] flex flex-col items-center justify-center text-center space-y-8 backdrop-blur-3xl">
+            <div className="space-y-2">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-black">Official Partner</span>
+              <div className="w-full h-px bg-zinc-800" />
+            </div>
+
+            <div className="w-[300px] h-[600px] bg-zinc-950/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 border border-dashed border-zinc-800 group hover:border-emerald-500/20 transition-all">
+              <div className="w-16 h-16 border-2 border-zinc-800 rounded-3xl rotate-45 flex items-center justify-center mb-6 group-hover:border-emerald-500/20 transition-all">
+                <ShieldCheck className="w-6 h-6 text-zinc-700 group-hover:text-emerald-500/50 transition-all -rotate-45" />
+              </div>
+              <p className="text-xs text-zinc-600 font-bold tracking-tight px-4 leading-relaxed italic">
+                Secure your digital workspace with VaultNode Premium. Local encryption for the modern era.
+              </p>
+            </div>
+
+            <div className="text-[9px] uppercase tracking-widest text-zinc-700 font-bold">
+              v1.0.4-Stable
             </div>
           </div>
         </aside>
