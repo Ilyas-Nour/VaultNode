@@ -1,14 +1,29 @@
 "use client";
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useDropzone } from "react-dropzone";
-import { FileUp, ShieldCheck, Eraser, Loader2, Download, ChevronLeft, Square, MousePointer2, AlertTriangle } from "lucide-react";
+import {
+    FileUp,
+    ShieldCheck,
+    Eraser,
+    Loader2,
+    Download,
+    ChevronLeft,
+    Square,
+    MousePointer2,
+    AlertTriangle,
+    Lock
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import * as pdfjs from "pdfjs-dist";
 import { PDFDocument } from "pdf-lib";
+
+// Constants for Coordinate Translation & Security
+const UI_RENDER_SCALE = 1.5;
+const SECURE_EXPORT_SCALE = 3.0;
 
 interface RedactionBox {
     x: number;
@@ -17,9 +32,6 @@ interface RedactionBox {
     height: number;
 }
 
-const UI_SCALE = 1.5;
-const EXPORT_SCALE = 3.0;
-
 export default function RedactorTool() {
     const [file, setFile] = useState<File | null>(null);
     const [redactions, setRedactions] = useState<RedactionBox[]>([]);
@@ -27,36 +39,40 @@ export default function RedactorTool() {
     const [isDrawing, setIsDrawing] = useState(false);
     const [currentBox, setCurrentBox] = useState<RedactionBox | null>(null);
 
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const overlayRef = useRef<HTMLCanvasElement>(null);
-    const exportCanvasRef = useRef<HTMLCanvasElement>(null);
+    // Canvas refs for the Two-Layer & Secure-Rendering system
+    const uiCanvasRef = useRef<HTMLCanvasElement>(null);
+    const interactiveOverlayRef = useRef<HTMLCanvasElement>(null);
+    const hiddenBaseCanvasRef = useRef<HTMLCanvasElement>(null);
 
-    // Initialize pdfjs worker on mount
+    // Initialize pdf.js worker locally from CDN (Production-ready)
     useEffect(() => {
         pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
     }, []);
 
-    // Render PDF to Canvas
-    const renderPage = useCallback(async (pdfFile: File) => {
+    /**
+     * Renders the PDF page to both the UI canvas (visiblity) and 
+     * a high-res hidden canvas (for the final secure export).
+     */
+    const renderPdfToCanvas = useCallback(async (pdfFile: File) => {
         try {
             const arrayBuffer = await pdfFile.arrayBuffer();
             const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
-            const page = await pdf.getPage(1); // Process first page
+            const page = await pdf.getPage(1); // Redacting page 1 for initial release
 
-            const uiViewport = page.getViewport({ scale: UI_SCALE });
-            const exportViewport = page.getViewport({ scale: EXPORT_SCALE });
+            const uiViewport = page.getViewport({ scale: UI_RENDER_SCALE });
+            const exportViewport = page.getViewport({ scale: SECURE_EXPORT_SCALE });
 
-            const canvas = canvasRef.current;
-            const overlay = overlayRef.current;
-            const exportCanvas = exportCanvasRef.current;
+            const uiCanvas = uiCanvasRef.current;
+            const overlay = interactiveOverlayRef.current;
+            const baseCanvas = hiddenBaseCanvasRef.current;
 
-            if (!canvas || !overlay || !exportCanvas) return;
+            if (!uiCanvas || !overlay || !baseCanvas) return;
 
-            // Setup UI Canvas
-            const uiCtx = canvas.getContext("2d");
+            // 1. Setup UI Viewport
+            const uiCtx = uiCanvas.getContext("2d");
             if (!uiCtx) return;
-            canvas.height = uiViewport.height;
-            canvas.width = uiViewport.width;
+            uiCanvas.height = uiViewport.height;
+            uiCanvas.width = uiViewport.width;
             overlay.height = uiViewport.height;
             overlay.width = uiViewport.width;
 
@@ -65,35 +81,38 @@ export default function RedactorTool() {
                 viewport: uiViewport,
             } as any).promise;
 
-            // Setup Export Canvas (Hidden)
-            const exportCtx = exportCanvas.getContext("2d");
-            if (!exportCtx) return;
-            exportCanvas.height = exportViewport.height;
-            exportCanvas.width = exportViewport.width;
+            // 2. Setup High-Res Base Canvas (Prerequisite for Flattening)
+            const baseCtx = baseCanvas.getContext("2d");
+            if (!baseCtx) return;
+            baseCanvas.height = exportViewport.height;
+            baseCanvas.width = exportViewport.width;
 
             await page.render({
-                canvasContext: exportCtx,
+                canvasContext: baseCtx,
                 viewport: exportViewport,
             } as any).promise;
 
-            drawRedactions();
+            refreshOverlay();
         } catch (error) {
-            console.error("Error rendering PDF:", error);
-            alert("Failed to render PDF for secure processing.");
+            console.error("Secure Render Error:", error);
+            alert("Security Error: Unable to render document locally.");
         }
     }, []);
 
     useEffect(() => {
-        if (file) renderPage(file);
-    }, [file, renderPage]);
+        if (file) renderPdfToCanvas(file);
+    }, [file, renderPdfToCanvas]);
 
-    // Drawing UI Logic (Overlay)
-    const drawRedactions = useCallback(() => {
-        const ctx = overlayRef.current?.getContext("2d");
-        if (!ctx || !overlayRef.current) return;
+    /**
+     * Interaction Logic: Handles drawing redaction rectangles
+     */
+    const refreshOverlay = useCallback(() => {
+        const ctx = interactiveOverlayRef.current?.getContext("2d");
+        if (!ctx || !interactiveOverlayRef.current) return;
 
-        ctx.clearRect(0, 0, overlayRef.current.width, overlayRef.current.height);
+        ctx.clearRect(0, 0, interactiveOverlayRef.current.width, interactiveOverlayRef.current.height);
 
+        // Draw existing redaction zones
         ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
         ctx.strokeStyle = "#10b981";
         ctx.lineWidth = 2;
@@ -103,6 +122,7 @@ export default function RedactorTool() {
             ctx.strokeRect(box.x, box.y, box.width, box.height);
         });
 
+        // Draw active drawing preview
         if (currentBox) {
             ctx.fillStyle = "rgba(16, 185, 129, 0.2)";
             ctx.strokeRect(currentBox.x, currentBox.y, currentBox.width, currentBox.height);
@@ -110,59 +130,60 @@ export default function RedactorTool() {
     }, [redactions, currentBox]);
 
     useEffect(() => {
-        drawRedactions();
-    }, [drawRedactions]);
+        refreshOverlay();
+    }, [refreshOverlay]);
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if (!overlayRef.current) return;
-        const rect = overlayRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    const onMouseDown = (e: React.MouseEvent) => {
+        if (!interactiveOverlayRef.current) return;
+        const rect = interactiveOverlayRef.current.getBoundingClientRect();
         setIsDrawing(true);
-        setCurrentBox({ x, y, width: 0, height: 0 });
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!isDrawing || !currentBox || !overlayRef.current) return;
-        const rect = overlayRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
         setCurrentBox({
-            ...currentBox,
-            width: x - currentBox.x,
-            height: y - currentBox.y
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+            width: 0,
+            height: 0
         });
     };
 
-    const handleMouseUp = () => {
-        if (currentBox && Math.abs(currentBox.width) > 5 && Math.abs(currentBox.height) > 5) {
-            const normalized = {
+    const onMouseMove = (e: React.MouseEvent) => {
+        if (!isDrawing || !currentBox || !interactiveOverlayRef.current) return;
+        const rect = interactiveOverlayRef.current.getBoundingClientRect();
+        setCurrentBox({
+            ...currentBox,
+            width: (e.clientX - rect.left) - currentBox.x,
+            height: (e.clientY - rect.top) - currentBox.y
+        });
+    };
+
+    const onMouseUp = () => {
+        if (currentBox && Math.abs(currentBox.width) > 4 && Math.abs(currentBox.height) > 4) {
+            setRedactions(prev => [...prev, {
                 x: currentBox.width > 0 ? currentBox.x : currentBox.x + currentBox.width,
                 y: currentBox.height > 0 ? currentBox.y : currentBox.y + currentBox.height,
                 width: Math.abs(currentBox.width),
                 height: Math.abs(currentBox.height)
-            };
-            setRedactions(prev => [...prev, normalized]);
+            }]);
         }
         setIsDrawing(false);
         setCurrentBox(null);
     };
 
-    // The Secure Implementation: Rasterization Flattening
-    const handleRedact = async () => {
+    /**
+     * THE CORE SECURITY LOGIC: Canvas Flattening & Rasterization
+     * This permanently destroys underlying text data by reconstructing the PDF as an image.
+     */
+    const handleSecureRedact = async () => {
         if (!file || redactions.length === 0) return;
         setIsProcessing(true);
 
         try {
-            const exportCanvas = exportCanvasRef.current;
-            if (!exportCanvas) throw new Error("Export canvas not ready");
+            const baseCanvas = hiddenBaseCanvasRef.current;
+            if (!baseCanvas) throw new Error("Base canvas missing");
+            const ctx = baseCanvas.getContext("2d");
+            if (!ctx) throw new Error("Context failure");
 
-            const ctx = exportCanvas.getContext("2d");
-            if (!ctx) throw new Error("Canvas context failed");
-
-            // 1. Draw solid black boxes on the high-res baseCanvas
-            const scaleFactor = EXPORT_SCALE / UI_SCALE;
+            // 1. Pixel-Level Redaction: Draw solid black onto high-res canvas
+            const scaleFactor = SECURE_EXPORT_SCALE / UI_RENDER_SCALE;
             ctx.fillStyle = "rgb(0, 0, 0)";
 
             redactions.forEach(box => {
@@ -174,28 +195,29 @@ export default function RedactorTool() {
                 );
             });
 
-            // 2. Convert high-res baseCanvas to a high-quality JPEG (Destroys underlying vector text)
-            const imgData = exportCanvas.toDataURL("image/jpeg", 1.0);
+            // 2. Image Flattening: Convert to high-quality JPEG (Destructive export)
+            const imgData = baseCanvas.toDataURL("image/jpeg", 1.0);
 
-            // 3. Rebuild PDF using pdf-lib
+            // 3. Document Reconstruction: Build final PDF from the flattened image
             const pdfDoc = await PDFDocument.create();
 
-            // Get original PDF to preserve page dimensions if possible
-            const originalArrayBuffer = await file.arrayBuffer();
-            const originalPdf = await PDFDocument.load(originalArrayBuffer);
+            // Load original for dimension matching
+            const originalAb = await file.arrayBuffer();
+            const originalPdf = await PDFDocument.load(originalAb);
             const originalPage = originalPdf.getPages()[0];
             const { width, height } = originalPage.getSize();
 
             const page = pdfDoc.addPage([width, height]);
-            const embeddedImage = await pdfDoc.embedJpg(imgData);
+            const redactedImage = await pdfDoc.embedJpg(imgData);
 
-            page.drawImage(embeddedImage, {
+            page.drawImage(redactedImage, {
                 x: 0,
                 y: 0,
                 width: width,
                 height: height,
             });
 
+            // Serialize and download
             const pdfBytes = await pdfDoc.save();
             const blob = new Blob([pdfBytes as any], { type: "application/pdf" });
             const url = URL.createObjectURL(blob);
@@ -204,9 +226,9 @@ export default function RedactorTool() {
             link.download = `vaultnode-secured-${file.name}`;
             link.click();
             URL.revokeObjectURL(url);
-        } catch (error) {
-            console.error("Redaction error:", error);
-            alert("Error generating secured document.");
+        } catch (err) {
+            console.error("Flattening failure:", err);
+            alert("Failed to securely flatten the document.");
         } finally {
             setIsProcessing(false);
         }
@@ -223,126 +245,134 @@ export default function RedactorTool() {
     });
 
     return (
-        <main className="min-h-screen bg-zinc-950 text-white p-6 flex flex-col items-center">
+        <div className="min-h-screen bg-zinc-950 text-white p-6 flex flex-col items-center">
             <div className="w-full max-w-6xl flex flex-col space-y-8">
 
-                {/* Nav */}
+                {/* Header Section */}
                 <div className="flex items-center justify-between">
                     <Link href="/">
-                        <Button variant="ghost" className="text-zinc-400 hover:text-white">
+                        <Button variant="ghost" className="text-zinc-400 hover:text-white transition-colors">
                             <ChevronLeft className="mr-2 h-4 w-4" />
-                            Back to Home
+                            Main Dashboard
                         </Button>
                     </Link>
-                    <div className="flex items-center space-x-2">
-                        <ShieldCheck className="text-emerald-500 w-5 h-5" />
-                        <h1 className="text-xl font-bold italic tracking-tighter">VaultNode <span className="text-emerald-500">Secure Redactor</span></h1>
+                    <div className="flex items-center space-x-3">
+                        <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                            <Lock className="text-emerald-500 w-4 h-4" />
+                        </div>
+                        <h1 className="text-xl font-bold tracking-tight">Secure <span className="text-emerald-500">Redactor</span></h1>
                     </div>
                 </div>
 
                 {!file ? (
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="w-full"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="w-full h-[60vh] flex flex-col items-center justify-center pt-20"
                     >
                         <div
                             {...getRootProps()}
                             className={`
-                mt-20 w-full max-w-2xl mx-auto aspect-[16/8] rounded-3xl border-2 border-dashed 
-                transition-all duration-500 cursor-pointer flex flex-col items-center justify-center space-y-4
-                ${isDragActive ? "border-emerald-500 bg-emerald-500/5 shadow-lg" : "border-zinc-800 bg-zinc-900/30"}
+                w-full max-w-2xl aspect-[16/9] rounded-[2rem] border-2 border-dashed 
+                transition-all duration-700 cursor-pointer flex flex-col items-center justify-center space-y-6
+                ${isDragActive ? "border-emerald-500 bg-emerald-500/5 scale-102 shadow-2xl" : "border-zinc-800 bg-zinc-900/20 hover:border-zinc-700"}
               `}
                         >
                             <input {...getInputProps()} />
-                            <div className="p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
-                                <Square className="w-8 h-8 text-zinc-500" />
+                            <div className="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 shadow-xl">
+                                <FileUp className={`w-10 h-10 transition-colors duration-500 ${isDragActive ? "text-emerald-500" : "text-zinc-600"}`} />
                             </div>
-                            <p className="text-lg font-medium">Drop a PDF to secure & redact</p>
-                            <p className="text-zinc-500 text-sm italic">Uses "Pixel-Flattening" to permanently destroy underlying text data.</p>
+                            <div className="text-center space-y-2">
+                                <p className="text-xl font-semibold">Drop sensitive PDF</p>
+                                <p className="text-zinc-500 text-sm max-w-[280px] leading-relaxed">
+                                    Pixels are flattened locally. Original text data is <b>never</b> recoverable.
+                                </p>
+                            </div>
                         </div>
                     </motion.div>
                 ) : (
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10">
 
-                        {/* Redaction Canvas Area */}
-                        <div className="flex flex-col items-center space-y-4">
-                            <div className="relative bg-zinc-900 rounded-xl overflow-auto border border-zinc-800 shadow-2xl max-h-[80vh] custom-scroll">
-                                <canvas ref={canvasRef} className="block" />
+                        {/* Logic Area: Visualization + Interaction Layer */}
+                        <div className="flex flex-col items-center space-y-6">
+                            <div className="relative group bg-zinc-900 rounded-3xl overflow-auto border-4 border-zinc-900 shadow-[0_0_50px_rgba(0,0,0,0.5)] max-h-[75vh] custom-scroll">
+                                <canvas ref={uiCanvasRef} className="block rounded-lg" />
                                 <canvas
-                                    ref={overlayRef}
-                                    onMouseDown={handleMouseDown}
-                                    onMouseMove={handleMouseMove}
-                                    onMouseUp={handleMouseUp}
+                                    ref={interactiveOverlayRef}
+                                    onMouseDown={onMouseDown}
+                                    onMouseMove={onMouseMove}
+                                    onMouseUp={onMouseUp}
                                     className="absolute top-0 left-0 cursor-crosshair touch-none"
                                 />
                             </div>
-                            {/* Hidden Export Canvas */}
-                            <canvas ref={exportCanvasRef} className="hidden" />
-                            <p className="text-zinc-500 text-xs flex items-center">
-                                <MousePointer2 className="w-3 h-3 mr-1" />
-                                Select sensitive areas. Export will be rasterized for 100% security.
-                            </p>
+                            {/* Hidden Secure Canvas (Internal Processing Only) */}
+                            <canvas ref={hiddenBaseCanvasRef} className="hidden" />
+
+                            <div className="flex items-center space-x-4 text-zinc-500 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800">
+                                <MousePointer2 className="w-3 h-3 text-emerald-500" />
+                                <span className="text-[10px] font-bold uppercase tracking-widest leading-none">Drawing Redaction Boxes</span>
+                            </div>
                         </div>
 
-                        {/* Sidebar Controls */}
+                        {/* Controls Sidebar */}
                         <aside className="space-y-6">
-                            <Card className="p-6 bg-zinc-900/50 border-zinc-800/50 space-y-6">
-                                <div className="space-y-4">
-                                    <div className="flex items-center space-x-2 text-emerald-500 px-3 py-2 rounded-lg bg-emerald-500/5 border border-emerald-500/10">
-                                        <ShieldCheck className="w-4 h-4" />
-                                        <span className="text-xs font-bold uppercase tracking-wider">Secure Mode Active</span>
+                            <Card className="p-8 bg-zinc-900/40 border-zinc-800/50 backdrop-blur-xl rounded-[2rem] space-y-8">
+                                <div className="space-y-6">
+                                    <div className="inline-flex items-center space-x-2 text-emerald-500 px-3 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10">
+                                        <ShieldCheck className="w-3 h-3" />
+                                        <span className="text-[10px] font-bold uppercase tracking-tighter">Zero-Trace Active</span>
                                     </div>
 
                                     <div className="space-y-1">
-                                        <h3 className="text-xs font-semibold text-zinc-500 uppercase">Active Boxes</h3>
-                                        <p className="text-3xl font-bold text-white tracking-tighter">{redactions.length}</p>
+                                        <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Active Layers</h3>
+                                        <p className="text-5xl font-black text-white tracking-tighter">{redactions.length}</p>
                                     </div>
                                 </div>
 
-                                <div className="space-y-3">
+                                <div className="space-y-4">
                                     <Button
-                                        onClick={handleRedact}
+                                        onClick={handleSecureRedact}
                                         disabled={isProcessing || redactions.length === 0}
-                                        className="w-full bg-emerald-500 hover:bg-emerald-600 text-emerald-950 font-bold h-12 rounded-xl"
+                                        className="w-full group bg-emerald-500 hover:bg-emerald-600 text-emerald-950 font-black h-16 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-emerald-500/10"
                                     >
                                         {isProcessing ? (
-                                            <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Flattening...</>
+                                            <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Securing & Flattening...</>
                                         ) : (
-                                            <><Download className="mr-2 h-4 w-4" /> Secure & Download</>
+                                            <><Download className="mr-3 h-5 w-5 group-hover:-translate-y-1 transition-transform" /> Secure & Download</>
                                         )}
                                     </Button>
 
                                     <Button
-                                        variant="outline"
+                                        variant="ghost"
                                         onClick={() => setRedactions([])}
                                         disabled={isProcessing || redactions.length === 0}
-                                        className="w-full border-zinc-800 text-zinc-400 hover:bg-zinc-800"
+                                        className="w-full text-zinc-500 hover:text-white hover:bg-zinc-800/50 rounded-2xl h-12"
                                     >
                                         <Eraser className="mr-2 h-4 w-4" />
-                                        Clear All
+                                        Clear Redactions
                                     </Button>
                                 </div>
 
-                                <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 space-y-2">
+                                <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-3">
                                     <div className="flex items-center space-x-2 text-amber-500">
                                         <AlertTriangle className="w-4 h-4" />
-                                        <span className="text-[10px] font-bold uppercase">Security Note</span>
+                                        <span className="text-[10px] font-black uppercase">Technical Notice</span>
                                     </div>
-                                    <p className="text-[10px] text-zinc-500 leading-relaxed italic">
-                                        This method converts your PDF pages to high-resolution images. Underlying text will be <b>permanently destroyed</b> and cannot be recovered via copy/paste.
+                                    <p className="text-[10px] text-zinc-500 leading-relaxed font-medium">
+                                        This implementation destroys underlying vector text data by rasterizing the page to a high-density canvas before PDF reconstruction.
                                     </p>
                                 </div>
                             </Card>
 
-                            <div className="w-full h-[300px] bg-zinc-900/30 border border-dashed border-zinc-800 rounded-xl flex items-center justify-center text-[10px] text-zinc-800 font-bold tracking-widest uppercase">
-                                Ad Slot
+                            {/* Sidebar Branding/Ad */}
+                            <div className="w-full h-[250px] bg-zinc-900/20 border border-dashed border-zinc-800 rounded-[2rem] flex flex-col items-center justify-center space-y-2 opacity-50 grayscale hover:grayscale-0 transition-all">
+                                <p className="text-[10px] font-bold text-zinc-700 uppercase">Secure Environment by VaultNode</p>
+                                <div className="w-12 h-1 bg-zinc-800 rounded-full" />
                             </div>
                         </aside>
                     </div>
                 )}
             </div>
-        </main>
+        </div>
     );
 }
-
