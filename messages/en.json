@@ -9,6 +9,45 @@
         "pdfToImg": "PDF to Image",
         "cleanExif": "Metadata Scrubber",
         "password": "Password Generator",
+        "unlockPdf": "Unlock PDF",
+        "heicToJpg": "HEIC to JPG",
+        "pdfToDocx": "PDF to Word",
+        "mediaConverter": "Media Converter",
+        "svgToPng": "SVG to PNG",
+        "textEncryptor": "Text Encryptor",
+        "blurTool": "Privacy Blur",
+        "pdfSplit": "Extract Pages",
+        "toolDescriptions": {
+            "redactor": "Black out sensitive text forever.",
+            "cleanExif": "Scrub GPS & private metadata.",
+            "password": "Generate military-grade keys.",
+            "textEncryptor": "Secure AES-256 text encryption.",
+            "compress": "Shrink images with zero quality loss.",
+            "heic": "Convert iPhone HEIC to JPG locally.",
+            "mediaConverter": "Extract audio or trim video clips.",
+            "svgToPng": "Rasterize vector SVGs to PNG pixels.",
+            "blur": "Obfuscate sensitive image parts.",
+            "merger": "Combine PDFs without server uploads.",
+            "pdfToWord": "Turn PDFs into editable Word files.",
+            "unlock": "Remove PDF restrictions instantly.",
+            "pdfToImg": "Rasterize PDF pages into images.",
+            "split": "Split PDFs into individual files."
+        },
+        "categories": {
+            "vault": "The Vault",
+            "media": "Media Lab",
+            "docs": "Document Suite"
+        },
+        "searchPlaceholder": "Search for a tool (e.g. PDF, HEIC)...",
+        "noResults": "No tools found matching your search.",
+        "toolSubtitle": "Professional tools for your {category} workflow",
+        "settings": "Settings",
+        "adPlaceholder": "Advertisement Placeholder",
+        "cta": {
+            "title": "Ready to take back your privacy?",
+            "desc": "Join thousands of users processing sensitive data where it belongs: in their own hands.",
+            "button": "Unlock Pro Tools"
+        },
         "mergeDropDesc": "Select multiple PDFs to merge in your session.",
         "mergeButton": "Merge Files",
         "localOnly": "Local-Only",
@@ -110,11 +149,6 @@
                 "title": "Agile Teams",
                 "desc": "Merge and optimize project assets fast without waiting for slow cloud uploads or processing queues."
             }
-        },
-        "cta": {
-            "title": "Ready to claim your digital sovereignty?",
-            "desc": "No accounts. No subscriptions. Just pure local-only file processing for the modern privacy era.",
-            "button": "Launch VaultNode Tools"
         }
     },
     "Footer": {
@@ -144,6 +178,30 @@
         "password": {
             "title": "Secure Password Generator",
             "description": "Generate cryptographically secure passwords locally on your device using native browser APIs."
+        },
+        "unlockPdf": {
+            "title": "PDF Unlocker",
+            "description": "Remove passwords and restrictions safely from trusted PDFs locally in your browser. No files uploaded."
+        },
+        "heicToJpg": {
+            "title": "HEIC to JPG Converter",
+            "description": "Transform high-efficiency Apple HEIC photos into standard JPEG or WebP formats instantly with in-memory execution."
+        },
+        "pdfToDocx": {
+            "title": "PDF to Word Converter",
+            "description": "Extract readable text from PDFs and rebuild them as professional Word (.docx) documents securely."
+        },
+        "textEncryptor": {
+            "title": "Text Encryptor",
+            "description": "Protect messages with hardware-accelerated AES-256-GCM encryption natively in your browser."
+        },
+        "blurTool": {
+            "title": "Privacy Blur",
+            "description": "Obfuscate sensitive regions of your images locally with Gaussian filtering."
+        },
+        "pdfSplit": {
+            "title": "Extract Pages",
+            "description": "Split PDF documents or extract specific ranges locally without cloud processing."
         }
     },
     "Tools": {
@@ -236,6 +294,65 @@
             "medium": "Medium",
             "strong": "Strong",
             "alien": "Military Grade"
+        },
+        "unlockPdf": {
+            "titleHighlight": "Unlock",
+            "dropTitle": "Drop Protected PDF",
+            "dropDesc": "We'll securely decrypt your PDF using your password within your browser.",
+            "passwordLabel": "PDF Password",
+            "passwordPlaceholder": "Enter password to decrypt...",
+            "unlocking": "Unlocking...",
+            "unlockBtn": "Decrypt & Unlock",
+            "successTitle": "PDF Unlocked",
+            "successDesc": "Your document has been successfully decrypted and is ready to download.",
+            "downloadBtn": "Download Unlocked PDF",
+            "explainerHighlight": "Privacy Guaranteed",
+            "explainerText": "Your bank password never leaves your keyboard. The PDF is decrypted locally in your browser's RAM without any server uploads."
+        },
+        "heicToJpg": {
+            "titleHighlight": "Convert",
+            "dropTitle": "Drop HEIC Photo",
+            "dropDesc": "We will intelligently transcode your iPhone photos using standard WebAssembly loops.",
+            "processing": "Transcoding...",
+            "processingDesc": "Transcoding image in memory...",
+            "success": "Conversion Complete",
+            "downloadBtn": "Download Image",
+            "errorDesc": "Failed to convert HEIC. The file may be corrupted.",
+            "explainerHighlight": "RAM-Only Transcoding",
+            "explainerText": "HEIC formats are computationally heavy. We use WebAssembly to transcode them directly inside your browser's RAM, ensuring your photos are never sent to a cloud server."
+        },
+        "pdfToDocx": {
+            "titleHighlight": "Extract",
+            "dropTitle": "Drop PDF to Extract",
+            "dropDesc": "We'll scrape the text layers and build a downloadable Word Document.",
+            "readingPdf": "Reading Document...",
+            "extractingText": "Extracting Text...",
+            "processingPage": "Processing Page",
+            "buildingWord": "Building Word File...",
+            "processing": "Reconstructing...",
+            "success": "Reconstruction Complete",
+            "downloadBtn": "Download DOXC",
+            "errorDesc": "Failed to process PDF. Ensure it is not encrypted and contains text layers.",
+            "explainerHighlight": "100% Client-Side Extraction",
+            "explainerText": "We read your PDF's text layer and build the Word document entirely in your browser. Highly sensitive data never hits the network."
+        },
+        "mediaConverter": {
+            "titleHighlight": "Media",
+            "dropTitle": "Drop Video or Audio",
+            "dropDesc": "We'll process your media using FFmpeg.wasm directly inside your browser's memory.",
+            "processing": "Transcoding...",
+            "convertBtn": "Convert & Download",
+            "explainerHighlight": "FFmpeg Browser Engine",
+            "explainerText": "Converting video is intensive. We bring the power of FFmpeg to your browser via WebAssembly, so your media files never leave your device."
+        },
+        "svgToPng": {
+            "titleHighlight": "SVG",
+            "dropTitle": "Drop SVG File",
+            "dropDesc": "Rasterize vector files to PNG pixels using your native graphics engine.",
+            "processing": "Rasterizing...",
+            "convertBtn": "Rasterize & Download",
+            "explainerHighlight": "Native Graphics Pipeline",
+            "explainerText": "SVG files are code. We use a sandbox canvas to draw your vector graphics and export them as PNGs without any external processing."
         }
     }
 }

@@ -1,0 +1,35 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
+import { RefreshCcw, Loader2 } from "lucide-react";
+
+// Use dynamic import so heic2any doesn't try to load in node.js during SSR
+const HeicToJpgTool = dynamic(() => import("./HeicToJpgTool"), {
+    ssr: false,
+    loading: () => <LoadingState />
+});
+
+function LoadingState() {
+    const t = useTranslations('Tools.common');
+    return (
+        <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center space-y-8">
+            <div className="relative">
+                <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full animate-pulse" />
+                <div className="w-20 h-20 bg-zinc-900 border border-zinc-800 rounded-3xl flex items-center justify-center relative z-10 shadow-2xl">
+                    <RefreshCcw className="w-8 h-8 text-blue-500" />
+                </div>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+                <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                <div className="flex items-center gap-3 text-zinc-500 font-bold tracking-widest uppercase text-[10px]">
+                    <span>{t('loading')}</span>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function HeicToJpgClient() {
+    return <HeicToJpgTool />;
+}

@@ -2,16 +2,16 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { FileUp, Loader2, ChevronLeft, Image as ImageIcon, Settings2, FileArchive, Shield } from "lucide-react";
+import { FileUp, Loader2, Image as ImageIcon, FileArchive, Shield, Settings2, Info, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Link } from "@/i18n/routing";
+import { ToolContainer } from "@/components/ToolContainer";
 import * as pdfjsLib from "pdfjs-dist";
 import JSZip from "jszip";
 import { useTranslations } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function PdfToImgTool() {
-    const tc = useTranslations("Tools.common");
     const t = useTranslations("Tools.pdfToImg");
 
     const [file, setFile] = useState<File | null>(null);
@@ -49,7 +49,6 @@ export default function PdfToImgTool() {
             setTotalPages(pdf.numPages);
             const zip = new JSZip();
 
-            // Create a temporary canvas for rendering
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
@@ -68,7 +67,6 @@ export default function PdfToImgTool() {
                     viewport: viewport
                 } as any).promise;
 
-                // Convert to blob
                 const blob = await new Promise<Blob | null>((resolve) => {
                     canvas.toBlob((b) => resolve(b), 'image/jpeg', 0.95);
                 });
@@ -79,7 +77,6 @@ export default function PdfToImgTool() {
                 }
             }
 
-            // Generate ZIP
             const zipContent = await zip.generateAsync({ type: "blob" });
             const url = URL.createObjectURL(zipContent);
             const link = document.createElement("a");
@@ -90,130 +87,185 @@ export default function PdfToImgTool() {
 
         } catch (error) {
             console.error("Extraction error:", error);
-            alert("Error extracting images. Please try again.");
         } finally {
             setIsProcessing(false);
         }
     };
 
+    const resetTool = () => {
+        setFile(null);
+        setProgress(0);
+        setTotalPages(0);
+    };
+
     return (
-        <div className="min-h-screen bg-zinc-950 text-white selection:bg-emerald-500/30 font-sans pb-24">
-            {/* Header */}
-            <header className="border-b border-zinc-900 bg-zinc-950/50 backdrop-blur-xl sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors group">
-                        <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform rtl:group-hover:translate-x-1 rtl:rotate-180" />
-                        <span className="text-sm font-bold uppercase tracking-widest">{tc('backHome')}</span>
-                    </Link>
-                    <div className="flex items-center gap-2">
-                        <span className="text-zinc-600 font-bold tracking-widest uppercase text-xs">{tc('vaultNode')}</span>
-                        <span className="text-emerald-500 font-black uppercase italic tracking-tighter text-sm">{t('titleHighlight')}</span>
-                    </div>
-                </div>
-            </header>
-
-            <main className="max-w-4xl mx-auto px-6 pt-12 lg:pt-20 space-y-12">
-                <div className="text-center space-y-4">
-                    <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(16,185,129,0.1)]">
-                        <FileArchive className="w-8 h-8 text-emerald-500" />
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-black uppercase italic tracking-tighter">
-                        {t('titleHighlight')} <span className="text-emerald-500">PDF</span>
-                    </h1>
-                </div>
-
-                {!file ? (
-                    <Card
-                        {...getRootProps()}
-                        className={`p-12 sm:p-24 border-2 border-dashed rounded-[3rem] text-center cursor-pointer transition-all duration-500 ${isDragActive ? 'border-emerald-500 bg-emerald-500/5 scale-102' : 'border-zinc-800 hover:border-zinc-700 bg-zinc-900/30 hover:bg-zinc-900/50'}`}
-                    >
-                        <input {...getInputProps()} />
-                        <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
-                            <FileUp className={`w-8 h-8 transition-colors duration-300 ${isDragActive ? 'text-emerald-500' : 'text-zinc-500'}`} />
-                        </div>
-                        <h3 className="text-2xl font-black uppercase italic tracking-tight mb-4">{t('dropTitle')}</h3>
-                        <p className="text-sm font-medium text-zinc-500">{t('dropDesc')}</p>
-                    </Card>
-                ) : (
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {/* Main File View */}
-                        <div className="lg:col-span-2 space-y-6">
-                            <Card className="p-8 bg-zinc-900/20 border-zinc-800 rounded-[2.5rem] overflow-hidden relative min-h-[400px] flex items-center justify-center">
-                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-                                <div className="z-10 text-center space-y-6 w-full px-8">
-                                    <div className="w-24 h-24 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl flex items-center justify-center mx-auto">
-                                        <FileUp className="w-10 h-10 text-emerald-500" />
-                                    </div>
-                                    <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 truncate flex items-center gap-3 w-full">
-                                        <div className="w-10 h-10 bg-zinc-900 rounded-xl flex items-center justify-center shrink-0">
-                                            <span className="text-[10px] font-black text-zinc-500 uppercase">PDF</span>
-                                        </div>
-                                        <span className="font-bold text-sm truncate flex-1 text-start rtl:text-end">{file.name}</span>
-                                    </div>
-                                </div>
-                            </Card>
-                        </div>
-
-                        {/* Controls Sidebar */}
-                        <div className="space-y-6">
-                            <Card className="p-6 bg-zinc-900/50 border-zinc-800 rounded-[2rem] space-y-8 backdrop-blur-xl">
-                                <div className="flex items-center gap-3 text-emerald-500">
-                                    <Settings2 className="w-5 h-5" />
-                                    <h3 className="font-bold text-sm tracking-widest uppercase">{t('selectDensity')}</h3>
-                                </div>
-
-                                <div className="space-y-3">
-                                    {[
-                                        { val: 1, label: t('normal'), desc: '72 DPI' },
-                                        { val: 2, label: t('high'), desc: '144 DPI' },
-                                        { val: 3, label: t('ultra'), desc: '216 DPI' },
-                                    ].map((s) => (
-                                        <button
-                                            key={s.val}
-                                            onClick={() => setScale(s.val)}
-                                            className={`w-full p-4 rounded-xl border flex items-center justify-between transition-all ${scale === s.val ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-500' : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-900'}`}
-                                        >
-                                            <span className="font-bold text-sm">{s.label}</span>
-                                            <span className="text-xs font-medium opacity-50">{s.desc}</span>
-                                        </button>
-                                    ))}
-                                </div>
-
-                                <div className="pt-4 space-y-4">
-                                    {isProcessing && totalPages > 0 ? (
-                                        <div className="space-y-3 p-4 bg-zinc-950 border border-zinc-800 rounded-xl">
-                                            <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-emerald-500">
-                                                <span>{t('extractingPage')} {progress} / {totalPages}</span>
-                                                <span>{Math.round((progress / totalPages) * 100)}%</span>
-                                            </div>
-                                            <div className="h-2 bg-zinc-900 rounded-full overflow-hidden flex flex-row rtl:flex-row-reverse">
-                                                <div
-                                                    className="h-full bg-emerald-500 transition-all duration-300"
-                                                    style={{ width: `${(progress / totalPages) * 100}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <Button
-                                            onClick={handleExtract}
-                                            disabled={isProcessing}
-                                            className="w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl shadow-[0_0_30px_rgba(16,185,129,0.2)] transition-all active:scale-95"
-                                        >
-                                            <ImageIcon className="w-5 h-5 me-2" />
-                                            {t('convertPages')}
-                                        </Button>
+        <ToolContainer
+            title={t('titleHighlight')}
+            description={t('dropDesc')}
+            icon={FileArchive}
+            category="docs"
+            settingsContent={
+                <div className="space-y-6">
+                    <div className="space-y-3">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Render Density</span>
+                        <div className="space-y-2">
+                            {[
+                                { val: 1, label: "Standard", desc: '72 DPI' },
+                                { val: 2, label: "High Definition", desc: '144 DPI' },
+                                { val: 3, label: "Ultra Precision", desc: '216 DPI' },
+                            ].map((s) => (
+                                <button
+                                    key={s.val}
+                                    onClick={() => setScale(s.val)}
+                                    className={cn(
+                                        "w-full p-3 rounded-xl border flex items-center justify-between transition-all italic",
+                                        scale === s.val
+                                            ? "bg-emerald-500/10 border-emerald-500/50 text-emerald-500"
+                                            : "bg-zinc-900/50 border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-white"
                                     )}
-                                </div>
-                            </Card>
-
-                            <div className="flex items-center justify-center gap-2 text-zinc-600 font-black text-[10px] uppercase tracking-widest">
-                                <Shield className="w-3 h-3" />
-                                <span>{tc('securedBy')}</span>
-                            </div>
+                                >
+                                    <span className="text-[10px] font-black uppercase tracking-widest">{s.label}</span>
+                                    <span className="text-[9px] font-bold opacity-50">{s.desc}</span>
+                                </button>
+                            ))}
                         </div>
                     </div>
-                )}
-            </main>
-        </div>
+
+                    <div className="space-y-3 pt-4">
+                        <Button
+                            onClick={handleExtract}
+                            disabled={isProcessing || !file}
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                        >
+                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4 me-2" />}
+                            {isProcessing ? t('processing') : t('convertPages')}
+                        </Button>
+
+                        <Button
+                            variant="outline"
+                            onClick={resetTool}
+                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                        >
+                            <FileArchive className="w-4 h-4 me-2" />
+                            New Archive
+                        </Button>
+                    </div>
+
+                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                        <div className="flex items-center gap-2 text-emerald-500">
+                            <Shield className="w-3.5 h-3.5" />
+                            <span className="text-[10px] font-black uppercase tracking-widest">In-Browser PDF.js</span>
+                        </div>
+                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                            Uses Mozilla&apos;s PDF.js to render slices directly to canvas.
+                            Your documents never touch our infra.
+                        </p>
+                    </div>
+                </div>
+            }
+            howItWorks={[
+                { title: "Layer Rasterization", description: "Flattens PDF vector instructions into pixel-perfect JPEG slices." },
+                { title: "Atomic Extraction", description: "Processes each page in a sandboxed worker thread for speed." },
+                { title: "Binary Packaging", description: "Zips all rendered images into a single local archive." }
+            ]}
+        >
+            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
+                <AnimatePresence mode="wait">
+                    {!file ? (
+                        <motion.div
+                            key="dropzone"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1.05 }}
+                            className="w-full max-w-2xl"
+                        >
+                            <div className="relative group/dropzone w-full">
+                                <AnimatePresence>
+                                    {isDragActive && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            className="absolute -inset-1 conic-gradient-vault animate-pulse-conic rounded-[2.7rem] blur-md -z-10"
+                                        />
+                                    )}
+                                </AnimatePresence>
+                                <div
+                                    {...getRootProps()}
+                                    className={cn(
+                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
+                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                    )}
+                                >
+                                    <input {...getInputProps()} />
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    </div>
+                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
+                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="results"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="w-full flex flex-col items-center space-y-8"
+                        >
+                            <div className="w-full max-w-2xl aspect-video bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative flex flex-col items-center justify-center shadow-2xl group">
+                                <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
+
+                                <div className="z-10 bg-zinc-950/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 flex flex-col items-center gap-4 transition-transform group-hover:scale-105">
+                                    <FileUp className="w-12 h-12 text-emerald-500" />
+                                    <div className="text-center">
+                                        <p className="text-sm font-black uppercase tracking-tighter text-white">{file.name}</p>
+                                        <p className="text-[10px] font-bold uppercase text-zinc-500">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <AnimatePresence>
+                                {isProcessing && totalPages > 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="w-full max-w-2xl space-y-4"
+                                    >
+                                        <div className="flex justify-between items-center px-4">
+                                            <div className="flex items-center gap-2">
+                                                <Loader2 className="w-3 h-3 text-emerald-500 animate-spin" />
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse italic">Extracting Page {progress} of {totalPages}</span>
+                                            </div>
+                                            <span className="text-[10px] font-black text-emerald-500 italic">{Math.round((progress / totalPages) * 100)}%</span>
+                                        </div>
+                                        <div className="h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+                                            <motion.div
+                                                className="h-full bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${(progress / totalPages) * 100}%` }}
+                                            />
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
+                                <div className="flex flex-col items-center gap-1">
+                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Input Buffer</span>
+                                    <Layers className="w-5 h-5 text-zinc-500" />
+                                </div>
+                                <FileArchive className={cn("w-5 h-5 text-emerald-500", isProcessing && "animate-bounce")} />
+                                <div className="flex flex-col items-center gap-1">
+                                    <span className="text-[8px] font-black text-zinc-600 uppercase">ZIP Package</span>
+                                    <ImageIcon className="w-5 h-5 text-emerald-500" />
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </ToolContainer>
     );
 }

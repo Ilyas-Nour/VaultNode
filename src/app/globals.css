@@ -109,7 +109,66 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Dynamic Font Weight for Dark Mode */
+  .dark body {
+    font-weight: 500;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4 {
+    font-weight: 900;
+  }
+}
+
+/* Custom Scrollbar */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 rounded-full;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-emerald-500/50;
+}
+
+.bg-grid-vault {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.02) 1px, transparent 1px);
+}
+
+@keyframes pulse-conic {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-conic {
+  animation: pulse-conic 3s ease-in-out infinite;
+}
+
+.conic-gradient-vault {
+  background: conic-gradient(from 0deg at 50% 50%, #10b981, #27272a, #10b981);
 }

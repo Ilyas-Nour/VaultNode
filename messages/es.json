@@ -6,6 +6,28 @@
         "launchRedactor": "Iniciar Redactor",
         "imageCompressor": "Compresor de Imágenes",
         "pdfMerger": "Fusión de PDF",
+        "pdfToImg": "PDF a Imagen",
+        "cleanExif": "Limpiador de Metadatos",
+        "password": "Generador de Claves",
+        "unlockPdf": "Desbloquear PDF",
+        "heicToJpg": "HEIC a JPG",
+        "pdfToDocx": "PDF a Word",
+        "mediaConverter": "Convertidor de Medios",
+        "svgToPng": "SVG a PNG",
+        "categories": {
+            "vault": "La Bóveda",
+            "media": "Laboratorio de Medios",
+            "docs": "Suite de Documentos"
+        },
+        "searchPlaceholder": "Buscar herramienta (ej. PDF, HEIC)...",
+        "noResults": "No se encontraron herramientas.",
+        "settings": "Ajustes",
+        "adPlaceholder": "Espacio Publicitario",
+        "cta": {
+            "title": "¿Listo para recuperar tu privacidad?",
+            "desc": "Únete a miles de usuarios que procesan datos sensibles donde pertenecen: en sus propias manos.",
+            "button": "Desbloquear Herramientas Pro"
+        },
         "localOnly": "Procesamiento 100% Local",
         "howItWorks": {
             "title": "Cómo Funciona VaultNode",
@@ -105,11 +127,6 @@
                 "title": "Equipos Ágiles",
                 "desc": "Fusiona y optimiza los recursos de tus proyectos rápidamente, sin las demoras de subir archivos a la nube ni hacer colas de procesamiento."
             }
-        },
-        "cta": {
-            "title": "¿Listo para recuperar tu soberanía digital?",
-            "desc": "Sin crear cuentas. Sin suscripciones. Simplemente procesamiento de archivos estrictamente local para la era de la privacidad.",
-            "button": "Lanzar Herramientas VaultNode"
         }
     },
     "Footer": {
@@ -139,6 +156,18 @@
         "password": {
             "title": "Generador de Claves Seguras",
             "description": "Genere contraseñas criptográficamente seguras localmente en su dispositivo usando APIs nativas del navegador."
+        },
+        "unlockPdf": {
+            "title": "Desbloquear PDF Protegido",
+            "description": "Elimine contraseñas y restricciones de forma segura de PDFs de confianza localmente en su navegador. Sin subir archivos."
+        },
+        "heicToJpg": {
+            "title": "Convertidor HEIC a JPG",
+            "description": "Transforme fotos HEIC de Apple de alta eficiencia a formatos estándar JPEG o WebP instantáneamente con ejecución en memoria."
+        },
+        "pdfToDocx": {
+            "title": "Convertidor de PDF a Word",
+            "description": "Extraiga texto legible de PDFs y reconstrúyalos como documentos profesionales de Word (.docx) de forma segura."
         }
     },
     "Tools": {
@@ -231,6 +260,65 @@
             "medium": "Medio",
             "strong": "Fuerte",
             "alien": "Grado Militar"
+        },
+        "unlockPdf": {
+            "titleHighlight": "Desbloquear",
+            "dropTitle": "Soltar PDF Protegido",
+            "dropDesc": "Desencriptaremos su PDF de forma segura usando su contraseña dentro de su navegador.",
+            "passwordLabel": "Contraseña del PDF",
+            "passwordPlaceholder": "Ingrese la contraseña para desencriptar...",
+            "unlocking": "Desbloqueando...",
+            "unlockBtn": "Desencriptar y Desbloquear",
+            "successTitle": "PDF Desbloqueado",
+            "successDesc": "Su documento ha sido desencriptado con éxito y está listo para descargar.",
+            "downloadBtn": "Descargar PDF Desbloqueado",
+            "explainerHighlight": "Privacidad Garantizada",
+            "explainerText": "Su contraseña bancaria nunca sale de su teclado. El PDF se desencripta localmente en la memoria RAM de su navegador sin subirlo a ningún servidor."
+        },
+        "heicToJpg": {
+            "titleHighlight": "Convertir",
+            "dropTitle": "Soltar Foto HEIC",
+            "dropDesc": "Transcodificaremos inteligentemente sus fotos de iPhone usando bucles estándar de WebAssembly.",
+            "processing": "Transcodificando...",
+            "processingDesc": "Transcodificando imagen en memoria...",
+            "success": "Conversión Completa",
+            "downloadBtn": "Descargar Imagen",
+            "errorDesc": "Error al convertir HEIC. El archivo puede estar corrupto.",
+            "explainerHighlight": "Transcodificación Solo en RAM",
+            "explainerText": "Los formatos HEIC son computacionalmente pesados. Usamos WebAssembly para transcodificarlos directamente dentro de la memoria RAM de su navegador, asegurando que sus fotos nunca se envíen a un servidor en la nube."
+        },
+        "pdfToDocx": {
+            "titleHighlight": "Extraer",
+            "dropTitle": "Soltar PDF para Extraer",
+            "dropDesc": "Rasparemos las capas de texto y construiremos un Documento Word descargable.",
+            "readingPdf": "Leyendo Documento...",
+            "extractingText": "Extrayendo Texto...",
+            "processingPage": "Procesando Página",
+            "buildingWord": "Construyendo Archivo Word...",
+            "processing": "Reconstruyendo...",
+            "success": "Reconstrucción Completa",
+            "downloadBtn": "Descargar DOCX",
+            "errorDesc": "Error al procesar el PDF. Asegúrese de que no esté encriptado y contenga capas de texto.",
+            "explainerHighlight": "Extracción 100% en el Cliente",
+            "explainerText": "Leemos la capa de texto de su PDF y construimos el documento Word enteramente en su navegador. Los datos altamente sensibles nunca tocan la red."
+        },
+        "mediaConverter": {
+            "titleHighlight": "Medios",
+            "dropTitle": "Soltar Video o Audio",
+            "dropDesc": "Procesaremos sus medios usando FFmpeg.wasm directamente dentro de la memoria de su navegador.",
+            "processing": "Transcodificando...",
+            "convertBtn": "Convertir y Descargar",
+            "explainerHighlight": "Motor FFmpeg en el Navegador",
+            "explainerText": "Convertir video es intensivo. Traemos el poder de FFmpeg a su navegador a través de WebAssembly, para que sus archivos nunca salgan de su dispositivo."
+        },
+        "svgToPng": {
+            "titleHighlight": "SVG",
+            "dropTitle": "Soltar Archivo SVG",
+            "dropDesc": "Rasterice archivos vectoriales a píxeles PNG usando su motor de gráficos nativo.",
+            "processing": "Rasterizando...",
+            "convertBtn": "Rasterizar y Descargar",
+            "explainerHighlight": "Canal de Gráficos Nativo",
+            "explainerText": "Los archivos SVG son código. Usamos un lienzo aislado para dibujar sus gráficos vectoriales y exportarlos como PNG sin ningún procesamiento externo."
         }
     }
 }

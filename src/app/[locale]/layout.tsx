@@ -5,17 +5,22 @@ import { getMessages, getLocale, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import "../globals.css";
+import { DashboardSidebar } from "@/components/DashboardSidebar";
 
 const geist = Geist({ subsets: ["latin"], variable: '--font-geist' });
-const ibmPlexArabic = IBM_Plex_Sans_Arabic({ weight: ['300', '400', '500', '600', '700'], subsets: ["arabic"], variable: '--font-ibm-plex' });
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+    weight: ['300', '400', '500', '600', '700'],
+    subsets: ["arabic"],
+    variable: '--font-ibm-plex'
+});
 
 export const metadata: Metadata = {
     title: {
         template: "%s | VaultNode",
         default: "VaultNode | 100% Private Local Media Tools",
     },
-    description: "Secure, 100% private, and local browser processing for your media. Zero uploads. VaultNode handles PDFs and images directly in your RAM using WebAssembly.",
-    keywords: ["private pdf redactor", "local image compressor", "secure media tools", "browser-side pdf editing", "zero upload privacy", "offline media tools"],
+    description: "Secure, 100% private, and local browser processing for your media. Zero uploads. VaultNode handles PDFs, videos, and images directly in your RAM.",
+    keywords: ["private pdf redactor", "unlock pdf offline", "heic to jpg local", "pdf to word converter", "ffmpeg wasm converter", "svg to png local", "zero upload privacy"],
     alternates: {
         canonical: "https://vaultnode.com",
         languages: {
@@ -71,12 +76,17 @@ export default async function RootLayout({
             "price": "0",
             "priceCurrency": "USD"
         },
-        "description": "Pure client-side media suite. 100% private PDF and image tools running in RAM.",
-        "softwareVersion": "1.0.5",
+        "description": "Pure client-side media suite. 100% private PDF unlocking, HEIC conversion, FFmpeg media processing, and text extraction running purely in RAM.",
+        "softwareVersion": "1.2.0",
         "featureList": [
             "Secure PDF Redaction",
             "Smart Image Compression",
-            "Local PDF Merging"
+            "Local PDF Merging",
+            "Offline PDF Unlocking",
+            "Browser-Native HEIC Parsing",
+            "Local PDF to Word Reconstruction",
+            "FFmpeg Video to Audio Extraction",
+            "Client-Side SVG Rasterization"
         ],
         "availableLanguage": ["en", "es", "fr", "ar"]
     };
@@ -93,10 +103,18 @@ export default async function RootLayout({
                 suppressHydrationWarning
                 data-debug-locale={locale}
                 data-debug-keys={Object.keys(messages).join(',')}
-                className={`${isArabic ? ibmPlexArabic.className : geist.className} bg-background text-foreground antialiased`}
+                className={`${isArabic ? ibmPlexArabic.className : geist.className} bg-background text-foreground antialiased min-h-screen selection:bg-emerald-500/30 font-medium dark:font-semibold`}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    {children}
+                    <div className="relative flex min-h-screen">
+                        {/* Sidebar */}
+                        <DashboardSidebar />
+
+                        {/* Main Content Area */}
+                        <div className="flex-1 lg:ms-72 min-h-screen flex flex-col">
+                            {children}
+                        </div>
+                    </div>
                 </NextIntlClientProvider>
             </body>
         </html>
