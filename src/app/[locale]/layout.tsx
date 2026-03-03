@@ -90,6 +90,7 @@ export default async function RootLayout({
                 />
             </head>
             <body
+                suppressHydrationWarning
                 data-debug-locale={locale}
                 data-debug-keys={Object.keys(messages).join(',')}
                 className={`${isArabic ? ibmPlexArabic.className : geist.className} bg-background text-foreground antialiased`}
