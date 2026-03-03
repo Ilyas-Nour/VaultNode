@@ -2,11 +2,11 @@
 
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import { useTranslations, useLocale } from 'next-intl';
 import {
-    CloudOff, Loader2, Download, Trash2,
-    FileUp, Shield, Info, RefreshCw,
-    Wand2, Sliders, Image as ImageIcon,
-    Eye
+    Loader2, Download, RefreshCw,
+    Upload, Sparkles, X,
+    Eye, Settings2, FileUp, Shield, Image as ImageIcon, Wand2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -14,7 +14,8 @@ import { Slider } from "@/components/ui/slider";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function BlurTool() {
+export function BlurTool() {
+    const t = useTranslations('HomePage');
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [blurAmount, setBlurAmount] = useState([10]);
@@ -253,7 +254,7 @@ export default function BlurTool() {
                                 <div className="w-px h-3 bg-zinc-800" />
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                                    <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">RAM Sypher Mode</span>
+                                    <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">{t('localOnly')}</span>
                                 </div>
                             </div>
                         </motion.div>

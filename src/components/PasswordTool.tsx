@@ -154,7 +154,7 @@ export default function PasswordTool() {
                         </div>
                         <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
                             Generated via window.crypto.getRandomValues.
-                            The result is never stored outside RAM.
+                            The result is never stored outside your screen.
                         </p>
                     </div>
                 </div>

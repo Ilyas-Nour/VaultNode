@@ -217,7 +217,7 @@ export default function TextEncryptorTool() {
                                                 )}
                                             >
                                                 {copied ? <Check className="w-3.5 h-3.5 me-2" /> : <Copy className="w-3.5 h-3.5 me-2" />}
-                                                {copied ? "Copied" : "Copy to RAM"}
+                                                {copied ? "Copied" : "Copy"}
                                             </Button>
                                         </div>
                                     </motion.div>

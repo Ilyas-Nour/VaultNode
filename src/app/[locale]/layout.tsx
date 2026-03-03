@@ -16,10 +16,10 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 
 export const metadata: Metadata = {
     title: {
-        template: "%s | VaultNode",
-        default: "VaultNode | 100% Private Local Media Tools",
+        template: "%s | PrivaFlow",
+        default: "PrivaFlow | Your Files Stay With You",
     },
-    description: "Secure, 100% private, and local browser processing for your media. Zero uploads. VaultNode handles PDFs, videos, and images directly in your RAM.",
+    description: "Everything you do stays inside your own screen. Safe, private, and 100% free tools for your photos and files.",
     keywords: ["private pdf redactor", "unlock pdf offline", "heic to jpg local", "pdf to word converter", "ffmpeg wasm converter", "svg to png local", "zero upload privacy"],
     alternates: {
         canonical: "https://vaultnode.com",
@@ -31,15 +31,17 @@ export const metadata: Metadata = {
         },
     },
     openGraph: {
-        title: "VaultNode | Private Local Media Tools",
-        description: "Zero-upload PDF editing and media compression. Your privacy is our architecture.",
-        type: "website",
-        url: "https://vaultnode.com",
-        siteName: "VaultNode",
+        title: "PrivaFlow | Private Media Tools",
+        description: "Everything you do stays inside your own screen.",
+        url: 'https://privaflow.com',
+        siteName: "PrivaFlow",
+        images: [{ url: '/og-image.png' }],
+        locale: 'en_US',
+        type: 'website',
     },
     twitter: {
-        card: "summary_large_image",
-        title: "VaultNode | 100% Private Media Tools",
+        card: 'summary_large_image',
+        title: "PrivaFlow | Private Media Tools",
         description: "Pure client-side processing. No servers. No uploads. Just privacy.",
     }
 };
@@ -68,7 +70,7 @@ export default async function RootLayout({
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "VaultNode",
+        "name": "PrivaFlow",
         "operatingSystem": "Any browser (Chrome, Firefox, Safari)",
         "applicationCategory": "MultimediaApplication",
         "offers": {

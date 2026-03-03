@@ -1,5 +1,5 @@
 /**
- * VaultNode PDF Worker
+ * PrivaFlow PDF Worker
  * High-performance PDF merging logic using pdf-lib.
  * Runs in a separate thread to keep the UI snappy.
  */

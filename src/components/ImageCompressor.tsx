@@ -186,7 +186,7 @@ export default function ImageCompressor() {
             }
             howItWorks={[
                 { title: "Browser Logic", description: "Uses browser-image-compression with multithreaded workers." },
-                { title: "Zero Uploads", description: "All pixel crunching happens in your local RAM." },
+                { title: "Zero Uploads", description: "Everything happens privately on your screen." },
                 { title: "Smart Resizing", description: "Maintains aspect ratio while aggressively optimizing data chunks." }
             ]}
         >

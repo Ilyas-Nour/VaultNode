@@ -120,7 +120,7 @@ export default function CleanExifTool() {
                             <span className="text-[10px] font-black uppercase tracking-widest">Safe Execution</span>
                         </div>
                         <p className="text-[10px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            All image buffers are cleared from RAM after processing.
+                            All image data is cleared from your screen after processing.
                             No permanent file objects persist.
                         </p>
                     </div>

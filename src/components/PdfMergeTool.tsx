@@ -139,7 +139,7 @@ export default function PdfMergeTool() {
                             <span className="text-[10px] font-black uppercase tracking-widest">Local Assembly</span>
                         </div>
                         <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            PDF layers are merged in a transient RAM buffer.
+                            Everything happens safely inside your own screen.
                             No persistent traces left on disk or network.
                         </p>
                     </div>
@@ -261,7 +261,7 @@ export default function PdfMergeTool() {
                                     </div>
                                     <div className="space-y-1">
                                         <h4 className="text-xl font-black uppercase italic tracking-tight text-emerald-500">Node Synthesis Complete</h4>
-                                        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Document compiled successfully in RAM.</p>
+                                        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Done! Everything stayed inside your screen.</p>
                                     </div>
                                     <Button
                                         onClick={handleDownload}
@@ -283,7 +283,7 @@ export default function PdfMergeTool() {
                     <div className="w-px h-3 bg-zinc-800" />
                     <div className="flex items-center gap-2 text-emerald-500">
                         <RefreshCw className="w-4 h-4 animate-spin-slow" />
-                        <span className="text-[9px] font-black uppercase tracking-widest">RAM Sypher Mode</span>
+                        <span className="text-[9px] font-black uppercase tracking-widest">{t('localOnly')}</span>
                     </div>
                 </div>
             </div>

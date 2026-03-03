@@ -172,7 +172,7 @@ export default function PdfSplitTool() {
                             <span className="text-[10px] font-black uppercase tracking-widest">In-Browser Split</span>
                         </div>
                         <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            Your document is parsed and re-composed entirely in RAM.
+                            Your document is parsed and re-composed entirely privately.
                             No persistent file system writes occur.
                         </p>
                     </div>

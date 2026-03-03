@@ -145,7 +145,7 @@ export default function HeicToJpgTool() {
             }
             howItWorks={[
                 { title: "Apple Compatibility", description: "Convert high-efficiency HEIC photos to standard web formats." },
-                { title: "Universal Logic", description: "All transcoding happens in your browser's RAM via WASM." },
+                { title: "Universal Logic", description: "Everything happens right here in your browser." },
                 { title: "Lossless Export", description: "High-quality conversion keeping bit-depth and clarity intact." }
             ]}
         >

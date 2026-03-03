@@ -40,7 +40,7 @@ export default function AdUnit({ type }: AdUnitProps) {
             {isSidebar && (
                 <div className="mt-8 pt-8 border-t border-zinc-900/50 w-full px-4">
                     <p className="text-[10px] text-zinc-700 leading-relaxed italic font-medium">
-                        Support VaultNode by viewing high-relevance privacy and developer tools.
+                        Support PrivaFlow by viewing high-relevance privacy and developer tools.
                     </p>
                 </div>
             )}

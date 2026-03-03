@@ -11,7 +11,8 @@ import {
     ChevronRight,
     Lock,
     Zap,
-    HardDrive
+    HardDrive,
+    Settings2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -40,6 +41,7 @@ export function ToolContainer({
     settingsContent,
     howItWorks
 }: ToolContainerProps) {
+    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
     const t = useTranslations('HomePage');
     const locale = useLocale();
     const isRTL = locale === 'ar';
@@ -65,13 +67,13 @@ export function ToolContainer({
                     <div className="flex flex-col">
                         <div className="flex items-center gap-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">System Trace Active</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Working Privately</span>
                         </div>
                         <div className="flex items-center gap-3 mt-1 font-mono">
-                            <span className="text-[9px] text-zinc-600 uppercase">Local Thread #1</span>
+                            <span className="text-[9px] text-zinc-600 uppercase">Secure Tool #1</span>
                             <div className="w-px h-2 bg-zinc-800" />
                             <span className="text-[9px] text-emerald-500 uppercase tracking-tighter">
-                                RAM: {((Math.random() * 50) + 120).toFixed(1)}MB
+                                Safe Memory: Active
                             </span>
                         </div>
                     </div>
@@ -93,7 +95,7 @@ export function ToolContainer({
                         <div>
                             <h1 className="text-xl font-black uppercase italic tracking-tighter leading-none">{title}</h1>
                             <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">
-                                {t(`categories.${category}`)} • 100% Local
+                                {t(`categories.${category}`)} • {t('localOnly')}
                             </p>
                         </div>
                     </div>
@@ -104,6 +106,17 @@ export function ToolContainer({
                         <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Secure Session Active</span>
                     </div>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                        className={cn(
+                            "lg:hidden rounded-xl border transition-all",
+                            isSidebarOpen ? "bg-emerald-500 text-emerald-950 border-emerald-500" : "bg-zinc-900 border-zinc-800 text-zinc-400"
+                        )}
+                    >
+                        <Settings2 className="w-5 h-5" />
+                    </Button>
                 </div>
             </header>
 
@@ -122,8 +135,7 @@ export function ToolContainer({
                                 {description}
                             </motion.h2>
                             <p className="text-zinc-500 text-sm font-medium leading-relaxed max-w-2xl">
-                                Processing inside your browser's RAM means your sensitive data never touches a server.
-                                Full privacy, zero compromises.
+                                {t('subtitle')}
                             </p>
                         </div>
 
@@ -156,58 +168,70 @@ export function ToolContainer({
                 </main>
 
                 {/* Contextual Sidebar */}
-                <aside className="w-full lg:w-80 bg-zinc-950/20 backdrop-blur-md p-8 space-y-12 h-screen sticky top-0 border-s border-zinc-900">
+                <AnimatePresence>
+                    {(isSidebarOpen || (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
+                        <motion.aside
+                            initial={{ x: isRTL ? -320 : 320, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: isRTL ? -320 : 320, opacity: 0 }}
+                            className={cn(
+                                "fixed lg:sticky top-0 lg:top-[73px] end-0 z-40 w-full md:w-80 lg:w-80 h-[calc(100vh-73px)] lg:h-screen bg-zinc-950/95 lg:bg-zinc-950/20 backdrop-blur-xl lg:backdrop-blur-md p-8 space-y-12 border-s border-zinc-900 overflow-y-auto shadow-2xl lg:shadow-none transition-all",
+                                !isSidebarOpen && "hidden lg:block"
+                            )}
+                        >
 
-                    {/* Settings Section */}
-                    <div className="space-y-6">
-                        <div className="flex items-center gap-2">
-                            <Settings className="w-4 h-4 text-zinc-600" />
-                            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Tool Settings</h3>
-                        </div>
-                        {settingsContent ? (
-                            <div className="space-y-4">
-                                {settingsContent}
-                            </div>
-                        ) : (
-                            <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/20 text-[10px] font-bold text-zinc-600 uppercase italic text-center">
-                                No extra settings
-                            </div>
-                        )}
-                    </div>
-
-                    {/* Privacy Specs */}
-                    <div className="space-y-6">
-                        <div className="flex items-center gap-2">
-                            <Info className="w-4 h-4 text-zinc-600" />
-                            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Security Audit</h3>
-                        </div>
-                        <div className="space-y-2">
-                            {[
-                                { label: 'Network', value: '0 Packets Sent', icon: Zap },
-                                { label: 'Storage', value: 'RAM-Only', icon: HardDrive },
-                                { label: 'Encryption', value: 'Hardware Level', icon: Lock }
-                            ].map((spec, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-zinc-900/50 border border-zinc-900">
-                                    <div className="flex items-center gap-2">
-                                        <spec.icon className="w-3 h-3 text-zinc-600" />
-                                        <span className="text-[9px] font-black uppercase text-zinc-500 tracking-wider font-mono">{spec.label}</span>
-                                    </div>
-                                    <span className="text-[9px] font-black text-emerald-500 uppercase italic">{spec.value}</span>
+                            {/* Settings Section */}
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-2">
+                                    <Settings className="w-4 h-4 text-zinc-600" />
+                                    <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Tool Settings</h3>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                                {settingsContent ? (
+                                    <div className="space-y-4">
+                                        {settingsContent}
+                                    </div>
+                                ) : (
+                                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/20 text-[10px] font-bold text-zinc-600 uppercase italic text-center">
+                                        No extra settings
+                                    </div>
+                                )}
+                            </div>
 
-                    {/* Ad Placeholder */}
-                    <div className="aspect-[4/5] rounded-3xl bg-zinc-900 border border-dashed border-zinc-800 flex flex-col items-center justify-center p-8 text-center space-y-4">
-                        <div className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-700">
-                            $
-                        </div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-700 leading-tight">
-                            {t('adPlaceholder')}
-                        </span>
-                    </div>
-                </aside>
+                            {/* Privacy Specs */}
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-2">
+                                    <Info className="w-4 h-4 text-zinc-600" />
+                                    <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">How it stays safe</h3>
+                                </div>
+                                <div className="space-y-2">
+                                    {[
+                                        { label: 'Internet', value: 'None Used', icon: Zap },
+                                        { label: 'Storage', value: 'Deleted after', icon: HardDrive },
+                                        { label: 'Safety', value: 'Top Level', icon: Lock }
+                                    ].map((spec, i) => (
+                                        <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-zinc-900/50 border border-zinc-900">
+                                            <div className="flex items-center gap-2">
+                                                <spec.icon className="w-3 h-3 text-zinc-600" />
+                                                <span className="text-[9px] font-black uppercase text-zinc-500 tracking-wider font-mono">{spec.label}</span>
+                                            </div>
+                                            <span className="text-[9px] font-black text-emerald-500 uppercase italic">{spec.value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Ad Placeholder */}
+                            <div className="aspect-[4/5] rounded-3xl bg-zinc-900 border border-dashed border-zinc-800 flex flex-col items-center justify-center p-8 text-center space-y-4">
+                                <div className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center text-zinc-700">
+                                    $
+                                </div>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-700 leading-tight">
+                                    {t('adPlaceholder')}
+                                </span>
+                            </div>
+                        </motion.aside>
+                    )}
+                </AnimatePresence>
 
             </div>
         </div>

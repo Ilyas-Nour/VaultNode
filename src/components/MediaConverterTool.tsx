@@ -211,7 +211,7 @@ export default function MediaConverterTool() {
             howItWorks={[
                 { title: "Binary Transcoding", description: "V8-powered FFmpeg binaries running directly in your CPU cycles." },
                 { title: "SharedArrayBuffer", description: "Multithreaded acceleration for desktop-class performance." },
-                { title: "Privacy First", description: "Zero-server footprint. Your videos are processed in volatile RAM." }
+                { title: "Privacy First", description: "Zero-server footprint. Your videos are processed safely on your device." }
             ]}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-8">

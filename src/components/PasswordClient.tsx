@@ -121,7 +121,7 @@ export default function PasswordClient() {
             }
             howItWorks={[
                 { title: "Hardware Entropy", description: "Uses window.crypto.getRandomValues for true randomness from your CPU." },
-                { title: "Zero Latency", description: "Generated in microseconds directly in your browser's RAM session." },
+                { title: "Zero Latency", description: "Generated in microseconds directly on your machine." },
                 { title: "Local Safety", description: "Your passwords never touch our servers. They exist only on your screen." }
             ]}
         >

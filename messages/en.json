@@ -1,358 +1,150 @@
 {
     "HomePage": {
-        "title": "Stop Uploading Your Life.",
-        "subtitle": "Next-Gen Local Privacy",
-        "description": "The digital world leaks. VaultNode doesn't. Process, redact, and merge your most sensitive documents 100% inside your browser's RAM. No servers. No traces.",
-        "launchRedactor": "Launch Redactor",
-        "imageCompressor": "Image Compressor",
-        "pdfMerger": "PDF Merger",
-        "pdfToImg": "PDF to Image",
-        "cleanExif": "Metadata Scrubber",
-        "password": "Password Generator",
-        "unlockPdf": "Unlock PDF",
-        "heicToJpg": "HEIC to JPG",
+        "title": "Your Files Stay With You. Always.",
+        "subtitle": "Most websites take your files to their computers. We don't. Everything you do stays inside your own screen. It's 100% private, 100% free, and 100% safe.",
+        "launchRedactor": "Hide Secret Text",
+        "imageCompressor": "Make Photos Smaller",
+        "pdfMerger": "Combine PDFs",
+        "pdfToImg": "Turn PDF into Pictures",
+        "cleanExif": "Remove Hidden Info",
+        "password": "Create Safe Codes",
+        "unlockPdf": "Unlock a PDF",
+        "heicToJpg": "iPhone Photo Fixer",
         "pdfToDocx": "PDF to Word",
-        "mediaConverter": "Media Converter",
-        "svgToPng": "SVG to PNG",
-        "textEncryptor": "Text Encryptor",
-        "blurTool": "Privacy Blur",
-        "pdfSplit": "Extract Pages",
+        "mediaConverter": "Video & Music Fixer",
+        "svgToPng": "Logo Maker Fix",
+        "textEncryptor": "Secret Message Maker",
+        "blurTool": "Blur Part of Photo",
+        "pdfSplit": "Take Pages Out",
         "toolDescriptions": {
-            "redactor": "Black out sensitive text forever.",
-            "cleanExif": "Scrub GPS & private metadata.",
-            "password": "Generate military-grade keys.",
-            "textEncryptor": "Secure AES-256 text encryption.",
-            "compress": "Shrink images with zero quality loss.",
-            "heic": "Convert iPhone HEIC to JPG locally.",
-            "mediaConverter": "Extract audio or trim video clips.",
-            "svgToPng": "Rasterize vector SVGs to PNG pixels.",
-            "blur": "Obfuscate sensitive image parts.",
-            "merger": "Combine PDFs without server uploads.",
-            "pdfToWord": "Turn PDFs into editable Word files.",
-            "unlock": "Remove PDF restrictions instantly.",
-            "pdfToImg": "Rasterize PDF pages into images.",
-            "split": "Split PDFs into individual files."
+            "redactor": "Paint over private words so they are gone forever.",
+            "cleanExif": "Wipe away hidden map data and private details.",
+            "password": "Make very strong codes that only you know.",
+            "textEncryptor": "Turn your writing into a secret code.",
+            "compress": "Shrink big photos so they are easier to send.",
+            "heic": "Make iPhone photos work on any computer.",
+            "mediaConverter": "Change video or music files to work better.",
+            "svgToPng": "Turn drawing files into simple photos.",
+            "blur": "Hide faces or private things in your photos.",
+            "merger": "Put many PDF files together into one.",
+            "pdfToWord": "Make a PDF something you can type in.",
+            "unlock": "Open a file that is locked with a password.",
+            "pdfToImg": "Save each page of your PDF as a photo.",
+            "split": "Pick just the pages you need from a big file."
         },
-        "categories": {
-            "vault": "The Vault",
-            "media": "Media Lab",
-            "docs": "Document Suite"
-        },
-        "searchPlaceholder": "Search for a tool (e.g. PDF, HEIC)...",
-        "noResults": "No tools found matching your search.",
-        "toolSubtitle": "Professional tools for your {category} workflow",
-        "settings": "Settings",
-        "adPlaceholder": "Advertisement Placeholder",
-        "cta": {
-            "title": "Ready to take back your privacy?",
-            "desc": "Join thousands of users processing sensitive data where it belongs: in their own hands.",
-            "button": "Unlock Pro Tools"
-        },
-        "mergeDropDesc": "Select multiple PDFs to merge in your session.",
-        "mergeButton": "Merge Files",
-        "localOnly": "Local-Only",
-        "howItWorks": {
-            "title": "How VaultNode Works",
-            "subtitle": "How VaultNode protects you in 3 movements",
-            "step1": {
-                "title": "Select Source",
-                "desc": "Drag your files into the vault. They are instantly loaded into your browser's private session RAM."
-            },
-            "step2": {
-                "title": "Local Mutation",
-                "desc": "Our WebAssembly engine processes pixels and vectors locally. No data packets are sent to any server."
-            },
-            "step3": {
-                "title": "Secure Export",
-                "desc": "Download your finalized documents. Once you close the tab, your data is permanently wiped from RAM."
-            }
-        },
-        "visualProof": {
-            "title": "Visual Proof",
-            "desc": "Traditional redaction uses vector shapes that can easily be removed by hackers to reveal the original text. VaultNode destroys the underlying image pixels completely. What's gone is gone forever.",
-            "rasterizedActive": "Pixel Flattening Active",
-            "rawSource": "Unsecured Document",
-            "vulnerableSource": "Sensitive Data Exposed",
-            "vaultnodeSecured": "VaultNode Secured",
-            "permanentDestruction": "Pixels permanently destroyed"
-        },
-        "serviceShowcases": {
-            "title": "Interactive Examples",
-            "subtitle": "See VaultNode in Action",
+        "beforeAfter": {
             "redactor": {
-                "title": "Secure PDF Redaction",
-                "desc": "Traditional redaction uses vector shapes that can easily be removed by hackers to reveal the original text. VaultNode destroys the underlying image pixels completely. What's gone is gone forever.",
-                "before": "Unsecured Document",
-                "after": "VaultNode Secured",
-                "cta": "Launch Redactor"
+                "before": "A letter with your phone number.",
+                "after": "The number is gone under a solid black line."
             },
-            "compressor": {
-                "title": "Smart Image Compression",
-                "desc": "Heavy images slow down your work and leak metadata. VaultNode compresses images locally, stripping EXIF data and reducing file size by up to 90% without visible quality loss.",
-                "before": "Raw 8.4MB Image (Slow, Metadata intact)",
-                "after": "Optimized 850KB (Fast, Metadata stripped)",
-                "cta": "Compress Images"
-            },
-            "merger": {
-                "title": "Local PDF Merging",
-                "desc": "Scattered documents are hard to manage. Merge unlimited PDFs directly in your browser without uploading sensitive files to cloud servers.",
-                "before": "Scattered Files",
-                "after": "Unified Document",
-                "cta": "Merge PDFs"
-            },
-            "pdfToImg": {
-                "title": "PDF to Image Converter",
-                "desc": "Need a specific page from a PDF? VaultNode rasterizes PDF documents locally and extracts high-quality JPEGs directly in your browser. No server uploads required.",
-                "before": "Locked PDF Document",
-                "after": "Extracted Image Gallery",
-                "cta": "Extract Images"
-            },
-            "cleanExif": {
-                "title": "Metadata Scrubber",
-                "desc": "Photos carry hidden GPS coordinates, camera models, and timestamps. VaultNode redraws your images pixel-by-pixel to permanently strip all invisible EXIF data.",
-                "before": "Photo with GPS Location",
-                "after": "Cleaned Private Photo",
-                "cta": "Scrub Metadata"
+            "clean-exif": {
+                "before": "A photo that tells people where you live.",
+                "after": "A private photo with all map data wiped clean."
             },
             "password": {
-                "title": "Secure Key Generator",
-                "desc": "Stop trusting server-side password generators. VaultNode uses your browser's native cryptographic engine to create ultra-secure passwords that never leave your device.",
-                "before": "Weak/Reused Password",
-                "after": "Cryptographically Secure Key",
-                "cta": "Generate Key"
+                "before": "A weak password like '123456'.",
+                "after": "A super-strong code like 'Xk9!pQ2m#Lz'."
+            },
+            "encrypt": {
+                "before": "A secret note anyone can read.",
+                "after": "Jumbled letters that only you can unlock."
+            },
+            "compress": {
+                "before": "A slow, heavy photo.",
+                "after": "A fast, light photo that looks the same."
+            },
+            "heic": {
+                "before": "An iPhone photo that won't open on PC.",
+                "after": "A standard photo that works everywhere."
+            },
+            "media-converter": {
+                "before": "A video that won't play on your phone.",
+                "after": "A perfect file that plays on any device."
+            },
+            "svg-to-png": {
+                "before": "A drawing file for designers.",
+                "after": "A simple photo for everyone to see."
+            },
+            "blur": {
+                "before": "A photo showing a private face.",
+                "after": "The same photo with the face hidden."
+            },
+            "merger": {
+                "before": "5 different PDF files scattered around.",
+                "after": "One clean document with everything inside."
+            },
+            "pdf-to-word": {
+                "before": "A PDF you can't edit or type in.",
+                "after": "A Word file you can fix and change."
+            },
+            "unlock": {
+                "before": "A file you can't open.",
+                "after": "A file you can read and print."
+            },
+            "pdf-to-img": {
+                "before": "A document you have to scroll through.",
+                "after": "A collection of easy-to-share pictures."
+            },
+            "split": {
+                "before": "A 100-page book file.",
+                "after": "The exact 2 pages you actually needed."
             }
         },
-        "useCases": {
-            "title": "Global Compliance",
-            "subtitle": "Architected for professionals who can't risk a leak",
-            "hr": {
-                "title": "HR Departments",
-                "desc": "Redact social security numbers and personal addresses from employee records before internal sharing."
+        "categories": {
+            "vault": "Privacy Tools",
+            "media": "Photo & Video",
+            "docs": "Paper & Files"
+        },
+        "searchPlaceholder": "Search for a tool...",
+        "noResults": "No results found.",
+        "toolSubtitle": "Easy tools to help you with your {category}.",
+        "settings": {
+            "title": "Settings",
+            "subtitle": "Make it yours",
+            "language": {
+                "label": "Language",
+                "en": "English",
+                "es": "Español",
+                "fr": "Français",
+                "ar": "العربية"
             },
-            "legal": {
-                "title": "Legal Counsel",
-                "desc": "Blackout privileged information in discovery documents without leaving a digital vector trail behind."
+            "session": {
+                "label": "Cleanup",
+                "clear": "Wipe Screen Clean",
+                "clearDesc": "Wipe away everything you've done and start fresh on your screen.",
+                "cleared": "Screen Wiped Clean"
             },
-            "journalists": {
-                "title": "Journalists",
-                "desc": "Secure whistleblower sources by permanently removing metadata and identifiable visual information."
+            "close": "Close"
+        },
+        "adPlaceholder": "Support our free tools",
+        "cta": {
+            "title": "Your Privacy is a Right.",
+            "desc": "We built this because we believe your files should stay yours. No cost, no tricks, just privacy.",
+            "button": "Start Using Tools (Free)"
+        },
+        "mergeDropDesc": "Select files from your computer to put them together.",
+        "mergeButton": "Combine Files",
+        "localOnly": "Stays on your screen",
+        "howItWorks": {
+            "title": "How it Works",
+            "subtitle": "A simple story of safety",
+            "step1": {
+                "title": "Pick a File",
+                "desc": "Select the document or photo you want to fix."
             },
-            "publicSector": {
-                "title": "Public Sector",
-                "desc": "Process citizen data in compliance with GDPR and CCPA using strictly local hardware execution."
+            "step2": {
+                "title": "Fix it Privately",
+                "desc": "Our website works like a magic tool inside your screen. Your file never travels over the internet."
             },
-            "compliance": {
-                "title": "Compliance Officers",
-                "desc": "Audit high-risk documents in an air-gapped browser session with zero external dependencies."
-            },
-            "agile": {
-                "title": "Agile Teams",
-                "desc": "Merge and optimize project assets fast without waiting for slow cloud uploads or processing queues."
+            "step3": {
+                "title": "Save it Back",
+                "desc": "Download your finished file. Since it never left your device, nobody else ever saw it."
             }
-        }
-    },
-    "Footer": {
-        "desc": "The world's most private local-only media tools. Powered by hardware-level execution.",
-        "tools": "Tools",
-        "philosophy": "Philosophy",
-        "globalPresence": "Global Presence",
-        "rights": "All rights reserved."
-    },
-    "Metadata": {
-        "redact": {
-            "title": "Secure PDF Redactor",
-            "description": "Permanently blackout sensitive information in PDFs. 100% client-side rasterization ensures zero-trace data removal."
         },
-        "compress": {
-            "title": "Smart Image Compressor",
-            "description": "Shrink images without data leaks. Fast, 100% local browser-side compression for JPG, PNG, and WebP."
-        },
-        "pdfToImg": {
-            "title": "PDF to Image Converter",
-            "description": "Instantly convert PDF pages to high-quality JPG images directly in your browser. 100% local, secure, and fast."
-        },
-        "cleanExif": {
-            "title": "Metadata Scrubber",
-            "description": "Strip hidden GPS and EXIF data from your photos natively in your browser. Complete privacy without server uploads."
-        },
-        "password": {
-            "title": "Secure Password Generator",
-            "description": "Generate cryptographically secure passwords locally on your device using native browser APIs."
-        },
-        "unlockPdf": {
-            "title": "PDF Unlocker",
-            "description": "Remove passwords and restrictions safely from trusted PDFs locally in your browser. No files uploaded."
-        },
-        "heicToJpg": {
-            "title": "HEIC to JPG Converter",
-            "description": "Transform high-efficiency Apple HEIC photos into standard JPEG or WebP formats instantly with in-memory execution."
-        },
-        "pdfToDocx": {
-            "title": "PDF to Word Converter",
-            "description": "Extract readable text from PDFs and rebuild them as professional Word (.docx) documents securely."
-        },
-        "textEncryptor": {
-            "title": "Text Encryptor",
-            "description": "Protect messages with hardware-accelerated AES-256-GCM encryption natively in your browser."
-        },
-        "blurTool": {
-            "title": "Privacy Blur",
-            "description": "Obfuscate sensitive regions of your images locally with Gaussian filtering."
-        },
-        "pdfSplit": {
-            "title": "Extract Pages",
-            "description": "Split PDF documents or extract specific ranges locally without cloud processing."
-        }
-    },
-    "Tools": {
-        "common": {
-            "backHome": "Back Home",
-            "home": "Home",
-            "vaultNode": "VaultNode",
-            "securedBy": "Secured by VaultNode",
-            "loading": "Loading..."
-        },
-        "redact": {
-            "titleHighlight": "Secure",
-            "dropTitle": "Drop Secure PDF",
-            "dropDesc": "Rasterized flattening permanently destroys underlying data for 100% security.",
-            "drawingZones": "Drawing Redaction Zones",
-            "sandboxActive": "Privacy Sandbox Active",
-            "activeLayers": "Active Layers",
-            "flattening": "Flattening...",
-            "secureExport": "Secure & Export",
-            "clearAll": "Clear All",
-            "securityProtocol": "Security Protocol",
-            "securityWarning": "Original text data will be permanently overwritten by rasterization at 3.0x density.",
-            "initializing": "Initializing Secure Sandbox..."
-        },
-        "compress": {
-            "titleHighlight": "Compress",
-            "dropTitle": "Drop Image to Shrink",
-            "dropDesc": "JPG, PNG, WEBP. All processing happens 100% locally in your session.",
-            "originalArch": "Original Architecture",
-            "rawSource": "Raw Source Data",
-            "optimizedAsset": "Optimized Vault Asset",
-            "instantLoad": "Instant Load",
-            "dropHere": "Drop Image Here",
-            "releaseOptimize": "Release to instantly optimize...",
-            "originalFile": "Original File",
-            "dimensions": "Dimensions",
-            "size": "Size",
-            "type": "Type",
-            "optimizedFile": "Optimized File",
-            "savings": "Savings",
-            "compressionDetails": "Compression Details",
-            "savedSpace": "Saved Space",
-            "dataStripped": "Data Stripped",
-            "settings": "Settings",
-            "aggressive": "Aggressive (Smaller)",
-            "balanced": "Balanced",
-            "highQuality": "High Quality",
-            "downloadSecurely": "Download Securely",
-            "processing": "Processing...",
-            "vaultnodeSecured": "VaultNode Secured",
-            "initializing": "Initializing Secure Engine..."
-        },
-        "pdfToImg": {
-            "titleHighlight": "Extract",
-            "dropTitle": "Drop PDF to Extract",
-            "dropDesc": "We'll rasterize the PDF pages into high-quality images directly in your browser.",
-            "selectDensity": "Output Density",
-            "normal": "Normal",
-            "high": "High",
-            "ultra": "Ultra",
-            "convertPages": "Convert & Download ZIP",
-            "processing": "Extracting Pages...",
-            "extractingPage": "Extracting Page",
-            "initializing": "Initializing PDF Engine..."
-        },
-        "cleanExif": {
-            "titleHighlight": "Scrub",
-            "dropTitle": "Drop Photo to Clean",
-            "dropDesc": "We will redraw the pixels to permanently wipe hidden EXIF and GPS data.",
-            "originalData": "Original Info",
-            "cleaned": "Cleaned",
-            "scrubbing": "Scrubbing...",
-            "downloadClean": "Download Clean Image",
-            "noExifFound": "No sensitive metadata found attached to this image.",
-            "exifWarning": "Warning: Image contains potential metadata.",
-            "safe": "Image is clean and safe to share."
-        },
-        "password": {
-            "titleHighlight": "Key",
-            "generateNew": "Generate New Key",
-            "copy": "Copy",
-            "copied": "Copied!",
-            "length": "Password Length",
-            "uppercase": "Uppercase (A-Z)",
-            "lowercase": "Lowercase (a-z)",
-            "numbers": "Numbers (0-9)",
-            "symbols": "Symbols (!@#$)",
-            "securityLevel": "Cryptographic Entropy",
-            "weak": "Weak",
-            "medium": "Medium",
-            "strong": "Strong",
-            "alien": "Military Grade"
-        },
-        "unlockPdf": {
-            "titleHighlight": "Unlock",
-            "dropTitle": "Drop Protected PDF",
-            "dropDesc": "We'll securely decrypt your PDF using your password within your browser.",
-            "passwordLabel": "PDF Password",
-            "passwordPlaceholder": "Enter password to decrypt...",
-            "unlocking": "Unlocking...",
-            "unlockBtn": "Decrypt & Unlock",
-            "successTitle": "PDF Unlocked",
-            "successDesc": "Your document has been successfully decrypted and is ready to download.",
-            "downloadBtn": "Download Unlocked PDF",
-            "explainerHighlight": "Privacy Guaranteed",
-            "explainerText": "Your bank password never leaves your keyboard. The PDF is decrypted locally in your browser's RAM without any server uploads."
-        },
-        "heicToJpg": {
-            "titleHighlight": "Convert",
-            "dropTitle": "Drop HEIC Photo",
-            "dropDesc": "We will intelligently transcode your iPhone photos using standard WebAssembly loops.",
-            "processing": "Transcoding...",
-            "processingDesc": "Transcoding image in memory...",
-            "success": "Conversion Complete",
-            "downloadBtn": "Download Image",
-            "errorDesc": "Failed to convert HEIC. The file may be corrupted.",
-            "explainerHighlight": "RAM-Only Transcoding",
-            "explainerText": "HEIC formats are computationally heavy. We use WebAssembly to transcode them directly inside your browser's RAM, ensuring your photos are never sent to a cloud server."
-        },
-        "pdfToDocx": {
-            "titleHighlight": "Extract",
-            "dropTitle": "Drop PDF to Extract",
-            "dropDesc": "We'll scrape the text layers and build a downloadable Word Document.",
-            "readingPdf": "Reading Document...",
-            "extractingText": "Extracting Text...",
-            "processingPage": "Processing Page",
-            "buildingWord": "Building Word File...",
-            "processing": "Reconstructing...",
-            "success": "Reconstruction Complete",
-            "downloadBtn": "Download DOXC",
-            "errorDesc": "Failed to process PDF. Ensure it is not encrypted and contains text layers.",
-            "explainerHighlight": "100% Client-Side Extraction",
-            "explainerText": "We read your PDF's text layer and build the Word document entirely in your browser. Highly sensitive data never hits the network."
-        },
-        "mediaConverter": {
-            "titleHighlight": "Media",
-            "dropTitle": "Drop Video or Audio",
-            "dropDesc": "We'll process your media using FFmpeg.wasm directly inside your browser's memory.",
-            "processing": "Transcoding...",
-            "convertBtn": "Convert & Download",
-            "explainerHighlight": "FFmpeg Browser Engine",
-            "explainerText": "Converting video is intensive. We bring the power of FFmpeg to your browser via WebAssembly, so your media files never leave your device."
-        },
-        "svgToPng": {
-            "titleHighlight": "SVG",
-            "dropTitle": "Drop SVG File",
-            "dropDesc": "Rasterize vector files to PNG pixels using your native graphics engine.",
-            "processing": "Rasterizing...",
-            "convertBtn": "Rasterize & Download",
-            "explainerHighlight": "Native Graphics Pipeline",
-            "explainerText": "SVG files are code. We use a sandbox canvas to draw your vector graphics and export them as PNGs without any external processing."
+        "footer": {
+            "whyTitle": "Why it's free",
+            "whyDesc": "We believe privacy is a right, not a luxury. That's why these tools will always be free for everyone.",
+            "contact": "Contact us"
         }
     }
 }

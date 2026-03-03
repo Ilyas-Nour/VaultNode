@@ -255,12 +255,26 @@ export function BentoGrid() {
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between pt-4">
-                                            <div className="text-[10px] font-black uppercase tracking-widest text-zinc-700 group-hover:text-emerald-500 transition-colors">
-                                                Launch Tool
+                                        {/* Before & After Reveal */}
+                                        <div className="mt-4 pt-4 border-t border-zinc-900 overflow-hidden group/ba relative">
+                                            <div className="flex flex-col gap-2 transition-all duration-500 transform group-hover:-translate-y-[120%]">
+                                                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-zinc-700">
+                                                    <span>{t('cta.button')}</span>
+                                                    <ArrowRight className="w-3 h-3 text-emerald-500" />
+                                                </div>
                                             </div>
-                                            <div className="w-8 h-8 rounded-full bg-zinc-950 border border-zinc-900 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all transform translate-x-4 group-hover:translate-x-0">
-                                                <ArrowRight className="w-4 h-4 text-emerald-500" />
+
+                                            <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 space-y-2">
+                                                <div className="flex flex-col gap-1.5 p-3 rounded-2xl bg-zinc-950/50 border border-zinc-800">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-[8px] font-black text-zinc-500 uppercase tracking-[0.2em]">Before</span>
+                                                        <p className="text-[10px] text-zinc-400 font-bold italic line-through opacity-50">{t(`beforeAfter.${tool.id}.before`)}</p>
+                                                    </div>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-[8px] font-black text-emerald-500 uppercase tracking-[0.2em]">After</span>
+                                                        <p className="text-[10px] text-white font-black italic">{t(`beforeAfter.${tool.id}.after`)}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </Card>
