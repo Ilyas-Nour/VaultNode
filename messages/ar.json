@@ -10,7 +10,7 @@
         "mergeButton": "دمج الملفات",
         "localOnly": "معالجة محلية فقط",
         "howItWorks": {
-            "title": "هندسة محورها الإنسان",
+            "title": "كيف يعمل VaultNode",
             "subtitle": "كيف يحميك VaultNode في 3 خطوات بسيطة",
             "step1": {
                 "title": "إدراج الملفات",

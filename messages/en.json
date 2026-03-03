@@ -10,7 +10,7 @@
         "mergeButton": "Merge Files",
         "localOnly": "Local-Only",
         "howItWorks": {
-            "title": "Engineered for Humans",
+            "title": "How VaultNode Works",
             "subtitle": "How VaultNode protects you in 3 movements",
             "step1": {
                 "title": "Select Source",

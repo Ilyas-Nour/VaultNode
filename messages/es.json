@@ -8,7 +8,7 @@
         "pdfMerger": "Fusión de PDF",
         "localOnly": "Procesamiento 100% Local",
         "howItWorks": {
-            "title": "Diseñado para humanos",
+            "title": "Cómo Funciona VaultNode",
             "subtitle": "Cómo VaultNode protege tus datos en 3 pasos",
             "step1": {
                 "title": "Seleccionar origen",
