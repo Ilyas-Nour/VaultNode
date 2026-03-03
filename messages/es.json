@@ -106,6 +106,10 @@
         "compress": {
             "title": "Compresor Inteligente de Imágenes",
             "description": "Reduce imágenes sin fugas de datos. Compresión rápida, 100% local en tu navegador para JPG, PNG y WebP."
+        },
+        "pdfToImg": {
+            "title": "Convertidor de PDF a Imagen",
+            "description": "Convierta páginas de PDF a imágenes JPG de alta calidad directamente en su navegador. 100% local, seguro y rápido."
         }
     },
     "Tools": {
@@ -157,6 +161,19 @@
             "processing": "Procesando...",
             "vaultnodeSecured": "Protegido por VaultNode",
             "initializing": "Inicializando Motor Seguro..."
+        },
+        "pdfToImg": {
+            "titleHighlight": "Extraer",
+            "dropTitle": "Soltar PDF para Extraer",
+            "dropDesc": "Las páginas se rasterizan localmente y se empaquetan en ZIP. 100% privado.",
+            "convertPages": "Extraer a ZIP",
+            "processing": "Extrayendo Páginas...",
+            "extractingPage": "Extrayendo página",
+            "selectDensity": "Resolución (Escala)",
+            "normal": "Normal (1x)",
+            "high": "Alta (2x)",
+            "ultra": "Ultra (3x)",
+            "initializing": "Inicializando Motor de Extracción..."
         }
     }
 }

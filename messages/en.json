@@ -108,6 +108,10 @@
         "compress": {
             "title": "Smart Image Compressor",
             "description": "Shrink images without data leaks. Fast, 100% local browser-side compression for JPG, PNG, and WebP."
+        },
+        "pdfToImg": {
+            "title": "PDF to Image Converter",
+            "description": "Instantly convert PDF pages to high-quality JPG images directly in your browser. 100% local, secure, and fast."
         }
     },
     "Tools": {
@@ -159,6 +163,19 @@
             "processing": "Processing...",
             "vaultnodeSecured": "VaultNode Secured",
             "initializing": "Initializing Secure Engine..."
+        },
+        "pdfToImg": {
+            "titleHighlight": "Extract",
+            "dropTitle": "Drop PDF to Extract",
+            "dropDesc": "Pages are rasterized locally and zipped. 100% private.",
+            "convertPages": "Extract to ZIP",
+            "processing": "Extracting Pages...",
+            "extractingPage": "Extracting page",
+            "selectDensity": "Resolution (Scale)",
+            "normal": "Normal (1x)",
+            "high": "High (2x)",
+            "ultra": "Ultra (3x)",
+            "initializing": "Initializing Extract Engine..."
         }
     }
 }

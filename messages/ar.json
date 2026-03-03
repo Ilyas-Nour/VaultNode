@@ -108,6 +108,10 @@
         "compress": {
             "title": "أداة ضغط الصور الذكية",
             "description": "تقليص حجم الصور دون تسريب البيانات. ضغط سريع ومحلي 100% في متصفحك لصور JPG وPNG وWebP."
+        },
+        "pdfToImg": {
+            "title": "محول PDF إلى صور",
+            "description": "قم بتحويل صفحات PDF إلى صور JPG عالية الجودة مباشرة في متصفحك. 100% محلياً وسريعاً وآمناً."
         }
     },
     "Tools": {
@@ -159,6 +163,19 @@
             "processing": "جارٍ المعالجة...",
             "vaultnodeSecured": "مؤمن بواسطة VaultNode",
             "initializing": "جارٍ تهيئة محرك آمن..."
+        },
+        "pdfToImg": {
+            "titleHighlight": "استخراج",
+            "dropTitle": "أدرج ملف PDF للاستخراج",
+            "dropDesc": "تتم المعالجة النقطية محلياً ويتم ضغطها في أرشيف. خصوصية 100%.",
+            "convertPages": "استخراج إلى ZIP",
+            "processing": "جارٍ استخراج الصفحات...",
+            "extractingPage": "استخراج الصفحة",
+            "selectDensity": "الدقة (المقياس)",
+            "normal": "عادي (1x)",
+            "high": "عالي (2x)",
+            "ultra": "فائق (3x)",
+            "initializing": "جارٍ تهيئة محرك الاستخراج..."
         }
     }
 }
