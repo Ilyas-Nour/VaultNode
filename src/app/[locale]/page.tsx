@@ -151,7 +151,7 @@ export default function Home() {
             <Card className="p-1 sm:p-2 bg-zinc-900/50 border-zinc-800 rounded-[3rem] shadow-2xl backdrop-blur-xl group overflow-hidden">
               <div className="p-8 sm:p-12 space-y-8 bg-zinc-950/50 rounded-[2.5rem] border border-zinc-800/50">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                  <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <FileUp className="w-6 h-6 text-emerald-500" />
                     </div>
@@ -173,7 +173,7 @@ export default function Home() {
                   <input {...getInputProps()} />
                   <FileUp className={`w-8 h-8 mb-4 transition-colors ${isDragActive ? "text-emerald-500" : "text-zinc-600"}`} />
                   <p className="text-sm font-bold text-center text-zinc-500 tracking-tight leading-relaxed italic">
-                    Select multiple PDFs to merge in your session.
+                    {t('mergeDropDesc')}
                   </p>
                 </div>
 
@@ -194,7 +194,7 @@ export default function Home() {
                     </Reorder.Group>
                     <Button onClick={handleMerge} disabled={isProcessing || files.length < 2} className="w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl">
                       {isProcessing ? <Loader2 className="animate-spin mr-2" /> : <Download className="mr-2 h-4 w-4" />}
-                      Merge Files
+                      {t('mergeButton')}
                     </Button>
                   </motion.div>
                 )}
@@ -244,7 +244,7 @@ export default function Home() {
             <div className="bg-zinc-900/20 border border-zinc-900 rounded-[4rem] p-4 sm:p-8 lg:p-20 space-y-12 lg:space-y-16 overflow-hidden">
               <div className="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-8">
                 <div className="space-y-6 max-w-xl text-start">
-                  <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                       <Eraser className="w-6 h-6 text-emerald-500" />
                     </div>
@@ -360,7 +360,7 @@ export default function Home() {
             <div className="bg-zinc-900/20 border border-zinc-900 rounded-[4rem] p-4 sm:p-8 lg:p-20 space-y-12 lg:space-y-16 overflow-hidden">
               <div className="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-8">
                 <div className="space-y-6 max-w-xl text-start">
-                  <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
                       <Zap className="w-6 h-6 text-sky-500" />
                     </div>
@@ -429,7 +429,7 @@ export default function Home() {
             <div className="bg-zinc-900/20 border border-zinc-900 rounded-[4rem] p-4 sm:p-8 lg:p-20 space-y-12 lg:space-y-16 overflow-hidden">
               <div className="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-8">
                 <div className="space-y-6 max-w-xl text-start">
-                  <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                  <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
                       <FileUp className="w-6 h-6 text-purple-500" />
                     </div>
@@ -552,7 +552,7 @@ export default function Home() {
       <footer className="border-t border-zinc-900 py-20 bg-zinc-950">
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex flex-col items-center md:items-start space-y-4">
-            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+            <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-emerald-950">
                 <ShieldCheck className="w-5 h-5" />
               </div>

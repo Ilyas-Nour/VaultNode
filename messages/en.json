@@ -6,6 +6,8 @@
         "launchRedactor": "Launch Redactor",
         "imageCompressor": "Image Compressor",
         "pdfMerger": "PDF Merger",
+        "mergeDropDesc": "Select multiple PDFs to merge in your session.",
+        "mergeButton": "Merge Files",
         "localOnly": "Local-Only",
         "howItWorks": {
             "title": "Engineered for Humans",

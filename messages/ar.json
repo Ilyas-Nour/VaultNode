@@ -6,6 +6,8 @@
         "launchRedactor": "إطلاق أداة التنقيح",
         "imageCompressor": "ضغط الصور",
         "pdfMerger": "دمج ملفات PDF",
+        "mergeDropDesc": "قم بتحديد ملفات PDF متعددة لدمجها داخل جلستك.",
+        "mergeButton": "دمج الملفات",
         "localOnly": "معالجة محلية فقط",
         "howItWorks": {
             "title": "هندسة محورها الإنسان",
