@@ -1,8 +1,162 @@
 {
-    "Index": {
-        "title": "Tus Archivos. Cero Cargas.",
-        "description": "Deja de subir tu vida. El mundo digital se filtra. VaultNode no.",
-        "howItWorks": "Diseñado para Humanos",
-        "useCases": "Cumplimiento Global"
+    "HomePage": {
+        "title": "Deja de subir tu vida a la nube.",
+        "subtitle": "Privacidad local de última generación",
+        "description": "El mundo digital filtra datos. VaultNode no. Procesa, censura y fusiona tus documentos más confidenciales 100% dentro de la memoria RAM de tu navegador. Sin servidores. Sin rastros.",
+        "launchRedactor": "Iniciar Redactor",
+        "imageCompressor": "Compresor de Imágenes",
+        "pdfMerger": "Fusión de PDF",
+        "localOnly": "Procesamiento 100% Local",
+        "howItWorks": {
+            "title": "Diseñado para humanos",
+            "subtitle": "Cómo VaultNode protege tus datos en 3 pasos",
+            "step1": {
+                "title": "Seleccionar origen",
+                "desc": "Arrastra tus archivos a la bóveda. Se cargan al instante en la memoria RAM privada de tu navegador."
+            },
+            "step2": {
+                "title": "Procesamiento interno",
+                "desc": "Nuestro motor WebAssembly procesa píxeles y vectores localmente. Absolutamente ningún paquete de datos sale hacia servidores externos."
+            },
+            "step3": {
+                "title": "Exportación blindada",
+                "desc": "Descarga tus documentos finales. Al cerrar la pestaña, tu información se borra de la memoria para siempre."
+            }
+        },
+        "visualProof": {
+            "title": "Prueba visual definitiva",
+            "desc": "La censura tradicional usa formas vectoriales que los hackers pueden eliminar fácilmente para revelar el texto original. VaultNode destruye los píxeles de la imagen por completo. Lo que se elimina, desaparece para siempre.",
+            "rasterizedActive": "Aplanamiento de Píxeles Activo",
+            "rawSource": "Documento sin protección",
+            "vulnerableSource": "Datos sensibles expuestos",
+            "vaultnodeSecured": "Protegido por VaultNode",
+            "permanentDestruction": "Píxeles destruidos permanentemente"
+        },
+        "serviceShowcases": {
+            "title": "Ejemplos interactivos",
+            "subtitle": "Ve a VaultNode en acción",
+            "redactor": {
+                "title": "Censura segura de PDF",
+                "desc": "La censura tradicional usa formas vectoriales que los hackers pueden eliminar fácilmente para revelar el original. VaultNode destruye los píxeles de la imagen por completo. Lo que se elimina, desaparece para siempre.",
+                "before": "Documento sin protección",
+                "after": "Protegido por VaultNode",
+                "cta": "Lanzar Redactor"
+            },
+            "compressor": {
+                "title": "Compresión inteligente de imágenes",
+                "desc": "Las imágenes pesadas ralentizan tu trabajo y filtran metadatos. VaultNode comprime imágenes localmente, eliminando datos EXIF y reduciendo el tamaño del archivo hasta en un 90% sin pérdida visual de calidad.",
+                "before": "Imagen original de 8.4MB (Lenta, con metadatos)",
+                "after": "Optimizada a 850KB (Rápida, sin metadatos)",
+                "cta": "Comprimir Imágenes"
+            },
+            "merger": {
+                "title": "Fusión local de PDF",
+                "desc": "Los documentos dispersos son difíciles de manejar. Combina PDF ilimitados directamente en tu navegador sin subir archivos confidenciales a servidores en la nube.",
+                "before": "Archivos dispersos",
+                "after": "Documento unificado",
+                "cta": "Fusionar PDF"
+            }
+        },
+        "useCases": {
+            "title": "Cumplimiento normativo global",
+            "subtitle": "Arquitectura diseñada para profesionales que no pueden permitirse una filtración",
+            "hr": {
+                "title": "Recursos Humanos",
+                "desc": "Oculta números de seguridad social y direcciones personales en los expedientes de los empleados antes de compartirlos internamente."
+            },
+            "legal": {
+                "title": "Asesoría Legal",
+                "desc": "Censura información confidencial en documentos legales sin dejar ningún rastro vectorial digital."
+            },
+            "journalists": {
+                "title": "Periodistas",
+                "desc": "Protege a tus informantes eliminando permanentemente metadatos e información visual identificable."
+            },
+            "publicSector": {
+                "title": "Sector Público",
+                "desc": "Procesa datos de ciudadanos en estricto cumplimiento con el RGPD utilizando exclusivamente ejecución de hardware local."
+            },
+            "compliance": {
+                "title": "Oficiales de Cumplimiento",
+                "desc": "Audita documentos de alto riesgo en un entorno de navegador aislado (air-gapped) sin dependencias externas."
+            },
+            "agile": {
+                "title": "Equipos Ágiles",
+                "desc": "Fusiona y optimiza los recursos de tus proyectos rápidamente, sin las demoras de subir archivos a la nube ni hacer colas de procesamiento."
+            }
+        },
+        "cta": {
+            "title": "¿Listo para recuperar tu soberanía digital?",
+            "desc": "Sin crear cuentas. Sin suscripciones. Simplemente procesamiento de archivos estrictamente local para la era de la privacidad.",
+            "button": "Lanzar Herramientas VaultNode"
+        }
+    },
+    "Footer": {
+        "desc": "Las herramientas multimedia más privadas del mundo. Impulsadas por ejecución a nivel de hardware.",
+        "tools": "Herramientas",
+        "philosophy": "Filosofía",
+        "globalPresence": "Presencia Global",
+        "rights": "Todos los derechos reservados."
+    },
+    "Metadata": {
+        "redact": {
+            "title": "Redactor Seguro de PDF",
+            "description": "Censura permanentemente información confidencial en PDFs. La rasterización 100% del lado del cliente garantiza la eliminación de datos sin dejar rastro."
+        },
+        "compress": {
+            "title": "Compresor Inteligente de Imágenes",
+            "description": "Reduce imágenes sin fugas de datos. Compresión rápida, 100% local en tu navegador para JPG, PNG y WebP."
+        }
+    },
+    "Tools": {
+        "common": {
+            "backHome": "Volver al Inicio",
+            "home": "Inicio",
+            "vaultNode": "VaultNode",
+            "securedBy": "Protegido por VaultNode",
+            "loading": "Cargando..."
+        },
+        "redact": {
+            "titleHighlight": "Seguro",
+            "dropTitle": "Suelta tu PDF Seguro",
+            "dropDesc": "El aplanamiento rasterizado destruye permanentemente los datos subyacentes para una seguridad del 100%.",
+            "drawingZones": "Dibujando Zonas de Censura",
+            "sandboxActive": "Entorno de Privacidad Activo",
+            "activeLayers": "Capas Activas",
+            "flattening": "Aplanando...",
+            "secureExport": "Proteger y Exportar",
+            "clearAll": "Borrar Todo",
+            "securityProtocol": "Protocolo de Seguridad",
+            "securityWarning": "Los datos del texto original se sobrescribirán permanentemente mediante rasterización a densidad 3.0x.",
+            "initializing": "Inicializando Entorno Seguro..."
+        },
+        "compress": {
+            "titleHighlight": "Comprimir",
+            "dropTitle": "Suelta la Imagen para Reducir",
+            "dropDesc": "JPG, PNG, WEBP. Todo el procesamiento ocurre 100% localmente en tu sesión.",
+            "originalArch": "Arquitectura Original",
+            "rawSource": "Datos de Origen Sin Procesar",
+            "optimizedAsset": "Recurso Optimizado Vault",
+            "instantLoad": "Carga Instantánea",
+            "dropHere": "Suelta la Imagen Aquí",
+            "releaseOptimize": "Suelta para optimizar al instante...",
+            "originalFile": "Archivo Original",
+            "dimensions": "Dimensiones",
+            "size": "Tamaño",
+            "type": "Tipo",
+            "optimizedFile": "Archivo Optimizado",
+            "savings": "Ahorro",
+            "compressionDetails": "Detalles de Compresión",
+            "savedSpace": "Espacio Ahorrado",
+            "dataStripped": "Datos Eliminados",
+            "settings": "Ajustes",
+            "aggressive": "Agresivo (Más Pequeño)",
+            "balanced": "Equilibrado",
+            "highQuality": "Alta Calidad",
+            "downloadSecurely": "Descargar de Forma Segura",
+            "processing": "Procesando...",
+            "vaultnodeSecured": "Protegido por VaultNode",
+            "initializing": "Inicializando Motor Seguro..."
+        }
     }
 }

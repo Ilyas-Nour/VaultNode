@@ -2,15 +2,23 @@
 
 import dynamic from "next/dynamic";
 import AdUnit from "@/components/AdUnit";
+import { useTranslations } from "next-intl";
+
+const LoadingState = () => {
+    const t = useTranslations("Tools.redact");
+    return (
+        <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center space-y-4 w-full">
+            <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
+            <p className="text-zinc-500 font-medium animate-pulse uppercase tracking-widest text-[10px]">
+                {t('initializing')}
+            </p>
+        </div>
+    );
+};
 
 const RedactorTool = dynamic(() => import("@/components/RedactorTool"), {
     ssr: false,
-    loading: () => (
-        <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center space-y-4 w-full">
-            <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
-            <p className="text-zinc-500 font-medium animate-pulse uppercase tracking-widest text-[10px]">Initializing Secure Sandbox...</p>
-        </div>
-    )
+    loading: () => <LoadingState />
 });
 
 export default function RedactClient() {

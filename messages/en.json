@@ -1,8 +1,162 @@
 {
-    "Index": {
-        "title": "Your Files. Zero Uploads.",
-        "description": "Stop Uploading Your Life. The digital world leaks. VaultNode doesn't.",
-        "howItWorks": "Engineered for Humans",
-        "useCases": "Global Compliance"
+    "HomePage": {
+        "title": "Stop Uploading Your Life.",
+        "subtitle": "Next-Gen Local Privacy",
+        "description": "The digital world leaks. VaultNode doesn't. Process, redact, and merge your most sensitive documents 100% inside your browser's RAM. No servers. No traces.",
+        "launchRedactor": "Launch Redactor",
+        "imageCompressor": "Image Compressor",
+        "pdfMerger": "PDF Merger",
+        "localOnly": "Local-Only",
+        "howItWorks": {
+            "title": "Engineered for Humans",
+            "subtitle": "How VaultNode protects you in 3 movements",
+            "step1": {
+                "title": "Select Source",
+                "desc": "Drag your files into the vault. They are instantly loaded into your browser's private session RAM."
+            },
+            "step2": {
+                "title": "Local Mutation",
+                "desc": "Our WebAssembly engine processes pixels and vectors locally. No data packets are sent to any server."
+            },
+            "step3": {
+                "title": "Secure Export",
+                "desc": "Download your finalized documents. Once you close the tab, your data is permanently wiped from RAM."
+            }
+        },
+        "visualProof": {
+            "title": "Visual Proof",
+            "desc": "Traditional redaction uses vector shapes that can easily be removed by hackers to reveal the original text. VaultNode destroys the underlying image pixels completely. What's gone is gone forever.",
+            "rasterizedActive": "Pixel Flattening Active",
+            "rawSource": "Unsecured Document",
+            "vulnerableSource": "Sensitive Data Exposed",
+            "vaultnodeSecured": "VaultNode Secured",
+            "permanentDestruction": "Pixels permanently destroyed"
+        },
+        "serviceShowcases": {
+            "title": "Interactive Examples",
+            "subtitle": "See VaultNode in Action",
+            "redactor": {
+                "title": "Secure PDF Redaction",
+                "desc": "Traditional redaction uses vector shapes that can easily be removed by hackers to reveal the original text. VaultNode destroys the underlying image pixels completely. What's gone is gone forever.",
+                "before": "Unsecured Document",
+                "after": "VaultNode Secured",
+                "cta": "Launch Redactor"
+            },
+            "compressor": {
+                "title": "Smart Image Compression",
+                "desc": "Heavy images slow down your work and leak metadata. VaultNode compresses images locally, stripping EXIF data and reducing file size by up to 90% without visible quality loss.",
+                "before": "Raw 8.4MB Image (Slow, Metadata intact)",
+                "after": "Optimized 850KB (Fast, Metadata stripped)",
+                "cta": "Compress Images"
+            },
+            "merger": {
+                "title": "Local PDF Merging",
+                "desc": "Scattered documents are hard to manage. Merge unlimited PDFs directly in your browser without uploading sensitive files to cloud servers.",
+                "before": "Scattered Files",
+                "after": "Unified Document",
+                "cta": "Merge PDFs"
+            }
+        },
+        "useCases": {
+            "title": "Global Compliance",
+            "subtitle": "Architected for professionals who can't risk a leak",
+            "hr": {
+                "title": "HR Departments",
+                "desc": "Redact social security numbers and personal addresses from employee records before internal sharing."
+            },
+            "legal": {
+                "title": "Legal Counsel",
+                "desc": "Blackout privileged information in discovery documents without leaving a digital vector trail behind."
+            },
+            "journalists": {
+                "title": "Journalists",
+                "desc": "Secure whistleblower sources by permanently removing metadata and identifiable visual information."
+            },
+            "publicSector": {
+                "title": "Public Sector",
+                "desc": "Process citizen data in compliance with GDPR and CCPA using strictly local hardware execution."
+            },
+            "compliance": {
+                "title": "Compliance Officers",
+                "desc": "Audit high-risk documents in an air-gapped browser session with zero external dependencies."
+            },
+            "agile": {
+                "title": "Agile Teams",
+                "desc": "Merge and optimize project assets fast without waiting for slow cloud uploads or processing queues."
+            }
+        },
+        "cta": {
+            "title": "Ready to claim your digital sovereignty?",
+            "desc": "No accounts. No subscriptions. Just pure local-only file processing for the modern privacy era.",
+            "button": "Launch VaultNode Tools"
+        }
+    },
+    "Footer": {
+        "desc": "The world's most private local-only media tools. Powered by hardware-level execution.",
+        "tools": "Tools",
+        "philosophy": "Philosophy",
+        "globalPresence": "Global Presence",
+        "rights": "All rights reserved."
+    },
+    "Metadata": {
+        "redact": {
+            "title": "Secure PDF Redactor",
+            "description": "Permanently blackout sensitive information in PDFs. 100% client-side rasterization ensures zero-trace data removal."
+        },
+        "compress": {
+            "title": "Smart Image Compressor",
+            "description": "Shrink images without data leaks. Fast, 100% local browser-side compression for JPG, PNG, and WebP."
+        }
+    },
+    "Tools": {
+        "common": {
+            "backHome": "Back Home",
+            "home": "Home",
+            "vaultNode": "VaultNode",
+            "securedBy": "Secured by VaultNode",
+            "loading": "Loading..."
+        },
+        "redact": {
+            "titleHighlight": "Secure",
+            "dropTitle": "Drop Secure PDF",
+            "dropDesc": "Rasterized flattening permanently destroys underlying data for 100% security.",
+            "drawingZones": "Drawing Redaction Zones",
+            "sandboxActive": "Privacy Sandbox Active",
+            "activeLayers": "Active Layers",
+            "flattening": "Flattening...",
+            "secureExport": "Secure & Export",
+            "clearAll": "Clear All",
+            "securityProtocol": "Security Protocol",
+            "securityWarning": "Original text data will be permanently overwritten by rasterization at 3.0x density.",
+            "initializing": "Initializing Secure Sandbox..."
+        },
+        "compress": {
+            "titleHighlight": "Compress",
+            "dropTitle": "Drop Image to Shrink",
+            "dropDesc": "JPG, PNG, WEBP. All processing happens 100% locally in your session.",
+            "originalArch": "Original Architecture",
+            "rawSource": "Raw Source Data",
+            "optimizedAsset": "Optimized Vault Asset",
+            "instantLoad": "Instant Load",
+            "dropHere": "Drop Image Here",
+            "releaseOptimize": "Release to instantly optimize...",
+            "originalFile": "Original File",
+            "dimensions": "Dimensions",
+            "size": "Size",
+            "type": "Type",
+            "optimizedFile": "Optimized File",
+            "savings": "Savings",
+            "compressionDetails": "Compression Details",
+            "savedSpace": "Saved Space",
+            "dataStripped": "Data Stripped",
+            "settings": "Settings",
+            "aggressive": "Aggressive (Smaller)",
+            "balanced": "Balanced",
+            "highQuality": "High Quality",
+            "downloadSecurely": "Download Securely",
+            "processing": "Processing...",
+            "vaultnodeSecured": "VaultNode Secured",
+            "initializing": "Initializing Secure Engine..."
+        }
     }
 }

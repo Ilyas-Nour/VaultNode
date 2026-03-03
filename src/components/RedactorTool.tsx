@@ -19,6 +19,7 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import * as pdfjsLib from "pdfjs-dist";
 import { PDFDocument } from "pdf-lib";
+import { useTranslations } from "next-intl";
 
 // Configuration for High-Res Secure Flattening
 const UI_RENDER_SCALE = 1.5;
@@ -33,6 +34,9 @@ interface RedactionBox {
 }
 
 export default function RedactorTool() {
+    const tc = useTranslations("Tools.common");
+    const t = useTranslations("Tools.redact");
+
     const [file, setFile] = useState<File | null>(null);
     const [redactions, setRedactions] = useState<RedactionBox[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
@@ -46,7 +50,7 @@ export default function RedactorTool() {
 
     // Next.js pdfjs-dist Worker Fix (Crucial for build/runtime stability)
     useEffect(() => {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
     /**
@@ -273,16 +277,16 @@ export default function RedactorTool() {
 
                 {/* Navigation & Brand */}
                 <div className="flex items-center justify-between">
-                    <Link href="/">
+                    <Link href="/en/">
                         <Button variant="ghost" className="text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-xl transition-all h-10 px-3 sm:px-4">
                             <ChevronLeft className="mr-1 sm:mr-2 h-4 w-4" />
-                            <span className="hidden sm:inline">Back Home</span>
-                            <span className="sm:hidden">Home</span>
+                            <span className="hidden sm:inline">{tc('backHome')}</span>
+                            <span className="sm:hidden">{tc('home')}</span>
                         </Button>
                     </Link>
                     <div className="flex items-center space-x-2 sm:space-x-3 bg-zinc-900/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl border border-zinc-800">
                         <Shield className="text-emerald-500 w-4 h-4 sm:w-5 sm:h-5 fill-emerald-500/10" />
-                        <h1 className="text-sm sm:text-lg font-bold italic tracking-tighter">VaultNode <span className="text-emerald-500">Secure</span></h1>
+                        <h1 className="text-sm sm:text-lg font-bold italic tracking-tighter">{tc('vaultNode')} <span className="text-emerald-500">{t('titleHighlight')}</span></h1>
                     </div>
                 </div>
 
@@ -305,9 +309,9 @@ export default function RedactorTool() {
                                 <FileUp className={`w-8 h-8 sm:w-10 sm:h-10 transition-colors duration-500 ${isDragActive ? "text-emerald-500" : "text-zinc-600"}`} />
                             </div>
                             <div className="text-center space-y-1 sm:space-y-2 px-6">
-                                <p className="text-lg sm:text-xl font-bold tracking-tight">Drop Secure PDF</p>
+                                <p className="text-lg sm:text-xl font-bold tracking-tight">{t('dropTitle')}</p>
                                 <p className="text-zinc-500 text-xs sm:text-sm max-w-[320px] leading-relaxed mx-auto">
-                                    Rasterized flattening permanently destroys underlying data for 100% security.
+                                    {t('dropDesc')}
                                 </p>
                             </div>
                         </div>
@@ -336,7 +340,7 @@ export default function RedactorTool() {
 
                             <div className="flex items-center space-x-3 text-zinc-500 bg-zinc-900/80 px-5 py-2.5 rounded-2xl border border-zinc-800 shadow-lg">
                                 <MousePointer2 className="w-4 h-4 text-emerald-500" />
-                                <span className="text-xs font-bold uppercase tracking-widest leading-none">Drawing Redaction Zones</span>
+                                <span className="text-xs font-bold uppercase tracking-widest leading-none">{t('drawingZones')}</span>
                             </div>
                         </div>
 
@@ -346,11 +350,11 @@ export default function RedactorTool() {
                                 <div className="space-y-3 sm:space-y-4">
                                     <div className="inline-flex items-center space-x-2 text-emerald-500 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                                         <Shield className="w-3.5 h-3.5" />
-                                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest">Privacy Sandbox Active</span>
+                                        <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-widest">{t('sandboxActive')}</span>
                                     </div>
 
                                     <div className="flex lg:flex-col items-baseline lg:items-start justify-between lg:justify-start space-x-2 lg:space-x-0 lg:space-y-1 pl-1">
-                                        <h3 className="text-[10px] sm:text-xs font-bold text-zinc-500 uppercase tracking-widest">Active Layers</h3>
+                                        <h3 className="text-[10px] sm:text-xs font-bold text-zinc-500 uppercase tracking-widest">{t('activeLayers')}</h3>
                                         <p className="text-4xl sm:text-6xl font-black text-white tracking-tighter">{redactions.length}</p>
                                     </div>
                                 </div>
@@ -362,9 +366,9 @@ export default function RedactorTool() {
                                         className="w-full group bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black h-14 sm:h-16 rounded-xl sm:rounded-2xl transition-all duration-500 shadow-lg hover:shadow-emerald-500/20 active:scale-95 text-base sm:text-lg"
                                     >
                                         {isProcessing ? (
-                                            <><Loader2 className="mr-2 sm:mr-3 h-5 w-5 animate-spin" /> Flattening...</>
+                                            <><Loader2 className="mr-2 sm:mr-3 h-5 w-5 animate-spin" /> {t('flattening')}</>
                                         ) : (
-                                            <><Download className="mr-2 sm:mr-3 h-5 w-5 group-hover:-translate-y-1 transition-transform" /> Secure & Export</>
+                                            <><Download className="mr-2 sm:mr-3 h-5 w-5 group-hover:-translate-y-1 transition-transform" /> {t('secureExport')}</>
                                         )}
                                     </Button>
 
@@ -375,17 +379,17 @@ export default function RedactorTool() {
                                         className="w-full text-zinc-500 hover:text-white hover:bg-zinc-800 rounded-xl sm:rounded-2xl h-12 sm:h-14 font-bold text-sm"
                                     >
                                         <Trash2 className="mr-2 h-4 w-4" />
-                                        Clear All
+                                        {t('clearAll')}
                                     </Button>
                                 </div>
 
                                 <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-zinc-950/50 border border-zinc-800/80 space-y-3 sm:space-y-4">
                                     <div className="flex items-center space-x-2 text-amber-500">
                                         <AlertTriangle className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-500/10" />
-                                        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider">Security Protocol</span>
+                                        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider">{t('securityProtocol')}</span>
                                     </div>
                                     <p className="text-[9px] sm:text-[10px] text-zinc-500 leading-relaxed font-semibold italic">
-                                        Original text data will be permanently overwritten by rasterization at 3.0x density.
+                                        {t('securityWarning')}
                                     </p>
                                 </div>
                             </Card>
@@ -395,7 +399,7 @@ export default function RedactorTool() {
                                 <div className="w-8 h-8 lg:w-10 lg:h-10 border-2 border-zinc-800 rounded-xl rotate-45 flex items-center justify-center">
                                     <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-emerald-500 rounded-full" />
                                 </div>
-                                <p className="text-[9px] lg:text-[10px] font-bold text-zinc-600 uppercase tracking-widest">Secured by VaultNode</p>
+                                <p className="text-[9px] lg:text-[10px] font-bold text-zinc-600 uppercase tracking-widest">{tc('securedBy')}</p>
                             </div>
                         </aside>
                     </div>

@@ -17,9 +17,10 @@ import {
     HardDrive,
     Info
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 interface CompressionResult {
     originalUrl: string;
@@ -30,6 +31,8 @@ interface CompressionResult {
 }
 
 export default function ImageCompressor() {
+    const tc = useTranslations("Tools.common");
+    const t = useTranslations("Tools.compress");
     const [file, setFile] = useState<File | null>(null);
     const [targetSizeMB, setTargetSizeMB] = useState(1.0);
     const [result, setResult] = useState<CompressionResult | null>(null);
@@ -122,13 +125,13 @@ export default function ImageCompressor() {
                     <Link href="/">
                         <Button variant="ghost" className="text-zinc-400 hover:text-white hover:bg-zinc-900 rounded-xl transition-all h-10 px-4">
                             <ChevronLeft className="mr-2 h-4 w-4" />
-                            <span className="hidden sm:inline">Back Home</span>
-                            <span className="sm:hidden">Home</span>
+                            <span className="hidden sm:inline">{tc('backHome')}</span>
+                            <span className="sm:hidden">{tc('home')}</span>
                         </Button>
                     </Link>
                     <div className="flex items-center space-x-3 bg-zinc-900/50 px-4 py-2 rounded-2xl border border-zinc-800">
                         <Zap className="text-emerald-500 w-5 h-5 fill-emerald-500/10" />
-                        <h1 className="text-lg font-bold italic tracking-tighter uppercase">VaultNode <span className="text-emerald-500">Compress</span></h1>
+                        <h1 className="text-lg font-bold italic tracking-tighter uppercase">{tc('vaultNode')} <span className="text-emerald-500">{t('titleHighlight')}</span></h1>
                     </div>
                 </div>
 
@@ -151,9 +154,9 @@ export default function ImageCompressor() {
                                 <ImageIcon className={`w-10 h-10 transition-colors duration-500 ${isDragActive ? "text-emerald-500" : "text-zinc-600"}`} />
                             </div>
                             <div className="text-center space-y-2 px-8">
-                                <h3 className="text-xl font-bold tracking-tight text-white">Drop Image to Shrink</h3>
+                                <h3 className="text-xl font-bold tracking-tight text-white">{t('dropTitle')}</h3>
                                 <p className="text-zinc-500 text-sm max-w-[340px] leading-relaxed mx-auto italic">
-                                    JPG, PNG, WEBP. All processing happens 100% locally in your session.
+                                    {t('dropDesc')}
                                 </p>
                             </div>
                         </div>
@@ -168,7 +171,7 @@ export default function ImageCompressor() {
                                 {/* Original View */}
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between px-2">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Original Architecture</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{t('originalArch')}</span>
                                         <span className="text-xs font-bold text-zinc-400">{formatSize(result?.originalSize || file.size)}</span>
                                     </div>
                                     <Card className="aspect-square bg-zinc-900 rounded-[2rem] border-zinc-800 overflow-hidden flex items-center justify-center relative group">
@@ -178,7 +181,7 @@ export default function ImageCompressor() {
                                             className="w-full h-full object-contain p-4 opacity-50 contrast-125 grayscale"
                                         />
                                         <div className="absolute inset-0 bg-zinc-950/40 backdrop-blur-[2px] flex items-center justify-center">
-                                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 -rotate-12 italic">Raw Source Data</p>
+                                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 -rotate-12 italic">{t('rawSource')}</p>
                                         </div>
                                     </Card>
                                 </div>
@@ -186,7 +189,7 @@ export default function ImageCompressor() {
                                 {/* Compressed View */}
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between px-2">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Optimized Vault Asset</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">{t('optimizedAsset')}</span>
                                         <div className="flex items-center space-x-2">
                                             <span className="text-xs font-black text-emerald-500">{formatSize(result?.compressedSize || 0)}</span>
                                             {savingsPercent > 0 && (
@@ -206,7 +209,7 @@ export default function ImageCompressor() {
                                                     <div className="w-12 h-12 border-2 border-emerald-500/20 rounded-full animate-ping" />
                                                     <Loader2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-emerald-500 animate-spin" />
                                                 </div>
-                                                <p className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse">Shrinking locally...</p>
+                                                <p className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse">{t('processing')}</p>
                                             </div>
                                         )}
                                     </Card>
@@ -233,7 +236,7 @@ export default function ImageCompressor() {
                                 <div className="space-y-6">
                                     <div className="flex items-center space-x-3 text-emerald-500">
                                         <Sliders className="w-4 h-4" />
-                                        <span className="text-xs font-black uppercase tracking-[0.2em]">Engine Config</span>
+                                        <span className="text-xs font-black uppercase tracking-[0.2em]">{t('settings')}</span>
                                     </div>
 
                                     <div className="space-y-6">
@@ -253,8 +256,8 @@ export default function ImageCompressor() {
                                         />
 
                                         <div className="flex justify-between px-1">
-                                            <span className="text-[9px] font-black text-zinc-700 uppercase">Extreme</span>
-                                            <span className="text-[9px] font-black text-zinc-700 uppercase tracking-widest">Balanced Quality</span>
+                                            <span className="text-[9px] font-black text-zinc-700 uppercase">{t('aggressive')}</span>
+                                            <span className="text-[9px] font-black text-zinc-700 uppercase tracking-widest">{t('balanced')}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +271,7 @@ export default function ImageCompressor() {
                                         className="w-full h-16 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-xl shadow-emerald-500/10 active:scale-95 transition-all duration-500 capitalize italic group"
                                     >
                                         <Download className="mr-2 h-5 w-5 group-hover:translate-y-0.5 transition-transform" />
-                                        Export Optimized Image
+                                        {t('downloadSecurely')}
                                     </Button>
 
                                     <Button
