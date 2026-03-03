@@ -55,6 +55,27 @@
                 "before": "Fichiers dispersés",
                 "after": "Document unifié",
                 "cta": "Fusionner les PDF"
+            },
+            "pdfToImg": {
+                "title": "Convertisseur PDF en Image",
+                "desc": "Besoin d'une page spécifique d'un PDF ? VaultNode rastérise les documents PDF localement et extrait des JPEG de haute qualité directement dans votre navigateur. Aucun envoi sur serveur n'est requis.",
+                "before": "Document PDF Verrouillé",
+                "after": "Galerie d'Images Extraites",
+                "cta": "Extraire les Images"
+            },
+            "cleanExif": {
+                "title": "Nettoyeur de Métadonnées",
+                "desc": "Les photos contiennent des coordonnées GPS, des modèles d'appareils et des horodatages cachés. VaultNode redessine vos images pixel par pixel pour supprimer définitivement toutes les données EXIF invisibles.",
+                "before": "Photo avec Localisation GPS",
+                "after": "Photo Privée Nettoyée",
+                "cta": "Nettoyer les Métadonnées"
+            },
+            "password": {
+                "title": "Générateur de Clés Sécurisées",
+                "desc": "Cessez de faire confiance aux générateurs web. VaultNode utilise le moteur cryptographique natif de votre navigateur pour créer des mots de passe ultra-sécurisés qui ne quittent jamais votre appareil.",
+                "before": "Mot de Passe Faible/Réutilisé",
+                "after": "Clé Cryptographiquement Sécurisée",
+                "cta": "Générer la Clé"
             }
         },
         "useCases": {
@@ -109,7 +130,15 @@
         },
         "pdfToImg": {
             "title": "Convertisseur de PDF en Image",
-            "description": "Convertissez vos pages PDF en images JPG de haute qualité directement dans votre navigateur. 100 % local, sécurisé et rapide."
+            "description": "Convertissez instantanément des pages PDF en images JPG de haute qualité directement dans votre navigateur. 100% local, sécurisé et rapide."
+        },
+        "cleanExif": {
+            "title": "Nettoyeur de Métadonnées",
+            "description": "Supprimez les données GPS et EXIF cachées de vos photos nativement dans votre navigateur. Confidentialité totale sans serveurs."
+        },
+        "password": {
+            "title": "Générateur de Clés Sécurisées",
+            "description": "Générez des mots de passe cryptographiquement sécurisés localement sur votre appareil à l'aide des API natives du navigateur."
         }
     },
     "Tools": {
@@ -165,15 +194,43 @@
         "pdfToImg": {
             "titleHighlight": "Extraire",
             "dropTitle": "Déposez le PDF à Extraire",
-            "dropDesc": "Les pages sont rastérisées localement et zippées. 100 % privé.",
-            "convertPages": "Extraire vers ZIP",
+            "dropDesc": "Nous allons rastériser les pages PDF en images de haute qualité directement dans votre navigateur.",
+            "convertPages": "Convertir et Télécharger ZIP",
             "processing": "Extraction des Pages...",
-            "extractingPage": "Extraction de la page",
-            "selectDensity": "Résolution (Échelle)",
-            "normal": "Normale (1x)",
-            "high": "Haute (2x)",
-            "ultra": "Ultra (3x)",
-            "initializing": "Initialisation du Moteur d'Extraction..."
+            "extractingPage": "Extraction de la Page",
+            "selectDensity": "Densité de Sortie",
+            "normal": "Normale",
+            "high": "Haute",
+            "ultra": "Ultra",
+            "initializing": "Initialisation du Moteur PDF..."
+        },
+        "cleanExif": {
+            "titleHighlight": "Nettoyer",
+            "dropTitle": "Déposez la Photo à Nettoyer",
+            "dropDesc": "Nous allons redessiner les pixels pour effacer définitivement les données EXIF et GPS cachées.",
+            "originalData": "Infos Originales",
+            "cleaned": "Nettoyée",
+            "scrubbing": "Nettoyage...",
+            "downloadClean": "Télécharger Image Propre",
+            "noExifFound": "Aucune métadonnée sensible n'a été trouvée dans cette image.",
+            "exifWarning": "Avertissement : L'image contient des métadonnées potentielles.",
+            "safe": "L'image est propre et sûre à partager."
+        },
+        "password": {
+            "titleHighlight": "Clé",
+            "generateNew": "Générer Nouvelle Clé",
+            "copy": "Copier",
+            "copied": "Copié !",
+            "length": "Longueur",
+            "uppercase": "Majuscules (A-Z)",
+            "lowercase": "Minuscules (a-z)",
+            "numbers": "Chiffres (0-9)",
+            "symbols": "Symboles (!@#$)",
+            "securityLevel": "Entropie Cryptographique",
+            "weak": "Faible",
+            "medium": "Moyen",
+            "strong": "Fort",
+            "alien": "Niveau Militaire"
         }
     }
 }

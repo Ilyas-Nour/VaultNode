@@ -8,7 +8,8 @@ import {
   FileUp, ShieldCheck, Zap, HardDrive, LayoutGrid, X,
   GripVertical, FileText, Loader2, Download, Eraser,
   MousePointer2, Cpu, ArrowDownToLine, CheckCircle2,
-  Lock, EyeOff, Scale, Users, Briefcase, Globe, ArrowRight, ChevronLeft, ChevronRight
+  Lock, EyeOff, Scale, Users, Briefcase, Globe, ArrowRight, ChevronLeft, ChevronRight,
+  Images, ImageMinus, KeyRound, Key, AlertTriangle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -488,6 +489,184 @@ export default function Home() {
               </div>
             </div>
 
+            {/* 4. PDF to Image */}
+            <div className="bg-zinc-900/20 border border-zinc-900 rounded-[4rem] p-4 sm:p-8 lg:p-20 space-y-12 lg:space-y-16 overflow-hidden">
+              <div className="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-8">
+                <div className="space-y-6 max-w-xl text-start">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+                      <Images className="w-6 h-6 text-orange-500" />
+                    </div>
+                    <h3 className="text-3xl font-black uppercase italic tracking-tighter">{t('serviceShowcases.pdfToImg.title')}</h3>
+                  </div>
+                  <p className="text-zinc-500 font-medium leading-relaxed">{t('serviceShowcases.pdfToImg.desc')}</p>
+                  <Link href="/tools/pdf-to-img" className="inline-block mt-4">
+                    <Button className="h-14 px-8 bg-zinc-100 hover:bg-white text-zinc-950 font-black rounded-xl shadow-xl transition-all active:scale-95 text-sm uppercase tracking-widest">
+                      {t('serviceShowcases.pdfToImg.cta')}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                {/* Before: Locked PDF */}
+                <div className="space-y-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 px-4">{t('serviceShowcases.pdfToImg.before')}</p>
+                  <div className="bg-zinc-950 rounded-[2.5rem] border border-zinc-800 relative overflow-hidden lg:h-[320px] shadow-2xl flex items-center justify-center">
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                      <div className="relative">
+                        <FileText className="w-16 h-16 text-zinc-600" />
+                        <Lock className="w-6 h-6 text-zinc-500 absolute -bottom-2 -right-2" />
+                      </div>
+                      <span className="text-xs font-black uppercase tracking-widest text-zinc-600">Report.pdf</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* After: Extracted Image Gallery */}
+                <div className="space-y-4 relative">
+                  <div className="flex items-center justify-between px-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-orange-500">{t('serviceShowcases.pdfToImg.after')}</p>
+                    {isRTL ? <ChevronLeft className="w-4 h-4 text-orange-500" /> : <ArrowRight className="w-4 h-4 text-orange-500" />}
+                  </div>
+                  <div className="bg-zinc-950 rounded-[2.5rem] border border-orange-500/30 relative overflow-hidden lg:h-[320px] shadow-[0_0_100px_rgba(249,115,22,0.1)] flex items-center justify-center group pointer-events-none">
+                    <div className="absolute inset-0 bg-orange-500/5" />
+                    <div className="grid grid-cols-2 gap-4 px-8 z-10 w-full transition-transform duration-700 group-hover:scale-105">
+                      {[1, 2, 3, 4].map((num) => (
+                        <div key={num} className="aspect-square bg-zinc-900 border border-orange-500/20 rounded-2xl flex flex-col items-center justify-center shadow-lg relative overflow-hidden">
+                          <Images className="w-6 h-6 text-orange-500/50 mb-2" />
+                          <span className="text-[8px] font-black uppercase tracking-widest text-orange-500">Page {num}</span>
+                          <div className="absolute bottom-1 right-1 text-[6px] font-black text-orange-500/80">JPG</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 5. Clean EXIF */}
+            <div className="bg-zinc-900/20 border border-zinc-900 rounded-[4rem] p-4 sm:p-8 lg:p-20 space-y-12 lg:space-y-16 overflow-hidden">
+              <div className="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-8">
+                <div className="space-y-6 max-w-xl text-start">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                      <ImageMinus className="w-6 h-6 text-blue-500" />
+                    </div>
+                    <h3 className="text-3xl font-black uppercase italic tracking-tighter">{t('serviceShowcases.cleanExif.title')}</h3>
+                  </div>
+                  <p className="text-zinc-500 font-medium leading-relaxed">{t('serviceShowcases.cleanExif.desc')}</p>
+                  <Link href="/tools/clean-exif" className="inline-block mt-4">
+                    <Button className="h-14 px-8 bg-zinc-100 hover:bg-white text-zinc-950 font-black rounded-xl shadow-xl transition-all active:scale-95 text-sm uppercase tracking-widest">
+                      {t('serviceShowcases.cleanExif.cta')}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                {/* Before: EXIF Photo */}
+                <div className="space-y-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 px-4">{t('serviceShowcases.cleanExif.before')}</p>
+                  <div className="bg-zinc-950 rounded-[2.5rem] border border-zinc-800 relative overflow-hidden lg:h-[320px] shadow-2xl flex flex-col items-center justify-center">
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-40 grayscale" />
+                    <div className="z-10 bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-red-500/50 space-y-2">
+                      <div className="flex items-center gap-2 text-red-500 text-[10px] font-black uppercase tracking-widest">
+                        <AlertTriangle className="w-3 h-3" />
+                        <span>Hidden Metadata</span>
+                      </div>
+                      <div className="text-xs text-zinc-300 space-y-1 font-mono">
+                        <p>LAT: 40.7128° N</p>
+                        <p>LON: 74.0060° W</p>
+                        <p>Device: iPhone 14 Pro</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* After: Cleaned Photo */}
+                <div className="space-y-4 relative">
+                  <div className="flex items-center justify-between px-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500">{t('serviceShowcases.cleanExif.after')}</p>
+                    {isRTL ? <ChevronLeft className="w-4 h-4 text-blue-500" /> : <ArrowRight className="w-4 h-4 text-blue-500" />}
+                  </div>
+                  <div className="bg-zinc-950 rounded-[2.5rem] border border-blue-500/30 relative overflow-hidden lg:h-[320px] shadow-[0_0_100px_rgba(59,130,246,0.1)] flex flex-col items-center justify-center group pointer-events-none">
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')] bg-cover bg-center opacity-80" />
+                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay" />
+                    <div className="z-10 bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-blue-500/50 space-y-2 transition-transform duration-700 group-hover:scale-105">
+                      <div className="flex items-center gap-2 text-blue-500 text-[10px] font-black uppercase tracking-widest">
+                        <CheckCircle2 className="w-3 h-3" />
+                        <span>Metadata Stripped</span>
+                      </div>
+                      <div className="text-xs text-zinc-400 space-y-1 font-mono italic">
+                        <p>LAT: null</p>
+                        <p>LON: null</p>
+                        <p>Device: null</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 6. Secure Password */}
+            <div className="bg-zinc-900/20 border border-zinc-900 rounded-[4rem] p-4 sm:p-8 lg:p-20 space-y-12 lg:space-y-16 overflow-hidden">
+              <div className="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-8">
+                <div className="space-y-6 max-w-xl text-start">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+                      <KeyRound className="w-6 h-6 text-teal-500" />
+                    </div>
+                    <h3 className="text-3xl font-black uppercase italic tracking-tighter">{t('serviceShowcases.password.title')}</h3>
+                  </div>
+                  <p className="text-zinc-500 font-medium leading-relaxed">{t('serviceShowcases.password.desc')}</p>
+                  <Link href="/tools/password" className="inline-block mt-4">
+                    <Button className="h-14 px-8 bg-zinc-100 hover:bg-white text-zinc-950 font-black rounded-xl shadow-xl transition-all active:scale-95 text-sm uppercase tracking-widest">
+                      {t('serviceShowcases.password.cta')}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                {/* Before: Weak Password */}
+                <div className="space-y-4">
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 px-4">{t('serviceShowcases.password.before')}</p>
+                  <div className="bg-zinc-950 rounded-[2.5rem] border border-zinc-800 relative overflow-hidden lg:h-[320px] shadow-2xl flex items-center justify-center">
+                    <div className="space-y-6 text-center">
+                      <div className="text-4xl md:text-5xl font-mono text-zinc-700 tracking-widest blur-[2px]">
+                        admin123!
+                      </div>
+                      <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest">
+                        <Globe className="w-4 h-4" />
+                        <span>Data Breach Risk</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* After: Secure Key */}
+                <div className="space-y-4 relative">
+                  <div className="flex items-center justify-between px-4">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-teal-500">{t('serviceShowcases.password.after')}</p>
+                    {isRTL ? <ChevronLeft className="w-4 h-4 text-teal-500" /> : <ArrowRight className="w-4 h-4 text-teal-500" />}
+                  </div>
+                  <div className="bg-zinc-950 rounded-[2.5rem] border border-teal-500/30 relative overflow-hidden lg:h-[320px] shadow-[0_0_100px_rgba(20,184,166,0.1)] flex items-center justify-center group pointer-events-none">
+                    <div className="absolute inset-0 bg-teal-500/5" />
+                    <div className="space-y-6 text-center z-10 transition-transform duration-700 group-hover:scale-105">
+                      <div className="text-xl md:text-2xl font-mono text-teal-500 tracking-[0.2em] bg-zinc-900 border border-teal-500/30 p-4 rounded-2xl break-all">
+                        q9F2$xL#pM7!vK4@
+                      </div>
+                      <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 text-teal-500 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest">
+                        <Key className="w-4 h-4" />
+                        <span>Crypto-Secure</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -570,6 +749,9 @@ export default function Home() {
                 <li><Link href="/tools/redact" className="text-sm text-zinc-600 hover:text-white transition-colors">{t('launchRedactor')}</Link></li>
                 <li><Link href="/tools/compress" className="text-sm text-zinc-600 hover:text-white transition-colors">{t('imageCompressor')}</Link></li>
                 <li><button className="text-sm text-zinc-600 hover:text-white transition-colors">{t('pdfMerger')}</button></li>
+                <li><Link href="/tools/pdf-to-img" className="text-sm text-zinc-600 hover:text-white transition-colors">{t('pdfToImg')}</Link></li>
+                <li><Link href="/tools/clean-exif" className="text-sm text-zinc-600 hover:text-white transition-colors">{t('cleanExif')}</Link></li>
+                <li><Link href="/tools/password" className="text-sm text-zinc-600 hover:text-white transition-colors">{t('password')}</Link></li>
               </ul>
             </div>
             <div className="space-y-4">

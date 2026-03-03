@@ -6,6 +6,9 @@
         "launchRedactor": "Launch Redactor",
         "imageCompressor": "Image Compressor",
         "pdfMerger": "PDF Merger",
+        "pdfToImg": "PDF to Image",
+        "cleanExif": "Metadata Scrubber",
+        "password": "Password Generator",
         "mergeDropDesc": "Select multiple PDFs to merge in your session.",
         "mergeButton": "Merge Files",
         "localOnly": "Local-Only",
@@ -57,6 +60,27 @@
                 "before": "Scattered Files",
                 "after": "Unified Document",
                 "cta": "Merge PDFs"
+            },
+            "pdfToImg": {
+                "title": "PDF to Image Converter",
+                "desc": "Need a specific page from a PDF? VaultNode rasterizes PDF documents locally and extracts high-quality JPEGs directly in your browser. No server uploads required.",
+                "before": "Locked PDF Document",
+                "after": "Extracted Image Gallery",
+                "cta": "Extract Images"
+            },
+            "cleanExif": {
+                "title": "Metadata Scrubber",
+                "desc": "Photos carry hidden GPS coordinates, camera models, and timestamps. VaultNode redraws your images pixel-by-pixel to permanently strip all invisible EXIF data.",
+                "before": "Photo with GPS Location",
+                "after": "Cleaned Private Photo",
+                "cta": "Scrub Metadata"
+            },
+            "password": {
+                "title": "Secure Key Generator",
+                "desc": "Stop trusting server-side password generators. VaultNode uses your browser's native cryptographic engine to create ultra-secure passwords that never leave your device.",
+                "before": "Weak/Reused Password",
+                "after": "Cryptographically Secure Key",
+                "cta": "Generate Key"
             }
         },
         "useCases": {
@@ -112,6 +136,14 @@
         "pdfToImg": {
             "title": "PDF to Image Converter",
             "description": "Instantly convert PDF pages to high-quality JPG images directly in your browser. 100% local, secure, and fast."
+        },
+        "cleanExif": {
+            "title": "Metadata Scrubber",
+            "description": "Strip hidden GPS and EXIF data from your photos natively in your browser. Complete privacy without server uploads."
+        },
+        "password": {
+            "title": "Secure Password Generator",
+            "description": "Generate cryptographically secure passwords locally on your device using native browser APIs."
         }
     },
     "Tools": {
@@ -167,15 +199,43 @@
         "pdfToImg": {
             "titleHighlight": "Extract",
             "dropTitle": "Drop PDF to Extract",
-            "dropDesc": "Pages are rasterized locally and zipped. 100% private.",
-            "convertPages": "Extract to ZIP",
+            "dropDesc": "We'll rasterize the PDF pages into high-quality images directly in your browser.",
+            "selectDensity": "Output Density",
+            "normal": "Normal",
+            "high": "High",
+            "ultra": "Ultra",
+            "convertPages": "Convert & Download ZIP",
             "processing": "Extracting Pages...",
-            "extractingPage": "Extracting page",
-            "selectDensity": "Resolution (Scale)",
-            "normal": "Normal (1x)",
-            "high": "High (2x)",
-            "ultra": "Ultra (3x)",
-            "initializing": "Initializing Extract Engine..."
+            "extractingPage": "Extracting Page",
+            "initializing": "Initializing PDF Engine..."
+        },
+        "cleanExif": {
+            "titleHighlight": "Scrub",
+            "dropTitle": "Drop Photo to Clean",
+            "dropDesc": "We will redraw the pixels to permanently wipe hidden EXIF and GPS data.",
+            "originalData": "Original Info",
+            "cleaned": "Cleaned",
+            "scrubbing": "Scrubbing...",
+            "downloadClean": "Download Clean Image",
+            "noExifFound": "No sensitive metadata found attached to this image.",
+            "exifWarning": "Warning: Image contains potential metadata.",
+            "safe": "Image is clean and safe to share."
+        },
+        "password": {
+            "titleHighlight": "Key",
+            "generateNew": "Generate New Key",
+            "copy": "Copy",
+            "copied": "Copied!",
+            "length": "Password Length",
+            "uppercase": "Uppercase (A-Z)",
+            "lowercase": "Lowercase (a-z)",
+            "numbers": "Numbers (0-9)",
+            "symbols": "Symbols (!@#$)",
+            "securityLevel": "Cryptographic Entropy",
+            "weak": "Weak",
+            "medium": "Medium",
+            "strong": "Strong",
+            "alien": "Military Grade"
         }
     }
 }
