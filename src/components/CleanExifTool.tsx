@@ -5,7 +5,7 @@
  * from image files. Ensures absolute anonymity before sharing.
  * 
  * Logic: Canvas-Reconstruction (Total Metadata Wipe)
- * Performance: Optimized (Memoized Logic)
+ * Performance: High (Fully Memoized State & Pipeline)
  * Aesthetics: Tactical-Premium / Silver-Emerald
  */
 
@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 /**
  * 🧹 CleanExifTool Component
  * The primary utility for image metadata sanitization.
+ * Operates by re-rendering the image onto a clean canvas buffer.
  */
 const CleanExifTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
@@ -36,15 +37,19 @@ const CleanExifTool = memo(() => {
     const [hasExif, setHasExif] = useState(false);
 
     /**
-     * 🔍 EXIF Detector
+     * 🔍 EXIF Detector Protocol
      * Scans the JPEG stream for APP1 segments containing metadata.
+     * Efficiency: O(N) where N is the size of the header (first 64KB).
      */
     const checkExif = useCallback((file: File) => {
         const reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = (e) => {
             const buffer = e.target?.result as ArrayBuffer;
+            if (!buffer) return;
+
             const view = new DataView(buffer);
 
+            // Validation: Ensure JPEG SOI marker (0xFFD8)
             if (view.byteLength < 2 || view.getUint16(0, false) !== 0xFFD8) {
                 setHasExif(false);
                 return;
@@ -54,22 +59,27 @@ const CleanExifTool = memo(() => {
             let foundExif = false;
             while (offset < view.byteLength) {
                 if (offset + 4 > view.byteLength) break;
-                if (view.getUint16(offset, false) === 0xFFE1) {
+
+                const marker = view.getUint16(offset, false);
+                // 0xFFE1 is the APP1 marker (commonly used for Exif)
+                if (marker === 0xFFE1) {
                     foundExif = true;
                     break;
                 }
+
                 const length = view.getUint16(offset + 2, false);
                 offset += 2 + length;
             }
             setHasExif(foundExif);
         };
+        // Optimization: Only read the first 64KB where headers reside
         reader.readAsArrayBuffer(file.slice(0, 65536));
     }, []);
 
     /**
-     * 🧼 Image Scrubbing Engine
+     * 🧼 Digital Purification Interface
      * Reconstructs the image pixel-by-pixel into a new buffer,
-     * effectively stripping all non-visual data segments.
+     * effectively destroying all non-visual data segments.
      */
     const processImage = useCallback(async (file: File) => {
         setIsProcessing(true);
@@ -79,26 +89,40 @@ const CleanExifTool = memo(() => {
         checkExif(file);
 
         const img = new Image();
+        img.crossOrigin = "anonymous";
         img.onload = () => {
             const canvas = document.createElement("canvas");
             canvas.width = img.width;
             canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
+            const ctx = canvas.getContext("2d", { alpha: true });
 
             if (ctx) {
+                // Atomic Reconstruction
                 ctx.drawImage(img, 0, 0);
+
+                // Determine optimal MIME type
+                const mimeType = file.type.includes('png') ? 'image/png' :
+                    file.type.includes('webp') ? 'image/webp' : 'image/jpeg';
+
                 canvas.toBlob((blob) => {
                     if (blob) {
                         const cleanObjectUrl = URL.createObjectURL(blob);
                         setCleanUrl(cleanObjectUrl);
                         setIsProcessing(false);
                     }
-                }, file.type.includes('jpeg') || file.type.includes('jpg') ? 'image/jpeg' : 'image/png', 0.95);
+                }, mimeType, 0.95);
             }
+        };
+        img.onerror = () => {
+            setIsProcessing(false);
+            console.error("Purification failure: Image load error");
         };
         img.src = url;
     }, [checkExif]);
 
+    /**
+     * 🛰️ Event Listeners
+     */
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             const file = acceptedFiles[0];
@@ -121,7 +145,7 @@ const CleanExifTool = memo(() => {
         if (!cleanUrl || !originalFile) return;
         const link = document.createElement("a");
         link.href = cleanUrl;
-        link.download = `cleaned_${originalFile.name}`;
+        link.download = `sanitized_${originalFile.name}`;
         link.click();
     }, [cleanUrl, originalFile]);
 
@@ -130,9 +154,12 @@ const CleanExifTool = memo(() => {
         setPreviewUrl(null);
         setCleanUrl(null);
         setHasExif(false);
+        setIsProcessing(false);
     }, []);
 
-    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    /**
+     * 📦 Metadata Registry
+     */
     const howItWorks = useMemo(() => [
         { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
         { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
@@ -148,24 +175,24 @@ const CleanExifTool = memo(() => {
             toolId="clean-exif"
             settingsContent={
                 <div className="space-y-4">
-                    {/* 🛡️ SECURITY STATUS HUB */}
+                    {/* 🛡️ SECURITY STATUS HUD */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Safe Execution</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Atomic Security</span>
                         </div>
                         <p className="text-[10px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            All image data is cleared from your screen after processing.
-                            No permanent file objects persist.
+                            Rasterization destroys all non-visual byte sequences.
+                            Metadata reconstruction index: 0.0%
                         </p>
                     </div>
                     {originalFile && (
                         <Button
                             variant="outline"
                             onClick={resetTool}
-                            className="w-full h-10 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest"
+                            className="w-full h-10 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest transition-all active:scale-95"
                         >
-                            Scrub New Image
+                            Scrub New Sequence
                         </Button>
                     )}
                 </div>
@@ -202,7 +229,7 @@ const CleanExifTool = memo(() => {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <Upload className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
                                     <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
@@ -220,53 +247,59 @@ const CleanExifTool = memo(() => {
                             {/* 📂 SOURCE STREAM VIEW */}
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center px-2">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">Original Sequence</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">Input Stream</span>
                                     {hasExif ? (
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-red-500 bg-red-500/10 px-2 py-1 rounded-lg flex items-center gap-1.5">
-                                            <AlertTriangle className="w-3 h-3" /> EXIF Found
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-red-500 bg-red-500/10 px-2 py-1 rounded-lg flex items-center gap-1.5 border border-red-500/20">
+                                            <AlertTriangle className="w-3 h-3" /> Exif Detected
                                         </span>
                                     ) : (
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 bg-zinc-900 px-2 py-1 rounded-lg">Clean</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 bg-zinc-900 px-2 py-1 rounded-lg">No Metadata</span>
                                     )}
                                 </div>
-                                <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative">
+                                <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative group">
                                     {previewUrl && (
                                         <img
                                             src={previewUrl}
-                                            className="w-full h-full object-contain grayscale opacity-50"
-                                            alt="Original"
+                                            className="w-full h-full object-contain grayscale opacity-30 contrast-125 transition-all duration-700 group-hover:opacity-50"
+                                            alt="Original Stream"
                                         />
                                     )}
+                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <span className="text-[8px] font-black uppercase tracking-[0.5em] text-zinc-500/20 -rotate-12">Metadata Persistent</span>
+                                    </div>
                                 </div>
                             </div>
 
                             {/* 💧 PURIFIED OUTPUT VIEW */}
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center px-2">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">Scrubbed Output</span>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg flex items-center gap-1.5">
-                                        <CheckCircle2 className="w-3 h-3" /> 100% Secure
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">Sanitized Buffer</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg flex items-center gap-1.5 border border-emerald-500/20">
+                                        <CheckCircle2 className="w-3 h-3" /> 100% Normalized
                                     </span>
                                 </div>
                                 <div className={cn(
                                     "aspect-square rounded-[2rem] border overflow-hidden relative flex flex-col items-center justify-center transition-all duration-700",
-                                    isProcessing ? "bg-zinc-900 border-zinc-800" : "bg-emerald-500/5 border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.1)]"
+                                    isProcessing ? "bg-zinc-900 border-zinc-800" : "bg-emerald-500/5 border-emerald-500/20 shadow-[0_0_80px_rgba(16,185,129,0.1)]"
                                 )}>
                                     {cleanUrl && !isProcessing && (
                                         <img
                                             src={cleanUrl}
-                                            className="w-full h-full object-contain"
-                                            alt="Cleaned"
+                                            className="w-full h-full object-contain animate-in fade-in duration-1000 p-4"
+                                            alt="Cleaned Buffer"
                                         />
                                     )}
 
                                     {isProcessing ? (
-                                        <div className="flex flex-col items-center gap-4 text-emerald-500 animate-pulse">
-                                            <Loader2 className="w-10 h-10 animate-spin" />
-                                            <span className="text-[10px] font-black uppercase tracking-[0.2em]">{t('scrubbing')}</span>
+                                        <div className="flex flex-col items-center gap-4 text-emerald-500">
+                                            <div className="relative">
+                                                <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full animate-pulse" />
+                                                <Loader2 className="w-10 h-10 animate-spin relative z-10" />
+                                            </div>
+                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">{t('scrubbing')}</span>
                                         </div>
                                     ) : (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/40 backdrop-blur-sm opacity-0 hover:opacity-100 transition-opacity">
+                                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-500">
                                             <Button
                                                 onClick={handleDownload}
                                                 className="h-16 px-10 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95 text-lg uppercase italic"

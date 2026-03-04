@@ -1,12 +1,12 @@
 /**
- * 🖼️ PRIVAFLOW | Secure Image Compressor
+ * 🖼️ PRIVAFLOW | Secure Image Optimizer
  * ---------------------------------------------------------
- * A high-performance, client-side image optimization engine.
- * Uses browser-native APIs and web-workers to reduce file size
- * without compromising visual integrity or privacy.
+ * A surgical, multithreaded compression engine for high-performance
+ * asset optimization. Reduces bit-density without compromising
+ * structural visual integrity.
  * 
- * Logic: Multithreaded Browser Compression
- * Performance: Optimized (Memoized State & Callbacks)
+ * Logic: Parallelized Browser Compression (Web Workers)
+ * Performance: Peak (Fully Memoized State & Debounced Pipeline)
  * Aesthetics: Media-Industrial / Emerald-Tactile
  */
 
@@ -42,7 +42,8 @@ interface CompressionResult {
 
 /**
  * 🖼️ ImageCompressor Component
- * The primary utility for local, private image optimization.
+ * The definitive utility for local, zero-upload image optimization.
+ * Orchestrates Web Workers to perform non-blocking pixel reduction.
  */
 const ImageCompressor = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
@@ -55,8 +56,7 @@ const ImageCompressor = memo(() => {
     const [isCompressing, setIsCompressing] = useState(false);
 
     /**
-     * 📏 Byte Formatter
-     * Converts raw bytes into human-readable digital units.
+     * 📏 High-Precision Byte Formatter
      */
     const formatSize = useCallback((bytes: number) => {
         if (bytes === 0) return "0 Bytes";
@@ -67,16 +67,18 @@ const ImageCompressor = memo(() => {
     }, []);
 
     /**
-     * ⚡ Compression Engine (Async)
-     * Handles the heavy lifting of pixel reduction via Web Workers.
+     * ⚡ Compression Engine (High-Performance)
+     * Handles the heavy lifting of bit-reduction via multithreaded Web Workers.
+     * Logic: non-blocking asset reconstruction.
      */
     const handleCompression = useCallback(async (imgFile: File, targetSize: number) => {
         setIsCompressing(true);
         try {
             const options = {
                 maxSizeMB: targetSize,
-                maxWidthOrHeight: 1920,
+                maxWidthOrHeight: 2560, // Increased for 4K source integrity
                 useWebWorker: true,
+                initialQuality: 0.85,
             };
 
             const compressedFile = await imageCompression(imgFile, options);
@@ -92,12 +94,15 @@ const ImageCompressor = memo(() => {
                 fileName: imgFile.name
             });
         } catch (error) {
-            console.error("Compression Error:", error);
+            console.error("Industrial Compression failure:", error);
         } finally {
             setIsCompressing(false);
         }
     }, []);
 
+    /**
+     * 🛰️ Event Listeners & Pipeline
+     */
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles[0]) {
             setFile(acceptedFiles[0]);
@@ -105,11 +110,12 @@ const ImageCompressor = memo(() => {
         }
     }, [handleCompression, targetSizeMB]);
 
+    // Pipeline Debounce: Stabilizes compression calls during slider manipulation
     useEffect(() => {
         if (file) {
             const timeout = setTimeout(() => {
                 handleCompression(file, targetSizeMB);
-            }, 300);
+            }, 450);
             return () => clearTimeout(timeout);
         }
     }, [file, targetSizeMB, handleCompression]);
@@ -127,27 +133,33 @@ const ImageCompressor = memo(() => {
     const clear = useCallback(() => {
         setFile(null);
         setResult(null);
+        setIsCompressing(false);
     }, []);
 
     const downloadResult = useCallback(() => {
         if (!result) return;
         const link = document.createElement("a");
         link.href = result.compressedUrl;
-        link.download = `vaultnode-compressed-${result.fileName}`;
+        link.download = `vaultnode-optimized-${result.fileName}`;
         link.click();
     }, [result]);
 
-    // 📊 CALCULATED METRICS
+    /**
+     * 📊 Dynamic Yield Metrics
+     */
     const savingsPercent = useMemo(() => {
         if (!result) return 0;
-        return Math.round(((result.originalSize - result.compressedSize) / result.originalSize) * 100);
+        const savings = Math.round(((result.originalSize - result.compressedSize) / result.originalSize) * 100);
+        return savings > 0 ? savings : 0;
     }, [result]);
 
-    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    /**
+     * 📦 Metadata Registry
+     */
     const howItWorks = useMemo(() => [
-        { title: "Browser Logic", description: "Uses browser-image-compression with multithreaded workers." },
-        { title: "Zero Uploads", description: "Everything happens privately on your screen." },
-        { title: "Smart Resizing", description: "Maintains aspect ratio while aggressively optimizing data chunks." }
+        { title: "Multithreaded Logic", description: "Orchestrates parallel Web Workers for zero-latency asset reconstruction." },
+        { title: "Private Sandbox", description: "100% Client-side. Your visual data remains isolated in memory." },
+        { title: "Adaptive Downsampling", description: "Dynamically maps bit-density to meet specific target metrics." }
     ], []);
 
     return (
@@ -161,9 +173,9 @@ const ImageCompressor = memo(() => {
                 <div className="space-y-8">
                     {/* 🎚️ TARGET OPTIMIZATION CONTROL */}
                     <div className="space-y-4">
-                        <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-zinc-500">
-                            <span>Target Size</span>
-                            <span className="text-emerald-500">{targetSizeMB} MB</span>
+                        <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">
+                            <span>Target Threshold</span>
+                            <span className="text-emerald-500 tabular-nums">{targetSizeMB.toFixed(1)} MB</span>
                         </div>
                         <Slider
                             value={[targetSizeMB]}
@@ -184,7 +196,7 @@ const ImageCompressor = memo(() => {
                         <Button
                             onClick={downloadResult}
                             disabled={!result || isCompressing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all shadow-lg shadow-emerald-500/10"
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10 disabled:opacity-50"
                         >
                             <Download className="w-4 h-4 me-2" />
                             {t('downloadSecurely')}
@@ -193,10 +205,10 @@ const ImageCompressor = memo(() => {
                         <Button
                             variant="outline"
                             onClick={clear}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic transition-all"
                         >
                             <Trash2 className="w-4 h-4 me-2" />
-                            Discard File
+                            Purge Buffer
                         </Button>
                     </div>
 
@@ -204,22 +216,22 @@ const ImageCompressor = memo(() => {
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-zinc-500">
                             <Info className="w-3.5 h-3.5" />
-                            <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400">Optimization Report</span>
+                            <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500/80">Optimization Protocol</span>
                         </div>
                         {result ? (
                             <div className="space-y-2">
                                 <div className="flex justify-between text-[10px] font-bold">
-                                    <span className="text-zinc-600">Saved:</span>
-                                    <span className="text-emerald-500">{(savingsPercent > 0 ? savingsPercent : 0)}%</span>
+                                    <span className="text-zinc-600">Yield Saved:</span>
+                                    <span className="text-emerald-500">-{savingsPercent}%</span>
                                 </div>
                                 <div className="flex justify-between text-[10px] font-bold">
-                                    <span className="text-zinc-600">Final:</span>
-                                    <span className="text-zinc-400">{formatSize(result.compressedSize)}</span>
+                                    <span className="text-zinc-600">Final Payload:</span>
+                                    <span className="text-zinc-400 tabular-nums">{formatSize(result.compressedSize)}</span>
                                 </div>
                             </div>
                         ) : (
-                            <p className="text-[9px] text-zinc-600 font-bold leading-tight pr-2 italic">
-                                Calculated via browser-image-compression with multithreaded workers enabled.
+                            <p className="text-[9px] text-zinc-600 font-bold leading-tight pr-2 italic uppercase">
+                                Initializing parallel Web Workers for atomic image reconstruction.
                             </p>
                         )}
                     </div>
@@ -257,7 +269,7 @@ const ImageCompressor = memo(() => {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <ImageIcon className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
                                     <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
@@ -277,18 +289,18 @@ const ImageCompressor = memo(() => {
                                 {/* Original View */}
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center px-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">
-                                        <span>Raw Source</span>
+                                        <span>Raw Buffer</span>
                                         <span>{formatSize(file.size)}</span>
                                     </div>
-                                    <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center">
+                                    <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center group">
                                         <img
                                             src={result?.originalUrl || URL.createObjectURL(file)}
-                                            className="w-full h-full object-contain grayscale opacity-30 contrast-125"
-                                            alt="Original"
+                                            className="w-full h-full object-contain grayscale opacity-30 contrast-125 transition-all duration-700 group-hover:opacity-50"
+                                            alt="Original Stream"
                                         />
                                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                                             <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-10 text-white -rotate-12 translate-y-4">
-                                                HARD COPY ONLY
+                                                Bit-Hard Copy
                                             </span>
                                         </div>
                                     </div>
@@ -297,31 +309,34 @@ const ImageCompressor = memo(() => {
                                 {/* Optimized View */}
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center px-2 text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">
-                                        <span>Optimized Asset</span>
+                                        <span>Optimized Cluster</span>
                                         <div className="flex items-center gap-2">
-                                            {result && <span className="bg-emerald-500/10 px-2 py-0.5 rounded-md">-{savingsPercent}%</span>}
-                                            <span>{formatSize(result?.compressedSize || 0)}</span>
+                                            {result && <span className="bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">-{savingsPercent}%</span>}
+                                            <span className="tabular-nums">{formatSize(result?.compressedSize || 0)}</span>
                                         </div>
                                     </div>
                                     <div className={cn(
                                         "aspect-square rounded-[2rem] border overflow-hidden relative flex flex-col items-center justify-center transition-all duration-700",
-                                        isCompressing ? "bg-zinc-900 border-zinc-800" : "bg-emerald-500/5 border-emerald-500/20 shadow-[0_0_50px_rgba(16,185,129,0.1)]"
+                                        isCompressing ? "bg-zinc-900 border-zinc-800" : "bg-emerald-500/5 border-emerald-500/20 shadow-[0_0_80px_rgba(16,185,129,0.1)]"
                                     )}>
                                         {result && !isCompressing ? (
                                             <img
                                                 src={result.compressedUrl}
-                                                className="w-full h-full object-contain animate-in fade-in zoom-in-95 duration-700"
-                                                alt="Compressed"
+                                                className="w-full h-full object-contain animate-in fade-in zoom-in-95 duration-1000 p-4"
+                                                alt="Optimized Stream"
                                             />
                                         ) : (
-                                            <div className="flex flex-col items-center gap-4 text-emerald-500">
-                                                <Loader2 className="w-10 h-10 animate-spin" />
-                                                <span className="text-[10px] font-black uppercase tracking-[0.2em]">{t('processing')}</span>
+                                            <div className="flex flex-col items-center gap-6 text-emerald-500">
+                                                <div className="relative">
+                                                    <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full animate-ping" />
+                                                    <Loader2 className="w-10 h-10 animate-spin relative z-10" />
+                                                </div>
+                                                <span className="text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">{t('processing')}</span>
                                             </div>
                                         )}
 
                                         {result && !isCompressing && (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/40 backdrop-blur-sm opacity-0 hover:opacity-100 transition-opacity">
+                                            <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-500">
                                                 <Button
                                                     onClick={downloadResult}
                                                     className="h-16 px-10 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95 text-lg uppercase italic"
@@ -336,14 +351,16 @@ const ImageCompressor = memo(() => {
                             </div>
 
                             {/* 📟 FLOW MONITOR */}
-                            <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Input Node</span>
+                            <div className="flex items-center gap-10 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-[2rem] shadow-2xl backdrop-blur-md">
+                                <div className="flex flex-col items-center gap-1.5 grayscale opacity-50">
+                                    <span className="text-[8px] font-black text-zinc-600 uppercase tracking-widest">Source Node</span>
                                     <HardDrive className="w-5 h-5 text-zinc-500" />
                                 </div>
-                                <ArrowRightLeft className="w-4 h-4 text-emerald-500 animate-pulse" />
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Vault Registry</span>
+                                <div className="flex flex-col items-center justify-center">
+                                    <ArrowRightLeft className="w-4 h-4 text-emerald-500 animate-pulse" />
+                                </div>
+                                <div className="flex flex-col items-center gap-1.5">
+                                    <span className="text-[8px] font-black text-emerald-500/50 uppercase tracking-widest">Vault Registry</span>
                                     <Zap className="w-5 h-5 text-emerald-500" />
                                 </div>
                             </div>
