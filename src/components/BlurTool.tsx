@@ -1,12 +1,23 @@
+/**
+ * 🌫️ PRIVAFLOW | Local Graphic Obfuscator
+ * ---------------------------------------------------------
+ * A performance-tuned canvas utility for selective image blurring.
+ * Uses hardware-accelerated filters to shroud sensitive visual
+ * data within the browser Sandbox.
+ * 
+ * Logic: Canvas Gaussian Kernel
+ * Performance: Optimized (Memoized Callbacks)
+ * Aesthetics: Media-Industrial / Emerald-Mist
+ */
+
 "use client";
 
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useRef, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import {
     Loader2, Download, RefreshCw,
-    Upload, Sparkles, X,
-    Eye, Settings2, FileUp, Shield, Image as ImageIcon, Wand2
+    Eye, FileUp, Shield, Image as ImageIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -14,16 +25,22 @@ import { Slider } from "@/components/ui/slider";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export function BlurTool() {
+/**
+ * 🌫️ BlurTool Component
+ * The primary utility for local image obfuscation.
+ */
+const BlurTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations('HomePage');
+
+    // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [blurAmount, setBlurAmount] = useState([10]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [exportBlob, setExportBlob] = useState<Blob | null>(null);
 
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-
+    // 📂 Drop Handler
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             const f = acceptedFiles[0];
@@ -39,7 +56,12 @@ export function BlurTool() {
         maxFiles: 1
     });
 
-    const handleExport = async () => {
+    /**
+     * ⚡ Synthesis Engine
+     * Projects the image into a headless canvas and applies
+     * hardware-accelerated Gaussian filters.
+     */
+    const handleExport = useCallback(async () => {
         if (!file || !previewUrl) return;
         setIsProcessing(true);
 
@@ -69,23 +91,30 @@ export function BlurTool() {
             console.error("Blur export error:", error);
             setIsProcessing(false);
         }
-    };
+    }, [file, previewUrl, blurAmount]);
 
-    const handleDownload = () => {
+    const handleDownload = useCallback(() => {
         if (!exportBlob || !file) return;
         const url = URL.createObjectURL(exportBlob);
         const link = document.createElement("a");
         link.href = url;
         link.download = `blurred_${file.name}`;
         link.click();
-    };
+    }, [exportBlob, file]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setFile(null);
         setPreviewUrl(null);
         setExportBlob(null);
         setBlurAmount([10]);
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Heuristic Processing", description: "Injects the image bitstream into a headless canvas instance." },
+        { title: "Gaussian Kernel", description: "Applies a variable-radius Gaussian blur filter to the pixel matrix." },
+        { title: "Atomic Export", description: "Re-serializes the filtered matrix into a binary payload." }
+    ], []);
 
     return (
         <ToolContainer
@@ -96,6 +125,7 @@ export function BlurTool() {
             toolId="blur"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🎚️ INTENSITY CONTROL */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Blur Intensity</span>
@@ -110,6 +140,7 @@ export function BlurTool() {
                         />
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={handleExport}
@@ -141,6 +172,7 @@ export function BlurTool() {
                         )}
                     </div>
 
+                    {/* 📊 SANDBOX REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -153,11 +185,7 @@ export function BlurTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Heuristic Processing", description: "Injects the image bitstream into a headless canvas instance." },
-                { title: "Gaussian Kernel", description: "Applies a variable-radius Gaussian blur filter to the pixel matrix." },
-                { title: "Atomic Export", description: "Re-serializes the filtered matrix into a binary payload." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-8">
                 <AnimatePresence mode="wait">
@@ -169,6 +197,7 @@ export function BlurTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -203,6 +232,7 @@ export function BlurTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8"
                         >
+                            {/* 📂 SOURCE STREAM VIEW */}
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between px-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">Source Node</span>
@@ -220,6 +250,7 @@ export function BlurTool() {
                                 </div>
                             </div>
 
+                            {/* 💧 SYNTHESIZED PREVIEW */}
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between px-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">Synthesized Output</span>
@@ -247,15 +278,16 @@ export function BlurTool() {
                                 </div>
                             </div>
 
+                            {/* 📟 PROTOCOL INDICATORS */}
                             <div className="md:col-span-2 flex items-center justify-center gap-8 py-4 bg-zinc-900/50 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    <div className="w-2 rounded-full h-2 bg-emerald-500 animate-pulse" />
                                     <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Gaussian Protocol</span>
                                 </div>
                                 <div className="w-px h-3 bg-zinc-800" />
                                 <div className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                                    <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">{t('localOnly')}</span>
+                                    <div className="w-2 rounded-full h-2 bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                                    <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Local Integrity</span>
                                 </div>
                             </div>
                         </motion.div>
@@ -264,4 +296,8 @@ export function BlurTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+BlurTool.displayName = 'BlurTool';
+
+export default BlurTool;

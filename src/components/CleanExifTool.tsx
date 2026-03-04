@@ -1,6 +1,17 @@
+/**
+ * 🧹 PRIVAFLOW | Global EXIF Scrubber
+ * ---------------------------------------------------------
+ * A surgical tool for removing digital fingerprints (Metadata)
+ * from image files. Ensures absolute anonymity before sharing.
+ * 
+ * Logic: Canvas-Reconstruction (Total Metadata Wipe)
+ * Performance: Optimized (Memoized Logic)
+ * Aesthetics: Tactical-Premium / Silver-Emerald
+ */
+
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { Loader2, ImageMinus, Upload, Download, AlertTriangle, CheckCircle2, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,16 +20,26 @@ import { ToolContainer } from "@/components/ToolContainer";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function CleanExifTool() {
+/**
+ * 🧹 CleanExifTool Component
+ * The primary utility for image metadata sanitization.
+ */
+const CleanExifTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.cleanExif");
 
+    // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [cleanUrl, setCleanUrl] = useState<string | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [hasExif, setHasExif] = useState(false);
 
-    const checkExif = (file: File) => {
+    /**
+     * 🔍 EXIF Detector
+     * Scans the JPEG stream for APP1 segments containing metadata.
+     */
+    const checkExif = useCallback((file: File) => {
         const reader = new FileReader();
         reader.onload = function (e) {
             const buffer = e.target?.result as ArrayBuffer;
@@ -43,9 +64,14 @@ export default function CleanExifTool() {
             setHasExif(foundExif);
         };
         reader.readAsArrayBuffer(file.slice(0, 65536));
-    };
+    }, []);
 
-    const processImage = async (file: File) => {
+    /**
+     * 🧼 Image Scrubbing Engine
+     * Reconstructs the image pixel-by-pixel into a new buffer,
+     * effectively stripping all non-visual data segments.
+     */
+    const processImage = useCallback(async (file: File) => {
         setIsProcessing(true);
         const url = URL.createObjectURL(file);
         setPreviewUrl(url);
@@ -71,7 +97,7 @@ export default function CleanExifTool() {
             }
         };
         img.src = url;
-    };
+    }, [checkExif]);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
@@ -79,7 +105,7 @@ export default function CleanExifTool() {
             setOriginalFile(file);
             processImage(file);
         }
-    }, []);
+    }, [processImage]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
@@ -91,20 +117,27 @@ export default function CleanExifTool() {
         maxFiles: 1
     });
 
-    const handleDownload = () => {
+    const handleDownload = useCallback(() => {
         if (!cleanUrl || !originalFile) return;
         const link = document.createElement("a");
         link.href = cleanUrl;
         link.download = `cleaned_${originalFile.name}`;
         link.click();
-    };
+    }, [cleanUrl, originalFile]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setOriginalFile(null);
         setPreviewUrl(null);
         setCleanUrl(null);
         setHasExif(false);
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -115,6 +148,7 @@ export default function CleanExifTool() {
             toolId="clean-exif"
             settingsContent={
                 <div className="space-y-4">
+                    {/* 🛡️ SECURITY STATUS HUB */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
@@ -136,11 +170,7 @@ export default function CleanExifTool() {
                     )}
                 </div>
             }
-            howItWorks={[
-                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
-                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
-                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[400px] flex flex-col items-center justify-center p-8 md:p-12">
                 <AnimatePresence mode="wait">
@@ -152,6 +182,7 @@ export default function CleanExifTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -186,6 +217,7 @@ export default function CleanExifTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full grid grid-cols-1 md:grid-cols-2 gap-8"
                         >
+                            {/* 📂 SOURCE STREAM VIEW */}
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center px-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">Original Sequence</span>
@@ -208,6 +240,7 @@ export default function CleanExifTool() {
                                 </div>
                             </div>
 
+                            {/* 💧 PURIFIED OUTPUT VIEW */}
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center px-2">
                                     <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">Scrubbed Output</span>
@@ -251,4 +284,8 @@ export default function CleanExifTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+CleanExifTool.displayName = 'CleanExifTool';
+
+export default CleanExifTool;

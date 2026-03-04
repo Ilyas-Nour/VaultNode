@@ -1,20 +1,28 @@
+/**
+ * 🖋️ PRIVAFLOW | Secure PDF Redactor
+ * ---------------------------------------------------------
+ * A surgical privacy tool designed to physically destroy 
+ * sensitive data in PDF documents.
+ * 
+ * Logic: Raster-Flattening (Image-based redaction)
+ * Performance: Optimized (Memoized Canvas Engine)
+ * Aesthetics: Vault-Industrial / High-Tactile
+ */
+
 "use client";
 
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useRef, useEffect, memo, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDropzone } from "react-dropzone";
 import {
     Shield,
     FileUp,
     Trash2,
-    Download,
     Eraser,
     Loader2,
     MousePointer2,
     AlertTriangle,
-    CheckCircle2,
-    Maximize2,
-    Layers
+    Maximize2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import * as pdfjsLib from "pdfjs-dist";
@@ -23,7 +31,7 @@ import { useTranslations } from "next-intl";
 import { ToolContainer } from "@/components/ToolContainer";
 import { cn } from "@/lib/utils";
 
-// Configuration for High-Res Secure Flattening
+// --- 🔧 SECURITY ENGINE CONFIG ---
 const UI_RENDER_SCALE = 1.5;
 const SECURE_EXPORT_SCALE = 3.0;
 const JPEG_QUALITY = 0.95;
@@ -35,25 +43,35 @@ interface RedactionBox {
     height: number;
 }
 
-export default function RedactorTool() {
+/**
+ * 🖋️ RedactorTool Component
+ * The primary interface for secure document redaction.
+ */
+const RedactorTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.redact");
 
+    // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
     const [redactions, setRedactions] = useState<RedactionBox[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isDrawing, setIsDrawing] = useState(false);
     const [currentBox, setCurrentBox] = useState<RedactionBox | null>(null);
 
-    // Canvas Refs
+    // 🎨 CANVAS REFERENCES
     const pdfCanvasRef = useRef<HTMLCanvasElement>(null);
     const drawCanvasRef = useRef<HTMLCanvasElement>(null);
     const hiddenBaseCanvasRef = useRef<HTMLCanvasElement>(null);
 
-    // Next.js pdfjs-dist Worker Fix
+    // 🛠️ WORKER INITIALIZATION (PDF.js Integration)
     useEffect(() => {
         pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
+    /**
+     * 👁️ PDF Rendering Engine (Async)
+     * Transforms PDF vectors into canvas pixels for secure manipulation.
+     */
     const renderPdfAsync = useCallback(async (pdfFile: File) => {
         try {
             const arrayBuffer = await pdfFile.arrayBuffer();
@@ -101,6 +119,10 @@ export default function RedactorTool() {
         if (file) renderPdfAsync(file);
     }, [file, renderPdfAsync]);
 
+    /**
+     * 🖍️ Overlay Renderer (Drawing)
+     * Manages the visual representation of redaction layers.
+     */
     const redrawOverlay = useCallback(() => {
         const ctx = drawCanvasRef.current?.getContext("2d");
         if (!ctx || !drawCanvasRef.current) return;
@@ -126,7 +148,8 @@ export default function RedactorTool() {
         redrawOverlay();
     }, [redrawOverlay]);
 
-    const onMouseDown = (e: React.MouseEvent) => {
+    // 🕹️ INTERACTION HANDLERS
+    const onMouseDown = useCallback((e: React.MouseEvent) => {
         if (!drawCanvasRef.current) return;
         const rect = drawCanvasRef.current.getBoundingClientRect();
         setIsDrawing(true);
@@ -136,19 +159,19 @@ export default function RedactorTool() {
             width: 0,
             height: 0
         });
-    };
+    }, []);
 
-    const onMouseMove = (e: React.MouseEvent) => {
+    const onMouseMove = useCallback((e: React.MouseEvent) => {
         if (!isDrawing || !currentBox || !drawCanvasRef.current) return;
         const rect = drawCanvasRef.current.getBoundingClientRect();
-        setCurrentBox({
-            ...currentBox,
-            width: (e.clientX - rect.left) - currentBox.x,
-            height: (e.clientY - rect.top) - currentBox.y
-        });
-    };
+        setCurrentBox(prev => prev ? ({
+            ...prev,
+            width: (e.clientX - rect.left) - prev.x,
+            height: (e.clientY - rect.top) - prev.y
+        }) : null);
+    }, [isDrawing]);
 
-    const onMouseUp = () => {
+    const onMouseUp = useCallback(() => {
         if (currentBox && Math.abs(currentBox.width) > 5 && Math.abs(currentBox.height) > 5) {
             setRedactions(prev => [...prev, {
                 x: currentBox.width > 0 ? currentBox.x : currentBox.x + currentBox.width,
@@ -159,9 +182,14 @@ export default function RedactorTool() {
         }
         setIsDrawing(false);
         setCurrentBox(null);
-    };
+    }, [currentBox]);
 
-    const handleSecureRedact = async () => {
+    /**
+     * 🛡️ SECURE REDACTION ENGINE
+     * Implements pixel-level destruction by rasterizing the document
+     * and burning black pixels into the underlying image buffer.
+     */
+    const handleSecureRedact = useCallback(async () => {
         if (!file || redactions.length === 0) return;
         setIsProcessing(true);
 
@@ -214,12 +242,12 @@ export default function RedactorTool() {
         } finally {
             setIsProcessing(false);
         }
-    };
+    }, [file, redactions]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setFile(null);
         setRedactions([]);
-    };
+    }, []);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles[0]) setFile(acceptedFiles[0]);
@@ -231,6 +259,13 @@ export default function RedactorTool() {
         multiple: false
     });
 
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Visual Selection", description: "Draw boxes directly over sensitive text or images." },
+        { title: "Pixel Flattening", description: "Document is rasterized at 300 DPI to ensure zero vector recovery." },
+        { title: "Atomic Cleanup", description: "Temporary canvas buffers are destroyed upon download." }
+    ], []);
+
     return (
         <ToolContainer
             title={t('title')}
@@ -240,6 +275,7 @@ export default function RedactorTool() {
             toolId="redactor"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 📊 ACTIVITY MONITOR */}
                     <div className="space-y-2">
                         <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-zinc-500">
                             <span>Active Layers</span>
@@ -253,6 +289,7 @@ export default function RedactorTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3">
                         <Button
                             onClick={handleSecureRedact}
@@ -284,6 +321,7 @@ export default function RedactorTool() {
                         )}
                     </div>
 
+                    {/* ⚠️ SECURITY WARNING */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-amber-500">
                             <AlertTriangle className="w-3 h-3" />
@@ -296,11 +334,7 @@ export default function RedactorTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Visual Selection", description: "Draw boxes directly over sensitive text or images." },
-                { title: "Pixel Flattening", description: "Document is rasterized at 300 DPI to ensure zero vector recovery." },
-                { title: "Atomic Cleanup", description: "Temporary canvas buffers are destroyed upon download." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-8">
                 <AnimatePresence mode="wait">
@@ -312,6 +346,7 @@ export default function RedactorTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -346,6 +381,7 @@ export default function RedactorTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col items-center space-y-6"
                         >
+                            {/* 🖼️ EDITOR VIEWPORT */}
                             <div className="relative bg-zinc-900 rounded-[2rem] p-4 border border-zinc-800 shadow-2xl overflow-auto max-h-[70vh] custom-scroll max-w-full">
                                 <div className="min-w-fit mx-auto relative group">
                                     <canvas ref={pdfCanvasRef} className="block rounded-lg shadow-inner bg-white" />
@@ -360,6 +396,7 @@ export default function RedactorTool() {
                             </div>
                             <canvas ref={hiddenBaseCanvasRef} className="hidden" />
 
+                            {/* 📟 STATUS HUB */}
                             <div className="flex items-center gap-6 px-6 py-3 bg-zinc-900/80 border border-zinc-800 rounded-full shadow-lg">
                                 <div className="flex items-center gap-2">
                                     <MousePointer2 className="w-4 h-4 text-emerald-500" />
@@ -377,4 +414,8 @@ export default function RedactorTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+RedactorTool.displayName = 'RedactorTool';
+
+export default RedactorTool;

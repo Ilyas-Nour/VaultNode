@@ -1,6 +1,17 @@
+/**
+ * 🛡️ PRIVAFLOW | Premium Tool Architecture
+ * ---------------------------------------------------------
+ * This is the central hub for all PrivaFlow utilities. 
+ * Designed for extreme privacy, 100% width immersion, 
+ * and localized execution.
+ * 
+ * Performance: High (Memoized)
+ * Security: Zero-Knowledge
+ */
+
 "use client";
 
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import {
@@ -20,6 +31,8 @@ import { cn } from '@/lib/utils';
 import { VisualProof } from '@/components/VisualProof';
 import AdUnit from '@/components/AdUnit';
 
+// --- TYPES & INTERFACES ---
+
 interface ToolContainerProps {
     title: string;
     description: string;
@@ -34,7 +47,11 @@ interface ToolContainerProps {
     toolId?: string;
 }
 
-export function ToolContainer({
+/**
+ * 💎 ToolContainer Component
+ * The elite wrapper for every tool in the PrivaFlow ecosystem.
+ */
+export const ToolContainer = memo(({
     title,
     description,
     icon: Icon,
@@ -43,27 +60,32 @@ export function ToolContainer({
     settingsContent,
     howItWorks,
     toolId
-}: ToolContainerProps) {
+}: ToolContainerProps) => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations('HomePage');
     const locale = useLocale();
     const isRTL = locale === 'ar';
 
-    const categoryColors = {
-        vault: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10',
-        media: 'text-sky-500 bg-sky-500/10 border-sky-500/20 shadow-sky-500/10',
-        docs: 'text-purple-500 bg-purple-500/10 border-purple-500/20 shadow-purple-500/10'
-    };
+    // 🎨 DESIGN SYSTEM TOKENS
+    const config = useMemo(() => ({
+        colors: {
+            vault: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10',
+            media: 'text-sky-500 bg-sky-500/10 border-sky-500/20 shadow-sky-500/10',
+            docs: 'text-purple-500 bg-purple-500/10 border-purple-500/20 shadow-purple-500/10'
+        },
+        accents: {
+            vault: 'emerald',
+            media: 'sky',
+            docs: 'purple'
+        }
+    }), []);
 
-    const accentColor = {
-        vault: 'emerald',
-        media: 'sky',
-        docs: 'purple'
-    }[category];
+    const accentColor = config.accents[category];
 
     return (
         <div className="flex-1 flex flex-col min-h-screen bg-zinc-950 bg-grid-vault relative overflow-x-hidden pt-18">
 
-            {/* System Status HUD - Hidden on small mobile */}
+            {/* 🛰️ SYSTEM STATUS HUD (Desktop Only) */}
             <div className="fixed bottom-6 start-6 z-50 pointer-events-none hidden lg:block group/hud">
                 <div className="px-4 py-3 rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/5 shadow-2xl flex items-center gap-4 transition-all hover:border-emerald-500/30">
                     <div className="flex flex-col">
@@ -82,7 +104,7 @@ export function ToolContainer({
                 </div>
             </div>
 
-            {/* Tool Header */}
+            {/* 🔝 NAVIGATIONAL HEADER */}
             <header className="px-6 lg:px-8 py-4 lg:py-6 border-b border-zinc-900 flex items-center justify-between sticky top-0 bg-zinc-950/80 backdrop-blur-xl z-30">
                 <div className="flex items-center gap-4 lg:gap-6">
                     <Link href="/">
@@ -91,7 +113,7 @@ export function ToolContainer({
                         </Button>
                     </Link>
                     <div className="flex items-center gap-3 lg:gap-4">
-                        <div className={cn("w-8 h-8 lg:w-10 lg:h-10 rounded-xl border flex items-center justify-center shadow-lg transition-transform hover:scale-105", categoryColors[category])}>
+                        <div className={cn("w-8 h-8 lg:w-10 lg:h-10 rounded-xl border flex items-center justify-center shadow-lg transition-transform hover:scale-105", config.colors[category])}>
                             <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
                         </div>
                         <div>
@@ -111,19 +133,17 @@ export function ToolContainer({
                 </div>
             </header>
 
-            {/* Main Content Area */}
+            {/* 🌌 MAIN WORKSPACE AREA */}
             <main className="flex-1 p-4 lg:p-12 relative flex flex-col items-center">
-                {/* 100% Width Container */}
                 <div className="w-full relative flex flex-col gap-12 lg:gap-24 items-center">
-
                     <div className="flex-1 w-full max-w-[1600px] flex flex-col gap-12 lg:gap-24 relative">
 
-                        {/* Top Banner Ad - Primary Monitization */}
+                        {/* 📢 SPONSORSHIP PLACEMENT */}
                         <div className="w-full flex justify-center">
                             <AdUnit type="banner-slim" className="max-w-5xl" />
                         </div>
 
-                        {/* Intro & Transformation Hero */}
+                        {/* 🎭 TRANSFORMATION HERO */}
                         <div className="space-y-6 lg:space-y-12 w-full">
                             <div className="space-y-4 text-center">
                                 <motion.h2
@@ -138,7 +158,7 @@ export function ToolContainer({
                                 </p>
                             </div>
 
-                            {/* BIG VISUAL PROOF - Now at the Top for Instant Understanding */}
+                            {/* 🔍 VISUAL PROOF (Seeing is Believing) */}
                             {toolId && (
                                 <motion.section
                                     initial={{ opacity: 0, y: 20 }}
@@ -175,7 +195,7 @@ export function ToolContainer({
                             )}
                         </div>
 
-                        {/* THE TOOL WORKSPACE - Clean & Massive */}
+                        {/* 🛠️ CORE TOOL INTERFACE */}
                         <section className="space-y-12 w-full">
                             <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
                                 <div className="w-16 h-px bg-zinc-800 hidden lg:block" />
@@ -192,7 +212,7 @@ export function ToolContainer({
                             </div>
                         </section>
 
-                        {/* SUPPORTING INFO - Simplified & Secondary */}
+                        {/* ⚙️ SETTINGS & DOCUMENTATION */}
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pb-24">
                             <div className="lg:col-span-8 space-y-12 lg:space-y-24">
                                 {settingsContent && (
@@ -226,6 +246,7 @@ export function ToolContainer({
                                 )}
                             </div>
 
+                            {/* 🛡️ SAFETY PROTOCOLS (Sidebar) */}
                             <div className="lg:col-span-4 space-y-12 lg:sticky lg:top-32">
                                 <section className="space-y-8 p-10 lg:p-12 rounded-[3rem] bg-emerald-500/[0.02] border border-emerald-500/10 backdrop-blur-md">
                                     <h3 className="text-sm font-black uppercase italic tracking-widest text-emerald-500/60 flex items-center gap-3">
@@ -261,4 +282,6 @@ export function ToolContainer({
             </main>
         </div>
     );
-}
+});
+
+ToolContainer.displayName = 'ToolContainer';

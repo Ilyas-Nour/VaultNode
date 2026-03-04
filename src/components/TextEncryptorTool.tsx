@@ -1,9 +1,21 @@
+/**
+ * 🔐 PRIVAFLOW | Client-Side Cryptographic Vault
+ * ---------------------------------------------------------
+ * A high-security text encryption engine utilizing the native
+ * Web Crypto API. Implements PBKDF2 key derivation and
+ * AES-256-GCM authenticated encryption.
+ * 
+ * Logic: WebCrypto AES-GCM 256
+ * Performance: Optimized (Memoized State & Callbacks)
+ * Aesthetics: Cyber-Premium / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import {
-    Lock, Unlock, Copy, Check, RefreshCw,
-    Shield, Info, Key, Eye, EyeOff, Terminal, Loader2
+    Lock, Unlock, Copy, Check,
+    Shield, Key, Eye, EyeOff, Terminal, Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -11,9 +23,15 @@ import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function TextEncryptorTool() {
+/**
+ * 🔐 TextEncryptorTool Component
+ * The primary utility for local text encryption and decryption.
+ */
+const TextEncryptorTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.common");
 
+    // 📂 STATE ORCHESTRATION
     const [input, setInput] = useState("");
     const [password, setPassword] = useState("");
     const [output, setOutput] = useState("");
@@ -22,18 +40,22 @@ export default function TextEncryptorTool() {
     const [showPassword, setShowPassword] = useState(false);
     const [copied, setCopied] = useState(false);
 
-    const handleProcess = async () => {
+    /**
+     * ⚡ Cryptographic Processing Core
+     * Executes AES-GCM operations within the browser's secure context.
+     */
+    const handleProcess = useCallback(async () => {
         if (!input || !password) return;
         setIsProcessing(true);
         setCopied(false);
 
         try {
-            if (isLockMode) {
-                // Encryption
-                const encoder = new TextEncoder();
-                const data = encoder.encode(input);
-                const pwd = encoder.encode(password);
+            const encoder = new TextEncoder();
+            const pwd = encoder.encode(password);
 
+            if (isLockMode) {
+                // 🔐 ENCRYPTION SEQUENCE
+                const data = encoder.encode(input);
                 const key = await crypto.subtle.importKey(
                     "raw", pwd, "PBKDF2", false, ["deriveKey"]
                 );
@@ -56,14 +78,11 @@ export default function TextEncryptorTool() {
 
                 setOutput(btoa(String.fromCharCode(...combined)));
             } else {
-                // Decryption
+                // 🔓 DECRYPTION SEQUENCE
                 const combined = new Uint8Array(atob(input).split("").map(c => c.charCodeAt(0)));
                 const salt = combined.slice(0, 16);
                 const iv = combined.slice(16, 28);
                 const encrypted = combined.slice(28);
-
-                const encoder = new TextEncoder();
-                const pwd = encoder.encode(password);
 
                 const key = await crypto.subtle.importKey(
                     "raw", pwd, "PBKDF2", false, ["deriveKey"]
@@ -86,13 +105,20 @@ export default function TextEncryptorTool() {
         } finally {
             setIsProcessing(false);
         }
-    };
+    }, [input, password, isLockMode]);
 
-    const handleCopy = () => {
+    const handleCopy = useCallback(() => {
         navigator.clipboard.writeText(output);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-    };
+    }, [output]);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "KDF Derivation", description: "Derives a 256-bit symmetric key from your password using 100,000 iterations of PBKDF2." },
+        { title: "GCM Authentication", description: "Protects both confidentiality and integrity of your messages with an authentication tag." },
+        { title: "Salt & IV", description: "Uses unique random salts and initialization vectors for every single node synthesis." }
+    ], []);
 
     return (
         <ToolContainer
@@ -103,6 +129,7 @@ export default function TextEncryptorTool() {
             toolId="encrypt"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 OPERATION MODE SELECTOR */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Crypto Protocol</span>
                         <div className="space-y-2">
@@ -127,6 +154,7 @@ export default function TextEncryptorTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <div className="space-y-2">
                             <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Security Key</label>
@@ -157,6 +185,7 @@ export default function TextEncryptorTool() {
                         </Button>
                     </div>
 
+                    {/* 📊 PROTOCOL REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -169,15 +198,11 @@ export default function TextEncryptorTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "KDF Derivation", description: "Derives a 256-bit symmetric key from your password using 100,000 iterations of PBKDF2." },
-                { title: "GCM Authentication", description: "Protects both confidentiality and integrity of your messages with an authentication tag." },
-                { title: "Salt & IV", description: "Uses unique random salts and initialization vectors for every single node synthesis." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="flex flex-col flex-1 p-6 md:p-12 space-y-8 h-full min-h-[500px]">
                 <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[300px]">
-                    {/* Input Area */}
+                    {/* 📟 SOURCE NODE AREA */}
                     <div className="flex flex-col space-y-3">
                         <div className="flex items-center justify-between px-2">
                             <span className="text-[10px] font-black uppercase tracking-widest text-zinc-600 italic">Source Node</span>
@@ -191,7 +216,7 @@ export default function TextEncryptorTool() {
                         />
                     </div>
 
-                    {/* Output Area */}
+                    {/* 📟 BUFFER OUTPUT AREA */}
                     <div className="flex flex-col space-y-3">
                         <div className="flex items-center justify-between px-2">
                             <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">Encrypted Buffer</span>
@@ -235,18 +260,23 @@ export default function TextEncryptorTool() {
                     </div>
                 </div>
 
+                {/* 📟 FLOW INDICATORS */}
                 <div className="flex items-center justify-center gap-8 py-4 bg-zinc-900/30 border border-zinc-900 rounded-3xl">
                     <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <div className="w-2 rounded-full h-2 bg-emerald-500 animate-pulse" />
                         <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Cipher Integrity Active</span>
                     </div>
                     <div className="w-px h-3 bg-zinc-800" />
                     <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                        <div className="w-2 rounded-full h-2 bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
                         <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Volatile Key Store</span>
                     </div>
                 </div>
             </div>
         </ToolContainer>
     );
-}
+});
+
+TextEncryptorTool.displayName = 'TextEncryptorTool';
+
+export default TextEncryptorTool;

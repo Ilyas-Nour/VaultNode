@@ -14,13 +14,13 @@ function LoadingState() {
     return (
         <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center space-y-8">
             <div className="relative">
-                <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full animate-pulse" />
+                <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full animate-pulse" />
                 <div className="w-20 h-20 bg-zinc-900 border border-zinc-800 rounded-3xl flex items-center justify-center relative z-10 shadow-2xl">
-                    <FileText className="w-8 h-8 text-blue-500" />
+                    <FileText className="w-8 h-8 text-emerald-500" />
                 </div>
             </div>
             <div className="flex flex-col items-center gap-3">
-                <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
+                <Loader2 className="w-5 h-5 text-emerald-500 animate-spin" />
                 <div className="flex items-center gap-3 text-zinc-500 font-bold tracking-widest uppercase text-[10px]">
                     <span>{t('loading')}</span>
                 </div>

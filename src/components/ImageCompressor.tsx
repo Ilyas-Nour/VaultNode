@@ -1,6 +1,18 @@
+/**
+ * 🖼️ PRIVAFLOW | Secure Image Compressor
+ * ---------------------------------------------------------
+ * A high-performance, client-side image optimization engine.
+ * Uses browser-native APIs and web-workers to reduce file size
+ * without compromising visual integrity or privacy.
+ * 
+ * Logic: Multithreaded Browser Compression
+ * Performance: Optimized (Memoized State & Callbacks)
+ * Aesthetics: Media-Industrial / Emerald-Tactile
+ */
+
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDropzone } from "react-dropzone";
 import imageCompression from "browser-image-compression";
@@ -12,8 +24,7 @@ import {
     Zap,
     HardDrive,
     Info,
-    ArrowRightLeft,
-    FileImage
+    ArrowRightLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
@@ -29,21 +40,36 @@ interface CompressionResult {
     fileName: string;
 }
 
-export default function ImageCompressor() {
+/**
+ * 🖼️ ImageCompressor Component
+ * The primary utility for local, private image optimization.
+ */
+const ImageCompressor = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.compress");
+
+    // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
     const [targetSizeMB, setTargetSizeMB] = useState(1.0);
     const [result, setResult] = useState<CompressionResult | null>(null);
     const [isCompressing, setIsCompressing] = useState(false);
 
-    const formatSize = (bytes: number) => {
+    /**
+     * 📏 Byte Formatter
+     * Converts raw bytes into human-readable digital units.
+     */
+    const formatSize = useCallback((bytes: number) => {
         if (bytes === 0) return "0 Bytes";
         const k = 1024;
         const sizes = ["Bytes", "KB", "MB", "GB"];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-    };
+    }, []);
 
+    /**
+     * ⚡ Compression Engine (Async)
+     * Handles the heavy lifting of pixel reduction via Web Workers.
+     */
     const handleCompression = useCallback(async (imgFile: File, targetSize: number) => {
         setIsCompressing(true);
         try {
@@ -98,20 +124,31 @@ export default function ImageCompressor() {
         multiple: false
     });
 
-    const clear = () => {
+    const clear = useCallback(() => {
         setFile(null);
         setResult(null);
-    };
+    }, []);
 
-    const downloadResult = () => {
+    const downloadResult = useCallback(() => {
         if (!result) return;
         const link = document.createElement("a");
         link.href = result.compressedUrl;
         link.download = `vaultnode-compressed-${result.fileName}`;
         link.click();
-    };
+    }, [result]);
 
-    const savingsPercent = result ? Math.round(((result.originalSize - result.compressedSize) / result.originalSize) * 100) : 0;
+    // 📊 CALCULATED METRICS
+    const savingsPercent = useMemo(() => {
+        if (!result) return 0;
+        return Math.round(((result.originalSize - result.compressedSize) / result.originalSize) * 100);
+    }, [result]);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Browser Logic", description: "Uses browser-image-compression with multithreaded workers." },
+        { title: "Zero Uploads", description: "Everything happens privately on your screen." },
+        { title: "Smart Resizing", description: "Maintains aspect ratio while aggressively optimizing data chunks." }
+    ], []);
 
     return (
         <ToolContainer
@@ -122,6 +159,7 @@ export default function ImageCompressor() {
             toolId="compress"
             settingsContent={
                 <div className="space-y-8">
+                    {/* 🎚️ TARGET OPTIMIZATION CONTROL */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-zinc-500">
                             <span>Target Size</span>
@@ -141,6 +179,7 @@ export default function ImageCompressor() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3">
                         <Button
                             onClick={downloadResult}
@@ -161,6 +200,7 @@ export default function ImageCompressor() {
                         </Button>
                     </div>
 
+                    {/* 📊 OPTIMIZATION REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-zinc-500">
                             <Info className="w-3.5 h-3.5" />
@@ -185,11 +225,7 @@ export default function ImageCompressor() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Browser Logic", description: "Uses browser-image-compression with multithreaded workers." },
-                { title: "Zero Uploads", description: "Everything happens privately on your screen." },
-                { title: "Smart Resizing", description: "Maintains aspect ratio while aggressively optimizing data chunks." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
                 <AnimatePresence mode="wait">
@@ -201,6 +237,7 @@ export default function ImageCompressor() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -235,8 +272,9 @@ export default function ImageCompressor() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col items-center space-y-8"
                         >
+                            {/* 🖼️ COMPARISON VIEWPORT */}
                             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Original */}
+                                {/* Original View */}
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center px-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">
                                         <span>Raw Source</span>
@@ -256,7 +294,7 @@ export default function ImageCompressor() {
                                     </div>
                                 </div>
 
-                                {/* Compressed */}
+                                {/* Optimized View */}
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center px-2 text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">
                                         <span>Optimized Asset</span>
@@ -297,6 +335,7 @@ export default function ImageCompressor() {
                                 </div>
                             </div>
 
+                            {/* 📟 FLOW MONITOR */}
                             <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex flex-col items-center gap-1">
                                     <span className="text-[8px] font-black text-zinc-600 uppercase">Input Node</span>
@@ -314,4 +353,8 @@ export default function ImageCompressor() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+ImageCompressor.displayName = 'ImageCompressor';
+
+export default ImageCompressor;

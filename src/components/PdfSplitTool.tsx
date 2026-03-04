@@ -1,10 +1,22 @@
+/**
+ * ✂️ PRIVAFLOW | PDF Page Extractor
+ * ---------------------------------------------------------
+ * A surgical document partitioning engine. Extracts specific
+ * ranges or individual pages from PDF bitstreams using
+ * pdf-lib and JSZip for multi-node bundling.
+ * 
+ * Logic: PDF Partitioning & ZIP Bundling
+ * Performance: Optimized (Memoized Callbacks & Parsers)
+ * Aesthetics: Surgical-Minimalism / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import {
-    Scissors, Loader2, Download, Trash2,
-    FileUp, Key, Shield, Info, RefreshCw,
+    Scissors, Loader2, Download,
+    FileUp, Shield, Info, RefreshCw,
     Layers, CheckCircle2, FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,17 +27,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import JSZip from "jszip";
 
-export default function PdfSplitTool() {
+/**
+ * ✂️ PdfSplitTool Component
+ * A high-security utility for extracting pages from PDF documents locally.
+ */
+const PdfSplitTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("HomePage");
     const tc = useTranslations("Tools.common");
 
+    // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
-    const [range, setRange] = useState<string>(""); // e.g. "1-3, 5, 8-10"
+    const [range, setRange] = useState<string>("");
     const [isProcessing, setIsProcessing] = useState(false);
     const [splitBlob, setSplitBlob] = useState<Blob | null>(null);
     const [isZip, setIsZip] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+    /**
+     * 📂 Queue Management
+     * Registers the source document into the local processing buffer.
+     */
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             setFile(acceptedFiles[0]);
@@ -40,7 +62,11 @@ export default function PdfSplitTool() {
         maxFiles: 1
     });
 
-    const parseRange = (rangeStr: string, maxPages: number): number[] => {
+    /**
+     * ⚙️ Range Parser Logic
+     * Converts human-readable range strings into zero-indexed page arrays.
+     */
+    const parseRange = useCallback((rangeStr: string, maxPages: number): number[] => {
         const pages = new Set<number>();
         const parts = rangeStr.split(/[\s,]+/);
 
@@ -61,9 +87,13 @@ export default function PdfSplitTool() {
         });
 
         return Array.from(pages).sort((a, b) => a - b);
-    };
+    }, []);
 
-    const handleSplit = async () => {
+    /**
+     * ⚡ Extraction Core
+     * Partitions the PDF catalog and synthesizes new document artifacts.
+     */
+    const handleSplit = useCallback(async () => {
         if (!file) return;
         setIsProcessing(true);
         setErrorMsg(null);
@@ -82,7 +112,7 @@ export default function PdfSplitTool() {
             }
 
             if (selectedIndices.length === 1 || range.trim() !== "") {
-                // Extract into a single PDF
+                // 📄 EXTRACT TO SINGLE PDF UNIT
                 const newPdf = await PDFDocument.create();
                 const copiedPages = await newPdf.copyPages(sourcePdf, selectedIndices);
                 copiedPages.forEach(p => newPdf.addPage(p));
@@ -90,7 +120,7 @@ export default function PdfSplitTool() {
                 setSplitBlob(new Blob([bytes as any], { type: "application/pdf" }));
                 setIsZip(false);
             } else {
-                // Individual pages into a ZIP
+                // 📦 BUNDLE TO ZIP CONTAINER
                 const zip = new JSZip();
                 for (const index of selectedIndices) {
                     const newPdf = await PDFDocument.create();
@@ -108,9 +138,9 @@ export default function PdfSplitTool() {
         } finally {
             setIsProcessing(false);
         }
-    };
+    }, [file, range, parseRange]);
 
-    const handleDownload = () => {
+    const handleDownload = useCallback(() => {
         if (!splitBlob || !file) return;
         const link = document.createElement("a");
         link.href = URL.createObjectURL(splitBlob);
@@ -118,7 +148,14 @@ export default function PdfSplitTool() {
             ? `${file.name.replace(".pdf", "")}_pages.zip`
             : `extracted_${file.name}`;
         link.click();
-    };
+    }, [splitBlob, file, isZip]);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Binary Parsing", description: "Loads the PDF byte stream into a traversable document object." },
+        { title: "Page Dereferencing", description: "Clones specific page references and resources into a new document buffer." },
+        { title: "Atomic Synthesis", description: "Writes the new document structure to a binary blob for extraction." }
+    ], []);
 
     return (
         <ToolContainer
@@ -129,6 +166,7 @@ export default function PdfSplitTool() {
             toolId="pdf-split"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 EXTRACTION LOGIC HUB */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Extraction Logic</span>
                         <div className="space-y-2">
@@ -146,6 +184,7 @@ export default function PdfSplitTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={handleSplit}
@@ -167,6 +206,7 @@ export default function PdfSplitTool() {
                         )}
                     </div>
 
+                    {/* 📊 SANDBOX REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -179,11 +219,7 @@ export default function PdfSplitTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Binary Parsing", description: "Loads the PDF byte stream into a traversable document object." },
-                { title: "Page Dereferencing", description: "Clones specific page references and resources into a new document buffer." },
-                { title: "Atomic Synthesis", description: "Writes the new document structure to a binary blob for extraction." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
                 <AnimatePresence mode="wait">
@@ -195,6 +231,7 @@ export default function PdfSplitTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl mx-auto"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -229,6 +266,7 @@ export default function PdfSplitTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col items-center space-y-8"
                         >
+                            {/* 📟 PROCESSING REPORT CARD */}
                             <div className="w-full max-w-2xl bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative p-8 flex flex-col items-center shadow-2xl">
                                 <div className="flex items-center gap-4 w-full">
                                     <div className="w-14 h-14 bg-zinc-950 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0">
@@ -275,6 +313,7 @@ export default function PdfSplitTool() {
                                 )}
                             </div>
 
+                            {/* 📟 NODE FLOW INDICATORS */}
                             <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex flex-col items-center gap-1">
                                     <span className="text-[8px] font-black text-zinc-600 uppercase">Source Stream</span>
@@ -292,4 +331,8 @@ export default function PdfSplitTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+PdfSplitTool.displayName = 'PdfSplitTool';
+
+export default PdfSplitTool;

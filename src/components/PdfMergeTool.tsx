@@ -1,11 +1,23 @@
+/**
+ * 📑 PRIVAFLOW | PDF Document Merger
+ * ---------------------------------------------------------
+ * A high-performance, client-side document assembly engine.
+ * Merges multiple PDF bitstreams into a single catalog using
+ * pdf-lib, ensuring zero-server contact for sensitive documents.
+ * 
+ * Logic: PDF Bitstream Assembly
+ * Performance: Optimized (Memoized Callbacks & Reordering)
+ * Aesthetics: Document-Industrial / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import {
     FileStack, Loader2, Download, Trash2,
-    FileUp, Key, Shield, Info, RefreshCw,
-    Plus, ArrowUp, ArrowDown, GripVertical, FileText, HardDrive
+    FileUp, Shield, RefreshCw,
+    Plus, GripVertical, FileText, HardDrive
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -21,14 +33,24 @@ interface MergeFile {
     size: number;
 }
 
-export default function PdfMergeTool() {
-    const t = useTranslations("HomePage"); // Using merge keys from HomePage as seen in en.json
+/**
+ * 📑 PdfMergeTool Component
+ * The primary utility for merging multiple PDF files locally.
+ */
+const PdfMergeTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
+    const t = useTranslations("HomePage");
     const tc = useTranslations("Tools.common");
 
+    // 📂 STATE ORCHESTRATION
     const [files, setFiles] = useState<MergeFile[]>([]);
     const [isMerging, setIsMerging] = useState(false);
     const [mergedBlob, setMergedBlob] = useState<Blob | null>(null);
 
+    /**
+     * 📂 Queue Management
+     * Injects new files into the assembly queue with unique node IDs.
+     */
     const onDrop = useCallback((acceptedFiles: File[]) => {
         const newFiles = acceptedFiles.map(f => ({
             id: Math.random().toString(36).substr(2, 9),
@@ -45,12 +67,16 @@ export default function PdfMergeTool() {
         accept: { 'application/pdf': ['.pdf'] },
     });
 
-    const removeFile = (id: string) => {
+    const removeFile = useCallback((id: string) => {
         setFiles(prev => prev.filter(f => f.id !== id));
         setMergedBlob(null);
-    };
+    }, []);
 
-    const handleMerge = async () => {
+    /**
+     * ⚡ Document Assembly Core
+     * Sequentially merges PDF catalogs into a new document registry.
+     */
+    const handleMerge = useCallback(async () => {
         if (files.length < 2) return;
         setIsMerging(true);
 
@@ -72,20 +98,27 @@ export default function PdfMergeTool() {
         } finally {
             setIsMerging(false);
         }
-    };
+    }, [files]);
 
-    const handleDownload = () => {
+    const handleDownload = useCallback(() => {
         if (!mergedBlob) return;
         const url = URL.createObjectURL(mergedBlob);
         const link = document.createElement("a");
         link.href = url;
         link.download = `vaultnode_merged_${new Date().getTime()}.pdf`;
         link.click();
-    };
+    }, [mergedBlob]);
 
-    const formatSize = (bytes: number) => {
+    const formatSize = useCallback((bytes: number) => {
         return (bytes / 1024 / 1024).toFixed(2) + " MB";
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Parallel Loading", description: "All selected PDFs are read into individual byte buffers simultaneously." },
+        { title: "Page Injection", description: "Injects page objects from multiple source catalogs into a new PDF registry." },
+        { title: "Local Synthesis", description: "Serializes the final document object into a binary BLOB for instant download." }
+    ], []);
 
     return (
         <ToolContainer
@@ -96,6 +129,7 @@ export default function PdfMergeTool() {
             toolId="merger"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 DOCUMENT QUEUE STATUS */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Document Queue</span>
                         <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
@@ -104,6 +138,7 @@ export default function PdfMergeTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={handleMerge}
@@ -134,6 +169,7 @@ export default function PdfMergeTool() {
                         </Button>
                     </div>
 
+                    {/* 📊 SANDBOX REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -146,11 +182,7 @@ export default function PdfMergeTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Parallel Loading", description: "All selected PDFs are read into individual byte buffers simultaneously." },
-                { title: "Page Injection", description: "Injects page objects from multiple source catalogs into a new PDF registry." },
-                { title: "Local Synthesis", description: "Serializes the final document object into a binary BLOB for instant download." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col p-6 md:p-12">
                 <AnimatePresence mode="wait">
@@ -162,6 +194,7 @@ export default function PdfMergeTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center flex-1"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -196,6 +229,7 @@ export default function PdfMergeTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col space-y-6"
                         >
+                            {/* 📑 QUEUE HEADER */}
                             <div className="flex items-center justify-between px-2">
                                 <h3 className="text-lg font-black uppercase italic tracking-tight text-white">Merge Queue</h3>
                                 <div {...getRootProps()} className="cursor-pointer">
@@ -206,6 +240,7 @@ export default function PdfMergeTool() {
                                 </div>
                             </div>
 
+                            {/* 📑 DRAGGABLE STREAM ITEMS */}
                             <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-3">
                                 {files.map((file) => (
                                     <Reorder.Item
@@ -235,6 +270,7 @@ export default function PdfMergeTool() {
                                 ))}
                             </Reorder.Group>
 
+                            {/* 📟 SYNTHESIS LOADER */}
                             {isMerging && (
                                 <motion.div
                                     key="loader"
@@ -250,6 +286,7 @@ export default function PdfMergeTool() {
                                 </motion.div>
                             )}
 
+                            {/* 📟 SUCCESS STATE */}
                             {mergedBlob && !isMerging && (
                                 <motion.div
                                     key="success"
@@ -276,6 +313,7 @@ export default function PdfMergeTool() {
                     )}
                 </AnimatePresence>
 
+                {/* 📟 HARDWARE STATUS */}
                 <div className="mt-auto pt-10 flex items-center justify-center gap-6">
                     <div className="flex items-center gap-2 text-zinc-600">
                         <HardDrive className="w-4 h-4" />
@@ -284,10 +322,14 @@ export default function PdfMergeTool() {
                     <div className="w-px h-3 bg-zinc-800" />
                     <div className="flex items-center gap-2 text-emerald-500">
                         <RefreshCw className="w-4 h-4 animate-spin-slow" />
-                        <span className="text-[9px] font-black uppercase tracking-widest">{t('localOnly')}</span>
+                        <span className="text-[9px] font-black uppercase tracking-widest">Local-Only Logic</span>
                     </div>
                 </div>
             </div>
         </ToolContainer>
     );
-}
+});
+
+PdfMergeTool.displayName = 'PdfMergeTool';
+
+export default PdfMergeTool;

@@ -1,8 +1,20 @@
+/**
+ * 🔓 PRIVAFLOW | PDF Decryption Engine
+ * ---------------------------------------------------------
+ * A surgical security utility. Derives AES decryption keys
+ * from user-provided passwords to strip encryption layers
+ * from PDF bitstreams locally in volatile memory.
+ * 
+ * Logic: AES-256 local decryption
+ * Performance: Optimized (Memoized Callbacks & Buffer Orchestration)
+ * Aesthetics: Security-Surgical / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import { Loader2, Unlock, FileText, Upload, Download, EyeOff, Eye, AlertTriangle, ShieldCheck, Info, RefreshCw, Key, CheckCircle2, KeyRound } from "lucide-react";
+import { Loader2, Unlock, FileText, Upload, Download, EyeOff, Eye, ShieldCheck, Info, RefreshCw, Key, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
 import { useTranslations } from "next-intl";
@@ -10,9 +22,15 @@ import { PDFDocument } from "pdf-lib";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function UnlockPdfTool() {
+/**
+ * 🔓 UnlockPdfTool Component
+ * A high-security utility for local PDF decryption.
+ */
+const UnlockPdfTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.unlockPdf");
 
+    // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
     const [fileBuffer, setFileBuffer] = useState<ArrayBuffer | null>(null);
     const [password, setPassword] = useState("");
@@ -21,7 +39,11 @@ export default function UnlockPdfTool() {
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [unlockedBlob, setUnlockedBlob] = useState<Blob | null>(null);
 
-    const checkPdf = async (buffer: ArrayBuffer) => {
+    /**
+     * ⚙️ Heuristic Validation
+     * Detects encryption patterns without committing to heavy processing.
+     */
+    const checkPdf = useCallback(async (buffer: ArrayBuffer) => {
         try {
             await PDFDocument.load(buffer);
             setErrorMsg("This PDF is not password protected. It is already unlocked.");
@@ -32,9 +54,12 @@ export default function UnlockPdfTool() {
                 setErrorMsg("Invalid PDF or an unexpected error occurred.");
             }
         }
-    };
+    }, []);
 
-    const processFile = async (file: File) => {
+    /**
+     * 📂 Queue Management
+     */
+    const processFile = useCallback(async (file: File) => {
         setOriginalFile(file);
         setUnlockedBlob(null);
         setErrorMsg(null);
@@ -49,13 +74,13 @@ export default function UnlockPdfTool() {
             }
         };
         reader.readAsArrayBuffer(file);
-    };
+    }, [checkPdf]);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             processFile(acceptedFiles[0]);
         }
-    }, []);
+    }, [processFile]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
@@ -63,7 +88,11 @@ export default function UnlockPdfTool() {
         maxFiles: 1
     });
 
-    const unlockPdf = async () => {
+    /**
+     * ⚡ Decryption Core
+     * Strips encryption headers and synthesizes a clearstream buffer.
+     */
+    const unlockPdf = useCallback(async () => {
         if (!fileBuffer || !password) return;
         setIsProcessing(true);
         setErrorMsg(null);
@@ -82,23 +111,30 @@ export default function UnlockPdfTool() {
         } finally {
             setIsProcessing(false);
         }
-    };
+    }, [fileBuffer, password]);
 
-    const handleDownload = () => {
+    const handleDownload = useCallback(() => {
         if (!unlockedBlob || !originalFile) return;
         const link = document.createElement("a");
         link.href = URL.createObjectURL(unlockedBlob);
         link.download = `unlocked_${originalFile.name}`;
         link.click();
-    };
+    }, [unlockedBlob, originalFile]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setOriginalFile(null);
         setFileBuffer(null);
         setPassword("");
         setUnlockedBlob(null);
         setErrorMsg(null);
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Binary Parsing", description: "Loads the PDF byte stream into an atomic PDFDocument buffer object." },
+        { title: "Standard AES", description: "Attempts to derive the decryption key from your provided password." },
+        { title: "Metadata Rebuild", description: "Generates a new, unencrypted PDF stream while preserving content layers." }
+    ], []);
 
     return (
         <ToolContainer
@@ -109,6 +145,7 @@ export default function UnlockPdfTool() {
             toolId="unlock"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 SECURITY NODE HUB */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Security Node</span>
                         <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
@@ -117,6 +154,7 @@ export default function UnlockPdfTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={unlockPdf}
@@ -137,6 +175,7 @@ export default function UnlockPdfTool() {
                         </Button>
                     </div>
 
+                    {/* 📊 SANDBOX REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Key className="w-3.5 h-3.5" />
@@ -149,11 +188,7 @@ export default function UnlockPdfTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Binary Parsing", description: "Loads the PDF byte stream into an atomic PDFDocument buffer object." },
-                { title: "Standard AES", description: "Attempts to derive the decryption key from your provided password." },
-                { title: "Metadata Rebuild", description: "Generates a new, unencrypted PDF stream while preserving content layers." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
                 <AnimatePresence mode="wait">
@@ -165,6 +200,7 @@ export default function UnlockPdfTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -199,6 +235,7 @@ export default function UnlockPdfTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col items-center space-y-8"
                         >
+                            {/* 📟 PROCESSING REPORT CARD */}
                             <div className="w-full max-w-2xl bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative p-8 flex flex-col items-center shadow-2xl">
                                 <div className="flex items-center gap-4 mb-8 w-full">
                                     <div className="w-14 h-14 bg-zinc-950 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0">
@@ -283,6 +320,7 @@ export default function UnlockPdfTool() {
                                 </AnimatePresence>
                             </div>
 
+                            {/* 📟 FLOW METRICS */}
                             <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex flex-col items-center gap-1">
                                     <span className="text-[8px] font-black text-zinc-600 uppercase">Registry Lock</span>
@@ -300,4 +338,8 @@ export default function UnlockPdfTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+UnlockPdfTool.displayName = 'UnlockPdfTool';
+
+export default UnlockPdfTool;

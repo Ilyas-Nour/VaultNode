@@ -1,24 +1,37 @@
+/**
+ * 🛡️ PRIVAFLOW | Privacy Shield Engine
+ * ---------------------------------------------------------
+ * A high-fidelity vector visualization demonstrating
+ * the "PrivaFlow Shield" protecting user devices.
+ * 
+ * Performance: Optimized (Static Memoization)
+ * Aesthetics: Cyber-Premium / Motion-Rich
+ */
+
 "use client";
 
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Monitor, Smartphone, Lock, CheckCircle2 } from 'lucide-react';
 
-export function PrivacyShieldDiagram() {
+/**
+ * 🛡️ PrivacyShieldDiagram Component
+ * Visual centerpiece for the philosophy section.
+ */
+export const PrivacyShieldDiagram = memo(() => {
     return (
         <div className="relative w-full max-w-lg mx-auto aspect-square flex items-center justify-center">
-            {/* Background Glows */}
+            {/* 🌌 AMBIENT ATMOSPHERE */}
             <div className="absolute inset-0 bg-emerald-500/10 blur-[120px] rounded-full animate-pulse" />
             <div className="absolute inset-1/4 bg-emerald-400/5 blur-[80px] rounded-full" />
 
-            {/* Shield SVG Container */}
+            {/* 🛡️ CORE SHIELD APPARATUS */}
             <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="relative z-10 w-full h-full flex items-center justify-center"
             >
-                {/* Main Shield Shape */}
                 <div className="relative">
                     <motion.div
                         animate={{
@@ -34,7 +47,7 @@ export function PrivacyShieldDiagram() {
                     >
                         <Shield className="w-64 h-64 text-emerald-500 stroke-[0.5] fill-emerald-500/5 backdrop-blur-sm" />
 
-                        {/* Device Icons inside Shield */}
+                        {/* 📱 PROTECTED NODE ECOSYSTEM */}
                         <div className="absolute inset-0 flex items-center justify-center gap-4">
                             <motion.div
                                 initial={{ x: -20, opacity: 0 }}
@@ -53,7 +66,7 @@ export function PrivacyShieldDiagram() {
                         </div>
                     </motion.div>
 
-                    {/* Orbiting Elements */}
+                    {/* 🛰️ KINETIC ORBITALS */}
                     <div className="absolute inset-0 -z-10">
                         {[0, 120, 240].map((angle, i) => (
                             <motion.div
@@ -70,7 +83,7 @@ export function PrivacyShieldDiagram() {
                         ))}
                     </div>
 
-                    {/* Check Badges */}
+                    {/* 🎖️ VERIFICATION BADGES */}
                     <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
@@ -91,8 +104,10 @@ export function PrivacyShieldDiagram() {
                 </div>
             </motion.div>
 
-            {/* Reflection Line */}
+            {/* ⚡ QUANTUM REFLECTION */}
             <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
         </div>
     );
-}
+});
+
+PrivacyShieldDiagram.displayName = 'PrivacyShieldDiagram';

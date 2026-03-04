@@ -1,8 +1,20 @@
+/**
+ * 🖼️ PRIVAFLOW | PDF to Image Rasterizer
+ * ---------------------------------------------------------
+ * A high-speed document visualization engine. Flattens PDF
+ * vector stacks into pixel-perfect JPEG slices using 
+ * Mozilla's PDF.js and JSZip for archive bundling.
+ * 
+ * Logic: Canvas-Based Layer Rasterization
+ * Performance: Optimized (Memoized Callbacks & Scale Orchestration)
+ * Aesthetics: Industrial-Visual / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import { FileUp, Loader2, Image as ImageIcon, FileArchive, Shield, Settings2, Info, Layers } from "lucide-react";
+import { FileUp, Loader2, Image as ImageIcon, FileArchive, Shield, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
 import * as pdfjsLib from "pdfjs-dist";
@@ -11,20 +23,29 @@ import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function PdfToImgTool() {
+/**
+ * 🖼️ PdfToImgTool Component
+ * A high-security utility for local PDF to Image conversion.
+ */
+const PdfToImgTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.pdfToImg");
 
+    // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
     const [scale, setScale] = useState<number>(2); // 1 = Normal, 2 = High, 3 = Ultra
     const [isProcessing, setIsProcessing] = useState(false);
     const [progress, setProgress] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
-    // Next.js pdfjs-dist Worker Fix
+    // ⚙️ WORKER INITIALIZATION
     useEffect(() => {
         pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
+    /**
+     * 📂 Queue Management
+     */
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             setFile(acceptedFiles[0]);
@@ -37,7 +58,11 @@ export default function PdfToImgTool() {
         maxFiles: 1
     });
 
-    const handleExtract = async () => {
+    /**
+     * ⚡ Rasterization Core
+     * Flattens document layers into atomic image buffers.
+     */
+    const handleExtract = useCallback(async () => {
         if (!file) return;
         setIsProcessing(true);
         setProgress(0);
@@ -90,13 +115,27 @@ export default function PdfToImgTool() {
         } finally {
             setIsProcessing(false);
         }
-    };
+    }, [file, scale]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setFile(null);
         setProgress(0);
         setTotalPages(0);
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Layer Rasterization", description: "Flattens PDF vector instructions into pixel-perfect JPEG slices." },
+        { title: "Atomic Extraction", description: "Processes each page in a sandboxed worker thread for speed." },
+        { title: "Binary Packaging", description: "Zips all rendered images into a single local archive." }
+    ], []);
+
+    // ⚙️ RENDER CONFIGURATIONS
+    const scaleOptions = useMemo(() => [
+        { val: 1, label: "Standard", desc: '72 DPI' },
+        { val: 2, label: "High Definition", desc: '144 DPI' },
+        { val: 3, label: "Ultra Precision", desc: '216 DPI' },
+    ], []);
 
     return (
         <ToolContainer
@@ -107,14 +146,11 @@ export default function PdfToImgTool() {
             toolId="pdf-to-img"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 RENDER DENSITY HUB */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Render Density</span>
                         <div className="space-y-2">
-                            {[
-                                { val: 1, label: "Standard", desc: '72 DPI' },
-                                { val: 2, label: "High Definition", desc: '144 DPI' },
-                                { val: 3, label: "Ultra Precision", desc: '216 DPI' },
-                            ].map((s) => (
+                            {scaleOptions.map((s) => (
                                 <button
                                     key={s.val}
                                     onClick={() => setScale(s.val)}
@@ -132,6 +168,7 @@ export default function PdfToImgTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={handleExtract}
@@ -152,6 +189,7 @@ export default function PdfToImgTool() {
                         </Button>
                     </div>
 
+                    {/* 📊 SANDBOX REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -164,11 +202,7 @@ export default function PdfToImgTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Layer Rasterization", description: "Flattens PDF vector instructions into pixel-perfect JPEG slices." },
-                { title: "Atomic Extraction", description: "Processes each page in a sandboxed worker thread for speed." },
-                { title: "Binary Packaging", description: "Zips all rendered images into a single local archive." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
                 <AnimatePresence mode="wait">
@@ -180,6 +214,7 @@ export default function PdfToImgTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -214,9 +249,8 @@ export default function PdfToImgTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col items-center space-y-8"
                         >
+                            {/* 📟 PROCESSING REPORT CARD */}
                             <div className="w-full max-w-2xl aspect-video bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative flex flex-col items-center justify-center shadow-2xl group">
-                                <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
-
                                 <div className="z-10 bg-zinc-950/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 flex flex-col items-center gap-4 transition-transform group-hover:scale-105">
                                     <FileUp className="w-12 h-12 text-emerald-500" />
                                     <div className="text-center">
@@ -252,6 +286,7 @@ export default function PdfToImgTool() {
                                 )}
                             </AnimatePresence>
 
+                            {/* 📟 FLOW METRICS */}
                             <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex flex-col items-center gap-1">
                                     <span className="text-[8px] font-black text-zinc-600 uppercase">Input Buffer</span>
@@ -269,4 +304,8 @@ export default function PdfToImgTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+PdfToImgTool.displayName = 'PdfToImgTool';
+
+export default PdfToImgTool;

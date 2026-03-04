@@ -1,13 +1,24 @@
+/**
+ * 🎬 PRIVAFLOW | Client-Side Media Transcoder
+ * ---------------------------------------------------------
+ * A high-performance, browser-native media engine powered by
+ * FFmpeg.wasm. Performs bitstream manipulation and format
+ * conversion without server-side processing.
+ * 
+ * Logic: WASM-Accelerated Binary Transcoding
+ * Performance: Optimized (Memoized Callbacks & State)
+ * Aesthetics: Media-Industrial / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, memo, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 import { useTranslations } from 'next-intl';
 import {
     Video, Music, Scissors, Download, Loader2,
-    Play, Pause, Volume2, AlertCircle, ShieldCheck,
-    Clock, RefreshCw, Zap, HardDrive, Info
+    Play, Pause, Volume2, RefreshCw, Zap, HardDrive
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
@@ -16,9 +27,16 @@ import { ToolContainer } from '@/components/ToolContainer';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 
-export default function MediaConverterTool() {
+/**
+ * 🎬 MediaConverterTool Component
+ * The primary utility for local media format conversion and trimming.
+ */
+const MediaConverterTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations('Tools.mediaConverter');
     const { ffmpeg, loaded, progress, load } = useFFmpeg();
+
+    // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [startTime, setStartTime] = useState(0);
@@ -33,6 +51,10 @@ export default function MediaConverterTool() {
         load();
     }, [load]);
 
+    /**
+     * 📂 Drop Handler
+     * Initializes the media stream and extracts metadata for UI synchronization.
+     */
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             const selectedFile = acceptedFiles[0];
@@ -59,7 +81,11 @@ export default function MediaConverterTool() {
         multiple: false
     });
 
-    const processMedia = async () => {
+    /**
+     * ⚡ WASM Transcoding Core
+     * Executes FFmpeg commands in the browser's shared memory space.
+     */
+    const processMedia = useCallback(async () => {
         if (!file || !loaded) return;
         setIsProcessing(true);
 
@@ -70,7 +96,6 @@ export default function MediaConverterTool() {
             await ffmpeg.writeFile(inputName, await fetchFile(file));
 
             let command: string[] = [];
-
             if (mode === 'mp3' || mode === 'wav') {
                 command = ['-i', inputName, '-vn', '-acodec', mode === 'mp3' ? 'libmp3lame' : 'pcm_s16le', '-ar', '44100', '-ac', '2', outputName];
             } else if (mode === 'trim') {
@@ -88,21 +113,21 @@ export default function MediaConverterTool() {
             a.click();
             URL.revokeObjectURL(url);
         } catch (error) {
-            console.error(error);
+            console.error("Transcoding Error:", error);
         } finally {
             setIsProcessing(false);
         }
-    };
+    }, [file, loaded, mode, ffmpeg, startTime, endTime]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setFile(null);
         setPreviewUrl(null);
         setDuration(0);
         setStartTime(0);
         setEndTime(10);
-    };
+    }, []);
 
-    const togglePlay = () => {
+    const togglePlay = useCallback(() => {
         if (videoRef.current) {
             if (videoRef.current.paused) {
                 videoRef.current.play();
@@ -112,7 +137,14 @@ export default function MediaConverterTool() {
                 setIsPlaying(false);
             }
         }
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Binary Transcoding", description: "V8-powered FFmpeg binaries running directly in your CPU cycles." },
+        { title: "SharedArrayBuffer", description: "Multithreaded acceleration for desktop-class performance." },
+        { title: "Privacy First", description: "Zero-server footprint. Your videos are processed safely on your device." }
+    ], []);
 
     return (
         <ToolContainer
@@ -123,6 +155,7 @@ export default function MediaConverterTool() {
             toolId="media-converter"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 OPERATION MODE SELECTOR */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Operation Mode</span>
                         <div className="grid grid-cols-3 gap-2 p-1 bg-zinc-900 rounded-2xl border border-zinc-800">
@@ -148,6 +181,7 @@ export default function MediaConverterTool() {
                         </div>
                     </div>
 
+                    {/* 🎚️ TRIM RANGE SELECTOR */}
                     {mode === 'trim' && duration > 0 && (
                         <div className="space-y-4 pt-2">
                             <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-zinc-500">
@@ -168,6 +202,7 @@ export default function MediaConverterTool() {
                         </div>
                     )}
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={processMedia}
@@ -188,6 +223,7 @@ export default function MediaConverterTool() {
                         </Button>
                     </div>
 
+                    {/* 📊 WASM STATUS REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Zap className="w-3.5 h-3.5" />
@@ -209,11 +245,7 @@ export default function MediaConverterTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Binary Transcoding", description: "V8-powered FFmpeg binaries running directly in your CPU cycles." },
-                { title: "SharedArrayBuffer", description: "Multithreaded acceleration for desktop-class performance." },
-                { title: "Privacy First", description: "Zero-server footprint. Your videos are processed safely on your device." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-8">
                 <AnimatePresence mode="wait">
@@ -225,6 +257,7 @@ export default function MediaConverterTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -259,6 +292,7 @@ export default function MediaConverterTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full h-full flex flex-col items-center space-y-8"
                         >
+                            {/* 🎥 PREVIEW VIEWPORT */}
                             <div className="relative group w-full max-w-3xl aspect-video bg-zinc-900 rounded-[2rem] border border-zinc-800 overflow-hidden shadow-2xl">
                                 {previewUrl && file.type.startsWith('video/') ? (
                                     <video
@@ -291,6 +325,7 @@ export default function MediaConverterTool() {
                                 </div>
                             </div>
 
+                            {/* 📟 PROGRESS MONITOR */}
                             <AnimatePresence>
                                 {isProcessing && (
                                     <motion.div
@@ -306,7 +341,7 @@ export default function MediaConverterTool() {
                                             </div>
                                             <span className="text-[10px] font-black text-emerald-500">{progress}%</span>
                                         </div>
-                                        <div className="h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+                                        <div className="h-1.5 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800">
                                             <motion.div
                                                 className="h-full bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
                                                 initial={{ width: 0 }}
@@ -317,6 +352,7 @@ export default function MediaConverterTool() {
                                 )}
                             </AnimatePresence>
 
+                            {/* 📟 HARDWARE FLOW HUB */}
                             <div className="flex items-center gap-8 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex flex-col items-center gap-1.5">
                                     <span className="text-[8px] font-black text-zinc-600 uppercase">Hardware Node</span>
@@ -334,4 +370,8 @@ export default function MediaConverterTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+MediaConverterTool.displayName = 'MediaConverterTool';
+
+export default MediaConverterTool;

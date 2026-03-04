@@ -1,8 +1,20 @@
+/**
+ * 📄 PRIVAFLOW | PDF to DOCX Converter
+ * ---------------------------------------------------------
+ * A structural document reconstruction engine. Scans PDF
+ * text layers and synthesizes native OpenXML (.docx) 
+ * bitstreams using PDF.js and docx.js.
+ * 
+ * Logic: Heuristic Text Layer Recovery
+ * Performance: Optimized (Memoized Callbacks & Headless Rendering)
+ * Aesthetics: Document-Industrial / Emerald-Dark
+ */
+
 "use client";
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import { Loader2, FileText, Upload, Download, CheckCircle2, FileType2, Shield, Info, RefreshCw } from "lucide-react";
+import { Loader2, FileText, Upload, Download, CheckCircle2, Shield, Info, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
 import { useTranslations } from "next-intl";
@@ -11,20 +23,31 @@ import { Document, Packer, Paragraph, TextRun } from "docx";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function PdfToDocxTool() {
+/**
+ * 📄 PdfToDocxTool Component
+ * A high-security utility for local PDF to Word reconstruction.
+ */
+const PdfToDocxTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.pdfToDocx");
 
+    // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
     const [docxBlobUrl, setDocxBlobUrl] = useState<string | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [progressStr, setProgressStr] = useState<string>("");
 
+    // ⚙️ WORKER INITIALIZATION
     useEffect(() => {
         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
     }, []);
 
-    const processFile = async (file: File) => {
+    /**
+     * ⚡ Reconstruction Core
+     * Iterates through PDF primitives to synthesize a native Word document.
+     */
+    const processFile = useCallback(async (file: File) => {
         setOriginalFile(file);
         setIsProcessing(true);
         setErrorMsg(null);
@@ -83,13 +106,13 @@ export default function PdfToDocxTool() {
             setIsProcessing(false);
             setProgressStr("");
         }
-    };
+    }, [t]);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
             processFile(acceptedFiles[0]);
         }
-    }, [t]);
+    }, [processFile]);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
@@ -97,21 +120,28 @@ export default function PdfToDocxTool() {
         maxFiles: 1
     });
 
-    const handleDownload = () => {
+    const handleDownload = useCallback(() => {
         if (!docxBlobUrl || !originalFile) return;
         const link = document.createElement("a");
         link.href = docxBlobUrl;
         const newName = originalFile.name.replace(/\.pdf$/i, ".docx");
         link.download = newName;
         link.click();
-    };
+    }, [docxBlobUrl, originalFile]);
 
-    const resetTool = () => {
+    const resetTool = useCallback(() => {
         setOriginalFile(null);
         setDocxBlobUrl(null);
         setErrorMsg(null);
         setProgressStr("");
-    };
+    }, []);
+
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "Layer Scanning", description: "Iterates through the PDF text matrix to reconstruct paragraph blocks." },
+        { title: "Headless Rendering", description: "Uses PDF.js in a headless state to extract semantic string arrays." },
+        { title: "OpenXML Synthesis", description: "Pipes strings into the docx.js engine to generate native Word files." }
+    ], []);
 
     return (
         <ToolContainer
@@ -122,6 +152,7 @@ export default function PdfToDocxTool() {
             toolId="pdf-to-docx"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🔘 EXTRACTION MODE HUB */}
                     <div className="space-y-3">
                         <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Extraction Mode</span>
                         <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
@@ -130,6 +161,7 @@ export default function PdfToDocxTool() {
                         </div>
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={handleDownload}
@@ -150,6 +182,7 @@ export default function PdfToDocxTool() {
                         </Button>
                     </div>
 
+                    {/* 📊 SANDBOX REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -162,11 +195,7 @@ export default function PdfToDocxTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "Layer Scanning", description: "Iterates through the PDF text matrix to reconstruct paragraph blocks." },
-                { title: "Headless Rendering", description: "Uses PDF.js in a headless state to extract semantic string arrays." },
-                { title: "OpenXML Synthesis", description: "Pipes strings into the docx.js engine to generate native Word files." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
                 <AnimatePresence mode="wait">
@@ -178,6 +207,7 @@ export default function PdfToDocxTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
+                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -212,9 +242,8 @@ export default function PdfToDocxTool() {
                             animate={{ opacity: 1, y: 0 }}
                             className="w-full flex flex-col items-center space-y-8"
                         >
+                            {/* 📟 PROCESSING REPORT CARD */}
                             <div className="w-full max-w-2xl aspect-video bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative flex flex-col items-center justify-center shadow-2xl group">
-                                <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-10 pointer-events-none" />
-
                                 <div className="z-10 bg-zinc-950/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 flex flex-col items-center gap-4 transition-transform group-hover:scale-105">
                                     <FileText className="w-12 h-12 text-emerald-500" />
                                     <div className="text-center">
@@ -272,4 +301,8 @@ export default function PdfToDocxTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+PdfToDocxTool.displayName = 'PdfToDocxTool';
+
+export default PdfToDocxTool;

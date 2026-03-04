@@ -1,10 +1,20 @@
+/**
+ * 🔑 PRIVAFLOW | Entropy-Grade Password Architect
+ * ---------------------------------------------------------
+ * A local-first cryptographic utility for generating high-entropy
+ * passwords. No data ever leaves the client-side memory space.
+ * 
+ * Logic: window.crypto CSPRNG
+ * Performance: Optimized (Memoized Generation & Metrics)
+ * Aesthetics: Crypt-Industrial / Monochro-Emerald
+ */
+
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, memo, useMemo } from "react";
 import {
     KeyRound, ShieldCheck, Copy, CheckCircle2,
-    RefreshCcw, Shield, ShieldAlert, Globe,
-    ChevronLeft
+    RefreshCcw, Shield, ShieldAlert, Globe
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
@@ -13,10 +23,15 @@ import { ToolContainer } from "@/components/ToolContainer";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export default function PasswordTool() {
-    const tc = useTranslations("Tools.common");
+/**
+ * 🔑 PasswordTool Component
+ * The primary utility for generating secure, volatile passwords.
+ */
+const PasswordTool = memo(() => {
+    // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.password");
 
+    // 📂 STATE ORCHESTRATION
     const [password, setPassword] = useState("");
     const [length, setLength] = useState([32]);
     const [useUpper, setUseUpper] = useState(true);
@@ -25,6 +40,10 @@ export default function PasswordTool() {
     const [useSymbols, setUseSymbols] = useState(true);
     const [copied, setCopied] = useState(false);
 
+    /**
+     * ⚡ CSPRNG Generation Engine
+     * Leverages Web Crypto API for cryptographically secure random values.
+     */
     const generatePassword = useCallback(() => {
         const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const lower = "abcdefghijklmnopqrstuvwxyz";
@@ -58,14 +77,18 @@ export default function PasswordTool() {
         generatePassword();
     }, [generatePassword]);
 
-    const handleCopy = async () => {
+    const handleCopy = useCallback(async () => {
         if (!password) return;
         await navigator.clipboard.writeText(password);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-    };
+    }, [password]);
 
-    const getSecurityLevel = () => {
+    /**
+     * 📊 Entropy & Security Analyst
+     * Calculates the mathematical strength based on character pool and length.
+     */
+    const security = useMemo(() => {
         let poolSize = 0;
         if (useUpper) poolSize += 26;
         if (useLower) poolSize += 26;
@@ -80,9 +103,14 @@ export default function PasswordTool() {
         if (entropy < 60) return { label: t('medium'), color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20", icon: Shield };
         if (entropy < 100) return { label: t('strong'), color: "text-teal-500", bg: "bg-teal-500/10", border: "border-teal-500/20", icon: ShieldCheck };
         return { label: t('alien'), color: "text-purple-500", bg: "bg-purple-500/10", border: "border-purple-500/20", icon: Globe };
-    };
+    }, [length, useUpper, useLower, useNumbers, useSymbols, t]);
 
-    const security = getSecurityLevel();
+    // 📦 HOW IT WORKS REGISTRY (Memoized)
+    const howItWorks = useMemo(() => [
+        { title: "CSPRNG Engine", description: "Uses the browser's native Cryptographically Secure Pseudo-Random Number Generator." },
+        { title: "Entropy Calculation", description: "Quantifies the mathematical complexity of the string based on pool size and length." },
+        { title: "Volatile Synthesis", description: "Strings are constructed character-by-character in a private memory space." }
+    ], []);
 
     return (
         <ToolContainer
@@ -93,6 +121,7 @@ export default function PasswordTool() {
             toolId="password"
             settingsContent={
                 <div className="space-y-6">
+                    {/* 🎚️ PARAMETER CONTROL */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
                             <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{t('length')}</span>
@@ -108,6 +137,7 @@ export default function PasswordTool() {
                         />
                     </div>
 
+                    {/* 🔘 TOGGLE GRID */}
                     <div className="space-y-2">
                         {[
                             { id: 'upper', label: t('uppercase'), state: useUpper, setter: setUseUpper },
@@ -130,6 +160,7 @@ export default function PasswordTool() {
                         ))}
                     </div>
 
+                    {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-4">
                         <Button
                             onClick={handleCopy}
@@ -148,6 +179,7 @@ export default function PasswordTool() {
                         </Button>
                     </div>
 
+                    {/* 🧪 SECURITY REPORT */}
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-3.5 h-3.5" />
@@ -160,16 +192,13 @@ export default function PasswordTool() {
                     </div>
                 </div>
             }
-            howItWorks={[
-                { title: "CSPRNG Engine", description: "Uses the browser's native Cryptographically Secure Pseudo-Random Number Generator." },
-                { title: "Entropy Calculation", description: "Quantifies the mathematical complexity of the string based on pool size and length." },
-                { title: "Volatile Synthesis", description: "Strings are constructed character-by-character in a private memory space." }
-            ]}
+            howItWorks={howItWorks}
         >
             <div className="flex flex-col items-center justify-center p-6 md:p-12 h-full min-h-[450px]">
                 <div className="w-full max-w-2xl bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-12 relative overflow-hidden flex flex-col items-center justify-center shadow-2xl group">
                     <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-5 pointer-events-none" />
 
+                    {/* 🖼️ CIPHER DISPLAY */}
                     <div className="z-10 w-full space-y-12 text-center">
                         <motion.div
                             key={password}
@@ -188,6 +217,7 @@ export default function PasswordTool() {
                             </div>
                         </motion.div>
 
+                        {/* 📟 METRIC HUB */}
                         <div className="flex items-center justify-center gap-4">
                             <div className={cn(
                                 "inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all",
@@ -202,6 +232,7 @@ export default function PasswordTool() {
                         </div>
                     </div>
 
+                    {/* 🛸 STATUS BEACONS */}
                     <div className="absolute bottom-8 flex items-center gap-6 opacity-20 group-hover:opacity-40 transition-opacity">
                         <div className="flex items-center gap-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -216,4 +247,8 @@ export default function PasswordTool() {
             </div>
         </ToolContainer>
     );
-}
+});
+
+PasswordTool.displayName = 'PasswordTool';
+
+export default PasswordTool;

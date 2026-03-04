@@ -1,14 +1,30 @@
+/**
+ * 🧱 PRIVAFLOW | Foundational Footer
+ * ---------------------------------------------------------
+ * The structural anchor for the application.
+ * Provides deep-link navigation and security reassurance.
+ * 
+ * Performance: Optimized (Memoized hierarchy)
+ * Aesthetics: Zero-Weight / Technical-Premium
+ */
+
 "use client";
 
-import React from 'react';
+import React, { useMemo, memo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Sparkles, Shield, Heart, Github, Mail, HelpCircle } from 'lucide-react';
 
-export function Footer() {
+/**
+ * 🧱 Footer Component
+ * High-fidelity footer with optimized link structures.
+ */
+export const Footer = memo(() => {
+    // ✨ HOOKS
     const t = useTranslations('HomePage');
 
-    const sections = [
+    // 📂 FOOTER NAVIGATION REGISTRY
+    const sections = useMemo(() => [
         {
             title: t('footer.services'),
             links: [
@@ -37,13 +53,14 @@ export function Footer() {
                 { title: t('footer.report'), href: '#' },
             ]
         }
-    ];
+    ], [t]);
 
     return (
-        <footer className="bg-zinc-950 border-t border-zinc-900 pt-24 pb-12">
-            <div className="w-full px-6 lg:px-24">
+        <footer className="bg-zinc-950 border-t border-zinc-900 pt-24 pb-12 w-full">
+            <div className="w-full px-6 lg:px-12 xl:px-24">
+                {/* 🏗️ MAIN GRID ARCHITECTURE */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
-                    {/* Brand Column */}
+                    {/* 🏷️ BRAND IDENTITY COLUMN */}
                     <div className="space-y-8">
                         <Link href="/" className="flex items-center gap-2 group">
                             <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]">
@@ -64,7 +81,7 @@ export function Footer() {
                         </div>
                     </div>
 
-                    {/* Links Columns */}
+                    {/* 🔗 LINK DIRECTORIES */}
                     {sections.map((section) => (
                         <div key={section.title} className="space-y-6">
                             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
@@ -86,6 +103,7 @@ export function Footer() {
                     ))}
                 </div>
 
+                {/* 📜 LEGAL & SOCIAL FOOTLINE */}
                 <div className="pt-12 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between gap-8">
                     <p className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
                         © 2026 PRIVAFLOW. {t('footer.rights')}
@@ -108,5 +126,6 @@ export function Footer() {
             </div>
         </footer>
     );
-}
+});
 
+Footer.displayName = 'Footer';

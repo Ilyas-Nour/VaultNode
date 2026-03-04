@@ -1,6 +1,16 @@
+/**
+ * 🧭 PRIVAFLOW | Navigation Architecture
+ * ---------------------------------------------------------
+ * The main orchestrator for site-wide navigation.
+ * Features a high-fidelity mega-menu and mobile-first responsive design.
+ * 
+ * Performance: Optimized (Memoized categories & components)
+ * Aesthetics: Glassmorphism / Premium Minimalist
+ */
+
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
@@ -19,22 +29,28 @@ import {
     Unlock,
     Images,
     Scissors,
-    Shield,
     Sparkles,
     ChevronDown,
     Menu,
-    X
+    X,
+    Shield
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export function Navbar() {
+/**
+ * 🧭 Navbar Component
+ * High-performance navigation with mega-menu capabilities.
+ */
+export const Navbar = memo(() => {
+    // ✨ HOOKS & LOCAL STATE
     const t = useTranslations('HomePage');
     const locale = useLocale();
     const isRTL = locale === 'ar';
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isToolsOpen, setIsToolsOpen] = useState(false);
 
-    const categories = [
+    // 📂 CATEGORY REGISTRY (Memoized for peak efficiency)
+    const categories = useMemo(() => [
         {
             id: 'vault',
             title: t('categories.vault'),
@@ -76,12 +92,13 @@ export function Navbar() {
                 { id: 'split', title: t('pdfSplit'), icon: Scissors, href: '/tools/pdf-split' },
             ]
         }
-    ];
+    ], [t]);
 
     return (
         <nav className="fixed top-0 inset-x-0 z-50 bg-zinc-950/50 backdrop-blur-xl border-b border-zinc-900/50">
+            {/* 🌌 MAIN LOGO & DESKTOP LINKS */}
             <div className="w-full px-6 lg:px-24 h-18 flex items-center justify-between">
-                {/* Logo */}
+                {/* 🏷️ BRAND IDENTITY */}
                 <Link href="/" className="flex items-center gap-2 group">
                     <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform">
                         <Sparkles className="w-6 h-6 text-black fill-black" />
@@ -91,7 +108,7 @@ export function Navbar() {
                     </span>
                 </Link>
 
-                {/* Desktop Links */}
+                {/* 🛰️ DESKTOP NAVIGATION HUB */}
                 <div className="hidden lg:flex items-center gap-8">
                     <div
                         className="relative"
@@ -149,14 +166,14 @@ export function Navbar() {
                     </Link>
                 </div>
 
-                {/* Right Actions */}
+                {/* 🛡️ SECURITY STATUS BADGE */}
                 <div className="flex items-center gap-4">
                     <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                         <Shield className="w-4 h-4 text-emerald-500" />
                         <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">{t('nav.privateBadge')}</span>
                     </div>
 
-                    {/* Mobile Menu Toggle */}
+                    {/* 📱 MOBILE TOGGLE HUB */}
                     <button
                         className="lg:hidden p-2 text-zinc-400"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -166,7 +183,7 @@ export function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* 📱 MOBILE MENU DRILL-DOWN */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
@@ -201,4 +218,6 @@ export function Navbar() {
             </AnimatePresence>
         </nav>
     );
-}
+});
+
+Navbar.displayName = 'Navbar';
