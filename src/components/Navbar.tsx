@@ -80,7 +80,7 @@ export function Navbar() {
 
     return (
         <nav className="fixed top-0 inset-x-0 z-50 bg-zinc-950/50 backdrop-blur-xl border-b border-zinc-900/50">
-            <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+            <div className="w-full px-6 lg:px-24 h-18 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">
                     <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform">
