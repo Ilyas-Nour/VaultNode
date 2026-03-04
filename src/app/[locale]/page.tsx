@@ -183,7 +183,7 @@ export default function Home() {
               {t('footer.philosophy')}
             </h2>
             <div className="space-y-6 text-zinc-400 font-bold text-lg leading-relaxed max-w-xl lg:mx-0 mx-auto">
-              <p>{t('footer.whyDesc')}</p>
+              <p>{t('footer.philosophyDesc')}</p>
             </div>
             <div className="flex justify-center lg:justify-start gap-4">
               {[Shield, Lock, Sparkles].map((Icon, i) => (
