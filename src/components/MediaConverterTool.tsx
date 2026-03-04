@@ -116,10 +116,11 @@ export default function MediaConverterTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
-            icon={RefreshCw}
+            title={t('title')}
+            description={t('description')}
+            icon={Video}
             category="media"
+            toolId="media-converter"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

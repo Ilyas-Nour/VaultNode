@@ -86,10 +86,11 @@ export default function PasswordTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description="Generate high-entropy, cryptographically secure passkeys locally."
+            title={t('title')}
+            description={t('description')}
             icon={KeyRound}
             category="vault"
+            toolId="password"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-4">

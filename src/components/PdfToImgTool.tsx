@@ -100,10 +100,11 @@ export default function PdfToImgTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
-            icon={FileArchive}
+            title={t('title')}
+            description={t('description')}
+            icon={ImageIcon}
             category="docs"
+            toolId="pdf-to-img"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

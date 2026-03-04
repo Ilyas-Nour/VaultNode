@@ -1,45 +1,47 @@
 {
     "HomePage": {
-        "title": "Your Files Stay With You. Always.",
-        "subtitle": "Most websites take your files to their computers. We don't. Everything you do stays inside your own screen. It's 100% private, 100% free, and 100% safe.",
-        "launchRedactor": "Hide Secret Text",
-        "imageCompressor": "Make Photos Smaller",
-        "pdfMerger": "Combine PDFs",
-        "pdfToImg": "Turn PDF into Pictures",
-        "cleanExif": "Remove Hidden Info",
-        "password": "Create Safe Codes",
-        "unlockPdf": "Unlock a PDF",
-        "heicToJpg": "iPhone Photo Fixer",
+        "title": "Your Files Stay with You. Always.",
+        "titlePart1": "Your Files.",
+        "titlePart2": "Your System.",
+        "subtitle": "Most websites steal your files. We don't. Everything you do stays inside your screen. It's 100% private and 100% free.",
+        "launchRedactor": "Hide Sensitive Info",
+        "imageCompressor": "Shrink Photo",
+        "pdfMerger": "Merge PDF",
+        "pdfToImg": "PDF to Image",
+        "cleanExif": "Remove Photo Data",
+        "password": "Password Maker",
+        "unlockPdf": "Unlock PDF",
+        "heicToJpg": "iPhone Photo to JPG",
         "pdfToDocx": "PDF to Word",
-        "mediaConverter": "Video & Music Fixer",
-        "svgToPng": "Logo Maker Fix",
-        "textEncryptor": "Secret Message Maker",
-        "blurTool": "Blur Part of Photo",
-        "pdfSplit": "Take Pages Out",
+        "mediaConverter": "MP4 to MP3 / Video Fixer",
+        "svgToPng": "Logo to Photo",
+        "textEncryptor": "Secret Message",
+        "blurTool": "Blur Photo",
+        "pdfSplit": "Split PDF",
         "toolDescriptions": {
-            "redactor": "Paint over private words so they are gone forever.",
-            "cleanExif": "Wipe away hidden map data and private details.",
-            "password": "Make very strong codes that only you know.",
-            "textEncryptor": "Turn your writing into a secret code.",
-            "compress": "Shrink big photos so they are easier to send.",
-            "heic": "Make iPhone photos work on any computer.",
-            "mediaConverter": "Change video or music files to work better.",
-            "svgToPng": "Turn drawing files into simple photos.",
-            "blur": "Hide faces or private things in your photos.",
-            "merger": "Put many PDF files together into one.",
-            "pdfToWord": "Make a PDF something you can type in.",
-            "unlock": "Open a file that is locked with a password.",
-            "pdfToImg": "Save each page of your PDF as a photo.",
-            "split": "Pick just the pages you need from a big file."
+            "redactor": "Use the brush to paint over secrets.",
+            "cleanExif": "Remove the 'hidden map' from your pictures.",
+            "password": "Make very strong secret codes that only you can know.",
+            "textEncryptor": "Turn your writing into a secret code that only you can unlock.",
+            "compress": "Make big files small so they send faster.",
+            "heic": "Make iPhone pictures work on any computer without special apps.",
+            "mediaConverter": "Change video or music files so they play perfectly on any device.",
+            "svgToPng": "Take designer drawings and turn them into simple photos everyone can see.",
+            "blur": "Use a magic brush to hide faces or private things in your pictures.",
+            "merger": "Pick many separate files and put them together into one clean book.",
+            "pdfToWord": "Change a locked file into a document you can type in and edit.",
+            "unlock": "Remove a password you already know so the file stays open.",
+            "pdfToImg": "Save every single page of your file as a separate picture.",
+            "split": "Choose only the pages you need from a big file and save them separately."
         },
         "beforeAfter": {
             "redactor": {
                 "before": "A letter with your phone number.",
-                "after": "The number is gone under a solid black line."
+                "after": "The number is gone under a solid black line forever."
             },
             "clean-exif": {
-                "before": "A photo that tells people where you live.",
-                "after": "A private photo with all map data wiped clean."
+                "before": "A photo that shows exactly where you live.",
+                "after": "A photo that is safe to share with strangers."
             },
             "password": {
                 "before": "A weak password like '123456'.",
@@ -50,11 +52,11 @@
                 "after": "Jumbled letters that only you can unlock."
             },
             "compress": {
-                "before": "A slow, heavy photo.",
-                "after": "A fast, light photo that looks the same."
+                "before": "A 'heavy' photo that is slow to send.",
+                "after": "A 'light' photo that looks exactly the same but sends instantly."
             },
             "heic": {
-                "before": "An iPhone photo that won't open on PC.",
+                "before": "An iPhone picture that won't open on PC.",
                 "after": "A standard photo that works everywhere."
             },
             "media-converter": {
@@ -70,16 +72,16 @@
                 "after": "The same photo with the face hidden."
             },
             "merger": {
-                "before": "5 different PDF files scattered around.",
+                "before": "5 different files scattered around.",
                 "after": "One clean document with everything inside."
             },
             "pdf-to-word": {
-                "before": "A PDF you can't edit or type in.",
+                "before": "A file you can't edit or type in.",
                 "after": "A Word file you can fix and change."
             },
             "unlock": {
-                "before": "A file you can't open.",
-                "after": "A file you can read and print."
+                "before": "A file that asks for a password every time.",
+                "after": "A file that opens instantly for anyone."
             },
             "pdf-to-img": {
                 "before": "A document you have to scroll through.",
@@ -142,9 +144,238 @@
             }
         },
         "footer": {
-            "whyTitle": "Why it's free",
-            "whyDesc": "We believe privacy is a right, not a luxury. That's why these tools will always be free for everyone.",
-            "contact": "Contact us"
+            "whyTitle": "Why it's free?",
+            "whyDesc": "We believe privacy shouldn't be a luxury. PrivaFlow runs entirely on your device. No data sales, no catches.",
+            "contact": "Contact Us",
+            "philosophy": "Philosophy",
+            "faq": "FAQ",
+            "services": "Tools",
+            "badge": "100% Private",
+            "company": "Company",
+            "support": "Support",
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Use",
+            "report": "Report a Bug",
+            "rights": "All rights reserved.",
+            "builtWith": "Built with"
+        },
+        "nav": {
+            "tools": "Tools",
+            "philosophy": "Philosophy",
+            "faq": "FAQ",
+            "privateBadge": "100% Private"
+        },
+        "visualProof": {
+            "label": "Visual Evidence",
+            "title": "See the Magic",
+            "desc": "Visual proof of our tools in action. Everything you see happens privately inside your screen.",
+            "viewProof": "View Proof"
+        }
+    },
+    "Metadata": {
+        "blur": {
+            "title": "Hide Faces",
+            "description": "Blur parts of your photo locally."
+        },
+        "clean-exif": {
+            "title": "Clean Photo Info",
+            "description": "Remove hidden map and details."
+        },
+        "compress": {
+            "title": "Make Photos Smaller",
+            "description": "Shrink photo size for easier sharing."
+        },
+        "encrypt": {
+            "title": "Secret Message",
+            "description": "Lock your writing with a code."
+        },
+        "heic-to-jpg": {
+            "title": "Fix iPhone Pictures",
+            "description": "Turn iPhone files into photos that work everywhere."
+        },
+        "media-converter": {
+            "title": "Video/Audio Fixer",
+            "description": "Change video or music file types."
+        },
+        "password": {
+            "title": "Create Strong Codes",
+            "description": "Make secure codes only you know."
+        },
+        "pdf-merge": {
+            "title": "Combine Many Files",
+            "description": "Put multiple files into one."
+        },
+        "pdf-split": {
+            "title": "Split Files",
+            "description": "Take pages out of a large file."
+        },
+        "pdf-to-docx": {
+            "title": "File to Word",
+            "description": "Turn files into documents you can edit."
+        },
+        "pdf-to-img": {
+            "title": "File to Pictures",
+            "description": "Turn pages into image files."
+        },
+        "redact": {
+            "title": "Hide Private Info",
+            "description": "Cover secrets in a document."
+        },
+        "svg-to-png": {
+            "title": "Fix Logos",
+            "description": "Turn designer drawings into images."
+        },
+        "unlock-pdf": {
+            "title": "Unlock a File",
+            "description": "Remove passwords from your files."
+        }
+    },
+    "Tools": {
+        "common": {
+            "loading": "Preparing Workspace...",
+            "processing": "Working...",
+            "success": "Task Complete",
+            "error": "Something went wrong",
+            "backToHome": "Back to Tools"
+        },
+        "redact": {
+            "title": "Hide Private Info",
+            "description": "Cover secrets in a document.",
+            "titleHighlight": "Hide Private Info",
+            "dropTitle": "Drop Your File Here",
+            "dropDesc": "Pick a file to start hiding secret details.",
+            "flattening": "Securing Your File...",
+            "secureExport": "Save Secure Copy",
+            "clearAll": "Start Over",
+            "initializing": "Waking up the Safety Shield..."
+        },
+        "unlockPdf": {
+            "title": "Unlock a File",
+            "description": "Remove passwords from your files.",
+            "titleHighlight": "Unlock Your File",
+            "dropTitle": "Drop Locked File",
+            "dropDesc": "Select the file you want to unlock.",
+            "unlocking": "Opening the Lock...",
+            "unlockBtn": "Unlock Now",
+            "successTitle": "Unlocked!",
+            "successDesc": "Your file is now free and open.",
+            "downloadBtn": "Download Unlocked File",
+            "passwordLabel": "Enter Password",
+            "passwordPlaceholder": "Type password here..."
+        },
+        "svgToPng": {
+            "title": "Fix Logos",
+            "description": "Turn designer drawings into images.",
+            "titleHighlight": "Logo Maker Fix",
+            "dropTitle": "Drop Your Logo",
+            "dropDesc": "Select a designer drawing to turn into a photo.",
+            "processing": "Polishing the Pixels...",
+            "convertBtn": "Turn into Photo (PNG)"
+        },
+        "pdfToImg": {
+            "title": "File to Pictures",
+            "description": "Turn pages into image files.",
+            "titleHighlight": "Turn File into Pictures",
+            "dropTitle": "Drop Your File Here",
+            "dropDesc": "We'll turn every page into a separate picture.",
+            "processing": "Taking Pictures...",
+            "convertPages": "Turn into Pictures",
+            "initializing": "Preparing the Camera..."
+        },
+        "pdfToDocx": {
+            "title": "File to Word",
+            "description": "Turn files into documents you can edit.",
+            "titleHighlight": "File to Word",
+            "dropTitle": "Drop Your File Here",
+            "dropDesc": "Change your file into one you can type in.",
+            "readingPdf": "Reading the Paper...",
+            "extractingText": "Picking up the Letters...",
+            "processingPage": "Fixing Page",
+            "buildingWord": "Writing the Word File...",
+            "errorDesc": "Oops! We couldn't read this one. Make sure it's not locked.",
+            "processing": "Working...",
+            "downloadBtn": "Download Word File"
+        },
+        "password": {
+            "title": "Create Strong Codes",
+            "description": "Make secure codes only you know.",
+            "titleHighlight": "Safe Code Maker",
+            "weak": "Weak",
+            "medium": "Medium",
+            "strong": "Strong",
+            "alien": "Alien",
+            "length": "How Long?",
+            "uppercase": "Capital Letters",
+            "lowercase": "Lowercase",
+            "numbers": "Numbers",
+            "symbols": "Symbols",
+            "copied": "Copied!",
+            "copy": "Copy to Screen",
+            "generateNew": "Make New One"
+        },
+        "mediaConverter": {
+            "title": "Video & Music Fixer",
+            "description": "Change video or music file types.",
+            "titleHighlight": "Video & Music Fixer",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "Pick a video or music file to fix.",
+            "processing": "Fixing the File...",
+            "downloadBtn": "Save Fixed File",
+            "targetFormat": "Choose New Type"
+        },
+        "compress": {
+            "title": "Shrink Heavy Photos",
+            "description": "Make big files small so they send faster.",
+            "titleHighlight": "Shrink Heavy Photos",
+            "dropTitle": "Drop Photo Here",
+            "dropDesc": "Pick a photo to shrink it safely.",
+            "aggressive": "Very Small",
+            "balanced": "Look Best",
+            "downloadSecurely": "Save Smaller Photo",
+            "processing": "Shrinking..."
+        },
+        "heicToJpg": {
+            "title": "Fix iPhone Pictures",
+            "description": "Make iPhone pictures work on any computer without special apps.",
+            "titleHighlight": "Fix iPhone Pictures",
+            "dropTitle": "Drop iPhone Picture",
+            "dropDesc": "Pick an iPhone picture to make it work everywhere.",
+            "processing": "Fixing the Photo...",
+            "downloadBtn": "Save Standard Photo"
+        },
+        "cleanExif": {
+            "title": "Clean a Photo",
+            "description": "Remove the 'hidden map' from your pictures.",
+            "titleHighlight": "Clean a Photo",
+            "dropTitle": "Drop Photo Here",
+            "dropDesc": "Pick a photo to wipe away hidden details.",
+            "cleaning": "Wiping Clean...",
+            "cleanBtn": "Clean My Photo",
+            "downloadBtn": "Save Clean Photo"
+        },
+        "encrypt": {
+            "title": "Secret Message Maker",
+            "description": "Lock your writing with a code.",
+            "titleHighlight": "Secret Message Maker",
+            "inputText": "Your Private Writing",
+            "inputPlaceholder": "Type your secret message here...",
+            "passwordLabel": "Secret Key",
+            "passwordPlaceholder": "Type a key only you know...",
+            "encryptBtn": "Lock Message",
+            "decryptBtn": "Unlock Message",
+            "resultLabel": "The Secret Code",
+            "copyBtn": "Copy Code",
+            "copied": "Copied!"
+        },
+        "blur": {
+            "title": "Hide Parts of a Photo",
+            "description": "Hide faces or private things in your pictures.",
+            "titleHighlight": "Hide Parts of a Photo",
+            "dropDesc": "Pick a photo to hide faces or private things.",
+            "processing": "Adding the Magic Blur...",
+            "downloadBtn": "Save Small Blurred Photo",
+            "clearAll": "Start Over",
+            "dropTitle": "Drop Photo Here"
         }
     }
 }

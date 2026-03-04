@@ -115,10 +115,11 @@ export default function PdfToDocxTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
-            icon={FileType2}
+            title={t('title')}
+            description={t('description')}
+            icon={FileText}
             category="docs"
+            toolId="pdf-to-docx"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

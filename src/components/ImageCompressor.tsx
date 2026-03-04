@@ -115,10 +115,11 @@ export default function ImageCompressor() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
+            title={t('title')}
+            description={t('description')}
             icon={ImageIcon}
             category="media"
+            toolId="compress"
             settingsContent={
                 <div className="space-y-8">
                     <div className="space-y-4">

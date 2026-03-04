@@ -89,10 +89,11 @@ export function BlurTool() {
 
     return (
         <ToolContainer
-            title="Privacy Blur"
-            description="Obfuscate sensitive regions of your images locally."
-            icon={Wand2}
+            title={t('title')}
+            description={t('description')}
+            icon={Eye}
             category="media"
+            toolId="blur"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-4">

@@ -112,6 +112,7 @@ export default function CleanExifTool() {
             description={t('dropDesc')}
             icon={ImageMinus}
             category="vault"
+            toolId="clean-exif"
             settingsContent={
                 <div className="space-y-4">
                     <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">

@@ -93,10 +93,11 @@ export default function SvgToPngTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
-            icon={Wand2}
+            title={t('title')}
+            description={t('description')}
+            icon={ImageIcon}
             category="media"
+            toolId="svg-to-png"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

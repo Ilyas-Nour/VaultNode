@@ -122,10 +122,11 @@ export default function PdfSplitTool() {
 
     return (
         <ToolContainer
-            title="Extract Pages"
-            description="Split PDF documents or extract specific ranges locally."
+            title={t('title')}
+            description={t('description')}
             icon={Scissors}
             category="docs"
+            toolId="pdf-split"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

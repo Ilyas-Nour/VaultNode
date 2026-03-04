@@ -5,7 +5,7 @@ import { getMessages, getLocale, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import "../globals.css";
-import { DashboardSidebar } from "@/components/DashboardSidebar";
+import { Navbar } from "@/components/Navbar";
 
 const geist = Geist({ subsets: ["latin"], variable: '--font-geist' });
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
@@ -108,14 +108,11 @@ export default async function RootLayout({
                 className={`${isArabic ? ibmPlexArabic.className : geist.className} bg-background text-foreground antialiased min-h-screen selection:bg-emerald-500/30 font-medium dark:font-semibold`}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <div className="relative flex min-h-screen">
-                        {/* Sidebar */}
-                        <DashboardSidebar />
-
-                        {/* Main Content Area */}
-                        <div className="flex-1 lg:ms-72 min-h-screen flex flex-col">
+                    <div className="relative min-h-screen flex flex-col">
+                        <Navbar />
+                        <main className="flex-1 flex flex-col pt-18">
                             {children}
-                        </div>
+                        </main>
                     </div>
                 </NextIntlClientProvider>
             </body>

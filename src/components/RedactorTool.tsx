@@ -8,6 +8,7 @@ import {
     FileUp,
     Trash2,
     Download,
+    Eraser,
     Loader2,
     MousePointer2,
     AlertTriangle,
@@ -232,10 +233,11 @@ export default function RedactorTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
-            icon={Layers}
+            title={t('title')}
+            description={t('description')}
+            icon={Eraser}
             category="vault"
+            toolId="redactor"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-2">

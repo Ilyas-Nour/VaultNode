@@ -89,10 +89,11 @@ export default function PdfMergeTool() {
 
     return (
         <ToolContainer
-            title={t('pdfMerger')}
-            description={t('mergeDropDesc')}
+            title={t('title')}
+            description={t('description')}
             icon={FileStack}
             category="docs"
+            toolId="merger"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

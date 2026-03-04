@@ -80,10 +80,11 @@ export default function PasswordClient() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description="Generate cryptographically secure passwords locally."
+            title={t('title')}
+            description={t('description')}
             icon={KeyRound}
             category="vault"
+            toolId="password"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-4">

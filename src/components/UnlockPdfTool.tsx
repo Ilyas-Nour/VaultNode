@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Loader2, Unlock, FileText, Upload, Download, EyeOff, Eye, AlertTriangle, ShieldCheck, Info, RefreshCw, Key } from "lucide-react";
+import { Loader2, Unlock, FileText, Upload, Download, EyeOff, Eye, AlertTriangle, ShieldCheck, Info, RefreshCw, Key, CheckCircle2, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
 import { useTranslations } from "next-intl";
@@ -102,10 +102,11 @@ export default function UnlockPdfTool() {
 
     return (
         <ToolContainer
-            title={t('titleHighlight')}
-            description={t('dropDesc')}
-            icon={Unlock}
+            title={t('title')}
+            description={t('description')}
+            icon={KeyRound}
             category="docs"
+            toolId="unlock"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

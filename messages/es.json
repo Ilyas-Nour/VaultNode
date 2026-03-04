@@ -1,324 +1,288 @@
 {
     "HomePage": {
-        "title": "Deja de subir tu vida a la nube.",
-        "subtitle": "Privacidad local de última generación",
-        "description": "El mundo digital filtra datos. VaultNode no. Procesa, censura y fusiona tus documentos más confidenciales 100% dentro de la memoria RAM de tu navegador. Sin servidores. Sin rastros.",
-        "launchRedactor": "Iniciar Redactor",
-        "imageCompressor": "Compresor de Imágenes",
-        "pdfMerger": "Fusión de PDF",
+        "title": "Tus archivos se quedan contigo. Siempre.",
+        "titlePart1": "Tus Archivos.",
+        "titlePart2": "Tu Dispositivo.",
+        "subtitle": "La mayoría de los sitios roban tus archivos. Nosotros no. Todo lo que haces se queda en tu pantalla. 100% privado y 100% gratis.",
+        "launchRedactor": "Ocultar Información Sensible",
+        "imageCompressor": "Reducir Foto",
+        "pdfMerger": "Unir PDF",
         "pdfToImg": "PDF a Imagen",
-        "cleanExif": "Limpiador de Metadatos",
-        "password": "Generador de Claves",
+        "cleanExif": "Borrar Datos de Foto",
+        "password": "Creador de Contraseñas",
         "unlockPdf": "Desbloquear PDF",
-        "heicToJpg": "HEIC a JPG",
+        "heicToJpg": "Foto iPhone a JPG",
         "pdfToDocx": "PDF a Word",
-        "mediaConverter": "Convertidor de Medios",
-        "svgToPng": "SVG a PNG",
-        "categories": {
-            "vault": "La Bóveda",
-            "media": "Laboratorio de Medios",
-            "docs": "Suite de Documentos"
+        "mediaConverter": "MP4 a MP3 / Reparar Vídeo",
+        "svgToPng": "Logo a Foto",
+        "textEncryptor": "Mensaje Secreto",
+        "blurTool": "Difuminar Foto",
+        "pdfSplit": "Dividir PDF",
+        "toolDescriptions": {
+            "redactor": "Usa el pincel para pintar sobre los secretos y ocultarlos.",
+            "cleanExif": "Elimina el 'mapa oculto' de tus fotos.",
+            "password": "Crea códigos secretos muy fuertes que solo tú puedas conocer.",
+            "textEncryptor": "Convierte lo que escribes en un código secreto que solo tú puedas desbloquear.",
+            "compress": "Haz que los archivos grandes sean pequeños para que se envíen más rápido.",
+            "heic": "Haz que las fotos de iPhone funcionen en cualquier computadora.",
+            "mediaConverter": "Cambia archivos de video o música para que funcionen en cualquier dispositivo.",
+            "svgToPng": "Toma dibujos de diseñadores y conviértelos en fotos simples que todos puedan ver.",
+            "blur": "Usa un pincel mágico para ocultar caras o cosas privadas en tus fotos.",
+            "merger": "Elige varios archivos y júntalos en un solo libro limpio.",
+            "pdfToWord": "Cambia un archivo bloqueado a un documento que puedas editar.",
+            "unlock": "Elimina una contraseña que ya conoces para que el archivo se quede abierto.",
+            "pdfToImg": "Guarda cada página de tu archivo como una foto separada.",
+            "split": "Elige solo las páginas que necesitas."
         },
-        "searchPlaceholder": "Buscar herramienta (ej. PDF, HEIC)...",
-        "noResults": "No se encontraron herramientas.",
-        "settings": "Ajustes",
-        "adPlaceholder": "Espacio Publicitario",
-        "cta": {
-            "title": "¿Listo para recuperar tu privacidad?",
-            "desc": "Únete a miles de usuarios que procesan datos sensibles donde pertenecen: en sus propias manos.",
-            "button": "Desbloquear Herramientas Pro"
-        },
-        "localOnly": "Procesamiento 100% Local",
-        "howItWorks": {
-            "title": "Cómo Funciona VaultNode",
-            "subtitle": "Cómo VaultNode protege tus datos en 3 pasos",
-            "step1": {
-                "title": "Seleccionar origen",
-                "desc": "Arrastra tus archivos a la bóveda. Se cargan al instante en la memoria RAM privada de tu navegador."
-            },
-            "step2": {
-                "title": "Procesamiento interno",
-                "desc": "Nuestro motor WebAssembly procesa píxeles y vectores localmente. Absolutamente ningún paquete de datos sale hacia servidores externos."
-            },
-            "step3": {
-                "title": "Exportación blindada",
-                "desc": "Descarga tus documentos finales. Al cerrar la pestaña, tu información se borra de la memoria para siempre."
-            }
-        },
-        "visualProof": {
-            "title": "Prueba visual definitiva",
-            "desc": "La censura tradicional usa formas vectoriales que los hackers pueden eliminar fácilmente para revelar el texto original. VaultNode destruye los píxeles de la imagen por completo. Lo que se elimina, desaparece para siempre.",
-            "rasterizedActive": "Aplanamiento de Píxeles Activo",
-            "rawSource": "Documento sin protección",
-            "vulnerableSource": "Datos sensibles expuestos",
-            "vaultnodeSecured": "Protegido por VaultNode",
-            "permanentDestruction": "Píxeles destruidos permanentemente"
-        },
-        "serviceShowcases": {
-            "title": "Ejemplos interactivos",
-            "subtitle": "Ve a VaultNode en acción",
+        "beforeAfter": {
             "redactor": {
-                "title": "Censura segura de PDF",
-                "desc": "La censura tradicional usa formas vectoriales que los hackers pueden eliminar fácilmente para revelar el original. VaultNode destruye los píxeles de la imagen por completo. Lo que se elimina, desaparece para siempre.",
-                "before": "Documento sin protección",
-                "after": "Protegido por VaultNode",
-                "cta": "Lanzar Redactor"
+                "before": "Una carta con tu número de teléfono.",
+                "after": "El número desapareció bajo una línea negra para siempre."
             },
-            "compressor": {
-                "title": "Compresión inteligente de imágenes",
-                "desc": "Las imágenes pesadas ralentizan tu trabajo y filtran metadatos. VaultNode comprime imágenes localmente, eliminando datos EXIF y reduciendo el tamaño del archivo hasta en un 90% sin pérdida visual de calidad.",
-                "before": "Imagen original de 8.4MB (Lenta, con metadatos)",
-                "after": "Optimizada a 850KB (Rápida, sin metadatos)",
-                "cta": "Comprimir Imágenes"
-            },
-            "merger": {
-                "title": "Fusión local de PDF",
-                "desc": "Los documentos dispersos son difíciles de manejar. Combina PDF ilimitados directamente en tu navegador sin subir archivos confidenciales a servidores en la nube.",
-                "before": "Archivos dispersos",
-                "after": "Documento unificado",
-                "cta": "Fusionar PDF"
-            },
-            "pdfToImg": {
-                "title": "Convertidor de PDF a Imagen",
-                "desc": "¿Necesita una página específica de un PDF? VaultNode rasteriza documentos PDF localmente y extrae JPEGs de alta calidad directamente en su navegador. No requiere subir a servidores.",
-                "before": "Documento PDF Bloqueado",
-                "after": "Galería de Imágenes Extraídas",
-                "cta": "Extraer Imágenes"
-            },
-            "cleanExif": {
-                "title": "Limpiador de Metadatos",
-                "desc": "Las fotos llevan coordenadas GPS, modelos de cámara y marcas de tiempo ocultas. VaultNode redibuja tus imágenes píxel a píxel para eliminar permanentemente todos los datos EXIF invisibles.",
-                "before": "Foto con Ubicación GPS",
-                "after": "Foto Privada Limpia",
-                "cta": "Limpiar Metadatos"
+            "clean-exif": {
+                "before": "Una foto que muestra exactamente dónde vives.",
+                "after": "Una foto segura para compartir con extraños."
             },
             "password": {
-                "title": "Generador de Claves Seguras",
-                "desc": "Deje de confiar en servidores en línea. VaultNode utiliza el motor criptográfico nativo de su navegador para crear contraseñas ultra seguras que nunca salen de su dispositivo.",
-                "before": "Contraseña Débil/Reutilizada",
-                "after": "Clave Criptográficamente Segura",
-                "cta": "Generar Clave"
+                "before": "Una contraseña débil como '123456'.",
+                "after": "Un código super fuerte como 'Xk9!pQ2m#Lz'."
+            },
+            "encrypt": {
+                "before": "Una nota secreta que cualquiera puede leer.",
+                "after": "Letras mezcladas que solo tú puedes desbloquear."
+            },
+            "compress": {
+                "before": "Una foto 'pesada' lenta de enviar.",
+                "after": "Una foto 'ligera' que se envía al instante."
+            },
+            "heic": {
+                "before": "Una foto de iPhone que no abre en PC.",
+                "after": "Una foto estándar que funciona en todas partes."
+            },
+            "media-converter": {
+                "before": "Un video que no funciona en tu teléfono.",
+                "after": "Un archivo perfecto que funciona en cualquier dispositivo."
+            },
+            "svg-to-png": {
+                "before": "Un archivo de dibujo para diseñadores.",
+                "after": "Una foto simple para que todos la vean."
+            },
+            "blur": {
+                "before": "Una foto que muestra una cara privada.",
+                "after": "La misma foto con la cara oculta."
+            },
+            "merger": {
+                "before": "5 archivos diferentes esparcidos por ahí.",
+                "after": "Un documento limpio con todo adentro."
+            },
+            "pdf-to-word": {
+                "before": "Un archivo que no puedes editar ni escribir en él.",
+                "after": "Un archivo de Word que puedes cambiar."
+            },
+            "unlock": {
+                "before": "Un archivo que pide contraseña cada vez.",
+                "after": "Un archivo que abre al instante para cualquiera."
+            },
+            "pdf-to-img": {
+                "before": "Un documento largo que requiere mucho desplazamiento.",
+                "after": "Una colección de fotos fáciles de compartir."
+            },
+            "split": {
+                "before": "Un libro de 100 páginas.",
+                "after": "Las 2 páginas que realmente necesitabas."
             }
         },
-        "useCases": {
-            "title": "Cumplimiento normativo global",
-            "subtitle": "Arquitectura diseñada para profesionales que no pueden permitirse una filtración",
-            "hr": {
-                "title": "Recursos Humanos",
-                "desc": "Oculta números de seguridad social y direcciones personales en los expedientes de los empleados antes de compartirlos internamente."
+        "categories": {
+            "vault": "Herramientas de Privacidad",
+            "media": "Foto y Video",
+            "docs": "Papeles y Archivos"
+        },
+        "searchPlaceholder": "Buscar una herramienta...",
+        "noResults": "No se encontraron resultados.",
+        "toolSubtitle": "Herramientas fáciles para ayudarte con tus {category}.",
+        "settings": {
+            "title": "Ajustes",
+            "subtitle": "Hazlo tuyo",
+            "language": {
+                "label": "Idioma",
+                "en": "English",
+                "es": "Español",
+                "fr": "Français",
+                "ar": "العربية"
             },
-            "legal": {
-                "title": "Asesoría Legal",
-                "desc": "Censura información confidencial en documentos legales sin dejar ningún rastro vectorial digital."
+            "session": {
+                "label": "Limpieza",
+                "clear": "Limpiar pantalla",
+                "clearDesc": "Limpia todo lo que has hecho y empieza de cero en tu pantalla.",
+                "cleared": "Pantalla limpia"
             },
-            "journalists": {
-                "title": "Periodistas",
-                "desc": "Protege a tus informantes eliminando permanentemente metadatos e información visual identificable."
+            "close": "Cerrar"
+        },
+        "adPlaceholder": "Apoya nuestras herramientas gratuitas",
+        "cta": {
+            "title": "Tu privacidad es un derecho.",
+            "desc": "Construimos esto porque creemos que tus archivos deben ser solo tuyos. Sin costos, sin trucos, solo privacidad.",
+            "button": "Empezar (Gratis)"
+        },
+        "mergeDropDesc": "Selecciona archivos de tu computadora para unirlos.",
+        "mergeButton": "Combinar archivos",
+        "localOnly": "Se queda en tu pantalla",
+        "howItWorks": {
+            "title": "¿Cómo funciona?",
+            "subtitle": "Una historia simple de seguridad",
+            "step1": {
+                "title": "Elige un archivo",
+                "desc": "Selecciona el documento o foto que quieras arreglar."
             },
-            "publicSector": {
-                "title": "Sector Público",
-                "desc": "Procesa datos de ciudadanos en estricto cumplimiento con el RGPD utilizando exclusivamente ejecución de hardware local."
+            "step2": {
+                "title": "Arreglo privado",
+                "desc": "Nuestro sitio funciona como una herramienta mágica dentro de tu pantalla. Tu archivo nunca viaja por internet."
             },
-            "compliance": {
-                "title": "Oficiales de Cumplimiento",
-                "desc": "Audita documentos de alto riesgo en un entorno de navegador aislado (air-gapped) sin dependencias externas."
-            },
-            "agile": {
-                "title": "Equipos Ágiles",
-                "desc": "Fusiona y optimiza los recursos de tus proyectos rápidamente, sin las demoras de subir archivos a la nube ni hacer colas de procesamiento."
+            "step3": {
+                "title": "Guárdalo",
+                "desc": "Descarga tu archivo terminado. Como nunca salió de tu dispositivo, nadie más lo vio."
             }
+        },
+        "footer": {
+            "whyTitle": "¿Por qué es gratis?",
+            "whyDesc": "Creemos que la privacidad no debe ser un lujo. PrivaFlow funciona completamente en tu dispositivo. Sin venta de datos, sin trampas.",
+            "contact": "Contáctanos",
+            "philosophy": "Filosofía",
+            "faq": "Preguntas",
+            "services": "Herramientas",
+            "badge": "100% Privado",
+            "company": "Compañía",
+            "support": "Soporte",
+            "privacy": "Privacidad",
+            "terms": "Términos",
+            "report": "Reportar un bug",
+            "rights": "Todos los derechos reservados.",
+            "builtWith": "Hecho con"
+        },
+        "nav": {
+            "tools": "Herramientas",
+            "philosophy": "Filosofía",
+            "faq": "Preguntas",
+            "privateBadge": "100% Privado"
+        },
+        "visualProof": {
+            "label": "Evidencia Visual",
+            "title": "Mira la Magia",
+            "desc": "Prueba visual de nuestras herramientas en acción. Todo ocurre en privado dentro de tu pantalla.",
+            "viewProof": "Ver prueba"
         }
     },
-    "Footer": {
-        "desc": "Las herramientas multimedia más privadas del mundo. Impulsadas por ejecución a nivel de hardware.",
-        "tools": "Herramientas",
-        "philosophy": "Filosofía",
-        "globalPresence": "Presencia Global",
-        "rights": "Todos los derechos reservados."
-    },
     "Metadata": {
-        "redact": {
-            "title": "Redactor Seguro de PDF",
-            "description": "Censura permanentemente información confidencial en PDFs. La rasterización 100% del lado del cliente garantiza la eliminación de datos sin dejar rastro."
+        "blur": {
+            "title": "Ocultar caras",
+            "description": "Difumina partes de tu foto localmente."
+        },
+        "clean-exif": {
+            "title": "Limpiar foto",
+            "description": "Elimina el mapa oculto y los detalles."
         },
         "compress": {
-            "title": "Compresor Inteligente de Imágenes",
-            "description": "Reduce imágenes sin fugas de datos. Compresión rápida, 100% local en tu navegador para JPG, PNG y WebP."
+            "title": "Reducir tamaño",
+            "description": "Haz que las fotos sean más pequeñas."
         },
-        "pdfToImg": {
-            "title": "Convertidor de PDF a Imagen",
-            "description": "Convierta instantáneamente páginas PDF a imágenes JPG de alta calidad directamente en su navegador. 100% local, seguro y rápido."
+        "encrypt": {
+            "title": "Mensaje Secreto",
+            "description": "Bloquea tu escritura con un código."
         },
-        "cleanExif": {
-            "title": "Limpiador de Metadatos",
-            "description": "Elimine datos GPS y EXIF ocultos de sus fotos nativamente en su navegador. Privacidad completa sin subir a servidores."
+        "heic-to-jpg": {
+            "title": "Arreglar fotos iPhone",
+            "description": "Fotos que funcionan en todas partes."
+        },
+        "media-converter": {
+            "title": "Arreglador Video/Audio",
+            "description": "Cambia el tipo de archivo."
         },
         "password": {
-            "title": "Generador de Claves Seguras",
-            "description": "Genere contraseñas criptográficamente seguras localmente en su dispositivo usando APIs nativas del navegador."
+            "title": "Códigos Fuertes",
+            "description": "Crea códigos seguros."
         },
-        "unlockPdf": {
-            "title": "Desbloquear PDF Protegido",
-            "description": "Elimine contraseñas y restricciones de forma segura de PDFs de confianza localmente en su navegador. Sin subir archivos."
+        "pdf-merge": {
+            "title": "Combinar archivos",
+            "description": "Pon varios archivos en uno solo."
         },
-        "heicToJpg": {
-            "title": "Convertidor HEIC a JPG",
-            "description": "Transforme fotos HEIC de Apple de alta eficiencia a formatos estándar JPEG o WebP instantáneamente con ejecución en memoria."
+        "pdf-split": {
+            "title": "Extraer páginas",
+            "description": "Toma páginas de un archivo grande."
         },
-        "pdfToDocx": {
-            "title": "Convertidor de PDF a Word",
-            "description": "Extraiga texto legible de PDFs y reconstrúyalos como documentos profesionales de Word (.docx) de forma segura."
+        "pdf-to-docx": {
+            "title": "Archivo a Word",
+            "description": "Convierte en documento editable."
+        },
+        "pdf-to-img": {
+            "title": "Archivo a Imágenes",
+            "description": "Convierte páginas en fotos."
+        },
+        "redact": {
+            "title": "Ocultar info privada",
+            "description": "Cubre secretos en un documento."
+        },
+        "svg-to-png": {
+            "title": "Arreglar Logos",
+            "description": "Toma dibujos y conviértelos en fotos."
+        },
+        "unlock-pdf": {
+            "title": "Desbloquear archivo",
+            "description": "Elimina contraseñas."
         }
     },
     "Tools": {
         "common": {
-            "backHome": "Volver al Inicio",
-            "home": "Inicio",
-            "vaultNode": "VaultNode",
-            "securedBy": "Protegido por VaultNode",
-            "loading": "Cargando..."
+            "loading": "Preparando...",
+            "processing": "Trabajando...",
+            "success": "Terminado",
+            "error": "Algo salió mal",
+            "backToHome": "Volver a Herramientas"
         },
         "redact": {
-            "titleHighlight": "Seguro",
-            "dropTitle": "Suelta tu PDF Seguro",
-            "dropDesc": "El aplanamiento rasterizado destruye permanentemente los datos subyacentes para una seguridad del 100%.",
-            "drawingZones": "Dibujando Zonas de Censura",
-            "sandboxActive": "Entorno de Privacidad Activo",
-            "activeLayers": "Capas Activas",
-            "flattening": "Aplanando...",
-            "secureExport": "Proteger y Exportar",
-            "clearAll": "Borrar Todo",
-            "securityProtocol": "Protocolo de Seguridad",
-            "securityWarning": "Los datos del texto original se sobrescribirán permanentemente mediante rasterización a densidad 3.0x.",
-            "initializing": "Inicializando Entorno Seguro..."
-        },
-        "compress": {
-            "titleHighlight": "Comprimir",
-            "dropTitle": "Suelta la Imagen para Reducir",
-            "dropDesc": "JPG, PNG, WEBP. Todo el procesamiento ocurre 100% localmente en tu sesión.",
-            "originalArch": "Arquitectura Original",
-            "rawSource": "Datos de Origen Sin Procesar",
-            "optimizedAsset": "Recurso Optimizado Vault",
-            "instantLoad": "Carga Instantánea",
-            "dropHere": "Suelta la Imagen Aquí",
-            "releaseOptimize": "Suelta para optimizar al instante...",
-            "originalFile": "Archivo Original",
-            "dimensions": "Dimensiones",
-            "size": "Tamaño",
-            "type": "Tipo",
-            "optimizedFile": "Archivo Optimizado",
-            "savings": "Ahorro",
-            "compressionDetails": "Detalles de Compresión",
-            "savedSpace": "Espacio Ahorrado",
-            "dataStripped": "Datos Eliminados",
-            "settings": "Ajustes",
-            "aggressive": "Agresivo (Más Pequeño)",
-            "balanced": "Equilibrado",
-            "highQuality": "Alta Calidad",
-            "downloadSecurely": "Descargar de Forma Segura",
-            "processing": "Procesando...",
-            "vaultnodeSecured": "Protegido por VaultNode",
-            "initializing": "Inicializando Motor Seguro..."
-        },
-        "pdfToImg": {
-            "titleHighlight": "Extraer",
-            "dropTitle": "Soltar PDF para Extraer",
-            "dropDesc": "Rasterizaremos las páginas PDF en imágenes de alta calidad directamente en su navegador.",
-            "convertPages": "Convertir y Descargar ZIP",
-            "processing": "Extrayendo Páginas...",
-            "extractingPage": "Extrayendo Página",
-            "selectDensity": "Densidad de Salida",
-            "normal": "Normal",
-            "high": "Alta",
-            "ultra": "Ultra",
-            "initializing": "Inicializando Motor PDF..."
-        },
-        "cleanExif": {
-            "titleHighlight": "Limpiar",
-            "dropTitle": "Suelte Foto para Limpiar",
-            "dropDesc": "Redibujaremos los píxeles para borrar permanentemente los datos EXIF y GPS ocultos.",
-            "originalData": "Información Original",
-            "cleaned": "Limpiada",
-            "scrubbing": "Limpiando...",
-            "downloadClean": "Descargar Imagen Limpia",
-            "noExifFound": "No se encontraron metadatos sensibles adjuntos a esta imagen.",
-            "exifWarning": "Advertencia: La imagen contiene potenciales metadatos.",
-            "safe": "La imagen está limpia y es segura para compartir."
-        },
-        "password": {
-            "titleHighlight": "Clave",
-            "generateNew": "Generar Nueva Clave",
-            "copy": "Copiar",
-            "copied": "¡Copiado!",
-            "length": "Longitud",
-            "uppercase": "Mayúsculas (A-Z)",
-            "lowercase": "Minúsculas (a-z)",
-            "numbers": "Números (0-9)",
-            "symbols": "Símbolos (!@#$)",
-            "securityLevel": "Entropía Criptográfica",
-            "weak": "Débil",
-            "medium": "Medio",
-            "strong": "Fuerte",
-            "alien": "Grado Militar"
+            "title": "Ocultar información privada",
+            "description": "Cubre secretos en un documento.",
+            "titleHighlight": "Ocultar información privada",
+            "dropTitle": "Suelta tu archivo aquí",
+            "dropDesc": "Elige un archivo para empezar a ocultar secretos.",
+            "flattening": "Asegurando...",
+            "secureExport": "Guardar copia segura",
+            "clearAll": "Empezar de nuevo",
+            "initializing": "Activando el escudo de seguridad..."
         },
         "unlockPdf": {
-            "titleHighlight": "Desbloquear",
-            "dropTitle": "Soltar PDF Protegido",
-            "dropDesc": "Desencriptaremos su PDF de forma segura usando su contraseña dentro de su navegador.",
-            "passwordLabel": "Contraseña del PDF",
-            "passwordPlaceholder": "Ingrese la contraseña para desencriptar...",
-            "unlocking": "Desbloqueando...",
-            "unlockBtn": "Desencriptar y Desbloquear",
-            "successTitle": "PDF Desbloqueado",
-            "successDesc": "Su documento ha sido desencriptado con éxito y está listo para descargar.",
-            "downloadBtn": "Descargar PDF Desbloqueado",
-            "explainerHighlight": "Privacidad Garantizada",
-            "explainerText": "Su contraseña bancaria nunca sale de su teclado. El PDF se desencripta localmente en la memoria RAM de su navegador sin subirlo a ningún servidor."
+            "title": "Desbloquear un archivo",
+            "description": "Elimina contraseñas.",
+            "titleHighlight": "Desbloquea tu archivo",
+            "dropTitle": "Suelta el archivo bloqueado",
+            "dropDesc": "Selecciona el archivo que quieras desbloquear.",
+            "unlocking": "Abriendo el candado...",
+            "unlockBtn": "Desbloquear ahora",
+            "successTitle": "¡Desbloqueado!",
+            "successDesc": "Tu archivo ahora está libre y abierto.",
+            "downloadBtn": "Descargar archivo abierto",
+            "passwordLabel": "Escribir contraseña",
+            "passwordPlaceholder": "Escribe la contraseña aquí..."
         },
-        "heicToJpg": {
-            "titleHighlight": "Convertir",
-            "dropTitle": "Soltar Foto HEIC",
-            "dropDesc": "Transcodificaremos inteligentemente sus fotos de iPhone usando bucles estándar de WebAssembly.",
-            "processing": "Transcodificando...",
-            "processingDesc": "Transcodificando imagen en memoria...",
-            "success": "Conversión Completa",
-            "downloadBtn": "Descargar Imagen",
-            "errorDesc": "Error al convertir HEIC. El archivo puede estar corrupto.",
-            "explainerHighlight": "Transcodificación Solo en RAM",
-            "explainerText": "Los formatos HEIC son computacionalmente pesados. Usamos WebAssembly para transcodificarlos directamente dentro de la memoria RAM de su navegador, asegurando que sus fotos nunca se envíen a un servidor en la nube."
+        "compress": {
+            "title": "Reducir tamaño de fotos",
+            "description": "Haz que los archivos grandes sean pequeños para que se envíen más rápido.",
+            "titleHighlight": "Reducir tamaño de fotos",
+            "dropTitle": "Suelta la foto aquí",
+            "dropDesc": "Elige una foto para reducirla de forma segura.",
+            "aggressive": "Muy Pequeño",
+            "balanced": "Mejor Aspecto",
+            "downloadSecurely": "Guardar foto reducida",
+            "processing": "Reduciendo..."
         },
-        "pdfToDocx": {
-            "titleHighlight": "Extraer",
-            "dropTitle": "Soltar PDF para Extraer",
-            "dropDesc": "Rasparemos las capas de texto y construiremos un Documento Word descargable.",
-            "readingPdf": "Leyendo Documento...",
-            "extractingText": "Extrayendo Texto...",
-            "processingPage": "Procesando Página",
-            "buildingWord": "Construyendo Archivo Word...",
-            "processing": "Reconstruyendo...",
-            "success": "Reconstrucción Completa",
-            "downloadBtn": "Descargar DOCX",
-            "errorDesc": "Error al procesar el PDF. Asegúrese de que no esté encriptado y contenga capas de texto.",
-            "explainerHighlight": "Extracción 100% en el Cliente",
-            "explainerText": "Leemos la capa de texto de su PDF y construimos el documento Word enteramente en su navegador. Los datos altamente sensibles nunca tocan la red."
-        },
-        "mediaConverter": {
-            "titleHighlight": "Medios",
-            "dropTitle": "Soltar Video o Audio",
-            "dropDesc": "Procesaremos sus medios usando FFmpeg.wasm directamente dentro de la memoria de su navegador.",
-            "processing": "Transcodificando...",
-            "convertBtn": "Convertir y Descargar",
-            "explainerHighlight": "Motor FFmpeg en el Navegador",
-            "explainerText": "Convertir video es intensivo. Traemos el poder de FFmpeg a su navegador a través de WebAssembly, para que sus archivos nunca salgan de su dispositivo."
-        },
-        "svgToPng": {
-            "titleHighlight": "SVG",
-            "dropTitle": "Soltar Archivo SVG",
-            "dropDesc": "Rasterice archivos vectoriales a píxeles PNG usando su motor de gráficos nativo.",
-            "processing": "Rasterizando...",
-            "convertBtn": "Rasterizar y Descargar",
-            "explainerHighlight": "Canal de Gráficos Nativo",
-            "explainerText": "Los archivos SVG son código. Usamos un lienzo aislado para dibujar sus gráficos vectoriales y exportarlos como PNG sin ningún procesamiento externo."
+        "cleanExif": {
+            "title": "Limpiar una foto",
+            "description": "Elimina el 'mapa oculto' de tus fotos.",
+            "titleHighlight": "Limpiar una foto",
+            "dropTitle": "Suelta la foto aquí",
+            "dropDesc": "Elige una foto para borrar los detalles ocultos.",
+            "cleaning": "Limpiando...",
+            "cleanBtn": "Limpiar mi foto",
+            "downloadBtn": "Guardar foto limpia"
         }
     }
 }

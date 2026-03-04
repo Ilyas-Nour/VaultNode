@@ -100,6 +100,7 @@ export default function TextEncryptorTool() {
             description="Military-grade AES-GCM encryption for your sensitive messages."
             icon={isLockMode ? Lock : Unlock}
             category="vault"
+            toolId="encrypt"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

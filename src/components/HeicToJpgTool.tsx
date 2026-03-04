@@ -90,6 +90,7 @@ export default function HeicToJpgTool() {
             description={t('dropDesc')}
             icon={RefreshCcw}
             category="media"
+            toolId="heic"
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3">

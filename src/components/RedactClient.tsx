@@ -23,16 +23,22 @@ const RedactorTool = dynamic(() => import("@/components/RedactorTool"), {
 
 export default function RedactClient() {
     return (
-        <main className="min-h-screen bg-zinc-950 flex flex-col lg:flex-row p-4 sm:p-8 gap-8 items-start justify-center">
-            {/* Main Application Logic */}
-            <section className="flex-1 w-full max-w-6xl">
-                <RedactorTool />
-            </section>
+        <main className="min-h-screen bg-zinc-950 flex flex-col items-center pt-18 pb-24">
+            {/* 100% Width Container */}
+            <div className="w-full max-w-[1600px] relative flex flex-col gap-12 lg:gap-24 items-center p-4 sm:p-8 lg:p-12">
 
-            {/* Strategic Monetization Placement */}
-            <aside className="hidden lg:block sticky top-8 shrink-0">
-                <AdUnit type="sidebar" />
-            </aside>
+                <div className="flex-1 w-full flex flex-col gap-12 relative text-center">
+                    {/* Top Banner Ad - Primary Monitization */}
+                    <div className="w-full flex justify-center mb-8">
+                        <AdUnit type="banner-slim" className="max-w-5xl" />
+                    </div>
+
+                    {/* Main Application Logic */}
+                    <section className="w-full">
+                        <RedactorTool />
+                    </section>
+                </div>
+            </div>
         </main>
     );
 }
