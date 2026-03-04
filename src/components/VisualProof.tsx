@@ -1,11 +1,14 @@
 /**
- * 🎨 PRIVAFLOW | Visual Proof System
+ * 🎨 PRIVAFLOW | Visual Proof Engine
  * ---------------------------------------------------------
- * A high-fidelity visualization engine that demonstrates
- * "Before vs After" states for privacy tools.
+ * A structural visualization layer that demonstrates 
+ * "Before vs After" document and media transformations. 
+ * Orchestrates localized mockups using CSS-first 
+ * rendering to ensure privacy-safe demonstrations.
  * 
- * Performance: Optimized (Memoized sub-components)
- * Aesthetics: Premium / Ultra-Clean
+ * Logic: Polymorphic Mockup Orchestration
+ * Performance: High (Memoized Sub-renderers & Logic)
+ * Aesthetics: Media-Industrial / Emerald-Dark
  */
 
 "use client";
@@ -27,10 +30,11 @@ import {
 import { cn } from '@/lib/utils';
 import { useLocale } from 'next-intl';
 
-// --- SUB-COMPONENTS (Memoized for Speed) ---
+// --- INDUSTRIAL SUB-RENDERERS (Memoized for Atomic Speed) ---
 
 /**
- * 📄 Document Markup Sub-renderer
+ * 📄 RedactorProof Sub-renderer
+ * Visualizes sensitive data blackboarding patterns.
  */
 const RedactorProof = memo(({ type }: { type: 'before' | 'after' }) => (
     <div className="relative w-full h-full bg-white rounded-lg p-6 shadow-sm flex flex-col gap-4 overflow-hidden">
@@ -66,7 +70,8 @@ const RedactorProof = memo(({ type }: { type: 'before' | 'after' }) => (
 RedactorProof.displayName = 'RedactorProof';
 
 /**
- * 🖼️ Image Transformation Sub-renderer
+ * 🖼️ ImageProof Sub-renderer
+ * Visualizes asset optimization and metadata scaling.
  */
 const ImageProof = memo(({ type, url, beforeLabel, afterLabel }: { type: 'before' | 'after', url: string, beforeLabel: string, afterLabel: string }) => (
     <div className="relative w-full h-full rounded-lg overflow-hidden group/photo">
@@ -91,7 +96,8 @@ const ImageProof = memo(({ type, url, beforeLabel, afterLabel }: { type: 'before
 ImageProof.displayName = 'ImageProof';
 
 /**
- * 🔐 Security Unlock Sub-renderer
+ * 🔐 UnlockProof Sub-renderer
+ * Visualizes cryptographic state transitions.
  */
 const UnlockProof = memo(({ type }: { type: 'before' | 'after' }) => (
     <div className="relative w-full h-full bg-white rounded-lg p-4 shadow-sm flex flex-col gap-3 overflow-hidden">
@@ -125,7 +131,7 @@ const UnlockProof = memo(({ type }: { type: 'before' | 'after' }) => (
 ));
 UnlockProof.displayName = 'UnlockProof';
 
-// --- MAIN COMPONENT ---
+// --- PROTOCOL INTERFACES ---
 
 interface VisualProofProps {
     toolId: string;
@@ -134,16 +140,17 @@ interface VisualProofProps {
 }
 
 /**
- * 💎 VisualProof Engine
- * Orchestrates all demo visualizations.
+ * 💎 VisualProof Component
+ * The central visualization node for all document transformation demos.
  */
 export const VisualProof = memo(({ toolId, mode = 'card', className }: VisualProofProps) => {
+    // ✨ HOOKS & LOCALIZATION
     const locale = useLocale();
     const isRTL = locale === 'ar';
 
     /**
-     * Component mapping for extreme performance.
-     * Prevents logic recreation on re-renders.
+     * Component Registry
+     * Memoized routing of tool IDs to specific visualization patterns.
      */
     const content = useMemo(() => {
         const render = (type: 'before' | 'after') => {
@@ -171,7 +178,7 @@ export const VisualProof = memo(({ toolId, mode = 'card', className }: VisualPro
                             <div className="absolute top-4 left-4 space-y-2">
                                 {[
                                     { icon: MapPin, text: "40.7128° N", color: "bg-red-500" },
-                                    { icon: Calendar, text: "MARCH 12, 2024", color: "bg-blue-500" },
+                                    { icon: Calendar, text: "MARCH 12, 2024", color: "bg-zinc-500" },
                                     { icon: ImageIcon, text: "IPHONE 15 PRO", color: "bg-zinc-500" }
                                 ].map((tag, i) => (
                                     <div

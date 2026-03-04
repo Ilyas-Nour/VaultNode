@@ -4,8 +4,9 @@
  * A high-performance, responsive grid system for tool navigation.
  * Features ultra-smooth filtering and premium hover states.
  * 
- * Performance: Optimized (Memoized grid & lists)
- * Interaction: Motion-Enhanced / Category-Filtered
+ * Logic: AnimatePresence Grid Orchestration
+ * Performance: High (Memoized Registry & Category Filters)
+ * Aesthetics: Dashboard-Industrial / Emerald-Dark
  */
 
 "use client";
@@ -34,7 +35,7 @@ import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
 
-// --- TYPES & CONFIG ---
+// --- PROTOCOL CONFIGURATIONS ---
 
 interface ToolItem {
     id: string;
@@ -47,6 +48,19 @@ interface ToolItem {
 }
 
 /**
+ * Aesthetic Mapping Registry
+ * Stored outside component to prevent reconciliation overhead.
+ */
+const colorClasses = {
+    zinc: 'text-zinc-400 bg-zinc-400/5 border-zinc-800',
+    emerald: 'text-emerald-500 bg-emerald-500/5 border-emerald-500/20',
+    sky: 'text-sky-500 bg-sky-500/5 border-sky-500/20',
+    purple: 'text-purple-500 bg-purple-500/5 border-purple-500/20'
+};
+
+// --- MAIN COMPONENT ---
+
+/**
  * 🍱 BentoGrid Component
  * The central command center for all available services.
  */
@@ -57,7 +71,10 @@ export const BentoGrid = memo(() => {
     const isRTL = locale === 'ar';
     const [activeCategory, setActiveCategory] = useState('all');
 
-    // 📋 TOOL REGISTRY
+    /**
+     * Tool Inventory Node
+     * Memoized to prevent dictionary rebuilds during filter transitions.
+     */
     const tools = useMemo((): ToolItem[] => [
         // THE VAULT (Security Specialist Tools)
         { id: 'redactor', category: 'vault', title: t('launchRedactor'), desc: t('toolDescriptions.redactor'), icon: Eraser, href: '/tools/redact', color: 'emerald' },
@@ -87,18 +104,14 @@ export const BentoGrid = memo(() => {
         { id: 'docs', title: t('categories.docs'), color: 'purple' }
     ], [t]);
 
-    // 🔍 FILTER LOGIC
+    /**
+     * 🔍 Data Filtering Logic
+     * Computes the subset of tools based on the active security tier.
+     */
     const filteredTools = useMemo(() => {
         if (activeCategory === 'all') return tools;
         return tools.filter(tool => tool.category === activeCategory);
     }, [activeCategory, tools]);
-
-    const colorClasses = {
-        zinc: 'text-zinc-400 bg-zinc-400/5 hover:bg-zinc-400/10 active:bg-zinc-400/20 border-zinc-800',
-        emerald: 'text-emerald-500 bg-emerald-500/5 hover:bg-emerald-500/10 active:bg-emerald-500/20 border-emerald-500/20',
-        sky: 'text-sky-500 bg-sky-500/5 hover:bg-sky-500/10 active:bg-sky-500/20 border-sky-500/20',
-        purple: 'text-purple-500 bg-purple-500/5 hover:bg-purple-500/10 active:bg-purple-500/20 border-purple-500/20'
-    };
 
     return (
         <section id="tools" className="space-y-16">

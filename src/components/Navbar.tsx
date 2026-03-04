@@ -2,9 +2,11 @@
  * 🧭 PRIVAFLOW | Navigation Architecture
  * ---------------------------------------------------------
  * The main orchestrator for site-wide navigation.
- * Features a high-fidelity mega-menu and mobile-first responsive design.
+ * Features a high-fidelity mega-menu and mobile-first 
+ * responsive design optimized for 100% device width.
  * 
- * Performance: Optimized (Memoized categories & components)
+ * Logic: Mega-Menu Drill-Down
+ * Performance: High (Memoized Registry & State Management)
  * Aesthetics: Glassmorphism / Premium Minimalist
  */
 
@@ -49,7 +51,10 @@ export const Navbar = memo(() => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isToolsOpen, setIsToolsOpen] = useState(false);
 
-    // 📂 CATEGORY REGISTRY (Memoized for peak efficiency)
+    /**
+     * 📂 Navigation Registry
+     * Memoized to prevent hierarchical rebuilds during viewport resizing.
+     */
     const categories = useMemo(() => [
         {
             id: 'vault',

@@ -5,8 +5,9 @@
  * Designed for extreme privacy, 100% width immersion, 
  * and localized execution.
  * 
- * Performance: High (Memoized)
- * Security: Zero-Knowledge
+ * Logic: HOC Fragment Orchestration
+ * Performance: High (Memoized Layout & Config)
+ * Aesthetics: Dashboard-Industrial / Emerald-Dark
  */
 
 "use client";
@@ -31,7 +32,7 @@ import { cn } from '@/lib/utils';
 import { VisualProof } from '@/components/VisualProof';
 import AdUnit from '@/components/AdUnit';
 
-// --- TYPES & INTERFACES ---
+// --- PROTOCOL INTERFACES ---
 
 interface ToolContainerProps {
     title: string;
@@ -46,6 +47,21 @@ interface ToolContainerProps {
     }[];
     toolId?: string;
 }
+
+// --- CONSTANT MAPPING (Performance Cache) ---
+const categoryColors = {
+    vault: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10',
+    media: 'text-sky-500 bg-sky-500/10 border-sky-500/20 shadow-sky-500/10',
+    docs: 'text-purple-500 bg-purple-500/10 border-purple-500/20 shadow-purple-500/10'
+};
+
+const categoryAccents = {
+    vault: 'bg-emerald-500/20',
+    media: 'bg-sky-500/20',
+    docs: 'bg-purple-500/20'
+};
+
+// --- MAIN COMPONENT ---
 
 /**
  * 💎 ToolContainer Component
@@ -65,22 +81,6 @@ export const ToolContainer = memo(({
     const t = useTranslations('HomePage');
     const locale = useLocale();
     const isRTL = locale === 'ar';
-
-    // 🎨 DESIGN SYSTEM TOKENS
-    const config = useMemo(() => ({
-        colors: {
-            vault: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10',
-            media: 'text-sky-500 bg-sky-500/10 border-sky-500/20 shadow-sky-500/10',
-            docs: 'text-purple-500 bg-purple-500/10 border-purple-500/20 shadow-purple-500/10'
-        },
-        accents: {
-            vault: 'emerald',
-            media: 'sky',
-            docs: 'purple'
-        }
-    }), []);
-
-    const accentColor = config.accents[category];
 
     return (
         <div className="flex-1 flex flex-col min-h-screen bg-zinc-950 bg-grid-vault relative overflow-x-hidden pt-18">
@@ -113,7 +113,7 @@ export const ToolContainer = memo(({
                         </Button>
                     </Link>
                     <div className="flex items-center gap-3 lg:gap-4">
-                        <div className={cn("w-8 h-8 lg:w-10 lg:h-10 rounded-xl border flex items-center justify-center shadow-lg transition-transform hover:scale-105", config.colors[category])}>
+                        <div className={cn("w-8 h-8 lg:w-10 lg:h-10 rounded-xl border flex items-center justify-center shadow-lg transition-transform hover:scale-105", categoryColors[category])}>
                             <Icon className="w-4 h-4 lg:w-5 lg:h-5" />
                         </div>
                         <div>
@@ -204,7 +204,7 @@ export const ToolContainer = memo(({
                             <div className="relative group/tool">
                                 <div className={cn(
                                     "absolute -inset-10 rounded-[4rem] blur-[120px] opacity-0 group-hover/tool:opacity-30 transition-opacity duration-1000 -z-10",
-                                    `bg-${accentColor}-500/20`
+                                    categoryAccents[category]
                                 )} />
                                 <Card className="bg-zinc-900 border-zinc-800/80 rounded-[3rem] border shadow-[0_0_150px_rgba(0,0,0,0.9)] overflow-hidden backdrop-blur-3xl transition-all duration-700 group-hover/tool:border-zinc-700/50">
                                     {children}

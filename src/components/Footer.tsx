@@ -4,7 +4,8 @@
  * The structural anchor for the application.
  * Provides deep-link navigation and security reassurance.
  * 
- * Performance: Optimized (Memoized hierarchy)
+ * Logic: Hierarchical Link Registration
+ * Performance: High (Memoized Registry)
  * Aesthetics: Zero-Weight / Technical-Premium
  */
 
@@ -23,7 +24,10 @@ export const Footer = memo(() => {
     // ✨ HOOKS
     const t = useTranslations('HomePage');
 
-    // 📂 FOOTER NAVIGATION REGISTRY
+    /**
+     * 📂 Footer Navigation Registry
+     * Memoized to prevent hierarchical rebuilds during viewport resizing.
+     */
     const sections = useMemo(() => [
         {
             title: t('footer.services'),

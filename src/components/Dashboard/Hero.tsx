@@ -4,7 +4,8 @@
  * The high-fidelity entry point for the application.
  * Features kinetic typography and deep-space atmospheric lighting.
  * 
- * Performance: Optimized (Static Memoization)
+ * Logic: Atmospheric Motion Node
+ * Performance: High (Static Memoization)
  * Aesthetics: Ultra-Premium / Kinetic-Italic
  */
 
@@ -21,6 +22,7 @@ import { Link } from '@/i18n/routing';
  * First-impression generator for PrivaFlow.
  */
 export const Hero = memo(() => {
+    // ✨ HOOKS
     const t = useTranslations('HomePage');
 
     return (
