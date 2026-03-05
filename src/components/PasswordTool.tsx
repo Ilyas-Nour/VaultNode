@@ -124,8 +124,8 @@ const PasswordTool = memo(() => {
                     {/* 🎚️ PARAMETER CONTROL */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{t('length')}</span>
-                            <span className="text-[10px] font-black text-emerald-500">{length[0]}</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('length')}</span>
+                            <span className="text-sm font-black text-emerald-500 tabular-nums">{length[0]}</span>
                         </div>
                         <Slider
                             value={length}
@@ -133,46 +133,46 @@ const PasswordTool = memo(() => {
                             min={8}
                             max={128}
                             step={1}
-                            className="py-4"
+                            className="py-6"
                         />
                     </div>
 
                     {/* 🔘 TOGGLE GRID */}
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 gap-2.5">
                         {[
                             { id: 'upper', label: t('uppercase'), state: useUpper, setter: setUseUpper },
                             { id: 'lower', label: t('lowercase'), state: useLower, setter: setUseLower },
                             { id: 'numbers', label: t('numbers'), state: useNumbers, setter: setUseNumbers },
                             { id: 'symbols', label: t('symbols'), state: useSymbols, setter: setUseSymbols },
                         ].map((toggle) => (
-                            <label key={toggle.id} className="flex items-center gap-3 p-3 rounded-xl border border-zinc-900 bg-zinc-900/20 cursor-pointer hover:border-zinc-800 transition-colors">
+                            <label key={toggle.id} className="flex items-center gap-3.5 p-3.5 rounded-2xl border border-zinc-900 bg-zinc-900/20 cursor-pointer hover:border-zinc-800 transition-all hover:bg-zinc-900/40 group">
                                 <input
                                     type="checkbox"
                                     checked={toggle.state}
                                     onChange={(e) => toggle.setter(e.target.checked)}
                                     className="peer sr-only"
                                 />
-                                <div className="w-4 h-4 rounded border border-zinc-700 peer-checked:bg-emerald-500 peer-checked:border-emerald-500 transition-colors flex items-center justify-center">
-                                    <CheckCircle2 className="w-3 h-3 text-emerald-950 opacity-0 peer-checked:opacity-100 transition-opacity" />
+                                <div className="w-5 h-5 rounded-lg border border-zinc-700 peer-checked:bg-emerald-500 peer-checked:border-emerald-500 transition-all flex items-center justify-center shadow-inner group-hover:scale-110">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-950 opacity-0 peer-checked:opacity-100 transition-opacity" />
                                 </div>
-                                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 peer-checked:text-white transition-colors">{toggle.label}</span>
+                                <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 peer-checked:text-white transition-colors italic">{toggle.label}</span>
                             </label>
                         ))}
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3.5 pt-4">
                         <Button
                             onClick={handleCopy}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {copied ? <CheckCircle2 className="w-4 h-4 me-2" /> : <Copy className="w-4 h-4 me-2" />}
+                            {copied ? <CheckCircle2 className="w-5 h-5 me-2" /> : <Copy className="w-5 h-5 me-2" />}
                             {copied ? t('copied') : t('copy')}
                         </Button>
                         <Button
                             variant="outline"
                             onClick={generatePassword}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
                         >
                             <RefreshCcw className="w-4 h-4 me-2" />
                             {t('generateNew')}
@@ -180,12 +180,12 @@ const PasswordTool = memo(() => {
                     </div>
 
                     {/* 🧪 SECURITY REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Local Entropy</span>
+                            <Shield className="w-4 h-4" />
+                            <span className="text-[11px] font-black uppercase tracking-widest">Local Entropy</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
                             Generated via window.crypto.getRandomValues.
                             The result is never stored outside your screen.
                         </p>
@@ -194,53 +194,55 @@ const PasswordTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="flex flex-col items-center justify-center p-6 md:p-12 h-full min-h-[450px]">
-                <div className="w-full max-w-2xl bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-12 relative overflow-hidden flex flex-col items-center justify-center shadow-2xl group">
-                    <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-5 pointer-events-none" />
+            <div className="flex flex-col items-center justify-center p-6 md:p-12 h-full min-h-[420px]">
+                <div className="w-full max-w-2xl bg-zinc-950 border border-zinc-800/50 rounded-[3rem] p-10 relative overflow-hidden flex flex-col items-center justify-center shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] group backdrop-blur-3xl">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50" />
 
                     {/* 🖼️ CIPHER DISPLAY */}
-                    <div className="z-10 w-full space-y-12 text-center">
+                    <div className="z-10 w-full space-y-10 text-center">
                         <motion.div
                             key={password}
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
                             className="relative"
                         >
                             <div
                                 onClick={handleCopy}
-                                className="text-2xl sm:text-4xl md:text-5xl font-mono text-emerald-500 tracking-[0.1em] break-all px-4 cursor-pointer hover:scale-[1.02] transition-transform active:scale-95 py-8"
+                                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-mono text-emerald-500 tracking-[0.1em] break-all px-6 cursor-pointer hover:scale-[1.02] transition-all active:scale-95 py-10 selection:bg-emerald-500/20 drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                             >
                                 {password || "..."}
                             </div>
-                            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-widest text-zinc-600 opacity-60 italic">
+                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 bg-zinc-900/50 backdrop-blur-md rounded-full border border-zinc-800/80 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 opacity-60 italic group-hover:opacity-100 transition-all group-hover:bg-zinc-900">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 animate-pulse" />
                                 Click to Copy to Buffer
                             </div>
                         </motion.div>
 
                         {/* 📟 METRIC HUB */}
-                        <div className="flex items-center justify-center gap-4">
+                        <div className="flex items-center justify-center gap-6 pt-4">
                             <div className={cn(
-                                "inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all",
-                                security.bg, security.border, security.color
+                                "inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all shadow-xl backdrop-blur-xl border border-white/5",
+                                security.bg, security.color, "hover:scale-105"
                             )}>
-                                <security.icon className="w-4 h-4" />
+                                <security.icon className="w-4 h-4 shadow-[0_0_10px_currentColor]" />
                                 <span>{security.label} STATUS</span>
                             </div>
-                            <div className="px-6 py-3 bg-zinc-950 border border-zinc-800 rounded-2xl text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">
+                            <div className="px-8 py-3.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-[11px] font-black uppercase tracking-[0.15em] text-zinc-400 italic shadow-xl backdrop-blur-xl transition-all hover:scale-105 border-white/5 tabular-nums">
                                 {length[0]} BITS
                             </div>
                         </div>
                     </div>
 
                     {/* 🛸 STATUS BEACONS */}
-                    <div className="absolute bottom-8 flex items-center gap-6 opacity-20 group-hover:opacity-40 transition-opacity">
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="text-[8px] font-black text-white uppercase">Active Cipher</span>
+                    <div className="absolute bottom-10 flex items-center gap-8 opacity-20 group-hover:opacity-60 transition-all duration-700">
+                        <div className="flex items-center gap-2.5">
+                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">Active Cipher</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse delay-75" />
-                            <span className="text-[8px] font-black text-white uppercase">Vault Guard</span>
+                        <div className="w-px h-3 bg-zinc-800" />
+                        <div className="flex items-center gap-2.5">
+                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse delay-300 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">Vault Guard</span>
                         </div>
                     </div>
                 </div>

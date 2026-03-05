@@ -124,23 +124,23 @@
             "desc": "We built this because we believe your files should stay yours. No cost, no tricks, just privacy.",
             "button": "Start Using Tools (Free)"
         },
-        "mergeDropDesc": "Select files from your computer to put them together.",
-        "mergeButton": "Combine Files",
-        "localOnly": "Stays on your screen",
+        "mergeDropDesc": "Select your PDF documents to combine them into a single file.",
+        "mergeButton": "Merge Documents",
+        "localOnly": "100% Client-Side",
         "howItWorks": {
-            "title": "How it Works",
-            "subtitle": "A simple story of safety",
+            "title": "Industrial Workspace",
+            "subtitle": "A sanctuary for high-stakes privacy.",
             "step1": {
-                "title": "Pick a File",
-                "desc": "Select the document or photo you want to fix."
+                "title": "Stage Your Files",
+                "desc": "Select the documents or media you want to transform."
             },
             "step2": {
-                "title": "Fix it Privately",
-                "desc": "Our website works like a magic tool inside your screen. Your file never travels over the internet."
+                "title": "Local Synthesis",
+                "desc": "Our engine reconstructs your data inside a secure sandbox on your hardware. No bit ever leaves your machine."
             },
             "step3": {
-                "title": "Save it Back",
-                "desc": "Download your finished file. Since it never left your device, nobody else ever saw it."
+                "title": "Secure Export",
+                "desc": "Download your finished work. The sandbox is wiped clean the second you close the tab."
             }
         },
         "footer": {
@@ -178,7 +178,7 @@
             "title": "Hide Faces",
             "description": "Blur parts of your photo locally."
         },
-        "clean-exif": {
+        "cleanExif": {
             "title": "Clean Photo Info",
             "description": "Remove hidden map and details."
         },
@@ -241,142 +241,158 @@
         },
         "redact": {
             "title": "Hide Private Info",
-            "description": "Cover secrets in a document.",
-            "titleHighlight": "Hide Private Info",
-            "dropTitle": "Drop Your File Here",
-            "dropDesc": "Pick a file to start hiding secret details.",
-            "flattening": "Securing Your File...",
-            "secureExport": "Save Secure Copy",
-            "clearAll": "Start Over",
-            "initializing": "Waking up the Safety Shield..."
+            "description": "Black out sensitive details from your documents forever.",
+            "titleHighlight": "Secure Redaction",
+            "dropTitle": "Drop your document here to start hiding secrets.",
+            "dropDesc": "We'll help you paint over confidential information privately.",
+            "flattening": "Hardening the document layer...",
+            "secureExport": "Save Shielded Copy",
+            "clearAll": "Wipe Workspace",
+            "initializing": "Activating the Privacy Shield..."
         },
         "unlockPdf": {
             "title": "Unlock a File",
-            "description": "Remove passwords from your files.",
-            "titleHighlight": "Unlock Your File",
-            "dropTitle": "Drop Locked File",
-            "dropDesc": "Select the file you want to unlock.",
-            "unlocking": "Opening the Lock...",
-            "unlockBtn": "Unlock Now",
-            "successTitle": "Unlocked!",
-            "successDesc": "Your file is now free and open.",
-            "downloadBtn": "Download Unlocked File",
-            "passwordLabel": "Enter Password",
-            "passwordPlaceholder": "Type password here..."
+            "description": "Unlock a password-protected PDF file instantly.",
+            "titleHighlight": "Access Decryptor",
+            "dropTitle": "Drop your locked file here.",
+            "dropDesc": "We'll open it up so you can access your data safely.",
+            "unlocking": "Bypassing the shell lock...",
+            "unlockBtn": "Unlock Document",
+            "successTitle": "Access Granted!",
+            "successDesc": "Your file is now completely open and ready for use.",
+            "downloadBtn": "Save Unlocked Copy",
+            "passwordLabel": "Security Key",
+            "passwordPlaceholder": "Type the file's password..."
         },
         "svgToPng": {
-            "title": "Fix Logos",
-            "description": "Turn designer drawings into images.",
-            "titleHighlight": "Logo Maker Fix",
-            "dropTitle": "Drop Your Logo",
-            "dropDesc": "Select a designer drawing to turn into a photo.",
-            "processing": "Polishing the Pixels...",
-            "convertBtn": "Turn into Photo (PNG)"
+            "title": "Logo Converter",
+            "description": "Turn designer vector drawings into high-quality photos.",
+            "titleHighlight": "Vector to Raster",
+            "dropTitle": "Drop your SVG logo here.",
+            "dropDesc": "We'll turn it into a standard PNG photo instantly.",
+            "processing": "Rasterizing digital paths...",
+            "convertBtn": "Generate PNG Photo"
         },
         "pdfToImg": {
             "title": "File to Pictures",
-            "description": "Turn pages into image files.",
-            "titleHighlight": "Turn File into Pictures",
-            "dropTitle": "Drop Your File Here",
-            "dropDesc": "We'll turn every page into a separate picture.",
-            "processing": "Taking Pictures...",
-            "convertPages": "Turn into Pictures",
-            "initializing": "Preparing the Camera..."
+            "description": "Turn every page of your PDF into high-quality image files.",
+            "titleHighlight": "Page Snapshots",
+            "dropTitle": "Drop your PDF file here.",
+            "dropDesc": "We'll capture every page as a high-fidelity photo.",
+            "processing": "Capturing page buffers...",
+            "convertPages": "Convert to Gallery",
+            "initializing": "Calibrating the virtual camera..."
         },
         "pdfToDocx": {
             "title": "File to Word",
-            "description": "Turn files into documents you can edit.",
-            "titleHighlight": "File to Word",
-            "dropTitle": "Drop Your File Here",
-            "dropDesc": "Change your file into one you can type in.",
-            "readingPdf": "Reading the Paper...",
-            "extractingText": "Picking up the Letters...",
-            "processingPage": "Fixing Page",
-            "buildingWord": "Writing the Word File...",
-            "errorDesc": "Oops! We couldn't read this one. Make sure it's not locked.",
-            "processing": "Working...",
-            "downloadBtn": "Download Word File"
+            "description": "Convert your PDF into an editable Word document.",
+            "titleHighlight": "Document Resurrector",
+            "dropTitle": "Drop your PDF here to edit it.",
+            "dropDesc": "We'll reconstruct the text so you can type and fix things.",
+            "readingPdf": "Analyzing document structure...",
+            "extractingText": "Harvesting textual data...",
+            "processingPage": "Rebuilding Page",
+            "buildingWord": "Synthesizing Word structure...",
+            "errorDesc": "Synthesis failed. Please ensure the file isn't encrypted.",
+            "processing": "Processing text layers...",
+            "downloadBtn": "Save Word Document"
         },
         "password": {
-            "title": "Create Strong Codes",
-            "description": "Make secure codes only you know.",
-            "titleHighlight": "Safe Code Maker",
-            "weak": "Weak",
-            "medium": "Medium",
-            "strong": "Strong",
-            "alien": "Alien",
-            "length": "How Long?",
-            "uppercase": "Capital Letters",
-            "lowercase": "Lowercase",
-            "numbers": "Numbers",
-            "symbols": "Symbols",
-            "copied": "Copied!",
-            "copy": "Copy to Screen",
-            "generateNew": "Make New One"
+            "title": "Secure Code Generator",
+            "description": "Generate industrial-grade passwords that only you can know.",
+            "titleHighlight": "Entropy Engine",
+            "weak": "Vulnerable",
+            "medium": "Standard",
+            "strong": "Elite",
+            "alien": "Industrial",
+            "length": "Bit Length / Character Count",
+            "uppercase": "Include Capitals",
+            "lowercase": "Include Lowercase",
+            "numbers": "Include Numbers",
+            "symbols": "Include Special Symbols",
+            "copied": "Copied to Clipboard!",
+            "copy": "Copy Secure Code",
+            "generateNew": "Re-generate"
         },
         "mediaConverter": {
             "title": "Video & Music Fixer",
-            "description": "Change video or music file types.",
-            "titleHighlight": "Video & Music Fixer",
-            "dropTitle": "Drop File Here",
-            "dropDesc": "Pick a video or music file to fix.",
-            "processing": "Fixing the File...",
-            "downloadBtn": "Save Fixed File",
-            "targetFormat": "Choose New Type"
+            "description": "Change video or music files so they play perfectly on any device.",
+            "titleHighlight": "Format Transcoder",
+            "dropTitle": "Drop your media file here.",
+            "dropDesc": "We'll fix the format so it works everywhere.",
+            "processing": "Recoding bitstream data...",
+            "downloadBtn": "Save Fixed Media",
+            "targetFormat": "Select Output Type"
         },
         "compress": {
-            "title": "Shrink Heavy Photos",
-            "description": "Make big files small so they send faster.",
-            "titleHighlight": "Shrink Heavy Photos",
-            "dropTitle": "Drop Photo Here",
-            "dropDesc": "Pick a photo to shrink it safely.",
-            "aggressive": "Very Small",
-            "balanced": "Look Best",
-            "downloadSecurely": "Save Smaller Photo",
-            "processing": "Shrinking..."
+            "title": "Image Asset Optimizer",
+            "description": "Reduce file size while preserving professional visual fidelity.",
+            "titleHighlight": "Pixel Shrinker",
+            "dropTitle": "Drop your heavy image here.",
+            "dropDesc": "We'll optimize the file size without sacrificing quality.",
+            "aggressive": "Max Compression",
+            "balanced": "High Fidelity",
+            "downloadSecurely": "Save Optimized Asset",
+            "processing": "Optimizing image clusters..."
         },
         "heicToJpg": {
-            "title": "Fix iPhone Pictures",
-            "description": "Make iPhone pictures work on any computer without special apps.",
-            "titleHighlight": "Fix iPhone Pictures",
-            "dropTitle": "Drop iPhone Picture",
-            "dropDesc": "Pick an iPhone picture to make it work everywhere.",
-            "processing": "Fixing the Photo...",
+            "title": "iPhone Asset Fixer",
+            "description": "Convert iPhone HEIC files into high-compatibility JPG photos.",
+            "titleHighlight": "HEIC Transcoder",
+            "dropTitle": "Drop your iPhone photo here.",
+            "dropDesc": "We'll turn it into a standard photo that works everywhere.",
+            "processing": "Converting to JPG catalog...",
             "downloadBtn": "Save Standard Photo"
         },
         "cleanExif": {
-            "title": "Clean a Photo",
-            "description": "Remove the 'hidden map' from your pictures.",
-            "titleHighlight": "Clean a Photo",
-            "dropTitle": "Drop Photo Here",
-            "dropDesc": "Pick a photo to wipe away hidden details.",
-            "cleaning": "Wiping Clean...",
-            "cleanBtn": "Clean My Photo",
-            "downloadBtn": "Save Clean Photo"
+            "title": "Metadata Scrubber",
+            "description": "Wipe away the 'hidden map' and private tracking data from your pictures.",
+            "titleHighlight": "Privacy Sanitizer",
+            "dropTitle": "Drop your photo here to sanitize it.",
+            "dropDesc": "We'll reconstruct the image on a clean canvas to wipe all metadata.",
+            "cleaning": "Sanitizing image layers...",
+            "scrubbing": "Scrubbing EXIF metadata...",
+            "cleanBtn": "Start Sanitization",
+            "downloadBtn": "Save Sanitized Asset",
+            "downloadClean": "Save Sanitized Asset",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Image",
+                    "desc": "Choose the photo you want to sanitize."
+                },
+                "step2": {
+                    "title": "Metadata Scrubbing",
+                    "desc": "Our engine reconstructs the image on a clean canvas to wipe all EXIF data."
+                },
+                "step3": {
+                    "title": "Secure Export",
+                    "desc": "Download your fully anonymous photo safely."
+                }
+            }
         },
         "encrypt": {
-            "title": "Secret Message Maker",
-            "description": "Lock your writing with a code.",
+            "title": "Secure Note Encryption",
+            "description": "Lock your private writing inside a cryptographic vault only you can open.",
             "titleHighlight": "Secret Message Maker",
-            "inputText": "Your Private Writing",
+            "inputText": "Raw Text Node",
             "inputPlaceholder": "Type your secret message here...",
-            "passwordLabel": "Secret Key",
+            "passwordLabel": "Encryption Key",
             "passwordPlaceholder": "Type a key only you know...",
             "encryptBtn": "Lock Message",
             "decryptBtn": "Unlock Message",
-            "resultLabel": "The Secret Code",
-            "copyBtn": "Copy Code",
-            "copied": "Copied!"
+            "resultLabel": "Encrypted Payload",
+            "copyBtn": "Copy Payload",
+            "copied": "Payload Copied!"
         },
         "blur": {
-            "title": "Hide Parts of a Photo",
-            "description": "Hide faces or private things in your pictures.",
-            "titleHighlight": "Hide Parts of a Photo",
-            "dropDesc": "Pick a photo to hide faces or private things.",
-            "processing": "Adding the Magic Blur...",
-            "downloadBtn": "Save Small Blurred Photo",
-            "clearAll": "Start Over",
-            "dropTitle": "Drop Photo Here"
+            "title": "Visual Privacy Blur",
+            "description": "Hide faces or sensitive objects in your pictures with a magic brush.",
+            "titleHighlight": "Aesthetic Blur",
+            "dropTitle": "Drop your photo here.",
+            "dropDesc": "We'll help you hide faces or private details with a magic brush.",
+            "processing": "Applying privacy blur...",
+            "downloadBtn": "Save Blurred Image",
+            "clearAll": "Wipe Canvas"
         }
     }
 }

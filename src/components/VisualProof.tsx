@@ -1,137 +1,419 @@
-/**
- * 🎨 PRIVAFLOW | Visual Proof Engine
- * ---------------------------------------------------------
- * A structural visualization layer that demonstrates 
- * "Before vs After" document and media transformations. 
- * Orchestrates localized mockups using CSS-first 
- * rendering to ensure privacy-safe demonstrations.
- * 
- * Logic: Polymorphic Mockup Orchestration
- * Performance: High (Memoized Sub-renderers & Logic)
- * Aesthetics: Media-Industrial / Emerald-Dark
- */
-
 "use client";
 
-import React, { memo, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import {
-    Lock,
-    Unlock,
-    Shield,
-    FileText,
-    Image as ImageIcon,
-    ArrowRight,
-    MapPin,
-    Calendar,
-    Eye,
-    RefreshCw
-} from 'lucide-react';
+import React, { memo } from 'react';
+import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useLocale } from 'next-intl';
 
-// --- INDUSTRIAL SUB-RENDERERS (Memoized for Atomic Speed) ---
+// ─── Image-backed sub-renderers ───────────────────────────────────────────────
 
-/**
- * 📄 RedactorProof Sub-renderer
- * Visualizes sensitive data blackboarding patterns.
- */
 const RedactorProof = memo(({ type }: { type: 'before' | 'after' }) => (
-    <div className="relative w-full h-full bg-white rounded-lg p-6 shadow-sm flex flex-col gap-4 overflow-hidden">
-        <div className="space-y-3">
-            <div className="h-3 w-3/4 bg-zinc-100 rounded" />
-            <div className="h-3 w-full bg-zinc-100 rounded" />
-            <div className="relative group/text">
-                <div className="h-3 w-1/2 bg-zinc-100 rounded" />
-                <span className={cn(
-                    "absolute top-0 left-0 h-3 bg-emerald-500/20 px-2 text-[8px] font-black text-emerald-950 rounded flex items-center transition-all duration-700",
-                    type === 'after' && "bg-black opacity-100 w-full text-transparent"
-                )}>
-                    {type === 'before' ? "NAME: JOHN DOE" : ""}
-                </span>
-            </div>
-            <div className="h-3 w-full bg-zinc-100 rounded" />
-            <div className="relative">
-                <div className="h-3 w-2/3 bg-zinc-100 rounded" />
-                <span className={cn(
-                    "absolute top-0 left-0 h-3 bg-emerald-500/20 px-2 text-[8px] font-black text-emerald-950 rounded flex items-center transition-all duration-700 delay-100",
-                    type === 'after' && "bg-black opacity-100 w-3/4 text-transparent"
-                )}>
-                    {type === 'before' ? "PHONE: 555-0199" : ""}
-                </span>
-            </div>
-        </div>
-        <div className="mt-auto flex justify-between items-center">
-            <div className="w-10 h-12 bg-zinc-50 border border-zinc-100 rounded flex items-center justify-center text-[12px] font-black text-zinc-300">ID</div>
-            <div className="w-16 h-4 bg-zinc-100 rounded" />
-        </div>
+    <div
+        className="w-full h-full bg-cover bg-center bg-no-repeat"
+        style={{
+            backgroundImage: `url('${type === 'before'
+                ? '/confidential_document_before_1772656258732.png'
+                : '/confidential_document_after_1772656279868.png'}')`
+        }}
+    >
+        <Label text={type === 'before' ? 'Raw Document' : 'Secured Asset'} type={type} />
     </div>
 ));
 RedactorProof.displayName = 'RedactorProof';
 
-/**
- * 🖼️ ImageProof Sub-renderer
- * Visualizes asset optimization and metadata scaling.
- */
-const ImageProof = memo(({ type, url, beforeLabel, afterLabel }: { type: 'before' | 'after', url: string, beforeLabel: string, afterLabel: string }) => (
-    <div className="relative w-full h-full rounded-lg overflow-hidden group/photo">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${url}')` }} />
-        <div className="absolute inset-0 bg-black/20" />
-        <div className={cn(
-            "absolute top-4 right-4 px-3 py-1.5 rounded-full backdrop-blur-md border font-black text-[10px] uppercase tracking-widest transition-all duration-700",
-            type === 'before' ? "bg-red-500/20 border-red-500/40 text-red-100" : "bg-emerald-500/20 border-emerald-500/40 text-emerald-100 scale-110"
-        )}>
-            {type === 'before' ? beforeLabel : afterLabel}
-        </div>
-        <div className="absolute bottom-4 left-4 flex items-center gap-2">
-            <div className="w-6 h-6 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center">
-                <ImageIcon className="w-3 h-3 text-white" />
-            </div>
-            <span className="text-[8px] font-black text-white uppercase tracking-tighter shadow-sm">
-                {type === 'after' ? "100% QUALITY KEPT" : "UNOPTIMIZED RAW"}
-            </span>
-        </div>
+const ImageProof = memo(({ type, url, beforeLabel, afterLabel }: {
+    type: 'before' | 'after'; url: string; beforeLabel: string; afterLabel: string;
+}) => (
+    <div className="w-full h-full bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${url}')` }}>
+        <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
     </div>
 ));
 ImageProof.displayName = 'ImageProof';
 
-/**
- * 🔐 UnlockProof Sub-renderer
- * Visualizes cryptographic state transitions.
- */
-const UnlockProof = memo(({ type }: { type: 'before' | 'after' }) => (
-    <div className="relative w-full h-full bg-white rounded-lg p-4 shadow-sm flex flex-col gap-3 overflow-hidden">
-        <div className={cn("space-y-3 transition-all duration-1000", type === 'before' && "blur-[6px] opacity-40")}>
-            <div className="h-3 w-1/4 bg-zinc-200 rounded" />
-            <div className="space-y-2">
-                <div className="h-2 w-full bg-zinc-100 rounded" />
-                <div className="h-2 w-full bg-zinc-100 rounded" />
-                <div className="h-2 w-3/4 bg-zinc-100 rounded" />
+const CleanExifProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full flex items-center justify-center bg-zinc-950">
+        <img
+            src={type === 'before' ? '/clean_exif_before_1772656297208.png' : '/clean_exif_after_1772656317043.png'}
+            className="w-full h-full object-contain"
+            alt={type === 'before' ? 'Before EXIF cleaning' : 'After EXIF cleaning'}
+        />
+        <Label text={type === 'before' ? 'Raw EXIF Data' : 'Clean & Private'} type={type} />
+    </div>
+));
+CleanExifProof.displayName = 'CleanExifProof';
+
+const BlurProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full flex items-center justify-center bg-zinc-950">
+        <img
+            src={type === 'before' ? '/blur_after_1772656353991.png' : '/blur_before_1772656334995.png'}
+            className="w-full h-full object-contain"
+            alt={type === 'before' ? 'Blurry image' : 'Sharp clear image'}
+        />
+        <Label text={type === 'before' ? 'Blurry / Low Quality' : 'Sharp & Clear'} type={type} />
+    </div>
+));
+BlurProof.displayName = 'BlurProof';
+
+// ─── CSS-based mockups ────────────────────────────────────────────────────────
+
+/** Encrypt: plaintext → cipher text */
+const EncryptProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex flex-col gap-4 p-8 font-mono text-sm">
+        <Label text={type === 'before' ? 'Plain Text' : 'AES-256 Encrypted'} type={type} />
+        {type === 'before' ? (
+            <div className="space-y-2 mt-8">
+                <div className="text-zinc-300 text-xs leading-relaxed">
+                    <span className="text-zinc-600">To: </span>alice@example.com
+                </div>
+                <div className="text-zinc-300 text-xs leading-relaxed">
+                    <span className="text-zinc-600">Subject: </span>Contract Details
+                </div>
+                <hr className="border-zinc-800 my-3" />
+                <p className="text-zinc-200 text-xs leading-loose">
+                    Hi Alice,<br />
+                    Please find the account number:<br />
+                    <span className="text-white font-bold">ACCT: 4829-0011-3847-0293</span><br />
+                    Password: <span className="text-white font-bold">Sunf1ower#99</span>
+                </p>
             </div>
-            <div className="h-20 w-full bg-zinc-50 border border-zinc-100 rounded-xl" />
-        </div>
-        <div className="absolute inset-0 flex items-center justify-center">
+        ) : (
+            <div className="space-y-3 mt-8">
+                <div className="text-[10px] text-zinc-600 uppercase tracking-widest">AES-256-GCM · IV attached</div>
+                <div className="bg-zinc-900 border border-zinc-800 rounded p-4 break-all text-[10px] text-emerald-400 leading-relaxed font-mono">
+                    U2FsdGVkX1+mK9vXzT2qR8bN3cWpL7sH<br />
+                    4eA1YdFvGs6JtPw0lQrZ9uMxCk8nVhOi<br />
+                    XbD2EyR5TsW3aF7gJ6cN4pKmHqUvBeLw<br />
+                    <span className="text-zinc-600">···</span>
+                </div>
+                <div className="flex items-center gap-2 text-[10px] text-emerald-500">
+                    <Lock className="w-3 h-3" />
+                    <span>Decryptable only with your key</span>
+                </div>
+            </div>
+        )}
+    </div>
+));
+EncryptProof.displayName = 'EncryptProof';
+
+/** Password: weak → strong entropy */
+const PasswordProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center gap-6 p-8">
+        <Label text={type === 'before' ? 'Weak Password' : 'Entropy-Hardened'} type={type} />
+        {type === 'before' ? (
+            <div className="space-y-5 w-full max-w-xs">
+                <div className="space-y-2">
+                    {['password123', 'abc123', 'iloveyou'].map((p, i) => (
+                        <div key={i} className="flex items-center gap-3 bg-zinc-900 border border-zinc-800 px-4 py-2.5">
+                            <Key className="w-3.5 h-3.5 text-zinc-600" />
+                            <span className="text-zinc-400 font-mono text-sm">{p}</span>
+                            <span className="ml-auto text-[9px] text-red-500 uppercase tracking-widest">Weak</span>
+                        </div>
+                    ))}
+                </div>
+                <div className="w-full bg-zinc-900 h-1.5">
+                    <div className="bg-red-500 h-full" style={{ width: '15%' }} />
+                </div>
+                <p className="text-zinc-600 text-[10px] uppercase tracking-widest text-center">Crackable in &lt; 1 second</p>
+            </div>
+        ) : (
+            <div className="space-y-5 w-full max-w-xs">
+                <div className="space-y-2">
+                    {['Qx#7mK$2pL!vR9', 'bN@5zW$3jF&8cT', 'rV!4hY#6nS$2kP'].map((p, i) => (
+                        <div key={i} className="flex items-center gap-3 bg-zinc-900 border border-zinc-800 px-4 py-2.5">
+                            <Key className="w-3.5 h-3.5 text-emerald-500" />
+                            <span className="text-emerald-300 font-mono text-sm tracking-wider">{p}</span>
+                        </div>
+                    ))}
+                </div>
+                <div className="w-full bg-zinc-900 h-1.5">
+                    <div className="bg-emerald-500 h-full w-full" />
+                </div>
+                <p className="text-emerald-600 text-[10px] uppercase tracking-widest text-center">128-bit entropy · Zero patterns</p>
+            </div>
+        )}
+    </div>
+));
+PasswordProof.displayName = 'PasswordProof';
+
+/** PDF Merge: multiple files → single file */
+const MergeProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8 gap-6">
+        <Label text={type === 'before' ? '3 Separate Files' : '1 Merged Document'} type={type} />
+        {type === 'before' ? (
+            <div className="flex flex-col gap-3 mt-8">
+                {['Contract_p1.pdf', 'Exhibit_A.pdf', 'Signatures.pdf'].map((f, i) => (
+                    <div key={i} className="flex items-center gap-3 bg-zinc-900 border border-zinc-800 px-5 py-3 w-52">
+                        <FileText className="w-4 h-4 text-zinc-500" />
+                        <span className="text-zinc-300 text-xs font-mono">{f}</span>
+                    </div>
+                ))}
+            </div>
+        ) : (
+            <div className="flex flex-col items-center gap-4 mt-8">
+                <div className="relative">
+                    <div className="absolute -top-2 -left-2 w-48 h-60 bg-zinc-800 border border-zinc-700" />
+                    <div className="absolute -top-1 -left-1 w-48 h-60 bg-zinc-850 border border-zinc-700" />
+                    <div className="relative w-48 h-60 bg-zinc-900 border border-zinc-700 flex flex-col items-center justify-center gap-3">
+                        <FilePlus className="w-8 h-8 text-emerald-500" />
+                        <span className="text-emerald-400 font-mono text-xs">Full_Document.pdf</span>
+                        <span className="text-zinc-600 text-[10px]">3 files merged</span>
+                    </div>
+                </div>
+            </div>
+        )}
+    </div>
+));
+MergeProof.displayName = 'MergeProof';
+
+/** HEIC → JPG */
+const HeicProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8 gap-8">
+        <Label text={type === 'before' ? 'HEIC (Apple Format)' : 'Universal JPEG'} type={type} />
+        <div className="flex flex-col items-center gap-5 mt-8">
             <div className={cn(
-                "w-16 h-16 rounded-3xl flex items-center justify-center transition-all duration-700 shadow-2xl",
-                type === 'before' ? "bg-red-500 text-white rotate-0" : "bg-emerald-500 text-emerald-950 scale-0 opacity-0 -rotate-12"
+                "w-44 h-44 border-2 flex flex-col items-center justify-center gap-3",
+                type === 'before' ? "border-zinc-700 bg-zinc-900" : "border-emerald-500/30 bg-zinc-900"
             )}>
-                <Lock className="w-8 h-8" />
+                <Image className={cn("w-10 h-10", type === 'before' ? "text-zinc-600" : "text-emerald-500")} />
+                <span className={cn("font-mono text-xs font-bold", type === 'before' ? "text-zinc-500" : "text-emerald-400")}>
+                    {type === 'before' ? 'IMG_4928.HEIC' : 'IMG_4928.jpg'}
+                </span>
+                <span className="text-zinc-600 text-[10px]">
+                    {type === 'before' ? '3.2 MB · Apple only' : '1.8 MB · Universal'}
+                </span>
             </div>
+            {type === 'before' ? (
+                <div className="text-[10px] text-zinc-600 uppercase tracking-widest text-center">
+                    ✗ Won&apos;t open on Windows<br />✗ Won&apos;t open on Android
+                </div>
+            ) : (
+                <div className="text-[10px] text-emerald-600 uppercase tracking-widest text-center">
+                    ✓ Opens everywhere<br />✓ Web compatible
+                </div>
+            )}
+        </div>
+    </div>
+));
+HeicProof.displayName = 'HeicProof';
+
+/** Unlock PDF */
+const UnlockProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center gap-6 p-8">
+        <Label text={type === 'before' ? 'Password Protected' : 'Unlocked & Free'} type={type} />
+        <div className={cn(
+            "relative w-48 h-64 border-2 flex flex-col items-start p-4 gap-2 mt-4",
+            type === 'before' ? "border-zinc-700 bg-zinc-900" : "border-emerald-500/30 bg-zinc-900"
+        )}>
+            <div className="h-2 w-32 bg-zinc-800 rounded" />
+            <div className="h-2 w-full bg-zinc-800 rounded" />
+            <div className="h-2 w-full bg-zinc-800 rounded" />
+            {type === 'before' && (
+                <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-[2px] flex flex-col items-center justify-center gap-3">
+                    <div className="w-12 h-12 bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+                        <Lock className="w-6 h-6 text-zinc-400" />
+                    </div>
+                    <span className="text-zinc-500 text-[10px] uppercase tracking-widest">Password Required</span>
+                </div>
+            )}
             {type === 'after' && (
-                <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="w-16 h-16 rounded-3xl bg-emerald-500 flex items-center justify-center text-emerald-950 shadow-[0_0_40px_rgba(16,185,129,0.4)]"
-                >
-                    <Unlock className="w-8 h-8" />
-                </motion.div>
+                <>
+                    <div className="h-2 w-full bg-zinc-800 rounded" />
+                    <div className="h-2 w-3/4 bg-zinc-800 rounded" />
+                    <div className="h-20 w-full bg-zinc-800/40 border border-zinc-800 rounded mt-2" />
+                    <div className="mt-auto flex items-center gap-2 text-emerald-500">
+                        <Lock className="w-3 h-3" />
+                        <span className="text-[9px] uppercase tracking-widest">Restrictions Removed</span>
+                    </div>
+                </>
             )}
         </div>
     </div>
 ));
 UnlockProof.displayName = 'UnlockProof';
 
-// --- PROTOCOL INTERFACES ---
+/** SVG → PNG */
+const SvgToPngProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8">
+        <Label text={type === 'before' ? 'SVG Vector' : 'PNG Raster'} type={type} />
+        <div className="flex flex-col items-center gap-6 mt-8">
+            <div className={cn(
+                "w-48 h-48 border-2 flex items-center justify-center",
+                type === 'before' ? "border-zinc-700 bg-zinc-900" : "border-emerald-500/30 bg-zinc-900"
+            )}>
+                {type === 'before' ? (
+                    <div className="text-center space-y-2">
+                        <Code className="w-10 h-10 text-zinc-500 mx-auto" />
+                        <div className="font-mono text-[9px] text-zinc-600 text-left leading-relaxed px-4">
+                            {`<svg viewBox="0 0 24 24">`}<br />
+                            {`  <path d="M12 2L2`}<br />
+                            {`  22h20L12 2z"/>`}<br />
+                            {`</svg>`}
+                        </div>
+                    </div>
+                ) : (
+                    <div className="text-center space-y-2">
+                        <div className="w-20 h-20 mx-auto relative">
+                            <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#27272a_0px,#27272a_4px,#1c1c1e_4px,#1c1c1e_8px)]" />
+                            <div className="absolute inset-4 bg-emerald-500 clip-triangle" style={{
+                                clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
+                            }} />
+                        </div>
+                        <span className="text-emerald-400 font-mono text-[10px]">2048 × 2048 px</span>
+                    </div>
+                )}
+            </div>
+            <span className="text-zinc-600 text-[10px] uppercase tracking-widest">
+                {type === 'before' ? 'Vector markup — no pixels' : 'Pixel-perfect raster export'}
+            </span>
+        </div>
+    </div>
+));
+SvgToPngProof.displayName = 'SvgToPngProof';
+
+/** PDF → Word */
+const PdfToDocxProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8">
+        <Label text={type === 'before' ? 'Locked PDF' : 'Editable DOCX'} type={type} />
+        <div className="flex flex-col items-center gap-4 mt-8">
+            <div className={cn(
+                "w-44 h-56 border-2 flex flex-col p-3 gap-2",
+                type === 'before' ? "border-zinc-700 bg-zinc-900" : "border-emerald-500/30 bg-zinc-900"
+            )}>
+                <div className={cn("text-[10px] font-bold uppercase tracking-widest mb-2",
+                    type === 'before' ? "text-zinc-600" : "text-emerald-500")}>
+                    {type === 'before' ? 'report.pdf' : 'report.docx'}
+                </div>
+                {[100, 75, 100, 50, 85, 65].map((w, i) => (
+                    <div key={i} className={cn("h-1.5 rounded-sm", type === 'before' ? "bg-zinc-800" : "bg-zinc-700")}
+                        style={{ width: `${w}%` }} />
+                ))}
+                {type === 'before' ? (
+                    <div className="mt-auto flex items-center justify-center py-2 border border-zinc-800 text-zinc-600 text-[9px] uppercase tracking-widest gap-1">
+                        <Lock className="w-2.5 h-2.5" /> Read-only
+                    </div>
+                ) : (
+                    <div className="mt-auto flex items-center justify-center py-2 border border-emerald-500/30 text-emerald-500 text-[9px] uppercase tracking-widest gap-1">
+                        ✏️ Fully Editable
+                    </div>
+                )}
+            </div>
+        </div>
+    </div>
+));
+PdfToDocxProof.displayName = 'PdfToDocxProof';
+
+/** PDF → Images */
+const PdfToImgProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8">
+        <Label text={type === 'before' ? 'PDF Document' : 'PNG Pages'} type={type} />
+        {type === 'before' ? (
+            <div className="flex flex-col items-center gap-4 mt-8">
+                <div className="w-40 h-52 bg-zinc-900 border border-zinc-700 flex flex-col p-4 gap-2">
+                    <div className="h-2 w-full bg-zinc-800 rounded" />
+                    <div className="h-2 w-3/4 bg-zinc-800 rounded" />
+                    <div className="h-32 bg-zinc-800/40 border border-zinc-800 rounded mt-2" />
+                    <div className="h-2 w-full bg-zinc-800 rounded mt-2" />
+                </div>
+                <span className="text-zinc-600 text-[10px] uppercase tracking-widest">12-page document</span>
+            </div>
+        ) : (
+            <div className="flex flex-col items-center gap-4 mt-8">
+                <div className="flex gap-2">
+                    {[1, 2, 3].map((i) => (
+                        <div key={i} className="w-24 h-32 bg-zinc-900 border border-emerald-500/20 flex flex-col items-center justify-center gap-2">
+                            <Image className="w-5 h-5 text-emerald-500" />
+                            <span className="text-[9px] text-zinc-500 font-mono">page_{i}.png</span>
+                        </div>
+                    ))}
+                </div>
+                <span className="text-emerald-600 text-[10px] uppercase tracking-widest">High-res · Lossless</span>
+            </div>
+        )}
+    </div>
+));
+PdfToImgProof.displayName = 'PdfToImgProof';
+
+/** PDF Split */
+const PdfSplitProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8">
+        <Label text={type === 'before' ? 'Single PDF' : 'Split into Ranges'} type={type} />
+        {type === 'before' ? (
+            <div className="flex flex-col items-center gap-4 mt-8">
+                <div className="relative w-36 h-48">
+                    {[2, 1, 0].map(i => (
+                        <div key={i} className="absolute w-36 h-48 bg-zinc-900 border border-zinc-700"
+                            style={{ top: i * 4, left: i * 4 }}>
+                        </div>
+                    ))}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-zinc-500 text-xs font-mono">24 pages</span>
+                    </div>
+                </div>
+            </div>
+        ) : (
+            <div className="flex gap-3 mt-8">
+                {[
+                    { label: 'pp. 1–8', color: 'border-emerald-500/30 text-emerald-500' },
+                    { label: 'pp. 9–16', color: 'border-zinc-700 text-zinc-500' },
+                    { label: 'pp. 17–24', color: 'border-zinc-700 text-zinc-500' },
+                ].map((s, i) => (
+                    <div key={i} className={cn("w-24 h-32 bg-zinc-900 border-2 flex flex-col items-center justify-center gap-2", s.color)}>
+                        <Scissors className={cn("w-4 h-4", s.color.includes('emerald') ? 'text-emerald-500' : 'text-zinc-600')} />
+                        <span className={cn("text-[9px] font-mono text-center", s.color)}>{s.label}</span>
+                    </div>
+                ))}
+            </div>
+        )}
+    </div>
+));
+PdfSplitProof.displayName = 'PdfSplitProof';
+
+/** Media Converter */
+const MediaConverterProof = memo(({ type }: { type: 'before' | 'after' }) => (
+    <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-8">
+        <Label text={type === 'before' ? 'MP4 Video' : 'MP3 Audio'} type={type} />
+        <div className="flex flex-col items-center gap-6 mt-8">
+            {type === 'before' ? (
+                <div className="w-56 h-32 bg-zinc-900 border border-zinc-700 flex flex-col items-center justify-center gap-3">
+                    <Video className="w-8 h-8 text-zinc-500" />
+                    <span className="text-zinc-400 font-mono text-xs">interview.mp4 · 148 MB</span>
+                    <div className="flex gap-2 items-center">
+                        <div className="w-20 h-1 bg-zinc-700 rounded">
+                            <div className="w-8 h-1 bg-zinc-500 rounded" />
+                        </div>
+                        <span className="text-zinc-600 text-[9px]">2:34</span>
+                    </div>
+                </div>
+            ) : (
+                <div className="w-56 h-32 bg-zinc-900 border border-emerald-500/30 flex flex-col items-center justify-center gap-3">
+                    <div className="w-10 h-10 rounded-full border-2 border-emerald-500 flex items-center justify-center">
+                        <div className="w-4 h-4 rounded-full bg-emerald-500" />
+                    </div>
+                    <span className="text-emerald-400 font-mono text-xs">interview.mp3 · 3.2 MB</span>
+                    <div className="flex gap-1 items-end h-5">
+                        {[3, 6, 4, 8, 5, 7, 3, 6, 4, 8, 5, 7, 4].map((h, i) => (
+                            <div key={i} className="w-1 bg-emerald-500/60 rounded-sm" style={{ height: `${h * 2}px` }} />
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    </div>
+));
+MediaConverterProof.displayName = 'MediaConverterProof';
+
+// ─── Shared Label ─────────────────────────────────────────────────────────────
+
+const Label = memo(({ text, type }: { text: string; type: 'before' | 'after' }) => (
+    <div className={cn(
+        "absolute top-4 left-4 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest z-10",
+        type === 'before' ? "bg-white text-black" : "bg-black text-white border border-white/20"
+    )}>
+        {text}
+    </div>
+));
+Label.displayName = 'Label';
+
+// ─── Main VisualProof ─────────────────────────────────────────────────────────
 
 interface VisualProofProps {
     toolId: string;
@@ -139,287 +421,92 @@ interface VisualProofProps {
     className?: string;
 }
 
-/**
- * 💎 VisualProof Component
- * The central visualization node for all document transformation demos.
- */
-export const VisualProof = memo(({ toolId, mode = 'card', className }: VisualProofProps) => {
-    // ✨ HOOKS & LOCALIZATION
-    const locale = useLocale();
-    const isRTL = locale === 'ar';
+const captions: Record<string, string> = {
+    'redactor': 'Before & After: PDF Redaction',
+    'compress': 'Before & After: Image Compression',
+    'clean-exif': 'Before & After: Metadata Cleaning',
+    'blur': 'Before & After: Image Enhancement',
+    'encrypt': 'Before & After: Text Encryption',
+    'password': 'Before & After: Password Generation',
+    'merger': 'Before & After: PDF Merging',
+    'heic': 'Before & After: HEIC Conversion',
+    'unlock': 'Before & After: PDF Unlocking',
+    'svg-to-png': 'Before & After: SVG → PNG',
+    'pdf-to-docx': 'Before & After: PDF → Word',
+    'pdf-to-img': 'Before & After: PDF → Images',
+    'pdf-split': 'Before & After: PDF Splitting',
+    'media-converter': 'Before & After: Media Conversion',
+};
 
-    /**
-     * Component Registry
-     * Memoized routing of tool IDs to specific visualization patterns.
-     */
-    const content = useMemo(() => {
-        const render = (type: 'before' | 'after') => {
-            switch (toolId) {
-                case 'redactor':
-                    return <RedactorProof type={type} />;
+export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualProofProps) => {
+    const caption = captions[toolId] || 'Privacy in Action';
 
-                case 'compress':
-                    return (
-                        <ImageProof
-                            type={type}
-                            url="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=400"
-                            beforeLabel="HEAVY: 12.5 MB"
-                            afterLabel="OPTIMIZED: 0.8 MB"
-                        />
-                    );
-
-                case 'unlock':
-                    return <UnlockProof type={type} />;
-
-                case 'clean-exif':
-                    return (
-                        <div className="relative w-full h-full rounded-lg overflow-hidden">
-                            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=400')] bg-cover bg-center" />
-                            <div className="absolute top-4 left-4 space-y-2">
-                                {[
-                                    { icon: MapPin, text: "40.7128° N", color: "bg-red-500" },
-                                    { icon: Calendar, text: "MARCH 12, 2024", color: "bg-zinc-500" },
-                                    { icon: ImageIcon, text: "IPHONE 15 PRO", color: "bg-zinc-500" }
-                                ].map((tag, i) => (
-                                    <div
-                                        key={i}
-                                        className={cn(
-                                            "flex items-center gap-2 px-2 py-1 rounded-md backdrop-blur-md border border-white/20 text-[6px] font-black text-white transition-all duration-700",
-                                            type === 'after' && "scale-0 opacity-0 translate-x-[-20px]"
-                                        )}
-                                        style={{ transitionDelay: `${i * 100}ms` }}
-                                    >
-                                        <tag.icon className="w-2 h-2 opacity-50" />
-                                        {tag.text}
-                                    </div>
-                                ))}
-                            </div>
-                            <div className={cn(
-                                "absolute inset-0 bg-emerald-500/10 flex flex-col items-center justify-center transition-all duration-1000",
-                                type === 'after' ? "opacity-100" : "opacity-0"
-                            )}>
-                                <div className="w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg">
-                                    <Shield className="w-6 h-6 text-emerald-950 fill-emerald-950/20" />
-                                </div>
-                                <span className="mt-2 text-[8px] font-black text-emerald-500 uppercase tracking-[0.2em] bg-zinc-950/80 px-4 py-1 rounded-full">
-                                    Identity Cleared
-                                </span>
-                            </div>
-                        </div>
-                    );
-
-                case 'merger':
-                case 'pdf-split':
-                    return (
-                        <div className="relative w-full h-full bg-zinc-950 rounded-lg p-2 flex items-center justify-center overflow-hidden">
-                            <div className="flex gap-1 relative">
-                                {[1, 2, 3].map((i) => (
-                                    <motion.div
-                                        key={i}
-                                        animate={toolId === 'merger' && type === 'after' ? {
-                                            x: isRTL ? (i - 2) * 2 : (2 - i) * 2,
-                                            y: (i - 2) * 4,
-                                            scale: 1.05
-                                        } : {}}
-                                        className={cn(
-                                            "w-12 h-16 bg-white rounded border border-zinc-200 shadow-lg flex flex-col p-2 gap-1",
-                                            i === 2 ? "z-20" : "z-10 opacity-60",
-                                            toolId === 'pdf-split' && type === 'after' && i !== 2 && "opacity-0 scale-50 transition-all duration-700"
-                                        )}
-                                    >
-                                        <div className="h-1 w-full bg-zinc-100 rounded" />
-                                        <div className="h-4 w-full bg-zinc-50 rounded" />
-                                        <div className="mt-auto flex justify-end">
-                                            <div className="w-2 h-2 rounded-full bg-purple-500/20 flex items-center justify-center text-[5px] font-bold text-purple-700">{i}</div>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
-                            {toolId === 'merger' && type === 'after' && (
-                                <div className="absolute inset-0 bg-purple-500/5 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
-                                    <Shield className="w-8 h-8 text-purple-500/20" />
-                                </div>
-                            )}
-                        </div>
-                    );
-
-                case 'media-converter':
-                case 'heic':
-                case 'svg-to-png':
-                    return (
-                        <div className="relative w-full h-full bg-zinc-900 rounded-lg flex flex-col items-center justify-center p-4">
-                            <div className="relative">
-                                <div className={cn(
-                                    "w-20 h-20 rounded-3xl bg-zinc-950 border border-zinc-800 flex flex-col items-center justify-center shadow-2xl transition-all duration-700",
-                                    type === 'after' && "border-emerald-500/50 bg-emerald-500/5 scale-110"
-                                )}>
-                                    <div className="text-[14px] font-black italic tracking-tighter text-zinc-500 mb-2">
-                                        {toolId === 'heic' ? "HEIC" : toolId === 'svg-to-png' ? "SVG" : "MP4"}
-                                    </div>
-                                    <div className="w-12 h-1.5 bg-zinc-800 rounded-full" />
-                                    {type === 'after' && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            className="mt-3 text-[14px] font-black text-emerald-500 bg-emerald-500/20 px-3 py-1 rounded-lg shadow-[0_0_20px_rgba(16,185,129,0.2)]"
-                                        >
-                                            {toolId === 'heic' ? "JPG" : toolId === 'svg-to-png' ? "PNG" : "WEBM"}
-                                        </motion.div>
-                                    )}
-                                </div>
-                                <div className={cn(
-                                    "absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-700",
-                                    type === 'before' ? "bg-zinc-800 text-zinc-600" : "bg-emerald-500 text-emerald-950 shadow-lg scale-110 rotate-12"
-                                )}>
-                                    {type === 'before' ? <RefreshCw className="w-4 h-4 animate-spin-slow" /> : <Shield className="w-4 h-4" />}
-                                </div>
-                            </div>
-                        </div>
-                    );
-
-                case 'password':
-                case 'encrypt':
-                    return (
-                        <div className="relative w-full h-full bg-zinc-900 rounded-[1.5rem] p-6 flex flex-col justify-center border border-zinc-800 shadow-2xl overflow-hidden group/card">
-                            <div className="relative space-y-4">
-                                <div className="flex items-center justify-between border-b border-zinc-800/50 pb-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className={cn(
-                                            "w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-inner",
-                                            type === 'before' ? "bg-zinc-950 text-zinc-600" : "bg-emerald-500/10 text-emerald-500"
-                                        )}>
-                                            <Lock className="w-4 h-4" />
-                                        </div>
-                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
-                                            {toolId === 'password' ? "Vault Key" : "Secure Node"}
-                                        </span>
-                                    </div>
-                                    <div className={cn(
-                                        "px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-widest border",
-                                        type === 'before' ? "bg-red-500/10 border-red-500/20 text-red-500" : "bg-emerald-500/10 border-emerald-500/20 text-emerald-500"
-                                    )}>
-                                        {type === 'before' ? "Vulnerable" : "Shielded"}
-                                    </div>
-                                </div>
-                                <div className="py-2">
-                                    <div className={cn(
-                                        "text-xl md:text-2xl font-mono break-all leading-tight transition-all duration-700 tracking-tighter",
-                                        type === 'before' ? "text-zinc-600 italic" : "text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
-                                    )}>
-                                        {type === 'before'
-                                            ? (toolId === 'password' ? "weak_pass_123" : "Private Message")
-                                            : (toolId === 'password' ? "Xk29!p_#$L9m" : "A8*kL9#mP0q-Z1x8v3n4m7L9pQ==")}
-                                    </div>
-                                </div>
-                                {type === 'after' && (
-                                    <motion.div
-                                        initial={{ width: 0 }}
-                                        animate={{ width: "100%" }}
-                                        className="h-1 bg-gradient-to-r from-emerald-500 to-sky-400 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
-                                    />
-                                )}
-                            </div>
-                        </div>
-                    );
-
-                default:
-                    return (
-                        <div className="w-full h-full bg-zinc-900 border border-zinc-800 rounded-lg flex items-center justify-center">
-                            <FileText className="w-8 h-8 text-zinc-700" />
-                        </div>
-                    );
-            }
-        };
-
-        return {
-            before: render('before'),
-            after: render('after')
-        };
-    }, [toolId, isRTL]);
+    const render = (type: 'before' | 'after') => {
+        switch (toolId) {
+            case 'redactor': return <RedactorProof type={type} />;
+            case 'compress': return (
+                <ImageProof
+                    type={type}
+                    url="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&q=80&w=800"
+                    beforeLabel="12.5 MB"
+                    afterLabel="0.8 MB"
+                />
+            );
+            case 'clean-exif': return <CleanExifProof type={type} />;
+            case 'blur': return <BlurProof type={type} />;
+            case 'encrypt': return <EncryptProof type={type} />;
+            case 'password': return <PasswordProof type={type} />;
+            case 'merger': return <MergeProof type={type} />;
+            case 'heic': return <HeicProof type={type} />;
+            case 'unlock': return <UnlockProof type={type} />;
+            case 'svg-to-png': return <SvgToPngProof type={type} />;
+            case 'pdf-to-docx': return <PdfToDocxProof type={type} />;
+            case 'pdf-to-img': return <PdfToImgProof type={type} />;
+            case 'pdf-split': return <PdfSplitProof type={type} />;
+            case 'media-converter': return <MediaConverterProof type={type} />;
+            default: return (
+                <div className="w-full h-full bg-zinc-950 flex items-center justify-center">
+                    <span className="text-zinc-700 font-mono text-xs">{toolId} · {type}</span>
+                </div>
+            );
+        }
+    };
 
     return (
-        <div className={cn(
-            "relative w-full",
-            mode === 'card' ? "h-48" : "h-auto",
-            className
-        )}>
-            <div className={cn(
-                "grid h-full",
-                mode === 'card' ? "grid-cols-2 gap-4" : "grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20"
-            )}>
-                {/* ⏮️ BEFORE CONTAINER */}
-                <div className="relative group/before flex flex-col">
-                    {mode === 'full' && (
-                        <div className="flex items-center gap-3 px-2 mb-6">
-                            <div className="w-2.5 h-2.5 rounded-full bg-zinc-800 border border-zinc-700" />
-                            <h4 className="text-2xl font-black uppercase italic tracking-tighter text-zinc-600">BEFORE</h4>
-                        </div>
-                    )}
-                    <div className={cn(
-                        "flex-1 aspect-video bg-zinc-950 flex shadow-2xl relative overflow-hidden ring-1 ring-zinc-800 rounded-[2.5rem] transition-all duration-500 group-hover/before:ring-zinc-700",
-                    )}>
-                        {mode !== 'full' && (
-                            <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-zinc-950/80 text-[8px] font-black text-zinc-500 uppercase tracking-widest border border-zinc-800">
-                                Before
-                            </div>
-                        )}
-                        <div className="h-full w-full p-6">
-                            {content.before}
-                        </div>
-                    </div>
-                </div>
-
-                {/* ⏭️ AFTER CONTAINER */}
-                <div className="relative group/after flex flex-col">
-                    {mode === 'full' && (
-                        <div className="flex items-center gap-3 px-2 mb-6">
-                            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] animate-pulse" />
-                            <h4 className="text-2xl font-black uppercase italic tracking-tighter text-emerald-500">AFTER</h4>
-                        </div>
-                    )}
-                    <div className={cn(
-                        "flex-1 aspect-video bg-zinc-950 flex shadow-2xl relative overflow-hidden ring-1 ring-emerald-500/30 rounded-[2.5rem] transition-all duration-500 group-hover/after:ring-emerald-500/50",
-                    )}>
-                        {mode !== 'full' && (
-                            <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-emerald-500/20 text-[8px] font-black text-emerald-500 uppercase tracking-widest border border-emerald-500/30">
-                                After
-                            </div>
-                        )}
-                        <div className="h-full w-full p-6">
-                            {content.after}
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/10 to-transparent h-1/2 w-full animate-scan pointer-events-none" />
-                        <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-emerald-500/10 backdrop-blur-md border border-emerald-500/20 flex items-center gap-2">
-                            <div className="w-1 h-1 rounded-full bg-emerald-500 animate-ping" />
-                            <span className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Live Security</span>
-                        </div>
-                    </div>
-                </div>
-
-                {mode === 'card' && (
-                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-20">
-                        <div className={cn(
-                            "w-12 h-12 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.5)] border-4 border-zinc-950 transition-transform group-hover:scale-110",
-                            isRTL && "rotate-180"
-                        )}>
-                            <ArrowRight className="w-6 h-6 text-emerald-950" />
-                        </div>
-                    </div>
-                )}
+        <div className={cn("w-full space-y-6", className)}>
+            {/* Label */}
+            <div className="flex items-center gap-4">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">Visual Proof</span>
+                <div className="flex-1 h-px bg-white/[0.06]" />
             </div>
 
-            {/* 🏷️ FOOTER MARKER */}
-            {mode === 'full' && (
-                <div className="text-center mt-12 space-y-4">
-                    <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/5">
-                        <Shield className="w-4 h-4 text-emerald-500" />
-                        <span className="text-[12px] font-black uppercase tracking-[0.3em] text-emerald-500">Live Magic Demo</span>
-                    </div>
-                    <p className="text-zinc-500 text-lg font-bold max-w-2xl mx-auto leading-relaxed">
-                        Real-world transformation visualization. All processing remains on your device.
-                    </p>
+            <h3 className="text-xl font-black uppercase tracking-tight text-white">
+                {caption}
+            </h3>
+
+            {/* Full-width split */}
+            <div className="w-full grid grid-cols-2 gap-px bg-white/[0.06] overflow-hidden">
+                <div className="relative aspect-video bg-black overflow-hidden">
+                    <div className="absolute top-4 left-4 text-[9px] font-black uppercase tracking-widest text-white/30 z-10">before</div>
+                    {render('before')}
                 </div>
-            )}
+                <div className="relative aspect-video bg-black overflow-hidden">
+                    <div className="absolute top-4 left-4 text-[9px] font-black uppercase tracking-widest text-white/30 z-10">after</div>
+                    {render('after')}
+                </div>
+            </div>
+
+            {/* Footer badges */}
+            <div className="flex items-center gap-6 pt-2">
+                <div className="flex items-center gap-2 text-zinc-600">
+                    <Shield className="w-3.5 h-3.5" />
+                    <span className="text-[10px] font-semibold uppercase tracking-widest">Full Bit Integrity</span>
+                </div>
+                <div className="flex items-center gap-2 text-zinc-600">
+                    <Lock className="w-3.5 h-3.5" />
+                    <span className="text-[10px] font-semibold uppercase tracking-widest">Zero Cloud Metadata</span>
+                </div>
+            </div>
         </div>
     );
 });

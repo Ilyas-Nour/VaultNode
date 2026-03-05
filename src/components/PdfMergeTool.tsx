@@ -17,7 +17,7 @@ import { useDropzone } from "react-dropzone";
 import {
     FileStack, Loader2, Download, Trash2,
     FileUp, Shield, RefreshCw,
-    Plus, GripVertical, FileText, HardDrive
+    Plus, GripVertical, FileText, HardDrive, CheckCircle2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -130,29 +130,31 @@ const PdfMergeTool = memo(() => {
             settingsContent={
                 <div className="space-y-6">
                     {/* 🔘 DOCUMENT QUEUE STATUS */}
-                    <div className="space-y-3">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Document Queue</span>
-                        <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
-                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-tight italic">{files.length} Files Ready</span>
-                            <FileStack className="w-3 h-3 text-emerald-500" />
+                    <div className="space-y-3.5">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Document Queue</span>
+                        <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between shadow-inner">
+                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-tight italic">{files.length} Files Ready</span>
+                            <div className="bg-emerald-500/10 p-1.5 rounded-lg border border-emerald-500/20">
+                                <FileStack className="w-4 h-4 text-emerald-500" />
+                            </div>
                         </div>
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3.5 pt-4">
                         <Button
                             onClick={handleMerge}
                             disabled={files.length < 2 || isMerging}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {isMerging ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4 me-2" />}
+                            {isMerging ? <Loader2 className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5 me-2" />}
                             {isMerging ? "Merging..." : t('mergeButton')}
                         </Button>
 
                         {mergedBlob && (
                             <Button
                                 onClick={handleDownload}
-                                className="w-full h-12 bg-zinc-950 border border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all"
+                                className="w-full h-12 bg-zinc-950 border border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all"
                             >
                                 <Download className="w-4 h-4 me-2" />
                                 Download Merged
@@ -162,7 +164,7 @@ const PdfMergeTool = memo(() => {
                         <Button
                             variant="outline"
                             onClick={() => { setFiles([]); setMergedBlob(null); }}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
                         >
                             <Trash2 className="w-4 h-4 me-2" />
                             Clear Queue
@@ -170,12 +172,12 @@ const PdfMergeTool = memo(() => {
                     </div>
 
                     {/* 📊 SANDBOX REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Local Assembly</span>
+                            <Shield className="w-4 h-4" />
+                            <span className="text-[11px] font-black uppercase tracking-widest">Local Assembly</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
                             Everything happens safely inside your own screen.
                             No persistent traces left on disk or network.
                         </p>
@@ -184,7 +186,7 @@ const PdfMergeTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[450px] flex flex-col p-6 md:p-12">
+            <div className="relative min-h-[420px] flex flex-col p-6 md:p-12">
                 <AnimatePresence mode="wait">
                     {files.length === 0 ? (
                         <motion.div
@@ -214,11 +216,11 @@ const PdfMergeTool = memo(() => {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">Stage Your Documents</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">{t('mergeDropDesc')}</p>
+                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Stage Your Documents</h3>
+                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('mergeDropDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -227,44 +229,46 @@ const PdfMergeTool = memo(() => {
                             key="queue"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full flex flex-col space-y-6"
+                            className="w-full flex flex-col space-y-8"
                         >
                             {/* 📑 QUEUE HEADER */}
-                            <div className="flex items-center justify-between px-2">
-                                <h3 className="text-lg font-black uppercase italic tracking-tight text-white">Merge Queue</h3>
+                            <div className="flex items-center justify-between px-4">
+                                <h3 className="text-xl lg:text-2xl font-black uppercase italic tracking-tight text-white">Merge Queue</h3>
                                 <div {...getRootProps()} className="cursor-pointer">
                                     <input {...getInputProps()} />
-                                    <Button variant="ghost" size="sm" className="text-emerald-500 hover:text-emerald-400 uppercase tracking-widest text-[10px] font-black italic">
-                                        <Plus className="w-3 h-3 me-2" /> Add More
+                                    <Button variant="ghost" size="sm" className="text-emerald-500 hover:text-emerald-400 uppercase tracking-widest text-[11px] font-black italic gap-2 group/add">
+                                        <Plus className="w-4 h-4 transition-transform group-hover/add:rotate-90" /> Add More
                                     </Button>
                                 </div>
                             </div>
 
                             {/* 📑 DRAGGABLE STREAM ITEMS */}
-                            <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-3">
+                            <Reorder.Group axis="y" values={files} onReorder={setFiles} className="space-y-4">
                                 {files.map((file) => (
                                     <Reorder.Item
                                         key={file.id}
                                         value={file}
                                         className="p-1"
                                     >
-                                        <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center gap-4 group hover:border-emerald-500/30 transition-colors shadow-lg">
-                                            <div className="cursor-grab active:cursor-grabbing text-zinc-700 group-hover:text-zinc-400">
-                                                <GripVertical className="w-5 h-5" />
+                                        <div className="p-5 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800/50 rounded-3xl flex items-center gap-5 group hover:border-emerald-500/40 transition-all hover:bg-zinc-900 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
+                                            <div className="cursor-grab active:cursor-grabbing text-zinc-700 group-hover:text-zinc-400 transition-colors">
+                                                <GripVertical className="w-6 h-6" />
                                             </div>
-                                            <div className="w-10 h-10 bg-zinc-950 border border-zinc-800 rounded-xl flex items-center justify-center shrink-0">
-                                                <FileText className="w-5 h-5 text-emerald-500" />
+                                            <div className="w-12 h-12 bg-zinc-950 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
+                                                <FileText className="w-6 h-6 text-emerald-500" />
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-black uppercase tracking-tighter text-white truncate">{file.name}</p>
-                                                <p className="text-[10px] font-bold uppercase text-zinc-500">{formatSize(file.size)} &bull; Ready to Append</p>
+                                                <p className="text-base font-black uppercase tracking-tighter text-white truncate group-hover:text-emerald-500 transition-colors">{file.name}</p>
+                                                <p className="text-[11px] font-bold uppercase text-zinc-500 tracking-widest">{formatSize(file.size)} &bull; Ready to Append</p>
                                             </div>
-                                            <button
-                                                onClick={() => removeFile(file.id)}
-                                                className="p-2 text-zinc-600 hover:text-red-500 transition-colors"
-                                            >
-                                                <Trash2 className="w-4 h-4" />
-                                            </button>
+                                            <div className="flex items-center gap-2">
+                                                <button
+                                                    onClick={() => removeFile(file.id)}
+                                                    className="w-10 h-10 rounded-xl flex items-center justify-center text-zinc-600 hover:text-red-500 hover:bg-red-500/10 transition-all"
+                                                >
+                                                    <Trash2 className="w-4 h-4" />
+                                                </button>
+                                            </div>
                                         </div>
                                     </Reorder.Item>
                                 ))}
@@ -276,13 +280,13 @@ const PdfMergeTool = memo(() => {
                                     key="loader"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    className="flex flex-col items-center justify-center py-12 gap-4"
+                                    className="flex flex-col items-center justify-center py-16 gap-6"
                                 >
                                     <div className="relative">
-                                        <div className="absolute inset-0 bg-emerald-500 rounded-full animate-ping opacity-20" />
-                                        <Loader2 className="w-12 h-12 text-emerald-500 animate-spin" />
+                                        <div className="absolute -inset-8 bg-emerald-500/10 blur-3xl rounded-full animate-pulse" />
+                                        <Loader2 className="w-16 h-16 text-emerald-500 animate-spin relative" />
                                     </div>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-500 animate-pulse">Synthesis in Progress</p>
+                                    <p className="text-[11px] font-black uppercase tracking-[0.4em] text-emerald-500 animate-pulse italic">Synthesis in Progress</p>
                                 </motion.div>
                             )}
 
@@ -290,21 +294,22 @@ const PdfMergeTool = memo(() => {
                             {mergedBlob && !isMerging && (
                                 <motion.div
                                     key="success"
-                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    className="p-8 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl flex flex-col items-center gap-4 text-center"
+                                    className="p-10 bg-emerald-500/5 border border-emerald-500/20 rounded-[3rem] flex flex-col items-center gap-6 text-center shadow-[0_20px_50px_-20px_rgba(16,185,129,0.1)] backdrop-blur-xl"
                                 >
-                                    <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                                        <Download className="w-6 h-6 text-emerald-500" />
+                                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                        <CheckCircle2 className="w-8 h-8 text-emerald-500" />
                                     </div>
-                                    <div className="space-y-1">
-                                        <h4 className="text-xl font-black uppercase italic tracking-tight text-emerald-500">Node Synthesis Complete</h4>
-                                        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Done! Everything stayed inside your screen.</p>
+                                    <div className="space-y-2">
+                                        <h4 className="text-2xl font-black uppercase italic tracking-tight text-white mb-2">Node Synthesis Complete</h4>
+                                        <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.2em] max-w-sm mx-auto">Done! Everything stayed inside your screen. Your multi-node PDF is ready for export.</p>
                                     </div>
                                     <Button
                                         onClick={handleDownload}
-                                        className="h-12 px-10 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl shadow-xl transition-all hover:scale-105 active:scale-95 text-xs uppercase italic"
+                                        className="h-14 px-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl shadow-[0_20px_40px_-10px_rgba(16,185,129,0.3)] transition-all hover:scale-105 active:scale-95 text-[11px] uppercase italic tracking-widest"
                                     >
+                                        <Download className="w-4 h-4 me-2" />
                                         Download Final PDF
                                     </Button>
                                 </motion.div>
@@ -314,15 +319,15 @@ const PdfMergeTool = memo(() => {
                 </AnimatePresence>
 
                 {/* 📟 HARDWARE STATUS */}
-                <div className="mt-auto pt-10 flex items-center justify-center gap-6">
-                    <div className="flex items-center gap-2 text-zinc-600">
+                <div className="mt-auto pt-12 flex items-center justify-center gap-10">
+                    <div className="flex items-center gap-2.5 text-zinc-600 transition-colors hover:text-zinc-400">
                         <HardDrive className="w-4 h-4" />
-                        <span className="text-[9px] font-black uppercase tracking-widest">Buffer-04</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest italic">Buffer-04</span>
                     </div>
-                    <div className="w-px h-3 bg-zinc-800" />
-                    <div className="flex items-center gap-2 text-emerald-500">
+                    <div className="w-px h-4 bg-zinc-800" />
+                    <div className="flex items-center gap-2.5 text-emerald-500 transition-colors hover:text-emerald-400">
                         <RefreshCw className="w-4 h-4 animate-spin-slow" />
-                        <span className="text-[9px] font-black uppercase tracking-widest">Local-Only Logic</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest italic">Local-Only Logic</span>
                     </div>
                 </div>
             </div>

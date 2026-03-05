@@ -1,3 +1,15 @@
+/**
+ * 🎨 PRIVAFLOW | Scalable Vector Rasterizer
+ * ---------------------------------------------------------
+ * A high-precision rendering engine for SVG bitstream conversion.
+ * Transforms XML-based vector stacks into optimized PNG buffers
+ * using a native canvas serialization bridge.
+ * 
+ * Logic: Canvas-Based XML Rasterization
+ * Performance: Optimized (Atomic Rendering)
+ * Aesthetics: Design-Industrial / Emerald-Dark
+ */
+
 "use client";
 
 import React, { useState, useCallback } from 'react';
@@ -100,40 +112,40 @@ export default function SvgToPngTool() {
             toolId="svg-to-png"
             settingsContent={
                 <div className="space-y-6">
-                    <div className="space-y-3">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Raster Quality</span>
-                        <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
-                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-tight italic">2x Super-Sampling</span>
-                            <RefreshCw className="w-3 h-3 text-emerald-500" />
+                    <div className="space-y-3.5">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500">Raster Quality</span>
+                        <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between shadow-inner">
+                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-tight italic">2x Super-Sampling</span>
+                            <RefreshCw className="w-4 h-4 text-emerald-500" />
                         </div>
                     </div>
 
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3.5 pt-4">
                         <Button
                             onClick={rasterize}
                             disabled={!svgCode || isProcessing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4 me-2" />}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <ImageIcon className="w-5 h-5 me-2" />}
                             {isProcessing ? t('processing') : t('convertBtn')}
                         </Button>
 
                         <Button
                             variant="outline"
                             onClick={resetTool}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
                         >
                             <RefreshCw className="w-4 h-4 me-2" />
                             Reset Buffer
                         </Button>
                     </div>
 
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Local Engine</span>
+                            <Shield className="w-4 h-4" />
+                            <span className="text-[11px] font-black uppercase tracking-widest">Local Engine</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
                             Uses native Canvas API to rasterize vectors. Zero external network calls.
                         </p>
                     </div>
@@ -145,7 +157,7 @@ export default function SvgToPngTool() {
                 { title: "Local Export", description: "Binary BLOB is created in-browser and pushed to your downloads." }
             ]}
         >
-            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
+            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-10">
                 <AnimatePresence mode="wait">
                     {!svgCode ? (
                         <motion.div
@@ -174,11 +186,11 @@ export default function SvgToPngTool() {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <FileCode className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
+                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
+                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -187,12 +199,12 @@ export default function SvgToPngTool() {
                             key="results"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full grid grid-cols-1 md:grid-cols-2 gap-8"
+                            className="w-full grid grid-cols-1 md:grid-cols-2 gap-6"
                         >
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center px-2 text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">
+                                <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
                                     <span>Source Vector Code</span>
-                                    <span className="text-zinc-600 truncate max-w-[100px]">{fileName}.svg</span>
+                                    <span className="text-zinc-600 truncate max-w-[120px] bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">{fileName}.svg</span>
                                 </div>
                                 <textarea
                                     value={svgCode}
@@ -200,17 +212,17 @@ export default function SvgToPngTool() {
                                         setSvgCode(e.target.value);
                                         if (e.target.value.includes('<svg')) generatePreview(e.target.value);
                                     }}
-                                    className="w-full aspect-square bg-zinc-900/50 border border-zinc-800 rounded-[2rem] p-6 text-[10px] font-mono text-zinc-500 focus:border-emerald-500 outline-none transition-colors resize-none custom-scroll"
+                                    className="w-full aspect-square bg-zinc-900/50 border border-zinc-800 rounded-[2rem] p-6 text-[11px] font-mono text-zinc-500 focus:border-emerald-500 outline-none transition-colors resize-none custom-scroll shadow-inner"
                                     placeholder="Paste SVG XML here..."
                                 />
                             </div>
 
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center px-2 text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">
+                                <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">
                                     <span>Raster Result</span>
-                                    <span className="text-emerald-500/50">2x Scaled</span>
+                                    <span className="text-emerald-500/50 bg-emerald-500/5 px-2 py-0.5 rounded-lg border border-emerald-500/10">2x Scaled</span>
                                 </div>
-                                <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center">
+                                <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center shadow-2xl">
                                     <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-5 pointer-events-none" />
                                     {previewUrl ? (
                                         <img
@@ -223,12 +235,12 @@ export default function SvgToPngTool() {
                                     )}
 
                                     {previewUrl && (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/40 backdrop-blur-sm opacity-0 hover:opacity-100 transition-opacity">
+                                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-500">
                                             <Button
                                                 onClick={rasterize}
-                                                className="h-16 px-10 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95 text-lg uppercase italic"
+                                                className="h-16 px-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95 text-xl uppercase italic tracking-tight"
                                             >
-                                                <Download className="w-6 h-6 me-3" />
+                                                <Download className="w-6 h-6 me-4" />
                                                 Save as PNG
                                             </Button>
                                         </div>
@@ -239,15 +251,15 @@ export default function SvgToPngTool() {
                     )}
                 </AnimatePresence>
 
-                <div className="flex items-center gap-6 px-8 py-3 bg-zinc-900/80 border border-zinc-800 rounded-full mt-8 shadow-xl">
-                    <div className="flex items-center gap-2">
-                        <HardDrive className="w-4 h-4 text-zinc-600" />
-                        <span className="text-[9px] font-black uppercase tracking-widest text-zinc-500">Node-09</span>
+                <div className="flex items-center gap-10 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-full mt-10 shadow-2xl backdrop-blur-md">
+                    <div className="flex items-center gap-2.5">
+                        <HardDrive className="w-5 h-5 text-zinc-600" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Node-09</span>
                     </div>
-                    <div className="w-px h-3 bg-zinc-800" />
-                    <div className="flex items-center gap-2">
-                        <Layers className="w-4 h-4 text-emerald-500" />
-                        <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500">Raster Engine 2.1</span>
+                    <div className="w-px h-5 bg-zinc-800" />
+                    <div className="flex items-center gap-2.5">
+                        <Layers className="w-5 h-5 text-emerald-500" />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Raster Engine 2.1</span>
                     </div>
                 </div>
             </div>

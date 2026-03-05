@@ -147,55 +147,55 @@ const PdfToImgTool = memo(() => {
             settingsContent={
                 <div className="space-y-6">
                     {/* 🔘 RENDER DENSITY HUB */}
-                    <div className="space-y-3">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Render Density</span>
+                    <div className="space-y-4">
+                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">Render Density</span>
                         <div className="space-y-2">
                             {scaleOptions.map((s) => (
                                 <button
                                     key={s.val}
                                     onClick={() => setScale(s.val)}
                                     className={cn(
-                                        "w-full p-3 rounded-xl border flex items-center justify-between transition-all italic",
+                                        "w-full p-4 rounded-xl border flex items-center justify-between transition-all italic",
                                         scale === s.val
                                             ? "bg-emerald-500/10 border-emerald-500/50 text-emerald-500"
                                             : "bg-zinc-900/50 border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-white"
                                     )}
                                 >
-                                    <span className="text-[10px] font-black uppercase tracking-widest">{s.label}</span>
-                                    <span className="text-[9px] font-bold opacity-50">{s.desc}</span>
+                                    <span className="text-xs font-black uppercase tracking-widest">{s.label}</span>
+                                    <span className="text-[10px] font-bold opacity-50">{s.desc}</span>
                                 </button>
                             ))}
                         </div>
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3 pt-2">
                         <Button
                             onClick={handleExtract}
                             disabled={isProcessing || !file}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-xs uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4 me-2" />}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <ImageIcon className="w-5 h-5 me-2" />}
                             {isProcessing ? t('processing') : t('convertPages')}
                         </Button>
 
                         <Button
                             variant="outline"
                             onClick={resetTool}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-14 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-xs font-black uppercase tracking-widest italic"
                         >
-                            <FileArchive className="w-4 h-4 me-2" />
+                            <FileArchive className="w-5 h-5 me-2" />
                             New Archive
                         </Button>
                     </div>
 
                     {/* 📊 SANDBOX REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-4">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">In-Browser PDF.js</span>
+                            <Shield className="w-4 h-4" />
+                            <span className="text-xs font-black uppercase tracking-widest">In-Browser PDF.js</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase">
                             Uses Mozilla&apos;s PDF.js to render slices directly to canvas.
                             Your documents never touch our infra.
                         </p>
@@ -204,7 +204,7 @@ const PdfToImgTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
+            <div className="relative min-h-[400px] flex flex-col items-center justify-center p-4 md:p-8">
                 <AnimatePresence mode="wait">
                     {!file ? (
                         <motion.div
@@ -250,12 +250,12 @@ const PdfToImgTool = memo(() => {
                             className="w-full flex flex-col items-center space-y-8"
                         >
                             {/* 📟 PROCESSING REPORT CARD */}
-                            <div className="w-full max-w-2xl aspect-video bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative flex flex-col items-center justify-center shadow-2xl group">
-                                <div className="z-10 bg-zinc-950/80 backdrop-blur-xl border border-zinc-800 rounded-3xl p-8 flex flex-col items-center gap-4 transition-transform group-hover:scale-105">
-                                    <FileUp className="w-12 h-12 text-emerald-500" />
+                            <div className="w-full max-w-2xl aspect-video bg-zinc-900/50 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative flex flex-col items-center justify-center shadow-2xl group">
+                                <div className="z-10 bg-zinc-950/90 backdrop-blur-xl border border-zinc-800 rounded-3xl p-10 flex flex-col items-center gap-6 transition-transform group-hover:scale-[1.02]">
+                                    <FileUp className="w-14 h-14 text-emerald-500" />
                                     <div className="text-center">
-                                        <p className="text-sm font-black uppercase tracking-tighter text-white">{file.name}</p>
-                                        <p className="text-[10px] font-bold uppercase text-zinc-500">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
+                                        <p className="text-base font-black uppercase tracking-tighter text-white">{file.name}</p>
+                                        <p className="text-xs font-bold uppercase text-zinc-500">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
                                     </div>
                                 </div>
                             </div>
@@ -270,10 +270,10 @@ const PdfToImgTool = memo(() => {
                                     >
                                         <div className="flex justify-between items-center px-4">
                                             <div className="flex items-center gap-2">
-                                                <Loader2 className="w-3 h-3 text-emerald-500 animate-spin" />
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse italic">Extracting Page {progress} of {totalPages}</span>
+                                                <Loader2 className="w-4 h-4 text-emerald-500 animate-spin" />
+                                                <span className="text-xs font-black uppercase tracking-widest text-emerald-500 animate-pulse italic">Extracting Page {progress} of {totalPages}</span>
                                             </div>
-                                            <span className="text-[10px] font-black text-emerald-500 italic">{Math.round((progress / totalPages) * 100)}%</span>
+                                            <span className="text-xs font-black text-emerald-500 italic">{Math.round((progress / totalPages) * 100)}%</span>
                                         </div>
                                         <div className="h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
                                             <motion.div
@@ -287,15 +287,15 @@ const PdfToImgTool = memo(() => {
                             </AnimatePresence>
 
                             {/* 📟 FLOW METRICS */}
-                            <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Input Buffer</span>
-                                    <Layers className="w-5 h-5 text-zinc-500" />
+                            <div className="flex items-center gap-12 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[10px] font-black text-zinc-600 uppercase">Input Buffer</span>
+                                    <Layers className="w-6 h-6 text-zinc-500" />
                                 </div>
-                                <FileArchive className={cn("w-5 h-5 text-emerald-500", isProcessing && "animate-bounce")} />
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">ZIP Package</span>
-                                    <ImageIcon className="w-5 h-5 text-emerald-500" />
+                                <FileArchive className={cn("w-6 h-6 text-emerald-500", isProcessing && "animate-bounce")} />
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[10px] font-black text-zinc-600 uppercase">ZIP Package</span>
+                                    <ImageIcon className="w-6 h-6 text-emerald-500" />
                                 </div>
                             </div>
                         </motion.div>

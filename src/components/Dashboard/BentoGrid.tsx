@@ -1,41 +1,14 @@
-/**
- * 🍱 PRIVAFLOW | Bento Architecture
- * ---------------------------------------------------------
- * A high-performance, responsive grid system for tool navigation.
- * Features ultra-smooth filtering and premium hover states.
- * 
- * Logic: AnimatePresence Grid Orchestration
- * Performance: High (Memoized Registry & Category Filters)
- * Aesthetics: Dashboard-Industrial / Emerald-Dark
- */
-
 "use client";
 
 import React, { useState, useMemo, memo } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Eraser,
-    ImageMinus,
-    KeyRound,
-    Zap,
-    Images,
-    ImagePlus,
-    Video,
-    FileUp,
-    FileStack,
-    Unlock,
-    Wand2,
-    ArrowRight,
-    Scissors,
-    Eye,
-    Lock
+    Eraser, ImageMinus, KeyRound, Lock, Zap, ImagePlus,
+    Video, FileUp, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { useLocale } from 'next-intl';
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/card';
-
-// --- PROTOCOL CONFIGURATIONS ---
 
 interface ToolItem {
     id: string;
@@ -44,137 +17,110 @@ interface ToolItem {
     desc: string;
     icon: React.ElementType;
     href: string;
-    color: string;
 }
 
-/**
- * Aesthetic Mapping Registry
- * Stored outside component to prevent reconciliation overhead.
- */
-const colorClasses = {
-    zinc: 'text-zinc-400 bg-zinc-400/5 border-zinc-800',
-    emerald: 'text-emerald-500 bg-emerald-500/5 border-emerald-500/20',
-    sky: 'text-sky-500 bg-sky-500/5 border-sky-500/20',
-    purple: 'text-purple-500 bg-purple-500/5 border-purple-500/20'
-};
+const tools: ToolItem[] = [
+    // VAULT
+    { id: 'redactor', category: 'vault', title: 'Redact PDF', desc: 'Permanently destroy sensitive data by pixel-burning regions directly on the document.', icon: Eraser, href: '/tools/redact' },
+    { id: 'clean-exif', category: 'vault', title: 'Clean Metadata', desc: 'Strip GPS data, camera info, and hidden EXIF tags from your images locally.', icon: ImageMinus, href: '/tools/clean-exif' },
+    { id: 'password', category: 'vault', title: 'Password Generator', desc: 'Generate cryptographically secure passwords with custom rules and entropy.', icon: KeyRound, href: '/tools/password' },
+    { id: 'encrypt', category: 'vault', title: 'Text Encryptor', desc: 'Client-side AES encryption for messages, notes, and sensitive text.', icon: Lock, href: '/tools/encrypt' },
 
-// --- MAIN COMPONENT ---
+    // MEDIA
+    { id: 'compress', category: 'media', title: 'Compress Image', desc: 'Reduce file size without visible quality loss using local canvas processing.', icon: Zap, href: '/tools/compress' },
+    { id: 'heic', category: 'media', title: 'HEIC to JPG', desc: 'Convert Apple HEIC photos to universal JPEG format, entirely offline.', icon: ImagePlus, href: '/tools/heic-to-jpg' },
+    { id: 'media-converter', category: 'media', title: 'Media Converter', desc: 'Extract audio and trim video clips using FFmpeg.wasm in your browser.', icon: Video, href: '/tools/media-converter' },
+    { id: 'svg-to-png', category: 'media', title: 'SVG to PNG', desc: 'Rasterize scalable vector files to high-resolution PNGs locally.', icon: Wand2, href: '/tools/svg-to-png' },
+    { id: 'blur', category: 'media', title: 'Blur Image', desc: 'Apply Gaussian blur to faces, plates, or sensitive areas in photos.', icon: Eye, href: '/tools/blur' },
 
-/**
- * 🍱 BentoGrid Component
- * The central command center for all available services.
- */
+    // DOCS
+    { id: 'merger', category: 'docs', title: 'Merge PDFs', desc: 'Combine multiple PDFs into one document without uploading anything.', icon: FileStack, href: '/tools/pdf-merge' },
+    { id: 'pdf-to-word', category: 'docs', title: 'PDF to Word', desc: 'Reconstruct PDF text content into an editable DOCX file from your browser.', icon: FileUp, href: '/tools/pdf-to-docx' },
+    { id: 'unlock', category: 'docs', title: 'Unlock PDF', desc: 'Remove user-level password restrictions from PDFs locally.', icon: Unlock, href: '/tools/unlock-pdf' },
+    { id: 'pdf-to-img', category: 'docs', title: 'PDF to Image', desc: 'Convert PDF pages to high-resolution PNG images, page by page.', icon: Images, href: '/tools/pdf-to-img' },
+    { id: 'split', category: 'docs', title: 'Split PDF', desc: 'Extract page ranges or individual pages from any PDF document.', icon: Scissors, href: '/tools/pdf-split' },
+];
+
+const categories = [
+    { id: 'all', label: 'All Tools', count: tools.length },
+    { id: 'vault', label: 'Vault', count: tools.filter(t => t.category === 'vault').length },
+    { id: 'media', label: 'Media', count: tools.filter(t => t.category === 'media').length },
+    { id: 'docs', label: 'Documents', count: tools.filter(t => t.category === 'docs').length },
+];
+
 export const BentoGrid = memo(() => {
-    // ✨ HOOKS & STATE
-    const t = useTranslations('HomePage');
     const locale = useLocale();
     const isRTL = locale === 'ar';
-    const [activeCategory, setActiveCategory] = useState('all');
+    const [active, setActive] = useState('all');
 
-    /**
-     * Tool Inventory Node
-     * Memoized to prevent dictionary rebuilds during filter transitions.
-     */
-    const tools = useMemo((): ToolItem[] => [
-        // THE VAULT (Security Specialist Tools)
-        { id: 'redactor', category: 'vault', title: t('launchRedactor'), desc: t('toolDescriptions.redactor'), icon: Eraser, href: '/tools/redact', color: 'emerald' },
-        { id: 'clean-exif', category: 'vault', title: t('cleanExif'), desc: t('toolDescriptions.cleanExif'), icon: ImageMinus, href: '/tools/clean-exif', color: 'emerald' },
-        { id: 'password', category: 'vault', title: t('password'), desc: t('toolDescriptions.password'), icon: KeyRound, href: '/tools/password', color: 'emerald' },
-        { id: 'encrypt', category: 'vault', title: t('textEncryptor'), desc: t('toolDescriptions.textEncryptor'), icon: Lock, href: '/tools/encrypt', color: 'emerald' },
-
-        // MEDIA LAB (Creative & Compression Assets)
-        { id: 'compress', category: 'media', title: t('imageCompressor'), desc: t('toolDescriptions.compress'), icon: Zap, href: '/tools/compress', color: 'sky' },
-        { id: 'heic', category: 'media', title: t('heicToJpg'), desc: t('toolDescriptions.heic'), icon: ImagePlus, href: '/tools/heic-to-jpg', color: 'sky' },
-        { id: 'media-converter', category: 'media', title: t('mediaConverter'), desc: t('toolDescriptions.mediaConverter'), icon: Video, href: '/tools/media-converter', color: 'sky' },
-        { id: 'svg-to-png', category: 'media', title: t('svgToPng'), desc: t('toolDescriptions.svgToPng'), icon: Wand2, href: '/tools/svg-to-png', color: 'sky' },
-        { id: 'blur', category: 'media', title: t('blurTool'), desc: t('toolDescriptions.blur'), icon: Eye, href: '/tools/blur', color: 'sky' },
-
-        // DOCUMENT SUITE (Secure PDF Workflow)
-        { id: 'merger', category: 'docs', title: t('pdfMerger'), desc: t('toolDescriptions.merger'), icon: FileStack, href: '/tools/pdf-merge', color: 'purple' },
-        { id: 'pdf-to-word', category: 'docs', title: t('pdfToDocx'), desc: t('toolDescriptions.pdfToWord'), icon: FileUp, href: '/tools/pdf-to-docx', color: 'purple' },
-        { id: 'unlock', category: 'docs', title: t('unlockPdf'), desc: t('toolDescriptions.unlock'), icon: Unlock, href: '/tools/unlock-pdf', color: 'purple' },
-        { id: 'pdf-to-img', category: 'docs', title: t('pdfToImg'), desc: t('toolDescriptions.pdfToImg'), icon: Images, href: '/tools/pdf-to-img', color: 'purple' },
-        { id: 'split', category: 'docs', title: t('pdfSplit'), desc: t('toolDescriptions.split'), icon: Scissors, href: '/tools/pdf-split', color: 'purple' }
-    ], [t]);
-
-    const categories = useMemo(() => [
-        { id: 'all', title: 'All Tools', color: 'zinc' },
-        { id: 'vault', title: t('categories.vault'), color: 'emerald' },
-        { id: 'media', title: t('categories.media'), color: 'sky' },
-        { id: 'docs', title: t('categories.docs'), color: 'purple' }
-    ], [t]);
-
-    /**
-     * 🔍 Data Filtering Logic
-     * Computes the subset of tools based on the active security tier.
-     */
-    const filteredTools = useMemo(() => {
-        if (activeCategory === 'all') return tools;
-        return tools.filter(tool => tool.category === activeCategory);
-    }, [activeCategory, tools]);
+    const filtered = useMemo(() => {
+        if (active === 'all') return tools;
+        return tools.filter(t => t.category === active);
+    }, [active]);
 
     return (
-        <section id="tools" className="space-y-16">
-            {/* 🎚️ CATEGORY FILTERS */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-                {categories.map((cat) => (
+        <section id="tools" className="space-y-12">
+            {/* Category filter tabs */}
+            <div className="flex flex-wrap items-center gap-2">
+                {categories.map(cat => (
                     <button
                         key={cat.id}
-                        onClick={() => setActiveCategory(cat.id)}
+                        onClick={() => setActive(cat.id)}
                         className={cn(
-                            "px-6 lg:px-10 py-4 lg:py-5 rounded-[1.5rem] text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] transition-all border",
-                            activeCategory === cat.id
-                                ? "bg-white text-black border-white shadow-[0_10px_30px_rgba(255,255,255,0.2)] scale-105"
-                                : "bg-zinc-900/50 text-zinc-500 border-zinc-800 hover:border-zinc-700 hover:text-white"
+                            "h-10 px-5 text-[11px] font-bold uppercase tracking-widest border transition-all",
+                            active === cat.id
+                                ? "bg-white text-black border-white"
+                                : "bg-transparent text-zinc-500 border-white/10 hover:border-white/30 hover:text-white"
                         )}
                     >
-                        {cat.title}
+                        {cat.label}
+                        <span className={cn("ms-2 tabular-nums", active === cat.id ? "text-black/50" : "text-zinc-700")}>
+                            {cat.count}
+                        </span>
                     </button>
                 ))}
             </div>
 
-            {/* ⚒️ DYNAMIC TOOL GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Tool grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
                 <AnimatePresence mode="popLayout">
-                    {filteredTools.map((tool, i) => (
+                    {filtered.map((tool, i) => (
                         <motion.div
                             key={tool.id}
                             layout
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.4, delay: i * 0.05 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.25, delay: i * 0.04 }}
                         >
-                            <Link href={tool.href} className="group block h-full">
-                                <Card className="h-full bg-zinc-900/30 border border-zinc-900 rounded-[2.5rem] p-8 lg:p-10 flex flex-col transition-all duration-500 hover:bg-zinc-900/50 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/5">
-                                    <div className="flex items-start justify-between mb-8">
-                                        <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl border transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 bg-zinc-950 border-zinc-800 text-zinc-400 group-hover:text-emerald-500 group-hover:border-emerald-500/50">
-                                            <tool.icon className="w-8 h-8" />
+                            <Link href={tool.href} className="group block bg-black hover:bg-zinc-950 transition-colors p-8 lg:p-10 h-full">
+                                <div className="flex flex-col h-full gap-6">
+                                    {/* Icon + Category badge */}
+                                    <div className="flex items-start justify-between">
+                                        <div className="w-12 h-12 border border-white/10 group-hover:border-white/30 flex items-center justify-center transition-colors">
+                                            <tool.icon className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" />
                                         </div>
-                                        <div className={cn(
-                                            "px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-widest",
-                                            colorClasses[tool.color as keyof typeof colorClasses] || colorClasses.zinc
-                                        )}>
-                                            {t(`categories.${tool.category}`)}
-                                        </div>
+                                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-600 border border-zinc-900 px-2.5 py-1">
+                                            {tool.category}
+                                        </span>
                                     </div>
 
-                                    <div className="space-y-6 mb-8">
-                                        <h3 className="text-3xl lg:text-4xl font-black uppercase italic tracking-tighter text-white group-hover:text-emerald-500 transition-colors leading-none">
+                                    {/* Text */}
+                                    <div className="flex-1 space-y-3">
+                                        <h3 className="text-2xl font-black uppercase tracking-tight text-white leading-tight">
                                             {tool.title}
                                         </h3>
-                                        <p className="text-zinc-400 font-bold leading-relaxed text-base">
+                                        <p className="text-sm text-zinc-500 leading-relaxed font-normal">
                                             {tool.desc}
                                         </p>
                                     </div>
 
-                                    <div className="mt-auto pt-8 border-t border-zinc-900/50">
-                                        <div className="flex items-center justify-between group-hover:translate-x-2 transition-transform duration-500">
-                                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 italic">Open Service</span>
-                                            <ArrowRight className={cn("w-5 h-5 text-emerald-500", isRTL && "rotate-180")} />
-                                        </div>
+                                    {/* Arrow CTA */}
+                                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-white transition-colors">
+                                        Open Tool
+                                        <ArrowRight className={cn("w-3.5 h-3.5 group-hover:translate-x-1 transition-transform", isRTL && "rotate-180")} />
                                     </div>
-                                </Card>
+                                </div>
                             </Link>
                         </motion.div>
                     ))}

@@ -1,17 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Outfit, Inter, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getLocale, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import "../globals.css";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
-const geist = Geist({ subsets: ["latin"], variable: '--font-geist' });
+const outfit = Outfit({
+    subsets: ["latin"],
+    variable: '--font-outfit',
+    display: 'swap'
+});
+const inter = Inter({
+    subsets: ["latin"],
+    variable: '--font-inter',
+    display: 'swap'
+});
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
     weight: ['300', '400', '500', '600', '700'],
     subsets: ["arabic"],
-    variable: '--font-ibm-plex'
+    variable: '--font-ibm-plex',
+    display: 'swap'
 });
 
 export const metadata: Metadata = {
@@ -105,14 +116,15 @@ export default async function RootLayout({
                 suppressHydrationWarning
                 data-debug-locale={locale}
                 data-debug-keys={Object.keys(messages).join(',')}
-                className={`${isArabic ? ibmPlexArabic.className : geist.className} bg-background text-foreground antialiased min-h-screen selection:bg-emerald-500/30 font-medium dark:font-semibold`}
+                className={`${outfit.variable} ${inter.variable} ${isArabic ? ibmPlexArabic.className : inter.className} bg-background text-foreground antialiased min-h-screen selection:bg-white/20`}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <div className="relative min-h-screen flex flex-col">
+                    <div className="w-full min-h-screen flex flex-col">
                         <Navbar />
-                        <main className="flex-1 flex flex-col pt-18">
+                        <main className="flex-1 w-full pt-16">
                             {children}
                         </main>
+                        <Footer />
                     </div>
                 </NextIntlClientProvider>
             </body>

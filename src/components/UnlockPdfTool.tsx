@@ -146,42 +146,42 @@ const UnlockPdfTool = memo(() => {
             settingsContent={
                 <div className="space-y-6">
                     {/* 🔘 SECURITY NODE HUB */}
-                    <div className="space-y-3">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Security Node</span>
-                        <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
-                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-tight italic">AES Decryption</span>
-                            <ShieldCheck className="w-3 h-3 text-emerald-500" />
+                    <div className="space-y-4">
+                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">Security Node</span>
+                        <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
+                            <span className="text-sm font-bold text-zinc-400 uppercase tracking-tight italic">AES Decryption</span>
+                            <ShieldCheck className="w-4 h-4 text-emerald-500" />
                         </div>
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3 pt-2">
                         <Button
                             onClick={unlockPdf}
                             disabled={!password || isProcessing || !!(errorMsg && !errorMsg.includes("Incorrect"))}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-xs uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Unlock className="w-4 h-4 me-2" />}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Unlock className="w-5 h-5 me-2" />}
                             {isProcessing ? t('unlocking') : t('unlockBtn')}
                         </Button>
 
                         <Button
                             variant="outline"
                             onClick={resetTool}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-14 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-xs font-black uppercase tracking-widest italic"
                         >
-                            <RefreshCw className="w-4 h-4 me-2" />
+                            <RefreshCw className="w-5 h-5 me-2" />
                             Reset Keyhole
                         </Button>
                     </div>
 
                     {/* 📊 SANDBOX REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-4">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Key className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">End-to-End Local</span>
+                            <Key className="w-4 h-4" />
+                            <span className="text-xs font-black uppercase tracking-widest">End-to-End Local</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase">
                             Decryption keys are held in volatile memory only.
                             No keystrokes are logged or transmitted.
                         </p>
@@ -190,7 +190,7 @@ const UnlockPdfTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
+            <div className="relative min-h-[400px] flex flex-col items-center justify-center p-4 md:p-8">
                 <AnimatePresence mode="wait">
                     {!originalFile ? (
                         <motion.div
@@ -236,16 +236,16 @@ const UnlockPdfTool = memo(() => {
                             className="w-full flex flex-col items-center space-y-8"
                         >
                             {/* 📟 PROCESSING REPORT CARD */}
-                            <div className="w-full max-w-2xl bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative p-8 flex flex-col items-center shadow-2xl">
-                                <div className="flex items-center gap-4 mb-8 w-full">
-                                    <div className="w-14 h-14 bg-zinc-950 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0">
-                                        <FileText className="w-6 h-6 text-emerald-500" />
+                            <div className="w-full max-w-2xl bg-zinc-900/50 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative p-10 flex flex-col items-center shadow-2xl">
+                                <div className="flex items-center gap-6 mb-10 w-full">
+                                    <div className="w-16 h-16 bg-zinc-950 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0 shadow-inner">
+                                        <FileText className="w-7 h-7 text-emerald-500" />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-black uppercase tracking-tighter text-white truncate">{originalFile.name}</p>
-                                        <p className="text-[10px] font-bold uppercase text-zinc-500">{(originalFile.size / 1024 / 1024).toFixed(2)} MB &bull; Encrypted Registry</p>
+                                        <p className="text-base font-black uppercase tracking-tighter text-white truncate">{originalFile.name}</p>
+                                        <p className="text-xs font-bold uppercase text-zinc-500">{(originalFile.size / 1024 / 1024).toFixed(2)} MB &bull; Encrypted Registry</p>
                                     </div>
-                                    <Button variant="ghost" size="sm" onClick={resetTool} className="text-zinc-500 hover:text-white uppercase tracking-widest text-[9px] font-black italic">
+                                    <Button variant="ghost" size="sm" onClick={resetTool} className="text-zinc-500 hover:text-white uppercase tracking-widest text-xs font-black italic">
                                         Change
                                     </Button>
                                 </div>
@@ -261,9 +261,9 @@ const UnlockPdfTool = memo(() => {
                                             <div className="w-20 h-20 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.1)]">
                                                 <ShieldCheck className="w-10 h-10 text-emerald-500" />
                                             </div>
-                                            <div className="text-center space-y-2">
-                                                <h3 className="text-xl font-black uppercase italic tracking-tight">{t('successTitle')}</h3>
-                                                <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest max-w-xs">{t('successDesc')}</p>
+                                            <div className="text-center space-y-3">
+                                                <h3 className="text-2xl font-black uppercase italic tracking-tight">{t('successTitle')}</h3>
+                                                <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest max-w-sm">{t('successDesc')}</p>
                                             </div>
                                             <Button
                                                 onClick={handleDownload}
@@ -282,8 +282,8 @@ const UnlockPdfTool = memo(() => {
                                         >
                                             <div className="space-y-4">
                                                 <div className="flex justify-between items-center px-1">
-                                                    <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{t('passwordLabel')}</label>
-                                                    {errorMsg && <span className="text-[10px] text-red-500 font-bold uppercase">{errorMsg}</span>}
+                                                    <label className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('passwordLabel')}</label>
+                                                    {errorMsg && <span className="text-xs text-red-500 font-bold uppercase">{errorMsg}</span>}
                                                 </div>
                                                 <div className="relative">
                                                     <input
@@ -309,9 +309,9 @@ const UnlockPdfTool = memo(() => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-center gap-3 p-4 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl">
-                                                <Info className="w-5 h-5 text-emerald-500 shrink-0" />
-                                                <p className="text-[9px] text-zinc-500 font-bold leading-tight uppercase">
+                                            <div className="flex items-center gap-4 p-5 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl">
+                                                <Info className="w-6 h-6 text-emerald-500 shrink-0" />
+                                                <p className="text-[11px] text-zinc-500 font-bold leading-tight uppercase">
                                                     This PDF is processed in a transient memory buffer. No data survives the session.
                                                 </p>
                                             </div>
@@ -321,15 +321,15 @@ const UnlockPdfTool = memo(() => {
                             </div>
 
                             {/* 📟 FLOW METRICS */}
-                            <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Registry Lock</span>
-                                    <Unlock className="w-5 h-5 text-zinc-500" />
+                            <div className="flex items-center gap-12 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[10px] font-black text-zinc-600 uppercase">Registry Lock</span>
+                                    <Unlock className="w-6 h-6 text-zinc-500" />
                                 </div>
-                                <RefreshCw className={cn("w-5 h-5 text-emerald-500", isProcessing && "animate-spin")} />
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Clearstream Registry</span>
-                                    <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                                <RefreshCw className={cn("w-6 h-6 text-emerald-500", isProcessing && "animate-spin")} />
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-[10px] font-black text-zinc-600 uppercase">Clearstream Registry</span>
+                                    <ShieldCheck className="w-6 h-6 text-emerald-500" />
                                 </div>
                             </div>
                         </motion.div>

@@ -178,7 +178,7 @@
             "title": "Ocultar caras",
             "description": "Difumina partes de tu foto localmente."
         },
-        "clean-exif": {
+        "cleanExif": {
             "title": "Limpiar foto",
             "description": "Elimina el mapa oculto y los detalles."
         },
@@ -282,8 +282,24 @@
             "dropTitle": "Suelta la foto aquí",
             "dropDesc": "Elige una foto para borrar los detalles ocultos.",
             "cleaning": "Limpiando...",
+            "scrubbing": "Limpiando metadatos...",
             "cleanBtn": "Limpiar mi foto",
-            "downloadBtn": "Guardar foto limpia"
+            "downloadBtn": "Guardar foto limpia",
+            "downloadClean": "Guardar foto limpia",
+            "howItWorks": {
+                "step1": {
+                    "title": "Seleccionar imagen",
+                    "desc": "Elige la foto que quieras desinfectar."
+                },
+                "step2": {
+                    "title": "Limpieza de metadatos",
+                    "desc": "Nuestro sistema reconstruye la imagen en un lienzo limpio para borrar todos los datos EXIF."
+                },
+                "step3": {
+                    "title": "Exportación segura",
+                    "desc": "Descarga tu foto totalmente anónima de forma segura."
+                }
+            }
         }
     }
 }

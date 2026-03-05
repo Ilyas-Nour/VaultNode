@@ -128,33 +128,33 @@ const BlurTool = memo(() => {
                     {/* 🎚️ INTENSITY CONTROL */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Blur Intensity</span>
-                            <span className="text-[10px] font-black text-emerald-500">{blurAmount[0]}px</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Blur Intensity</span>
+                            <span className="text-sm font-black text-emerald-500 tabular-nums">{blurAmount[0]}px</span>
                         </div>
                         <Slider
                             value={blurAmount}
                             onValueChange={(val) => { setBlurAmount(val); setExportBlob(null); }}
                             max={50}
                             step={1}
-                            className="py-4"
+                            className="py-6"
                         />
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3.5 pt-4">
                         <Button
                             onClick={handleExport}
                             disabled={!file || isProcessing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4 me-2" />}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <RefreshCw className="w-5 h-5 me-2" />}
                             {isProcessing ? "Synthesizing..." : "Apply Buffer Blur"}
                         </Button>
 
                         {exportBlob && (
                             <Button
                                 onClick={handleDownload}
-                                className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all shadow-xl"
+                                className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all shadow-xl"
                             >
                                 <Download className="w-4 h-4 me-2" />
                                 Download Node
@@ -165,7 +165,7 @@ const BlurTool = memo(() => {
                             <Button
                                 variant="ghost"
                                 onClick={resetTool}
-                                className="w-full h-10 text-zinc-600 hover:text-white text-[9px] font-black uppercase tracking-widest"
+                                className="w-full h-10 text-zinc-600 hover:text-white text-[10px] font-black uppercase tracking-widest italic tracking-[0.15em]"
                             >
                                 New Sequence
                             </Button>
@@ -173,12 +173,12 @@ const BlurTool = memo(() => {
                     </div>
 
                     {/* 📊 SANDBOX REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Canvas Sandbox</span>
+                            <Shield className="w-4 h-4" />
+                            <span className="text-[11px] font-black uppercase tracking-widest">Canvas Sandbox</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
                             Pixels are transformed in a volatile HTML5 canvas.
                             Zero persistent artifacts.
                         </p>
@@ -187,7 +187,7 @@ const BlurTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-8">
+            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-8">
                 <AnimatePresence mode="wait">
                     {!file ? (
                         <motion.div
@@ -217,11 +217,11 @@ const BlurTool = memo(() => {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">Stage Your Media</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">Select an image to obfuscate locally.</p>
+                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Stage Your Media</h3>
+                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">Select an image to obfuscate locally.</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -230,64 +230,69 @@ const BlurTool = memo(() => {
                             key="results"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8"
+                            className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6"
                         >
                             {/* 📂 SOURCE STREAM VIEW */}
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between px-2">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">Source Node</span>
-                                    <ImageIcon className="w-3 h-3 text-zinc-700" />
+                                    <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Source Node</span>
+                                    <div className="bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">
+                                        <ImageIcon className="w-3.5 h-3.5 text-zinc-700" />
+                                    </div>
                                 </div>
-                                <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative shadow-2xl">
+                                <div className="aspect-square rounded-[2.5rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative shadow-2xl backdrop-blur-sm">
                                     {previewUrl && (
                                         <img
                                             src={previewUrl}
-                                            className="w-full h-full object-contain mix-blend-lighten opacity-80"
+                                            className="w-full h-full object-contain mix-blend-lighten opacity-80 p-4"
                                             alt="Original"
                                         />
                                     )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/50 to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent pointer-events-none" />
                                 </div>
                             </div>
 
                             {/* 💧 SYNTHESIZED PREVIEW */}
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between px-2">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 italic">Synthesized Output</span>
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-[9px] font-black text-emerald-500/50 uppercase">Preview</span>
-                                        <Eye className="w-3 h-3 text-emerald-500" />
+                                    <span className="text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">Synthesized Output</span>
+                                    <div className="flex items-center gap-2.5 bg-emerald-500/5 px-2.5 py-1 rounded-full border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors group/eye">
+                                        <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-tighter">Live Monitor</span>
+                                        <Eye className="w-3.5 h-3.5 text-emerald-500 animate-pulse group-hover/eye:scale-110 transition-transform" />
                                     </div>
                                 </div>
-                                <div className="aspect-square rounded-[2rem] border border-emerald-500/20 bg-emerald-500/5 overflow-hidden relative shadow-[0_0_50px_rgba(16,185,129,0.05)]">
+                                <div className="aspect-square rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/10 overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)] transition-all duration-700 hover:border-emerald-500/40 group">
                                     {previewUrl && (
                                         <img
                                             src={previewUrl}
                                             style={{ filter: `blur(${blurAmount[0]}px)` }}
-                                            className="w-full h-full object-contain transition-all duration-300 transform scale-[1.02]"
+                                            className="w-full h-full object-contain transition-all duration-500 transform scale-[1.05] p-4 group-hover:scale-[1.02]"
                                             alt="Blurred Preview"
                                         />
                                     )}
 
                                     {isProcessing && (
-                                        <div className="absolute inset-0 bg-zinc-950/60 backdrop-blur-md flex flex-col items-center justify-center gap-4">
-                                            <Loader2 className="w-8 h-8 text-emerald-500 animate-spin" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse">Encoding Node</span>
+                                        <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl flex flex-col items-center justify-center gap-5 transition-all animate-in fade-in duration-500">
+                                            <div className="relative">
+                                                <div className="absolute -inset-4 bg-emerald-500/20 blur-2xl rounded-full animate-pulse" />
+                                                <Loader2 className="w-10 h-10 text-emerald-500 animate-spin relative" />
+                                            </div>
+                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse">Encoding Node</span>
                                         </div>
                                     )}
                                 </div>
                             </div>
 
                             {/* 📟 PROTOCOL INDICATORS */}
-                            <div className="md:col-span-2 flex items-center justify-center gap-8 py-4 bg-zinc-900/50 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-2 rounded-full h-2 bg-emerald-500 animate-pulse" />
-                                    <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Gaussian Protocol</span>
+                            <div className="md:col-span-2 flex items-center justify-center gap-12 py-6 bg-zinc-900/80 border border-zinc-800 rounded-[2.5rem] shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl mt-4">
+                                <div className="flex items-center gap-3.5 transition-all hover:scale-105">
+                                    <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">Gaussian Protocol</span>
                                 </div>
-                                <div className="w-px h-3 bg-zinc-800" />
-                                <div className="flex items-center gap-3">
-                                    <div className="w-2 rounded-full h-2 bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                                    <span className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Local Integrity</span>
+                                <div className="w-px h-6 bg-zinc-800" />
+                                <div className="flex items-center gap-3.5 transition-all hover:scale-105">
+                                    <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]" style={{ animationDelay: '0.2s' }} />
+                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">Local Integrity</span>
                                 </div>
                             </div>
                         </motion.div>

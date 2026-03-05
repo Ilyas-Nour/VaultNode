@@ -60,7 +60,7 @@
                 "after": "Une photo standard qui fonctionne partout."
             },
             "media-converter": {
-                "before": "Une vidéo qui ne fonctionne pas sur votre téléphone.",
+                "before": "Une vidéo que ne fonctionne pas sur votre téléphone.",
                 "after": "Un fichier parfait qui fonctionne partout."
             },
             "svg-to-png": {
@@ -177,7 +177,7 @@
             "title": "Cacher les visages",
             "description": "Flouter des parties de votre photo."
         },
-        "clean-exif": {
+        "cleanExif": {
             "title": "Nettoyer une photo",
             "description": "Supprimer la carte cachée et les détails."
         },
@@ -243,7 +243,7 @@
             "description": "Couvrir les secrets dans un document.",
             "titleHighlight": "Cacher les infos privées",
             "dropTitle": "Déposez votre fichier ici",
-            "dropDesc": "Choisissez un fichier pour commencer à cacher les secrets.",
+            "dropDesc": "Choisissez un fichier pour recommencer à cacher les secrets.",
             "flattening": "Sécurisation...",
             "secureExport": "Enregistrer la copie sûre",
             "clearAll": "Recommencer",
@@ -281,8 +281,24 @@
             "dropTitle": "Déposez la photo ici",
             "dropDesc": "Choisissez une photo pour effacer les détails cachés.",
             "cleaning": "Nettoyage en cours...",
+            "scrubbing": "Nettoyage des métadonnées...",
             "cleanBtn": "Nettoyer ma photo",
-            "downloadBtn": "Enregistrer la photo propre"
+            "downloadBtn": "Enregistrer la photo propre",
+            "downloadClean": "Enregistrer la photo propre",
+            "howItWorks": {
+                "step1": {
+                    "title": "Sélectionner une image",
+                    "desc": "Choisissez la photo que vous souhaitez assainir."
+                },
+                "step2": {
+                    "title": "Nettoyage des métadonnées",
+                    "desc": "Notre système reconstruit l'image sur un canevas propre pour effacer toutes les données EXIF."
+                },
+                "step3": {
+                    "title": "Exportation sécurisée",
+                    "desc": "Téléchargez votre photo entièrement anonyme en toute sécurité."
+                }
+            }
         }
     }
 }

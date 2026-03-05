@@ -1,104 +1,80 @@
-/**
- * 🧱 PRIVAFLOW | Foundational Footer
- * ---------------------------------------------------------
- * The structural anchor for the application.
- * Provides deep-link navigation and security reassurance.
- * 
- * Logic: Hierarchical Link Registration
- * Performance: High (Memoized Registry)
- * Aesthetics: Zero-Weight / Technical-Premium
- */
-
 "use client";
 
-import React, { useMemo, memo } from 'react';
-import { useTranslations } from 'next-intl';
+import React, { memo } from 'react';
 import { Link } from '@/i18n/routing';
-import { Sparkles, Shield, Heart, Github, Mail, HelpCircle } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
-/**
- * 🧱 Footer Component
- * High-fidelity footer with optimized link structures.
- */
+const columns = [
+    {
+        heading: "Tools",
+        links: [
+            { label: "Redact PDF", href: '/tools/redact' },
+            { label: "Clean Metadata", href: '/tools/clean-exif' },
+            { label: "Media Converter", href: '/tools/media-converter' },
+            { label: "PDF to Word", href: '/tools/pdf-to-docx' },
+            { label: "Compress Image", href: '/tools/compress' },
+            { label: "Merge PDF", href: '/tools/pdf-merge' },
+        ]
+    },
+    {
+        heading: "Documents",
+        links: [
+            { label: "Blur Image", href: '/tools/blur' },
+            { label: "HEIC to JPG", href: '/tools/heic-to-jpg' },
+            { label: "SVG to PNG", href: '/tools/svg-to-png' },
+            { label: "Unlock PDF", href: '/tools/unlock-pdf' },
+            { label: "PDF to Image", href: '/tools/pdf-to-img' },
+            { label: "Split PDF", href: '/tools/pdf-split' },
+        ]
+    },
+    {
+        heading: "Privacy",
+        links: [
+            { label: "Zero Upload Policy", href: '#philosophy' },
+            { label: "Local Protocol", href: '#philosophy' },
+            { label: "Encryption Standards", href: '#philosophy' },
+            { label: "Open Architecture", href: '#philosophy' },
+        ]
+    },
+    {
+        heading: "Info",
+        links: [
+            { label: "How It Works", href: '/#tools' },
+            { label: "Philosophy", href: '/#philosophy' },
+            { label: "All Tools", href: '/#magic' },
+            { label: "Contact Us", href: '/contact' },
+        ]
+    }
+];
+
 export const Footer = memo(() => {
-    // ✨ HOOKS
-    const t = useTranslations('HomePage');
-
-    /**
-     * 📂 Footer Navigation Registry
-     * Memoized to prevent hierarchical rebuilds during viewport resizing.
-     */
-    const sections = useMemo(() => [
-        {
-            title: t('footer.services'),
-            links: [
-                { title: t('launchRedactor'), href: '/tools/redact' },
-                { title: t('imageCompressor'), href: '/tools/compress' },
-                { title: t('pdfMerger'), href: '/tools/pdf-merge' },
-                { title: t('password'), href: '/tools/password' },
-                { title: t('cleanExif'), href: '/tools/clean-exif' },
-                { title: t('unlockPdf'), href: '/tools/unlock-pdf' },
-            ]
-        },
-        {
-            title: t('footer.company'),
-            links: [
-                { title: t('footer.philosophy'), href: '#philosophy' },
-                { title: t('footer.whyTitle'), href: '#why' },
-                { title: t('footer.privacy'), href: '#' },
-                { title: t('footer.terms'), href: '#' },
-            ]
-        },
-        {
-            title: t('footer.support'),
-            links: [
-                { title: t('footer.faq'), href: '#faq' },
-                { title: t('footer.contact'), href: '#contact' },
-                { title: t('footer.report'), href: '#' },
-            ]
-        }
-    ], [t]);
-
     return (
-        <footer className="bg-zinc-950 border-t border-zinc-900 pt-24 pb-12 w-full">
-            <div className="w-full px-6 lg:px-12 xl:px-24">
-                {/* 🏗️ MAIN GRID ARCHITECTURE */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
-                    {/* 🏷️ BRAND IDENTITY COLUMN */}
-                    <div className="space-y-8">
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-                                <Sparkles className="w-6 h-6 text-black fill-black" />
-                            </div>
-                            <span className="text-xl font-black uppercase italic tracking-tighter text-white">
-                                PrivaFlow
-                            </span>
-                        </Link>
-                        <p className="text-zinc-500 text-sm leading-relaxed font-medium max-w-[240px]">
-                            {t('footer.whyDesc')}
-                        </p>
-                        <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-zinc-900 border border-zinc-800 w-fit">
-                            <Shield className="w-4 h-4 text-emerald-500" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">
-                                {t('footer.badge')}
-                            </span>
-                        </div>
-                    </div>
+        <footer className="border-t border-white/[0.06] bg-black w-full">
+            <div className="w-full px-6 lg:px-12 pt-20 pb-12">
 
-                    {/* 🔗 LINK DIRECTORIES */}
-                    {sections.map((section) => (
-                        <div key={section.title} className="space-y-6">
-                            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
-                                {section.title}
+                {/* Big brand statement */}
+                <div className="mb-16 border-b border-white/[0.06] pb-16">
+                    <p className="text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9] text-white/10 max-w-3xl">
+                        Privacy Is Not an Option.
+                        <span className="text-white"> It's the Architecture.</span>
+                    </p>
+                </div>
+
+                {/* Sitemap */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
+                    {columns.map(col => (
+                        <div key={col.heading} className="space-y-5">
+                            <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-white">
+                                {col.heading}
                             </h4>
-                            <ul className="space-y-4">
-                                {section.links.map((link) => (
-                                    <li key={link.title}>
+                            <ul className="space-y-2.5">
+                                {col.links.map(link => (
+                                    <li key={link.label}>
                                         <Link
                                             href={link.href}
-                                            className="text-sm font-bold text-zinc-500 hover:text-white transition-colors"
+                                            className="text-[13px] text-zinc-500 hover:text-white transition-colors"
                                         >
-                                            {link.title}
+                                            {link.label}
                                         </Link>
                                     </li>
                                 ))}
@@ -107,25 +83,15 @@ export const Footer = memo(() => {
                     ))}
                 </div>
 
-                {/* 📜 LEGAL & SOCIAL FOOTLINE */}
-                <div className="pt-12 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <p className="text-xs font-bold text-zinc-600 uppercase tracking-widest">
-                        © 2026 PRIVAFLOW. {t('footer.rights')}
+                {/* Bottom bar */}
+                <div className="pt-8 border-t border-white/[0.06] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-sm font-black uppercase tracking-[0.15em] text-white">PrivaFlow</span>
+                        <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-700">v2.0</span>
+                    </div>
+                    <p className="text-[10px] font-semibold text-zinc-700 uppercase tracking-widest">
+                        © 2026 · Zero tracking · Zero uploads · Built for the open web
                     </p>
-                    <div className="flex items-center gap-6">
-                        <Link href="#" className="p-2 text-zinc-500 hover:text-white transition-colors">
-                            <Github className="w-5 h-5" />
-                        </Link>
-                        <Link href="#" className="p-2 text-zinc-500 hover:text-white transition-colors">
-                            <Mail className="w-5 h-5" />
-                        </Link>
-                        <Link href="#" className="p-2 text-zinc-500 hover:text-white transition-colors">
-                            <HelpCircle className="w-5 h-5" />
-                        </Link>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs font-bold text-zinc-600 uppercase tracking-widest">
-                        {t('footer.builtWith')} <Heart className="w-3 h-3 text-red-500 fill-red-500" /> for privacy
-                    </div>
                 </div>
             </div>
         </footer>

@@ -15,7 +15,6 @@
 import React, { useState, useRef, useEffect, useCallback, memo, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
-import { useTranslations } from 'next-intl';
 import {
     Video, Music, Scissors, Download, Loader2,
     Play, Pause, Volume2, RefreshCw, Zap, HardDrive
@@ -32,11 +31,9 @@ import { cn } from '@/lib/utils';
  * The primary utility for local media format conversion and trimming.
  */
 const MediaConverterTool = memo(() => {
-    // ✨ HOOKS & TRANSLATIONS
-    const t = useTranslations('Tools.mediaConverter');
     const { ffmpeg, loaded, progress, load } = useFFmpeg();
 
-    // 📂 STATE ORCHESTRATION
+    // 📂 STATE
     const [file, setFile] = useState<File | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [startTime, setStartTime] = useState(0);
@@ -148,17 +145,17 @@ const MediaConverterTool = memo(() => {
 
     return (
         <ToolContainer
-            title={t('title')}
-            description={t('description')}
+            title="Media Converter"
+            description="Extract audio or trim video clips using FFmpeg.wasm — entirely in your browser."
             icon={Video}
             category="media"
             toolId="media-converter"
             settingsContent={
                 <div className="space-y-6">
                     {/* 🔘 OPERATION MODE SELECTOR */}
-                    <div className="space-y-3">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Operation Mode</span>
-                        <div className="grid grid-cols-3 gap-2 p-1 bg-zinc-900 rounded-2xl border border-zinc-800">
+                    <div className="space-y-3.5">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Operation Mode</span>
+                        <div className="grid grid-cols-3 gap-2 p-1.5 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-inner">
                             {[
                                 { id: 'mp3', icon: Music, label: 'MP3' },
                                 { id: 'wav', icon: Volume2, label: 'WAV' },
@@ -168,14 +165,14 @@ const MediaConverterTool = memo(() => {
                                     key={item.id}
                                     onClick={() => setMode(item.id as any)}
                                     className={cn(
-                                        "py-3 rounded-xl flex flex-col items-center gap-1 transition-all",
+                                        "py-3.5 rounded-xl flex flex-col items-center gap-1.5 transition-all",
                                         mode === item.id
                                             ? "bg-emerald-500 text-emerald-950 shadow-lg shadow-emerald-500/10"
                                             : "text-zinc-500 hover:text-white hover:bg-zinc-800"
                                     )}
                                 >
-                                    <item.icon className="w-3.5 h-3.5" />
-                                    <span className="text-[9px] font-black uppercase italic">{item.label}</span>
+                                    <item.icon className="w-4 h-4" />
+                                    <span className="text-[10px] font-black uppercase italic tracking-tight">{item.label}</span>
                                 </button>
                             ))}
                         </div>
@@ -184,9 +181,9 @@ const MediaConverterTool = memo(() => {
                     {/* 🎚️ TRIM RANGE SELECTOR */}
                     {mode === 'trim' && duration > 0 && (
                         <div className="space-y-4 pt-2">
-                            <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                            <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
                                 <span>Range Selection</span>
-                                <span className="text-emerald-500">{startTime.toFixed(1)}s - {endTime.toFixed(1)}s</span>
+                                <span className="text-emerald-500 tabular-nums">{startTime.toFixed(1)}s - {endTime.toFixed(1)}s</span>
                             </div>
                             <Slider
                                 value={[startTime, endTime]}
@@ -197,26 +194,25 @@ const MediaConverterTool = memo(() => {
                                     setStartTime(val[0]);
                                     setEndTime(val[1]);
                                 }}
-                                className="py-4"
+                                className="py-6"
                             />
                         </div>
                     )}
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3.5 pt-4">
                         <Button
                             onClick={processMedia}
                             disabled={isProcessing || !loaded || !file}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-14 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-xs transition-all active:scale-95"
                         >
-                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4 me-2" />}
-                            {isProcessing ? t('processing') : t('convertBtn')}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : "Convert & Download"}
                         </Button>
 
                         <Button
                             variant="outline"
                             onClick={resetTool}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[10px] font-black uppercase tracking-widest italic"
+                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
                         >
                             <RefreshCw className="w-4 h-4 me-2" />
                             Reset Node
@@ -224,19 +220,19 @@ const MediaConverterTool = memo(() => {
                     </div>
 
                     {/* 📊 WASM STATUS REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Zap className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">FFmpeg.wasm Active</span>
+                            <Zap className="w-4 h-4" />
+                            <span className="text-[11px] font-black uppercase tracking-widest">FFmpeg.wasm Active</span>
                         </div>
-                        <div className="space-y-1">
-                            <div className="flex justify-between text-[8px] font-black uppercase text-zinc-600">
+                        <div className="space-y-2">
+                            <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-zinc-600">
                                 <span>WASM Status</span>
                                 <span className={loaded ? "text-emerald-500" : "text-amber-500"}>{loaded ? "Ready" : "Loading..."}</span>
                             </div>
-                            <div className="h-1 bg-zinc-950 rounded-full overflow-hidden">
+                            <div className="h-1.5 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/50">
                                 <motion.div
-                                    className="h-full bg-emerald-500"
+                                    className="h-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                                     initial={{ width: 0 }}
                                     animate={{ width: loaded ? "100%" : "20%" }}
                                 />
@@ -247,7 +243,7 @@ const MediaConverterTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-8">
+            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-8">
                 <AnimatePresence mode="wait">
                     {!file ? (
                         <motion.div
@@ -277,11 +273,11 @@ const MediaConverterTool = memo(() => {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <Video className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
+                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Drop Media File</h3>
+                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">MP4 · MOV · MP3 · WEBM Supported</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -290,15 +286,15 @@ const MediaConverterTool = memo(() => {
                             key="results"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full h-full flex flex-col items-center space-y-8"
+                            className="w-full h-full flex flex-col items-center space-y-10"
                         >
                             {/* 🎥 PREVIEW VIEWPORT */}
-                            <div className="relative group w-full max-w-3xl aspect-video bg-zinc-900 rounded-[2rem] border border-zinc-800 overflow-hidden shadow-2xl">
+                            <div className="relative group w-full max-w-3xl aspect-video bg-zinc-950 rounded-[2.5rem] border border-zinc-800/80 overflow-hidden shadow-2xl backdrop-blur-xl">
                                 {previewUrl && file.type.startsWith('video/') ? (
                                     <video
                                         ref={videoRef}
                                         src={previewUrl}
-                                        className="w-full h-full object-contain"
+                                        className="w-full h-full object-contain mix-blend-lighten p-2"
                                         onTimeUpdate={(e) => {
                                             const curr = (e.target as HTMLVideoElement).currentTime;
                                             if (mode === 'trim' && curr >= endTime) {
@@ -307,20 +303,23 @@ const MediaConverterTool = memo(() => {
                                         }}
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex flex-col items-center justify-center gap-4 text-zinc-700">
-                                        <Music className="w-16 h-16 animate-pulse" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest">{file.name}</span>
+                                    <div className="w-full h-full flex flex-col items-center justify-center gap-6 text-zinc-800">
+                                        <div className="relative">
+                                            <div className="absolute -inset-8 bg-zinc-900 blur-3xl rounded-full" />
+                                            <Music className="w-20 h-20 animate-pulse relative" />
+                                        </div>
+                                        <span className="text-[11px] font-black uppercase tracking-[0.3em] text-zinc-600 relative">{file.name}</span>
                                     </div>
                                 )}
 
-                                <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto backdrop-blur-[2px]">
                                     <Button
                                         variant="ghost"
                                         size="icon"
                                         onClick={togglePlay}
-                                        className="w-16 h-16 rounded-full bg-emerald-500 hover:bg-emerald-400 text-emerald-950 shadow-2xl shadow-emerald-500/20"
+                                        className="w-20 h-20 rounded-full bg-emerald-500 hover:bg-emerald-400 text-emerald-950 shadow-[0_0_50px_rgba(16,185,129,0.4)] transition-all hover:scale-110 active:scale-95"
                                     >
-                                        {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
+                                        {isPlaying ? <Pause className="w-10 h-10" /> : <Play className="w-10 h-10 ml-1.5" />}
                                     </Button>
                                 </div>
                             </div>
@@ -332,18 +331,21 @@ const MediaConverterTool = memo(() => {
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0 }}
-                                        className="w-full max-w-2xl space-y-4"
+                                        className="w-full max-w-2xl space-y-5 px-4"
                                     >
-                                        <div className="flex justify-between items-center px-4">
-                                            <div className="flex items-center gap-2">
-                                                <Loader2 className="w-3 h-3 text-emerald-500 animate-spin" />
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse italic">Engaging Transcoder</span>
+                                        <div className="flex justify-between items-center px-4 transition-all">
+                                            <div className="flex items-center gap-3">
+                                                <div className="relative">
+                                                    <Loader2 className="w-4 h-4 text-emerald-500 animate-spin relative" />
+                                                    <div className="absolute -inset-1 bg-emerald-500/20 blur-sm rounded-full animate-pulse" />
+                                                </div>
+                                                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse italic">Engaging Transcoder</span>
                                             </div>
-                                            <span className="text-[10px] font-black text-emerald-500">{progress}%</span>
+                                            <span className="text-[11px] font-black text-emerald-500 tabular-nums">{progress}%</span>
                                         </div>
-                                        <div className="h-1.5 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800">
+                                        <div className="h-2 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800 shadow-inner">
                                             <motion.div
-                                                className="h-full bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                                                className="h-full bg-emerald-500 shadow-[0_0_25px_rgba(16,185,129,0.6)]"
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${progress}%` }}
                                             />
@@ -353,15 +355,18 @@ const MediaConverterTool = memo(() => {
                             </AnimatePresence>
 
                             {/* 📟 HARDWARE FLOW HUB */}
-                            <div className="flex items-center gap-8 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex flex-col items-center gap-1.5">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Hardware Node</span>
-                                    <HardDrive className="w-5 h-5 text-zinc-500" />
+                            <div className="flex items-center gap-12 px-12 py-6 bg-zinc-900/90 border border-zinc-800 rounded-full shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all hover:bg-zinc-900">
+                                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
+                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Hardware Node</span>
+                                    <HardDrive className="w-6 h-6 text-zinc-500" />
                                 </div>
-                                <RefreshCw className={cn("w-5 h-5 text-emerald-500", isProcessing && "animate-spin")} />
-                                <div className="flex flex-col items-center gap-1.5">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Vault Secure Out</span>
-                                    <Zap className="w-5 h-5 text-emerald-500" />
+                                <div className="relative">
+                                    <RefreshCw className={cn("w-6 h-6 text-emerald-500 transition-all", isProcessing ? "animate-spin" : "opacity-30")} />
+                                    {isProcessing && <div className="absolute -inset-3 bg-emerald-500/10 blur-xl rounded-full animate-pulse" />}
+                                </div>
+                                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
+                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Vault Secure Out</span>
+                                    <Zap className="w-6 h-6 text-emerald-500" />
                                 </div>
                             </div>
                         </motion.div>

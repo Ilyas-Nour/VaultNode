@@ -167,38 +167,38 @@ const PdfSplitTool = memo(() => {
             settingsContent={
                 <div className="space-y-6">
                     {/* 🔘 EXTRACTION LOGIC HUB */}
-                    <div className="space-y-3">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Extraction Logic</span>
-                        <div className="space-y-2">
-                            <div className="p-3 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-2">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Page Range</label>
+                    <div className="space-y-3.5">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Extraction Logic</span>
+                        <div className="space-y-2.5">
+                            <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
+                                <label className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Page Range</label>
                                 <input
                                     type="text"
                                     value={range}
                                     onChange={(e) => setRange(e.target.value)}
                                     placeholder="e.g. 1-3, 5, 8-10"
-                                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2 text-xs font-bold text-white focus:outline-none focus:border-emerald-500 transition-all italic"
+                                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-emerald-500 transition-all italic placeholder:text-zinc-800"
                                 />
-                                <p className="text-[8px] text-zinc-600 font-bold uppercase italic leading-none">Leave empty to extract all pages as individual files.</p>
+                                <p className="text-[10px] text-zinc-600 font-bold uppercase italic leading-tight">Leave empty to extract all pages as individual files.</p>
                             </div>
                         </div>
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-4">
+                    <div className="space-y-3.5 pt-4">
                         <Button
                             onClick={handleSplit}
                             disabled={!file || isProcessing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
-                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Scissors className="w-4 h-4 me-2" />}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Scissors className="w-5 h-5 me-2" />}
                             {isProcessing ? "Processing..." : "Extract Pages"}
                         </Button>
 
                         {splitBlob && (
                             <Button
                                 onClick={handleDownload}
-                                className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-all shadow-xl"
+                                className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all shadow-xl"
                             >
                                 <Download className="w-4 h-4 me-2" />
                                 Download {isZip ? "ZIP Package" : "Extracted PDF"}
@@ -207,12 +207,12 @@ const PdfSplitTool = memo(() => {
                     </div>
 
                     {/* 📊 SANDBOX REPORT */}
-                    <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3">
+                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-3.5 h-3.5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">In-Browser Split</span>
+                            <Shield className="w-4 h-4" />
+                            <span className="text-[11px] font-black uppercase tracking-widest">In-Browser Split</span>
                         </div>
-                        <p className="text-[9px] text-zinc-500 font-bold leading-relaxed uppercase">
+                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
                             Your document is parsed and re-composed entirely privately.
                             No persistent file system writes occur.
                         </p>
@@ -221,7 +221,7 @@ const PdfSplitTool = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[450px] flex flex-col items-center justify-center p-6 md:p-12">
+            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-12">
                 <AnimatePresence mode="wait">
                     {!file ? (
                         <motion.div
@@ -251,11 +251,11 @@ const PdfSplitTool = memo(() => {
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
+                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
                                         <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">Stage Your Document</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">Select a PDF to extract pages from locally.</p>
+                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Stage Your Document</h3>
+                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">Select a PDF to extract pages from locally.</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -264,49 +264,51 @@ const PdfSplitTool = memo(() => {
                             key="results"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full flex flex-col items-center space-y-8"
+                            className="w-full flex flex-col items-center space-y-10"
                         >
                             {/* 📟 PROCESSING REPORT CARD */}
-                            <div className="w-full max-w-2xl bg-zinc-900 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative p-8 flex flex-col items-center shadow-2xl">
-                                <div className="flex items-center gap-4 w-full">
-                                    <div className="w-14 h-14 bg-zinc-950 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0">
-                                        <FileText className="w-6 h-6 text-emerald-500" />
+                            <div className="w-full max-w-2xl bg-zinc-950 rounded-[3rem] border border-zinc-800/80 overflow-hidden relative p-10 flex flex-col items-center shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] backdrop-blur-3xl group">
+                                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50" />
+
+                                <div className="flex items-center gap-6 w-full z-10">
+                                    <div className="w-16 h-16 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0 shadow-xl group-hover:scale-110 transition-transform duration-500">
+                                        <FileText className="w-8 h-8 text-emerald-500" />
                                     </div>
                                     <div className="flex-1 min-w-0 text-start">
-                                        <p className="text-sm font-black uppercase tracking-tighter text-white truncate">{file.name}</p>
-                                        <p className="text-[10px] font-bold uppercase text-zinc-500">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
+                                        <p className="text-lg lg:text-xl font-black uppercase tracking-tighter text-white truncate group-hover:text-emerald-500 transition-colors">{file.name}</p>
+                                        <p className="text-[11px] font-bold uppercase text-zinc-500 tracking-[0.2em]">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
                                     </div>
-                                    <Button variant="ghost" size="sm" onClick={() => setFile(null)} className="text-zinc-500 hover:text-white uppercase tracking-widest text-[9px] font-black italic">
+                                    <Button variant="ghost" size="sm" onClick={() => setFile(null)} className="h-10 px-4 text-zinc-500 hover:text-white uppercase tracking-widest text-[11px] font-black italic hover:bg-zinc-900 rounded-xl transition-all">
                                         Change
                                     </Button>
                                 </div>
 
                                 {errorMsg && (
-                                    <div className="w-full mt-6 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-500">
-                                        <Info className="w-4 h-4" />
-                                        <span className="text-[10px] font-black uppercase italic tracking-tight">{errorMsg}</span>
+                                    <div className="w-full mt-8 p-5 bg-red-500/5 border border-red-500/20 rounded-2xl flex items-center gap-4 text-red-500 z-10 shadow-lg">
+                                        <Info className="w-5 h-5 animate-pulse" />
+                                        <span className="text-[11px] font-black uppercase italic tracking-tight">{errorMsg}</span>
                                     </div>
                                 )}
 
                                 {splitBlob && !isProcessing && (
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
-                                        className="w-full mt-8 flex flex-col items-center space-y-6"
+                                        className="w-full mt-10 flex flex-col items-center space-y-8 z-10"
                                     >
-                                        <div className="flex items-center gap-2 text-emerald-500 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full animate-pulse">
-                                            <CheckCircle2 className="w-4 h-4" />
-                                            <span className="text-[10px] font-black uppercase tracking-widest">Partitioning Absolute</span>
+                                        <div className="flex items-center gap-3 text-emerald-500 px-6 py-2.5 bg-emerald-500/5 border border-emerald-500/20 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+                                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                            <span className="text-[11px] font-black uppercase tracking-[0.2em]">Partitioning Absolute</span>
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-                                            <div className="p-4 bg-zinc-950/50 border border-zinc-900 rounded-2xl text-center space-y-1">
-                                                <p className="text-[8px] font-black text-zinc-600 uppercase">Archive Format</p>
-                                                <p className="text-xs font-black text-white uppercase italic">{isZip ? "ZIP Archive" : "Single PDF"}</p>
+                                        <div className="grid grid-cols-2 gap-6 w-full max-w-lg">
+                                            <div className="p-6 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-2xl text-center space-y-2 transition-all hover:bg-zinc-900">
+                                                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Archive Format</p>
+                                                <p className="text-sm font-black text-white uppercase italic tracking-tight">{isZip ? "ZIP Archive" : "Single PDF"}</p>
                                             </div>
-                                            <div className="p-4 bg-zinc-950/50 border border-zinc-900 rounded-2xl text-center space-y-1">
-                                                <p className="text-[8px] font-black text-zinc-600 uppercase">Extraction Size</p>
-                                                <p className="text-xs font-black text-white uppercase italic">{(splitBlob.size / 1024 / 1024).toFixed(2)} MB</p>
+                                            <div className="p-6 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-2xl text-center space-y-2 transition-all hover:bg-zinc-900">
+                                                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Extraction Size</p>
+                                                <p className="text-sm font-black text-white uppercase italic tracking-tight">{(splitBlob.size / 1024 / 1024).toFixed(2)} MB</p>
                                             </div>
                                         </div>
                                     </motion.div>
@@ -314,15 +316,18 @@ const PdfSplitTool = memo(() => {
                             </div>
 
                             {/* 📟 NODE FLOW INDICATORS */}
-                            <div className="flex items-center gap-8 px-8 py-4 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Source Stream</span>
-                                    <Layers className="w-5 h-5 text-zinc-500" />
+                            <div className="flex items-center gap-12 px-12 py-6 bg-zinc-900/90 border border-zinc-800 rounded-full shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all hover:bg-zinc-900">
+                                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
+                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Source Stream</span>
+                                    <Layers className="w-6 h-6 text-zinc-500" />
                                 </div>
-                                <RefreshCw className={cn("w-5 h-5 text-emerald-500", isProcessing && "animate-spin")} />
-                                <div className="flex flex-col items-center gap-1">
-                                    <span className="text-[8px] font-black text-zinc-600 uppercase">Extraction Registry</span>
-                                    <Scissors className="w-5 h-5 text-emerald-500" />
+                                <div className="relative">
+                                    <RefreshCw className={cn("w-6 h-6 text-emerald-500 transition-all", isProcessing ? "animate-spin" : "opacity-30")} />
+                                    {isProcessing && <div className="absolute -inset-3 bg-emerald-500/10 blur-xl rounded-full animate-pulse" />}
+                                </div>
+                                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
+                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Extraction Registry</span>
+                                    <Scissors className="w-6 h-6 text-emerald-500" />
                                 </div>
                             </div>
                         </motion.div>
