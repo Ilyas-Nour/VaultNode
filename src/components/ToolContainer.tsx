@@ -1,7 +1,6 @@
 /**
- * ToolContainer — Canvas Design System: Tool Page Layout
- * Structure: Left Ad | Tool Content | Right Ad
- * Navbar and Footer are injected by the root layout.
+ * ToolContainer — Canvas Design System
+ * Layout: Small Left Ad | Full-width content | Small Right Ad
  */
 
 "use client";
@@ -37,114 +36,115 @@ export const ToolContainer = memo(({
     toolId
 }: ToolContainerProps) => {
     return (
-        <div className="flex-1 flex flex-col min-h-screen bg-black pt-16">
+        <div className="w-full flex flex-col bg-black">
+            <div className="w-full flex items-start">
 
-            {/* ── 3-column layout: Ad | Content | Ad ── */}
-            <div className="flex-1 w-full flex items-start gap-0">
-
-                {/* LEFT AD COLUMN — hidden on mobile, sticky on desktop */}
-                <aside className="hidden xl:flex w-[200px] shrink-0 sticky top-20 self-start pt-12 px-4 flex-col items-center gap-6">
-                    <AdUnit type="skyscraper" className="w-[160px] h-[600px]" />
+                {/* Left ad — small, sticky */}
+                <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
+                    <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
                 </aside>
 
-                {/* ── MAIN CONTENT ── */}
+                {/* Main content */}
                 <main className="flex-1 min-w-0 flex flex-col">
-
-                    {/* Tool header */}
-                    <div className="px-6 lg:px-12 pt-12 pb-8 border-b border-white/[0.06]">
+                    <div className="w-full px-6 lg:px-12 pt-10 pb-6 border-b border-white/[0.06]">
                         <Link
                             href="/"
-                            className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest text-zinc-600 hover:text-white transition-colors mb-6"
+                            className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-600 hover:text-white transition-colors mb-5"
                         >
                             <ArrowLeft className="w-3 h-3" />
                             All Tools
                         </Link>
 
-                        <div className="flex items-center gap-3 mb-3">
-                            <div className="w-8 h-8 border border-white/10 flex items-center justify-center shrink-0">
-                                <Icon className="w-4 h-4 text-white/60" />
+                        <div className="flex items-center gap-3 mb-2">
+                            <div className="w-7 h-7 border border-white/10 flex items-center justify-center shrink-0">
+                                <Icon className="w-3.5 h-3.5 text-white/50" />
                             </div>
                             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-600">{category}</span>
                         </div>
 
-                        <h1 className="text-3xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+                        <h1 className="text-2xl lg:text-4xl font-black uppercase tracking-tight text-white leading-tight">
                             {title}
                         </h1>
-                        <p className="mt-3 text-sm text-zinc-500 font-normal leading-relaxed max-w-lg">
+                        <p className="mt-2 text-sm text-zinc-500 leading-relaxed max-w-xl">
                             {description}
                         </p>
                     </div>
 
-                    {/* Tool workspace */}
-                    <div className="px-6 lg:px-12 py-10 border-b border-white/[0.06]">
-                        {children}
+                    {/* ── TOP ACTION ROW: Dropzone left | Settings + How It Works right ── */}
+                    <div className="w-full px-6 lg:px-12 py-8 border-b border-white/[0.06]">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+                            {/* LEFT: dropzone */}
+                            <div className="w-full">
+                                {children}
+                            </div>
+
+                            {/* RIGHT: Settings first, How It Works below */}
+                            <div className="space-y-8">
+
+                                {/* Settings */}
+                                {settingsContent && (
+                                    <div className="space-y-4">
+                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                                            Settings
+                                        </h3>
+                                        {settingsContent}
+                                    </div>
+                                )}
+
+                                {/* How It Works */}
+                                {howItWorks && (
+                                    <div className="space-y-5 pt-2 border-t border-white/[0.06]">
+                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                                            How It Works
+                                        </h3>
+                                        <div className="space-y-5">
+                                            {howItWorks.map((step, i) => (
+                                                <div key={i} className="flex gap-4">
+                                                    <span className="text-2xl font-black text-white/10 tabular-nums leading-none shrink-0 w-8 pt-0.5">
+                                                        {String(i + 1).padStart(2, '0')}
+                                                    </span>
+                                                    <div className="space-y-0.5">
+                                                        <h4 className="text-sm font-black uppercase tracking-wide text-white">{step.title}</h4>
+                                                        <p className="text-sm text-zinc-500 leading-relaxed">{step.description}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Privacy specs */}
+                                <div className="pt-2 border-t border-white/[0.06] flex items-center gap-6">
+                                    {[
+                                        { label: 'Network', value: 'Local-Only', icon: Zap },
+                                        { label: 'Storage', value: 'In-RAM', icon: HardDrive },
+                                        { label: 'Privacy', value: 'Zero Uploads', icon: Lock }
+                                    ].map((spec) => (
+                                        <div key={spec.label} className="flex flex-col gap-0.5">
+                                            <span className="text-[9px] font-bold uppercase text-zinc-700 tracking-widest">{spec.label}</span>
+                                            <span className="text-xs font-black text-white uppercase tracking-tight">{spec.value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Visual Proof — full width of content area */}
+                    {/* Visual Proof — full width below the fold */}
                     {toolId && (
-                        <div className="px-6 lg:px-12 py-16 border-b border-white/[0.06]">
+                        <div className="w-full px-6 lg:px-12 py-14 border-b border-white/[0.06]">
                             <VisualProof toolId={toolId} mode="full" />
                         </div>
                     )}
 
-                    {/* Settings + How It Works */}
-                    {(settingsContent || howItWorks) && (
-                        <div className="px-6 lg:px-12 py-14 border-b border-white/[0.06] grid grid-cols-1 lg:grid-cols-2 gap-14">
-                            {settingsContent && (
-                                <div className="space-y-6">
-                                    <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">Settings</h3>
-                                    {settingsContent}
-                                </div>
-                            )}
-                            {howItWorks && (
-                                <div className="space-y-8">
-                                    <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">How It Works</h3>
-                                    <div className="space-y-8">
-                                        {howItWorks.map((step, i) => (
-                                            <div key={i} className="flex gap-5">
-                                                <span className="text-3xl font-black text-white/10 tabular-nums leading-none shrink-0 w-10">
-                                                    {String(i + 1).padStart(2, '0')}
-                                                </span>
-                                                <div className="space-y-1 pt-1">
-                                                    <h4 className="text-sm font-black uppercase tracking-wide text-white">{step.title}</h4>
-                                                    <p className="text-sm text-zinc-500 leading-relaxed font-normal">{step.description}</p>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-
-                    {/* Inline ad for mobile — between settings and footer spec */}
-                    <div className="xl:hidden px-6 lg:px-12 py-8 border-b border-white/[0.06]">
-                        <AdUnit type="banner-slim" />
-                    </div>
-
-                    {/* Safety specs */}
-                    <div className="px-6 lg:px-12 py-10">
-                        <div className="grid grid-cols-3 gap-8">
-                            {[
-                                { label: 'Network', value: 'Local-Only', icon: Zap },
-                                { label: 'Storage', value: 'In-RAM Only', icon: HardDrive },
-                                { label: 'Privacy', value: 'Zero Uploads', icon: Lock }
-                            ].map((spec) => (
-                                <div key={spec.label} className="flex flex-col gap-1">
-                                    <span className="text-[10px] font-bold uppercase text-zinc-600 tracking-widest">{spec.label}</span>
-                                    <span className="text-base lg:text-xl font-black text-white uppercase tracking-tight">{spec.value}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
                 </main>
 
-                {/* RIGHT AD COLUMN — hidden on mobile, sticky on desktop */}
-                <aside className="hidden xl:flex w-[200px] shrink-0 sticky top-20 self-start pt-12 px-4 flex-col items-center gap-6">
-                    <AdUnit type="skyscraper" className="w-[160px] h-[600px]" />
-                    {/* Second ad unit lower down */}
-                    <AdUnit type="sidebar" className="w-[160px] h-[300px] mt-4" />
+                {/* Right ad — small, sticky */}
+                <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
+                    <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
                 </aside>
+
             </div>
         </div>
     );

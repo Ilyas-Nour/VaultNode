@@ -115,9 +115,9 @@ const TextEncryptorTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "KDF Derivation", description: "Derives a 256-bit symmetric key from your password using 100,000 iterations of PBKDF2." },
-        { title: "GCM Authentication", description: "Protects both confidentiality and integrity of your messages with an authentication tag." },
-        { title: "Salt & IV", description: "Uses unique random salts and initialization vectors for every single node synthesis." }
+        { title: 'Type Your Message', description: 'Write or paste any text you want to protect — a note, password, or private message.' },
+        { title: 'Set a Password', description: 'Choose a password that only you (and whoever you share it with) will know.' },
+        { title: 'Encrypt or Decrypt', description: 'Hit Encrypt to scramble your text, or paste encrypted text with the same password to read it again.' }
     ], []);
 
     return (

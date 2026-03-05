@@ -172,36 +172,41 @@ const CleanExifTool = memo(() => {
                 </div>
             }
             howItWorks={[
-                { title: "Select Image", description: "Drop your photo into the top-drop area." },
-                { title: "Strip Metadata", description: "Fresh canvas re-rendering wipes all hidden tags." },
-                { title: "Secure Download", description: "Get your anonymous, purified image file." }
+                { title: "Drop Your Photo", description: "Choose any photo you want to clean. No account needed." },
+                { title: "We Remove Hidden Data", description: "The tool strips out invisible info like your camera model, GPS location, and the date the photo was taken." },
+                { title: "Download the Clean Photo", description: "Save the image — it now contains zero personal metadata." }
             ]}
         >
             <div className="w-full min-h-[400px] flex items-center justify-center">
                 {!originalFile ? (
                     <div {...getRootProps()} className={cn(
-                        "w-full h-64 border border-zinc-800 flex flex-col items-center justify-center cursor-pointer transition-all",
-                        isDragActive ? "bg-white/5 border-white" : "hover:border-zinc-500"
+                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                     )}>
                         <input {...getInputProps()} />
-                        <Upload className="w-8 h-8 text-zinc-500 mb-4" />
-                        <p className="text-xs font-black uppercase text-zinc-400 tracking-widest">Select Image for Purification</p>
+                        <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                        <div className="text-center">
+                            <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                {isDragActive ? 'Drop it here' : 'Drop your photo here'}
+                            </p>
+                            <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">JPG · PNG · WebP</p>
+                        </div>
                     </div>
                 ) : (
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-1 px-6 py-10">
-                        <div className="aspect-square bg-zinc-950 flex flex-col items-center justify-center border border-zinc-900">
-                            <span className="text-[10px] font-black uppercase text-zinc-700 tracking-widest mb-4">RAW STREAM</span>
-                            {previewUrl && <img src={previewUrl} className="max-h-[70%] opacity-40 grayscale" />}
-                            {hasExif && <span className="mt-4 text-[10px] font-black text-red-500 uppercase tracking-widest border border-red-500/20 px-4 py-1">Metadata Detected</span>}
+                        <div className="aspect-square bg-zinc-950 flex flex-col items-center justify-center border border-zinc-800">
+                            <span className="text-[10px] font-bold uppercase text-zinc-600 tracking-widest mb-4">Original</span>
+                            {previewUrl && <img src={previewUrl} className="max-h-[70%] opacity-60" />}
+                            {hasExif && <span className="mt-4 text-[10px] font-bold text-red-400 uppercase tracking-widest border border-red-500/20 px-4 py-1">Hidden Data Found</span>}
                         </div>
-                        <div className="aspect-square bg-zinc-950 flex flex-col items-center justify-center border border-zinc-900">
-                            <span className="text-[10px] font-black uppercase text-emerald-500 tracking-widest mb-4 italic">PURIFIED BUFFER</span>
+                        <div className="aspect-square bg-zinc-950 flex flex-col items-center justify-center border border-zinc-800">
+                            <span className="text-[10px] font-bold uppercase text-zinc-400 tracking-widest mb-4">Cleaned</span>
                             {isProcessing ? (
-                                <Loader2 className="w-8 h-8 animate-spin text-emerald-500" />
+                                <Loader2 className="w-8 h-8 animate-spin text-white" />
                             ) : (
                                 cleanUrl && <img src={cleanUrl} className="max-h-[70%] p-4" />
                             )}
-                            {!isProcessing && <span className="mt-4 text-[10px] font-black text-emerald-500 uppercase tracking-widest border border-emerald-500/20 px-4 py-1">100% Normalized</span>}
+                            {!isProcessing && <span className="mt-4 text-[10px] font-bold text-white uppercase tracking-widest border border-white/10 px-4 py-1">Metadata Removed</span>}
                         </div>
                     </div>
                 )}

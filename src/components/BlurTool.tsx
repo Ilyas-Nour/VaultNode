@@ -111,15 +111,15 @@ const BlurTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "Heuristic Processing", description: "Injects the image bitstream into a headless canvas instance." },
-        { title: "Gaussian Kernel", description: "Applies a variable-radius Gaussian blur filter to the pixel matrix." },
-        { title: "Atomic Export", description: "Re-serializes the filtered matrix into a binary payload." }
+        { title: 'Drop Your Image', description: 'Pick any photo you want to sharpen or fix. It stays on your device — nothing is uploaded.' },
+        { title: 'Adjust the Strength', description: 'Use the slider to control how sharp the result should be. More strength means a clearer image.' },
+        { title: 'Save the Result', description: 'Click process and download your enhanced image instantly.' }
     ], []);
 
     return (
         <ToolContainer
-            title={t('title')}
-            description={t('description')}
+            title="Image Enhancer"
+            description="Sharpen blurry photos or smooth noise — your image stays on your device, never uploaded."
             icon={Eye}
             category="media"
             toolId="blur"
@@ -212,16 +212,18 @@ const BlurTool = memo(() => {
                                 <div
                                     {...getRootProps()}
                                     className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                    <div className="text-center">
+                                        <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                            {isDragActive ? 'Drop it here' : 'Drop your image here'}
+                                        </p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">JPG · PNG · WebP</p>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Stage Your Media</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">Select an image to obfuscate locally.</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -230,12 +232,12 @@ const BlurTool = memo(() => {
                             key="results"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6"
+                            className="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
                         >
                             {/* 📂 SOURCE STREAM VIEW */}
                             <div className="space-y-4">
-                                <div className="flex items-center justify-between px-2">
-                                    <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Source Node</span>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Original</span>
                                     <div className="bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">
                                         <ImageIcon className="w-3.5 h-3.5 text-zinc-700" />
                                     </div>

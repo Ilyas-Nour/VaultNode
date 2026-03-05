@@ -485,7 +485,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             </h3>
 
             {/* Full-width split */}
-            <div className="w-full grid grid-cols-2 gap-px bg-white/[0.06] overflow-hidden">
+            <div className="w-full grid grid-cols-2 gap-2 overflow-hidden">
                 <div className="relative aspect-video bg-black overflow-hidden">
                     <div className="absolute top-4 left-4 text-[9px] font-black uppercase tracking-widest text-white/30 z-10">before</div>
                     {render('before')}

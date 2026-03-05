@@ -21,10 +21,6 @@ import {
     Download,
     Loader2,
     Trash2,
-    Zap,
-    HardDrive,
-    Info,
-    ArrowRightLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
@@ -157,9 +153,9 @@ const ImageCompressor = memo(() => {
      * 📦 Metadata Registry
      */
     const howItWorks = useMemo(() => [
-        { title: "Multithreaded Logic", description: "Orchestrates parallel Web Workers for zero-latency asset reconstruction." },
-        { title: "Private Sandbox", description: "100% Client-side. Your visual data remains isolated in memory." },
-        { title: "Adaptive Downsampling", description: "Dynamically maps bit-density to meet specific target metrics." }
+        { title: 'Drop Your Image', description: 'Pick any JPG, PNG, or WebP photo. It stays completely on your device — nothing is sent to a server.' },
+        { title: 'Set the Target Size', description: 'Use the slider to choose how small you’d like the file to be. Lower means a smaller file, higher keeps more quality.' },
+        { title: 'Download the Compressed File', description: 'Your image is ready instantly. Download it and it’ll look great while taking up much less space.' }
     ], []);
 
     return (
@@ -173,8 +169,8 @@ const ImageCompressor = memo(() => {
                 <div className="space-y-8">
                     {/* 🎚️ TARGET OPTIMIZATION CONTROL */}
                     <div className="space-y-5">
-                        <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
-                            <span>Target Threshold</span>
+                        <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-zinc-500">
+                            <span>Target Size</span>
                             <span className="text-emerald-500 tabular-nums text-sm">{targetSizeMB.toFixed(1)} MB</span>
                         </div>
                         <Slider
@@ -192,46 +188,42 @@ const ImageCompressor = memo(() => {
                     </div>
 
                     {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3.5">
-                        <Button
+                    <div className="space-y-3">
+                        <button
                             onClick={downloadResult}
                             disabled={!result || isCompressing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10 disabled:opacity-50"
+                            className="w-full h-10 bg-white hover:bg-zinc-100 disabled:opacity-40 text-black font-black rounded-sm text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95"
                         >
-                            <Download className="w-4 h-4 me-2" />
-                            {t('downloadSecurely')}
-                        </Button>
+                            <Download className="w-3.5 h-3.5" />
+                            Download Compressed Image
+                        </button>
 
-                        <Button
-                            variant="outline"
+                        <button
                             onClick={clear}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic transition-all rounded-xl"
+                            className="w-full h-10 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all rounded-sm"
                         >
-                            <Trash2 className="w-4 h-4 me-2" />
-                            Purge Buffer
-                        </Button>
+                            <Trash2 className="w-3.5 h-3.5 inline mr-2" />
+                            Clear
+                        </button>
                     </div>
 
                     {/* 📊 OPTIMIZATION REPORT */}
-                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
-                        <div className="flex items-center gap-2 text-zinc-500">
-                            <Info className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest text-emerald-500/80">Optimization Protocol</span>
-                        </div>
+                    <div className="border border-zinc-800 bg-zinc-950 space-y-3 p-4">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Result</span>
                         {result ? (
-                            <div className="space-y-2.5">
+                            <div className="space-y-2">
                                 <div className="flex justify-between text-[11px] font-bold">
-                                    <span className="text-zinc-600 uppercase">Yield Saved:</span>
-                                    <span className="text-emerald-500 text-sm">-{savingsPercent}%</span>
+                                    <span className="text-zinc-500 uppercase">Space Saved:</span>
+                                    <span className="text-emerald-400 text-sm">-{savingsPercent}%</span>
                                 </div>
                                 <div className="flex justify-between text-[11px] font-bold">
-                                    <span className="text-zinc-600 uppercase">Final Payload:</span>
-                                    <span className="text-zinc-400 tabular-nums">{formatSize(result.compressedSize)}</span>
+                                    <span className="text-zinc-500 uppercase">Final Size:</span>
+                                    <span className="text-zinc-300 tabular-nums">{formatSize(result.compressedSize)}</span>
                                 </div>
                             </div>
                         ) : (
-                            <p className="text-[11px] text-zinc-500 font-bold leading-relaxed pr-2 italic uppercase tracking-tight">
-                                Initializing parallel Web Workers for atomic image reconstruction.
+                            <p className="text-[11px] text-zinc-600 leading-relaxed">
+                                Drop an image to see the compression results here.
                             </p>
                         )}
                     </div>
@@ -239,130 +231,97 @@ const ImageCompressor = memo(() => {
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-10">
+            <div className="w-full">
                 <AnimatePresence mode="wait">
                     {!file ? (
                         <motion.div
                             key="dropzone"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 1.05 }}
-                            className="w-full max-w-2xl"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
                         >
-                            {/* 🛸 DROPZONE ARCHITECTURE */}
-                            <div className="relative group/dropzone w-full">
-                                <AnimatePresence>
-                                    {isDragActive && (
-                                        <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            className="absolute -inset-1 conic-gradient-vault animate-pulse-conic rounded-[2.7rem] blur-md -z-10"
-                                        />
-                                    )}
-                                </AnimatePresence>
-                                <div
-                                    {...getRootProps()}
-                                    className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
-                                    )}
-                                >
-                                    <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <ImageIcon className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
-                                    </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
+                            <div
+                                {...getRootProps()}
+                                className={cn(
+                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                    isDragActive
+                                        ? "border-white/40 bg-white/[0.03]"
+                                        : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                                )}
+                            >
+                                <input {...getInputProps()} />
+                                <ImageIcon className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                <div className="text-center">
+                                    <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                        {isDragActive ? 'Drop it here' : 'Drop your image here'}
+                                    </p>
+                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">JPG · PNG · WebP</p>
                                 </div>
                             </div>
                         </motion.div>
                     ) : (
                         <motion.div
                             key="results"
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full flex flex-col items-center space-y-8"
+                            className="w-full flex flex-col gap-6"
                         >
-                            {/* 🖼️ COMPARISON VIEWPORT */}
-                            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {/* Original View */}
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
-                                        <span>Raw Buffer</span>
-                                        <span className="bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">{formatSize(file.size)}</span>
+                            {/* Before / After */}
+                            <div className="w-full grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                                        <span>Original</span>
+                                        <span className="tabular-nums">{formatSize(file.size)}</span>
                                     </div>
-                                    <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center group shadow-2xl">
+                                    <div className="aspect-square bg-zinc-900 border border-zinc-800 overflow-hidden flex items-center justify-center">
                                         <img
                                             src={result?.originalUrl || URL.createObjectURL(file)}
-                                            className="w-full h-full object-contain grayscale opacity-30 contrast-125 transition-all duration-700 group-hover:opacity-50"
-                                            alt="Original Stream"
+                                            className="w-full h-full object-contain"
+                                            alt="Original"
                                         />
-                                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                            <span className="text-[10px] font-black uppercase tracking-[0.5em] opacity-10 text-white -rotate-12 translate-y-6">
-                                                Bit-Hard Copy
-                                            </span>
-                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Optimized View */}
-                                <div className="space-y-4">
-                                    <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">
-                                        <span>Optimized Cluster</span>
+                                <div className="space-y-2">
+                                    <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-white">
+                                        <span>Compressed</span>
                                         <div className="flex items-center gap-2">
-                                            {result && <span className="bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/20 text-[10px]">-{savingsPercent}%</span>}
-                                            <span className="tabular-nums">{formatSize(result?.compressedSize || 0)}</span>
+                                            {result && <span className="text-emerald-400">-{savingsPercent}%</span>}
+                                            <span className="tabular-nums text-zinc-400">{formatSize(result?.compressedSize || 0)}</span>
                                         </div>
                                     </div>
                                     <div className={cn(
-                                        "aspect-square rounded-[2rem] border overflow-hidden relative flex flex-col items-center justify-center transition-all duration-700 shadow-2xl",
-                                        isCompressing ? "bg-zinc-900 border-zinc-800" : "bg-emerald-500/5 border-emerald-500/20 shadow-[0_0_100px_rgba(16,185,129,0.1)]"
+                                        "aspect-square border overflow-hidden flex items-center justify-center transition-all",
+                                        isCompressing ? "bg-zinc-900 border-zinc-800" : "bg-zinc-950 border-zinc-700"
                                     )}>
                                         {result && !isCompressing ? (
-                                            <img
-                                                src={result.compressedUrl}
-                                                className="w-full h-full object-contain animate-in fade-in zoom-in-95 duration-1000 p-6"
-                                                alt="Optimized Stream"
-                                            />
+                                            <img src={result.compressedUrl} className="w-full h-full object-contain" alt="Compressed" />
                                         ) : (
-                                            <div className="flex flex-col items-center gap-6 text-emerald-500">
-                                                <div className="relative">
-                                                    <div className="absolute inset-0 bg-emerald-500/20 blur-xl rounded-full animate-ping" />
-                                                    <Loader2 className="w-12 h-12 animate-spin relative z-10" />
-                                                </div>
-                                                <span className="text-[11px] font-black uppercase tracking-[0.25em] animate-pulse">{t('processing')}</span>
-                                            </div>
-                                        )}
-
-                                        {result && !isCompressing && (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/70 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-500">
-                                                <Button
-                                                    onClick={downloadResult}
-                                                    className="h-16 px-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95 text-xl uppercase italic tracking-tight"
-                                                >
-                                                    <Download className="w-6 h-6 me-4" />
-                                                    {t('downloadSecurely')}
-                                                </Button>
+                                            <div className="flex flex-col items-center gap-3 text-zinc-600">
+                                                <Loader2 className="w-6 h-6 animate-spin" />
+                                                <span className="text-[10px] uppercase tracking-widest">Compressing…</span>
                                             </div>
                                         )}
                                     </div>
                                 </div>
                             </div>
 
-                            {/* 📟 FLOW MONITOR */}
-                            <div className="flex items-center gap-10 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-[2rem] shadow-2xl backdrop-blur-md">
-                                <div className="flex flex-col items-center gap-2 grayscale opacity-50">
-                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Source Node</span>
-                                    <HardDrive className="w-5 h-5 text-zinc-500" />
-                                </div>
-                                <div className="flex flex-col items-center justify-center">
-                                    <ArrowRightLeft className="w-5 h-5 text-emerald-500 animate-pulse" />
-                                </div>
-                                <div className="flex flex-col items-center gap-2">
-                                    <span className="text-[9px] font-black text-emerald-500/50 uppercase tracking-widest">Vault Registry</span>
-                                    <Zap className="w-5 h-5 text-emerald-500" />
-                                </div>
+                            {/* Actions */}
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={downloadResult}
+                                    disabled={!result || isCompressing}
+                                    className="flex-1 h-10 bg-white hover:bg-zinc-100 disabled:opacity-40 text-black text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95"
+                                >
+                                    <Download className="w-3.5 h-3.5" />
+                                    Download
+                                </button>
+                                <button
+                                    onClick={clear}
+                                    className="h-10 px-5 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all"
+                                >
+                                    Clear
+                                </button>
                             </div>
                         </motion.div>
                     )}

@@ -125,9 +125,9 @@ const PdfToImgTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "Layer Rasterization", description: "Flattens PDF vector instructions into pixel-perfect JPEG slices." },
-        { title: "Atomic Extraction", description: "Processes each page in a sandboxed worker thread for speed." },
-        { title: "Binary Packaging", description: "Zips all rendered images into a single local archive." }
+        { title: 'Upload Your PDF', description: 'Drop any PDF — it can have one page or hundreds. Each page becomes its own image.' },
+        { title: 'Choose the Quality', description: 'Higher quality means sharper images but larger file sizes. Pick what works for your use case.' },
+        { title: 'Download All Pages', description: 'All images are bundled into a zip file. Open it and you\'ll find a separate image for every page.' }
     ], []);
 
     // ⚙️ RENDER CONFIGURATIONS
@@ -229,55 +229,55 @@ const PdfToImgTool = memo(() => {
                                 <div
                                     {...getRootProps()}
                                     className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
-                                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                    <div className="text-center">
+                                        <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                            {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                        </p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>
                     ) : (
                         <motion.div
                             key="results"
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full flex flex-col items-center space-y-8"
+                            className="w-full flex flex-col gap-4"
                         >
-                            {/* 📟 PROCESSING REPORT CARD */}
-                            <div className="w-full max-w-2xl aspect-video bg-zinc-900/50 rounded-[2.5rem] border border-zinc-800 overflow-hidden relative flex flex-col items-center justify-center shadow-2xl group">
-                                <div className="z-10 bg-zinc-950/90 backdrop-blur-xl border border-zinc-800 rounded-3xl p-10 flex flex-col items-center gap-6 transition-transform group-hover:scale-[1.02]">
-                                    <FileUp className="w-14 h-14 text-emerald-500" />
-                                    <div className="text-center">
-                                        <p className="text-base font-black uppercase tracking-tighter text-white">{file.name}</p>
-                                        <p className="text-xs font-bold uppercase text-zinc-500">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
-                                    </div>
+                            {/* File info row */}
+                            <div className="flex items-center gap-4 p-4 border border-zinc-800 bg-zinc-950">
+                                <FileUp className="w-8 h-8 text-zinc-600 shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-bold text-white truncate">{file.name}</p>
+                                    <p className="text-xs text-zinc-600">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                                 </div>
                             </div>
 
                             <AnimatePresence>
                                 {isProcessing && totalPages > 0 && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        className="w-full max-w-2xl space-y-4"
+                                        className="space-y-2"
                                     >
-                                        <div className="flex justify-between items-center px-4">
+                                        <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-2">
-                                                <Loader2 className="w-4 h-4 text-emerald-500 animate-spin" />
-                                                <span className="text-xs font-black uppercase tracking-widest text-emerald-500 animate-pulse italic">Extracting Page {progress} of {totalPages}</span>
+                                                <Loader2 className="w-4 h-4 text-white animate-spin" />
+                                                <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Converting page {progress} of {totalPages}</span>
                                             </div>
-                                            <span className="text-xs font-black text-emerald-500 italic">{Math.round((progress / totalPages) * 100)}%</span>
+                                            <span className="text-xs text-zinc-500">{Math.round((progress / totalPages) * 100)}%</span>
                                         </div>
-                                        <div className="h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+                                        <div className="h-1 bg-zinc-900 overflow-hidden">
                                             <motion.div
-                                                className="h-full bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                                                className="h-full bg-white"
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${(progress / totalPages) * 100}%` }}
                                             />
@@ -286,16 +286,15 @@ const PdfToImgTool = memo(() => {
                                 )}
                             </AnimatePresence>
 
-                            {/* 📟 FLOW METRICS */}
-                            <div className="flex items-center gap-12 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
-                                <div className="flex flex-col items-center gap-2">
-                                    <span className="text-[10px] font-black text-zinc-600 uppercase">Input Buffer</span>
-                                    <Layers className="w-6 h-6 text-zinc-500" />
+                            <div className="flex items-center gap-6 p-4 border border-zinc-800">
+                                <div className="flex flex-col items-center gap-1">
+                                    <Layers className="w-4 h-4 text-zinc-600" />
+                                    <span className="text-[9px] font-bold text-zinc-600 uppercase">PDF</span>
                                 </div>
-                                <FileArchive className={cn("w-6 h-6 text-emerald-500", isProcessing && "animate-bounce")} />
-                                <div className="flex flex-col items-center gap-2">
-                                    <span className="text-[10px] font-black text-zinc-600 uppercase">ZIP Package</span>
-                                    <ImageIcon className="w-6 h-6 text-emerald-500" />
+                                <FileArchive className={cn("w-4 h-4 text-zinc-500", isProcessing && "animate-bounce")} />
+                                <div className="flex flex-col items-center gap-1">
+                                    <ImageIcon className="w-4 h-4 text-zinc-400" />
+                                    <span className="text-[9px] font-bold text-zinc-500 uppercase">Images</span>
                                 </div>
                             </div>
                         </motion.div>

@@ -126,9 +126,9 @@ const HeicToJpgTool = memo(() => {
      * 📦 Metadata Registry
      */
     const howItWorks = useMemo(() => [
-        { title: "WASM Bridge", description: "Uses libheif via WebAssembly for atomic browser-side processing." },
-        { title: "Universal Logic", description: "Zero uploads. All pixel manipulation occurs in local sandbox." },
-        { title: "High-Fidelity Export", description: "Preserves depth and clarity while mapping to standard formats." }
+        { title: 'Drop Your HEIC File', description: 'Add the .heic photo from your iPhone or iPad. It\'s fine if you have multiple — batch them all.' },
+        { title: 'Pick the Output Format', description: 'Choose JPG or PNG. JPG is smaller, PNG keeps the highest quality.' },
+        { title: 'Download Your Photos', description: 'Your converted images are ready to share, post, or print — they work everywhere now.' }
     ], []);
 
     return (
@@ -218,16 +218,18 @@ const HeicToJpgTool = memo(() => {
                                 <div
                                     {...getRootProps()}
                                     className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <Upload className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                    <div className="text-center">
+                                        <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                            {isDragActive ? 'Drop it here' : 'Drop your HEIC file here'}
+                                        </p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">HEIC · HEIF</p>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -241,9 +243,9 @@ const HeicToJpgTool = memo(() => {
                             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Original */}
                                 <div className="space-y-4">
-                                    <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
-                                        <span>Apple HEIC Source</span>
-                                        <span className="bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">{formatSize(originalFile.size)}</span>
+                                    <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                                        <span>Original HEIC</span>
+                                        <span>{formatSize(originalFile.size)}</span>
                                     </div>
                                     <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center group shadow-2xl">
                                         <FileImage className="w-12 h-12 text-zinc-700 group-hover:text-zinc-500 transition-colors" />

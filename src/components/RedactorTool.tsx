@@ -276,20 +276,25 @@ const RedactorTool = memo(() => {
                 </div>
             }
             howItWorks={[
-                { title: "Select PDF", description: "Drop your file into the top-drop area." },
-                { title: "Draw Boxes", description: "Click and drag to cover sensitive information." },
-                { title: "Wipe Clean", description: "Export the file with pixels permanently destroyed." }
+                { title: 'Upload Your PDF', description: 'Drop any PDF that has text or info you want to hide permanently.' },
+                { title: 'Draw Over the Text', description: 'Click and drag a box over any word, name, number, or section you want removed.' },
+                { title: 'Download the Redacted File', description: 'Save the cleaned PDF — the hidden parts are gone forever, not just covered.' }
             ]}
         >
-            <div className="w-full min-h-[400px] flex items-center justify-center">
+            <div className="w-full">
                 {!file ? (
                     <div {...getRootProps()} className={cn(
-                        "w-full h-64 border border-zinc-800 flex flex-col items-center justify-center cursor-pointer transition-all",
-                        isDragActive ? "bg-white/5 border-white" : "hover:border-zinc-500"
+                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                     )}>
                         <input {...getInputProps()} />
-                        <FileUp className="w-8 h-8 text-zinc-500 mb-4" />
-                        <p className="text-xs font-black uppercase text-zinc-400 tracking-widest">Select PDF for Redaction</p>
+                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                        <div className="text-center">
+                            <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                            </p>
+                            <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                        </div>
                     </div>
                 ) : (
                     <div className="w-full flex justify-center py-10">

@@ -152,9 +152,9 @@ const PdfSplitTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "Binary Parsing", description: "Loads the PDF byte stream into a traversable document object." },
-        { title: "Page Dereferencing", description: "Clones specific page references and resources into a new document buffer." },
-        { title: "Atomic Synthesis", description: "Writes the new document structure to a binary blob for extraction." }
+        { title: 'Upload Your PDF', description: 'Drop the big PDF you want to cut into smaller pieces.' },
+        { title: 'Choose Which Pages to Keep', description: 'Type a page range like "1-5" or pick specific pages. You decide what goes into each new file.' },
+        { title: 'Download Your Split Files', description: 'Each section downloads as its own PDF, ready to share or send separately.' }
     ], []);
 
     return (
@@ -232,104 +232,68 @@ const PdfSplitTool = memo(() => {
                             className="w-full max-w-2xl mx-auto"
                         >
                             {/* 🛸 DROPZONE ARCHITECTURE */}
-                            <div className="relative group/dropzone w-full">
-                                <AnimatePresence>
-                                    {isDragActive && (
-                                        <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            className="absolute -inset-1 conic-gradient-vault animate-pulse-conic rounded-[2.7rem] blur-md -z-10"
-                                        />
-                                    )}
-                                </AnimatePresence>
-                                <div
-                                    {...getRootProps()}
-                                    className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
-                                    )}
-                                >
-                                    <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
-                                    </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Stage Your Document</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">Select a PDF to extract pages from locally.</p>
+                            <div
+                                {...getRootProps()}
+                                className={cn(
+                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                    isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                                )}
+                            >
+                                <input {...getInputProps()} />
+                                <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                <div className="text-center">
+                                    <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                        {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                    </p>
+                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
                                 </div>
                             </div>
                         </motion.div>
                     ) : (
                         <motion.div
                             key="results"
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full flex flex-col items-center space-y-10"
+                            className="w-full flex flex-col gap-4"
                         >
-                            {/* 📟 PROCESSING REPORT CARD */}
-                            <div className="w-full max-w-2xl bg-zinc-950 rounded-[3rem] border border-zinc-800/80 overflow-hidden relative p-10 flex flex-col items-center shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] backdrop-blur-3xl group">
-                                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50" />
-
-                                <div className="flex items-center gap-6 w-full z-10">
-                                    <div className="w-16 h-16 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center justify-center shrink-0 shadow-xl group-hover:scale-110 transition-transform duration-500">
-                                        <FileText className="w-8 h-8 text-emerald-500" />
-                                    </div>
-                                    <div className="flex-1 min-w-0 text-start">
-                                        <p className="text-lg lg:text-xl font-black uppercase tracking-tighter text-white truncate group-hover:text-emerald-500 transition-colors">{file.name}</p>
-                                        <p className="text-[11px] font-bold uppercase text-zinc-500 tracking-[0.2em]">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
-                                    </div>
-                                    <Button variant="ghost" size="sm" onClick={() => setFile(null)} className="h-10 px-4 text-zinc-500 hover:text-white uppercase tracking-widest text-[11px] font-black italic hover:bg-zinc-900 rounded-xl transition-all">
-                                        Change
-                                    </Button>
+                            {/* File info row */}
+                            <div className="flex items-center gap-4 p-4 border border-zinc-800 bg-zinc-950">
+                                <FileText className="w-8 h-8 text-zinc-600 shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-bold text-white truncate">{file.name}</p>
+                                    <p className="text-xs text-zinc-600">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                                 </div>
-
-                                {errorMsg && (
-                                    <div className="w-full mt-8 p-5 bg-red-500/5 border border-red-500/20 rounded-2xl flex items-center gap-4 text-red-500 z-10 shadow-lg">
-                                        <Info className="w-5 h-5 animate-pulse" />
-                                        <span className="text-[11px] font-black uppercase italic tracking-tight">{errorMsg}</span>
-                                    </div>
-                                )}
-
-                                {splitBlob && !isProcessing && (
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        className="w-full mt-10 flex flex-col items-center space-y-8 z-10"
-                                    >
-                                        <div className="flex items-center gap-3 text-emerald-500 px-6 py-2.5 bg-emerald-500/5 border border-emerald-500/20 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.1)]">
-                                            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                                            <span className="text-[11px] font-black uppercase tracking-[0.2em]">Partitioning Absolute</span>
-                                        </div>
-
-                                        <div className="grid grid-cols-2 gap-6 w-full max-w-lg">
-                                            <div className="p-6 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-2xl text-center space-y-2 transition-all hover:bg-zinc-900">
-                                                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Archive Format</p>
-                                                <p className="text-sm font-black text-white uppercase italic tracking-tight">{isZip ? "ZIP Archive" : "Single PDF"}</p>
-                                            </div>
-                                            <div className="p-6 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-2xl text-center space-y-2 transition-all hover:bg-zinc-900">
-                                                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Extraction Size</p>
-                                                <p className="text-sm font-black text-white uppercase italic tracking-tight">{(splitBlob.size / 1024 / 1024).toFixed(2)} MB</p>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                )}
+                                <button onClick={() => setFile(null)} className="text-xs font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors">
+                                    Change
+                                </button>
                             </div>
 
-                            {/* 📟 NODE FLOW INDICATORS */}
-                            <div className="flex items-center gap-12 px-12 py-6 bg-zinc-900/90 border border-zinc-800 rounded-full shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all hover:bg-zinc-900">
-                                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
-                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Source Stream</span>
-                                    <Layers className="w-6 h-6 text-zinc-500" />
+                            {errorMsg && (
+                                <div className="flex items-center gap-3 p-4 border border-red-500/30 bg-red-500/5 text-red-400">
+                                    <Info className="w-4 h-4 shrink-0" />
+                                    <span className="text-xs font-bold uppercase tracking-tight">{errorMsg}</span>
                                 </div>
-                                <div className="relative">
-                                    <RefreshCw className={cn("w-6 h-6 text-emerald-500 transition-all", isProcessing ? "animate-spin" : "opacity-30")} />
-                                    {isProcessing && <div className="absolute -inset-3 bg-emerald-500/10 blur-xl rounded-full animate-pulse" />}
+                            )}
+
+                            {splitBlob && !isProcessing && (
+                                <div className="flex items-center gap-3 p-4 border border-white/10 bg-white/[0.02]">
+                                    <div className="flex items-center gap-3 flex-1">
+                                        <div className="w-2 h-2 rounded-full bg-white" />
+                                        <span className="text-xs font-bold text-white uppercase tracking-widest">Split Complete</span>
+                                    </div>
+                                    <div className="flex gap-4 text-xs text-zinc-500">
+                                        <span>{isZip ? 'ZIP Archive' : 'Single PDF'}</span>
+                                        <span>{(splitBlob.size / 1024 / 1024).toFixed(2)} MB</span>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
-                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Extraction Registry</span>
-                                    <Scissors className="w-6 h-6 text-emerald-500" />
+                            )}
+
+                            {isProcessing && (
+                                <div className="flex items-center gap-3">
+                                    <RefreshCw className="w-4 h-4 text-white animate-spin" />
+                                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Splitting…</span>
                                 </div>
-                            </div>
+                            )}
                         </motion.div>
                     )}
                 </AnimatePresence>

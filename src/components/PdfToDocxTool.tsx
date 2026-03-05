@@ -138,9 +138,9 @@ const PdfToDocxTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "Layer Scanning", description: "Iterates through the PDF text matrix to reconstruct paragraph blocks." },
-        { title: "Headless Rendering", description: "Uses PDF.js in a headless state to extract semantic string arrays." },
-        { title: "OpenXML Synthesis", description: "Pipes strings into the docx.js engine to generate native Word files." }
+        { title: 'Upload Your PDF', description: 'Drop any PDF that you need to edit but can\'t — a scanned report, a form, anything.' },
+        { title: 'We Extract the Text', description: 'The tool reads all the text from your PDF and organizes it into paragraphs, just like the original.' },
+        { title: 'Download as Word File', description: 'Get a fully editable .docx file that opens in Microsoft Word, Google Docs, or any word processor.' }
     ], []);
 
     return (
@@ -151,65 +151,54 @@ const PdfToDocxTool = memo(() => {
             category="docs"
             toolId="pdf-to-docx"
             settingsContent={
-                <div className="space-y-6">
-                    {/* 🔘 EXTRACTION MODE HUB */}
-                    <div className="space-y-3.5">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Extraction Mode</span>
-                        <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between shadow-inner transition-all hover:bg-zinc-900">
-                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-tight italic">Text Layer Recovery</span>
-                            <div className="bg-emerald-500/10 p-1.5 rounded-lg border border-emerald-500/20">
-                                <RefreshCw className="w-4 h-4 text-emerald-500" />
-                            </div>
+                <div className="space-y-4">
+                    <div className="space-y-3">
+                        <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-500">Output Format</span>
+                        <div className="border border-zinc-800 bg-zinc-950 p-3 flex items-center justify-between">
+                            <span className="text-xs font-bold text-zinc-300 uppercase tracking-wide">Word Document (.docx)</span>
+                            <RefreshCw className="w-3.5 h-3.5 text-zinc-600" />
                         </div>
                     </div>
 
-                    {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3.5 pt-4">
-                        <Button
+                    <div className="space-y-3">
+                        <button
                             onClick={handleDownload}
                             disabled={!docxBlobUrl || isProcessing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-10 bg-white hover:bg-zinc-100 disabled:opacity-40 text-black font-black rounded-sm text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95"
                         >
-                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5 me-2" />}
-                            {isProcessing ? t('processing') : t('downloadBtn')}
-                        </Button>
+                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
+                            {isProcessing ? 'Converting…' : 'Download Word File'}
+                        </button>
 
-                        <Button
-                            variant="outline"
+                        <button
                             onClick={resetTool}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
+                            className="w-full h-10 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all rounded-sm"
                         >
-                            <RefreshCw className="w-4 h-4 me-2" />
-                            Reset Workspace
-                        </Button>
+                            <RefreshCw className="w-3.5 h-3.5 inline mr-2" />
+                            Start Over
+                        </button>
                     </div>
 
-                    {/* 📊 SANDBOX REPORT */}
-                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
-                        <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">Heuristic Recovery</span>
-                        </div>
-                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
-                            Scans PDF text instructions and re-pipelines them into OpenXML buffers.
-                            Zero cloud dependencies.
+                    <div className="border border-zinc-800 bg-zinc-950 p-4 space-y-1">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">How This Works</span>
+                        <p className="text-[11px] text-zinc-600 leading-relaxed">
+                            Your PDF text is extracted directly in the browser and saved as a Word file. Nothing is uploaded.
                         </p>
                     </div>
                 </div>
             }
             howItWorks={howItWorks}
         >
-            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-12">
+            <div className="w-full">
                 <AnimatePresence mode="wait">
                     {!originalFile ? (
                         <motion.div
                             key="dropzone"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 1.05 }}
-                            className="w-full max-w-2xl"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="w-full"
                         >
-                            {/* 🛸 DROPZONE ARCHITECTURE */}
                             <div className="relative group/dropzone w-full">
                                 <AnimatePresence>
                                     {isDragActive && (
@@ -224,62 +213,53 @@ const PdfToDocxTool = memo(() => {
                                 <div
                                     {...getRootProps()}
                                     className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <Upload className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                    <div className="text-center">
+                                        <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                            {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                        </p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>
                     ) : (
                         <motion.div
                             key="results"
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="w-full flex flex-col items-center space-y-10"
+                            className="w-full flex flex-col gap-4"
                         >
-                            {/* 📟 PROCESSING REPORT CARD */}
-                            <div className="w-full max-w-2xl aspect-video bg-zinc-950 rounded-[3rem] border border-zinc-800/80 overflow-hidden relative flex flex-col items-center justify-center shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)] group backdrop-blur-3xl">
-                                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-50" />
-
-                                <div className="z-10 bg-zinc-900/50 backdrop-blur-3xl border border-zinc-800/80 rounded-[2.5rem] p-10 flex flex-col items-center gap-6 transition-all group-hover:scale-105 shadow-2xl group-hover:border-emerald-500/30">
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center shadow-inner">
-                                        <FileText className="w-10 h-10 text-emerald-500" />
-                                    </div>
-                                    <div className="text-center space-y-2">
-                                        <p className="text-lg lg:text-xl font-black uppercase tracking-tighter text-white group-hover:text-emerald-500 transition-colors">{originalFile.name}</p>
-                                        <p className="text-[11px] font-bold uppercase text-zinc-500 tracking-[0.2em]">{(originalFile.size / 1024 / 1024).toFixed(2)} MB &bull; PDF Registry</p>
-                                    </div>
+                            {/* File info row */}
+                            <div className="flex items-center gap-4 p-4 border border-zinc-800 bg-zinc-950">
+                                <FileText className="w-8 h-8 text-zinc-600 shrink-0" />
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-bold text-white truncate">{originalFile.name}</p>
+                                    <p className="text-xs text-zinc-600">{(originalFile.size / 1024 / 1024).toFixed(2)} MB</p>
                                 </div>
                             </div>
 
+                            {/* Progress */}
                             <AnimatePresence>
                                 {isProcessing && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        className="w-full max-w-2xl space-y-5"
+                                        className="space-y-2"
                                     >
-                                        <div className="flex justify-between items-center px-6">
-                                            <div className="flex items-center gap-3">
-                                                <Loader2 className="w-4 h-4 text-emerald-500 animate-spin" />
-                                                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-emerald-500 animate-pulse italic">{progressStr}</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full">
-                                                <RefreshCw className="w-3.5 h-3.5 text-emerald-500 animate-spin" />
-                                                <span className="text-[9px] font-black text-zinc-500 uppercase italic">Parsing Nodes</span>
-                                            </div>
+                                        <div className="flex items-center gap-2">
+                                            <Loader2 className="w-4 h-4 text-white animate-spin" />
+                                            <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">{progressStr}</span>
                                         </div>
-                                        <div className="h-1.5 bg-zinc-900/50 rounded-full overflow-hidden border border-zinc-800 backdrop-blur-sm">
+                                        <div className="h-1 bg-zinc-900 overflow-hidden">
                                             <motion.div
-                                                className="h-full bg-emerald-500 shadow-[0_0_25px_rgba(16,185,129,0.6)]"
+                                                className="h-full bg-white"
                                                 initial={{ width: "5%" }}
                                                 animate={{ width: "95%" }}
                                                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -289,19 +269,19 @@ const PdfToDocxTool = memo(() => {
                                 )}
                             </AnimatePresence>
 
+                            {/* Error */}
                             {errorMsg && (
-                                <div className="flex items-center gap-4 p-5 bg-red-500/5 border border-red-500/20 rounded-2xl text-red-500 shadow-lg animate-in fade-in zoom-in-95">
-                                    <Info className="w-6 h-6 animate-pulse" />
-                                    <p className="text-xs font-bold uppercase tracking-tight italic">{errorMsg}</p>
+                                <div className="flex items-center gap-3 p-4 border border-red-500/30 bg-red-500/5 text-red-400">
+                                    <Info className="w-4 h-4 shrink-0" />
+                                    <p className="text-xs font-bold uppercase tracking-tight">{errorMsg}</p>
                                 </div>
                             )}
 
+                            {/* Success */}
                             {docxBlobUrl && !isProcessing && (
-                                <div className="flex flex-col items-center gap-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                                    <div className="flex items-center gap-3 text-emerald-500 px-8 py-3 bg-emerald-500/5 border border-emerald-500/20 rounded-full shadow-[0_0_40px_rgba(16,185,129,0.1)] backdrop-blur-xl">
-                                        <CheckCircle2 className="w-5 h-5" />
-                                        <span className="text-[11px] font-black uppercase tracking-[0.2em] italic">Reconstruction Complete</span>
-                                    </div>
+                                <div className="flex items-center gap-3 p-4 border border-white/10 bg-white/[0.02] text-white">
+                                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                                    <p className="text-xs font-bold uppercase tracking-widest">Ready to Download</p>
                                 </div>
                             )}
                         </motion.div>

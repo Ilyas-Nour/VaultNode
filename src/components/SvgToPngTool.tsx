@@ -167,30 +167,20 @@ export default function SvgToPngTool() {
                             exit={{ opacity: 0, scale: 1.05 }}
                             className="w-full max-w-2xl"
                         >
-                            <div className="relative group/dropzone w-full">
-                                <AnimatePresence>
-                                    {isDragActive && (
-                                        <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            className="absolute -inset-1 conic-gradient-vault animate-pulse-conic rounded-[2.7rem] blur-md -z-10"
-                                        />
-                                    )}
-                                </AnimatePresence>
-                                <div
-                                    {...getRootProps()}
-                                    className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
-                                    )}
-                                >
-                                    <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <FileCode className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
-                                    </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
+                            <div
+                                {...getRootProps()}
+                                className={cn(
+                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                    isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                                )}
+                            >
+                                <input {...getInputProps()} />
+                                <FileCode className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                <div className="text-center">
+                                    <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                        {isDragActive ? 'Drop it here' : 'Drop your SVG file here'}
+                                    </p>
+                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">SVG files only</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -202,9 +192,9 @@ export default function SvgToPngTool() {
                             className="w-full grid grid-cols-1 md:grid-cols-2 gap-6"
                         >
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
-                                    <span>Source Vector Code</span>
-                                    <span className="text-zinc-600 truncate max-w-[120px] bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">{fileName}.svg</span>
+                                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-500">
+                                    <span>SVG Code</span>
+                                    <span className="text-zinc-600 truncate max-w-[120px]">{fileName}.svg</span>
                                 </div>
                                 <textarea
                                     value={svgCode}

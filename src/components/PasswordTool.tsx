@@ -107,9 +107,9 @@ const PasswordTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "CSPRNG Engine", description: "Uses the browser's native Cryptographically Secure Pseudo-Random Number Generator." },
-        { title: "Entropy Calculation", description: "Quantifies the mathematical complexity of the string based on pool size and length." },
-        { title: "Volatile Synthesis", description: "Strings are constructed character-by-character in a private memory space." }
+        { title: 'Set Your Rules', description: 'Choose how long the password should be and whether to include numbers, symbols, or uppercase letters.' },
+        { title: 'Generate Instantly', description: 'Click generate and get a strong, unique password in under a second — created entirely on your device.' },
+        { title: 'Copy and Use', description: 'Copy the password with one click and use it for any account. We never store or see your passwords.' }
     ], []);
 
     return (

@@ -131,9 +131,9 @@ const UnlockPdfTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "Binary Parsing", description: "Loads the PDF byte stream into an atomic PDFDocument buffer object." },
-        { title: "Standard AES", description: "Attempts to derive the decryption key from your provided password." },
-        { title: "Metadata Rebuild", description: "Generates a new, unencrypted PDF stream while preserving content layers." }
+        { title: 'Upload Your Locked PDF', description: 'Drop the PDF file that is password-protected or has printing/editing restrictions.' },
+        { title: 'Enter the Password (if you have it)', description: 'If the PDF requires a password to open, type it in. If it just has restrictions, skip this step.' },
+        { title: 'Download the Unlocked File', description: 'Get a fully usable PDF — you can now open, copy, print, and edit it freely.' }
     ], []);
 
     return (
@@ -215,16 +215,18 @@ const UnlockPdfTool = memo(() => {
                                 <div
                                     {...getRootProps()}
                                     className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl">
-                                        <Upload className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                    <div className="text-center">
+                                        <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                            {isDragActive ? 'Drop it here' : 'Drop your locked PDF here'}
+                                        </p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
                                     </div>
-                                    <h3 className="text-2xl font-black uppercase italic tracking-tight mb-2">{t('dropTitle')}</h3>
-                                    <p className="text-zinc-500 text-sm font-bold uppercase tracking-widest text-center px-4">{t('dropDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>

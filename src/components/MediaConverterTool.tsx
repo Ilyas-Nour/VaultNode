@@ -137,11 +137,20 @@ const MediaConverterTool = memo(() => {
     }, []);
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
-    const howItWorks = useMemo(() => [
-        { title: "Binary Transcoding", description: "V8-powered FFmpeg binaries running directly in your CPU cycles." },
-        { title: "SharedArrayBuffer", description: "Multithreaded acceleration for desktop-class performance." },
-        { title: "Privacy First", description: "Zero-server footprint. Your videos are processed safely on your device." }
-    ], []);
+    const howItWorks = [
+        {
+            title: 'Pick Your File',
+            description: 'Drop any video or audio file onto the box. No account needed — it stays on your device the whole time.'
+        },
+        {
+            title: 'Choose What to Do',
+            description: 'Select the output format (MP3, WAV) or trim the video to just the part you want.'
+        },
+        {
+            title: 'Download the Result',
+            description: 'Click Convert and your file is ready in seconds. Everything happens inside your browser — nothing is sent anywhere.'
+        }
+    ];
 
     return (
         <ToolContainer
@@ -268,16 +277,20 @@ const MediaConverterTool = memo(() => {
                                 <div
                                     {...getRootProps()}
                                     className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
+                                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                        isDragActive
+                                            ? "border-white/40 bg-white/[0.03]"
+                                            : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
                                     )}
                                 >
                                     <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <Video className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
+                                    <Video className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                    <div className="text-center">
+                                        <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                            {isDragActive ? 'Drop it here' : 'Drop your file here'}
+                                        </p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">MP4 · MOV · MP3 · WEBM</p>
                                     </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Drop Media File</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">MP4 · MOV · MP3 · WEBM Supported</p>
                                 </div>
                             </div>
                         </motion.div>

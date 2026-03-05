@@ -115,9 +115,9 @@ const PdfMergeTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: "Parallel Loading", description: "All selected PDFs are read into individual byte buffers simultaneously." },
-        { title: "Page Injection", description: "Injects page objects from multiple source catalogs into a new PDF registry." },
-        { title: "Local Synthesis", description: "Serializes the final document object into a binary BLOB for instant download." }
+        { title: 'Add Your Files', description: 'Drop all the PDF files you want to combine. You can add as many as you need.' },
+        { title: 'Set the Order', description: 'Drag files to arrange them in the order you want them to appear in the final document.' },
+        { title: 'Download the Merged PDF', description: 'Click merge and get a single, ready-to-share PDF file in seconds.' }
     ], []);
 
     return (
@@ -197,30 +197,20 @@ const PdfMergeTool = memo(() => {
                             className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center flex-1"
                         >
                             {/* 🛸 DROPZONE ARCHITECTURE */}
-                            <div className="relative group/dropzone w-full">
-                                <AnimatePresence>
-                                    {isDragActive && (
-                                        <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            exit={{ opacity: 0 }}
-                                            className="absolute -inset-1 conic-gradient-vault animate-pulse-conic rounded-[2.7rem] blur-md -z-10"
-                                        />
-                                    )}
-                                </AnimatePresence>
-                                <div
-                                    {...getRootProps()}
-                                    className={cn(
-                                        "w-full aspect-video border-2 border-dashed rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative",
-                                        isDragActive ? "border-emerald-500 bg-emerald-500/5" : "border-zinc-800 hover:border-zinc-700 bg-zinc-900/20"
-                                    )}
-                                >
-                                    <input {...getInputProps()} />
-                                    <div className="w-20 h-20 bg-zinc-950 border border-zinc-800 rounded-3xl flex items-center justify-center mb-6 shadow-2xl group-hover/dropzone:scale-110 transition-transform duration-500">
-                                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-emerald-500" : "text-zinc-500")} />
-                                    </div>
-                                    <h3 className="text-2xl lg:text-3xl font-black uppercase italic tracking-tight mb-2">Stage Your Documents</h3>
-                                    <p className="text-zinc-500 text-sm lg:text-base font-bold uppercase tracking-widest text-center px-4">{t('mergeDropDesc')}</p>
+                            <div
+                                {...getRootProps()}
+                                className={cn(
+                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
+                                    isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                                )}
+                            >
+                                <input {...getInputProps()} />
+                                <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                                <div className="text-center">
+                                    <p className="text-sm font-bold text-white uppercase tracking-widest">
+                                        {isDragActive ? 'Drop files here' : 'Drop your PDFs here'}
+                                    </p>
+                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -232,8 +222,8 @@ const PdfMergeTool = memo(() => {
                             className="w-full flex flex-col space-y-8"
                         >
                             {/* 📑 QUEUE HEADER */}
-                            <div className="flex items-center justify-between px-4">
-                                <h3 className="text-xl lg:text-2xl font-black uppercase italic tracking-tight text-white">Merge Queue</h3>
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-base font-black uppercase tracking-tight text-white">Files to Merge</h3>
                                 <div {...getRootProps()} className="cursor-pointer">
                                     <input {...getInputProps()} />
                                     <Button variant="ghost" size="sm" className="text-emerald-500 hover:text-emerald-400 uppercase tracking-widest text-[11px] font-black italic gap-2 group/add">
