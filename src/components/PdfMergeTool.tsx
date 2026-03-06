@@ -39,7 +39,7 @@ interface MergeFile {
  */
 const PdfMergeTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
-    const t = useTranslations("HomePage");
+    const t = useTranslations("Tools.pdfMerge");
     const tc = useTranslations("Tools.common");
 
     // 📂 STATE ORCHESTRATION

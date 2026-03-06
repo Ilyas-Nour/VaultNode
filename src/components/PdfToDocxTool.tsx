@@ -98,7 +98,6 @@ const PdfToDocxTool = memo(() => {
             const blob = await Packer.toBlob(doc);
             const url = URL.createObjectURL(blob);
             setDocxBlobUrl(url);
-
         } catch (error: any) {
             console.error("PDF to DOCX error:", error);
             setErrorMsg(t('errorDesc') || "Failed to process PDF. Ensure it is not encrypted and contains text layers.");

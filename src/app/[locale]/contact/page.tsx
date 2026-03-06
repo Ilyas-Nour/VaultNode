@@ -81,12 +81,9 @@ export default function ContactPage() {
                             We built PrivaFlow for you. Your feedback, bug reports, and feature ideas shape every update.
                             Send us a message and we typically respond within 24 hours.
                         </p>
-                        <div className="flex items-center gap-4 text-sm">
-                            <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                <span className="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Available · Response in 24h</span>
-                            </div>
-                        </div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-700">
+                            Response within 24h
+                        </p>
                     </div>
                 </div>
 

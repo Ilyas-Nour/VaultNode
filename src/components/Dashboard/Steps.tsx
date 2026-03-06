@@ -2,47 +2,55 @@
 
 import React, { memo } from 'react';
 import { motion } from 'framer-motion';
-import { MousePointerClick, Cpu, Download } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 export const Steps = memo(() => {
     const t = useTranslations('HomePage');
     const steps = [
-        { n: "01", icon: MousePointerClick, title: t('step1Title'), desc: t('step1Desc') },
-        { n: "02", icon: Cpu, title: t('step2Title'), desc: t('step2Desc') },
-        { n: "03", icon: Download, title: t('step3Title'), desc: t('step3Desc') },
+        { n: "01", title: t('step1Title'), desc: t('step1Desc') },
+        { n: "02", title: t('step2Title'), desc: t('step2Desc') },
+        { n: "03", title: t('step3Title'), desc: t('step3Desc') },
     ];
     return (
         <section className="border-t border-white/[0.06] w-full">
-            <div className="w-full px-5 sm:px-6 lg:px-12 py-12 lg:py-32">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-10 lg:mb-16">
+            <div className="w-full px-5 sm:px-6 lg:px-12 py-16 lg:py-28">
+
+                {/* Header */}
+                <div className="mb-12 lg:mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                     <div>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">{t('stepsLabel')}</span>
-                        <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">{t('stepsLabel')}</span>
+                        <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[0.9]">
                             {t('stepsTitle')}
                         </h2>
                     </div>
-                    <p className="text-zinc-400 text-base leading-relaxed">{t('stepsBody')}</p>
+                    <p className="text-zinc-500 text-[14px] leading-relaxed max-w-sm lg:text-right">
+                        {t('stepsBody')}
+                    </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.06]">
+                {/* Steps — horizontal rule layout */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.05]">
                     {steps.map((s, i) => (
                         <motion.div
                             key={s.n}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 16 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.15 }}
-                            className="bg-black p-7 md:p-10 space-y-5"
+                            transition={{ delay: i * 0.12, duration: 0.4 }}
+                            className="bg-black p-8 lg:p-10 flex flex-col gap-8"
                         >
-                            <div className="flex items-center gap-4">
-                                <span className="text-5xl font-black text-white/10 tabular-nums leading-none">{s.n}</span>
-                                <div className="w-9 h-9 border border-white/10 flex items-center justify-center">
-                                    <s.icon className="w-4 h-4 text-white/50" />
-                                </div>
+                            {/* Number */}
+                            <span className="text-[52px] font-black text-white/[0.07] tabular-nums leading-none tracking-tighter">
+                                {s.n}
+                            </span>
+                            <div className="space-y-2">
+                                <h3 className="text-[15px] font-black uppercase tracking-[0.1em] text-white">
+                                    {s.title}
+                                </h3>
+                                <p className="text-[13px] text-zinc-500 leading-relaxed">
+                                    {s.desc}
+                                </p>
                             </div>
-                            <h3 className="text-xl font-black uppercase tracking-tight">{s.title}</h3>
-                            <p className="text-sm text-zinc-500 leading-relaxed font-normal">{s.desc}</p>
                         </motion.div>
                     ))}
                 </div>

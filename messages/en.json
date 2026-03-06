@@ -12,7 +12,7 @@
         "heroStatLanguages": "Languages",
         "heroStatClient": "Client Side",
         "sectionAllLabel": "All Tools",
-        "sectionAllTitle": "13 Private Tools. Zero Uploads.",
+        "sectionAllTitle": "19 Private Tools. Zero Uploads.",
         "philosophyLabel": "Our Philosophy",
         "philosophyTitle": "Privacy Is Not a Feature. It's a Requirement.",
         "philosophyBody1": "Most online tools work by uploading your files to a server, processing them, and returning the result. That model is inherently broken from a privacy standpoint.",
@@ -60,6 +60,11 @@
             "linkUnlock": "Unlock PDF",
             "linkPdfImg": "PDF to Image",
             "linkSplit": "Split PDF",
+            "linkSign": "Sign Paper",
+            "linkStamp": "Stamp Photo",
+            "linkRepair": "Repair File",
+            "linkNumber": "Number Pages",
+            "linkOrganize": "Organize Pages",
             "linkZeroUpload": "Zero Upload Policy",
             "linkLocalProtocol": "Local Protocol",
             "linkEncryption": "Encryption Standards",
@@ -68,7 +73,7 @@
             "linkPhilosophy": "Philosophy",
             "linkAllTools": "All Tools",
             "linkContact": "Contact Us",
-            "copyright": "\u00a9 2026 \u00b7 Zero tracking \u00b7 Zero uploads \u00b7 Built for the open web"
+            "copyright": "© 2026 · Zero tracking · Zero uploads · Built for the open web"
         },
         "subtitle": "Most websites steal your files. We don't. Everything you do stays inside your screen. It's 100% private and 100% free.",
         "launchRedactor": "Hide Sensitive Info",
@@ -85,6 +90,11 @@
         "textEncryptor": "Secret Message",
         "blurTool": "Blur Photo",
         "pdfSplit": "Split PDF",
+        "sign": "Sign a Paper",
+        "stamp": "Stamp a Photo",
+        "repair": "Fix Broken File",
+        "numberPages": "Number the Pages",
+        "organizePages": "Organize Pages",
         "toolDescriptions": {
             "redactor": "Use the brush to paint over secrets.",
             "cleanExif": "Remove the 'hidden map' from your pictures.",
@@ -99,14 +109,39 @@
             "pdfToWord": "Change a locked file into a document you can type in and edit.",
             "unlock": "Remove a password you already know so the file stays open.",
             "pdfToImg": "Save every single page of your file as a separate picture.",
-            "split": "Choose only the pages you need from a big file and save them separately."
+            "split": "Choose only the pages you need from a big file and save them separately.",
+            "sign": "Use your mouse or finger to draw your signature and place it on any page instantly.",
+            "stamp": "Put your name or your logo on top of your photos to protect them from being stolen.",
+            "repair": "Fix a document that is broken or shows an error so you can open it again.",
+            "numberPages": "Put a small number on the bottom of every page so your file is organized and easy to read.",
+            "organizePages": "Move pages around, delete the ones you don't need, or add new ones to your file."
         },
         "beforeAfter": {
             "redactor": {
                 "before": "A letter with your phone number.",
                 "after": "The number is gone under a solid black line forever."
             },
-            "clean-exif": {
+            "sign": {
+                "before": "An empty signature line.",
+                "after": "A legally signed document."
+            },
+            "stamp": {
+                "before": "A plain photo.",
+                "after": "A photo with your watermark."
+            },
+            "repair": {
+                "before": "A file that won't open.",
+                "after": "A fully recovered document."
+            },
+            "numberPages": {
+                "before": "Pages without numbers.",
+                "after": "A paginated, organized file."
+            },
+            "organizePages": {
+                "before": "A messy pile of pages.",
+                "after": "A perfectly ordered document."
+            },
+            "cleanExif": {
                 "before": "A photo that shows exactly where you live.",
                 "after": "A photo that is safe to share with strangers."
             },
@@ -126,11 +161,11 @@
                 "before": "An iPhone picture that won't open on PC.",
                 "after": "A standard photo that works everywhere."
             },
-            "media-converter": {
+            "mediaConverter": {
                 "before": "A video that won't play on your phone.",
                 "after": "A perfect file that plays on any device."
             },
-            "svg-to-png": {
+            "svgToPng": {
                 "before": "A drawing file for designers.",
                 "after": "A simple photo for everyone to see."
             },
@@ -142,7 +177,7 @@
                 "before": "5 different files scattered around.",
                 "after": "One clean document with everything inside."
             },
-            "pdf-to-word": {
+            "pdfToDocx": {
                 "before": "A file you can't edit or type in.",
                 "after": "A Word file you can fix and change."
             },
@@ -150,7 +185,7 @@
                 "before": "A file that asks for a password every time.",
                 "after": "A file that opens instantly for anyone."
             },
-            "pdf-to-img": {
+            "pdfToImg": {
                 "before": "A document you have to scroll through.",
                 "after": "A collection of easy-to-share pictures."
             },
@@ -235,11 +270,11 @@
             "title": "Secret Message",
             "description": "Lock your writing with a code."
         },
-        "heic-to-jpg": {
+        "heicToJpg": {
             "title": "Fix iPhone Pictures",
             "description": "Turn iPhone files into photos that work everywhere."
         },
-        "media-converter": {
+        "mediaConverter": {
             "title": "Video/Audio Fixer",
             "description": "Change video or music file types."
         },
@@ -247,19 +282,19 @@
             "title": "Create Strong Codes",
             "description": "Make secure codes only you know."
         },
-        "pdf-merge": {
+        "pdfMerge": {
             "title": "Combine Many Files",
             "description": "Put multiple files into one."
         },
-        "pdf-split": {
+        "pdfSplit": {
             "title": "Split Files",
             "description": "Take pages out of a large file."
         },
-        "pdf-to-docx": {
+        "pdfToDocx": {
             "title": "File to Word",
             "description": "Turn files into documents you can edit."
         },
-        "pdf-to-img": {
+        "pdfToImg": {
             "title": "File to Pictures",
             "description": "Turn pages into image files."
         },
@@ -267,13 +302,33 @@
             "title": "Hide Private Info",
             "description": "Cover secrets in a document."
         },
-        "svg-to-png": {
+        "svgToPng": {
             "title": "Fix Logos",
             "description": "Turn designer drawings into images."
         },
-        "unlock-pdf": {
+        "unlockPdf": {
             "title": "Unlock a File",
             "description": "Remove passwords from your files."
+        },
+        "sign": {
+            "title": "Sign a Paper",
+            "description": "Use your mouse or finger to draw your signature and place it on any page instantly."
+        },
+        "stamp": {
+            "title": "Stamp a Photo",
+            "description": "Put your name or your logo on top of your photos to protect them from being stolen."
+        },
+        "repair": {
+            "title": "Fix Broken File",
+            "description": "Fix a document that is broken or shows an error so you can open it again."
+        },
+        "numberPages": {
+            "title": "Number every Page",
+            "description": "Put a small number on the bottom of every page so your file is organized and easy to read."
+        },
+        "organizePages": {
+            "title": "Organize Pages",
+            "description": "Move pages around, delete the ones you don't need, or add new ones to your file."
         }
     },
     "Tools": {
@@ -282,7 +337,19 @@
             "processing": "Working...",
             "success": "Task Complete",
             "error": "Something went wrong",
-            "backToHome": "Back to Tools"
+            "backToHome": "Back to Tools",
+            "settings": "Settings",
+            "howItWorks": "How It Works",
+            "before": "Original",
+            "after": "Result",
+            "specs": {
+                "network": "Network",
+                "local": "Local-Only",
+                "storage": "Storage",
+                "ram": "In-RAM",
+                "privacy": "Privacy",
+                "zero": "Zero Uploads"
+            }
         },
         "redact": {
             "title": "Hide Private Info",
@@ -340,7 +407,13 @@
             "buildingWord": "Synthesizing Word structure...",
             "errorDesc": "Synthesis failed. Please ensure the file isn't encrypted.",
             "processing": "Processing text layers...",
-            "downloadBtn": "Save Word Document"
+            "downloadBtn": "Save Word Document",
+            "startOver": "Start Over",
+            "outputFormat": "Output Format",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "Your PDF text is extracted directly in the browser and saved as a Word file. Nothing is uploaded.",
+            "ready": "Ready to Download",
+            "converting": "Converting..."
         },
         "password": {
             "title": "Secure Code Generator",
@@ -364,21 +437,169 @@
             "description": "Change video or music files so they play perfectly on any device.",
             "titleHighlight": "Format Transcoder",
             "dropTitle": "Drop your media file here.",
+            "dropActive": "Drop it here",
             "dropDesc": "We'll fix the format so it works everywhere.",
             "processing": "Recoding bitstream data...",
-            "downloadBtn": "Save Fixed Media",
+            "downloadBtn": "Convert & Download",
+            "resetBtn": "Reset Node",
+            "operationMode": "Operation Mode",
+            "rangeSelection": "Range Selection",
+            "engaging": "Engaging Transcoder",
+            "hardwareNode": "Hardware Node",
+            "secureOut": "Vault Secure Out",
+            "status": {
+                "active": "FFmpeg.wasm Active",
+                "label": "WASM Status",
+                "ready": "Ready",
+                "loading": "Loading..."
+            },
+            "howItWorks": {
+                "step1": {
+                    "title": "Pick Your File",
+                    "desc": "Drop any video or audio file onto the box. No account needed — it stays on your device the whole time."
+                },
+                "step2": {
+                    "title": "Choose What to Do",
+                    "desc": "Select the output format (MP3, WAV) or trim the video to just the part you want."
+                },
+                "step3": {
+                    "title": "Download the Result",
+                    "desc": "Click Convert and your file is ready in seconds. Everything happens inside your browser — nothing is sent anywhere."
+                }
+            },
             "targetFormat": "Select Output Type"
         },
         "compress": {
             "title": "Image Asset Optimizer",
             "description": "Reduce file size while preserving professional visual fidelity.",
             "titleHighlight": "Pixel Shrinker",
-            "dropTitle": "Drop your heavy image here.",
+            "dropTitle": "Drop your image here.",
+            "dropActive": "Drop it here",
             "dropDesc": "We'll optimize the file size without sacrificing quality.",
             "aggressive": "Max Compression",
             "balanced": "High Fidelity",
-            "downloadSecurely": "Save Optimized Asset",
-            "processing": "Optimizing image clusters..."
+            "downloadSecurely": "Download Compressed Image",
+            "processing": "Optimizing image clusters...",
+            "initializing": "Loading compression engine...",
+            "targetSize": "Target Size",
+            "clear": "Clear",
+            "resultLabel": "Result",
+            "saved": "Space Saved",
+            "finalSize": "Final Size",
+            "resultPlaceholder": "Drop an image to see the compression results here.",
+            "original": "Original",
+            "compressed": "Compressed",
+            "downloadBtn": "Download",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your Image",
+                    "desc": "Select the photo you want to optimize. It stays on your device."
+                },
+                "step2": {
+                    "title": "Set Target Size",
+                    "desc": "Adjust the quality slider to find the perfect balance between size and clarity."
+                },
+                "step3": {
+                    "title": "Download Result",
+                    "desc": "Get your optimized image instantly. Zero quality loss in balanced mode."
+                }
+            }
+        },
+        "pdfMerge": {
+            "title": "Combine PDFs",
+            "description": "Merge multiple PDF files into one secure document in your browser.",
+            "titleHighlight": "Document Merger",
+            "dropTitle": "Drop your PDF files here.",
+            "dropDesc": "We'll combine them into a single file locally.",
+            "processing": "Synthesizing document catalog...",
+            "mergeButton": "Merge PDF Files"
+        },
+        "sign": {
+            "title": "Sign a Paper",
+            "description": "Draw your signature and place it on any page instantly.",
+            "titleHighlight": "Digital Signature",
+            "dropTitle": "Drop your PDF here.",
+            "drawSignature": "Draw Your Signature",
+            "clear": "Clear",
+            "addSignature": "Add Signature",
+            "processing": "Embedding signature...",
+            "downloadBtn": "Download Signed PDF",
+            "signHere": "Sign here with mouse or finger",
+            "dropDesc": "Selected PDF will be rendered for signing.",
+            "saveBtn": "Save Signed Paper",
+            "ready": "Signature Ready. Drag it on the preview."
+        },
+        "stamp": {
+            "title": "Stamp a Photo",
+            "description": "Put your name or logo on your photos.",
+            "titleHighlight": "Photo Watermark",
+            "dropTitle": "Drop your image here.",
+            "watermarkText": "Watermark Text",
+            "watermarkPlaceholder": "TYPE YOUR WATERMARK...",
+            "color": "Color",
+            "opacity": "Opacity",
+            "size": "Size",
+            "processingImage": "Processing Image...",
+            "startFresh": "Start Fresh",
+            "dropToStamp": "Drop to Stamp",
+            "position": "Position",
+            "downloadBtn": "Download Stamped Image",
+            "dropDesc": "We'll help you protect your visual assets.",
+            "saveBtn": "Save Stamped Photo"
+        },
+        "repair": {
+            "title": "Fix Broken File",
+            "description": "Fix a document that is broken or shows an error.",
+            "titleHighlight": "Document Repair",
+            "dropTitle": "Drop your broken PDF here.",
+            "processing": "Reconstructing file headers...",
+            "reconstructing": "Reconstructing...",
+            "infectedAsset": "Infected Asset",
+            "formatPdf": "Format: PDF Document",
+            "downloadBtn": "Download Fixed PDF",
+            "dropDesc": "We'll attempt to restore structural integrity.",
+            "saveBtn": "Save Fixed File"
+        },
+        "numberPages": {
+            "title": "Number every Page",
+            "description": "Put small numbers on the bottom of every page.",
+            "titleHighlight": "Page Indexer",
+            "dropTitle": "Drop your PDF here.",
+            "position": "Number Position",
+            "bottomCenter": "Bottom Center",
+            "bottomLeft": "Bottom Left",
+            "bottomRight": "Bottom Right",
+            "applyingNumbers": "Applying Numbers...",
+            "discardDocument": "Discard Document",
+            "downloadBtn": "Download Numbered PDF",
+            "dropDesc": "We'll help you organize your document.",
+            "saveBtn": "Save Numbered File"
+        },
+        "organizePages": {
+            "title": "Organize Pages",
+            "description": "Move pages around or delete the ones you don't need.",
+            "titleHighlight": "Page Manager",
+            "dropTitle": "Drop your PDF here.",
+            "processing": "Rendering document pages...",
+            "scanning": "Scanning Document Layers...",
+            "pagesLoaded": "{count} Pages Loaded. Drag to reorder.",
+            "synthesizing": "Synthesizing...",
+            "discardBtn": "Discard Document",
+            "downloadBtn": "Download Organized PDF",
+            "pageLabel": "Page",
+            "delete": "Delete",
+            "dropActive": "Drop to Organize",
+            "dropDesc": "Drag to reorder, click to delete.",
+            "saveBtn": "Save New File"
+        },
+        "pdfSplit": {
+            "title": "Extract PDF Pages",
+            "description": "Securely extract specific pages or ranges from your PDF documents.",
+            "titleHighlight": "Page Extractor",
+            "dropTitle": "Drop your PDF file here.",
+            "dropDesc": "We'll help you extract the pages you need.",
+            "processing": "Extracting page buffers...",
+            "splitBtn": "Extract Selected Pages"
         },
         "heicToJpg": {
             "title": "iPhone Asset Fixer",

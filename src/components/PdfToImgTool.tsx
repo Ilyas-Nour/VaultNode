@@ -89,8 +89,9 @@ const PdfToImgTool = memo(() => {
 
                 await page.render({
                     canvasContext: ctx,
-                    viewport: viewport
-                } as any).promise;
+                    canvas: canvas,
+                    viewport: viewport,
+                }).promise;
 
                 const blob = await new Promise<Blob | null>((resolve) => {
                     canvas.toBlob((b) => resolve(b), 'image/jpeg', 0.95);

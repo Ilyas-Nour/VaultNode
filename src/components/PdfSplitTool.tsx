@@ -33,7 +33,7 @@ import JSZip from "jszip";
  */
 const PdfSplitTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
-    const t = useTranslations("HomePage");
+    const t = useTranslations("Tools.pdfSplit");
     const tc = useTranslations("Tools.common");
 
     // 📂 STATE ORCHESTRATION

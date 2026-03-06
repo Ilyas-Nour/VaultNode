@@ -18,6 +18,11 @@
         "textEncryptor": "Mensaje Secreto",
         "blurTool": "Difuminar Foto",
         "pdfSplit": "Dividir PDF",
+        "sign": "Firmar un Documento",
+        "stamp": "Sellar una Foto",
+        "repair": "Reparar Archivo Roto",
+        "numberPages": "Numerar las Páginas",
+        "organizePages": "Organizar Páginas",
         "toolDescriptions": {
             "redactor": "Usa el pincel para pintar sobre los secretos y ocultarlos.",
             "cleanExif": "Elimina el 'mapa oculto' de tus fotos.",
@@ -32,14 +37,19 @@
             "pdfToWord": "Cambia un archivo bloqueado a un documento que puedas editar.",
             "unlock": "Elimina una contraseña que ya conoces para que el archivo se quede abierto.",
             "pdfToImg": "Guarda cada página de tu archivo como una foto separada.",
-            "split": "Elige solo las páginas que necesitas."
+            "split": "Elige solo las páginas que necesitas.",
+            "sign": "Usa el ratón o el dedo para dibujar tu firma y ponerla en cualquier página.",
+            "stamp": "Pon tu nombre o logo encima de las fotos para protegerlas.",
+            "repair": "Arregla un documento roto o que da error para que puedas abrirlo.",
+            "numberPages": "Pon un número pequeño en la parte inferior de cada página.",
+            "organizePages": "Mueve, elimina o añade páginas a tu documento."
         },
         "beforeAfter": {
             "redactor": {
                 "before": "Una carta con tu número de teléfono.",
                 "after": "El número desapareció bajo una línea negra para siempre."
             },
-            "clean-exif": {
+            "cleanExif": {
                 "before": "Una foto que muestra exactamente dónde vives.",
                 "after": "Una foto segura para compartir con extraños."
             },
@@ -59,11 +69,11 @@
                 "before": "Una foto de iPhone que no abre en PC.",
                 "after": "Una foto estándar que funciona en todas partes."
             },
-            "media-converter": {
+            "mediaConverter": {
                 "before": "Un video que no funciona en tu teléfono.",
                 "after": "Un archivo perfecto que funciona en cualquier dispositivo."
             },
-            "svg-to-png": {
+            "svgToPng": {
                 "before": "Un archivo de dibujo para diseñadores.",
                 "after": "Una foto simple para que todos la vean."
             },
@@ -75,7 +85,7 @@
                 "before": "5 archivos diferentes esparcidos por ahí.",
                 "after": "Un documento limpio con todo adentro."
             },
-            "pdf-to-word": {
+            "pdfToDocx": {
                 "before": "Un archivo que no puedes editar ni escribir en él.",
                 "after": "Un archivo de Word que puedes cambiar."
             },
@@ -83,13 +93,33 @@
                 "before": "Un archivo que pide contraseña cada vez.",
                 "after": "Un archivo que abre al instante para cualquiera."
             },
-            "pdf-to-img": {
+            "pdfToImg": {
                 "before": "Un documento largo que requiere mucho desplazamiento.",
                 "after": "Una colección de fotos fáciles de compartir."
             },
             "split": {
                 "before": "Un libro de 100 páginas.",
                 "after": "Las 2 páginas que realmente necesitabas."
+            },
+            "sign": {
+                "before": "Una línea de firma vacía.",
+                "after": "Un documento firmado legalmente."
+            },
+            "stamp": {
+                "before": "Una foto sencilla.",
+                "after": "Una foto con tu marca de agua."
+            },
+            "repair": {
+                "before": "Un archivo que no abre.",
+                "after": "Un documento completamente recuperado."
+            },
+            "numberPages": {
+                "before": "Páginas sin números.",
+                "after": "Un archivo paginado y organizado."
+            },
+            "organizePages": {
+                "before": "Un montón desordenado de páginas.",
+                "after": "Un documento perfectamente ordenado."
             }
         },
         "categories": {
@@ -170,7 +200,8 @@
             "label": "Evidencia Visual",
             "title": "Mira la Magia",
             "desc": "Prueba visual de nuestras herramientas en acción. Todo ocurre en privado dentro de tu pantalla.",
-            "viewProof": "Ver prueba"
+            "viewProof": "Ver prueba",
+            "openTool": "Abrir herramienta"
         }
     },
     "Metadata": {

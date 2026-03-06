@@ -1,15 +1,23 @@
 /**
- * ToolContainer — Canvas Design System
- * Layout: Small Left Ad | Full-width content | Small Right Ad
+ * ToolContainer — PrivaFlow Design System
+ * Single layout shell for all 19 tool pages.
+ *
+ * Brand DNA:
+ *  • Black background, white typography
+ *  • Section labels: 10px bold uppercase tracking-[0.25em] zinc-600
+ *  • Titles: font-black uppercase tracking-tight
+ *  • Borders: border-white/[0.06] — consistent hairline throughout
+ *  • No decorative badges, pulse dots, or spec grids
  */
 
 "use client";
 
 import React, { memo } from 'react';
-import { Lock, Zap, HardDrive, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { VisualProof } from '@/components/VisualProof';
 import AdUnit from '@/components/AdUnit';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 interface ToolContainerProps {
     title: string;
@@ -29,7 +37,7 @@ interface ToolContainerProps {
 export const ToolContainer = memo(({
     title,
     description,
-    icon: Icon,
+    icon: _Icon,
     category,
     children,
     settingsContent,
@@ -37,80 +45,98 @@ export const ToolContainer = memo(({
     toolId,
     hideAds = false
 }: ToolContainerProps) => {
+    const t = useTranslations('Tools.common');
+
+    const categoryLabel: Record<string, string> = {
+        vault: 'Privacy Vault',
+        media: 'Photo & Media',
+        docs: 'PDF & Documents',
+    };
+
     return (
         <div className="w-full flex flex-col bg-black">
             <div className="w-full flex items-start">
 
-                {/* Left ad — small, sticky */}
+                {/* Left ad */}
                 {!hideAds && (
-                    <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
+                    <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-14 flex-col items-center">
                         <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
                     </aside>
                 )}
 
                 {/* Main content */}
                 <main className="flex-1 min-w-0 flex flex-col">
-                    <div className="w-full px-4 sm:px-6 lg:px-12 pt-8 pb-5 border-b border-white/[0.06]">
+
+                    {/* ── PAGE HEADER ── */}
+                    <div className="w-full px-5 sm:px-6 lg:px-12 pt-10 pb-8 border-b border-white/[0.06]">
+
+                        {/* Back link */}
                         <Link
                             href="/"
-                            className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-600 hover:text-white transition-colors mb-5"
+                            className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-700 hover:text-white transition-colors mb-6"
                         >
                             <ArrowLeft className="w-3 h-3" />
-                            All Tools
+                            {t('backToHome')}
                         </Link>
 
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className="w-7 h-7 border border-white/10 flex items-center justify-center shrink-0">
-                                <Icon className="w-3.5 h-3.5 text-white/50" />
-                            </div>
-                            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-600">{category}</span>
-                        </div>
+                        {/* Category label */}
+                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600 mb-3">
+                            {categoryLabel[category] ?? category}
+                        </p>
 
-                        <h1 className="text-xl sm:text-2xl lg:text-4xl font-black uppercase tracking-tight text-white leading-tight">
+                        {/* Title */}
+                        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-black uppercase tracking-tight text-white leading-[0.9] mb-4">
                             {title}
                         </h1>
-                        <p className="mt-2 text-sm text-zinc-500 leading-relaxed max-w-xl">
+
+                        {/* Description */}
+                        <p className="text-[15px] text-zinc-500 leading-relaxed max-w-lg">
                             {description}
                         </p>
                     </div>
 
-                    {/* ── TOP ACTION ROW: Dropzone left | Settings + How It Works right ── */}
-                    <div className="w-full px-4 sm:px-6 lg:px-12 py-6 lg:py-8 border-b border-white/[0.06]">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    {/* ── WORK AREA ── */}
+                    <div className="w-full px-5 sm:px-6 lg:px-12 py-8 border-b border-white/[0.06]">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
-                            {/* LEFT: dropzone */}
+                            {/* LEFT: drop zone / canvas */}
                             <div className="w-full">
                                 {children}
                             </div>
 
-                            {/* RIGHT: Settings first, How It Works below */}
+                            {/* RIGHT: settings + how it works */}
                             <div className="space-y-8">
 
-                                {/* Settings */}
+                                {/* Settings panel */}
                                 {settingsContent && (
                                     <div className="space-y-4">
-                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
-                                            Settings
-                                        </h3>
+                                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
+                                            {t('settings')}
+                                        </p>
                                         {settingsContent}
                                     </div>
                                 )}
 
                                 {/* How It Works */}
                                 {howItWorks && (
-                                    <div className="space-y-5 pt-2 border-t border-white/[0.06]">
-                                        <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
-                                            How It Works
-                                        </h3>
-                                        <div className="space-y-5">
+                                    <div className="pt-6 border-t border-white/[0.06] space-y-6">
+                                        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
+                                            {t('howItWorks')}
+                                        </p>
+                                        <div className="space-y-6">
                                             {howItWorks.map((step, i) => (
-                                                <div key={i} className="flex gap-4">
-                                                    <span className="text-2xl font-black text-white/10 tabular-nums leading-none shrink-0 w-8 pt-0.5">
+                                                <div key={i} className="flex gap-5">
+                                                    {/* Step number */}
+                                                    <span className="text-[11px] font-black text-white/20 tabular-nums leading-none shrink-0 w-5 pt-0.5">
                                                         {String(i + 1).padStart(2, '0')}
                                                     </span>
-                                                    <div className="space-y-0.5">
-                                                        <h4 className="text-sm font-black uppercase tracking-wide text-white">{step.title}</h4>
-                                                        <p className="text-sm text-zinc-500 leading-relaxed">{step.description}</p>
+                                                    <div>
+                                                        <h4 className="text-[13px] font-black uppercase tracking-[0.12em] text-white mb-1">
+                                                            {step.title}
+                                                        </h4>
+                                                        <p className="text-[13px] text-zinc-500 leading-relaxed">
+                                                            {step.description}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             ))}
@@ -118,42 +144,35 @@ export const ToolContainer = memo(({
                                     </div>
                                 )}
 
-                                {/* Privacy specs */}
-                                <div className="pt-2 border-t border-white/[0.06] flex flex-wrap items-center gap-4 sm:gap-6">
-                                    {[
-                                        { label: 'Network', value: 'Local-Only', icon: Zap },
-                                        { label: 'Storage', value: 'In-RAM', icon: HardDrive },
-                                        { label: 'Privacy', value: 'Zero Uploads', icon: Lock }
-                                    ].map((spec) => (
-                                        <div key={spec.label} className="flex flex-col gap-0.5">
-                                            <span className="text-[9px] font-bold uppercase text-zinc-700 tracking-widest">{spec.label}</span>
-                                            <span className="text-xs font-black text-white uppercase tracking-tight">{spec.value}</span>
-                                        </div>
-                                    ))}
+                                {/* Single-line privacy note — replaces the old busy spec grid */}
+                                <div className="pt-6 border-t border-white/[0.06]">
+                                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-700">
+                                        100% Local · Zero Upload · Private by Design
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Mobile ad — visible below xl where side ads are hidden */}
+                    {/* Mobile ad */}
                     {!hideAds && (
-                        <div className="xl:hidden w-full px-4 sm:px-6 py-4 border-b border-white/[0.06] flex justify-center">
+                        <div className="xl:hidden w-full px-5 sm:px-6 py-4 border-b border-white/[0.06] flex justify-center">
                             <AdUnit type="banner-slim" className="w-full max-w-[468px]" />
                         </div>
                     )}
 
-                    {/* Visual Proof — full width below the fold */}
+                    {/* Visual Proof */}
                     {toolId && (
-                        <div className="w-full px-4 sm:px-6 lg:px-12 py-10 lg:py-14 border-b border-white/[0.06]">
+                        <div className="w-full px-5 sm:px-6 lg:px-12 py-12 lg:py-16 border-b border-white/[0.06]">
                             <VisualProof toolId={toolId} mode="full" />
                         </div>
                     )}
 
                 </main>
 
-                {/* Right ad — small, sticky */}
+                {/* Right ad */}
                 {!hideAds && (
-                    <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
+                    <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-14 flex-col items-center">
                         <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
                     </aside>
                 )}

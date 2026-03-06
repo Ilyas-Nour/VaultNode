@@ -25,12 +25,14 @@ import { fetchFile } from '@ffmpeg/util';
 import { ToolContainer } from '@/components/ToolContainer';
 import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 /**
  * 🎬 MediaConverterTool Component
  * The primary utility for local media format conversion and trimming.
  */
 const MediaConverterTool = memo(() => {
+    const t = useTranslations('Tools.mediaConverter');
     const { ffmpeg, loaded, progress, load } = useFFmpeg();
 
     // 📂 STATE
@@ -139,23 +141,23 @@ const MediaConverterTool = memo(() => {
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = [
         {
-            title: 'Pick Your File',
-            description: 'Drop any video or audio file onto the box. No account needed — it stays on your device the whole time.'
+            title: t('howItWorks.step1.title'),
+            description: t('howItWorks.step1.desc')
         },
         {
-            title: 'Choose What to Do',
-            description: 'Select the output format (MP3, WAV) or trim the video to just the part you want.'
+            title: t('howItWorks.step2.title'),
+            description: t('howItWorks.step2.desc')
         },
         {
-            title: 'Download the Result',
-            description: 'Click Convert and your file is ready in seconds. Everything happens inside your browser — nothing is sent anywhere.'
+            title: t('howItWorks.step3.title'),
+            description: t('howItWorks.step3.desc')
         }
     ];
 
     return (
         <ToolContainer
-            title="Media Converter"
-            description="Extract audio or trim video clips using FFmpeg.wasm — entirely in your browser."
+            title={t('title')}
+            description={t('description')}
             icon={Video}
             category="media"
             toolId="media-converter"
@@ -163,7 +165,7 @@ const MediaConverterTool = memo(() => {
                 <div className="space-y-6">
                     {/* 🔘 OPERATION MODE SELECTOR */}
                     <div className="space-y-3.5">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Operation Mode</span>
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('operationMode')}</span>
                         <div className="grid grid-cols-3 gap-2 p-1.5 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-inner">
                             {[
                                 { id: 'mp3', icon: Music, label: 'MP3' },
@@ -191,7 +193,7 @@ const MediaConverterTool = memo(() => {
                     {mode === 'trim' && duration > 0 && (
                         <div className="space-y-4 pt-2">
                             <div className="flex justify-between text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">
-                                <span>Range Selection</span>
+                                <span>{t('rangeSelection')}</span>
                                 <span className="text-emerald-500 tabular-nums">{startTime.toFixed(1)}s - {endTime.toFixed(1)}s</span>
                             </div>
                             <Slider
@@ -215,7 +217,7 @@ const MediaConverterTool = memo(() => {
                             disabled={isProcessing || !loaded || !file}
                             className="w-full h-14 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-xs transition-all active:scale-95"
                         >
-                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : "Convert & Download"}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : t('downloadBtn')}
                         </Button>
 
                         <Button
@@ -224,7 +226,7 @@ const MediaConverterTool = memo(() => {
                             className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
                         >
                             <RefreshCw className="w-4 h-4 me-2" />
-                            Reset Node
+                            {t('resetBtn')}
                         </Button>
                     </div>
 
@@ -232,12 +234,12 @@ const MediaConverterTool = memo(() => {
                     <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Zap className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">FFmpeg.wasm Active</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{t('status.active')}</span>
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-zinc-600">
-                                <span>WASM Status</span>
-                                <span className={loaded ? "text-emerald-500" : "text-amber-500"}>{loaded ? "Ready" : "Loading..."}</span>
+                                <span>{t('status.label')}</span>
+                                <span className={loaded ? "text-emerald-500" : "text-amber-500"}>{loaded ? t('status.ready') : t('status.loading')}</span>
                             </div>
                             <div className="h-1.5 bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/50">
                                 <motion.div
@@ -287,7 +289,7 @@ const MediaConverterTool = memo(() => {
                                     <Video className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? 'Drop it here' : 'Drop your file here'}
+                                            {isDragActive ? t('dropActive') : t('dropTitle')}
                                         </p>
                                         <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">MP4 · MOV · MP3 · WEBM</p>
                                     </div>
@@ -352,7 +354,7 @@ const MediaConverterTool = memo(() => {
                                                     <Loader2 className="w-4 h-4 text-emerald-500 animate-spin relative" />
                                                     <div className="absolute -inset-1 bg-emerald-500/20 blur-sm rounded-full animate-pulse" />
                                                 </div>
-                                                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse italic">Engaging Transcoder</span>
+                                                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse italic">{t('engaging')}</span>
                                             </div>
                                             <span className="text-[11px] font-black text-emerald-500 tabular-nums">{progress}%</span>
                                         </div>
@@ -370,7 +372,7 @@ const MediaConverterTool = memo(() => {
                             {/* 📟 HARDWARE FLOW HUB */}
                             <div className="flex items-center gap-12 px-12 py-6 bg-zinc-900/90 border border-zinc-800 rounded-full shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all hover:bg-zinc-900">
                                 <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
-                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Hardware Node</span>
+                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">{t('hardwareNode')}</span>
                                     <HardDrive className="w-6 h-6 text-zinc-500" />
                                 </div>
                                 <div className="relative">
@@ -378,7 +380,7 @@ const MediaConverterTool = memo(() => {
                                     {isProcessing && <div className="absolute -inset-3 bg-emerald-500/10 blur-xl rounded-full animate-pulse" />}
                                 </div>
                                 <div className="flex flex-col items-center gap-2 transition-all hover:scale-105">
-                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">Vault Secure Out</span>
+                                    <span className="text-[9px] font-black text-zinc-600 uppercase tracking-tighter">{t('secureOut')}</span>
                                     <Zap className="w-6 h-6 text-emerald-500" />
                                 </div>
                             </div>

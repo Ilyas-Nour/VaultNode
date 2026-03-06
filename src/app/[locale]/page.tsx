@@ -14,7 +14,7 @@ export default function Home() {
       <Hero />
 
       {/* Services */}
-      <section id="magic" className="w-full px-6 lg:px-12 py-24 lg:py-40">
+      <section id="magic" className="w-full px-6 lg:px-12 py-16 lg:py-24">
         <div>
           <div className="mb-16 space-y-3">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">

@@ -153,10 +153,10 @@ const ImageCompressor = memo(() => {
      * 📦 Metadata Registry
      */
     const howItWorks = useMemo(() => [
-        { title: 'Drop Your Image', description: 'Pick any JPG, PNG, or WebP photo. It stays completely on your device — nothing is sent to a server.' },
-        { title: 'Set the Target Size', description: 'Use the slider to choose how small you’d like the file to be. Lower means a smaller file, higher keeps more quality.' },
-        { title: 'Download the Compressed File', description: 'Your image is ready instantly. Download it and it’ll look great while taking up much less space.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -170,7 +170,7 @@ const ImageCompressor = memo(() => {
                     {/* 🎚️ TARGET OPTIMIZATION CONTROL */}
                     <div className="space-y-5">
                         <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-zinc-500">
-                            <span>Target Size</span>
+                            <span>{t('targetSize')}</span>
                             <span className="text-emerald-500 tabular-nums text-sm">{targetSizeMB.toFixed(1)} MB</span>
                         </div>
                         <Slider
@@ -195,7 +195,7 @@ const ImageCompressor = memo(() => {
                             className="w-full h-10 bg-white hover:bg-zinc-100 disabled:opacity-40 text-black font-black rounded-sm text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95"
                         >
                             <Download className="w-3.5 h-3.5" />
-                            Download Compressed Image
+                            {t('downloadSecurely')}
                         </button>
 
                         <button
@@ -203,27 +203,27 @@ const ImageCompressor = memo(() => {
                             className="w-full h-10 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all rounded-sm"
                         >
                             <Trash2 className="w-3.5 h-3.5 inline mr-2" />
-                            Clear
+                            {t('clear')}
                         </button>
                     </div>
 
                     {/* 📊 OPTIMIZATION REPORT */}
                     <div className="border border-zinc-800 bg-zinc-950 space-y-3 p-4">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Result</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{t('resultLabel')}</span>
                         {result ? (
                             <div className="space-y-2">
                                 <div className="flex justify-between text-[11px] font-bold">
-                                    <span className="text-zinc-500 uppercase">Space Saved:</span>
+                                    <span className="text-zinc-500 uppercase">{t('saved')}:</span>
                                     <span className="text-emerald-400 text-sm">-{savingsPercent}%</span>
                                 </div>
                                 <div className="flex justify-between text-[11px] font-bold">
-                                    <span className="text-zinc-500 uppercase">Final Size:</span>
+                                    <span className="text-zinc-500 uppercase">{t('finalSize')}:</span>
                                     <span className="text-zinc-300 tabular-nums">{formatSize(result.compressedSize)}</span>
                                 </div>
                             </div>
                         ) : (
                             <p className="text-[11px] text-zinc-600 leading-relaxed">
-                                Drop an image to see the compression results here.
+                                {t('resultPlaceholder')}
                             </p>
                         )}
                     </div>
@@ -253,7 +253,7 @@ const ImageCompressor = memo(() => {
                                 <ImageIcon className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                        {isDragActive ? 'Drop it here' : 'Drop your image here'}
+                                        {isDragActive ? t('dropActive') : t('dropTitle')}
                                     </p>
                                     <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">JPG · PNG · WebP</p>
                                 </div>
@@ -270,7 +270,7 @@ const ImageCompressor = memo(() => {
                             <div className="w-full grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                                        <span>Original</span>
+                                        <span>{t('original')}</span>
                                         <span className="tabular-nums">{formatSize(file.size)}</span>
                                     </div>
                                     <div className="aspect-square bg-zinc-900 border border-zinc-800 overflow-hidden flex items-center justify-center">
@@ -284,7 +284,7 @@ const ImageCompressor = memo(() => {
 
                                 <div className="space-y-2">
                                     <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-white">
-                                        <span>Compressed</span>
+                                        <span>{t('compressed')}</span>
                                         <div className="flex items-center gap-2">
                                             {result && <span className="text-emerald-400">-{savingsPercent}%</span>}
                                             <span className="tabular-nums text-zinc-400">{formatSize(result?.compressedSize || 0)}</span>
@@ -299,7 +299,7 @@ const ImageCompressor = memo(() => {
                                         ) : (
                                             <div className="flex flex-col items-center gap-3 text-zinc-600">
                                                 <Loader2 className="w-6 h-6 animate-spin" />
-                                                <span className="text-[10px] uppercase tracking-widest">Compressing…</span>
+                                                <span className="text-[10px] uppercase tracking-widest">{t('processing')}</span>
                                             </div>
                                         )}
                                     </div>
@@ -314,13 +314,13 @@ const ImageCompressor = memo(() => {
                                     className="flex-1 h-10 bg-white hover:bg-zinc-100 disabled:opacity-40 text-black text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95"
                                 >
                                     <Download className="w-3.5 h-3.5" />
-                                    Download
+                                    {t('downloadBtn')}
                                 </button>
                                 <button
                                     onClick={clear}
                                     className="h-10 px-5 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all"
                                 >
-                                    Clear
+                                    {t('clear')}
                                 </button>
                             </div>
                         </motion.div>

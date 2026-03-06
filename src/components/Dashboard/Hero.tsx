@@ -9,11 +9,11 @@ import { useTranslations } from 'next-intl';
 export const Hero = memo(() => {
     const t = useTranslations('HomePage');
     return (
-        <section className="relative mt-14 sm:mt-16 min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-start border-b border-white/[0.06] overflow-hidden w-full">
+        <section className="relative mt-14 sm:mt-16 min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-center border-b border-white/[0.06] overflow-hidden w-full">
             <div className="absolute inset-0 bg-grid-canvas opacity-100 pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/3 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="relative w-full px-5 sm:px-6 lg:px-12 pt-0 pb-6 flex flex-col items-center text-center gap-4 sm:gap-5">
+            <div className="relative w-full px-4 sm:px-6 lg:px-12 py-6 -mt-[8vh] flex flex-col items-center text-center gap-5 sm:gap-6">
 
                 {/* Badge */}
                 <motion.div
@@ -31,7 +31,8 @@ export const Hero = memo(() => {
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-5xl sm:text-6xl md:text-7xl lg:text-[96px] font-black leading-[0.88] tracking-tighter uppercase"
+                    className="font-black leading-[0.87] tracking-tighter uppercase w-full"
+                    style={{ fontSize: 'clamp(3.5rem, 13vw, 180px)' }}
                 >
                     <span className="text-white block">{t('titlePart1')}</span>
                     <span className="text-white/30 block">{t('titlePart2')}</span>
@@ -43,7 +44,7 @@ export const Hero = memo(() => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.25 }}
-                    className="max-w-xl text-zinc-400 text-base md:text-lg leading-relaxed font-normal"
+                    className="max-w-2xl text-zinc-400 text-lg md:text-xl leading-relaxed font-normal"
                 >
                     {t('subtitle')}
                 </motion.p>
@@ -78,7 +79,7 @@ export const Hero = memo(() => {
                     className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pt-4 border-t border-white/[0.06] w-full max-w-3xl"
                 >
                     {[
-                        { n: "13", label: t('heroStatTools') },
+                        { n: "19", label: t('heroStatTools') },
                         { n: "0 bytes", label: t('heroStatUploaded') },
                         { n: "4", label: t('heroStatLanguages') },
                         { n: "100%", label: t('heroStatClient') },

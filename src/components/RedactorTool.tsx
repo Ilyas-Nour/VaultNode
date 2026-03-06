@@ -109,14 +109,14 @@ const RedactorTool = memo(() => {
             drawCanvas.height = uiViewport.height;
             drawCanvas.width = uiViewport.width;
 
-            await page.render({ canvasContext: uiCtx, viewport: uiViewport } as any).promise;
+            await page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: uiViewport }).promise;
 
             const baseCtx = baseCanvas.getContext("2d");
             if (!baseCtx) return;
             baseCanvas.height = exportViewport.height;
             baseCanvas.width = exportViewport.width;
 
-            await page.render({ canvasContext: baseCtx, viewport: exportViewport } as any).promise;
+            await page.render({ canvasContext: baseCtx, canvas: baseCanvas, viewport: exportViewport }).promise;
 
             redrawOverlay();
         } catch (err) {

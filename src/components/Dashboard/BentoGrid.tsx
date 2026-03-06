@@ -4,7 +4,8 @@ import React, { useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Eraser, ImageMinus, KeyRound, Lock, Zap, ImagePlus,
-    Video, FileUp, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight
+    Video, FileUp, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight,
+    PenTool, Stamp, Wrench, Hash, LayoutGrid
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
@@ -25,6 +26,7 @@ const tools: ToolItem[] = [
     { id: 'clean-exif', category: 'vault', titleKey: 'cleanExif', descKey: 'toolDescriptions.cleanExif', icon: ImageMinus, href: '/tools/clean-exif' },
     { id: 'password', category: 'vault', titleKey: 'password', descKey: 'toolDescriptions.password', icon: KeyRound, href: '/tools/password' },
     { id: 'encrypt', category: 'vault', titleKey: 'textEncryptor', descKey: 'toolDescriptions.textEncryptor', icon: Lock, href: '/tools/encrypt' },
+    { id: 'repair', category: 'vault', titleKey: 'repair', descKey: 'toolDescriptions.repair', icon: Wrench, href: '/tools/repair' },
 
     // MEDIA
     { id: 'compress', category: 'media', titleKey: 'imageCompressor', descKey: 'toolDescriptions.compress', icon: Zap, href: '/tools/compress' },
@@ -32,6 +34,7 @@ const tools: ToolItem[] = [
     { id: 'media-converter', category: 'media', titleKey: 'mediaConverter', descKey: 'toolDescriptions.mediaConverter', icon: Video, href: '/tools/media-converter' },
     { id: 'svg-to-png', category: 'media', titleKey: 'svgToPng', descKey: 'toolDescriptions.svgToPng', icon: Wand2, href: '/tools/svg-to-png' },
     { id: 'blur', category: 'media', titleKey: 'blurTool', descKey: 'toolDescriptions.blur', icon: Eye, href: '/tools/blur' },
+    { id: 'stamp', category: 'media', titleKey: 'stamp', descKey: 'toolDescriptions.stamp', icon: Stamp, href: '/tools/stamp' },
 
     // DOCS
     { id: 'merger', category: 'docs', titleKey: 'pdfMerger', descKey: 'toolDescriptions.merger', icon: FileStack, href: '/tools/pdf-merge' },
@@ -39,6 +42,9 @@ const tools: ToolItem[] = [
     { id: 'unlock', category: 'docs', titleKey: 'unlockPdf', descKey: 'toolDescriptions.unlock', icon: Unlock, href: '/tools/unlock-pdf' },
     { id: 'pdf-to-img', category: 'docs', titleKey: 'pdfToImg', descKey: 'toolDescriptions.pdfToImg', icon: Images, href: '/tools/pdf-to-img' },
     { id: 'split', category: 'docs', titleKey: 'pdfSplit', descKey: 'toolDescriptions.split', icon: Scissors, href: '/tools/pdf-split' },
+    { id: 'sign', category: 'docs', titleKey: 'sign', descKey: 'toolDescriptions.sign', icon: PenTool, href: '/tools/sign' },
+    { id: 'number-pages', category: 'docs', titleKey: 'numberPages', descKey: 'toolDescriptions.numberPages', icon: Hash, href: '/tools/number-pages' },
+    { id: 'organize-pages', category: 'docs', titleKey: 'organizePages', descKey: 'toolDescriptions.organizePages', icon: LayoutGrid, href: '/tools/organize-pages' },
 ];
 
 export const BentoGrid = memo(() => {
@@ -60,22 +66,23 @@ export const BentoGrid = memo(() => {
     }, [active]);
 
     return (
-        <section id="tools" className="space-y-12">
-            {/* Category filter tabs */}
-            <div className="flex flex-wrap items-center gap-2">
+        <section id="tools" className="space-y-10">
+
+            {/* Filter tabs */}
+            <div className="flex flex-wrap items-center gap-1.5">
                 {categories.map(cat => (
                     <button
                         key={cat.id}
                         onClick={() => setActive(cat.id)}
                         className={cn(
-                            "h-10 px-5 text-[11px] font-bold uppercase tracking-widest border transition-all",
+                            "h-9 px-4 text-[10px] font-bold uppercase tracking-[0.18em] border transition-all",
                             active === cat.id
                                 ? "bg-white text-black border-white"
-                                : "bg-transparent text-zinc-500 border-white/10 hover:border-white/30 hover:text-white"
+                                : "bg-transparent text-zinc-600 border-white/[0.08] hover:border-white/25 hover:text-zinc-300"
                         )}
                     >
                         {cat.label}
-                        <span className={cn("ms-2 tabular-nums", active === cat.id ? "text-black/50" : "text-zinc-700")}>
+                        <span className={cn("ms-2 tabular-nums font-normal", active === cat.id ? "text-black/40" : "text-zinc-700")}>
                             {cat.count}
                         </span>
                     </button>
@@ -83,7 +90,7 @@ export const BentoGrid = memo(() => {
             </div>
 
             {/* Tool grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.05]">
                 <AnimatePresence mode="popLayout">
                     {filtered.map((tool, i) => (
                         <motion.div
@@ -92,35 +99,33 @@ export const BentoGrid = memo(() => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{ duration: 0.25, delay: i * 0.04 }}
+                            transition={{ duration: 0.2, delay: i * 0.03 }}
                         >
-                            <Link href={tool.href} className="group block bg-black hover:bg-zinc-950 transition-colors p-5 sm:p-7 lg:p-10 h-full">
-                                <div className="flex flex-col h-full gap-6">
-                                    {/* Icon + Category badge */}
-                                    <div className="flex items-start justify-between">
-                                        <div className="w-12 h-12 border border-white/10 group-hover:border-white/30 flex items-center justify-center transition-colors">
-                                            <tool.icon className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" />
-                                        </div>
-                                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-600 border border-zinc-900 px-2.5 py-1">
-                                            {t(`categories.${tool.category}`)}
-                                        </span>
-                                    </div>
+                            <Link href={tool.href} className="group flex flex-col justify-between bg-black hover:bg-zinc-950/80 transition-colors p-7 lg:p-9 h-full min-h-[180px]">
 
-                                    {/* Text */}
-                                    <div className="flex-1 space-y-3">
-                                        <h3 className="text-xl lg:text-2xl font-black uppercase tracking-tight text-white leading-tight">
-                                            {t(tool.titleKey)}
-                                        </h3>
-                                        <p className="text-sm text-zinc-500 leading-relaxed font-normal">
-                                            {t(tool.descKey)}
-                                        </p>
-                                    </div>
+                                {/* Top row: icon + title */}
+                                <div className="flex items-start gap-4 mb-5">
+                                    <tool.icon className={cn(
+                                        "w-5 h-5 shrink-0 mt-0.5 transition-colors",
+                                        "text-zinc-700 group-hover:text-zinc-400"
+                                    )} />
+                                    <h3 className="text-[15px] font-black uppercase tracking-tight text-white leading-snug">
+                                        {t(tool.titleKey)}
+                                    </h3>
+                                </div>
 
-                                    {/* Arrow CTA */}
-                                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-zinc-600 group-hover:text-white transition-colors">
-                                        {t('visualProof.openTool')}
-                                        <ArrowRight className={cn("w-3.5 h-3.5 group-hover:translate-x-1 transition-transform", isRTL && "rotate-180")} />
-                                    </div>
+                                {/* Description */}
+                                <p className="text-[13px] text-zinc-600 leading-relaxed mb-6 ms-9">
+                                    {t(tool.descKey)}
+                                </p>
+
+                                {/* Bottom: open link */}
+                                <div className={cn(
+                                    "ms-9 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] transition-colors",
+                                    "text-zinc-800 group-hover:text-zinc-400"
+                                )}>
+                                    {t('visualProof.openTool')}
+                                    <ArrowRight className={cn("w-3 h-3 group-hover:translate-x-0.5 transition-transform", isRTL && "rotate-180")} />
                                 </div>
                             </Link>
                         </motion.div>
