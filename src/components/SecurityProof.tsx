@@ -35,8 +35,8 @@ export const SecurityProof = memo(({ className, compact = false }: SecurityProof
     }
 
     return (
-        <section className={cn("w-full py-16 px-5 sm:px-6 lg:px-12 bg-black", className)}>
-            <div className="max-w-6xl mx-auto border border-white/[0.04] hover:border-emerald-500/10 bg-zinc-950/20 p-8 lg:p-14 relative group/box transition-colors">
+        <section className={cn("w-full py-12 sm:py-16 px-5 sm:px-6 lg:px-12 bg-black", className)}>
+            <div className="max-w-6xl mx-auto border border-white/[0.04] hover:border-emerald-500/10 bg-zinc-950/20 p-6 sm:p-8 lg:p-14 relative group/box transition-colors">
                 {/* Emerald corner accents */}
                 <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-emerald-500/20 group-hover/box:border-emerald-500/40 transition-colors" />
                 <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-emerald-500/20 group-hover/box:border-emerald-500/40 transition-colors" />

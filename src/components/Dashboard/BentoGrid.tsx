@@ -69,7 +69,7 @@ export const BentoGrid = memo(() => {
         <section id="tools" className="space-y-10">
 
             {/* Filter tabs */}
-            <div className="flex flex-wrap items-center gap-1.5">
+            <div className="flex flex-nowrap overflow-x-auto pb-4 sm:pb-0 no-scrollbar items-center gap-1.5 -mx-5 px-5 sm:mx-0 sm:px-0 sm:flex-wrap">
                 {categories.map(cat => (
                     <button
                         key={cat.id}

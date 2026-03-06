@@ -82,7 +82,7 @@ export const Footer = memo(() => {
                 {/* Right: all tools grid */}
                 <div>
                     <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-700 block mb-4">{t('footer.colTools')} / {t('footer.colMedia')}</span>
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-0">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0">
                         {toolLinks.map(link => (
                             <Link
                                 key={link.href}

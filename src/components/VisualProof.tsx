@@ -714,7 +714,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 <div className="flex-1 h-px bg-white/[0.06]" />
             </div>
 
-            <h3 className="text-xl font-black uppercase tracking-tight text-white italic">
+            <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white italic">
                 {t(`${toolId.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.after`)}
             </h3>
 

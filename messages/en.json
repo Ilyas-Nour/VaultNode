@@ -77,7 +77,9 @@
             "linkHowItWorks": "How it Works",
             "linkPhilosophy": "Philosophy",
             "linkContact": "Contact Us",
-            "copyright": "© 2026 · Zero tracking · Zero uploads · Built for the open web"
+            "linkAllTools": "Explore All Tools",
+            "copyright": "© 2026 · Zero tracking · Zero uploads · Built for the open web",
+            "footerCredits": "Made with Privacy in Mind"
         },
         "subtitle": "Most websites steal your files. We don't. Everything you do stays inside your screen. It's 100% private and 100% free.",
         "launchRedactor": "Hide Sensitive Info",

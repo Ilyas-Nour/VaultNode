@@ -32,7 +32,7 @@ export const Hero = memo(() => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="font-black leading-[0.87] tracking-tighter uppercase w-full"
-                    style={{ fontSize: 'clamp(3.5rem, 13vw, 180px)' }}
+                    style={{ fontSize: 'clamp(2.5rem, 12vw, 160px)' }}
                 >
                     <span className="text-white block">{t('titlePart1')}</span>
                     <span className="text-white/30 block">{t('titlePart2')}</span>
