@@ -361,7 +361,21 @@
             "flattening": "Hardening the document layer...",
             "secureExport": "Save Shielded Copy",
             "clearAll": "Wipe Workspace",
-            "initializing": "Activating the Privacy Shield..."
+            "initializing": "Activating the Privacy Shield...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your Document",
+                    "desc": "Select the PDF file you wish to redact. It stays safe on your machine."
+                },
+                "step2": {
+                    "title": "Mark for Redaction",
+                    "desc": "Use the selector to highlight and black out sensitive names, dates, or numbers."
+                },
+                "step3": {
+                    "title": "Flatten & Save",
+                    "desc": "The document is flattened into a static layer so the hidden info can never be recovered."
+                }
+            }
         },
         "unlockPdf": {
             "title": "Unlock a File",
@@ -375,7 +389,21 @@
             "successDesc": "Your file is now completely open and ready for use.",
             "downloadBtn": "Save Unlocked Copy",
             "passwordLabel": "Security Key",
-            "passwordPlaceholder": "Type the file's password..."
+            "passwordPlaceholder": "Type the file's password...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Locked PDF",
+                    "desc": "Upload the encrypted file you need to access. We never see your password."
+                },
+                "step2": {
+                    "title": "Enter Password",
+                    "desc": "Provide the current password to decrypt the file's security header locally."
+                },
+                "step3": {
+                    "title": "Export Unlocked",
+                    "desc": "The security layer is removed, and you can save the fully accessible PDF."
+                }
+            }
         },
         "svgToPng": {
             "title": "Logo Converter",
@@ -385,7 +413,10 @@
             "dropDesc": "SVG files only",
             "processing": "Converting...",
             "convertBtn": "Convert to PNG",
+            "downloadBtn": "Download PNG",
             "resetBtn": "Reset",
+            "xmlPlaceholder": "SVG XML Code...",
+            "scaled": "2× scaled",
             "howItWorks": {
                 "step1": {
                     "title": "Drop Your SVG",
@@ -409,7 +440,21 @@
             "dropDesc": "We'll capture every page as a high-fidelity photo.",
             "processing": "Capturing page buffers...",
             "convertPages": "Convert to Gallery",
-            "initializing": "Calibrating the virtual camera..."
+            "initializing": "Calibrating the virtual camera...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Load Your PDF",
+                    "desc": "Drop any PDF document. Each page is rendered locally as a high-res asset."
+                },
+                "step2": {
+                    "title": "Page-to-Pixel",
+                    "desc": "Our engine captures every page buffer and converts them into crisp JPG or PNG images."
+                },
+                "step3": {
+                    "title": "Save Gallery",
+                    "desc": "Download individual pages or the entire collection as a ZIP archive."
+                }
+            }
         },
         "pdfToDocx": {
             "title": "File to Word",
@@ -446,7 +491,28 @@
             "symbols": "Include Special Symbols",
             "copied": "Copied to Clipboard!",
             "copy": "Copy Secure Code",
-            "generateNew": "Re-generate"
+            "generateNew": "Re-generate",
+            "howItWorks": {
+                "step1": {
+                    "title": "Set Entropy",
+                    "desc": "Choose the length and complexity (symbols, numbers) for your secret code."
+                },
+                "step2": {
+                    "title": "Generate Locally",
+                    "desc": "Your browser's crypto engine constructs a high-entropy string instantly."
+                },
+                "step3": {
+                    "title": "Copy & Use",
+                    "desc": "Copy your new iron-clad password. We never see it and never store it."
+                }
+            },
+            "localEntropy": "Local Entropy",
+            "entropyDesc": "Generated via window.crypto.getRandomValues. The result is never stored outside your screen.",
+            "clickToCopy": "Click to Copy to Buffer",
+            "status": "{label} STATUS",
+            "bits": "{count} BITS",
+            "activeCipher": "Active Cipher",
+            "vaultGuard": "Vault Guard"
         },
         "mediaConverter": {
             "title": "Video & Music Fixer",
@@ -483,7 +549,8 @@
                     "desc": "Click Convert and your file is ready in seconds. Everything happens inside your browser — nothing is sent anywhere."
                 }
             },
-            "targetFormat": "Select Output Type"
+            "targetFormat": "Select Output Type",
+            "trim": "Trim"
         },
         "compress": {
             "title": "Image Asset Optimizer",
@@ -528,7 +595,21 @@
             "dropTitle": "Drop your PDF files here.",
             "dropDesc": "We'll combine them into a single file locally.",
             "processing": "Synthesizing document catalog...",
-            "mergeButton": "Merge PDF Files"
+            "mergeButton": "Merge PDF Files",
+            "howItWorks": {
+                "step1": {
+                    "title": "Add Your Files",
+                    "desc": "Drop all the PDF files you want to combine. You can add as many as you need."
+                },
+                "step2": {
+                    "title": "Set the Order",
+                    "desc": "Drag files to arrange them in the order you want them to appear in the final document."
+                },
+                "step3": {
+                    "title": "Download Result",
+                    "desc": "Click merge and get a single, ready-to-share PDF file in seconds."
+                }
+            }
         },
         "sign": {
             "title": "Sign a Paper",
@@ -543,7 +624,21 @@
             "signHere": "Sign here with mouse or finger",
             "dropDesc": "Selected PDF will be rendered for signing.",
             "saveBtn": "Save Signed Paper",
-            "ready": "Signature Ready. Drag it on the preview."
+            "ready": "Signature Ready. Drag it on the preview.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your PDF",
+                    "desc": "Load the document you need to sign. It's rendered locally for privacy."
+                },
+                "step2": {
+                    "title": "Draw Signature",
+                    "desc": "Use your mouse or touchscreen to draw a natural signature on the virtual pad."
+                },
+                "step3": {
+                    "title": "Place & Export",
+                    "desc": "Drag your signature onto the page, adjust the size, and save the signed document."
+                }
+            }
         },
         "stamp": {
             "title": "Stamp a Photo",
@@ -561,7 +656,21 @@
             "position": "Position",
             "downloadBtn": "Download Stamped Image",
             "dropDesc": "We'll help you protect your visual assets.",
-            "saveBtn": "Save Stamped Photo"
+            "saveBtn": "Save Stamped Photo",
+            "howItWorks": {
+                "step1": {
+                    "title": "Upload Image",
+                    "desc": "Select the photo you want to protect. No data leaves your machine."
+                },
+                "step2": {
+                    "title": "Design Watermark",
+                    "desc": "Enter your name or upload a logo. Adjust transparency and placement."
+                },
+                "step3": {
+                    "title": "Save Stamped",
+                    "desc": "The watermark is baked into the pixels locally. Your original stays private."
+                }
+            }
         },
         "repair": {
             "title": "Fix Broken File",
@@ -574,7 +683,21 @@
             "formatPdf": "Format: PDF Document",
             "downloadBtn": "Download Fixed PDF",
             "dropDesc": "We'll attempt to restore structural integrity.",
-            "saveBtn": "Save Fixed File"
+            "saveBtn": "Save Fixed File",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Corrupt PDF",
+                    "desc": "Select the file that won't open. Our engine scans the bitstream locally."
+                },
+                "step2": {
+                    "title": "Header Recovery",
+                    "desc": "We attempt to rebuild the PDF's internal cross-reference tables and headers."
+                },
+                "step3": {
+                    "title": "Restore & Save",
+                    "desc": "If the data is recoverable, a healthy PDF is synthesized for you to download."
+                }
+            }
         },
         "numberPages": {
             "title": "Number every Page",
@@ -589,7 +712,21 @@
             "discardDocument": "Discard Document",
             "downloadBtn": "Download Numbered PDF",
             "dropDesc": "We'll help you organize your document.",
-            "saveBtn": "Save Numbered File"
+            "saveBtn": "Save Numbered File",
+            "howItWorks": {
+                "step1": {
+                    "title": "Upload Document",
+                    "desc": "Drop the PDF you want to paginate. Everything stays in your browser's RAM."
+                },
+                "step2": {
+                    "title": "Pick Position",
+                    "desc": "Choose where you want the numbers to appear: bottom-left, center, or right."
+                },
+                "step3": {
+                    "title": "Auto-Paginate",
+                    "desc": "Our script injects the page indices and generates your new numbered file."
+                }
+            }
         },
         "organizePages": {
             "title": "Organize Pages",
@@ -606,7 +743,21 @@
             "delete": "Delete",
             "dropActive": "Drop to Organize",
             "dropDesc": "Drag to reorder, click to delete.",
-            "saveBtn": "Save New File"
+            "saveBtn": "Save New File",
+            "howItWorks": {
+                "step1": {
+                    "title": "Load Document",
+                    "desc": "Drop the PDF you want to modify. We render thumbnail previews for every page."
+                },
+                "step2": {
+                    "title": "Reorder & Prune",
+                    "desc": "Drag thumbnails to change the page sequence. Click the trash icon to remove unneeded pages."
+                },
+                "step3": {
+                    "title": "Save Assembly",
+                    "desc": "Our engine synthesizes the new page order into a clean PDF ready for export."
+                }
+            }
         },
         "pdfSplit": {
             "title": "Extract PDF Pages",
@@ -615,7 +766,21 @@
             "dropTitle": "Drop your PDF file here.",
             "dropDesc": "We'll help you extract the pages you need.",
             "processing": "Extracting page buffers...",
-            "splitBtn": "Extract Selected Pages"
+            "splitBtn": "Extract Selected Pages",
+            "howItWorks": {
+                "step1": {
+                    "title": "Choose PDF",
+                    "desc": "Upload the document you want to split. It's processed entirely in your RAM."
+                },
+                "step2": {
+                    "title": "Select Ranges",
+                    "desc": "Pick individual pages or define a range (e.g., 5-12) to extract from the source."
+                },
+                "step3": {
+                    "title": "Pull & Save",
+                    "desc": "The selected bitstreams are pulled into a new PDF registry for instant download."
+                }
+            }
         },
         "heicToJpg": {
             "title": "iPhone Asset Fixer",
@@ -624,7 +789,29 @@
             "dropTitle": "Drop your iPhone photo here.",
             "dropDesc": "We'll turn it into a standard photo that works everywhere.",
             "processing": "Converting to JPG catalog...",
-            "downloadBtn": "Save Standard Photo"
+            "downloadBtn": "Save Standard Photo",
+            "protocol": "Output Stream Protocol",
+            "to": "to {fmt}",
+            "resetBtn": "Reset Sequence",
+            "sandbox": "Sandbox Protocol",
+            "sandboxDesc": "HEIF packets are fully decimated and reconstructed locally. Cloud connectivity is strictly restricted.",
+            "originalLabel": "Original HEIC",
+            "purifiedLabel": "Purified {format}",
+            "wasmDecryption": "WASM Decryption...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select HEIC",
+                    "desc": "Drop an Apple HEIC image (high-efficiency container). It stays on your device."
+                },
+                "step2": {
+                    "title": "Local Decode",
+                    "desc": "Our engine decodes the HEIF stream and extracts the pixel map without server help."
+                },
+                "step3": {
+                    "title": "Export JPG",
+                    "desc": "The pixel data is recoded into a universal JPG file and saved to your device."
+                }
+            }
         },
         "cleanExif": {
             "title": "Metadata Scrubber",
@@ -664,7 +851,21 @@
             "decryptBtn": "Unlock Message",
             "resultLabel": "Encrypted Payload",
             "copyBtn": "Copy Payload",
-            "copied": "Payload Copied!"
+            "copied": "Payload Copied!",
+            "howItWorks": {
+                "step1": {
+                    "title": "Write Your Note",
+                    "desc": "Type or paste the sensitive text you want to secure from prying eyes."
+                },
+                "step2": {
+                    "title": "Apply Cipher",
+                    "desc": "Enter a secret key. We use AES-256 to turn your text into an unreadable scramble."
+                },
+                "step3": {
+                    "title": "Store Anywhere",
+                    "desc": "Copy the encrypted block. Only someone with your exact key can ever read it again."
+                }
+            }
         },
         "blur": {
             "title": "Visual Privacy Blur",
@@ -674,7 +875,21 @@
             "dropDesc": "We'll help you hide faces or private details with a magic brush.",
             "processing": "Applying privacy blur...",
             "downloadBtn": "Save Blurred Image",
-            "clearAll": "Wipe Canvas"
+            "clearAll": "Wipe Canvas",
+            "howItWorks": {
+                "step1": {
+                    "title": "Open Image",
+                    "desc": "Select the photo containing info you want to hide (like faces or license plates)."
+                },
+                "step2": {
+                    "title": "Apply Mask",
+                    "desc": "Use your mouse to paint over the sensitive zones. We apply a heavy Gaussian blur."
+                },
+                "step3": {
+                    "title": "Secure Export",
+                    "desc": "The blurred pixels are merged into a new image. Your privacy is now baked in."
+                }
+            }
         }
     }
 }

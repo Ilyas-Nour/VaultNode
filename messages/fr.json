@@ -250,7 +250,7 @@
         },
         "redact": {
             "title": "Cacher Infos Privées",
-            "description": "Couvrir les secrets dans un document."
+            "description": "Couvrir les secrets dans un document PDF."
         },
         "svgToPng": {
             "title": "Réparer les Logos",
@@ -311,11 +311,25 @@
             "flattening": "Sécurisation des couches du document...",
             "secureExport": "Enregistrer la Copie Protégée",
             "clearAll": "Effacer l'Espace",
-            "initializing": "Activation du Bouclier de Confidentialité..."
+            "initializing": "Activation du Bouclier de Confidentialité...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Déposez votre document",
+                    "desc": "Choisissez le PDF que vous souhaitez caviarder. Il reste en sécurité sur votre appareil."
+                },
+                "step2": {
+                    "title": "Marquez les infos",
+                    "desc": "Utilisez le pinceau pour masquer noms, dates ou données sensibles."
+                },
+                "step3": {
+                    "title": "Sécurisez et sauvez",
+                    "desc": "Les marques sont fusionnées pour que l'info cachée ne puisse plus jamais être récupérée."
+                }
+            }
         },
         "unlockPdf": {
-            "title": "Déverrouiller un Fichier",
-            "description": "Déverrouillez instantanément des fichiers PDF protégés par mot de passe.",
+            "title": "Déverrouiller un PDF",
+            "description": "Supprimez les mots de passe des fichiers protégés instantanément.",
             "titleHighlight": "Décrypteur d'Accès",
             "dropTitle": "Déposez votre fichier verrouillé ici.",
             "dropDesc": "Nous l'ouvrirons pour que vous puissiez accéder à vos données en toute sécurité.",
@@ -325,11 +339,25 @@
             "successDesc": "Votre fichier est maintenant complètement ouvert et prêt à l'emploi.",
             "downloadBtn": "Enregistrer la Copie Déverrouillée",
             "passwordLabel": "Clé de Sécurité",
-            "passwordPlaceholder": "Tapez le mot de passe du fichier..."
+            "passwordPlaceholder": "Tapez le mot de passe du fichier...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Choisissez le PDF",
+                    "desc": "Déposez le fichier crypté que vous devez ouvrir. Nous ne voyons jamais votre clé."
+                },
+                "step2": {
+                    "title": "Tapez le code",
+                    "desc": "Entrez le mot de passe actuel pour décrypter localement dans votre navigateur."
+                },
+                "step3": {
+                    "title": "Exportez ouvert",
+                    "desc": "La sécurité est supprimée et vous pouvez enregistrer un PDF libre d'accès."
+                }
+            }
         },
         "svgToPng": {
             "title": "Convertisseur de Logos",
-            "description": "Transformez les dessins vectoriels en photos de haute qualité.",
+            "description": "Transformez les dessins vectoriels (SVG) en photos de haute qualité.",
             "titleHighlight": "Vecteur vers Raster",
             "dropTitle": "Déposez votre fichier SVG ici",
             "dropDesc": "Fichiers SVG uniquement",
@@ -353,13 +381,27 @@
         },
         "pdfToImg": {
             "title": "Fichier vers Images",
-            "description": "Transformez chaque page de votre PDF en fichiers image de haute qualité.",
+            "description": "Transformez chaque page de votre PDF en images de haute qualité.",
             "titleHighlight": "Captures de Page",
             "dropTitle": "Déposez votre fichier PDF ici.",
             "dropDesc": "Nous capturerons chaque page comme une photo haute fidélité.",
             "processing": "Capture des buffers de page...",
             "convertPages": "Convertir en Galerie",
-            "initializing": "Calibrage de la caméra virtuelle..."
+            "initializing": "Calibrage de la caméra virtuelle...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Chargez le PDF",
+                    "desc": "Déposez n'importe quel document. Chaque page est rendue localement comme un original haute résolution."
+                },
+                "step2": {
+                    "title": "Passez en pixels",
+                    "desc": "Notre moteur capture le contenu de chaque page et le convertit en JPG ou PNG très net."
+                },
+                "step3": {
+                    "title": "Sauvez la galerie",
+                    "desc": "Téléchargez des pages individuelles ou le set complet dans une archive ZIP compressée."
+                }
+            }
         },
         "pdfToDocx": {
             "title": "Fichier vers Word",
@@ -392,11 +434,32 @@
             "length": "Longueur de Bits / Caractères",
             "uppercase": "Inclure Majuscules",
             "lowercase": "Inclure Minuscules",
-            "numbers": "Incluir Numéros",
+            "numbers": "Inclure Numéros",
             "symbols": "Inclure Symboles Spéciaux",
             "copied": "Copié dans le presse-papiers !",
             "copy": "Copier le Code Sécurisé",
-            "generateNew": "Régénérer"
+            "generateNew": "Générer Nouveau",
+            "howItWorks": {
+                "step1": {
+                    "title": "Cochez les options",
+                    "desc": "Choisissez la longueur et la complexité (symboles, chiffres) pour votre nouvelle clé secrète."
+                },
+                "step2": {
+                    "title": "Générez en local",
+                    "desc": "Le moteur cryptographique de votre navigateur crée une chaîne aléatoire ultra-forte instantanément."
+                },
+                "step3": {
+                    "title": "Copiez et utilisez",
+                    "desc": "Copiez votre clé forte. Nous ne la voyons jamais et ne la stockons pas."
+                }
+            },
+            "localEntropy": "Entropie Locale",
+            "entropyDesc": "Généré via window.crypto.getRandomValues. Le résultat n'est jamais stocké hors de votre écran.",
+            "clickToCopy": "Cliquer pour copier dans le presse-papiers",
+            "status": "STATUT {label}",
+            "bits": "{count} BITS",
+            "activeCipher": "Chiffrement Actif",
+            "vaultGuard": "Garde du Coffre"
         },
         "mediaConverter": {
             "title": "Fixateur de Vidéo & Musique",
@@ -433,7 +496,8 @@
                     "desc": "Cliquez sur Convertir et votre fichier est prêt en quelques secondes. Tout se passe dans votre navigateur."
                 }
             },
-            "targetFormat": "Sélectionner le Type de Sortie"
+            "targetFormat": "Sélectionner le Type de Sortie",
+            "trim": "Découper"
         },
         "compress": {
             "title": "Optimiseur d'Images",
@@ -466,7 +530,7 @@
                     "desc": "Ajustez le curseur de qualité pour trouver l'équilibre parfait entre taille et clarté."
                 },
                 "step3": {
-                    "title": "Télécharger le Résultat",
+                    "title": "Téléchargez le Résultat",
                     "desc": "Obtenez votre image optimisée instantanément. Zéro perte de qualité en mode équilibré."
                 }
             }
@@ -478,10 +542,24 @@
             "dropTitle": "Déposez vos fichiers PDF ici.",
             "dropDesc": "Nous les combinerons en un seul fichier localement.",
             "processing": "Synthèse du catalogue de documents...",
-            "mergeButton": "Fusionner les Fichiers PDF"
+            "mergeButton": "Fusionner les Fichiers PDF",
+            "howItWorks": {
+                "step1": {
+                    "title": "Ajoutez vos fichiers",
+                    "desc": "Déposez tous les PDF que vous voulez unir. Vous pouvez en ajouter autant que nécessaire."
+                },
+                "step2": {
+                    "title": "Ordonnez la liste",
+                    "desc": "Faites glisser les fichiers pour les mettre dans la séquence exacte que vous voulez pour le doc final."
+                },
+                "step3": {
+                    "title": "Téléchargez fusionné",
+                    "desc": "Cliquez sur Fusionner et obtenez un seul PDF prêt à partager en quelques secondes."
+                }
+            }
         },
         "sign": {
-            "title": "Signer un Papier",
+            "title": "Signer un Document",
             "description": "Dessinez votre signature et placez-la sur n'importe quelle page instantanément.",
             "titleHighlight": "Signature Numérique",
             "dropTitle": "Déposez votre PDF ici.",
@@ -493,11 +571,25 @@
             "signHere": "Signez ici avec la souris ou le doigt",
             "dropDesc": "Le PDF sélectionné sera affiché pour signature.",
             "saveBtn": "Enregistrer le Papier Signé",
-            "ready": "Signature Prête. Faites-la glisser sur l'aperçu."
+            "ready": "Signature Prête. Faites-la glisser sur l'aperçu.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Déposez le fichier",
+                    "desc": "Chargez le document que vous devez signer. Il s'affiche localement pour votre vie privée."
+                },
+                "step2": {
+                    "title": "Dessinez la signature",
+                    "desc": "Utilisez votre souris ou écran tactile pour créer une signature naturelle sur le canevas virtuel."
+                },
+                "step3": {
+                    "title": "Placez et sauvez",
+                    "desc": "Glissez votre signature sur la page, ajustez la taille et enregistrez le document signé."
+                }
+            }
         },
         "stamp": {
             "title": "Tamponner une Photo",
-            "description": "Ajoutez votre nom ou logo sur vos photos.",
+            "description": "Ajoutez votre nom ou logo sur vos photos pour les protéger.",
             "titleHighlight": "Filigrane Photo",
             "dropTitle": "Déposez votre image ici.",
             "watermarkText": "Texte du Filigrane",
@@ -511,11 +603,25 @@
             "position": "Position",
             "downloadBtn": "Télécharger l'Image Tamponnée",
             "dropDesc": "Nous vous aiderons à protéger vos actifs visuels.",
-            "saveBtn": "Enregistrer la Photo Tamponnée"
+            "saveBtn": "Enregistrer la Photo Tamponnée",
+            "howItWorks": {
+                "step1": {
+                    "title": "Chargez l'image",
+                    "desc": "Choisissez la photo que vous voulez protéger. Aucune de vos données ne sort de votre ordinateur."
+                },
+                "step2": {
+                    "title": "Créez votre tampon",
+                    "desc": "Tapez votre nom ou chargez un logo. Ajustez la transparence et la position idéale."
+                },
+                "step3": {
+                    "title": "Sauvez la photo",
+                    "desc": "La marque est incrustée dans les pixels localement. Votre photo originale reste privée."
+                }
+            }
         },
         "repair": {
             "title": "Réparer un Fichier Cassé",
-            "description": "Réparez un document qui est cassé ou qui affiche une erreur.",
+            "description": "Réparez un document PDF qui est cassé ou qui affiche une erreur.",
             "titleHighlight": "Réparation de Documents",
             "dropTitle": "Déposez votre PDF cassé ici.",
             "processing": "Reconstruction des en-têtes de fichier...",
@@ -524,7 +630,21 @@
             "formatPdf": "Format : Document PDF",
             "downloadBtn": "Télécharger le PDF Réparé",
             "dropDesc": "Nous tenterons de restaurer l'intégrité structurelle.",
-            "saveBtn": "Enregistrer le Fichier Réparé"
+            "saveBtn": "Enregistrer le Fichier Réparé",
+            "howItWorks": {
+                "step1": {
+                    "title": "Lâchez le cassé",
+                    "desc": "Choisissez le fichier qui n'ouvre pas. Notre moteur analyse le code du fichier en local."
+                },
+                "step2": {
+                    "title": "Répare les en-têtes",
+                    "desc": "Nous tentons de reconstruire les tables de référence internes et l'en-tête du PDF."
+                },
+                "step3": {
+                    "title": "Récupère et sauve",
+                    "desc": "Si les données sont sauvables, un PDF sain sera généré pour que vous le téléchargiez."
+                }
+            }
         },
         "numberPages": {
             "title": "Numéroter chaque Page",
@@ -539,42 +659,106 @@
             "discardDocument": "Abandonner le Document",
             "downloadBtn": "Télécharger le PDF Numéroté",
             "dropDesc": "Nous vous aiderons à organiser votre document.",
-            "saveBtn": "Enregistrer le Fichier Numéroté"
+            "saveBtn": "Enregistrer le Fichier Numéroté",
+            "howItWorks": {
+                "step1": {
+                    "title": "Chargez le document",
+                    "desc": "Déposez le PDF que vous voulez numéroter. Tout reste dans la RAM de votre navigateur."
+                },
+                "step2": {
+                    "title": "Choisissez la place",
+                    "desc": "Voulez-vous les numéros en bas à gauche, au centre ou à droite ?"
+                },
+                "step3": {
+                    "title": "Pagination auto",
+                    "desc": "Notre code injecte l'indice de pages et crée votre nouveau fichier numéroté."
+                }
+            }
         },
         "organizePages": {
             "title": "Organiser les Pages",
-            "description": "Déplacez des pages ou supprimez celles inutiles.",
+            "description": "Déplacez des pages ou supprimez celles inutiles du PDF.",
             "titleHighlight": "Gestionnaire de Pages",
             "dropTitle": "Déposez votre PDF ici.",
             "processing": "Rendu des pages du document...",
             "scanning": "Scan des Couches du Document...",
             "pagesLoaded": "{count} Pages Chargées. Glissez pour réordonner.",
-            "synthesizing": "Synthèse en cours...",
+            "synthesizing": "Synthèse de la structure...",
             "discardBtn": "Abandonner le Document",
             "downloadBtn": "Télécharger le PDF Organisé",
             "pageLabel": "Page",
             "delete": "Supprimer",
             "dropActive": "Déposer pour Organiser",
             "dropDesc": "Faites glisser pour réordonner, cliquez pour supprimer.",
-            "saveBtn": "Enregistrer le Nouveau Fichier"
+            "saveBtn": "Enregistrer le Nouveau Fichier",
+            "howItWorks": {
+                "step1": {
+                    "title": "Chargez le document",
+                    "desc": "Déposez le PDF à éditer. Nous affichons des miniatures de chaque page."
+                },
+                "step2": {
+                    "title": "Ordonnez et virez",
+                    "desc": "Glissez les miniatures pour changer l'ordre. Cliquez sur la croix pour virer des pages."
+                },
+                "step3": {
+                    "title": "Sauvez la synthèse",
+                    "desc": "Notre moteur assemble le nouvel ordre dans un PDF propre prêt à être exporté."
+                }
+            }
         },
         "pdfSplit": {
-            "title": "Extraire des Pages PDF",
-            "description": "Extrayez en toute sécurité des pages spécifiques ou des plages de vos documents PDF.",
+            "title": "Diviser un PDF",
+            "description": "Extrayez en toute sécurité des pages spécifiques ou des plages de vos documents.",
             "titleHighlight": "Extracteur de Pages",
             "dropTitle": "Déposez votre fichier PDF ici.",
             "dropDesc": "Nous vous aiderons à extraire les pages dont vous avez besoin.",
-            "processing": "Extraction des buffers de page...",
-            "splitBtn": "Extraire les Pages Sélectionnées"
+            "processing": "Extraction des couches de page...",
+            "splitBtn": "Extraire les Pages Sélectionnées",
+            "howItWorks": {
+                "step1": {
+                    "title": "Choisissez le PDF",
+                    "desc": "Chargez le document que vous voulez diviser. Il est traité intégralement dans votre RAM."
+                },
+                "step2": {
+                    "title": "Marquez les plages",
+                    "desc": "Choisissez des pages seules ou définissez une plage (ex: 5-12) à extraire du PDF."
+                },
+                "step3": {
+                    "title": "Sortez et sauvez",
+                    "desc": "Le contenu choisi est versé dans un nouveau registre PDF pour téléchargement immédiat."
+                }
+            }
         },
         "heicToJpg": {
             "title": "Fixateur d'iPhone",
-            "description": "Convertissez les fichiers HEIC de l'iPhone en photos JPG haute compatibilité.",
+            "description": "Convertissez les fichiers HEIC de l'iPhone en photos JPG compatibles.",
             "titleHighlight": "Transcodeur HEIC",
             "dropTitle": "Déposez votre photo iPhone ici.",
             "dropDesc": "Nous la transformerons en une photo standard fonctionnant partout.",
-            "processing": "Conversion en catalogue JPG...",
-            "downloadBtn": "Enregistrer la Photo Standard"
+            "processing": "Conversion en JPG universel...",
+            "downloadBtn": "Enregistrer la Photo Standard",
+            "protocol": "Protocole de Flux de Sortie",
+            "to": "vers {fmt}",
+            "resetBtn": "Réinitialiser la Séquence",
+            "sandbox": "Protocole Sandbox",
+            "sandboxDesc": "Les paquets HEIF sont entièrement décimés et reconstruits localement. La connectivité cloud est strictement restreinte.",
+            "originalLabel": "HEIC Original",
+            "purifiedLabel": "{format} Purifié",
+            "wasmDecryption": "Décryptage WASM...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Choisissez le HEIC",
+                    "desc": "Déposez une photo iPhone (.heic). Ces photos s'ouvrent mal sur Windows ou le web."
+                },
+                "step2": {
+                    "title": "Décodage local",
+                    "desc": "Notre moteur décode le fichier et extrait le plan de pixels sans aide d'aucun serveur."
+                },
+                "step3": {
+                    "title": "Exportation JPG",
+                    "desc": "Les données sont recodées en un JPG universel et enregistrées sur votre appareil."
+                }
+            }
         },
         "cleanExif": {
             "title": "Nettoyeur de Métadonnées",
@@ -604,17 +788,31 @@
         },
         "encrypt": {
             "title": "Cryptage de Notes Sécurisées",
-            "description": "Verrouillez vos écrits privés dans une chambre forte cryptographique que vous seul pouvez ouvrir.",
+            "description": "Verrouillez vos écrits privés dans une chambre forte cryptographique.",
             "titleHighlight": "Créateur de Message Secret",
             "inputText": "Nœud de Texte Brut",
             "inputPlaceholder": "Tapez votre message secret ici...",
             "passwordLabel": "Clé de Cryptage",
             "passwordPlaceholder": "Tapez une clé que vous seul connaissez...",
             "encryptBtn": "Verrouiller le Message",
-            "decryptBtn": "Déverrouiller le Message",
+            "decryptBtn": "Ouvrir le Message",
             "resultLabel": "Charge Cryptée",
             "copyBtn": "Copier la Charge",
-            "copied": "Charge Copiée !"
+            "copied": "Charge Copiée !",
+            "howItWorks": {
+                "step1": {
+                    "title": "Écrivez votre note",
+                    "desc": "Tapez ou collez le texte sensible que vous voulez protéger des regards curieux."
+                },
+                "step2": {
+                    "title": "Appliquez le cryptage",
+                    "desc": "Entrez une clé. Nous utilisons AES-256 pour passer votre texte en code illisible."
+                },
+                "step3": {
+                    "title": "Stockez-le partout",
+                    "desc": "Copiez le bloc crypté. Seule votre clé exacte permettra de le relire un jour."
+                }
+            }
         },
         "blur": {
             "title": "Floutage de Confidentialité",
@@ -624,7 +822,21 @@
             "dropDesc": "Nous vous aiderons à masquer des visages ou des détails privés avec un pinceau magique.",
             "processing": "Application du floutage...",
             "downloadBtn": "Enregistrer l'Image Floutée",
-            "clearAll": "Effacer le Canevas"
+            "clearAll": "Effacer le Canevas",
+            "howItWorks": {
+                "step1": {
+                    "title": "Ouvrez la photo",
+                    "desc": "Choisissez l'image qui contient des infos à masquer (comme des visages ou des plaques)."
+                },
+                "step2": {
+                    "title": "Appliquez le masque",
+                    "desc": "Utilisez la souris pour peindre sur les zones sensibles. Nous appliquons un flou élevé."
+                },
+                "step3": {
+                    "title": "Exportez sécurisé",
+                    "desc": "Les pixels floutés sont fusionnés dans la nouvelle photo. Votre vie privée en fait partie."
+                }
+            }
         }
     }
 }

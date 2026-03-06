@@ -107,10 +107,10 @@ const PasswordTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Set Your Rules', description: 'Choose how long the password should be and whether to include numbers, symbols, or uppercase letters.' },
-        { title: 'Generate Instantly', description: 'Click generate and get a strong, unique password in under a second — created entirely on your device.' },
-        { title: 'Copy and Use', description: 'Copy the password with one click and use it for any account. We never store or see your passwords.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -183,11 +183,10 @@ const PasswordTool = memo(() => {
                     <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">Local Entropy</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{t('localEntropy')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
-                            Generated via window.crypto.getRandomValues.
-                            The result is never stored outside your screen.
+                            {t('entropyDesc')}
                         </p>
                     </div>
                 </div>
@@ -214,7 +213,7 @@ const PasswordTool = memo(() => {
                             </div>
                             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 bg-zinc-900/50 backdrop-blur-md rounded-full border border-zinc-800/80 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 opacity-60 italic group-hover:opacity-100 transition-all group-hover:bg-zinc-900">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 animate-pulse" />
-                                Click to Copy to Buffer
+                                {t('clickToCopy')}
                             </div>
                         </motion.div>
 
@@ -225,10 +224,10 @@ const PasswordTool = memo(() => {
                                 security.bg, security.color, "hover:scale-105"
                             )}>
                                 <security.icon className="w-4 h-4 shadow-[0_0_10px_currentColor]" />
-                                <span>{security.label} STATUS</span>
+                                <span>{t('status', { label: security.label })}</span>
                             </div>
                             <div className="px-8 py-3.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-[11px] font-black uppercase tracking-[0.15em] text-zinc-400 italic shadow-xl backdrop-blur-xl transition-all hover:scale-105 border-white/5 tabular-nums">
-                                {length[0]} BITS
+                                {t('bits', { count: length[0] })}
                             </div>
                         </div>
                     </div>
@@ -237,12 +236,12 @@ const PasswordTool = memo(() => {
                     <div className="absolute bottom-10 flex items-center gap-8 opacity-20 group-hover:opacity-60 transition-all duration-700">
                         <div className="flex items-center gap-2.5">
                             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">Active Cipher</span>
+                            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">{t('activeCipher')}</span>
                         </div>
                         <div className="w-px h-3 bg-zinc-800" />
                         <div className="flex items-center gap-2.5">
                             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse delay-300 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">Vault Guard</span>
+                            <span className="text-[9px] font-black text-white/50 uppercase tracking-widest">{t('vaultGuard')}</span>
                         </div>
                     </div>
                 </div>

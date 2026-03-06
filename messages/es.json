@@ -211,7 +211,7 @@
         },
         "cleanExif": {
             "title": "Limpiar Datos de Foto",
-            "description": "Elimina el mapa oculto y los detalles."
+            "description": "Elimina el mapa oculto y los detalles EXIF."
         },
         "compress": {
             "title": "Reducir Tamaño de Fotos",
@@ -255,7 +255,7 @@
         },
         "svgToPng": {
             "title": "Arreglar Logos",
-            "description": "Convierte dibujos de diseñador en imágenes."
+            "description": "Convierte dibujos de diseñador en imágenes PNG."
         },
         "unlockPdf": {
             "title": "Desbloquear un Archivo",
@@ -312,11 +312,25 @@
             "flattening": "Endureciendo la capa del documento...",
             "secureExport": "Guardar Copia Protegida",
             "clearAll": "Limpiar Espacio",
-            "initializing": "Activando el Escudo de Privacidad..."
+            "initializing": "Activando el Escudo de Privacidad...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Suelta tu documento",
+                    "desc": "Elije el PDF que quieras redactar. Se queda seguro en tu dispositivo."
+                },
+                "step2": {
+                    "title": "Marca la información",
+                    "desc": "Usa el pincel para tapar nombres, fechas o datos sensibles."
+                },
+                "step3": {
+                    "title": "Asegura y guarda",
+                    "desc": "Las marcas se fusionan para que la información oculta no pueda recuperarse jamás."
+                }
+            }
         },
         "unlockPdf": {
-            "title": "Desbloquear un Archivo",
-            "description": "Desbloquea archivos PDF protegidos al instante.",
+            "title": "Desbloquear un PDF",
+            "description": "Elimina contraseñas de archivos protegidos al instante.",
             "titleHighlight": "Desencriptador de Acceso",
             "dropTitle": "Suelta tu archivo bloqueado aquí.",
             "dropDesc": "Lo abriremos para que puedas acceder a tus datos con seguridad.",
@@ -326,17 +340,34 @@
             "successDesc": "Tu archivo ya está completamente abierto y listo para usar.",
             "downloadBtn": "Guardar Copia Desbloqueada",
             "passwordLabel": "Clave de Seguridad",
-            "passwordPlaceholder": "Escribe la contraseña del archivo..."
+            "passwordPlaceholder": "Escribe la contraseña del archivo...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Elige el PDF",
+                    "desc": "Sube el archivo encriptado que necesites abrir. Nunca vemos tu contraseña."
+                },
+                "step2": {
+                    "title": "Escribe la clave",
+                    "desc": "Introduce la contraseña actual para desencriptar localmente en tu navegador."
+                },
+                "step3": {
+                    "title": "Exporta abierto",
+                    "desc": "Se elimina la seguridad y puedes guardar un PDF libre para todos."
+                }
+            }
         },
         "svgToPng": {
             "title": "Convertidor de Logos",
-            "description": "Convierte dibujos vectoriales en fotos de alta calidad.",
+            "description": "Convierte dibujos vectoriales (SVG) en fotos de alta calidad.",
             "titleHighlight": "Vector a Raster",
             "dropTitle": "Suelta tu archivo SVG aquí",
             "dropDesc": "Sólo archivos SVG",
             "processing": "Convirtiendo...",
             "convertBtn": "Convertir a PNG",
+            "downloadBtn": "Descargar PNG",
             "resetBtn": "Reiniciar",
+            "xmlPlaceholder": "Código XML de SVG...",
+            "scaled": "Escalado 2×",
             "howItWorks": {
                 "step1": {
                     "title": "Suelta tu SVG",
@@ -354,13 +385,27 @@
         },
         "pdfToImg": {
             "title": "Archivo a Imágenes",
-            "description": "Convierte cada página de tu PDF en archivos de imagen de alta calidad.",
+            "description": "Convierte cada página de tu PDF en imágenes de alta calidad.",
             "titleHighlight": "Capturas de Página",
             "dropTitle": "Suelta tu archivo PDF aquí.",
             "dropDesc": "Capturaremos cada página como una foto de alta fidelidad.",
             "processing": "Capturando buffers de página...",
             "convertPages": "Convertir a Galería",
-            "initializing": "Calibrando la cámara virtual..."
+            "initializing": "Calibrando la cámara virtual...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Carga el PDF",
+                    "desc": "Suelta cualquier documento. Cada página se renderiza localmente como un original de alta resolución."
+                },
+                "step2": {
+                    "title": "Pasa a píxeles",
+                    "desc": "Nuestro motor captura el contenido de cada página y lo convierte en JPG o PNG nitidísimos."
+                },
+                "step3": {
+                    "title": "Guarda la galería",
+                    "desc": "Descarga páginas sueltas o el set completo en un archivo ZIP comprimido."
+                }
+            }
         },
         "pdfToDocx": {
             "title": "Archivo a Word",
@@ -383,7 +428,7 @@
             "converting": "Convirtiendo..."
         },
         "password": {
-            "title": "Generador de Códigos Seguros",
+            "title": "Creador de Códigos Seguros",
             "description": "Genera contraseñas de grado industrial que solo tú puedes conocer.",
             "titleHighlight": "Motor de Entropía",
             "weak": "Vulnerable",
@@ -397,7 +442,28 @@
             "symbols": "Incluir Símbolos Especiales",
             "copied": "¡Copiado al Portapapeles!",
             "copy": "Copiar Código Seguro",
-            "generateNew": "Regenerar"
+            "generateNew": "Generar Nuevo",
+            "howItWorks": {
+                "step1": {
+                    "title": "Marca las opciones",
+                    "desc": "Elige el largo y la complejidad (símbolos, números) para tu nueva clave secreta."
+                },
+                "step2": {
+                    "title": "Genera en local",
+                    "desc": "El motor criptográfico de tu navegador crea una cadena aleatoria de alta fuerza al instante."
+                },
+                "step3": {
+                    "title": "Copia y usa",
+                    "desc": "Copia tu clave fuerte. Nosotros nunca la vemos ni la guardamos."
+                }
+            },
+            "localEntropy": "Entropía Local",
+            "entropyDesc": "Generado a través de window.crypto.getRandomValues. El resultado nunca se almacena fuera de tu pantalla.",
+            "clickToCopy": "Clic para copiar al portapapeles",
+            "status": "ESTADO {label}",
+            "bits": "{count} BITS",
+            "activeCipher": "Cifrado Activo",
+            "vaultGuard": "Guardián de la Bóveda"
         },
         "mediaConverter": {
             "title": "Arreglador de Video y Música",
@@ -434,7 +500,8 @@
                     "desc": "Haz clic en Convertir y tu archivo estará listo en segundos. Todo ocurre dentro de tu navegador."
                 }
             },
-            "targetFormat": "Seleccionar Tipo de Salida"
+            "targetFormat": "Seleccionar Tipo de Salida",
+            "trim": "Recortar"
         },
         "compress": {
             "title": "Optimizador de Imágenes",
@@ -479,10 +546,24 @@
             "dropTitle": "Suelta tus archivos PDF aquí.",
             "dropDesc": "Los combinaremos en un solo archivo localmente.",
             "processing": "Sintetizando catálogo de documentos...",
-            "mergeButton": "Combinar Archivos PDF"
+            "mergeButton": "Combinar Archivos PDF",
+            "howItWorks": {
+                "step1": {
+                    "title": "Añade tus archivos",
+                    "desc": "Suelta todos los PDFs que quieras unir. Puedes añadir tantos como necesites."
+                },
+                "step2": {
+                    "title": "Ordena la lista",
+                    "desc": "Arrastra los archivos para ponerlos en la secuencia exacta que quieres en el doc final."
+                },
+                "step3": {
+                    "title": "Descarga unido",
+                    "desc": "Dale a Combinar y obtén un solo PDF listo para compartir en segundos."
+                }
+            }
         },
         "sign": {
-            "title": "Firmar un Papel",
+            "title": "Firmar un Documento",
             "description": "Dibuja tu firma y colócala en cualquier página al instante.",
             "titleHighlight": "Firma Digital",
             "dropTitle": "Suelta tu PDF aquí.",
@@ -494,11 +575,25 @@
             "signHere": "Firma aquí con el ratón o el dedo",
             "dropDesc": "El PDF seleccionado se renderizará para firmar.",
             "saveBtn": "Guardar Papel Firmado",
-            "ready": "Firma Lista. Arrástrala a la vista previa."
+            "ready": "Firma Lista. Arrástrala a la vista previa.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Suelta el archivo",
+                    "desc": "Sube el documento que necesites firmar. Se muestra localmente para tu privacidad."
+                },
+                "step2": {
+                    "title": "Dibuja la firma",
+                    "desc": "Usa tu ratón o pantalla táctil para crear una firma natural en el lienzo virtual."
+                },
+                "step3": {
+                    "title": "Coloca y guarda",
+                    "desc": "Arrastra tu firma sobre la página, ajusta el tamaño y guarda el documento firmado."
+                }
+            }
         },
         "stamp": {
             "title": "Sellar una Foto",
-            "description": "Pon tu nombre o logo en tus fotos.",
+            "description": "Pon tu nombre o logo en tus fotos para protegerlas.",
             "titleHighlight": "Marca de Agua",
             "dropTitle": "Suelta tu imagen aquí.",
             "watermarkText": "Texto de Marca de Agua",
@@ -512,11 +607,25 @@
             "position": "Posición",
             "downloadBtn": "Descargar Imagen Sellada",
             "dropDesc": "Te ayudaremos a proteger tus activos visuales.",
-            "saveBtn": "Guardar Foto Sellada"
+            "saveBtn": "Guardar Foto Sellada",
+            "howItWorks": {
+                "step1": {
+                    "title": "Sube la imagen",
+                    "desc": "Elige la foto que quieras proteger. Nada de tus datos sale de tu computadora."
+                },
+                "step2": {
+                    "title": "Diseña tu sello",
+                    "desc": "Escribe tu nombre o sube un logo. Ajusta la transparencia y la posición ideal."
+                },
+                "step3": {
+                    "title": "Guarda la foto",
+                    "desc": "La marca se quema en los píxeles localmente. Tu foto original se queda privada."
+                }
+            }
         },
         "repair": {
-            "title": "Arreglar Archivo Roto",
-            "description": "Arregla un documento que está roto o da error.",
+            "title": "Reparar Archivo Roto",
+            "description": "Arregla un documento PDF que está roto o da error.",
             "titleHighlight": "Reparación de Documentos",
             "dropTitle": "Suelta tu PDF roto aquí.",
             "processing": "Reconstruyendo cabeceras de archivo...",
@@ -525,7 +634,21 @@
             "formatPdf": "Formato: Documento PDF",
             "downloadBtn": "Descargar PDF Arreglado",
             "dropDesc": "Intentaremos restaurar la integridad estructural.",
-            "saveBtn": "Guardar Archivo Arreglado"
+            "saveBtn": "Guardar Archivo Arreglado",
+            "howItWorks": {
+                "step1": {
+                    "title": "Suelta el roto",
+                    "desc": "Elige el archivo que no abre. Nuestro motor analiza el código del archivo en local."
+                },
+                "step2": {
+                    "title": "Restaura cabeceras",
+                    "desc": "Intentamos reconstruir las tablas de referencia internas y el encabezado del PDF."
+                },
+                "step3": {
+                    "title": "Recupera y guarda",
+                    "desc": "Si los datos son salvables, se generará un PDF sano para que lo descargues."
+                }
+            }
         },
         "numberPages": {
             "title": "Numerar cada Página",
@@ -540,42 +663,106 @@
             "discardDocument": "Descartar Documento",
             "downloadBtn": "Descargar PDF Numerado",
             "dropDesc": "Te ayudaremos a organizar tu documento.",
-            "saveBtn": "Guardar Archivo Numerado"
+            "saveBtn": "Guardar Archivo Numerado",
+            "howItWorks": {
+                "step1": {
+                    "title": "Carga el documento",
+                    "desc": "Suelta el PDF que quieras numerar. Todo se queda en la RAM de tu navegador."
+                },
+                "step2": {
+                    "title": "Elige posición",
+                    "desc": "¿Quieres los números abajo a la izquierda, al centro o a la derecha?"
+                },
+                "step3": {
+                    "title": "Paginado automático",
+                    "desc": "Nuestro código inyecta el índice de páginas y crea tu nuevo archivo numerado."
+                }
+            }
         },
         "organizePages": {
             "title": "Organizar Páginas",
-            "description": "Mueve páginas o elimina las que no necesites.",
+            "description": "Mueve páginas o elimina las que no necesites del PDF.",
             "titleHighlight": "Gestor de Páginas",
             "dropTitle": "Suelta tu PDF aquí.",
             "processing": "Renderizando páginas...",
             "scanning": "Escaneando Capas del Documento...",
             "pagesLoaded": "{count} Páginas Cargadas. Arrastra para reordenar.",
-            "synthesizing": "Sintetizando...",
+            "synthesizing": "Sintetizando estructura...",
             "discardBtn": "Descartar Documento",
             "downloadBtn": "Descargar PDF Organizado",
             "pageLabel": "Página",
             "delete": "Eliminar",
             "dropActive": "Soltar para Organizar",
             "dropDesc": "Arrastra para reordenar, haz clic para eliminar.",
-            "saveBtn": "Guardar Nuevo Archivo"
+            "saveBtn": "Guardar Nuevo Archivo",
+            "howItWorks": {
+                "step1": {
+                    "title": "Carga el documento",
+                    "desc": "Suelta el PDF que quieras editar. Mostramos miniaturas de cada página."
+                },
+                "step2": {
+                    "title": "Ordena y borra",
+                    "desc": "Arrastra las miniaturas para cambiar el orden. Pulsa el icono de borrar para quitar páginas."
+                },
+                "step3": {
+                    "title": "Guarda la síntesis",
+                    "desc": "Nuestro motor ensambla el nuevo orden en un PDF limpio listo para exportar."
+                }
+            }
         },
         "pdfSplit": {
-            "title": "Extraer Páginas de PDF",
-            "description": "Extrae de forma segura páginas específicas o rangos de tus documentos PDF.",
+            "title": "Dividir un PDF",
+            "description": "Extrae de forma segura páginas específicas o rangos de tus documentos.",
             "titleHighlight": "Extractor de Páginas",
             "dropTitle": "Suelta tu archivo PDF aquí.",
-            "dropDesc": "Te ayudaremos a extraer las páginas que necesites.",
-            "processing": "Extrayendo buffers de página...",
-            "splitBtn": "Extraer Páginas Seleccionadas"
+            "dropDesc": "Te ayudaremos a sacar las páginas que necesites.",
+            "processing": "Extrayendo capas de página...",
+            "splitBtn": "Extraer Páginas Seleccionadas",
+            "howItWorks": {
+                "step1": {
+                    "title": "Elige el PDF",
+                    "desc": "Sube el documento que quieras dividir. Se procesa íntegramente en tu RAM."
+                },
+                "step2": {
+                    "title": "Marca los rangos",
+                    "desc": "Elige páginas sueltas o define un rango (ej: 5-12) para sacar del original."
+                },
+                "step3": {
+                    "title": "Saca y guarda",
+                    "desc": "El contenido elegido se vuelca a un nuevo registro PDF para descarga inmediata."
+                }
+            }
         },
         "heicToJpg": {
             "title": "Arreglador de Fotos iPhone",
-            "description": "Convierte archivos HEIC de iPhone en fotos JPG de alta compatibilidad.",
+            "description": "Convierte archivos HEIC de iPhone en fotos JPG compatibles.",
             "titleHighlight": "Transcodificador HEIC",
             "dropTitle": "Suelta tu foto de iPhone aquí.",
             "dropDesc": "La convertiremos en una foto estándar que funciona en todas partes.",
-            "processing": "Convirtiendo a catálogo JPG...",
-            "downloadBtn": "Guardar Foto Estándar"
+            "processing": "Convirtiendo a JPG estándar...",
+            "downloadBtn": "Guardar Foto Estándar",
+            "protocol": "Protocolo de Flujo de Salida",
+            "to": "a {fmt}",
+            "resetBtn": "Reiniciar Secuencia",
+            "sandbox": "Protocolo de Sandbox",
+            "sandboxDesc": "Los paquetes HEIF se deciman y reconstruyen localmente por completo. La conectividad a la nube está estrictamente restringida.",
+            "originalLabel": "HEIC Original",
+            "purifiedLabel": "{format} Purificado",
+            "wasmDecryption": "Desencriptación WASM...",
+            "howItWorks": {
+                "step1": {
+                    "title": "Elige el HEIC",
+                    "desc": "Suelta una foto de iPhone (.heic). Estas fotos no suelen abrir en Windows o web."
+                },
+                "step2": {
+                    "title": "Decodificación local",
+                    "desc": "Nuestro motor decodifica el archivo y saca el mapa de píxeles sin ayuda del servidor."
+                },
+                "step3": {
+                    "title": "Exportación JPG",
+                    "desc": "Se recodifican los datos a un JPG universal y se guarda en tu dispositivo."
+                }
+            }
         },
         "cleanExif": {
             "title": "Limpiador de Metadatos",
@@ -605,17 +792,31 @@
         },
         "encrypt": {
             "title": "Encriptación de Notas Seguras",
-            "description": "Bloquea tu escritura privada dentro de una bóveda criptográfica que solo tú puedes abrir.",
+            "description": "Bloquea tu escritura privada dentro de una bóveda criptográfica.",
             "titleHighlight": "Creador de Mensajes Secretos",
             "inputText": "Nodo de Texto Crudo",
             "inputPlaceholder": "Escribe tu mensaje secreto aquí...",
             "passwordLabel": "Clave de Encriptación",
             "passwordPlaceholder": "Escribe una clave que solo tú sepas...",
             "encryptBtn": "Bloquear Mensaje",
-            "decryptBtn": "Desbloquear Mensaje",
+            "decryptBtn": "Abrir Mensaje",
             "resultLabel": "Carga Encriptada",
             "copyBtn": "Copiar Carga",
-            "copied": "¡Carga Copiada!"
+            "copied": "¡Carga Copiada!",
+            "howItWorks": {
+                "step1": {
+                    "title": "Escribe tu nota",
+                    "desc": "Escribe o pega el texto sensible que quieras proteger de ojos curiosos."
+                },
+                "step2": {
+                    "title": "Aplica el cifrado",
+                    "desc": "Introduce una clave. Usamos AES-256 para pasar tu texto a código ilegible."
+                },
+                "step3": {
+                    "title": "Guárdalo donde sea",
+                    "desc": "Copia el bloque encriptado. Solo con tu clave exacta podrá leerse de nuevo."
+                }
+            }
         },
         "blur": {
             "title": "Difuminado de Privacidad",
@@ -625,7 +826,21 @@
             "dropDesc": "Te ayudaremos a ocultar caras o detalles privados con un pincel mágico.",
             "processing": "Aplicando difuminado...",
             "downloadBtn": "Guardar Imagen Difuminada",
-            "clearAll": "Limpiar Lienzo"
+            "clearAll": "Limpiar Lienzo",
+            "howItWorks": {
+                "step1": {
+                    "title": "Abre la foto",
+                    "desc": "Elige la imagen que tenga info que quieras tapar (como caras o matrículas)."
+                },
+                "step2": {
+                    "title": "Aplica la máscara",
+                    "desc": "Usa el ratón para pintar sobre las zonas sensibles. Aplicamos un desenfoque alto."
+                },
+                "step3": {
+                    "title": "Exporta seguro",
+                    "desc": "Los píxeles difuminados se fusionan en la nueva foto. Tu privacidad ya es parte de la imagen."
+                }
+            }
         }
     }
 }

@@ -29,6 +29,7 @@ import { cn } from "@/lib/utils";
 const HeicToJpgTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.heicToJpg");
+    const tc = useTranslations("Tools.common");
 
     // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
@@ -126,10 +127,10 @@ const HeicToJpgTool = memo(() => {
      * 📦 Metadata Registry
      */
     const howItWorks = useMemo(() => [
-        { title: 'Drop Your HEIC File', description: 'Add the .heic photo from your iPhone or iPad. It\'s fine if you have multiple — batch them all.' },
-        { title: 'Pick the Output Format', description: 'Choose JPG or PNG. JPG is smaller, PNG keeps the highest quality.' },
-        { title: 'Download Your Photos', description: 'Your converted images are ready to share, post, or print — they work everywhere now.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -141,7 +142,7 @@ const HeicToJpgTool = memo(() => {
             settingsContent={
                 <div className="space-y-6">
                     <div className="space-y-3.5">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500">Output Stream Protocol</span>
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500">{t('protocol')}</span>
                         <div className="grid grid-cols-2 gap-2.5 p-1.5 bg-zinc-900/50 rounded-2xl border border-zinc-800">
                             {(["jpeg", "png"] as const).map((fmt) => (
                                 <button
@@ -154,7 +155,7 @@ const HeicToJpgTool = memo(() => {
                                             : "text-zinc-500 hover:text-white hover:bg-zinc-800"
                                     )}
                                 >
-                                    to {fmt}
+                                    {t('to', { fmt })}
                                 </button>
                             ))}
                         </div>
@@ -176,18 +177,17 @@ const HeicToJpgTool = memo(() => {
                             className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic transition-all rounded-xl"
                         >
                             <RefreshCcw className="w-4 h-4 me-2" />
-                            Reset Sequence
+                            {t('resetBtn')}
                         </Button>
                     </div>
 
                     <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">Sandbox Protocol</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{t('sandbox')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-400 font-bold leading-relaxed uppercase tracking-tight">
-                            HEIF packets are fully decimated and reconstructed locally.
-                            Cloud connectivity is strictly restricted.
+                            {t('sandboxDesc')}
                         </p>
                     </div>
                 </div>
@@ -226,7 +226,7 @@ const HeicToJpgTool = memo(() => {
                                     <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? 'Drop it here' : 'Drop your HEIC file here'}
+                                            {isDragActive ? tc('dropActive') : t('dropTitle')}
                                         </p>
                                         <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">HEIC · HEIF</p>
                                     </div>
@@ -244,7 +244,7 @@ const HeicToJpgTool = memo(() => {
                                 {/* Original */}
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                                        <span>Original HEIC</span>
+                                        <span>{t('originalLabel')}</span>
                                         <span>{formatSize(originalFile.size)}</span>
                                     </div>
                                     <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center group shadow-2xl">
@@ -258,7 +258,7 @@ const HeicToJpgTool = memo(() => {
                                 {/* Converted */}
                                 <div className="space-y-4">
                                     <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">
-                                        <span>Purified {convertedFormat.toUpperCase()}</span>
+                                        <span>{t('purifiedLabel', { format: convertedFormat.toUpperCase() })}</span>
                                         {convertedBlob && <span className="bg-emerald-500/10 px-2 py-0.5 rounded-lg border border-emerald-500/20">{formatSize(convertedBlob.size)}</span>}
                                     </div>
                                     <div className={cn(
@@ -279,7 +279,7 @@ const HeicToJpgTool = memo(() => {
                                                 </div>
                                                 <div className="text-center space-y-1.5">
                                                     <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse">{t('processing')}</span>
-                                                    <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-tight">WASM Decryption...</p>
+                                                    <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-tight">{t('wasmDecryption')}</p>
                                                 </div>
                                             </div>
                                         )}

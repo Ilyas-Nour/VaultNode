@@ -170,7 +170,7 @@ const MediaConverterTool = memo(() => {
                             {[
                                 { id: 'mp3', icon: Music, label: 'MP3' },
                                 { id: 'wav', icon: Volume2, label: 'WAV' },
-                                { id: 'trim', icon: Scissors, label: 'Trim' }
+                                { id: 'trim', icon: Scissors, label: t('trim') }
                             ].map((item) => (
                                 <button
                                     key={item.id}

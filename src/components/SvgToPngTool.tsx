@@ -166,7 +166,7 @@ export default function SvgToPngTool() {
                                     if (e.target.value.includes('<svg')) generatePreview(e.target.value);
                                 }}
                                 className="w-full h-48 bg-zinc-950 border border-zinc-800 p-4 text-[11px] font-mono text-zinc-500 focus:border-white/20 outline-none transition-colors resize-none"
-                                placeholder="SVG XML..."
+                                placeholder={t('xmlPlaceholder')}
                             />
                         </div>
 
@@ -175,7 +175,7 @@ export default function SvgToPngTool() {
                             <div className="space-y-2">
                                 <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-600">
                                     <span>PNG {tc('after')}</span>
-                                    <span className="text-zinc-700">2× scaled</span>
+                                    <span className="text-zinc-700">{t('scaled')}</span>
                                 </div>
                                 <div className="w-full aspect-square bg-zinc-950 border border-zinc-800 flex items-center justify-center relative overflow-hidden">
                                     <img
