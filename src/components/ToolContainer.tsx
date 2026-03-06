@@ -13,7 +13,7 @@
 "use client";
 
 import React, { memo } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { Lock, ArrowLeft } from 'lucide-react';
 import { VisualProof } from '@/components/VisualProof';
 import AdUnit from '@/components/AdUnit';
 import { Link } from '@/i18n/routing';
@@ -46,12 +46,7 @@ export const ToolContainer = memo(({
     hideAds = false
 }: ToolContainerProps) => {
     const t = useTranslations('Tools.common');
-
-    const categoryLabel: Record<string, string> = {
-        vault: 'Privacy Vault',
-        media: 'Photo & Media',
-        docs: 'PDF & Documents',
-    };
+    const tc = useTranslations('HomePage.categories');
 
     return (
         <div className="w-full flex flex-col bg-black">
@@ -68,7 +63,7 @@ export const ToolContainer = memo(({
                 <main className="flex-1 min-w-0 flex flex-col">
 
                     {/* ── PAGE HEADER ── */}
-                    <div className="w-full px-5 sm:px-6 lg:px-12 pt-10 pb-8 border-b border-white/[0.06]">
+                    <div className="w-full px-5 sm:px-6 lg:px-12 pt-6 pb-8 border-b border-white/[0.06]">
 
                         {/* Back link */}
                         <Link
@@ -81,7 +76,7 @@ export const ToolContainer = memo(({
 
                         {/* Category label */}
                         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600 mb-3">
-                            {categoryLabel[category] ?? category}
+                            {tc(category)}
                         </p>
 
                         {/* Title */}

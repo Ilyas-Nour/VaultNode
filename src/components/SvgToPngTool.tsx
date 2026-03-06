@@ -1,31 +1,17 @@
-/**
- * 🎨 PRIVAFLOW | Scalable Vector Rasterizer
- * ---------------------------------------------------------
- * A high-precision rendering engine for SVG bitstream conversion.
- * Transforms XML-based vector stacks into optimized PNG buffers
- * using a native canvas serialization bridge.
- * 
- * Logic: Canvas-Based XML Rasterization
- * Performance: Optimized (Atomic Rendering)
- * Aesthetics: Design-Industrial / Emerald-Dark
- */
-
 "use client";
 
 import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 import { useTranslations } from 'next-intl';
-import {
-    FileCode, Download, Loader2, Image as ImageIcon,
-    Shield, Wand2, RefreshCw, Layers, HardDrive
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { FileCode, Download, Loader2, Image as ImageIcon, RefreshCw } from 'lucide-react';
 import { ToolContainer } from '@/components/ToolContainer';
 import { cn } from '@/lib/utils';
 
 export default function SvgToPngTool() {
     const t = useTranslations('Tools.svgToPng');
+    const tc = useTranslations('Tools.common');
+
     const [svgCode, setSvgCode] = useState('');
     const [fileName, setFileName] = useState('image');
     const [isProcessing, setIsProcessing] = useState(false);
@@ -67,12 +53,11 @@ export default function SvgToPngTool() {
 
         const canvas = document.createElement('canvas');
         const img = new Image();
-
         const blob = new Blob([svgCode], { type: 'image/svg+xml;charset=utf-8' });
         const url = URL.createObjectURL(blob);
 
         img.onload = () => {
-            const scale = 2; // High resolution
+            const scale = 2;
             canvas.width = img.width * scale;
             canvas.height = img.height * scale;
             const ctx = canvas.getContext('2d');
@@ -82,7 +67,7 @@ export default function SvgToPngTool() {
                 const pngUrl = canvas.toDataURL('image/png');
                 const a = document.createElement('a');
                 a.href = pngUrl;
-                a.download = `vaultnode_${fileName}.png`;
+                a.download = `privaflow_${fileName}.png`;
                 a.click();
             }
             URL.revokeObjectURL(url);
@@ -90,7 +75,6 @@ export default function SvgToPngTool() {
         };
 
         img.onerror = () => {
-            alert("Malformed SVG. Please check the code.");
             setIsProcessing(false);
         };
 
@@ -111,148 +95,109 @@ export default function SvgToPngTool() {
             category="media"
             toolId="svg-to-png"
             settingsContent={
-                <div className="space-y-6">
-                    <div className="space-y-3.5">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500">Raster Quality</span>
-                        <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between shadow-inner">
-                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-tight italic">2x Super-Sampling</span>
-                            <RefreshCw className="w-4 h-4 text-emerald-500" />
-                        </div>
-                    </div>
-
-                    <div className="space-y-3.5 pt-4">
-                        <Button
-                            onClick={rasterize}
-                            disabled={!svgCode || isProcessing}
-                            className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
-                        >
-                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <ImageIcon className="w-5 h-5 me-2" />}
-                            {isProcessing ? t('processing') : t('convertBtn')}
-                        </Button>
-
-                        <Button
-                            variant="outline"
-                            onClick={resetTool}
-                            className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
-                        >
-                            <RefreshCw className="w-4 h-4 me-2" />
-                            Reset Buffer
-                        </Button>
-                    </div>
-
-                    <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
-                        <div className="flex items-center gap-2 text-emerald-500">
-                            <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">Local Engine</span>
-                        </div>
-                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
-                            Uses native Canvas API to rasterize vectors. Zero external network calls.
-                        </p>
-                    </div>
+                <div className="space-y-5">
+                    <button
+                        onClick={rasterize}
+                        disabled={!svgCode || isProcessing}
+                        className="w-full h-12 bg-white hover:bg-zinc-100 text-black text-[11px] font-bold uppercase tracking-[0.18em] transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                        {isProcessing
+                            ? <><Loader2 className="w-4 h-4 animate-spin" /> {t('processing')}</>
+                            : <><ImageIcon className="w-4 h-4" /> {t('convertBtn')}</>
+                        }
+                    </button>
+                    <button
+                        onClick={resetTool}
+                        className="w-full h-10 border border-white/[0.08] text-zinc-500 hover:text-white hover:border-white/20 text-[10px] font-bold uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2"
+                    >
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        {t('resetBtn')}
+                    </button>
                 </div>
             }
             howItWorks={[
-                { title: "Vector Extraction", description: "Parses SVG XML data objects directly from your file stream." },
-                { title: "High-Res Scaling", description: "Uses 2x super-sampling to prevent raster aliasing during export." },
-                { title: "Local Export", description: "Binary BLOB is created in-browser and pushed to your downloads." }
+                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') },
             ]}
         >
-            <div className="relative min-h-[420px] flex flex-col items-center justify-center p-6 md:p-10">
-                <AnimatePresence mode="wait">
-                    {!svgCode ? (
-                        <motion.div
-                            key="dropzone"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 1.05 }}
-                            className="w-full max-w-2xl"
+            <AnimatePresence mode="wait">
+                {!svgCode ? (
+                    <motion.div
+                        key="dropzone"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <div
+                            {...getRootProps()}
+                            className={cn(
+                                "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-12 gap-4",
+                                isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                            )}
                         >
-                            <div
-                                {...getRootProps()}
-                                className={cn(
-                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
-                                    isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
-                                )}
-                            >
-                                <input {...getInputProps()} />
-                                <FileCode className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
-                                <div className="text-center">
-                                    <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                        {isDragActive ? 'Drop it here' : 'Drop your SVG file here'}
-                                    </p>
-                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">SVG files only</p>
+                            <input {...getInputProps()} />
+                            <FileCode className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
+                            <div className="text-center">
+                                <p className="text-[13px] font-bold text-white uppercase tracking-[0.15em]">
+                                    {isDragActive ? tc('dropActive') : t('dropTitle')}
+                                </p>
+                                <p className="text-[11px] text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
+                            </div>
+                        </div>
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key="results"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-4"
+                    >
+                        {/* SVG Code Editor */}
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-600">
+                                <span>SVG {tc('before')}</span>
+                                <span className="text-zinc-700 truncate max-w-[140px]">{fileName}.svg</span>
+                            </div>
+                            <textarea
+                                value={svgCode}
+                                onChange={(e) => {
+                                    setSvgCode(e.target.value);
+                                    if (e.target.value.includes('<svg')) generatePreview(e.target.value);
+                                }}
+                                className="w-full h-48 bg-zinc-950 border border-zinc-800 p-4 text-[11px] font-mono text-zinc-500 focus:border-white/20 outline-none transition-colors resize-none"
+                                placeholder="SVG XML..."
+                            />
+                        </div>
+
+                        {/* Preview */}
+                        {previewUrl && (
+                            <div className="space-y-2">
+                                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.18em] text-zinc-600">
+                                    <span>PNG {tc('after')}</span>
+                                    <span className="text-zinc-700">2× scaled</span>
+                                </div>
+                                <div className="w-full aspect-square bg-zinc-950 border border-zinc-800 flex items-center justify-center relative overflow-hidden">
+                                    <img
+                                        src={previewUrl}
+                                        className="max-w-full max-h-full object-contain p-6"
+                                        alt="Preview"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition-all duration-300">
+                                        <button
+                                            onClick={rasterize}
+                                            className="h-12 px-8 bg-white text-black text-[11px] font-bold uppercase tracking-[0.18em] flex items-center gap-2 hover:bg-zinc-100 transition-colors"
+                                        >
+                                            <Download className="w-4 h-4" />
+                                            {t('convertBtn')}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="results"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="w-full grid grid-cols-1 md:grid-cols-2 gap-6"
-                        >
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-                                    <span>SVG Code</span>
-                                    <span className="text-zinc-600 truncate max-w-[120px]">{fileName}.svg</span>
-                                </div>
-                                <textarea
-                                    value={svgCode}
-                                    onChange={(e) => {
-                                        setSvgCode(e.target.value);
-                                        if (e.target.value.includes('<svg')) generatePreview(e.target.value);
-                                    }}
-                                    className="w-full aspect-square bg-zinc-900/50 border border-zinc-800 rounded-[2rem] p-6 text-[11px] font-mono text-zinc-500 focus:border-emerald-500 outline-none transition-colors resize-none custom-scroll shadow-inner"
-                                    placeholder="Paste SVG XML here..."
-                                />
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center px-2 text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">
-                                    <span>Raster Result</span>
-                                    <span className="text-emerald-500/50 bg-emerald-500/5 px-2 py-0.5 rounded-lg border border-emerald-500/10">2x Scaled</span>
-                                </div>
-                                <div className="aspect-square rounded-[2rem] bg-zinc-900/50 border border-zinc-800 overflow-hidden relative flex items-center justify-center shadow-2xl">
-                                    <div className="absolute inset-0 bg-[url('/patterns/carbon-fibre.png')] opacity-5 pointer-events-none" />
-                                    {previewUrl ? (
-                                        <img
-                                            src={previewUrl}
-                                            className="max-w-full max-h-full object-contain p-8 drop-shadow-2xl animate-in zoom-in-95 duration-500"
-                                            alt="Preview"
-                                        />
-                                    ) : (
-                                        <ImageIcon className="w-12 h-12 text-zinc-800 animate-pulse" />
-                                    )}
-
-                                    {previewUrl && (
-                                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm opacity-0 hover:opacity-100 transition-all duration-500">
-                                            <Button
-                                                onClick={rasterize}
-                                                className="h-16 px-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95 text-xl uppercase italic tracking-tight"
-                                            >
-                                                <Download className="w-6 h-6 me-4" />
-                                                Save as PNG
-                                            </Button>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                <div className="flex items-center gap-10 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-full mt-10 shadow-2xl backdrop-blur-md">
-                    <div className="flex items-center gap-2.5">
-                        <HardDrive className="w-5 h-5 text-zinc-600" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Node-09</span>
-                    </div>
-                    <div className="w-px h-5 bg-zinc-800" />
-                    <div className="flex items-center gap-2.5">
-                        <Layers className="w-5 h-5 text-emerald-500" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Raster Engine 2.1</span>
-                    </div>
-                </div>
-            </div>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </ToolContainer>
     );
 }

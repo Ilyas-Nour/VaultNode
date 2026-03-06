@@ -349,7 +349,8 @@
                 "ram": "In-RAM",
                 "privacy": "Privacy",
                 "zero": "Zero Uploads"
-            }
+            },
+            "dropActive": "Drop it here"
         },
         "redact": {
             "title": "Hide Private Info",
@@ -380,10 +381,25 @@
             "title": "Logo Converter",
             "description": "Turn designer vector drawings into high-quality photos.",
             "titleHighlight": "Vector to Raster",
-            "dropTitle": "Drop your SVG logo here.",
-            "dropDesc": "We'll turn it into a standard PNG photo instantly.",
-            "processing": "Rasterizing digital paths...",
-            "convertBtn": "Generate PNG Photo"
+            "dropTitle": "Drop your SVG file here",
+            "dropDesc": "SVG files only",
+            "processing": "Converting...",
+            "convertBtn": "Convert to PNG",
+            "resetBtn": "Reset",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your SVG",
+                    "desc": "Select any SVG file. It loads directly into your browser — nothing is uploaded."
+                },
+                "step2": {
+                    "title": "2× Rasterization",
+                    "desc": "Your vector is drawn onto an HTML canvas at 2× resolution to prevent aliasing."
+                },
+                "step3": {
+                    "title": "Download PNG",
+                    "desc": "The PNG is generated entirely in your browser and saved directly to your device."
+                }
+            }
         },
         "pdfToImg": {
             "title": "File to Pictures",

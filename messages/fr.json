@@ -205,131 +205,426 @@
     },
     "Metadata": {
         "blur": {
-            "title": "Cacher les visages",
-            "description": "Flouter des parties de votre photo."
+            "title": "Cacher les Visages",
+            "description": "Flouter des parties de votre photo localement."
         },
         "cleanExif": {
-            "title": "Nettoyer une photo",
-            "description": "Supprimer la carte cachée et les détails."
+            "title": "Nettoyer les Infos Photo",
+            "description": "Supprimer la carte cachée et les détails EXIF."
         },
         "compress": {
-            "title": "Réduire la taille",
-            "description": "Rendre les photos plus petites."
+            "title": "Réduire la Taille",
+            "description": "Rendre les photos plus petites pour un partage facile."
         },
         "encrypt": {
             "title": "Message Secret",
-            "description": "Verrouiller votre texte avec un code."
+            "description": "Verrouiller votre texte avec un code cryptographique."
         },
-        "heic-to-jpg": {
-            "title": "Réparer photos iPhone",
-            "description": "Photos qui fonctionnent partout."
+        "heicToJpg": {
+            "title": "Réparer Photos iPhone",
+            "description": "Transformer les fichiers iPhone en photos universelles."
         },
-        "media-converter": {
-            "title": "Réparateur Vidéo/Audio",
-            "description": "Changer le type de fichier."
+        "mediaConverter": {
+            "title": "Fixateur Vidéo/Audio",
+            "description": "Changer le type de fichier vidéo ou musique."
         },
         "password": {
-            "title": "Codes Forts",
-            "description": "Créer des codes sécurisés."
+            "title": "Créer des Codes Forts",
+            "description": "Générer des codes sécurisés que vous seul connaissez."
         },
-        "pdf-merge": {
-            "title": "Combiner fichiers",
-            "description": "Mettre plusieurs fichiers en un seul."
+        "pdfMerge": {
+            "title": "Combiner plusieurs Fichiers",
+            "description": "Rassembler plusieurs fichiers en un seul."
         },
-        "pdf-split": {
-            "title": "Extraire pages",
-            "description": "Prendre des pages d'un gros fichier."
+        "pdfSplit": {
+            "title": "Diviser les Fichiers",
+            "description": "Extraire des pages d'un gros fichier."
         },
-        "pdf-to-docx": {
+        "pdfToDocx": {
             "title": "Fichier vers Word",
-            "description": "Transformer en document modifiable."
+            "description": "Transformer des fichiers en documents éditables."
         },
-        "pdf-to-img": {
+        "pdfToImg": {
             "title": "Fichier vers Images",
-            "description": "Transformer les pages en photos."
+            "description": "Transformer des pages en fichiers image."
         },
         "redact": {
-            "title": "Cacher infos privées",
+            "title": "Cacher Infos Privées",
             "description": "Couvrir les secrets dans un document."
         },
-        "svg-to-png": {
-            "title": "Réparer Logos",
-            "description": "Transformer les dessins en photos."
+        "svgToPng": {
+            "title": "Réparer les Logos",
+            "description": "Transformer les dessins de designer en images PNG."
         },
-        "unlock-pdf": {
-            "title": "Déverrouiller fichier",
-            "description": "Supprimer les mots de passe."
+        "unlockPdf": {
+            "title": "Déverrouiller un Fichier",
+            "description": "Supprimer les mots de passe de vos fichiers."
+        },
+        "sign": {
+            "title": "Signer un Papier",
+            "description": "Utilisez votre souris ou votre doigt pour dessiner votre signature et la placer sur n'importe quelle page."
+        },
+        "stamp": {
+            "title": "Tamponner une Photo",
+            "description": "Ajoutez votre nom ou logo sur vos photos pour les protéger contre le vol."
+        },
+        "repair": {
+            "title": "Réparer un Fichier Cassé",
+            "description": "Réparer un document corrompu ou affichant une erreur pour pouvoir l'ouvrir à nouveau."
+        },
+        "numberPages": {
+            "title": "Numéroter chaque Page",
+            "description": "Ajoutez un petit numéro au bas de chaque page pour organiser votre fichier."
+        },
+        "organizePages": {
+            "title": "Organiser les Pages",
+            "description": "Déplacez des pages, supprimez celles inutiles ou ajoutez-en de nouvelles."
         }
     },
     "Tools": {
         "common": {
-            "loading": "Préparation...",
+            "loading": "Préparation de l'Espace de Travail...",
             "processing": "Travail en cours...",
-            "success": "Terminé",
+            "success": "Tâche Terminée",
             "error": "Une erreur est survenue",
-            "backToHome": "Retour aux outils"
+            "backToHome": "Retour aux Outils",
+            "settings": "Paramètres",
+            "howItWorks": "Comment ça marche",
+            "before": "Original",
+            "after": "Résultat",
+            "specs": {
+                "network": "Réseau",
+                "local": "Local Uniquement",
+                "storage": "Stockage",
+                "ram": "En RAM",
+                "privacy": "Confidentialité",
+                "zero": "Zéro Upload"
+            },
+            "dropActive": "Déposez ici"
         },
         "redact": {
-            "title": "Cacher les infos privées",
-            "description": "Couvrir les secrets dans un document.",
-            "titleHighlight": "Cacher les infos privées",
-            "dropTitle": "Déposez votre fichier ici",
-            "dropDesc": "Choisissez un fichier pour recommencer à cacher les secrets.",
-            "flattening": "Sécurisation...",
-            "secureExport": "Enregistrer la copie sûre",
-            "clearAll": "Recommencer",
-            "initializing": "Réveil du bouclier de sécurité..."
+            "title": "Masquer les Infos Privées",
+            "description": "Effacez définitivement les détails sensibles de vos documents.",
+            "titleHighlight": "Rédaction Sécurisée",
+            "dropTitle": "Déposez votre document ici pour commencer à masquer les secrets.",
+            "dropDesc": "Nous vous aiderons à couvrir les informations confidentielles en toute confidentialité.",
+            "flattening": "Sécurisation des couches du document...",
+            "secureExport": "Enregistrer la Copie Protégée",
+            "clearAll": "Effacer l'Espace",
+            "initializing": "Activation du Bouclier de Confidentialité..."
         },
         "unlockPdf": {
-            "title": "Déverrouiller un fichier",
-            "description": "Supprimer les mots de passe.",
-            "titleHighlight": "Déverrouiller votre fichier",
-            "dropTitle": "Déposez le fichier verrouillé",
-            "dropDesc": "Sélectionnez le fichier à déverrouiller.",
-            "unlocking": "Ouverture du verrou...",
-            "unlockBtn": "Déverrouiller maintenant",
-            "successTitle": "Déverrouillé !",
-            "successDesc": "Votre fichier est maintenant libre et ouvert.",
-            "downloadBtn": "Télécharger le fichier ouvert",
-            "passwordLabel": "Entrer le mot de passe",
-            "passwordPlaceholder": "Tapez le mot de passe ici..."
+            "title": "Déverrouiller un Fichier",
+            "description": "Déverrouillez instantanément des fichiers PDF protégés par mot de passe.",
+            "titleHighlight": "Décrypteur d'Accès",
+            "dropTitle": "Déposez votre fichier verrouillé ici.",
+            "dropDesc": "Nous l'ouvrirons pour que vous puissiez accéder à vos données en toute sécurité.",
+            "unlocking": "Contournement du verrouillage...",
+            "unlockBtn": "Déverrouiller le Document",
+            "successTitle": "Accès Accordé !",
+            "successDesc": "Votre fichier est maintenant complètement ouvert et prêt à l'emploi.",
+            "downloadBtn": "Enregistrer la Copie Déverrouillée",
+            "passwordLabel": "Clé de Sécurité",
+            "passwordPlaceholder": "Tapez le mot de passe du fichier..."
         },
-        "compress": {
-            "title": "Réduire la taille des photos",
-            "description": "Rendez les gros fichiers petits pour qu'ils s'envoient plus vite.",
-            "titleHighlight": "Réduire la taille des photos",
-            "dropTitle": "Déposez la photo ici",
-            "dropDesc": "Choisissez une photo pour la réduire en toute sécurité.",
-            "aggressive": "Très Petit",
-            "balanced": "Meilleur Aspect",
-            "downloadSecurely": "Enregistrer la photo réduite",
-            "processing": "Réduction en cours..."
-        },
-        "cleanExif": {
-            "title": "Nettoyer une photo",
-            "description": "Supprimez la 'carte cachée' de vos photos.",
-            "titleHighlight": "Nettoyer une photo",
-            "dropTitle": "Déposez la photo ici",
-            "dropDesc": "Choisissez une photo pour effacer les détails cachés.",
-            "cleaning": "Nettoyage en cours...",
-            "scrubbing": "Nettoyage des métadonnées...",
-            "cleanBtn": "Nettoyer ma photo",
-            "downloadBtn": "Enregistrer la photo propre",
-            "downloadClean": "Enregistrer la photo propre",
+        "svgToPng": {
+            "title": "Convertisseur de Logos",
+            "description": "Transformez les dessins vectoriels en photos de haute qualité.",
+            "titleHighlight": "Vecteur vers Raster",
+            "dropTitle": "Déposez votre fichier SVG ici",
+            "dropDesc": "Fichiers SVG uniquement",
+            "processing": "Conversion en cours...",
+            "convertBtn": "Convertir en PNG",
+            "resetBtn": "Réinitialiser",
             "howItWorks": {
                 "step1": {
-                    "title": "Sélectionner une image",
+                    "title": "Déposez votre SVG",
+                    "desc": "Sélectionnez n'importe quel fichier SVG. Il se charge directement dans votre navigateur ; rien n'est envoyé."
+                },
+                "step2": {
+                    "title": "Rastérisation 2×",
+                    "desc": "Votre vecteur est dessiné sur un canevas HTML avec une résolution doublée pour éviter l'aliasing."
+                },
+                "step3": {
+                    "title": "Télécharger PNG",
+                    "desc": "Le PNG est généré entièrement dans votre navigateur et enregistré directement sur votre appareil."
+                }
+            }
+        },
+        "pdfToImg": {
+            "title": "Fichier vers Images",
+            "description": "Transformez chaque page de votre PDF en fichiers image de haute qualité.",
+            "titleHighlight": "Captures de Page",
+            "dropTitle": "Déposez votre fichier PDF ici.",
+            "dropDesc": "Nous capturerons chaque page comme une photo haute fidélité.",
+            "processing": "Capture des buffers de page...",
+            "convertPages": "Convertir en Galerie",
+            "initializing": "Calibrage de la caméra virtuelle..."
+        },
+        "pdfToDocx": {
+            "title": "Fichier vers Word",
+            "description": "Convertissez votre PDF en un document Word éditable.",
+            "titleHighlight": "Ressusciteur de Documents",
+            "dropTitle": "Déposez votre PDF ici pour l'éditer.",
+            "dropDesc": "Nous reconstruirons le texte pour que vous puissiez taper et corriger des choses.",
+            "readingPdf": "Analyse de la structure du document...",
+            "extractingText": "Récolte des données textuelles...",
+            "processingPage": "Reconstruction de la Page",
+            "buildingWord": "Synthèse de la structure Word...",
+            "errorDesc": "Échec de la synthèse. Veuillez vous assurer que le fichier n'est pas crypté.",
+            "processing": "Traitement des couches de texte...",
+            "downloadBtn": "Enregistrer le Document Word",
+            "startOver": "Recommencer",
+            "outputFormat": "Format de Sortie",
+            "howThisWorks": "Comment ça marche",
+            "howThisWorksDesc": "Le texte de votre PDF est extrait directement dans le navigateur et enregistré en fichier Word. Rien n'est uploadé.",
+            "ready": "Prêt pour le Téléchargement",
+            "converting": "Conversion..."
+        },
+        "password": {
+            "title": "Générateur de Codes Sécurisés",
+            "description": "Générez des mots de passe de qualité industrielle que vous seul pouvez connaître.",
+            "titleHighlight": "Moteur d'Entropie",
+            "weak": "Vulnérable",
+            "medium": "Standard",
+            "strong": "Élite",
+            "alien": "Industriel",
+            "length": "Longueur de Bits / Caractères",
+            "uppercase": "Inclure Majuscules",
+            "lowercase": "Inclure Minuscules",
+            "numbers": "Incluir Numéros",
+            "symbols": "Inclure Symboles Spéciaux",
+            "copied": "Copié dans le presse-papiers !",
+            "copy": "Copier le Code Sécurisé",
+            "generateNew": "Régénérer"
+        },
+        "mediaConverter": {
+            "title": "Fixateur de Vidéo & Musique",
+            "description": "Modifiez vos fichiers vidéo ou musicaux pour qu'ils fonctionnent parfaitement sur n'importe quel appareil.",
+            "titleHighlight": "Transcodeur de Format",
+            "dropTitle": "Déposez votre fichier multimédia ici.",
+            "dropActive": "Déposez ici",
+            "dropDesc": "Nous corrigerons le format pour qu'il fonctionne partout.",
+            "processing": "Recodage des données de flux binaire...",
+            "downloadBtn": "Convertir & Télécharger",
+            "resetBtn": "Réinitialiser le Nœud",
+            "operationMode": "Mode d'Opération",
+            "rangeSelection": "Sélection de Plage",
+            "engaging": "Engagement du Transcodeur",
+            "hardwareNode": "Nœud Matériel",
+            "secureOut": "Sortie Sécurisée",
+            "status": {
+                "active": "FFmpeg.wasm Actif",
+                "label": "État WASM",
+                "ready": "Prêt",
+                "loading": "Chargement..."
+            },
+            "howItWorks": {
+                "step1": {
+                    "title": "Choisissez votre Fichier",
+                    "desc": "Déposez n'importe quel fichier vidéo ou audio. Aucun compte requis ; reste sur votre appareil à tout moment."
+                },
+                "step2": {
+                    "title": "Choisissez quoi faire",
+                    "desc": "Sélectionnez le format de sortie (MP3, WAV) ou découpez la vidéo à la partie souhaitée."
+                },
+                "step3": {
+                    "title": "Téléchargez le Résultat",
+                    "desc": "Cliquez sur Convertir et votre fichier est prêt en quelques secondes. Tout se passe dans votre navigateur."
+                }
+            },
+            "targetFormat": "Sélectionner le Type de Sortie"
+        },
+        "compress": {
+            "title": "Optimiseur d'Images",
+            "description": "Réduisez la taille du fichier tout en préservant la fidélité visuelle professionnelle.",
+            "titleHighlight": "Réducteur de Pixels",
+            "dropTitle": "Déposez votre image ici.",
+            "dropActive": "Déposez ici",
+            "dropDesc": "Nous optimiserons la taille sans sacrifier la qualité.",
+            "aggressive": "Compression Maximale",
+            "balanced": "Haute Fidélité",
+            "downloadSecurely": "Télécharger l'Image Compressée",
+            "processing": "Optimisation des clusters d'image...",
+            "initializing": "Chargement du moteur de compression...",
+            "targetSize": "Taille Cible",
+            "clear": "Effacer",
+            "resultLabel": "Résultat",
+            "saved": "Espace Économisé",
+            "finalSize": "Taille Finale",
+            "resultPlaceholder": "Déposez une image pour voir les résultats ici.",
+            "original": "Original",
+            "compressed": "Compressée",
+            "downloadBtn": "Télécharger",
+            "howItWorks": {
+                "step1": {
+                    "title": "Déposez votre Image",
+                    "desc": "Sélectionnez la photo à optimiser. Elle reste sur votre appareil."
+                },
+                "step2": {
+                    "title": "Régler la Taille",
+                    "desc": "Ajustez le curseur de qualité pour trouver l'équilibre parfait entre taille et clarté."
+                },
+                "step3": {
+                    "title": "Télécharger le Résultat",
+                    "desc": "Obtenez votre image optimisée instantanément. Zéro perte de qualité en mode équilibré."
+                }
+            }
+        },
+        "pdfMerge": {
+            "title": "Combiner des PDFs",
+            "description": "Fusionnez plusieurs fichiers PDF en un seul document sécurisé dans votre navigateur.",
+            "titleHighlight": "Fusion de Documents",
+            "dropTitle": "Déposez vos fichiers PDF ici.",
+            "dropDesc": "Nous les combinerons en un seul fichier localement.",
+            "processing": "Synthèse du catalogue de documents...",
+            "mergeButton": "Fusionner les Fichiers PDF"
+        },
+        "sign": {
+            "title": "Signer un Papier",
+            "description": "Dessinez votre signature et placez-la sur n'importe quelle page instantanément.",
+            "titleHighlight": "Signature Numérique",
+            "dropTitle": "Déposez votre PDF ici.",
+            "drawSignature": "Dessinez votre Signature",
+            "clear": "Effacer",
+            "addSignature": "Ajouter Signature",
+            "processing": "Incrustation de la signature...",
+            "downloadBtn": "Télécharger le PDF Signé",
+            "signHere": "Signez ici avec la souris ou le doigt",
+            "dropDesc": "Le PDF sélectionné sera affiché pour signature.",
+            "saveBtn": "Enregistrer le Papier Signé",
+            "ready": "Signature Prête. Faites-la glisser sur l'aperçu."
+        },
+        "stamp": {
+            "title": "Tamponner une Photo",
+            "description": "Ajoutez votre nom ou logo sur vos photos.",
+            "titleHighlight": "Filigrane Photo",
+            "dropTitle": "Déposez votre image ici.",
+            "watermarkText": "Texte du Filigrane",
+            "watermarkPlaceholder": "TAPEZ VOTRE FILIGRANE...",
+            "color": "Couleur",
+            "opacity": "Opacité",
+            "size": "Taille",
+            "processingImage": "Traitement de l'Image...",
+            "startFresh": "Recommencer à Zéro",
+            "dropToStamp": "Déposer pour Tamponner",
+            "position": "Position",
+            "downloadBtn": "Télécharger l'Image Tamponnée",
+            "dropDesc": "Nous vous aiderons à protéger vos actifs visuels.",
+            "saveBtn": "Enregistrer la Photo Tamponnée"
+        },
+        "repair": {
+            "title": "Réparer un Fichier Cassé",
+            "description": "Réparez un document qui est cassé ou qui affiche une erreur.",
+            "titleHighlight": "Réparation de Documents",
+            "dropTitle": "Déposez votre PDF cassé ici.",
+            "processing": "Reconstruction des en-têtes de fichier...",
+            "reconstructing": "Reconstruction en cours...",
+            "infectedAsset": "Actif Infecté",
+            "formatPdf": "Format : Document PDF",
+            "downloadBtn": "Télécharger le PDF Réparé",
+            "dropDesc": "Nous tenterons de restaurer l'intégrité structurelle.",
+            "saveBtn": "Enregistrer le Fichier Réparé"
+        },
+        "numberPages": {
+            "title": "Numéroter chaque Page",
+            "description": "Ajoutez des petits numéros au bas de chaque page.",
+            "titleHighlight": "Indexeur de Pages",
+            "dropTitle": "Déposez votre PDF ici.",
+            "position": "Position du Numéro",
+            "bottomCenter": "Bas Centre",
+            "bottomLeft": "Bas Gauche",
+            "bottomRight": "Bas Droite",
+            "applyingNumbers": "Application des Numéros...",
+            "discardDocument": "Abandonner le Document",
+            "downloadBtn": "Télécharger le PDF Numéroté",
+            "dropDesc": "Nous vous aiderons à organiser votre document.",
+            "saveBtn": "Enregistrer le Fichier Numéroté"
+        },
+        "organizePages": {
+            "title": "Organiser les Pages",
+            "description": "Déplacez des pages ou supprimez celles inutiles.",
+            "titleHighlight": "Gestionnaire de Pages",
+            "dropTitle": "Déposez votre PDF ici.",
+            "processing": "Rendu des pages du document...",
+            "scanning": "Scan des Couches du Document...",
+            "pagesLoaded": "{count} Pages Chargées. Glissez pour réordonner.",
+            "synthesizing": "Synthèse en cours...",
+            "discardBtn": "Abandonner le Document",
+            "downloadBtn": "Télécharger le PDF Organisé",
+            "pageLabel": "Page",
+            "delete": "Supprimer",
+            "dropActive": "Déposer pour Organiser",
+            "dropDesc": "Faites glisser pour réordonner, cliquez pour supprimer.",
+            "saveBtn": "Enregistrer le Nouveau Fichier"
+        },
+        "pdfSplit": {
+            "title": "Extraire des Pages PDF",
+            "description": "Extrayez en toute sécurité des pages spécifiques ou des plages de vos documents PDF.",
+            "titleHighlight": "Extracteur de Pages",
+            "dropTitle": "Déposez votre fichier PDF ici.",
+            "dropDesc": "Nous vous aiderons à extraire les pages dont vous avez besoin.",
+            "processing": "Extraction des buffers de page...",
+            "splitBtn": "Extraire les Pages Sélectionnées"
+        },
+        "heicToJpg": {
+            "title": "Fixateur d'iPhone",
+            "description": "Convertissez les fichiers HEIC de l'iPhone en photos JPG haute compatibilité.",
+            "titleHighlight": "Transcodeur HEIC",
+            "dropTitle": "Déposez votre photo iPhone ici.",
+            "dropDesc": "Nous la transformerons en une photo standard fonctionnant partout.",
+            "processing": "Conversion en catalogue JPG...",
+            "downloadBtn": "Enregistrer la Photo Standard"
+        },
+        "cleanExif": {
+            "title": "Nettoyeur de Métadonnées",
+            "description": "Effacez la 'carte cachée' et les données de suivi privées de vos photos.",
+            "titleHighlight": "Assainisseur de Confidentialité",
+            "dropTitle": "Déposez votre photo ici pour l'assainir.",
+            "dropDesc": "Nous reconstruirons l'image sur un canevas propre pour effacer toutes les métadonnées.",
+            "cleaning": "Assainissement des couches d'image...",
+            "scrubbing": "Nettoyage des métadonnées EXIF...",
+            "cleanBtn": "Démarrer l'Assainissement",
+            "downloadBtn": "Enregistrer l'Actif Assaini",
+            "downloadClean": "Enregistrer l'Actif Assaini",
+            "howItWorks": {
+                "step1": {
+                    "title": "Sélectionner Image",
                     "desc": "Choisissez la photo que vous souhaitez assainir."
                 },
                 "step2": {
-                    "title": "Nettoyage des métadonnées",
-                    "desc": "Notre système reconstruit l'image sur un canevas propre pour effacer toutes les données EXIF."
+                    "title": "Nettoyage des Métadonnées",
+                    "desc": "Notre moteur reconstruit l'image sur un canevas propre pour effacer toutes les données EXIF."
                 },
                 "step3": {
-                    "title": "Exportation sécurisée",
+                    "title": "Exportation Sécurisée",
                     "desc": "Téléchargez votre photo entièrement anonyme en toute sécurité."
                 }
             }
+        },
+        "encrypt": {
+            "title": "Cryptage de Notes Sécurisées",
+            "description": "Verrouillez vos écrits privés dans une chambre forte cryptographique que vous seul pouvez ouvrir.",
+            "titleHighlight": "Créateur de Message Secret",
+            "inputText": "Nœud de Texte Brut",
+            "inputPlaceholder": "Tapez votre message secret ici...",
+            "passwordLabel": "Clé de Cryptage",
+            "passwordPlaceholder": "Tapez une clé que vous seul connaissez...",
+            "encryptBtn": "Verrouiller le Message",
+            "decryptBtn": "Déverrouiller le Message",
+            "resultLabel": "Charge Cryptée",
+            "copyBtn": "Copier la Charge",
+            "copied": "Charge Copiée !"
+        },
+        "blur": {
+            "title": "Floutage de Confidentialité",
+            "description": "Cachez des visages ou des objets sensibles sur vos photos avec un pinceau magique.",
+            "titleHighlight": "Floutage Esthétique",
+            "dropTitle": "Déposez votre photo ici.",
+            "dropDesc": "Nous vous aiderons à masquer des visages ou des détails privés avec un pinceau magique.",
+            "processing": "Application du floutage...",
+            "downloadBtn": "Enregistrer l'Image Floutée",
+            "clearAll": "Effacer le Canevas"
         }
     }
 }
