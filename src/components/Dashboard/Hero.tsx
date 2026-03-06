@@ -4,17 +4,16 @@ import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, ArrowRight } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export const Hero = memo(() => {
+    const t = useTranslations('HomePage');
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center border-b border-white/[0.06] overflow-hidden w-full">
-            {/* Fine grid pattern */}
+        <section className="relative mt-14 sm:mt-16 min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-start border-b border-white/[0.06] overflow-hidden w-full">
             <div className="absolute inset-0 bg-grid-canvas opacity-100 pointer-events-none" />
-
-            {/* Subtle glow center */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/3 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="relative w-full px-6 lg:px-12 py-32 flex flex-col items-center text-center gap-12">
+            <div className="relative w-full px-5 sm:px-6 lg:px-12 pt-0 pb-6 flex flex-col items-center text-center gap-4 sm:gap-5">
 
                 {/* Badge */}
                 <motion.div
@@ -23,20 +22,20 @@ export const Hero = memo(() => {
                     transition={{ duration: 0.5 }}
                     className="inline-flex items-center gap-2.5 px-4 py-2 border border-white/10 rounded-full text-[10px] font-semibold uppercase tracking-[0.25em] text-zinc-400"
                 >
-                    <Lock className="w-3 h-3" />
-                    100% Browser-Native · Zero Uploads · Free Forever
+                    <Lock className="w-3 h-3 shrink-0" />
+                    {t('heroBadge')}
                 </motion.div>
 
-                {/* Main headline */}
+                {/* Headline */}
                 <motion.h1
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-6xl sm:text-7xl md:text-8xl lg:text-[112px] font-black leading-[0.88] tracking-tighter uppercase"
+                    className="text-5xl sm:text-6xl md:text-7xl lg:text-[96px] font-black leading-[0.88] tracking-tighter uppercase"
                 >
-                    <span className="text-white block">Your Files.</span>
-                    <span className="text-white/30 block">Your Rules.</span>
-                    <span className="text-white block">Your Device.</span>
+                    <span className="text-white block">{t('titlePart1')}</span>
+                    <span className="text-white/30 block">{t('titlePart2')}</span>
+                    <span className="text-white block">{t('titlePart3')}</span>
                 </motion.h1>
 
                 {/* Subline */}
@@ -46,8 +45,7 @@ export const Hero = memo(() => {
                     transition={{ duration: 0.5, delay: 0.25 }}
                     className="max-w-xl text-zinc-400 text-base md:text-lg leading-relaxed font-normal"
                 >
-                    PrivaFlow processes everything inside your own browser tab.
-                    No servers. No uploads. No surveillance.
+                    {t('subtitle')}
                 </motion.p>
 
                 {/* CTA row */}
@@ -55,20 +53,20 @@ export const Hero = memo(() => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="flex flex-col sm:flex-row items-center gap-4"
+                    className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto"
                 >
                     <Link
                         href="#tools"
-                        className="group h-14 px-10 bg-white hover:bg-zinc-100 text-black font-bold text-sm uppercase tracking-widest rounded-none flex items-center gap-3 transition-all active:scale-95"
+                        className="group h-12 sm:h-14 px-8 sm:px-10 bg-white hover:bg-zinc-100 text-black font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95"
                     >
-                        Explore All Tools
+                        {t('heroExplore')}
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                     <Link
                         href="#magic"
-                        className="h-14 px-10 border border-white/10 text-white/50 hover:text-white hover:border-white/30 font-bold text-sm uppercase tracking-widest rounded-none flex items-center gap-3 transition-all"
+                        className="h-12 sm:h-14 px-8 sm:px-10 border border-white/10 text-white/50 hover:text-white hover:border-white/30 font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all"
                     >
-                        See Visual Proof
+                        {t('heroProof')}
                     </Link>
                 </motion.div>
 
@@ -77,13 +75,13 @@ export const Hero = memo(() => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pt-8 border-t border-white/[0.06] w-full max-w-3xl"
+                    className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pt-4 border-t border-white/[0.06] w-full max-w-3xl"
                 >
                     {[
-                        { n: "13", label: "Privacy Tools" },
-                        { n: "0 bytes", label: "Data Uploaded" },
-                        { n: "4", label: "Languages" },
-                        { n: "100%", label: "Client Side" },
+                        { n: "13", label: t('heroStatTools') },
+                        { n: "0 bytes", label: t('heroStatUploaded') },
+                        { n: "4", label: t('heroStatLanguages') },
+                        { n: "100%", label: t('heroStatClient') },
                     ].map(s => (
                         <div key={s.label} className="flex flex-col items-center gap-1">
                             <span className="text-xl font-black text-white tracking-tight">{s.n}</span>

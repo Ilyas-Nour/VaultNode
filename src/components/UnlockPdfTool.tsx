@@ -144,46 +144,43 @@ const UnlockPdfTool = memo(() => {
             category="docs"
             toolId="unlock"
             settingsContent={
-                <div className="space-y-6">
-                    {/* 🔘 SECURITY NODE HUB */}
-                    <div className="space-y-4">
-                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">Security Node</span>
-                        <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between">
-                            <span className="text-sm font-bold text-zinc-400 uppercase tracking-tight italic">AES Decryption</span>
-                            <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <div className="space-y-4">
+
+                    {/* Encryption method indicator */}
+                    <div className="flex items-center justify-between p-3 border border-zinc-800">
+                        <span className="text-xs font-bold text-zinc-400">Encryption</span>
+                        <div className="flex items-center gap-2">
+                            <ShieldCheck className="w-3.5 h-3.5 text-white" />
+                            <span className="text-xs font-bold text-white">Password Protected</span>
                         </div>
                     </div>
 
-                    {/* 🕹️ ACTIONS CONTROL HUB */}
-                    <div className="space-y-3 pt-2">
+                    {/* Actions */}
+                    <div className="space-y-2">
                         <Button
                             onClick={unlockPdf}
                             disabled={!password || isProcessing || !!(errorMsg && !errorMsg.includes("Incorrect"))}
-                            className="w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-xs uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
+                            className="w-full h-11 bg-white hover:bg-zinc-100 text-black font-bold text-xs uppercase tracking-widest transition-all active:scale-95"
                         >
-                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Unlock className="w-5 h-5 me-2" />}
-                            {isProcessing ? t('unlocking') : t('unlockBtn')}
+                            {isProcessing ? <Loader2 className="w-4 h-4 animate-spin me-2" /> : <Unlock className="w-4 h-4 me-2" />}
+                            {isProcessing ? 'Unlocking…' : 'Unlock PDF'}
                         </Button>
 
                         <Button
                             variant="outline"
                             onClick={resetTool}
-                            className="w-full h-14 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-xs font-black uppercase tracking-widest italic"
+                            className="w-full h-11 border-zinc-800 text-zinc-500 hover:text-white hover:bg-zinc-900 text-xs font-bold uppercase tracking-widest"
                         >
-                            <RefreshCw className="w-5 h-5 me-2" />
-                            Reset Keyhole
+                            <RefreshCw className="w-4 h-4 me-2" />
+                            Start Over
                         </Button>
                     </div>
 
-                    {/* 📊 SANDBOX REPORT */}
-                    <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-4">
-                        <div className="flex items-center gap-2 text-emerald-500">
-                            <Key className="w-4 h-4" />
-                            <span className="text-xs font-black uppercase tracking-widest">End-to-End Local</span>
-                        </div>
-                        <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            Decryption keys are held in volatile memory only.
-                            No keystrokes are logged or transmitted.
+                    {/* Privacy note */}
+                    <div className="flex items-start gap-3 p-3 border border-zinc-800/50">
+                        <Key className="w-3.5 h-3.5 text-zinc-500 mt-0.5 shrink-0" />
+                        <p className="text-[11px] text-zinc-500 leading-relaxed">
+                            Your password never leaves your device. Everything runs locally in your browser.
                         </p>
                     </div>
                 </div>

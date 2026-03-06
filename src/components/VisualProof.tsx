@@ -197,29 +197,30 @@ HeicProof.displayName = 'HeicProof';
 
 /** Unlock PDF */
 const UnlockProof = memo(({ type }: { type: 'before' | 'after' }) => (
-    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center gap-6 p-8">
+    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center gap-4 p-5 sm:p-8">
         <Label text={type === 'before' ? 'Password Protected' : 'Unlocked & Free'} type={type} />
         <div className={cn(
-            "relative w-48 h-64 border-2 flex flex-col items-start p-4 gap-2 mt-4",
+            "relative w-full max-w-[180px] sm:max-w-[192px] border-2 flex flex-col items-start p-3 gap-2 mt-2",
+            "min-h-[140px] sm:min-h-[200px]",
             type === 'before' ? "border-zinc-700 bg-zinc-900" : "border-emerald-500/30 bg-zinc-900"
         )}>
-            <div className="h-2 w-32 bg-zinc-800 rounded" />
-            <div className="h-2 w-full bg-zinc-800 rounded" />
-            <div className="h-2 w-full bg-zinc-800 rounded" />
+            <div className="h-1.5 w-3/4 bg-zinc-800 rounded" />
+            <div className="h-1.5 w-full bg-zinc-800 rounded" />
+            <div className="h-1.5 w-full bg-zinc-800 rounded" />
             {type === 'before' && (
-                <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-[2px] flex flex-col items-center justify-center gap-3">
-                    <div className="w-12 h-12 bg-zinc-800 border border-zinc-700 flex items-center justify-center">
-                        <Lock className="w-6 h-6 text-zinc-400" />
+                <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-[2px] flex flex-col items-center justify-center gap-2">
+                    <div className="w-10 h-10 bg-zinc-800 border border-zinc-700 flex items-center justify-center">
+                        <Lock className="w-5 h-5 text-zinc-400" />
                     </div>
                     <span className="text-zinc-500 text-[10px] uppercase tracking-widest">Password Required</span>
                 </div>
             )}
             {type === 'after' && (
                 <>
-                    <div className="h-2 w-full bg-zinc-800 rounded" />
-                    <div className="h-2 w-3/4 bg-zinc-800 rounded" />
-                    <div className="h-20 w-full bg-zinc-800/40 border border-zinc-800 rounded mt-2" />
-                    <div className="mt-auto flex items-center gap-2 text-emerald-500">
+                    <div className="h-1.5 w-full bg-zinc-800 rounded" />
+                    <div className="h-1.5 w-3/4 bg-zinc-800 rounded" />
+                    <div className="h-12 sm:h-16 w-full bg-zinc-800/40 border border-zinc-800 rounded mt-1" />
+                    <div className="flex items-center gap-1.5 text-emerald-500 mt-1">
                         <Lock className="w-3 h-3" />
                         <span className="text-[9px] uppercase tracking-widest">Restrictions Removed</span>
                     </div>
@@ -485,7 +486,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             </h3>
 
             {/* Full-width split */}
-            <div className="w-full grid grid-cols-2 gap-2 overflow-hidden">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-hidden">
                 <div className="relative aspect-video bg-black overflow-hidden">
                     <div className="absolute top-4 left-4 text-[9px] font-black uppercase tracking-widest text-white/30 z-10">before</div>
                     {render('before')}

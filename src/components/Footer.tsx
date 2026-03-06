@@ -2,61 +2,63 @@
 
 import React, { memo } from 'react';
 import { Link } from '@/i18n/routing';
-import { Heart } from 'lucide-react';
-
-const columns = [
-    {
-        heading: "Tools",
-        links: [
-            { label: "Redact PDF", href: '/tools/redact' },
-            { label: "Clean Metadata", href: '/tools/clean-exif' },
-            { label: "Media Converter", href: '/tools/media-converter' },
-            { label: "PDF to Word", href: '/tools/pdf-to-docx' },
-            { label: "Compress Image", href: '/tools/compress' },
-            { label: "Merge PDF", href: '/tools/pdf-merge' },
-        ]
-    },
-    {
-        heading: "Documents",
-        links: [
-            { label: "Blur Image", href: '/tools/blur' },
-            { label: "HEIC to JPG", href: '/tools/heic-to-jpg' },
-            { label: "SVG to PNG", href: '/tools/svg-to-png' },
-            { label: "Unlock PDF", href: '/tools/unlock-pdf' },
-            { label: "PDF to Image", href: '/tools/pdf-to-img' },
-            { label: "Split PDF", href: '/tools/pdf-split' },
-        ]
-    },
-    {
-        heading: "Privacy",
-        links: [
-            { label: "Zero Upload Policy", href: '#philosophy' },
-            { label: "Local Protocol", href: '#philosophy' },
-            { label: "Encryption Standards", href: '#philosophy' },
-            { label: "Open Architecture", href: '#philosophy' },
-        ]
-    },
-    {
-        heading: "Info",
-        links: [
-            { label: "How It Works", href: '/#tools' },
-            { label: "Philosophy", href: '/#philosophy' },
-            { label: "All Tools", href: '/#magic' },
-            { label: "Contact Us", href: '/contact' },
-        ]
-    }
-];
+import { useTranslations } from 'next-intl';
 
 export const Footer = memo(() => {
+    const t = useTranslations('HomePage');
+
+    const columns = [
+        {
+            heading: t('footer.colTools'),
+            links: [
+                { label: t('footer.linkRedact'), href: '/tools/redact' },
+                { label: t('footer.linkCleanMeta'), href: '/tools/clean-exif' },
+                { label: t('footer.linkConverter'), href: '/tools/media-converter' },
+                { label: t('footer.linkPdfWord'), href: '/tools/pdf-to-docx' },
+                { label: t('footer.linkCompress'), href: '/tools/compress' },
+                { label: t('footer.linkMerge'), href: '/tools/pdf-merge' },
+            ]
+        },
+        {
+            heading: t('footer.colMedia'),
+            links: [
+                { label: t('footer.linkBlur'), href: '/tools/blur' },
+                { label: t('footer.linkHeic'), href: '/tools/heic-to-jpg' },
+                { label: t('footer.linkSvg'), href: '/tools/svg-to-png' },
+                { label: t('footer.linkUnlock'), href: '/tools/unlock-pdf' },
+                { label: t('footer.linkPdfImg'), href: '/tools/pdf-to-img' },
+                { label: t('footer.linkSplit'), href: '/tools/pdf-split' },
+            ]
+        },
+        {
+            heading: t('footer.colPrivacy'),
+            links: [
+                { label: t('footer.linkZeroUpload'), href: '#philosophy' },
+                { label: t('footer.linkLocalProtocol'), href: '#philosophy' },
+                { label: t('footer.linkEncryption'), href: '#philosophy' },
+                { label: t('footer.linkOpenArch'), href: '#philosophy' },
+            ]
+        },
+        {
+            heading: t('footer.colInfo'),
+            links: [
+                { label: t('footer.linkHowItWorks'), href: '/#tools' },
+                { label: t('footer.linkPhilosophy'), href: '/#philosophy' },
+                { label: t('footer.linkAllTools'), href: '/#magic' },
+                { label: t('footer.linkContact'), href: '/contact' },
+            ]
+        }
+    ];
+
     return (
         <footer className="border-t border-white/[0.06] bg-black w-full">
-            <div className="w-full px-6 lg:px-12 pt-20 pb-12">
+            <div className="w-full px-4 sm:px-6 lg:px-12 pt-12 sm:pt-16 lg:pt-20 pb-10 sm:pb-12">
 
                 {/* Big brand statement */}
-                <div className="mb-16 border-b border-white/[0.06] pb-16">
-                    <p className="text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9] text-white/10 max-w-3xl">
-                        Privacy Is Not an Option.
-                        <span className="text-white"> It's the Architecture.</span>
+                <div className="mb-10 sm:mb-16 border-b border-white/[0.06] pb-10 sm:pb-16">
+                    <p className="text-3xl sm:text-4xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9] text-white/10 max-w-3xl">
+                        {t('footer.brandStatement')}
+                        <span className="text-white">{t('footer.brandHighlight')}</span>
                     </p>
                 </div>
 
@@ -69,7 +71,7 @@ export const Footer = memo(() => {
                             </h4>
                             <ul className="space-y-2.5">
                                 {col.links.map(link => (
-                                    <li key={link.label}>
+                                    <li key={link.href + link.label}>
                                         <Link
                                             href={link.href}
                                             className="text-[13px] text-zinc-500 hover:text-white transition-colors"
@@ -90,7 +92,7 @@ export const Footer = memo(() => {
                         <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-700">v2.0</span>
                     </div>
                     <p className="text-[10px] font-semibold text-zinc-700 uppercase tracking-widest">
-                        © 2026 · Zero tracking · Zero uploads · Built for the open web
+                        {t('footer.copyright')}
                     </p>
                 </div>
             </div>

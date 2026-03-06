@@ -23,6 +23,7 @@ interface ToolContainerProps {
         description: string;
     }[];
     toolId?: string;
+    hideAds?: boolean;
 }
 
 export const ToolContainer = memo(({
@@ -33,20 +34,23 @@ export const ToolContainer = memo(({
     children,
     settingsContent,
     howItWorks,
-    toolId
+    toolId,
+    hideAds = false
 }: ToolContainerProps) => {
     return (
         <div className="w-full flex flex-col bg-black">
             <div className="w-full flex items-start">
 
                 {/* Left ad — small, sticky */}
-                <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
-                    <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
-                </aside>
+                {!hideAds && (
+                    <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
+                        <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
+                    </aside>
+                )}
 
                 {/* Main content */}
                 <main className="flex-1 min-w-0 flex flex-col">
-                    <div className="w-full px-6 lg:px-12 pt-10 pb-6 border-b border-white/[0.06]">
+                    <div className="w-full px-4 sm:px-6 lg:px-12 pt-8 pb-5 border-b border-white/[0.06]">
                         <Link
                             href="/"
                             className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-600 hover:text-white transition-colors mb-5"
@@ -62,7 +66,7 @@ export const ToolContainer = memo(({
                             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-600">{category}</span>
                         </div>
 
-                        <h1 className="text-2xl lg:text-4xl font-black uppercase tracking-tight text-white leading-tight">
+                        <h1 className="text-xl sm:text-2xl lg:text-4xl font-black uppercase tracking-tight text-white leading-tight">
                             {title}
                         </h1>
                         <p className="mt-2 text-sm text-zinc-500 leading-relaxed max-w-xl">
@@ -71,7 +75,7 @@ export const ToolContainer = memo(({
                     </div>
 
                     {/* ── TOP ACTION ROW: Dropzone left | Settings + How It Works right ── */}
-                    <div className="w-full px-6 lg:px-12 py-8 border-b border-white/[0.06]">
+                    <div className="w-full px-4 sm:px-6 lg:px-12 py-6 lg:py-8 border-b border-white/[0.06]">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
                             {/* LEFT: dropzone */}
@@ -115,7 +119,7 @@ export const ToolContainer = memo(({
                                 )}
 
                                 {/* Privacy specs */}
-                                <div className="pt-2 border-t border-white/[0.06] flex items-center gap-6">
+                                <div className="pt-2 border-t border-white/[0.06] flex flex-wrap items-center gap-4 sm:gap-6">
                                     {[
                                         { label: 'Network', value: 'Local-Only', icon: Zap },
                                         { label: 'Storage', value: 'In-RAM', icon: HardDrive },
@@ -131,9 +135,16 @@ export const ToolContainer = memo(({
                         </div>
                     </div>
 
+                    {/* Mobile ad — visible below xl where side ads are hidden */}
+                    {!hideAds && (
+                        <div className="xl:hidden w-full px-4 sm:px-6 py-4 border-b border-white/[0.06] flex justify-center">
+                            <AdUnit type="banner-slim" className="w-full max-w-[468px]" />
+                        </div>
+                    )}
+
                     {/* Visual Proof — full width below the fold */}
                     {toolId && (
-                        <div className="w-full px-6 lg:px-12 py-14 border-b border-white/[0.06]">
+                        <div className="w-full px-4 sm:px-6 lg:px-12 py-10 lg:py-14 border-b border-white/[0.06]">
                             <VisualProof toolId={toolId} mode="full" />
                         </div>
                     )}
@@ -141,9 +152,11 @@ export const ToolContainer = memo(({
                 </main>
 
                 {/* Right ad — small, sticky */}
-                <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
-                    <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
-                </aside>
+                {!hideAds && (
+                    <aside className="hidden xl:flex w-[160px] shrink-0 sticky top-20 self-start pt-12 flex-col items-center">
+                        <AdUnit type="skyscraper" className="w-[140px] h-[500px]" />
+                    </aside>
+                )}
 
             </div>
         </div>

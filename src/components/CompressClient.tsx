@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import AdUnit from "@/components/AdUnit";
 import { useTranslations } from "next-intl";
 
 const LoadingState = () => {
@@ -23,17 +22,5 @@ const ImageCompressor = dynamic(() => import("@/components/ImageCompressor"), {
 });
 
 export default function CompressClient() {
-    return (
-        <main className="min-h-screen bg-zinc-950 flex flex-col lg:flex-row p-4 sm:p-8 gap-8 items-start justify-center">
-            {/* High-Performance Compressor Tool */}
-            <section className="flex-1 w-full max-w-7xl">
-                <ImageCompressor />
-            </section>
-
-            {/* Strategic Sidebar Ad Slot */}
-            <aside className="hidden lg:block sticky top-8 shrink-0">
-                <AdUnit type="sidebar" />
-            </aside>
-        </main>
-    );
+    return <ImageCompressor />;
 }
