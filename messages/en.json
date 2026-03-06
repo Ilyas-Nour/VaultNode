@@ -896,6 +896,31 @@
             }
         }
     },
+    "SecurityProof": {
+        "ssl": "SSL SECURED CONNECTION",
+        "local": "100% LOCAL PROCESSING",
+        "noTracking": "ZERO TRACKING & NO COOKIES",
+        "openSource": "OPEN SOURCE & AUDITED",
+        "systemTag": "Security Protocol v.4.0",
+        "trustStatement": "WE DON'T ASK FOR YOUR TRUST; WE PROVE IT.",
+        "trustExplanation": "Since your files never leave your screen, we couldn't see them even if we wanted to.",
+        "viewReport": "VIEW FULL PRIVACY REPORT"
+    },
+    "PrivacyReport": {
+        "label": "Audit & Compliance",
+        "title": "NO-SERVER ARCHITECTURE",
+        "subtitle": "How PrivaFlow protects your data without ever seeing it.",
+        "steps": {
+            "step1Title": "100% Client-Side execution",
+            "step1Desc": "Every single computation — whether it's PDF redaction or video conversion — happens entirely within your browser using WASM (WebAssembly) and FFmpeg.wasm. No data is sent to a backend.",
+            "step2Title": "Zero Database Policy",
+            "step2Desc": "We do not have a database for your files. We do not have a bucket for your uploads. There is nowhere for your data to go except your own local storage.",
+            "step3Title": "Open Source Transparency",
+            "step3Desc": "Our entire source code is available on GitHub. Anyone can inspect how we handle data and verify that no telemetry or sneaky tracking scripts exist.",
+            "step4Title": "Memory-Only Lifecycle",
+            "step4Desc": "Files are processed in ephemeral browser memory. Once you refresh the page or close the tab, the processing environment is wiped clean."
+        }
+    },
     "ContactPage": {
         "label": "Contact",
         "title": "Let's Talk.",

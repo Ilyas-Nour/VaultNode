@@ -855,48 +855,73 @@
                     "desc": "Les pixels floutés sont fusionnés dans la nouvelle photo. Votre vie privée en fait partie."
                 }
             }
-        }
-    },
-    "ContactPage": {
-        "label": "Contact",
-        "title": "Parlons-en.",
-        "body1": "Nous avons conçu PrivaFlow pour vous. Vos retours, rapports de bugs et idées de fonctionnalités façonnent chaque mise à jour. Envoyez-nous un message et nous répondons généralement sous 24 heures.",
-        "response24h": "Réponse sous 24h",
-        "successTitle": "Message Envoyé",
-        "successDesc": "Nous avons bien reçu votre message et nous vous répondrons sous 24 heures. Merci.",
-        "sendAnother": "Envoyer un autre message",
-        "fieldName": "Nom Complet",
-        "fieldEmail": "Adresse Email",
-        "fieldTopic": "Sujet",
-        "fieldMessage": "Message",
-        "placeholderName": "Votre nom",
-        "placeholderEmail": "vous@exemple.com",
-        "placeholderMessage": "Dites-nous ce que vous avez en tête...",
-        "topics": {
-            "feedback": "Commentaires Généraux",
-            "bug": "Rapport de Bug",
-            "feature": "Demande de Fonctionnalité",
-            "partnership": "Partenariat / Presse",
-            "other": "Autre"
         },
-        "errorGeneral": "Une erreur est survenue. Veuillez réessayer ou nous contacter à hello@privaflow.com",
-        "sending": "Envoi...",
-        "sendBtn": "Envoyer le Message",
-        "sidebarTitle": "Infos de Contact",
-        "sidebarEmail": "E-mail",
-        "sidebarResponse": "Délai de Réponse",
-        "expectTitle": "À Quoi s'Attendre",
-        "expectItems": {
-            "item1": "Nous lisons chaque message",
-            "item2": "Les demandes de fonctions influencent notre feuille de route",
-            "item3": "Les rapports de bugs sont traités en priorité",
-            "item4": "Jamais de spam."
+        "SecurityProof": {
+            "ssl": "CONNEXION SSL SÉCURISÉE",
+            "local": "TRAITEMENT 100% LOCAL",
+            "noTracking": "ZÉRO TRAÇAGE & SANS COOKIES",
+            "openSource": "OPEN SOURCE & AUDITÉ",
+            "systemTag": "Protocole de Sécurité v.4.0",
+            "trustStatement": "NOUS NE DEMANDONS PAS VOTRE CONFIANCE ; NOUS LA PROUVONS.",
+            "trustExplanation": "Comme vos fichiers ne quittent jamais votre écran, nous ne pourrions pas les voir même si nous le voulions.",
+            "viewReport": "VOIR LE RAPPORT DE CONFIDENTIALITÉ"
         },
-        "privacyNote": "PrivaFlow est conçu selon des principes de confidentialité. Vos coordonnées sont uniquement utilisées pour répondre et ne sont jamais partagées ou vendues.",
-        "validation": {
-            "name": "Le nom est requis",
-            "email": "E-mail valide requis",
-            "message": "Le message doit faire au moins 10 caractères"
+        "PrivacyReport": {
+            "label": "Audit & Conformité",
+            "title": "ARCHITECTURE SANS SERVEUR",
+            "subtitle": "Comment PrivaFlow protège vos données sans jamais les voir.",
+            "steps": {
+                "step1Title": "Exécution 100% côté client",
+                "step1Desc": "Chaque calcul — qu'il s'agisse de caviardage PDF ou de conversion vidéo — se produit entièrement dans votre navigateur via WASM et FFmpeg.wasm. Aucune donnée n'est envoyée au backend.",
+                "step2Title": "Politique Zéro Base de Données",
+                "step2Desc": "Nous n'avons pas de base de données pour vos fichiers. Pas de stockage pour vos uploads. Vos données ne vont nulle part ailleurs que sur votre stockage local.",
+                "step3Title": "Transparence Open Source",
+                "step3Desc": "Tout notre code source est sur GitHub. N'importe qui peut inspecter la gestion des données et vérifier l'absence de scripts de traçage ou de télémétrie.",
+                "step4Title": "Cycle de vie en mémoire uniquement",
+                "step4Desc": "Les fichiers sont traités dans la mémoire éphémère du navigateur. Une fois la page actualisée ou l'onglet fermé, l'environnement est effacé."
+            }
+        },
+        "ContactPage": {
+            "label": "Contact",
+            "title": "Parlons-en.",
+            "body1": "Nous avons conçu PrivaFlow pour vous. Vos retours, rapports de bugs et idées de fonctionnalités façonnent chaque mise à jour. Envoyez-nous un message et nous répondons généralement sous 24 heures.",
+            "response24h": "Réponse sous 24h",
+            "successTitle": "Message Envoyé",
+            "successDesc": "Nous avons bien reçu votre message et nous vous répondrons sous 24 heures. Merci.",
+            "sendAnother": "Envoyer un autre message",
+            "fieldName": "Nom Complet",
+            "fieldEmail": "Adresse Email",
+            "fieldTopic": "Sujet",
+            "fieldMessage": "Message",
+            "placeholderName": "Votre nom",
+            "placeholderEmail": "vous@exemple.com",
+            "placeholderMessage": "Dites-nous ce que vous avez en tête...",
+            "topics": {
+                "feedback": "Commentaires Généraux",
+                "bug": "Rapport de Bug",
+                "feature": "Demande de Fonctionnalité",
+                "partnership": "Partenariat / Presse",
+                "other": "Autre"
+            },
+            "errorGeneral": "Une erreur est survenue. Veuillez réessayer ou nous contacter à hello@privaflow.com",
+            "sending": "Envoi...",
+            "sendBtn": "Envoyer le Message",
+            "sidebarTitle": "Infos de Contact",
+            "sidebarEmail": "E-mail",
+            "sidebarResponse": "Délai de Réponse",
+            "expectTitle": "À Quoi s'Attendre",
+            "expectItems": {
+                "item1": "Nous lisons chaque message",
+                "item2": "Les demandes de fonctions influencent notre feuille de route",
+                "item3": "Les rapports de bugs sont traités en priorité",
+                "item4": "Jamais de spam."
+            },
+            "privacyNote": "PrivaFlow est conçu selon des principes de confidentialité. Vos coordonnées sont uniquement utilisées pour répondre et ne sont jamais partagées ou vendues.",
+            "validation": {
+                "name": "Le nom est requis",
+                "email": "E-mail valide requis",
+                "message": "Le message doit faire au moins 10 caractères"
+            }
         }
     }
 }

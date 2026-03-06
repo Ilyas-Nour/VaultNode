@@ -859,48 +859,73 @@
                     "desc": "Los píxeles difuminados se fusionan en la nueva foto. Tu privacidad ya es parte de la imagen."
                 }
             }
-        }
-    },
-    "ContactPage": {
-        "label": "Contacto",
-        "title": "Hablemos.",
-        "body1": "Construimos PrivaFlow para ti. Tus comentarios, informes de errores e ideas de funciones dan forma a cada actualización. Envíanos un mensaje y solemos responder en 24 horas.",
-        "response24h": "Respuesta en 24h",
-        "successTitle": "Mensaje Enviado",
-        "successDesc": "Hemos recibido tu mensaje y te responderemos en 24 horas. Gracias.",
-        "sendAnother": "Enviar otro mensaje",
-        "fieldName": "Nombre Completo",
-        "fieldEmail": "Correo Electrónico",
-        "fieldTopic": "Tema",
-        "fieldMessage": "Mensaje",
-        "placeholderName": "Tu nombre",
-        "placeholderEmail": "tu@ejemplo.com",
-        "placeholderMessage": "Cuéntanos qué tienes en mente...",
-        "topics": {
-            "feedback": "Comentarios Generales",
-            "bug": "Informe de Error",
-            "feature": "Solicitud de Función",
-            "partnership": "Asociación / Prensa",
-            "other": "Otro"
         },
-        "errorGeneral": "Algo salió mal. Inténtalo de nuevo o escríbenos a hello@privaflow.com",
-        "sending": "Enviando...",
-        "sendBtn": "Enviar Mensaje",
-        "sidebarTitle": "Información de Contacto",
-        "sidebarEmail": "Correo",
-        "sidebarResponse": "Tiempo de Respuesta",
-        "expectTitle": "Qué Esperar",
-        "expectItems": {
-            "item1": "Leemos cada mensaje",
-            "item2": "Las solicitudes de funciones influyen en nuestra hoja de ruta",
-            "item3": "Los informes de errores se priorizan de inmediato",
-            "item4": "Sin spam, nunca."
+        "SecurityProof": {
+            "ssl": "CONEXIÓN SEGURA SSL",
+            "local": "PROCESAMIENTO 100% LOCAL",
+            "noTracking": "CERO SEGUIMIENTO Y SIN COOKIES",
+            "openSource": "CÓDIGO ABIERTO Y AUDITADO",
+            "systemTag": "Protocolo de Seguridad v.4.0",
+            "trustStatement": "NO PEDIMOS TU CONFIANZA; LA DEMOSTRAMOS.",
+            "trustExplanation": "Como tus archivos nunca salen de tu pantalla, no podríamos verlos aunque quisiéramos.",
+            "viewReport": "VER INFORME DE PRIVACIDAD COMPLETO"
         },
-        "privacyNote": "PrivaFlow está construido con principios de privacidad primero. Tu información de contacto solo se usa para responder a tu mensaje y nunca se comparte ni se vende.",
-        "validation": {
-            "name": "El nombre es obligatorio",
-            "email": "Se requiere un correo válido",
-            "message": "El mensaje debe tener al menos 10 caracteres"
+        "PrivacyReport": {
+            "label": "Auditoría y Cumplimiento",
+            "title": "ARQUITECTURA SIN SERVIDOR",
+            "subtitle": "Cómo PrivaFlow protege tus datos sin verlos nunca.",
+            "steps": {
+                "step1Title": "Ejecución 100% en el cliente",
+                "step1Desc": "Cada cálculo, ya sea redacción de PDF o conversión de video, ocurre completamente en tu navegador usando WASM y FFmpeg.wasm. No se envían datos al servidor.",
+                "step2Title": "Política de Cero Bases de Datos",
+                "step2Desc": "No tenemos una base de datos para tus archivos. No tenemos almacenamiento para tus cargas. Tus datos no tienen a dónde ir excepto a tu propio almacenamiento local.",
+                "step3Title": "Transparencia de Código Abierto",
+                "step3Desc": "Todo nuestro código fuente está disponible en GitHub. Cualquiera puede inspeccionar cómo manejamos los datos y verificar que no existen scripts de rastreo.",
+                "step4Title": "Ciclo de Vida Solo en Memoria",
+                "step4Desc": "Los archivos se procesan en la memoria efímera del navegador. Una vez que actualizas la página o cierras la pestaña, el entorno se borra por completo."
+            }
+        },
+        "ContactPage": {
+            "label": "Contacto",
+            "title": "Hablemos.",
+            "body1": "Construimos PrivaFlow para ti. Tus comentarios, informes de errores e ideas de funciones dan forma a cada actualización. Envíanos un mensaje y solemos responder en 24 horas.",
+            "response24h": "Respuesta en 24h",
+            "successTitle": "Mensaje Enviado",
+            "successDesc": "Hemos recibido tu mensaje y te responderemos en 24 horas. Gracias.",
+            "sendAnother": "Enviar otro mensaje",
+            "fieldName": "Nombre Completo",
+            "fieldEmail": "Correo Electrónico",
+            "fieldTopic": "Tema",
+            "fieldMessage": "Mensaje",
+            "placeholderName": "Tu nombre",
+            "placeholderEmail": "tu@ejemplo.com",
+            "placeholderMessage": "Cuéntanos qué tienes en mente...",
+            "topics": {
+                "feedback": "Comentarios Generales",
+                "bug": "Informe de Error",
+                "feature": "Solicitud de Función",
+                "partnership": "Asociación / Prensa",
+                "other": "Otro"
+            },
+            "errorGeneral": "Algo salió mal. Inténtalo de nuevo o escríbenos a hello@privaflow.com",
+            "sending": "Enviando...",
+            "sendBtn": "Enviar Mensaje",
+            "sidebarTitle": "Información de Contacto",
+            "sidebarEmail": "Correo",
+            "sidebarResponse": "Tiempo de Respuesta",
+            "expectTitle": "Qué Esperar",
+            "expectItems": {
+                "item1": "Leemos cada mensaje",
+                "item2": "Las solicitudes de funciones influyen en nuestra hoja de ruta",
+                "item3": "Los informes de errores se priorizan de inmediato",
+                "item4": "Sin spam, nunca."
+            },
+            "privacyNote": "PrivaFlow está construido con principios de privacidad primero. Tu información de contacto solo se usa para responder a tu mensaje y nunca se comparte ni se vende.",
+            "validation": {
+                "name": "El nombre es obligatorio",
+                "email": "Se requiere un correo válido",
+                "message": "El mensaje debe tener al menos 10 caracteres"
+            }
         }
     }
 }

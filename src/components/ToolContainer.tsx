@@ -18,6 +18,7 @@ import { VisualProof } from '@/components/VisualProof';
 import AdUnit from '@/components/AdUnit';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
+import { SecurityProof } from '@/components/SecurityProof';
 
 interface ToolContainerProps {
     title: string;
@@ -139,11 +140,9 @@ export const ToolContainer = memo(({
                                     </div>
                                 )}
 
-                                {/* Single-line privacy note — replaces the old busy spec grid */}
-                                <div className="pt-6 border-t border-white/[0.06]">
-                                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-700">
-                                        100% Local · Zero Upload · Private by Design
-                                    </p>
+                                {/* Compact Security Proof */}
+                                <div className="pt-8 border-t border-white/[0.06]">
+                                    <SecurityProof compact />
                                 </div>
                             </div>
                         </div>

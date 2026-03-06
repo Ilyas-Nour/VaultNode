@@ -5,6 +5,7 @@ import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { ArrowUpRight } from 'lucide-react';
 import { Logo } from '@/components/Logo';
+import { SecurityProof } from '@/components/SecurityProof';
 
 export const Footer = memo(() => {
     const t = useTranslations('HomePage');
@@ -38,6 +39,10 @@ export const Footer = memo(() => {
 
     return (
         <footer className="border-t border-white/[0.06] bg-black w-full">
+
+            <div className="w-full border-b border-white/[0.06]">
+                <SecurityProof className="py-20 lg:py-24" />
+            </div>
 
             <div className="w-full px-5 lg:px-10 py-8 flex items-center border-b border-white/[0.06]">
                 <Logo size="md" showTagline />
