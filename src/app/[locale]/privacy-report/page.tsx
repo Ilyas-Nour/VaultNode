@@ -47,9 +47,9 @@ export default function PrivacyReportPage() {
                 </div>
 
                 {/* Steps / Pillars */}
-                <div className="space-y-px bg-white/[0.06] border border-white/[0.06]">
+                <div className="space-y-px bg-emerald-500/5 border border-emerald-500/10">
                     {steps.map((step, i) => (
-                        <div key={i} className="bg-black p-8 lg:p-12 group hover:bg-zinc-950/50 transition-colors">
+                        <div key={i} className="bg-black p-8 lg:p-12 group hover:bg-zinc-950/50 transition-colors border-b border-emerald-500/5 last:border-0">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                                 {/* Icon & Index */}
                                 <div className="lg:col-span-1 flex lg:flex-col items-center justify-between lg:justify-start gap-4 h-full">
