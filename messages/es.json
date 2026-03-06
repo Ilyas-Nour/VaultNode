@@ -882,7 +882,7 @@
                 "step3Title": "Transparencia de Código Abierto",
                 "step3Desc": "Todo nuestro código fuente está disponible en GitHub. Cualquiera puede inspeccionar cómo manejamos los datos y verificar que no existen scripts de rastreo.",
                 "step4Title": "Ciclo de Vida Solo en Memoria",
-                "step4Desc": "Los archivos se procesan en la memoria efímera del navegador. Una vez que actualizas la página o cierras la pestaña, el entorno se borra por completo."
+                "step4Desc": "Los archivos se procesent en la memoria efímera del navegador. Una vez que actualizas la página o cierras la pestaña, el entorno se borra por completó."
             }
         },
         "ContactPage": {
