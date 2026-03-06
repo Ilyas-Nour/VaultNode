@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useTranslations } from 'next-intl';
 
 // ─── PrivaFlow Logo — Square Lock Mark ──────────────────────────────────────
 //
@@ -77,6 +78,7 @@ interface LogoProps {
 }
 
 export const Logo = memo(({ size = 'md', invert = false, showTagline = false, className = '' }: LogoProps) => {
+    const t = useTranslations('HomePage');
     const map = { xs: 20, sm: 24, md: 32, lg: 44 };
     const markSize = map[size];
     const fg = invert ? '#000000' : '#ffffff';
@@ -111,7 +113,7 @@ export const Logo = memo(({ size = 'md', invert = false, showTagline = false, cl
                             fontFamily: 'var(--font-outfit, system-ui, sans-serif)',
                         }}
                     >
-                        Private · Local · Free
+                        {t('logoTagline')}
                     </span>
                 )}
             </div>

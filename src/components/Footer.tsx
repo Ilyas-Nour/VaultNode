@@ -98,7 +98,7 @@ export const Footer = memo(() => {
                     {t('footer.copyright')}
                 </p>
                 <div className="flex items-center gap-6">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-800">100% Open · No Telemetry · No Analytics</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-800">{t('footer.footerCredits')}</span>
                 </div>
             </div>
         </footer>

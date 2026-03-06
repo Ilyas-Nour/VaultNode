@@ -3,10 +3,12 @@
 import React, { useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MessageSquare, Send, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
 
 export default function ContactPage() {
+    const t = useTranslations('ContactPage');
     const [status, setStatus] = useState<FormStatus>('idle');
     const [form, setForm] = useState({
         name: '',
@@ -18,9 +20,9 @@ export default function ContactPage() {
 
     const validate = () => {
         const e: Partial<typeof form> = {};
-        if (!form.name.trim()) e.name = 'Name is required';
-        if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Valid email required';
-        if (!form.message.trim() || form.message.length < 10) e.message = 'Message must be at least 10 characters';
+        if (!form.name.trim()) e.name = t('validation.name');
+        if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = t('validation.email');
+        if (!form.message.trim() || form.message.length < 10) e.message = t('validation.message');
         return e;
     };
 
@@ -71,18 +73,17 @@ export default function ContactPage() {
                 {/* Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
                     <div>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">Contact</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">{t('label')}</span>
                         <h1 className="mt-4 text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9]">
-                            Let's Talk.
+                            {t('title')}
                         </h1>
                     </div>
                     <div className="flex flex-col justify-end gap-6 text-zinc-400 leading-relaxed">
                         <p>
-                            We built PrivaFlow for you. Your feedback, bug reports, and feature ideas shape every update.
-                            Send us a message and we typically respond within 24 hours.
+                            {t('body1')}
                         </p>
                         <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-700">
-                            Response within 24h
+                            {t('response24h')}
                         </p>
                     </div>
                 </div>
@@ -100,40 +101,40 @@ export default function ContactPage() {
                             >
                                 <CheckCircle className="w-16 h-16 text-white/30" />
                                 <div>
-                                    <h2 className="text-3xl font-black uppercase tracking-tight">Message Sent</h2>
+                                    <h2 className="text-3xl font-black uppercase tracking-tight">{t('successTitle')}</h2>
                                     <p className="mt-3 text-zinc-500 max-w-sm mx-auto">
-                                        We got your message and will get back to you within 24 hours. Thank you.
+                                        {t('successDesc')}
                                     </p>
                                 </div>
                                 <button
                                     onClick={() => setStatus('idle')}
                                     className="mt-4 text-[11px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
                                 >
-                                    Send another message
+                                    {t('sendAnother')}
                                 </button>
                             </motion.div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-8" noValidate>
                                 {/* Row 1: Name + Email */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <Field label="Full Name" error={errors.name}>
+                                    <Field label={t('fieldName')} error={errors.name}>
                                         <input
                                             type="text"
                                             name="name"
                                             value={form.name}
                                             onChange={handleChange}
-                                            placeholder="Your name"
+                                            placeholder={t('placeholderName')}
                                             className="field-input"
                                             autoComplete="name"
                                         />
                                     </Field>
-                                    <Field label="Email Address" error={errors.email}>
+                                    <Field label={t('fieldEmail')} error={errors.email}>
                                         <input
                                             type="email"
                                             name="email"
                                             value={form.email}
                                             onChange={handleChange}
-                                            placeholder="you@example.com"
+                                            placeholder={t('placeholderEmail')}
                                             className="field-input"
                                             autoComplete="email"
                                         />
@@ -141,29 +142,29 @@ export default function ContactPage() {
                                 </div>
 
                                 {/* Topic */}
-                                <Field label="Topic">
+                                <Field label={t('fieldTopic')}>
                                     <select
                                         name="topic"
                                         value={form.topic}
                                         onChange={handleChange}
                                         className="field-input"
                                     >
-                                        <option value="feedback">General Feedback</option>
-                                        <option value="bug">Bug Report</option>
-                                        <option value="feature">Feature Request</option>
-                                        <option value="partnership">Partnership / Press</option>
-                                        <option value="other">Other</option>
+                                        <option value="feedback">{t('topics.feedback')}</option>
+                                        <option value="bug">{t('topics.bug')}</option>
+                                        <option value="feature">{t('topics.feature')}</option>
+                                        <option value="partnership">{t('topics.partnership')}</option>
+                                        <option value="other">{t('topics.other')}</option>
                                     </select>
                                 </Field>
 
                                 {/* Message */}
-                                <Field label="Message" error={errors.message}>
+                                <Field label={t('fieldMessage')} error={errors.message}>
                                     <textarea
                                         name="message"
                                         value={form.message}
                                         onChange={handleChange}
                                         rows={7}
-                                        placeholder="Tell us what's on your mind..."
+                                        placeholder={t('placeholderMessage')}
                                         className="field-input resize-none"
                                     />
                                 </Field>
@@ -172,7 +173,7 @@ export default function ContactPage() {
                                 {status === 'error' && (
                                     <div className="flex items-center gap-3 p-4 border border-red-500/30 bg-red-500/5 text-red-400 text-sm">
                                         <AlertCircle className="w-4 h-4 shrink-0" />
-                                        Something went wrong. Please try again or email us directly at hello@privaflow.com
+                                        {t('errorGeneral')}
                                     </div>
                                 )}
 
@@ -183,11 +184,11 @@ export default function ContactPage() {
                                 >
                                     {status === 'sending' ? (
                                         <>
-                                            <span className="animate-pulse">Sending...</span>
+                                            <span className="animate-pulse">{t('sending')}</span>
                                         </>
                                     ) : (
                                         <>
-                                            Send Message
+                                            {t('sendBtn')}
                                             <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
@@ -200,12 +201,12 @@ export default function ContactPage() {
                     <div className="bg-black p-10 lg:p-14 space-y-12">
 
                         <div className="space-y-6">
-                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">Contact Info</h3>
+                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('sidebarTitle')}</h3>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-3">
                                     <Mail className="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" />
                                     <div>
-                                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">Email</p>
+                                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">{t('sidebarEmail')}</p>
                                         <a
                                             href="mailto:hello@privaflow.com"
                                             className="text-sm text-white hover:text-zinc-300 transition-colors"
@@ -217,21 +218,21 @@ export default function ContactPage() {
                                 <div className="flex items-start gap-3">
                                     <MessageSquare className="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" />
                                     <div>
-                                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">Response Time</p>
-                                        <p className="text-sm text-white">Within 24 hours</p>
+                                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">{t('sidebarResponse')}</p>
+                                        <p className="text-sm text-white">{t('response24h')}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="space-y-4">
-                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">What To Expect</h3>
+                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('expectTitle')}</h3>
                             <ul className="space-y-3">
                                 {[
-                                    'We read every single message',
-                                    'Feature requests influence our roadmap',
-                                    'Bug reports get prioritized immediately',
-                                    'No spam, ever.',
+                                    t('expectItems.item1'),
+                                    t('expectItems.item2'),
+                                    t('expectItems.item3'),
+                                    t('expectItems.item4'),
                                 ].map((item) => (
                                     <li key={item} className="flex items-start gap-2.5 text-sm text-zinc-500">
                                         <ArrowRight className="w-3.5 h-3.5 mt-0.5 shrink-0 text-zinc-700" />
@@ -243,7 +244,7 @@ export default function ContactPage() {
 
                         <div className="pt-6 border-t border-white/[0.06]">
                             <p className="text-xs text-zinc-700 leading-relaxed">
-                                PrivaFlow is built with privacy-first principles. Your contact information is only used to respond to your message and is never shared or sold.
+                                {t('privacyNote')}
                             </p>
                         </div>
                     </div>

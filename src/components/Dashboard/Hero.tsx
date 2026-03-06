@@ -79,10 +79,10 @@ export const Hero = memo(() => {
                     className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pt-4 border-t border-white/[0.06] w-full max-w-3xl"
                 >
                     {[
-                        { n: "19", label: t('heroStatTools') },
-                        { n: "0 bytes", label: t('heroStatUploaded') },
-                        { n: "4", label: t('heroStatLanguages') },
-                        { n: "100%", label: t('heroStatClient') },
+                        { n: t('heroStatValue1'), label: t('heroStatTools') },
+                        { n: t('heroStatValue2'), label: t('heroStatUploaded') },
+                        { n: t('heroStatValue3'), label: t('heroStatLanguages') },
+                        { n: t('heroStatValue4'), label: t('heroStatClient') },
                     ].map(s => (
                         <div key={s.label} className="flex flex-col items-center gap-1">
                             <span className="text-xl font-black text-white tracking-tight">{s.n}</span>

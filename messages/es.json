@@ -173,29 +173,47 @@
                 "desc": "Descarga tu archivo terminado. Como nunca salió de tu dispositivo, nadie más lo vio."
             }
         },
+        "heroStatValue1": "19",
+        "heroStatValue2": "0 bytes",
+        "heroStatValue3": "4",
+        "heroStatValue4": "100%",
         "footer": {
-            "whyTitle": "¿Por qué es gratis?",
-            "whyDesc": "Creemos que la privacidad no debe ser un lujo. PrivaFlow funciona completamente en tu dispositivo. Sin venta de datos, sin trampas.",
-            "philosophyDesc": "PrivaFlow es un santuario para tu vida digital. Creemos que las herramientas de nivel profesional deben estar al alcance de todos sin sacrificar sus datos personales.",
-            "contact": "Contáctanos",
-            "philosophy": "Filosofía",
-            "faq": "Preguntas",
-            "services": "Herramientas",
-            "badge": "100% Privado",
-            "company": "Compañía",
-            "support": "Soporte",
-            "privacy": "Privacidad",
-            "terms": "Términos",
-            "report": "Reportar un bug",
-            "rights": "Todos los derechos reservados.",
-            "builtWith": "Hecho con"
+            "brandStatement": "Privacidad profesional.",
+            "brandHighlight": "En tu navegador.",
+            "colInfo": "Información",
+            "colTools": "Bóveda",
+            "colMedia": "Medios y Docs",
+            "linkHowItWorks": "Cómo funciona",
+            "linkPhilosophy": "Filosofía",
+            "linkAllTools": "Registro de Herramientas",
+            "linkContact": "Soporte y Feedback",
+            "linkRedact": "Redactor PDF",
+            "linkCleanMeta": "Limpiador Exif",
+            "linkConverter": "Convertidor Multimedia",
+            "linkPdfWord": "PDF a Word",
+            "linkCompress": "Optimizador de Imagen",
+            "linkMerge": "Fusionador PDF",
+            "linkSign": "Firma Electrónica",
+            "linkRepair": "Reparar Archivo",
+            "linkBlur": "Herramienta de Desenfoque",
+            "linkHeic": "HEIC a JPG",
+            "linkSvg": "SVG a PNG",
+            "linkUnlock": "Eliminar Contraseña",
+            "linkPdfImg": "PDF a Imagen",
+            "linkSplit": "Divisor PDF",
+            "linkStamp": "Marca de Agua",
+            "linkNumber": "Numerar Páginas",
+            "linkOrganize": "Organizar",
+            "copyright": "© 2026 PRIVaflow · Ningún dato sale de tu dispositivo.",
+            "footerCredits": "100% Abierto · Sin Telemetría · Sin Analíticas"
         },
         "nav": {
-            "tools": "Herramientas",
-            "philosophy": "Filosofía",
-            "faq": "Preguntas",
-            "privateBadge": "100% Privado"
+            "vault": "Bóveda",
+            "media": "Medios",
+            "documents": "Docs",
+            "contact": "Contacto"
         },
+        "logoTagline": "Privado · Local · Gratis",
         "visualProof": {
             "label": "Evidencia Visual",
             "title": "Mira la Magia",
@@ -841,6 +859,48 @@
                     "desc": "Los píxeles difuminados se fusionan en la nueva foto. Tu privacidad ya es parte de la imagen."
                 }
             }
+        }
+    },
+    "ContactPage": {
+        "label": "Contacto",
+        "title": "Hablemos.",
+        "body1": "Construimos PrivaFlow para ti. Tus comentarios, informes de errores e ideas de funciones dan forma a cada actualización. Envíanos un mensaje y solemos responder en 24 horas.",
+        "response24h": "Respuesta en 24h",
+        "successTitle": "Mensaje Enviado",
+        "successDesc": "Hemos recibido tu mensaje y te responderemos en 24 horas. Gracias.",
+        "sendAnother": "Enviar otro mensaje",
+        "fieldName": "Nombre Completo",
+        "fieldEmail": "Correo Electrónico",
+        "fieldTopic": "Tema",
+        "fieldMessage": "Mensaje",
+        "placeholderName": "Tu nombre",
+        "placeholderEmail": "tu@ejemplo.com",
+        "placeholderMessage": "Cuéntanos qué tienes en mente...",
+        "topics": {
+            "feedback": "Comentarios Generales",
+            "bug": "Informe de Error",
+            "feature": "Solicitud de Función",
+            "partnership": "Asociación / Prensa",
+            "other": "Otro"
+        },
+        "errorGeneral": "Algo salió mal. Inténtalo de nuevo o escríbenos a hello@privaflow.com",
+        "sending": "Enviando...",
+        "sendBtn": "Enviar Mensaje",
+        "sidebarTitle": "Información de Contacto",
+        "sidebarEmail": "Correo",
+        "sidebarResponse": "Tiempo de Respuesta",
+        "expectTitle": "Qué Esperar",
+        "expectItems": {
+            "item1": "Leemos cada mensaje",
+            "item2": "Las solicitudes de funciones influyen en nuestra hoja de ruta",
+            "item3": "Los informes de errores se priorizan de inmediato",
+            "item4": "Sin spam, nunca."
+        },
+        "privacyNote": "PrivaFlow está construido con principios de privacidad primero. Tu información de contacto solo se usa para responder a tu mensaje y nunca se comparte ni se vende.",
+        "validation": {
+            "name": "El nombre es obligatorio",
+            "email": "Se requiere un correo válido",
+            "message": "El mensaje debe tener al menos 10 caracteres"
         }
     }
 }
