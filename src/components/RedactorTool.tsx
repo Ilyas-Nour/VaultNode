@@ -109,13 +109,12 @@ const RedactorTool = memo(() => {
 
             const originalViewport = page.getViewport({ scale: 1 });
             
-            // Safer viewport detection
             const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
             const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
             
-            // Aggressive space usage (90% of screen)
-            const horizontalPadding = 48; 
-            const verticalPadding = 180; // HUD margins
+            // Margins for HUD and generous breathing room
+            const horizontalPadding = 80; 
+            const verticalPadding = 200; 
 
             const targetWidth = vw - horizontalPadding;
             const targetHeight = vh - verticalPadding;
@@ -123,8 +122,8 @@ const RedactorTool = memo(() => {
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
-            // Choose the fit-to-screen scale, ensuring it doesn't get too tiny
-            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.8), 12.0);
+            // Exact fit to screen, no arbitrary minimums or maximums.
+            const dynamicUIScale = Math.min(scaleX, scaleY);
             
             setActiveUIScale(dynamicUIScale);
 
@@ -140,16 +139,16 @@ const RedactorTool = memo(() => {
             const uiCtx = pdfCanvas.getContext("2d");
             if (!uiCtx) return;
 
-            // Force physical and display dimensions
-            pdfCanvas.height = uiViewport.height;
+            // Physical Canvas Resolution (High-Res scaling based on Device Pixel Ratio could be added here later, but standard px is fine for now)
             pdfCanvas.width = uiViewport.width;
-            pdfCanvas.style.height = `${uiViewport.height}px`;
+            pdfCanvas.height = uiViewport.height;
             pdfCanvas.style.width = `${uiViewport.width}px`;
+            pdfCanvas.style.height = `${uiViewport.height}px`;
 
-            drawCanvas.height = uiViewport.height;
             drawCanvas.width = uiViewport.width;
-            drawCanvas.style.height = `${uiViewport.height}px`;
+            drawCanvas.height = uiViewport.height;
             drawCanvas.style.width = `${uiViewport.width}px`;
+            drawCanvas.style.height = `${uiViewport.height}px`;
 
             renderTaskRef.current = page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: uiViewport });
             await renderTaskRef.current.promise;
@@ -376,7 +375,7 @@ const RedactorTool = memo(() => {
 
                     {/* --- Workspace --- */}
                     <div className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-black to-black">
-                        <div className="relative shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-zinc-800 bg-white">
+                        <div className="relative shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-zinc-800 bg-white shrink-0 mx-auto">
                             <canvas ref={pdfCanvasRef} className="block" />
                             <canvas
                                 ref={drawCanvasRef}
