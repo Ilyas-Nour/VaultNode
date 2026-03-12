@@ -1147,7 +1147,18 @@
         "systemTag": "بروتوكول الأمان v.4.0",
         "trustStatement": "نحن لا نطلب ثقتك؛ نحن نثبتها.",
         "trustExplanation": "بما أن ملفاتك لا تخرج من شاشتك أبداً، فلن نتمكن من رؤيتها حتى لو أردنا ذلك.",
-        "viewReport": "عرض تقرير الخصوصية الكامل"
+        "viewReport": "عرض تقرير الخصوصية الكامل",
+        "auditTitle": "كيفية التحقق من المعالجة المحلية فقط",
+        "auditDesc": "نحن نؤمن بالتحقق، وليس فقط الثقة. إليك كيف يمكنك إثبات أماننا بنفسك:",
+        "stepNetwork": "افتح أدوات مطوري المتصفح (F12) وحدد علامة التبويب 'Network'.",
+        "stepProcess": "حدد أي أداة وقم برفع ملف. راقب الشاشة.",
+        "stepResult": "لاحظ أنه لا يتم إرسال أي ملفات أو حزم بيانات إلى خوادمنا.",
+        "engineTitle": "تقنيات الأمان لدينا",
+        "engineWasm": "WebAssembly / FFmpeg.wasm",
+        "engineCrypto": "Native WebCrypto API",
+        "engineCanvas": "Layered HTML5 Canvas",
+        "guaranteeTitle": "خصوصية غير قابلة للتغيير",
+        "guaranteeDesc": "هيكليتنا غير قادرة قانونياً وتقنياً على رؤية بياناتك."
     },
     "PrivacyReport": {
         "label": "التدقيق والامتثال",

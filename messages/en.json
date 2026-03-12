@@ -1147,7 +1147,18 @@
         "systemTag": "Security Protocol v.4.0",
         "trustStatement": "WE DON'T ASK FOR YOUR TRUST; WE PROVE IT.",
         "trustExplanation": "Since your files never leave your screen, we couldn't see them even if we wanted to.",
-        "viewReport": "VIEW FULL PRIVACY REPORT"
+        "viewReport": "VIEW FULL PRIVACY REPORT",
+        "auditTitle": "How to Verify Local-Only Processing",
+        "auditDesc": "We believe in verification, not just trust. Here is how you can prove our security for yourself:",
+        "stepNetwork": "Open Browser DevTools (F12) and select the 'Network' tab.",
+        "stepProcess": "Select any tool and upload a file. Watch the monitor.",
+        "stepResult": "Observe that zero files or data packets are sent to our servers.",
+        "engineTitle": "Our Security Tech Stack",
+        "engineWasm": "WebAssembly / FFmpeg.wasm",
+        "engineCrypto": "Native WebCrypto API",
+        "engineCanvas": "Layered HTML5 Canvas",
+        "guaranteeTitle": "Immutable Privacy",
+        "guaranteeDesc": "Our architecture is legally and technically incapable of seeing your data."
     },
     "PrivacyReport": {
         "label": "Audit & Compliance",

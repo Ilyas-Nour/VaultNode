@@ -1004,7 +1004,18 @@
         "systemTag": "Protocolo de Seguridad v.4.0",
         "trustStatement": "NO PEDIMOS TU CONFIANZA; LA DEMOSTRAMOS.",
         "trustExplanation": "Como tus archivos nunca salen de tu pantalla, no podríamos verlos aunque quisiéramos.",
-        "viewReport": "VER INFORME DE PRIVACIDAD COMPLETO"
+        "viewReport": "VER INFORME DE PRIVACIDAD COMPLETO",
+        "auditTitle": "Cómo verificar el procesamiento local",
+        "auditDesc": "Creemos en la verificación, no solo en la confianza. Aquí tienes cómo puedes probar nuestra seguridad por ti mismo:",
+        "stepNetwork": "Abre las herramientas de desarrollo del navegador (F12) y selecciona la pestaña 'Red'.",
+        "stepProcess": "Selecciona cualquier herramienta y sube un archivo. Observa el monitor.",
+        "stepResult": "Observa que se envían cero archivos o paquetes de datos a nuestros servidores.",
+        "engineTitle": "Nuestra pila tecnológica de seguridad",
+        "engineWasm": "WebAssembly / FFmpeg.wasm",
+        "engineCrypto": "API nativa de WebCrypto",
+        "engineCanvas": "Canvas HTML5 por capas",
+        "guaranteeTitle": "Privacidad inmutable",
+        "guaranteeDesc": "Nuestra arquitectura es legal y técnicamente incapaz de ver sus datos."
     },
     "PrivacyReport": {
         "label": "Auditoría y Cumplimiento",
