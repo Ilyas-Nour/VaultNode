@@ -65,6 +65,23 @@ export const BentoGrid = memo(() => {
         return tools.filter(t => t.category === active);
     }, [active]);
 
+    const getSpanClass = (index: number, total: number) => {
+        if (index !== total - 1) return "";
+        let classes = "";
+        // MD (2 columns)
+        if (total % 2 === 1) classes += "md:col-span-2 ";
+        
+        // LG (3 columns)
+        if (total % 3 === 1) {
+            classes += "lg:col-span-3";
+        } else if (total % 3 === 2) {
+            classes += "lg:col-span-2";
+        } else {
+            classes += "lg:col-span-1";
+        }
+        return classes.trim();
+    };
+
     return (
         <section id="tools" className="space-y-10">
 
@@ -100,6 +117,7 @@ export const BentoGrid = memo(() => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2, delay: i * 0.03 }}
+                            className={cn("h-full", getSpanClass(i, filtered.length))}
                         >
                             <Link href={tool.href} className="group flex flex-col justify-between bg-black hover:bg-zinc-950/80 transition-colors p-7 lg:p-9 h-full min-h-[180px]">
 
