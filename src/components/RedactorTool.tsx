@@ -112,8 +112,8 @@ const RedactorTool = memo(() => {
             const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
             const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
             
-            // Margins for HUD and generous breathing room
-            const horizontalPadding = 80; 
+            // Tight margins to maximize use of space
+            const horizontalPadding = 48; 
             const verticalPadding = 200; 
 
             const targetWidth = vw - horizontalPadding;
@@ -122,12 +122,20 @@ const RedactorTool = memo(() => {
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
-            // Exact fit to screen, no arbitrary minimums or maximums.
-            const dynamicUIScale = Math.min(scaleX, scaleY);
+            // The logical CSS scale needed to fit the screen
+            const logicalScale = Math.min(scaleX, scaleY);
             
-            setActiveUIScale(dynamicUIScale);
+            // High-DPI physical scale
+            const dpr = window.devicePixelRatio || 1;
+            const physicalScale = logicalScale * dpr;
 
-            const uiViewport = page.getViewport({ scale: dynamicUIScale });
+            setActiveUIScale(logicalScale);
+
+            // Viewport for actual pixel rendering (High-Res)
+            const renderViewport = page.getViewport({ scale: physicalScale });
+            // Viewport for CSS sizing (Logical-Res)
+            const cssViewport = page.getViewport({ scale: logicalScale });
+            
             const exportViewport = page.getViewport({ scale: SECURE_EXPORT_SCALE });
 
             const pdfCanvas = pdfCanvasRef.current;
@@ -139,18 +147,19 @@ const RedactorTool = memo(() => {
             const uiCtx = pdfCanvas.getContext("2d");
             if (!uiCtx) return;
 
-            // Physical Canvas Resolution (High-Res scaling based on Device Pixel Ratio could be added here later, but standard px is fine for now)
-            pdfCanvas.width = uiViewport.width;
-            pdfCanvas.height = uiViewport.height;
-            pdfCanvas.style.width = `${uiViewport.width}px`;
-            pdfCanvas.style.height = `${uiViewport.height}px`;
+            // Physical Canvas Resolution (Actual Pixels)
+            pdfCanvas.width = renderViewport.width;
+            pdfCanvas.height = renderViewport.height;
+            drawCanvas.width = renderViewport.width;
+            drawCanvas.height = renderViewport.height;
 
-            drawCanvas.width = uiViewport.width;
-            drawCanvas.height = uiViewport.height;
-            drawCanvas.style.width = `${uiViewport.width}px`;
-            drawCanvas.style.height = `${uiViewport.height}px`;
+            // CSS Logical Size (How big it looks on screen, overriding flexbox)
+            pdfCanvas.style.width = `${cssViewport.width}px`;
+            pdfCanvas.style.height = `${cssViewport.height}px`;
+            drawCanvas.style.width = `${cssViewport.width}px`;
+            drawCanvas.style.height = `${cssViewport.height}px`;
 
-            renderTaskRef.current = page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: uiViewport });
+            renderTaskRef.current = page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: renderViewport });
             await renderTaskRef.current.promise;
 
             const baseCtx = baseCanvas.getContext("2d");
