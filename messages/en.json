@@ -260,6 +260,11 @@
         }
     },
     "Metadata": {
+        "default": {
+            "title": "PrivaFlow | Your Files Stay With You",
+            "description": "Everything you do stays inside your own screen. Safe, private, and 100% free tools for your photos and files.",
+            "keywords": "private pdf redactor, unlock pdf offline, heic to jpg local, pdf to word converter, ffmpeg wasm converter, svg to png local, zero upload privacy"
+        },
         "blur": {
             "title": "Hide Faces",
             "description": "Blur parts of your photo locally."

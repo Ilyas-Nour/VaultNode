@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Inter, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getLocale, setRequestLocale } from 'next-intl/server';
+import { getMessages, getLocale, setRequestLocale, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import "../globals.css";
@@ -25,37 +25,41 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
     display: 'swap'
 });
 
-export const metadata: Metadata = {
-    title: {
-        template: "%s | PrivaFlow",
-        default: "PrivaFlow | Your Files Stay With You",
-    },
-    description: "Everything you do stays inside your own screen. Safe, private, and 100% free tools for your photos and files.",
-    keywords: ["private pdf redactor", "unlock pdf offline", "heic to jpg local", "pdf to word converter", "ffmpeg wasm converter", "svg to png local", "zero upload privacy"],
-    alternates: {
-        canonical: "https://vaultnode.com",
-        languages: {
-            "en": "https://vaultnode.com/en",
-            "es": "https://vaultnode.com/es",
-            "fr": "https://vaultnode.com/fr",
-            "ar": "https://vaultnode.com/ar",
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+    const t = await getTranslations({ locale, namespace: 'Metadata.default' });
+
+    return {
+        title: {
+            template: "%s | PrivaFlow",
+            default: t('title'),
         },
-    },
-    openGraph: {
-        title: "PrivaFlow | Private Media Tools",
-        description: "Everything you do stays inside your own screen.",
-        url: 'https://privaflow.com',
-        siteName: "PrivaFlow",
-        images: [{ url: '/og-image.png' }],
-        locale: 'en_US',
-        type: 'website',
-    },
-    twitter: {
-        card: 'summary_large_image',
-        title: "PrivaFlow | Private Media Tools",
-        description: "Pure client-side processing. No servers. No uploads. Just privacy.",
-    }
-};
+        description: t('description'),
+        keywords: t('keywords').split(', '),
+        alternates: {
+            canonical: "https://vaultnode.com",
+            languages: {
+                "en": "https://vaultnode.com/en",
+                "es": "https://vaultnode.com/es",
+                "fr": "https://vaultnode.com/fr",
+                "ar": "https://vaultnode.com/ar",
+            },
+        },
+        openGraph: {
+            title: t('title'),
+            description: t('description'),
+            url: 'https://privaflow.com',
+            siteName: "PrivaFlow",
+            images: [{ url: '/og-image.png' }],
+            locale: locale,
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: t('title'),
+            description: t('description'),
+        }
+    };
+}
 
 export default async function RootLayout({
     children,

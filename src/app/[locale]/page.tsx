@@ -1,14 +1,24 @@
-"use client";
-
 import React from "react";
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { Hero } from "@/components/Dashboard/Hero";
 import { Steps } from "@/components/Dashboard/Steps";
 import { BentoGrid } from "@/components/Dashboard/BentoGrid";
 import { Philosophy } from "@/components/Dashboard/Philosophy";
+import { Metadata } from 'next';
 
-export default function Home() {
-  const t = useTranslations('HomePage');
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
+  return {
+    title: t('title'),
+    description: t('subtitle'),
+  };
+}
+
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
+  
   return (
     <div className="w-full bg-black text-white">
       <Hero />
@@ -33,3 +43,4 @@ export default function Home() {
     </div>
   );
 }
+

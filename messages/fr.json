@@ -222,6 +222,11 @@
         }
     },
     "Metadata": {
+        "default": {
+            "title": "PrivaFlow | Vos Fichiers Restent Avec Vous",
+            "description": "Tout ce que vous faites reste sur votre propre écran. Des outils sûrs, privés et 100% gratuits pour vos photos et fichiers.",
+            "keywords": "redacteur pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité"
+        },
         "blur": {
             "title": "Cacher les Visages",
             "description": "Flouter des parties de votre photo localement."
