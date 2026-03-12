@@ -95,9 +95,10 @@ const RedactorTool = memo(() => {
     }, [redactions, currentBox]);
 
     const renderTaskRef = useRef<any>(null);
+
+    // 🚀 STABLE RENDER ENGINE (Decoupled from drawing state)
     const renderPdfAsync = useCallback(async (pdfFile: File) => {
         try {
-            // 🛑 CANCEL PREVIOUS RENDER
             if (renderTaskRef.current) {
                 renderTaskRef.current.cancel();
             }
@@ -106,26 +107,22 @@ const RedactorTool = memo(() => {
             const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             const page = await pdf.getPage(1);
 
-            // 📏 DYNAMIC SCALING CALCULATION
             const originalViewport = page.getViewport({ scale: 1 });
-            
-            // Use window dimensions for immersive mode
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
             
-            const horizontalPadding = 48; // Tightest margins
-            const verticalPadding = 160; // Just enough for Header/Footer
+            const horizontalPadding = 48;
+            const verticalPadding = 160;
 
             const targetWidth = viewportWidth - horizontalPadding;
             const targetHeight = viewportHeight - verticalPadding;
 
-            // Calculate scale to fit both width and height gracefully
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
-            // Allow massive upscaling for small docs (max 10x)
             const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.4), 10.0);
             
+            // Set state for export logic, but this might trigger re-render
             setActiveUIScale(dynamicUIScale);
 
             const uiViewport = page.getViewport({ scale: dynamicUIScale });
@@ -140,7 +137,6 @@ const RedactorTool = memo(() => {
             const uiCtx = pdfCanvas.getContext("2d");
             if (!uiCtx) return;
 
-            // Force physical and display dimensions
             pdfCanvas.height = uiViewport.height;
             pdfCanvas.width = uiViewport.width;
             pdfCanvas.style.height = `${uiViewport.height}px`;
@@ -163,13 +159,13 @@ const RedactorTool = memo(() => {
             await renderTaskRef.current.promise;
 
             renderTaskRef.current = null;
-            redrawOverlay();
         } catch (err: any) {
             if (err.name === 'RenderingCancelledException') return;
             console.error("PDF Fail:", err);
         }
-    }, [redrawOverlay]);
+    }, []); // ⚡ No dependencies = Stable function
 
+    // Sync PDF render on file change
     useEffect(() => {
         if (file) renderPdfAsync(file);
         return () => {
