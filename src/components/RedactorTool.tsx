@@ -108,21 +108,24 @@ const RedactorTool = memo(() => {
             const page = await pdf.getPage(1);
 
             const originalViewport = page.getViewport({ scale: 1 });
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
             
-            const horizontalPadding = 48;
-            const verticalPadding = 160;
+            // Safer viewport detection
+            const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+            const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+            
+            // Aggressive space usage (90% of screen)
+            const horizontalPadding = 48; 
+            const verticalPadding = 180; // HUD margins
 
-            const targetWidth = viewportWidth - horizontalPadding;
-            const targetHeight = viewportHeight - verticalPadding;
+            const targetWidth = vw - horizontalPadding;
+            const targetHeight = vh - verticalPadding;
 
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
-            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.4), 10.0);
+            // Choose the fit-to-screen scale, ensuring it doesn't get too tiny
+            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.8), 12.0);
             
-            // Set state for export logic, but this might trigger re-render
             setActiveUIScale(dynamicUIScale);
 
             const uiViewport = page.getViewport({ scale: dynamicUIScale });
@@ -137,6 +140,7 @@ const RedactorTool = memo(() => {
             const uiCtx = pdfCanvas.getContext("2d");
             if (!uiCtx) return;
 
+            // Force physical and display dimensions
             pdfCanvas.height = uiViewport.height;
             pdfCanvas.width = uiViewport.width;
             pdfCanvas.style.height = `${uiViewport.height}px`;
