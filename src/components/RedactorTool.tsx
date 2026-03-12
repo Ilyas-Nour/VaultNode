@@ -113,9 +113,8 @@ const RedactorTool = memo(() => {
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
             
-            // Tighter padding to maximize the document area
-            const horizontalPadding = 80; 
-            const verticalPadding = 200; // Space for Header (64) + Footer (96) + some margin
+            const horizontalPadding = 48; // Tightest margins
+            const verticalPadding = 160; // Just enough for Header/Footer
 
             const targetWidth = viewportWidth - horizontalPadding;
             const targetHeight = viewportHeight - verticalPadding;
@@ -124,9 +123,8 @@ const RedactorTool = memo(() => {
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
-            // Prioritize fitting to screen but allowing it to be larger if it's a small doc
-            // Clamp min to 0.5 (very large docs) and max to 6.0 (tiny docs/slides)
-            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.5), 6.0);
+            // Allow massive upscaling for small docs (max 10x)
+            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.4), 10.0);
             
             setActiveUIScale(dynamicUIScale);
 
@@ -141,10 +139,17 @@ const RedactorTool = memo(() => {
 
             const uiCtx = pdfCanvas.getContext("2d");
             if (!uiCtx) return;
+
+            // Force physical and display dimensions
             pdfCanvas.height = uiViewport.height;
             pdfCanvas.width = uiViewport.width;
+            pdfCanvas.style.height = `${uiViewport.height}px`;
+            pdfCanvas.style.width = `${uiViewport.width}px`;
+
             drawCanvas.height = uiViewport.height;
             drawCanvas.width = uiViewport.width;
+            drawCanvas.style.height = `${uiViewport.height}px`;
+            drawCanvas.style.width = `${uiViewport.width}px`;
 
             renderTaskRef.current = page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: uiViewport });
             await renderTaskRef.current.promise;
@@ -284,165 +289,136 @@ const RedactorTool = memo(() => {
     });
 
     return (
-        <ToolContainer
-            title={t('title')}
-            description={t('description')}
-            icon={Eraser}
-            category="vault"
-            toolId="redactor"
-            settingsContent={
-                <div className="space-y-10">
-                    <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">{t('activeLayers')}</span>
-                            <span className="text-xl font-black text-white">{redactions.length}</span>
-                        </div>
-                        <div className="h-1 bg-zinc-900 w-full overflow-hidden">
-                            <div className="h-full bg-white transition-all duration-500" style={{ width: `${Math.min(redactions.length * 10, 100)}%` }} />
-                        </div>
-                    </div>
-
-                    <div className="space-y-4">
-                        <Button
-                            onClick={handleSecureRedact}
-                            disabled={isProcessing || redactions.length === 0}
-                            className="w-full h-14 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-xs transition-all active:scale-95"
-                        >
-                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : t('burnBtn')}
-                        </Button>
-
-                        <Button
-                            variant="outline"
-                            onClick={() => setRedactions([])}
-                            disabled={isProcessing || redactions.length === 0}
-                            className="w-full h-14 border-zinc-800 text-zinc-400 hover:text-white hover:border-white font-black uppercase tracking-widest text-xs transition-all"
-                        >
-                            {t('clearBtn')}
-                        </Button>
-
-                        {file && (
-                            <button onClick={resetTool} className="w-full text-[10px] font-black text-zinc-600 uppercase tracking-widest hover:text-white transition-colors">
-                                {t('resetBtn')}
-                            </button>
-                        )}
-                    </div>
-                </div>
-            }
-            howItWorks={[
-                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.description') },
-                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.description') },
-                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.description') }
-            ]}
-        >
-            <div className="w-full" ref={containerRef}>
-                <AnimatePresence mode="wait">
-                    {!file ? (
-                        <motion.div 
-                            key="upload-zone"
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            className="w-full"
-                        >
-                            <div 
-                                {...getRootProps()} 
-                                className={cn(
-                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-20 gap-4",
-                                    isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
-                                )}
-                            >
-                                <input {...getInputProps()} />
-                                <FileUp className={cn("w-12 h-12 mb-2", isDragActive ? "text-white" : "text-zinc-600")} />
-                                <div className="text-center">
-                                    <p className="text-lg font-black text-white uppercase tracking-widest">
-                                        {isDragActive ? commonT('dropAnywhere') : t('dropTitle')}
+        <AnimatePresence mode="wait">
+            {!file ? (
+                <motion.div
+                    key="landing"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                >
+                    <ToolContainer
+                        title={t('title')}
+                        description={t('description')}
+                        icon={Eraser}
+                        category="vault"
+                        toolId="redactor"
+                        settingsContent={
+                            <div className="space-y-10">
+                                <div className="space-y-4 text-center py-10 opacity-40">
+                                    <div className="w-12 h-12 border-2 border-dashed border-zinc-800 rounded-full mx-auto flex items-center justify-center">
+                                        <FileUp className="w-5 h-5 text-zinc-600" />
+                                    </div>
+                                    <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest leading-relaxed">
+                                        {t('howItWorks.step1.description')}
                                     </p>
-                                    <p className="text-xs text-zinc-600 mt-2 uppercase tracking-widest font-bold font-mono">{t('dropDesc')}</p>
                                 </div>
                             </div>
-                        </motion.div>
-                    ) : (
-                        <motion.div 
-                            key="immersive-editor"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center"
+                        }
+                        howItWorks={[
+                            { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.description') },
+                            { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.description') },
+                            { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.description') }
+                        ]}
+                    >
+                        <div 
+                            {...getRootProps()} 
+                            className={cn(
+                                "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-24 gap-4",
+                                isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                            )}
                         >
-                            {/* --- Immersive Header --- */}
-                            <div className="absolute top-0 left-0 right-0 h-16 border-b border-zinc-900 bg-black/80 backdrop-blur-xl z-10 flex items-center justify-between px-8">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
-                                        <Eraser className="w-4 h-4 text-black" />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-xs font-black text-white uppercase tracking-widest">{t('title')}</h2>
-                                        <p className="text-[10px] text-zinc-500 uppercase tracking-tighter font-bold">{file.name}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-6">
-                                    <div className="flex items-center gap-3 pr-6 border-r border-zinc-800">
-                                        <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">{t('activeLayers')}</span>
-                                        <span className="px-2 py-0.5 bg-zinc-900 text-white text-xs font-black rounded-sm border border-zinc-800">{redactions.length}</span>
-                                    </div>
-                                    <button 
-                                        onClick={resetTool}
-                                        className="text-[10px] font-black text-rose-500 hover:text-rose-400 uppercase tracking-widest transition-colors flex items-center gap-2"
-                                    >
-                                        <AlertTriangle className="w-3 h-3" />
-                                        {commonT('cancel')}
-                                    </button>
-                                </div>
+                            <input {...getInputProps()} />
+                            <FileUp className={cn("w-12 h-12 mb-2", isDragActive ? "text-white" : "text-zinc-600")} />
+                            <div className="text-center">
+                                <p className="text-xl font-black text-white uppercase tracking-widest">
+                                    {isDragActive ? commonT('dropAnywhere') : t('dropTitle')}
+                                </p>
+                                <p className="text-xs text-zinc-600 mt-2 uppercase tracking-widest font-bold">{t('dropDesc')}</p>
                             </div>
-
-                            {/* --- Workspace --- */}
-                            <div className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-900/20 via-black to-black">
-                                <div className="relative border border-zinc-800 p-4 shadow-[0_0_100px_rgba(0,0,0,0.5)] scale-100 origin-center bg-white/5">
-                                    <canvas ref={pdfCanvasRef} className="block shadow-2xl bg-white" />
-                                    <canvas
-                                        ref={drawCanvasRef}
-                                        onMouseDown={onMouseDown}
-                                        onMouseMove={onMouseMove}
-                                        onMouseUp={onMouseUp}
-                                        className="absolute top-4 left-4 touch-none cursor-crosshair"
-                                    />
-                                </div>
+                        </div>
+                    </ToolContainer>
+                </motion.div>
+            ) : (
+                <motion.div 
+                    key="immersive-editor"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center"
+                >
+                    {/* --- Immersive Header --- */}
+                    <div className="absolute top-0 left-0 right-0 h-16 border-b border-zinc-900 bg-black/80 backdrop-blur-xl z-10 flex items-center justify-between px-8">
+                        <div className="flex items-center gap-4">
+                            <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+                                <Eraser className="w-4 h-4 text-black" />
                             </div>
-
-                            {/* --- Immersive Footer / Action Bar --- */}
-                            <div className="absolute bottom-0 left-0 right-0 h-24 border-t border-zinc-900 bg-black/80 backdrop-blur-xl z-10 flex items-center justify-center px-8">
-                                <div className="max-w-md w-full flex gap-4">
-                                    <Button
-                                        variant="outline"
-                                        onClick={() => setRedactions([])}
-                                        disabled={isProcessing || redactions.length === 0}
-                                        className="flex-1 h-12 border-zinc-800 text-zinc-500 hover:text-white hover:border-white font-black uppercase tracking-widest text-[10px] transition-all bg-transparent flex items-center gap-2"
-                                    >
-                                        <Trash2 className="w-3 h-3" />
-                                        {t('clearBtn')}
-                                    </Button>
-
-                                    <Button
-                                        onClick={handleSecureRedact}
-                                        disabled={isProcessing || redactions.length === 0}
-                                        className="flex-[2] h-12 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center gap-2"
-                                    >
-                                        {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : (
-                                            <>
-                                                <Shield className="w-4 h-4" />
-                                                {t('burnBtn')}
-                                            </>
-                                        )}
-                                    </Button>
-                                </div>
+                            <div>
+                                <h2 className="text-xs font-black text-white uppercase tracking-widest">{t('title')}</h2>
+                                <p className="text-[10px] text-zinc-500 uppercase tracking-tighter font-bold">{file.name}</p>
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-                <canvas ref={hiddenBaseCanvasRef} className="hidden" />
-            </div>
-        </ToolContainer>
+                        </div>
+
+                        <div className="flex items-center gap-6">
+                            <div className="flex items-center gap-3 pr-6 border-r border-zinc-800">
+                                <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">{t('activeLayers')}</span>
+                                <span className="px-2 py-0.5 bg-zinc-900 text-white text-xs font-black rounded-sm border border-zinc-800">{redactions.length}</span>
+                            </div>
+                            <button 
+                                onClick={resetTool}
+                                className="text-[10px] font-black text-rose-500 hover:text-rose-400 uppercase tracking-widest transition-colors flex items-center gap-2 px-3 py-1.5 hover:bg-rose-500/10 rounded-sm"
+                            >
+                                <AlertTriangle className="w-3 h-3" />
+                                {commonT('cancel')}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* --- Workspace --- */}
+                    <div className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-black to-black">
+                        <div className="relative shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-zinc-800 bg-white">
+                            <canvas ref={pdfCanvasRef} className="block" />
+                            <canvas
+                                ref={drawCanvasRef}
+                                onMouseDown={onMouseDown}
+                                onMouseMove={onMouseMove}
+                                onMouseUp={onMouseUp}
+                                className="absolute top-0 left-0 touch-none cursor-crosshair"
+                            />
+                        </div>
+                    </div>
+
+                    {/* --- Immersive Footer / Action Bar --- */}
+                    <div className="absolute bottom-0 left-0 right-0 h-24 border-t border-zinc-900 bg-black/80 backdrop-blur-xl z-10 flex items-center justify-center px-8">
+                        <div className="max-w-md w-full flex gap-4">
+                            <Button
+                                variant="outline"
+                                onClick={() => setRedactions([])}
+                                disabled={isProcessing || redactions.length === 0}
+                                className="flex-1 h-12 border-zinc-800 text-zinc-500 hover:text-white hover:border-white font-black uppercase tracking-widest text-[10px] transition-all bg-transparent flex items-center gap-2"
+                            >
+                                <Trash2 className="w-3 h-3" />
+                                {t('clearBtn')}
+                            </Button>
+
+                            <Button
+                                onClick={handleSecureRedact}
+                                disabled={isProcessing || redactions.length === 0}
+                                className="flex-[2] h-12 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center gap-2"
+                            >
+                                {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : (
+                                    <>
+                                        <Shield className="w-4 h-4" />
+                                        {t('burnBtn')}
+                                    </>
+                                )}
+                            </Button>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+            <canvas ref={hiddenBaseCanvasRef} className="hidden" />
+        </AnimatePresence>
     );
 });
 
