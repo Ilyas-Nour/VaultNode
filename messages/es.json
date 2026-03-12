@@ -99,7 +99,7 @@
             },
             "split": {
                 "before": "Un libro de 100 páginas.",
-                "after": "Las 2 páginas que realmente necesitabas."
+                "after": "Las 2 páginas exactas que necesitabas."
             },
             "sign": {
                 "before": "Una línea de firma vacía.",
@@ -337,20 +337,20 @@
             "clearBtn": "Limpiar Selección",
             "resetBtn": "Reiniciar Espacio",
             "initializing": "Iniciando Redactor...",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "Suba su PDF",
                     "description": "Suelte cualquier PDF que contenga texto o información que desee ocultar permanentemente."
                 },
-                {
+                "step2": {
                     "title": "Dibuje sobre el texto",
-                    "description": "Haga clic y arrastre un cuadro sobre cualquier palabra, nombre, número o sección que desee eliminar."
+                    "description": "Haga clic y arrastre un cuadro sobre cualquier palabra, nombre, número o section que desee eliminar."
                 },
-                {
+                "step3": {
                     "title": "Descargue el redactado",
                     "description": "Guarde el PDF limpio; las partes ocultas desaparecen para siempre, no solo se cubren."
                 }
-            ]
+            }
         },
         "unlockPdf": {
             "title": "Desbloquear un PDF",
@@ -846,6 +846,8 @@
             "title": "Mejorador de Imágenes",
             "description": "Mejora fotos borrosas o suaviza el ruido: tu imagen se queda en tu dispositivo, nunca se sube.",
             "titleHighlight": "Desenfoque Estético",
+            "dropTitle": "Suelte su image aquí para desenfocar.",
+            "dropDesc": "Procesaremos los píxeles de la imagen localmente en su navegador.",
             "intensity": "Intensidad de desenfoque",
             "applyBtn": "Aplicar desenfoque de búfer",
             "downloadBtn": "Descargar nodo",
@@ -859,23 +861,25 @@
             "monitor": "Monitor en vivo",
             "protocol": "Protocolo Gaussiano",
             "integrity": "Integridad local",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "Suelte su imagen",
                     "description": "Elija cualquier foto que desee enfocar o arreglar. Se queda en su dispositivo; nada se sube."
                 },
-                {
+                "step2": {
                     "title": "Ajuste la fuerza",
                     "description": "Use el control deslizante para controlar qué tan nítido debe ser el resultado. Más fuerza significa una imagen más clara."
                 },
-                {
+                "step3": {
                     "title": "Guarde el resultado",
                     "description": "Haga clic en procesar y descargue su imagen mejorada al instante."
                 }
-            ]
+            }
         }
     },
     "VisualProof": {
+        "before": "Fuente Original",
+        "after": "Resultado Procesado",
         "label": "Evidencia Visual",
         "integrity": "Integridad total de bits",
         "metadata": "Cero metadatos en la nube",
@@ -892,10 +896,10 @@
             "removed": "[ELIMINADO]"
         },
         "blur": {
-            "before": "Ofuscado",
-            "after": "Profundidad mejorada",
-            "lowFid": "Baja fidelidad",
-            "ultraRes": "Ultra resolución"
+            "before": "Enfoque Nítido",
+            "after": "Completamente Difuminado",
+            "sharpFocus": "Enfoque Nítido",
+            "fullyObscured": "Completamente Difuminado"
         },
         "encrypt": {
             "before": "Texto plano global",

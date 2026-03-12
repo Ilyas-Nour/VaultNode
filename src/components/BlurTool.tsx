@@ -112,9 +112,9 @@ const BlurTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: t('howItWorks.0.title'), description: t('howItWorks.0.description') },
-        { title: t('howItWorks.1.title'), description: t('howItWorks.1.description') },
-        { title: t('howItWorks.2.title'), description: t('howItWorks.2.description') }
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.description') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.description') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.description') }
     ], [t]);
 
     return (

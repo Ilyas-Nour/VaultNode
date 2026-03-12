@@ -195,7 +195,7 @@
                 "before": "A document you have to scroll through.",
                 "after": "A collection of easy-to-share pictures."
             },
-            "split": {
+            "pdfSplit": {
                 "before": "A 100-page book file.",
                 "after": "The exact 2 pages you actually needed."
             }
@@ -363,7 +363,8 @@
             },
             "dropActive": "Drop it here",
             "change": "Change",
-            "ready": "Ready"
+            "ready": "Ready",
+            "dropOnly": "PDF files only"
         },
         "redact": {
             "title": "Redact PDF",
@@ -376,20 +377,20 @@
             "clearBtn": "Clear Selection",
             "resetBtn": "Reset Workspace",
             "initializing": "Initializing Redactor…",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "Upload Your PDF",
                     "description": "Drop any PDF that has text or info you want to hide permanently."
                 },
-                {
+                "step2": {
                     "title": "Draw Over the Text",
                     "description": "Click and drag a box over any word, name, number, or section you want removed."
                 },
-                {
+                "step3": {
                     "title": "Download the Redacted File",
                     "description": "Save the cleaned PDF — the hidden parts are gone forever, not just covered."
                 }
-            ]
+            }
         },
         "unlockPdf": {
             "title": "Unlock a File",
@@ -419,16 +420,16 @@
             "transientMemory": "This PDF is processed in a transient memory buffer. No data survives the session.",
             "howItWorks": {
                 "step1": {
-                    "title": "Select Locked PDF",
-                    "desc": "Upload the encrypted file you need to access. We never see your password."
+                    "title": "Choose Locked File",
+                    "desc": "Upload the encrypted document you need to open. We never see your password."
                 },
                 "step2": {
-                    "title": "Enter Password",
-                    "desc": "Provide the current password to decrypt the file's security header locally."
+                    "title": "Provide Password",
+                    "desc": "Supply the existing password to decrypt the document header locally in your browser."
                 },
                 "step3": {
-                    "title": "Export Unlocked",
-                    "desc": "The security layer is removed, and you can save the fully accessible PDF."
+                    "title": "Export Unlocked File",
+                    "desc": "The security layer is stripped, and you can save a fully accessible PDF version."
                 }
             }
         },
@@ -989,6 +990,8 @@
             "title": "Image Enhancer",
             "description": "Sharpen blurry photos or smooth noise — your image stays on your device, never uploaded.",
             "titleHighlight": "Aesthetic Blur",
+            "dropTitle": "Drop your image here to blur.",
+            "dropDesc": "We'll process image pixels locally in your browser.",
             "intensity": "Blur Intensity",
             "applyBtn": "Apply Buffer Blur",
             "downloadBtn": "Download Node",
@@ -1002,23 +1005,25 @@
             "monitor": "Live Monitor",
             "protocol": "Gaussian Protocol",
             "integrity": "Local Integrity",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "Drop Your Image",
                     "description": "Pick any photo you want to sharpen or fix. It stays on your device — nothing is uploaded."
                 },
-                {
+                "step2": {
                     "title": "Adjust the Strength",
                     "description": "Use the slider to control how sharp the result should be. More strength means a clearer image."
                 },
-                {
+                "step3": {
                     "title": "Save the Result",
                     "description": "Click process and download your enhanced image instantly."
                 }
-            ]
+            }
         }
     },
     "VisualProof": {
+        "before": "Original Source",
+        "after": "Processed Result",
         "label": "Visual Evidence",
         "integrity": "Full Bit Integrity",
         "metadata": "Zero Cloud Metadata",
@@ -1037,6 +1042,8 @@
         "blur": {
             "before": "Obfuscated",
             "after": "Enhanced Depth",
+            "sharpFocus": "Sharp Focus",
+            "fullyObscured": "Fully Obscured",
             "lowFid": "Low Fidelity",
             "ultraRes": "Ultra Resolution"
         },

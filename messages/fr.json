@@ -99,7 +99,7 @@
             },
             "split": {
                 "before": "Un livre de 100 pages.",
-                "after": "Les 2 pages dont vous aviez besoin."
+                "after": "Les 2 pages exactes dont vous aviez besoin."
             },
             "sign": {
                 "before": "Une ligne de signature vide.",
@@ -336,20 +336,20 @@
             "clearBtn": "Effacer la Sélection",
             "resetBtn": "Réinitialiser l'Espace",
             "initializing": "Initialisation du rédacteur...",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "Téléchargez votre PDF",
                     "description": "Déposez n'importe quel PDF contenant du texte ou des informations que vous souhaitez masquer définitivement."
                 },
-                {
+                "step2": {
                     "title": "Dessinez sur le texte",
                     "description": "Cliquez et faites glisser un cadre sur n'importe quel mot, nom, numéro ou section que vous souhaitez supprimer."
                 },
-                {
+                "step3": {
                     "title": "Téléchargez le caviardé",
                     "description": "Enregistrez le PDF propre — les parties cachées disparaissent pour toujours, pas seulement couvertes."
                 }
-            ]
+            }
         },
         "unlockPdf": {
             "title": "Déverrouiller un PDF",
@@ -842,6 +842,8 @@
             "title": "Améliorateur d'Images",
             "description": "Améliore les photos floues ou lisse le bruit — votre image reste sur votre appareil, jamais téléchargée.",
             "titleHighlight": "Flou Esthétique",
+            "dropTitle": "Déposez votre image ici pour flouter.",
+            "dropDesc": "Nous traiterons les pixels de l'image localement dans votre navigateur.",
             "intensity": "Intensité du flou",
             "applyBtn": "Appliquer le flou du tampon",
             "downloadBtn": "Télécharger le nœud",
@@ -855,23 +857,25 @@
             "monitor": "Moniteur en direct",
             "protocol": "Protocole gaussien",
             "integrity": "Intégrité locale",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "Déposez votre image",
                     "description": "Choisissez n'importe quelle photo que vous souhaitez affiner ou réparer. Elle reste sur votre appareil — rien n'est téléchargé."
                 },
-                {
+                "step2": {
                     "title": "Ajustez la force",
                     "description": "Utilisez le curseur pour contrôler la netteté du résultat. Plus de force signifie une image plus claire."
                 },
-                {
+                "step3": {
                     "title": "Enregistrez le résultat",
                     "description": "Cliquez sur traiter et téléchargez instantanément votre image améliorée."
                 }
-            ]
+            }
         }
     },
     "VisualProof": {
+        "before": "Source Originale",
+        "after": "Résultat Traité",
         "label": "Preuve Visuelle",
         "integrity": "Intégrité totale des bits",
         "metadata": "Zéro métadonnées cloud",
@@ -888,10 +892,10 @@
             "removed": "[SUPPRIMÉ]"
         },
         "blur": {
-            "before": "Offusqué",
-            "after": "Profondeur améliorée",
-            "lowFid": "Basse fidélité",
-            "ultraRes": "Ultra résolution"
+            "before": "Mise au point nette",
+            "after": "Entièrement obscurci",
+            "sharpFocus": "Mise au point nette",
+            "fullyObscured": "Entièrement obscurci"
         },
         "encrypt": {
             "before": "Texte clair global",

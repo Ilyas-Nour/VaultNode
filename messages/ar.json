@@ -195,7 +195,7 @@
                 "before": "مستند طويل يتطلب الكثير من التمرير.",
                 "after": "مجموعة صور سهلة المشاركة."
             },
-            "split": {
+            "pdfSplit": {
                 "before": "كتاب مكون من 100 صفحة.",
                 "after": "الصفحتان اللتان تحتاجهما بالضبط."
             }
@@ -363,7 +363,8 @@
             },
             "dropActive": "أفلته هنا",
             "ready": "جاهز",
-            "change": "Change"
+            "change": "تغيير",
+            "dropOnly": "ملفات PDF فقط"
         },
         "unlockPdf": {
             "title": "فك قفل ملف PDF",
@@ -392,19 +393,19 @@
                     "desc": "تتم إزالة طبقة الأمان، ويمكنك حفظ ملف PDF متاح للجميع بالكامل."
                 }
             },
-            "alreadyUnlocked": "This PDF is not password protected. It is already unlocked.",
-            "invalidPdf": "Invalid PDF or an unexpected error occurred.",
-            "incorrectPassword": "Incorrect password. Please try again.",
-            "failedUnlock": "Failed to unlock PDF. The file might be corrupted or uses unsupported encryption.",
-            "encryption": "Encryption",
-            "protected": "Password Protected",
-            "unlockingBtn": "Unlocking...",
-            "startOver": "Start Over",
-            "privacyHint": "Your password never leaves your device. Everything runs locally in your browser.",
-            "registryLock": "Registry Lock",
-            "clearstreamRegistry": "Clearstream Registry",
-            "encryptedRegistry": "Encrypted Registry",
-            "transientMemory": "This PDF is processed in a transient memory buffer. No data survives the session."
+            "alreadyUnlocked": "ملف PDF هذا غير محمي بكلمة مرور. إنه مفتوح بالفعل.",
+            "invalidPdf": "ملف PDF غير صالح أو حدث خطأ غير متوقع.",
+            "incorrectPassword": "كلمة المرور غير صحية. يرجى المحاولة مرة أخرى.",
+            "failedUnlock": "فشل فك قفل PDF. قد يكون الملف تالفاً أو يستخدم تشفيراً غير مدعوم.",
+            "encryption": "التشفير",
+            "protected": "محمي بكلمة مرور",
+            "unlockingBtn": "جاري فك القفل...",
+            "startOver": "البدء من جديد",
+            "privacyHint": "كلمة مرورك لا تغادر جهازك أبداً. كل شيء يعمل محلياً في متصفحك.",
+            "registryLock": "قفل السجل",
+            "clearstreamRegistry": "سجل Clearstream",
+            "encryptedRegistry": "سجل مشفر",
+            "transientMemory": "يتم معالجة ملف PDF في ذاكرة مؤقتة. لا تبقى أي بيانات بعد الجلسة."
         },
         "svgToPng": {
             "title": "محول الشعارات",
@@ -810,9 +811,11 @@
             "emptyQueue": "No pages left in the queue."
         },
         "blur": {
-            "title": "محسن الصور",
+            "title": "تمويه الصور",
             "description": "تحسين الصور الضبابية أو تنعيم الضوضاء — تبقى صورتك على جهازك، ولا يتم رفعها أبداً.",
             "titleHighlight": "تمويه جمالي",
+            "dropTitle": "أسقط صورتك هنا للتمويه.",
+            "dropDesc": "سنقوم بمعالجة بكسلات الصورة محلياً في متصفحك.",
             "intensity": "قوة التمويه",
             "applyBtn": "تطبيق التمويه",
             "downloadBtn": "تنزيل النتيجة",
@@ -826,20 +829,20 @@
             "monitor": "المراقب المباشر",
             "protocol": "بروتوكول غاوسي",
             "integrity": "سلامة محلية",
-            "howItWorks": [
-                {
+            "howItWorks": {
+                "step1": {
                     "title": "أسقط صورتك",
                     "description": "اختر أي صورة تريد تحسينها أو إصلاحها. تبقى على جهازك — لا يتم رفع أي شيء."
                 },
-                {
+                "step2": {
                     "title": "ضبط القوة",
                     "description": "استخدم المنزلق للتحكم في مدى حدة النتيجة. القوة الأكبر تعني صورة أوضح."
                 },
-                {
+                "step3": {
                     "title": "حفظ النتيجة",
                     "description": "انقر على معالجة وقم بتنزيل صورتك المحسنة فوراً."
                 }
-            ]
+            }
         },
         "heicToJpg": {
             "title": "مصلح صور آيفون",
@@ -956,69 +959,71 @@
             "outputLabel": "Encrypted Buffer"
         },
         "redact": {
-            "title": "Redact PDF",
-            "description": "Permanently destroy sensitive data in document vectors.",
-            "titleHighlight": "Secure Redaction",
-            "dropTitle": "Drop your PDF here",
-            "dropDesc": "PDF files only",
-            "activeLayers": "Active Layers",
-            "burnBtn": "Burn & Export PDF",
-            "clearBtn": "Clear Selection",
-            "resetBtn": "Reset Workspace",
-            "initializing": "Initializing Redactor…",
-            "howItWorks": [
-                {
-                    "title": "Upload Your PDF",
-                    "description": "Drop any PDF that has text or info you want to hide permanently."
-                },
-                {
-                    "title": "Draw Over the Text",
-                    "description": "Click and drag a box over any word, name, number, or section you want removed."
-                },
-                {
-                    "title": "Download the Redacted File",
-                    "description": "Save the cleaned PDF — the hidden parts are gone forever, not just covered."
-                }
-            ]
-        },
-        "pdfSplit": {
-            "title": "Extract PDF Pages",
-            "description": "Securely extract specific pages or ranges from your PDF documents.",
-            "titleHighlight": "Page Extractor",
-            "dropTitle": "Drop your PDF file here.",
-            "dropDesc": "We'll help you extract the pages you need.",
-            "processing": "Extracting page buffers...",
-            "splitBtn": "Extract Selected Pages",
-            "extractionLogic": "Extraction Logic",
-            "pageRange": "Page Range",
-            "rangePlaceholder": "e.g. 1-3, 5, 8-10",
-            "rangeHint": "Leave empty to extract all pages as individual files.",
-            "extractBtn": "Extract Pages",
-            "downloadZip": "Download ZIP Package",
-            "downloadPdf": "Download Extracted PDF",
-            "inBrowserSplit": "In-Browser Split",
-            "splitDesc": "Your document is parsed and re-composed entirely privately. No persistent file system writes occur.",
-            "splitting": "Splitting...",
-            "splitComplete": "Split Complete",
-            "zipArchive": "ZIP Archive",
-            "singlePdf": "Single PDF",
+            "title": "تعتيم PDF",
+            "description": "تدمير البيانات الحساسة بشكل دائم في موجهات المستند.",
+            "titleHighlight": "تعتيم آمن",
+            "dropTitle": "أسقط ملف PDF هنا.",
+            "dropDesc": "ملفات PDF فقط",
+            "activeLayers": "الطبقات النشطة",
+            "burnBtn": "حرق وتصدير PDF",
+            "clearBtn": "مسح التحديد",
+            "resetBtn": "إعادة ضبط مساحة العمل",
+            "initializing": "جاري تهيئة أداة التعتيم...",
             "howItWorks": {
                 "step1": {
-                    "title": "Choose PDF",
-                    "desc": "Upload the document you want to split. It's processed entirely in your RAM."
+                    "title": "رفع ملف PDF",
+                    "description": "أسقط أي ملف PDF يحتوي على نصوص أو معلومات تريد إخفاءها نهائياً."
                 },
                 "step2": {
-                    "title": "Select Ranges",
-                    "desc": "Pick individual pages or define a range (e.g., 5-12) to extract from the source."
+                    "title": "ارسم فوق النص",
+                    "description": "اضغط واسحب صندوقاً فوق أي كلمة أو اسم أو رقم تريد إزالته."
                 },
                 "step3": {
-                    "title": "Pull & Save",
-                    "desc": "The selected bitstreams are pulled into a new PDF registry for instant download."
+                    "title": "تحميل الملف المنقح",
+                    "description": "احفظ ملف PDF النظيف — الأجزاء المخفية تختفي للأبد، لا يتم تغطيتها فحسب."
+                }
+            }
+        },
+        "pdfSplit": {
+            "title": "تقسيم ملف PDF",
+            "description": "استخرج صفحات أو نطاقات محددة من مستندات PDF الخاصة بك بأمان.",
+            "titleHighlight": "مستخرج الصفحات",
+            "dropTitle": "أسقط ملف PDF هنا.",
+            "dropDesc": "سنساعدك في استخراج الصفحات التي تحتاجها.",
+            "processing": "جاري استخراج الصفحات...",
+            "splitBtn": "استخراج الصفحات المختارة",
+            "extractionLogic": "منطق الاستخراج",
+            "pageRange": "نطاق الصفحات",
+            "rangePlaceholder": "مثلاً 1-3، 5، 8-10",
+            "rangeHint": "اتركه فارغاً لاستخراج كل صفحة كملف منفصل.",
+            "extractBtn": "استخراج الصفحات",
+            "downloadZip": "تحميل حزمة ZIP",
+            "downloadPdf": "تحميل ملف PDF المستخرج",
+            "inBrowserSplit": "تقسيم داخل المتصفح",
+            "splitDesc": "يتم تحليل مستندك وإعادة تركيبه بخصوصية تامة. لا يتم حفظ أي ملفات بشكل دائم.",
+            "splitting": "جاري التقسيم...",
+            "splitComplete": "اكتمل التقسيم",
+            "zipArchive": "أرشيف ZIP",
+            "singlePdf": "ملف PDF واحد",
+            "howItWorks": {
+                "step1": {
+                    "title": "اختر ملف PDF",
+                    "desc": "قم برفع المستند الذي تريد تقسيمه. يتم معالجته بالكامل في الذاكرة (RAM)."
+                },
+                "step2": {
+                    "title": "حدد النطاقات",
+                    "desc": "اختر صفحات فردية أو حدد نطاقاً (مثلاً 5-12) للاستخراج من الأصل."
+                },
+                "step3": {
+                    "title": "استخراج وحفظ",
+                    "desc": "يتم سحب الأجزاء المختارة في ملف PDF جديد للتحميل الفوري."
                 }
             }
         }
     },
     "VisualProof": {
+        "before": "المصدر الأصلي",
+        "after": "النتيجة المعالجة",
         "label": "دليل مرئي",
         "integrity": "سلامة كاملة للبيانات",
         "metadata": "صفر بيانات سحابية",
@@ -1035,9 +1040,11 @@
             "removed": "[تمت الإزالة]"
         },
         "blur": {
-            "before": "غير واضح",
-            "after": "عمق محسن",
-            "lowFid": "دقة منخفضة",
+            "before": "ضبابي",
+            "after": "تحسين العمق",
+            "sharpFocus": "تركيز حاد",
+            "fullyObscured": "إخفاء كامل",
+            "lowFid": "جودة منخفضة",
             "ultraRes": "دقة فائقة"
         },
         "encrypt": {

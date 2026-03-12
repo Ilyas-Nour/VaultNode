@@ -90,8 +90,14 @@ const RedactorTool = memo(() => {
         }
     }, [redactions, currentBox]);
 
+    const renderTaskRef = useRef<any>(null);
     const renderPdfAsync = useCallback(async (pdfFile: File) => {
         try {
+            // 🛑 CANCEL PREVIOUS RENDER
+            if (renderTaskRef.current) {
+                renderTaskRef.current.cancel();
+            }
+
             const arrayBuffer = await pdfFile.arrayBuffer();
             const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             const page = await pdf.getPage(1);
@@ -112,23 +118,30 @@ const RedactorTool = memo(() => {
             drawCanvas.height = uiViewport.height;
             drawCanvas.width = uiViewport.width;
 
-            await page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: uiViewport }).promise;
+            renderTaskRef.current = page.render({ canvasContext: uiCtx, canvas: pdfCanvas, viewport: uiViewport });
+            await renderTaskRef.current.promise;
 
             const baseCtx = baseCanvas.getContext("2d");
             if (!baseCtx) return;
             baseCanvas.height = exportViewport.height;
             baseCanvas.width = exportViewport.width;
 
-            await page.render({ canvasContext: baseCtx, canvas: baseCanvas, viewport: exportViewport }).promise;
+            renderTaskRef.current = page.render({ canvasContext: baseCtx, canvas: baseCanvas, viewport: exportViewport });
+            await renderTaskRef.current.promise;
 
+            renderTaskRef.current = null;
             redrawOverlay();
-        } catch (err) {
+        } catch (err: any) {
+            if (err.name === 'RenderingCancelledException') return;
             console.error("PDF Fail:", err);
         }
     }, [redrawOverlay]);
 
     useEffect(() => {
         if (file) renderPdfAsync(file);
+        return () => {
+            if (renderTaskRef.current) renderTaskRef.current.cancel();
+        };
     }, [file, renderPdfAsync]);
 
     useEffect(() => {
@@ -279,9 +292,9 @@ const RedactorTool = memo(() => {
                 </div>
             }
             howItWorks={[
-                { title: t('howItWorks.0.title'), description: t('howItWorks.0.description') },
-                { title: t('howItWorks.1.title'), description: t('howItWorks.1.description') },
-                { title: t('howItWorks.2.title'), description: t('howItWorks.2.description') }
+                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.description') },
+                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.description') },
+                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.description') }
             ]}
         >
             <div className="w-full">
