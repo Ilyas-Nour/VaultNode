@@ -321,29 +321,30 @@
             "dropActive": "Déposez ici"
         },
         "redact": {
-            "title": "Masquer les Infos Privées",
-            "description": "Effacez définitivement les détails sensibles de vos documents.",
+            "title": "Rédacteur PDF",
+            "description": "Détruit définitivement les données sensibles dans les vecteurs de documents.",
             "titleHighlight": "Rédaction Sécurisée",
-            "dropTitle": "Déposez votre document ici pour commencer à masquer les secrets.",
-            "dropDesc": "Nous vous aiderons à couvrir les informations confidentielles en toute confidentialité.",
-            "flattening": "Sécurisation des couches du document...",
-            "secureExport": "Enregistrer la Copie Protégée",
-            "clearAll": "Effacer l'Espace",
-            "initializing": "Activation du Bouclier de Confidentialité...",
-            "howItWorks": {
-                "step1": {
-                    "title": "Déposez votre document",
-                    "desc": "Choisissez le PDF que vous souhaitez caviarder. Il reste en sécurité sur votre appareil."
+            "dropTitle": "Déposez le PDF ici",
+            "dropDesc": "Fichiers PDF uniquement",
+            "activeLayers": "Couches Actives",
+            "burnBtn": "Brûler et Exporter le PDF",
+            "clearBtn": "Effacer la Sélection",
+            "resetBtn": "Réinitialiser l'Espace",
+            "initializing": "Initialisation du rédacteur...",
+            "howItWorks": [
+                {
+                    "title": "Téléchargez votre PDF",
+                    "description": "Déposez n'importe quel PDF contenant du texte ou des informations que vous souhaitez masquer définitivement."
                 },
-                "step2": {
-                    "title": "Marquez les infos",
-                    "desc": "Utilisez le pinceau pour masquer noms, dates ou données sensibles."
+                {
+                    "title": "Dessinez sur le texte",
+                    "description": "Cliquez et faites glisser un cadre sur n'importe quel mot, nom, numéro ou section que vous souhaitez supprimer."
                 },
-                "step3": {
-                    "title": "Sécurisez et sauvez",
-                    "desc": "Les marques sont fusionnées pour que l'info cachée ne puisse plus jamais être récupérée."
+                {
+                    "title": "Téléchargez le caviardé",
+                    "description": "Enregistrez le PDF propre — les parties cachées disparaissent pour toujours, pas seulement couvertes."
                 }
-            }
+            ]
         },
         "unlockPdf": {
             "title": "Déverrouiller un PDF",
@@ -833,28 +834,157 @@
             }
         },
         "blur": {
-            "title": "Floutage de Confidentialité",
-            "description": "Cachez des visages ou des objets sensibles sur vos photos avec un pinceau magique.",
-            "titleHighlight": "Floutage Esthétique",
-            "dropTitle": "Déposez votre photo ici.",
-            "dropDesc": "Nous vous aiderons à masquer des visages ou des détails privés avec un pinceau magique.",
-            "processing": "Application du floutage...",
-            "downloadBtn": "Enregistrer l'Image Floutée",
-            "clearAll": "Effacer le Canevas",
-            "howItWorks": {
-                "step1": {
-                    "title": "Ouvrez la photo",
-                    "desc": "Choisissez l'image qui contient des infos à masquer (comme des visages ou des plaques)."
+            "title": "Améliorateur d'Images",
+            "description": "Améliore les photos floues ou lisse le bruit — votre image reste sur votre appareil, jamais téléchargée.",
+            "titleHighlight": "Flou Esthétique",
+            "intensity": "Intensité du flou",
+            "applyBtn": "Appliquer le flou du tampon",
+            "downloadBtn": "Télécharger le nœud",
+            "resetBtn": "Nouvelle séquence",
+            "synthesizing": "Synthèse...",
+            "encoding": "Encodage du nœud",
+            "sandbox": "Bac à sable du canevas",
+            "sandboxDesc": "Les pixels sont transformés dans un canevas HTML5 volatil. Zéro artefact persistant.",
+            "original": "Original",
+            "output": "Sortie synthétisée",
+            "monitor": "Moniteur en direct",
+            "protocol": "Protocole gaussien",
+            "integrity": "Intégrité locale",
+            "howItWorks": [
+                {
+                    "title": "Déposez votre image",
+                    "description": "Choisissez n'importe quelle photo que vous souhaitez affiner ou réparer. Elle reste sur votre appareil — rien n'est téléchargé."
                 },
-                "step2": {
-                    "title": "Appliquez le masque",
-                    "desc": "Utilisez la souris pour peindre sur les zones sensibles. Nous appliquons un flou élevé."
+                {
+                    "title": "Ajustez la force",
+                    "description": "Utilisez le curseur pour contrôler la netteté du résultat. Plus de force signifie une image plus claire."
                 },
-                "step3": {
-                    "title": "Exportez sécurisé",
-                    "desc": "Les pixels floutés sont fusionnés dans la nouvelle photo. Votre vie privée en fait partie."
+                {
+                    "title": "Enregistrez le résultat",
+                    "description": "Cliquez sur traiter et téléchargez instantanément votre image améliorée."
                 }
-            }
+            ]
+        }
+    },
+    "VisualProof": {
+        "label": "Preuve Visuelle",
+        "integrity": "Intégrité totale des bits",
+        "metadata": "Zéro métadonnées cloud",
+        "redactor": {
+            "before": "Source originale",
+            "after": "Données assainies"
+        },
+        "cleanExif": {
+            "before": "Métadonnées intégrées",
+            "after": "Anonymisé Raw",
+            "manifest": "Manifeste des métadonnées",
+            "validation": "Validation réussie",
+            "noSensitive": "Aucune chaîne sensible détectée",
+            "removed": "[SUPPRIMÉ]"
+        },
+        "blur": {
+            "before": "Offusqué",
+            "after": "Profondeur améliorée",
+            "lowFid": "Basse fidélité",
+            "ultraRes": "Ultra résolution"
+        },
+        "encrypt": {
+            "before": "Texte clair global",
+            "after": "Crypté en 256 bits",
+            "origin": "Origine",
+            "subject": "Sujet",
+            "confidential": "MÉMO CONFIDENTIEL",
+            "algorithm": "XTS-AES-256 · Mode compteur de Galois",
+            "chains": "... [CHAÎNES DE BLOCS CONTINUÉES] ...",
+            "isolated": "Isolé cryptographiquement"
+        },
+        "password": {
+            "before": "Identifiants faibles",
+            "after": "Entropie parfaite",
+            "compromised": "Compromis",
+            "resistant": "Résistant à la force brute : ZÉRO",
+            "quantum": "Entropie 128 bits · Prêt pour le quantique"
+        },
+        "merger": {
+            "before": "3 fichiers séparés",
+            "after": "1 document fusionné",
+            "unified": "3 fichiers unifiés"
+        },
+        "heic": {
+            "before": "HEIC (Format Apple)",
+            "after": "JPEG universel",
+            "proprietary": "Propriétaire",
+            "universal": "Universel",
+            "incompatible": "✗ Incompatible avec Windows/Android",
+            "compatible": "✓ Compatible multiplateforme"
+        },
+        "unlock": {
+            "before": "Protégé par mot de passe",
+            "after": "Déverrouillé & Libre",
+            "restricted": "Accès restreint",
+            "restored": "Permissions PDF standard restaurées"
+        },
+        "svgToPng": {
+            "before": "Vecteur SVG",
+            "after": "Raster PNG",
+            "geometry": "Géométrie définie par code",
+            "bitmaps": "Bitmaps haute résolution",
+            "alpha": "Canal alpha préservé"
+        },
+        "pdfToDocx": {
+            "before": "PDF verrouillé",
+            "after": "DOCX éditable",
+            "static": "STATIQUE · LECTURE SEULE",
+            "interactive": "✏️ INTERACTIF · ÉDITABLE"
+        },
+        "pdfToImg": {
+            "before": "Document PDF",
+            "after": "Pages PNG",
+            "multipage": "Document PDF multipage",
+            "lossless": "300 DPI · Actifs sans perte"
+        },
+        "pdfSplit": {
+            "before": "Un seul PDF",
+            "after": "Divisé en plages",
+            "master": "Master de 64 pages"
+        },
+        "mediaConverter": {
+            "before": "Conteneur : MP4",
+            "after": "Codec : AAC / MP3",
+            "transcoder": "Engagement du transcodeur",
+            "vaultSecure": "Sortie sécurisée du coffre"
+        },
+        "sign": {
+            "before": "Ligne vide",
+            "after": "Document signé",
+            "authorized": "Personne autorisée",
+            "signature": "Signature"
+        },
+        "stamp": {
+            "before": "Actif original",
+            "after": "Authentifié",
+            "stamped": "Authenticité tamponnée"
+        },
+        "repair": {
+            "before": "Données cassées",
+            "after": "Fichier réparé",
+            "integrityFailure": "Échec de l'intégrité structurelle",
+            "recovered": "Flux d'objets récupéré",
+            "rebuilt": "Table de référence croisée reconstruite · 100% réparé"
+        },
+        "numberPages": {
+            "before": "Sans numéros",
+            "after": "Pages numérotées"
+        },
+        "organizePages": {
+            "before": "Déordonné",
+            "after": "Ordonné"
+        },
+        "compress": {
+            "heavy": "Lourd : 18.5 MO",
+            "modern": "Moderne : 1.2 MO",
+            "lossy": "Remplissage avec perte",
+            "advanced": "Avancé optimisé LZ"
         }
     },
     "SecurityProof": {
@@ -924,5 +1054,4 @@
             "message": "Le message doit faire au moins 10 caractères"
         }
     }
-}
 }

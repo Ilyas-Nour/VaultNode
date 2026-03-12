@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 const PdfToDocxTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.pdfToDocx");
+    const tc = useTranslations("Tools.common");
 
     // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
@@ -124,7 +125,7 @@ const PdfToDocxTool = memo(() => {
         const link = document.createElement("a");
         link.href = docxBlobUrl;
         const newName = originalFile.name.replace(/\.pdf$/i, ".docx");
-        link.download = newName;
+        link.download = `privaflow_${newName}`;
         link.click();
     }, [docxBlobUrl, originalFile]);
 
@@ -137,10 +138,10 @@ const PdfToDocxTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Upload Your PDF', description: 'Drop any PDF that you need to edit but can\'t — a scanned report, a form, anything.' },
-        { title: 'We Extract the Text', description: 'The tool reads all the text from your PDF and organizes it into paragraphs, just like the original.' },
-        { title: 'Download as Word File', description: 'Get a fully editable .docx file that opens in Microsoft Word, Google Docs, or any word processor.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -166,7 +167,7 @@ const PdfToDocxTool = memo(() => {
                             className="w-full h-10 bg-white hover:bg-zinc-100 disabled:opacity-40 text-black font-black rounded-sm text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95"
                         >
                             {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
-                            {isProcessing ? 'Converting…' : 'Download Word File'}
+                            {isProcessing ? t('converting') : t('downloadBtn')}
                         </button>
 
                         <button
@@ -174,14 +175,14 @@ const PdfToDocxTool = memo(() => {
                             className="w-full h-10 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-all rounded-sm"
                         >
                             <RefreshCw className="w-3.5 h-3.5 inline mr-2" />
-                            Start Over
+                            {t('startOver')}
                         </button>
                     </div>
 
                     <div className="border border-zinc-800 bg-zinc-950 p-4 space-y-1">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">How This Works</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">{t('howThisWorks')}</span>
                         <p className="text-[11px] text-zinc-600 leading-relaxed">
-                            Your PDF text is extracted directly in the browser and saved as a Word file. Nothing is uploaded.
+                            {t('howThisWorksDesc')}
                         </p>
                     </div>
                 </div>
@@ -220,9 +221,9 @@ const PdfToDocxTool = memo(() => {
                                     <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                            {isDragActive ? tc('dropActive') : t('dropTitle')}
                                         </p>
-                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +281,7 @@ const PdfToDocxTool = memo(() => {
                             {docxBlobUrl && !isProcessing && (
                                 <div className="flex items-center gap-3 p-4 border border-white/10 bg-white/[0.02] text-white">
                                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                                    <p className="text-xs font-bold uppercase tracking-widest">Ready to Download</p>
+                                    <p className="text-xs font-bold uppercase tracking-widest">{t('readyToDownload')}</p>
                                 </div>
                             )}
                         </motion.div>

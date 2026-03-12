@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { FileText, Download, Trash2, Shield, Hash, ListOrdered, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -11,6 +11,7 @@ import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 
 const NumberTool = memo(() => {
     const t = useTranslations("Tools.numberPages");
+    const tc = useTranslations("Tools.common");
     const [file, setFile] = useState<File | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [position, setPosition] = useState<'bottom-center' | 'bottom-right' | 'bottom-left'>('bottom-center');
@@ -40,6 +41,7 @@ const NumberTool = memo(() => {
 
             pages.forEach((page, index) => {
                 const { width, height } = page.getSize();
+                // We could use a translation key for this too if needed, e.g. t('pageOf', { current: index + 1, total: totalPages })
                 const text = `Page ${index + 1} of ${totalPages}`;
                 const fontSize = 10;
                 const textWidth = font.widthOfTextAtSize(text, fontSize);
@@ -63,7 +65,7 @@ const NumberTool = memo(() => {
 
             const link = document.createElement("a");
             link.href = url;
-            link.download = `numbered-${file.name}`;
+            link.download = `privaflow_numbered_${file.name}`;
             link.click();
         } catch (err) {
             console.error("Numbering Error:", err);
@@ -73,6 +75,12 @@ const NumberTool = memo(() => {
     }, [file, position]);
 
     const clear = useCallback(() => setFile(null), []);
+
+    const howItWorks = useMemo(() => [
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -123,6 +131,7 @@ const NumberTool = memo(() => {
                     </div>
                 )
             }
+            howItWorks={howItWorks}
         >
             <div className="w-full">
                 <AnimatePresence mode="wait">
@@ -146,7 +155,7 @@ const NumberTool = memo(() => {
                                 </div>
                                 <div className="text-center space-y-2">
                                     <p className="text-xl font-black text-white uppercase tracking-tighter">
-                                        {isDragActive ? t('dropToNumber') : t('dropTitle')}
+                                        {isDragActive ? tc('dropActive') : t('dropTitle')}
                                     </p>
                                     <p className="text-sm text-zinc-500 font-bold uppercase tracking-widest">{t('dropDesc')}</p>
                                 </div>
@@ -170,14 +179,14 @@ const NumberTool = memo(() => {
                                     </div>
                                     <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
                                         <Shield className="w-3 h-3 text-emerald-500" />
-                                        <span className="text-[9px] font-black text-emerald-500 uppercase">Secure</span>
+                                        <span className="text-[9px] font-black text-emerald-500 uppercase">{tc('local')}</span>
                                     </div>
                                 </div>
 
                                 <div className="w-full flex gap-4 items-center justify-center py-10 bg-black/40 border border-white/5 rounded-xl">
                                     <div className="flex flex-col items-center gap-1.5 opacity-30">
                                         <div className="w-20 h-28 bg-white/10 border border-white/10 relative">
-                                            <div className="absolute bottom-2 left-0 right-0 text-center text-[7px] font-black text-white/40">Page 1</div>
+                                            <div className="absolute bottom-2 left-0 right-0 text-center text-[7px] font-black text-white/40">{t('pageLabel', { num: 1 })}</div>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-center gap-1.5">
@@ -192,20 +201,20 @@ const NumberTool = memo(() => {
                                                 "absolute bottom-3 font-black text-emerald-500 text-[8px] uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded",
                                                 position === 'bottom-left' ? "left-3" : position === 'bottom-right' ? "right-3" : "left-1/2 -translate-x-1/2"
                                             )}>
-                                                Page 2
+                                                {t('pageLabel', { num: 2 })}
                                             </div>
                                         </div>
                                     </div>
                                     <div className="flex flex-col items-center gap-1.5 opacity-30">
                                         <div className="w-20 h-28 bg-white/10 border border-white/10 relative">
-                                            <div className="absolute bottom-2 left-0 right-0 text-center text-[7px] font-black text-white/40">Page 3</div>
+                                            <div className="absolute bottom-2 left-0 right-0 text-center text-[7px] font-black text-white/40">{t('pageLabel', { num: 3 })}</div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="text-center space-y-1">
-                                    <p className="text-xs font-black text-white uppercase tracking-widest">Verify numbering layout</p>
-                                    <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest opacity-60">Numbers will be applied to every page of the document.</p>
+                                    <p className="text-xs font-black text-white uppercase tracking-widest">{t('verifyLayout')}</p>
+                                    <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest opacity-60">{t('layoutDesc')}</p>
                                 </div>
                             </div>
                         </motion.div>

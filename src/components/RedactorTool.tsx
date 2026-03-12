@@ -50,7 +50,10 @@ interface RedactionBox {
  */
 const RedactorTool = memo(() => {
     // 📂 STATE ORCHESTRATION
+    const t = useTranslations('Tools.redact');
+    const commonT = useTranslations('Tools.common');
     const [file, setFile] = useState<File | null>(null);
+    // ... rest of state
     const [redactions, setRedactions] = useState<RedactionBox[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isDrawing, setIsDrawing] = useState(false);
@@ -232,8 +235,8 @@ const RedactorTool = memo(() => {
 
     return (
         <ToolContainer
-            title="Redact PDF"
-            description="Permanently destroy sensitive data in document vectors."
+            title={t('title')}
+            description={t('description')}
             icon={Eraser}
             category="vault"
             toolId="redactor"
@@ -241,7 +244,7 @@ const RedactorTool = memo(() => {
                 <div className="space-y-10">
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">Active Layers</span>
+                            <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">{t('activeLayers')}</span>
                             <span className="text-xl font-black text-white">{redactions.length}</span>
                         </div>
                         <div className="h-1 bg-zinc-900 w-full overflow-hidden">
@@ -255,7 +258,7 @@ const RedactorTool = memo(() => {
                             disabled={isProcessing || redactions.length === 0}
                             className="w-full h-14 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-xs transition-all active:scale-95"
                         >
-                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : "Burn & Export PDF"}
+                            {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : t('burnBtn')}
                         </Button>
 
                         <Button
@@ -264,21 +267,21 @@ const RedactorTool = memo(() => {
                             disabled={isProcessing || redactions.length === 0}
                             className="w-full h-14 border-zinc-800 text-zinc-400 hover:text-white hover:border-white font-black uppercase tracking-widest text-xs transition-all"
                         >
-                            Clear Selection
+                            {t('clearBtn')}
                         </Button>
 
                         {file && (
                             <button onClick={resetTool} className="w-full text-[10px] font-black text-zinc-600 uppercase tracking-widest hover:text-white transition-colors">
-                                Reset Workspace
+                                {t('resetBtn')}
                             </button>
                         )}
                     </div>
                 </div>
             }
             howItWorks={[
-                { title: 'Upload Your PDF', description: 'Drop any PDF that has text or info you want to hide permanently.' },
-                { title: 'Draw Over the Text', description: 'Click and drag a box over any word, name, number, or section you want removed.' },
-                { title: 'Download the Redacted File', description: 'Save the cleaned PDF — the hidden parts are gone forever, not just covered.' }
+                { title: t('howItWorks.0.title'), description: t('howItWorks.0.description') },
+                { title: t('howItWorks.1.title'), description: t('howItWorks.1.description') },
+                { title: t('howItWorks.2.title'), description: t('howItWorks.2.description') }
             ]}
         >
             <div className="w-full">
@@ -291,9 +294,9 @@ const RedactorTool = memo(() => {
                         <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                         <div className="text-center">
                             <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                {isDragActive ? commonT('dropAnywhere') : t('dropTitle')}
                             </p>
-                            <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                            <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
                         </div>
                     </div>
                 ) : (

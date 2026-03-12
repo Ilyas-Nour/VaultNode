@@ -13,7 +13,7 @@ const StampTool = memo(() => {
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [isProcessing, setIsProcessing] = useState(false);
-    const [stampText, setStampText] = useState("PrivaFlow Secured");
+    const [stampText, setStampText] = useState(t('defaultText'));
     const [stampColor, setStampColor] = useState("#ffffff");
     const [stampOpacity, setStampOpacity] = useState(0.5);
     const [sigPos, setSigPos] = useState({ x: 50, y: 50 });
@@ -81,19 +81,25 @@ const StampTool = memo(() => {
             const dataUrl = canvas.toDataURL("image/png");
             const link = document.createElement("a");
             link.href = dataUrl;
-            link.download = `stamped-${file.name}`;
+            link.download = `privaflow_stamped_${file.name}`;
             link.click();
         } catch (err) {
             console.error("Export Error:", err);
         } finally {
             setIsProcessing(false);
         }
-    }, [file, previewUrl, sigPos, stampText, stampColor, stampOpacity]);
+    }, [file, previewUrl, sigPos, stampText, stampColor, stampOpacity, fontSize]);
 
     const clear = useCallback(() => {
         setFile(null);
         setPreviewUrl(null);
     }, []);
+
+    const howItWorks = React.useMemo(() => [
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -102,6 +108,7 @@ const StampTool = memo(() => {
             icon={Stamp}
             category="media"
             toolId="stamp"
+            howItWorks={howItWorks}
             settingsContent={
                 file && (
                     <div className="space-y-6">
@@ -253,11 +260,11 @@ const StampTool = memo(() => {
                                                     textShadow: '0 2px 4px rgba(0,0,0,0.5)'
                                                 }}
                                             >
-                                                {stampText || "STAMP"}
+                                                {stampText || t('stampPlaceholder')}
                                             </div>
                                             <div className="absolute -inset-1 border border-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[8px] font-black uppercase px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
-                                                Drag to place
+                                                {t('dragHint')}
                                             </div>
                                         </div>
                                     </motion.div>

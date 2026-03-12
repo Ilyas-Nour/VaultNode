@@ -152,10 +152,10 @@ const PdfSplitTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Upload Your PDF', description: 'Drop the big PDF you want to cut into smaller pieces.' },
-        { title: 'Choose Which Pages to Keep', description: 'Type a page range like "1-5" or pick specific pages. You decide what goes into each new file.' },
-        { title: 'Download Your Split Files', description: 'Each section downloads as its own PDF, ready to share or send separately.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -168,18 +168,18 @@ const PdfSplitTool = memo(() => {
                 <div className="space-y-6">
                     {/* 🔘 EXTRACTION LOGIC HUB */}
                     <div className="space-y-3.5">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Extraction Logic</span>
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('extractionLogic')}</span>
                         <div className="space-y-2.5">
                             <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
-                                <label className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Page Range</label>
+                                <label className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('pageRange')}</label>
                                 <input
                                     type="text"
                                     value={range}
                                     onChange={(e) => setRange(e.target.value)}
-                                    placeholder="e.g. 1-3, 5, 8-10"
+                                    placeholder={t('rangePlaceholder')}
                                     className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm font-bold text-white focus:outline-none focus:border-emerald-500 transition-all italic placeholder:text-zinc-800"
                                 />
-                                <p className="text-[10px] text-zinc-600 font-bold uppercase italic leading-tight">Leave empty to extract all pages as individual files.</p>
+                                <p className="text-[10px] text-zinc-600 font-bold uppercase italic leading-tight">{t('rangeHint')}</p>
                             </div>
                         </div>
                     </div>
@@ -192,7 +192,7 @@ const PdfSplitTool = memo(() => {
                             className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
                             {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Scissors className="w-5 h-5 me-2" />}
-                            {isProcessing ? "Processing..." : "Extract Pages"}
+                            {isProcessing ? tc('processing') : t('extractBtn')}
                         </Button>
 
                         {splitBlob && (
@@ -201,7 +201,7 @@ const PdfSplitTool = memo(() => {
                                 className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all shadow-xl"
                             >
                                 <Download className="w-4 h-4 me-2" />
-                                Download {isZip ? "ZIP Package" : "Extracted PDF"}
+                                {isZip ? t('downloadZip') : t('downloadPdf')}
                             </Button>
                         )}
                     </div>
@@ -210,11 +210,10 @@ const PdfSplitTool = memo(() => {
                     <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">In-Browser Split</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{t('inBrowserSplit')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
-                            Your document is parsed and re-composed entirely privately.
-                            No persistent file system writes occur.
+                            {t('splitDesc')}
                         </p>
                     </div>
                 </div>
@@ -243,9 +242,9 @@ const PdfSplitTool = memo(() => {
                                 <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                        {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                        {isDragActive ? tc('dropActive') : t('dropTitle')}
                                     </p>
-                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{tc('dropOnly')}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -264,7 +263,7 @@ const PdfSplitTool = memo(() => {
                                     <p className="text-xs text-zinc-600">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
                                 </div>
                                 <button onClick={() => setFile(null)} className="text-xs font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors">
-                                    Change
+                                    {tc('change')}
                                 </button>
                             </div>
 
@@ -279,10 +278,10 @@ const PdfSplitTool = memo(() => {
                                 <div className="flex items-center gap-3 p-4 border border-white/10 bg-white/[0.02]">
                                     <div className="flex items-center gap-3 flex-1">
                                         <div className="w-2 h-2 rounded-full bg-white" />
-                                        <span className="text-xs font-bold text-white uppercase tracking-widest">Split Complete</span>
+                                        <span className="text-xs font-bold text-white uppercase tracking-widest">{t('splitComplete')}</span>
                                     </div>
                                     <div className="flex gap-4 text-xs text-zinc-500">
-                                        <span>{isZip ? 'ZIP Archive' : 'Single PDF'}</span>
+                                        <span>{isZip ? t('zipArchive') : t('singlePdf')}</span>
                                         <span>{(splitBlob.size / 1024 / 1024).toFixed(2)} MB</span>
                                     </div>
                                 </div>
@@ -291,7 +290,7 @@ const PdfSplitTool = memo(() => {
                             {isProcessing && (
                                 <div className="flex items-center gap-3">
                                     <RefreshCw className="w-4 h-4 text-white animate-spin" />
-                                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Splitting…</span>
+                                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{t('splitting')}</span>
                                 </div>
                             )}
                         </motion.div>

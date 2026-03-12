@@ -356,32 +356,35 @@
                 "privacy": "Privacy",
                 "zero": "Zero Uploads"
             },
-            "dropActive": "Drop it here"
+            "dropActive": "Drop it here",
+            "change": "Change",
+            "ready": "Ready"
         },
         "redact": {
-            "title": "Hide Private Info",
-            "description": "Black out sensitive details from your documents forever.",
+            "title": "Redact PDF",
+            "description": "Permanently destroy sensitive data in document vectors.",
             "titleHighlight": "Secure Redaction",
-            "dropTitle": "Drop your document here to start hiding secrets.",
-            "dropDesc": "We'll help you paint over confidential information privately.",
-            "flattening": "Hardening the document layer...",
-            "secureExport": "Save Shielded Copy",
-            "clearAll": "Wipe Workspace",
-            "initializing": "Activating the Privacy Shield...",
-            "howItWorks": {
-                "step1": {
-                    "title": "Drop Your Document",
-                    "desc": "Select the PDF file you wish to redact. It stays safe on your machine."
+            "dropTitle": "Drop your PDF here",
+            "dropDesc": "PDF files only",
+            "activeLayers": "Active Layers",
+            "burnBtn": "Burn & Export PDF",
+            "clearBtn": "Clear Selection",
+            "resetBtn": "Reset Workspace",
+            "initializing": "Initializing Redactor…",
+            "howItWorks": [
+                {
+                    "title": "Upload Your PDF",
+                    "description": "Drop any PDF that has text or info you want to hide permanently."
                 },
-                "step2": {
-                    "title": "Mark for Redaction",
-                    "desc": "Use the selector to highlight and black out sensitive names, dates, or numbers."
+                {
+                    "title": "Draw Over the Text",
+                    "description": "Click and drag a box over any word, name, number, or section you want removed."
                 },
-                "step3": {
-                    "title": "Flatten & Save",
-                    "desc": "The document is flattened into a static layer so the hidden info can never be recovered."
+                {
+                    "title": "Download the Redacted File",
+                    "description": "Save the cleaned PDF — the hidden parts are gone forever, not just covered."
                 }
-            }
+            ]
         },
         "unlockPdf": {
             "title": "Unlock a File",
@@ -396,6 +399,19 @@
             "downloadBtn": "Save Unlocked Copy",
             "passwordLabel": "Security Key",
             "passwordPlaceholder": "Type the file's password...",
+            "alreadyUnlocked": "This PDF is not password protected. It is already unlocked.",
+            "invalidPdf": "Invalid PDF or an unexpected error occurred.",
+            "incorrectPassword": "Incorrect password. Please try again.",
+            "failedUnlock": "Failed to unlock PDF. The file might be corrupted or uses unsupported encryption.",
+            "encryption": "Encryption",
+            "protected": "Password Protected",
+            "unlockingBtn": "Unlocking...",
+            "startOver": "Start Over",
+            "privacyHint": "Your password never leaves your device. Everything runs locally in your browser.",
+            "registryLock": "Registry Lock",
+            "clearstreamRegistry": "Clearstream Registry",
+            "encryptedRegistry": "Encrypted Registry",
+            "transientMemory": "This PDF is processed in a transient memory buffer. No data survives the session.",
             "howItWorks": {
                 "step1": {
                     "title": "Select Locked PDF",
@@ -447,6 +463,17 @@
             "processing": "Capturing page buffers...",
             "convertPages": "Convert to Gallery",
             "initializing": "Calibrating the virtual camera...",
+            "renderDensity": "Render Density",
+            "standard": "Standard",
+            "highDef": "High Definition",
+            "ultraPrecision": "Ultra Precision",
+            "standardDesc": "72 DPI",
+            "highDefDesc": "144 DPI",
+            "ultraDesc": "216 DPI",
+            "newArchive": "New Archive",
+            "inBrowserPdfjs": "In-Browser PDF.js",
+            "pdfjsDesc": "Uses Mozilla's PDF.js to render slices directly to canvas. Your documents never touch our infra.",
+            "convertingPage": "Converting page {current} of {total}",
             "howItWorks": {
                 "step1": {
                     "title": "Load Your PDF",
@@ -602,6 +629,22 @@
             "dropDesc": "We'll combine them into a single file locally.",
             "processing": "Synthesizing document catalog...",
             "mergeButton": "Merge PDF Files",
+            "queueTitle": "Document Queue",
+            "queueStatus": "{count} Files Ready",
+            "merging": "Merging...",
+            "downloadMerged": "Download Merged",
+            "clearQueue": "Clear Queue",
+            "localAssembly": "Local Assembly",
+            "assemblyDesc": "Everything happens safely inside your own screen. No persistent traces left on disk or network.",
+            "filesToMerge": "Files to Merge",
+            "addMore": "Add More",
+            "readyToAppend": "Ready to Append",
+            "synthesisInProgress": "Synthesis in Progress",
+            "synthesisComplete": "Node Synthesis Complete",
+            "synthesisDesc": "Done! Everything stayed inside your screen. Your multi-node PDF is ready for export.",
+            "downloadFinal": "Download Final PDF",
+            "dropFiles": "Drop files here",
+            "dropOnly": "PDF files only",
             "howItWorks": {
                 "step1": {
                     "title": "Add Your Files",
@@ -631,6 +674,18 @@
             "dropDesc": "Selected PDF will be rendered for signing.",
             "saveBtn": "Save Signed Paper",
             "ready": "Signature Ready. Drag it on the preview.",
+            "placementTarget": "Placement Target",
+            "pageIndicator": "Page {current} of {total}",
+            "placeBtn": "Place Signature",
+            "adjustBtn": "Adjust Placement",
+            "workspaceTitle": "Signing Workspace",
+            "finishBtn": "Finish & Export",
+            "hint": "Use the arrows to flip pages. Drag your signature to the precise spot.",
+            "dragToPosition": "Drag to Position",
+            "docLoaded": "Document Loaded",
+            "pagesDetected": "{count} Pages Detected",
+            "sidebarHint": "Use the sidebar to draw your signature and place it on the document.",
+            "of": "of",
             "howItWorks": {
                 "step1": {
                     "title": "Drop Your PDF",
@@ -663,6 +718,9 @@
             "downloadBtn": "Download Stamped Image",
             "dropDesc": "We'll help you protect your visual assets.",
             "saveBtn": "Save Stamped Photo",
+            "defaultText": "PrivaFlow Secured",
+            "stampPlaceholder": "STAMP",
+            "dragHint": "Drag to place",
             "howItWorks": {
                 "step1": {
                     "title": "Upload Image",
@@ -690,6 +748,9 @@
             "downloadBtn": "Download Fixed PDF",
             "dropDesc": "We'll attempt to restore structural integrity.",
             "saveBtn": "Save Fixed File",
+            "finishBtn": "Finish Session",
+            "discardBtn": "Discard Asset",
+            "successDesc": "VaultNode logic successfully sanitized and reconstructed the PDF structure.",
             "howItWorks": {
                 "step1": {
                     "title": "Drop Corrupt PDF",
@@ -719,6 +780,9 @@
             "downloadBtn": "Download Numbered PDF",
             "dropDesc": "We'll help you organize your document.",
             "saveBtn": "Save Numbered File",
+            "pageLabel": "Page {num}",
+            "verifyLayout": "Verify numbering layout",
+            "layoutDesc": "Numbers will be applied to every page of the document.",
             "howItWorks": {
                 "step1": {
                     "title": "Upload Document",
@@ -749,6 +813,7 @@
             "delete": "Delete",
             "dropActive": "Drop to Organize",
             "dropDesc": "Drag to reorder, click to delete.",
+            "emptyQueue": "No pages left in the queue.",
             "saveBtn": "Save New File",
             "howItWorks": {
                 "step1": {
@@ -773,6 +838,19 @@
             "dropDesc": "We'll help you extract the pages you need.",
             "processing": "Extracting page buffers...",
             "splitBtn": "Extract Selected Pages",
+            "extractionLogic": "Extraction Logic",
+            "pageRange": "Page Range",
+            "rangePlaceholder": "e.g. 1-3, 5, 8-10",
+            "rangeHint": "Leave empty to extract all pages as individual files.",
+            "extractBtn": "Extract Pages",
+            "downloadZip": "Download ZIP Package",
+            "downloadPdf": "Download Extracted PDF",
+            "inBrowserSplit": "In-Browser Split",
+            "splitDesc": "Your document is parsed and re-composed entirely privately. No persistent file system writes occur.",
+            "splitting": "Splitting...",
+            "splitComplete": "Split Complete",
+            "zipArchive": "ZIP Archive",
+            "singlePdf": "Single PDF",
             "howItWorks": {
                 "step1": {
                     "title": "Choose PDF",
@@ -795,6 +873,7 @@
             "dropTitle": "Drop your iPhone photo here.",
             "dropDesc": "We'll turn it into a standard photo that works everywhere.",
             "processing": "Converting to JPG catalog...",
+            "errorDesc": "Failed to transcode HEIC. Signal integrity compromised.",
             "downloadBtn": "Save Standard Photo",
             "protocol": "Output Stream Protocol",
             "to": "to {fmt}",
@@ -830,6 +909,12 @@
             "cleanBtn": "Start Sanitization",
             "downloadBtn": "Save Sanitized Asset",
             "downloadClean": "Save Sanitized Asset",
+            "securityLevel": "Security Level",
+            "atomic": "ATOMIC",
+            "hiddenDetected": "Hidden Data Found",
+            "metadataRemoved": "Metadata Removed",
+            "original": "Original",
+            "cleaned": "Cleaned",
             "howItWorks": {
                 "step1": {
                     "title": "Select Image",
@@ -871,31 +956,182 @@
                     "title": "Store Anywhere",
                     "desc": "Copy the encrypted block. Only someone with your exact key can ever read it again."
                 }
-            }
+            },
+            "decryptTitle": "Text Decryptor",
+            "cryptoProtocol": "Crypto Protocol",
+            "encryptionMode": "Encryption Mode",
+            "decryptionMode": "Decryption Mode",
+            "securityKey": "Security Key",
+            "enterPassword": "Enter password...",
+            "processing": "Processing...",
+            "lockMessage": "Lock Message",
+            "unlockMessage": "Unlock Message",
+            "cryptoApi": "Web Crypto API",
+            "cryptoDesc": "Uses PBKDF2 for key derivation and AES-256-GCM for authenticated encryption. Keys never leave browser memory.",
+            "sourceNode": "Source Node",
+            "encryptedBuffer": "Encrypted Buffer",
+            "awaitingNode": "Awaiting Node Synthesis",
+            "cipherIntegrity": "Cipher Integrity Active",
+            "volatileKey": "Volatile Key Store",
+            "encryptLabel": "Text Encryptor",
+            "decryptLabel": "Text Decryptor",
+            "sourcePlaceholderLock": "Enter raw text to encrypt...",
+            "sourcePlaceholderUnlock": "Paste cipher text here...",
+            "inputLabel": "Source Node",
+            "outputLabel": "Encrypted Buffer"
         },
         "blur": {
-            "title": "Visual Privacy Blur",
-            "description": "Hide faces or sensitive objects in your pictures with a magic brush.",
+            "title": "Image Enhancer",
+            "description": "Sharpen blurry photos or smooth noise — your image stays on your device, never uploaded.",
             "titleHighlight": "Aesthetic Blur",
-            "dropTitle": "Drop your photo here.",
-            "dropDesc": "We'll help you hide faces or private details with a magic brush.",
-            "processing": "Applying privacy blur...",
-            "downloadBtn": "Save Blurred Image",
-            "clearAll": "Wipe Canvas",
-            "howItWorks": {
-                "step1": {
-                    "title": "Open Image",
-                    "desc": "Select the photo containing info you want to hide (like faces or license plates)."
+            "intensity": "Blur Intensity",
+            "applyBtn": "Apply Buffer Blur",
+            "downloadBtn": "Download Node",
+            "resetBtn": "New Sequence",
+            "synthesizing": "Synthesizing...",
+            "encoding": "Encoding Node",
+            "sandbox": "Canvas Sandbox",
+            "sandboxDesc": "Pixels are transformed in a volatile HTML5 canvas. Zero persistent artifacts.",
+            "original": "Original",
+            "output": "Synthesized Output",
+            "monitor": "Live Monitor",
+            "protocol": "Gaussian Protocol",
+            "integrity": "Local Integrity",
+            "howItWorks": [
+                {
+                    "title": "Drop Your Image",
+                    "description": "Pick any photo you want to sharpen or fix. It stays on your device — nothing is uploaded."
                 },
-                "step2": {
-                    "title": "Apply Mask",
-                    "desc": "Use your mouse to paint over the sensitive zones. We apply a heavy Gaussian blur."
+                {
+                    "title": "Adjust the Strength",
+                    "description": "Use the slider to control how sharp the result should be. More strength means a clearer image."
                 },
-                "step3": {
-                    "title": "Secure Export",
-                    "desc": "The blurred pixels are merged into a new image. Your privacy is now baked in."
+                {
+                    "title": "Save the Result",
+                    "description": "Click process and download your enhanced image instantly."
                 }
-            }
+            ]
+        }
+    },
+    "VisualProof": {
+        "label": "Visual Evidence",
+        "integrity": "Full Bit Integrity",
+        "metadata": "Zero Cloud Metadata",
+        "redactor": {
+            "before": "Original Source",
+            "after": "Sanitized Data"
+        },
+        "cleanExif": {
+            "before": "Embedded Metadata",
+            "after": "Anonymized Raw",
+            "manifest": "Metadata manifest",
+            "validation": "Validation Passed",
+            "noSensitive": "No Sensitive Strings Detected",
+            "removed": "[REMOVED]"
+        },
+        "blur": {
+            "before": "Obfuscated",
+            "after": "Enhanced Depth",
+            "lowFid": "Low Fidelity",
+            "ultraRes": "Ultra Resolution"
+        },
+        "encrypt": {
+            "before": "Global Plaintext",
+            "after": "256-Bit Encrypted",
+            "origin": "Origin",
+            "subject": "Subject",
+            "confidential": "CONFIDENTIAL MEMO",
+            "algorithm": "XTS-AES-256 · Galois Counter Mode",
+            "chains": "... [BLOCK CHAINS CONTINUED] ...",
+            "isolated": "Cryptographically Isolated"
+        },
+        "password": {
+            "before": "Weak Credentials",
+            "after": "Perfect Entropy",
+            "compromised": "Compromised",
+            "resistant": "Brute-force resistant: ZERO",
+            "quantum": "128-bit Entropy · Quantum Ready"
+        },
+        "merger": {
+            "before": "3 Separate Files",
+            "after": "1 Merged Document",
+            "unified": "3 files unified"
+        },
+        "heic": {
+            "before": "HEIC (Apple Format)",
+            "after": "Universal JPEG",
+            "proprietary": "Proprietary",
+            "universal": "Universal",
+            "incompatible": "✗ Incompatible with Windows/Android",
+            "compatible": "✓ Cross-Platform Compatible"
+        },
+        "unlock": {
+            "before": "Password Protected",
+            "after": "Unlocked & Free",
+            "restricted": "Restricted Access",
+            "restored": "Standard PDF Permissions Restored"
+        },
+        "svgToPng": {
+            "before": "SVG Vector",
+            "after": "PNG Raster",
+            "geometry": "Code-defined Geometry",
+            "bitmaps": "High-Resolution Bitmaps",
+            "alpha": "Alpha Channel preserved"
+        },
+        "pdfToDocx": {
+            "before": "Locked PDF",
+            "after": "Editable DOCX",
+            "static": "STATIC · READ ONLY",
+            "interactive": "✏️ INTERACTIVE · EDITABLE"
+        },
+        "pdfToImg": {
+            "before": "PDF Document",
+            "after": "PNG Pages",
+            "multipage": "Multi-page PDF Document",
+            "lossless": "300 DPI · Lossless Assets"
+        },
+        "pdfSplit": {
+            "before": "Single PDF",
+            "after": "Split into Ranges",
+            "master": "64 Page Master"
+        },
+        "mediaConverter": {
+            "before": "Container: MP4",
+            "after": "Codec: AAC / MP3",
+            "transcoder": "Engaging Transcoder",
+            "vaultSecure": "Vault Secure Out"
+        },
+        "sign": {
+            "before": "Empty Line",
+            "after": "Signed Document",
+            "authorized": "Authorized Person",
+            "signature": "Signature"
+        },
+        "stamp": {
+            "before": "Original Asset",
+            "after": "Authenticated",
+            "stamped": "Authenticity Stamped"
+        },
+        "repair": {
+            "before": "Broken Data",
+            "after": "Fixed File",
+            "integrityFailure": "Structural Integrity Failure",
+            "recovered": "Object Stream Recovered",
+            "rebuilt": "Cross-Ref Table Rebuilt · 100% Fixed"
+        },
+        "numberPages": {
+            "before": "No Numbers",
+            "after": "Numbered Pages"
+        },
+        "organizePages": {
+            "before": "Jumbled",
+            "after": "Sorted"
+        },
+        "compress": {
+            "heavy": "Heavy: 18.5 MB",
+            "modern": "Modern: 1.2 MB",
+            "lossy": "Lossy Padding",
+            "advanced": "Advanced LZ-Optimized"
         }
     },
     "SecurityProof": {

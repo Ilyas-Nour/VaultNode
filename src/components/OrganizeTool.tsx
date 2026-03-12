@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, memo, useEffect, useRef } from "react";
+import React, { useState, useCallback, memo, useEffect, useRef, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 import { FileText, Download, Trash2, LayoutGrid, GripVertical, Loader2, Shield } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -18,6 +18,7 @@ interface PageItem {
 
 const OrganizeTool = memo(() => {
     const t = useTranslations("Tools.organizePages");
+    const tc = useTranslations("Tools.common");
     const [file, setFile] = useState<File | null>(null);
     const [pages, setPages] = useState<PageItem[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
@@ -98,7 +99,7 @@ const OrganizeTool = memo(() => {
 
             const link = document.createElement("a");
             link.href = url;
-            link.download = `organized-${file.name}`;
+            link.download = `privaflow_organized_${file.name}`;
             link.click();
         } catch (err) {
             console.error("Export Error:", err);
@@ -111,6 +112,12 @@ const OrganizeTool = memo(() => {
         setFile(null);
         setPages([]);
     }, []);
+
+    const howItWorks = useMemo(() => [
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -143,6 +150,7 @@ const OrganizeTool = memo(() => {
                     </div>
                 )
             }
+            howItWorks={howItWorks}
         >
             <div className="w-full">
                 <AnimatePresence mode="wait">
@@ -166,7 +174,7 @@ const OrganizeTool = memo(() => {
                                 </div>
                                 <div className="text-center space-y-2">
                                     <p className="text-xl font-black text-white uppercase tracking-tighter">
-                                        {isDragActive ? t('dropActive') : t('dropTitle')}
+                                        {isDragActive ? tc('dropActive') : t('dropTitle')}
                                     </p>
                                     <p className="text-xs text-zinc-500 font-bold uppercase tracking-widest mt-1">{t('dropDesc')}</p>
                                 </div>
@@ -190,38 +198,44 @@ const OrganizeTool = memo(() => {
                                         axis="y"
                                         values={pages}
                                         onReorder={setPages}
-                                        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                                        className="space-y-3"
                                     >
                                         {pages.map((item, index) => (
                                             <Reorder.Item
-                                                dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
                                                 key={item.id}
                                                 value={item}
-                                                className="relative group aspect-[3/4] bg-zinc-900 border border-white/5 cursor-grab active:cursor-grabbing hover:border-emerald-500/50 transition-all overflow-hidden flex flex-col"
+                                                className="relative group bg-zinc-900 border border-white/5 cursor-grab active:cursor-grabbing hover:border-emerald-500/30 transition-all overflow-hidden flex items-center p-3 gap-6 rounded-xl"
                                             >
-                                                <div className="absolute top-2 left-2 z-10 w-6 h-6 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center text-[10px] font-black text-white border border-white/10 shadow-xl">
-                                                    {index + 1}
+                                                <div className="flex items-center gap-4 shrink-0">
+                                                    <div className="text-zinc-700 group-hover:text-zinc-500 transition-colors">
+                                                        <GripVertical className="w-5 h-5" />
+                                                    </div>
+                                                    <div className="w-8 h-8 bg-black/40 backdrop-blur-md rounded-lg flex items-center justify-center text-[11px] font-black text-white border border-white/10 shadow-xl">
+                                                        {index + 1}
+                                                    </div>
                                                 </div>
 
-                                                <div className="flex-1 w-full bg-white flex items-center justify-center overflow-hidden">
-                                                    <img src={item.thumbnail} className="w-full h-full object-contain pointer-events-none select-none" alt={`Page ${index + 1}`} />
+                                                <div className="w-20 aspect-[3/4] bg-white rounded-md flex items-center justify-center overflow-hidden shrink-0 shadow-2xl">
+                                                    <img src={item.thumbnail} className="w-full h-full object-contain pointer-events-none select-none" alt={`${t('pageLabel')} ${index + 1}`} />
                                                 </div>
 
-                                                <div className="p-2 bg-zinc-900 flex items-center justify-between">
-                                                    <span className="text-[9px] font-black text-zinc-400 uppercase tracking-widest">{t('pageLabel')} {index + 1}</span>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-sm font-black text-white uppercase tracking-tight truncate">{t('pageLabel')} {index + 1}</p>
+                                                    <p className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest mt-0.5">{tc('ready')}</p>
+                                                </div>
+
+                                                <div className="flex items-center gap-2">
                                                     <button
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             removePage(item.id);
                                                         }}
-                                                        className="p-1 hover:bg-red-500/20 text-zinc-600 hover:text-red-500 transition-colors rounded-sm"
+                                                        className="w-10 h-10 flex items-center justify-center hover:bg-red-500/20 text-zinc-600 hover:text-red-500 transition-colors rounded-xl"
                                                         title={t('delete')}
                                                     >
-                                                        <Trash2 className="w-3 h-3" />
+                                                        <Trash2 className="w-4 h-4" />
                                                     </button>
                                                 </div>
-
-                                                <div className="absolute inset-x-0 bottom-0 h-1 bg-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                                             </Reorder.Item>
                                         ))}
                                     </Reorder.Group>
@@ -229,7 +243,7 @@ const OrganizeTool = memo(() => {
                                     {pages.length === 0 && (
                                         <div className="py-20 text-center space-y-4">
                                             <Trash2 className="w-10 h-10 text-white/5 mx-auto" />
-                                            <p className="text-[10px] text-zinc-600 font-black uppercase tracking-widest">No pages left in the queue.</p>
+                                            <p className="text-[10px] text-zinc-600 font-black uppercase tracking-widest">{t('emptyQueue')}</p>
                                         </div>
                                     )}
                                 </div>

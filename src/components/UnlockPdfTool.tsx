@@ -29,6 +29,7 @@ import { cn } from "@/lib/utils";
 const UnlockPdfTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
     const t = useTranslations("Tools.unlockPdf");
+    const tc = useTranslations("Tools.common");
 
     // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
@@ -46,15 +47,15 @@ const UnlockPdfTool = memo(() => {
     const checkPdf = useCallback(async (buffer: ArrayBuffer) => {
         try {
             await PDFDocument.load(buffer);
-            setErrorMsg("This PDF is not password protected. It is already unlocked.");
+            setErrorMsg(t('alreadyUnlocked'));
         } catch (e: any) {
             if (e.message && e.message.includes("encrypted")) {
                 setErrorMsg(null);
             } else {
-                setErrorMsg("Invalid PDF or an unexpected error occurred.");
+                setErrorMsg(t('invalidPdf'));
             }
         }
-    }, []);
+    }, [t]);
 
     /**
      * 📂 Queue Management
@@ -104,14 +105,14 @@ const UnlockPdfTool = memo(() => {
             setUnlockedBlob(blob);
         } catch (error: any) {
             if (error.message && error.message.includes("password")) {
-                setErrorMsg("Incorrect password. Please try again.");
+                setErrorMsg(t('incorrectPassword'));
             } else {
-                setErrorMsg("Failed to unlock PDF. The file might be corrupted or uses unsupported encryption.");
+                setErrorMsg(t('failedUnlock'));
             }
         } finally {
             setIsProcessing(false);
         }
-    }, [fileBuffer, password]);
+    }, [fileBuffer, password, t]);
 
     const handleDownload = useCallback(() => {
         if (!unlockedBlob || !originalFile) return;
@@ -131,10 +132,10 @@ const UnlockPdfTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Upload Your Locked PDF', description: 'Drop the PDF file that is password-protected or has printing/editing restrictions.' },
-        { title: 'Enter the Password (if you have it)', description: 'If the PDF requires a password to open, type it in. If it just has restrictions, skip this step.' },
-        { title: 'Download the Unlocked File', description: 'Get a fully usable PDF — you can now open, copy, print, and edit it freely.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -148,10 +149,10 @@ const UnlockPdfTool = memo(() => {
 
                     {/* Encryption method indicator */}
                     <div className="flex items-center justify-between p-3 border border-zinc-800">
-                        <span className="text-xs font-bold text-zinc-400">Encryption</span>
+                        <span className="text-xs font-bold text-zinc-400">{t('encryption')}</span>
                         <div className="flex items-center gap-2">
                             <ShieldCheck className="w-3.5 h-3.5 text-white" />
-                            <span className="text-xs font-bold text-white">Password Protected</span>
+                            <span className="text-xs font-bold text-white">{t('protected')}</span>
                         </div>
                     </div>
 
@@ -163,7 +164,7 @@ const UnlockPdfTool = memo(() => {
                             className="w-full h-11 bg-white hover:bg-zinc-100 text-black font-bold text-xs uppercase tracking-widest transition-all active:scale-95"
                         >
                             {isProcessing ? <Loader2 className="w-4 h-4 animate-spin me-2" /> : <Unlock className="w-4 h-4 me-2" />}
-                            {isProcessing ? 'Unlocking…' : 'Unlock PDF'}
+                            {isProcessing ? t('unlockingBtn') : t('unlockBtn')}
                         </Button>
 
                         <Button
@@ -172,7 +173,7 @@ const UnlockPdfTool = memo(() => {
                             className="w-full h-11 border-zinc-800 text-zinc-500 hover:text-white hover:bg-zinc-900 text-xs font-bold uppercase tracking-widest"
                         >
                             <RefreshCw className="w-4 h-4 me-2" />
-                            Start Over
+                            {t('startOver')}
                         </Button>
                     </div>
 
@@ -180,7 +181,7 @@ const UnlockPdfTool = memo(() => {
                     <div className="flex items-start gap-3 p-3 border border-zinc-800/50">
                         <Key className="w-3.5 h-3.5 text-zinc-500 mt-0.5 shrink-0" />
                         <p className="text-[11px] text-zinc-500 leading-relaxed">
-                            Your password never leaves your device. Everything runs locally in your browser.
+                            {t('privacyHint')}
                         </p>
                     </div>
                 </div>
@@ -220,9 +221,9 @@ const UnlockPdfTool = memo(() => {
                                     <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? 'Drop it here' : 'Drop your locked PDF here'}
+                                            {isDragActive ? tc('dropActive') : t('dropTitle')}
                                         </p>
-                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -242,10 +243,10 @@ const UnlockPdfTool = memo(() => {
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="text-base font-black uppercase tracking-tighter text-white truncate">{originalFile.name}</p>
-                                        <p className="text-xs font-bold uppercase text-zinc-500">{(originalFile.size / 1024 / 1024).toFixed(2)} MB &bull; Encrypted Registry</p>
+                                        <p className="text-xs font-bold uppercase text-zinc-500">{(originalFile.size / 1024 / 1024).toFixed(2)} MB &bull; {t('encryptedRegistry')}</p>
                                     </div>
                                     <Button variant="ghost" size="sm" onClick={resetTool} className="text-zinc-500 hover:text-white uppercase tracking-widest text-xs font-black italic">
-                                        Change
+                                        {tc('change')}
                                     </Button>
                                 </div>
 
@@ -311,7 +312,7 @@ const UnlockPdfTool = memo(() => {
                                             <div className="flex items-center gap-4 p-5 bg-emerald-500/5 border border-emerald-500/10 rounded-2xl">
                                                 <Info className="w-6 h-6 text-emerald-500 shrink-0" />
                                                 <p className="text-[11px] text-zinc-500 font-bold leading-tight uppercase">
-                                                    This PDF is processed in a transient memory buffer. No data survives the session.
+                                                    {t('transientMemory')}
                                                 </p>
                                             </div>
                                         </motion.div>
@@ -322,12 +323,12 @@ const UnlockPdfTool = memo(() => {
                             {/* 📟 FLOW METRICS */}
                             <div className="flex items-center gap-12 px-10 py-5 bg-zinc-900/80 border border-zinc-800 rounded-3xl shadow-xl">
                                 <div className="flex flex-col items-center gap-2">
-                                    <span className="text-[10px] font-black text-zinc-600 uppercase">Registry Lock</span>
+                                    <span className="text-[10px] font-black text-zinc-600 uppercase">{t('registryLock')}</span>
                                     <Unlock className="w-6 h-6 text-zinc-500" />
                                 </div>
                                 <RefreshCw className={cn("w-6 h-6 text-emerald-500", isProcessing && "animate-spin")} />
                                 <div className="flex flex-col items-center gap-2">
-                                    <span className="text-[10px] font-black text-zinc-600 uppercase">Clearstream Registry</span>
+                                    <span className="text-[10px] font-black text-zinc-600 uppercase">{t('clearstreamRegistry')}</span>
                                     <ShieldCheck className="w-6 h-6 text-emerald-500" />
                                 </div>
                             </div>

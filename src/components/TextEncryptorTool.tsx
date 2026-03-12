@@ -29,7 +29,8 @@ import { cn } from "@/lib/utils";
  */
 const TextEncryptorTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
-    const t = useTranslations("Tools.common");
+    const t = useTranslations("Tools.encrypt");
+    const tc = useTranslations("Tools.common");
 
     // 📂 STATE ORCHESTRATION
     const [input, setInput] = useState("");
@@ -101,11 +102,11 @@ const TextEncryptorTool = memo(() => {
             }
         } catch (error) {
             console.error("Crypto error:", error);
-            setOutput("ERROR: Invalid cipher or incorrect key.");
+            setOutput(tc('error'));
         } finally {
             setIsProcessing(false);
         }
-    }, [input, password, isLockMode]);
+    }, [input, password, isLockMode, tc]);
 
     const handleCopy = useCallback(() => {
         navigator.clipboard.writeText(output);
@@ -115,15 +116,15 @@ const TextEncryptorTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Type Your Message', description: 'Write or paste any text you want to protect — a note, password, or private message.' },
-        { title: 'Set a Password', description: 'Choose a password that only you (and whoever you share it with) will know.' },
-        { title: 'Encrypt or Decrypt', description: 'Hit Encrypt to scramble your text, or paste encrypted text with the same password to read it again.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
-            title={isLockMode ? "Text Encryptor" : "Text Decryptor"}
-            description="Military-grade AES-GCM encryption for your sensitive messages."
+            title={isLockMode ? t('encryptLabel') : t('decryptLabel')}
+            description={t('description')}
             icon={isLockMode ? Lock : Unlock}
             category="vault"
             toolId="encrypt"
@@ -131,11 +132,11 @@ const TextEncryptorTool = memo(() => {
                 <div className="space-y-6">
                     {/* 🔘 OPERATION MODE SELECTOR */}
                     <div className="space-y-4">
-                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">Crypto Protocol</span>
+                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('cryptoProtocol')}</span>
                         <div className="space-y-2">
                             {[
-                                { val: true, label: "Encryption Mode", icon: Lock },
-                                { val: false, label: "Decryption Mode", icon: Unlock },
+                                { val: true, label: t('encryptionMode'), icon: Lock },
+                                { val: false, label: t('decryptionMode'), icon: Unlock },
                             ].map((m) => (
                                 <button
                                     key={m.label}
@@ -157,14 +158,14 @@ const TextEncryptorTool = memo(() => {
                     {/* 🕹️ ACTIONS CONTROL HUB */}
                     <div className="space-y-3 pt-2">
                         <div className="space-y-2">
-                            <label className="text-xs font-black uppercase tracking-widest text-zinc-500">Security Key</label>
+                            <label className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('securityKey')}</label>
                             <div className="relative">
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     className="w-full h-14 bg-zinc-950 border border-zinc-800 rounded-xl px-4 text-sm font-bold text-white focus:outline-none focus:border-emerald-500 font-mono tracking-widest"
-                                    placeholder="Enter password..."
+                                    placeholder={t('enterPassword')}
                                 />
                                 <button
                                     onClick={() => setShowPassword(!showPassword)}
@@ -181,7 +182,7 @@ const TextEncryptorTool = memo(() => {
                             className="w-full h-14 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-xs uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
                             {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : isLockMode ? <Lock className="w-5 h-5 me-2" /> : <Unlock className="w-5 h-5 me-2" />}
-                            {isProcessing ? "Processing..." : isLockMode ? "Lock Message" : "Unlock Message"}
+                            {isProcessing ? t('processing') : isLockMode ? t('lockMessage') : t('unlockMessage')}
                         </Button>
                     </div>
 
@@ -189,11 +190,10 @@ const TextEncryptorTool = memo(() => {
                     <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-4">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-xs font-black uppercase tracking-widest">Web Crypto API</span>
+                            <span className="text-xs font-black uppercase tracking-widest">{t('cryptoApi')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            Uses PBKDF2 for key derivation and AES-256-GCM for authenticated encryption.
-                            Keys never leave browser memory.
+                            {t('cryptoDesc')}
                         </p>
                     </div>
                 </div>
@@ -205,13 +205,13 @@ const TextEncryptorTool = memo(() => {
                     {/* 📟 SOURCE NODE AREA */}
                     <div className="flex flex-col space-y-3">
                         <div className="flex items-center justify-between px-2">
-                            <span className="text-xs font-black uppercase tracking-widest text-zinc-600 italic">Source Node</span>
+                            <span className="text-xs font-black uppercase tracking-widest text-zinc-600 italic">{t('sourceNode')}</span>
                             <Terminal className="w-4 h-4 text-zinc-700" />
                         </div>
                         <textarea
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
-                            placeholder={isLockMode ? "Enter raw text to encrypt..." : "Paste cipher text here..."}
+                            placeholder={isLockMode ? t('sourcePlaceholderLock') : t('sourcePlaceholderUnlock')}
                             className="flex-1 bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 text-base font-bold text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/50 resize-none transition-all scrollbar-hide"
                         />
                     </div>
@@ -219,7 +219,7 @@ const TextEncryptorTool = memo(() => {
                     {/* 📟 BUFFER OUTPUT AREA */}
                     <div className="flex flex-col space-y-3">
                         <div className="flex items-center justify-between px-2">
-                            <span className="text-xs font-black uppercase tracking-widest text-emerald-500 italic">Encrypted Buffer</span>
+                            <span className="text-xs font-black uppercase tracking-widest text-emerald-500 italic">{t('encryptedBuffer')}</span>
                             <Key className="w-4 h-4 text-emerald-500" />
                         </div>
                         <div className="flex-1 bg-zinc-950 border border-zinc-900 rounded-3xl p-6 relative group border-dashed">
@@ -243,7 +243,7 @@ const TextEncryptorTool = memo(() => {
                                                 )}
                                             >
                                                 {copied ? <Check className="w-4 h-4 me-2" /> : <Copy className="w-4 h-4 me-2" />}
-                                                {copied ? "Copied" : "Copy"}
+                                                {copied ? tc('success') : t('copyBtn')}
                                             </Button>
                                         </div>
                                     </motion.div>
@@ -252,7 +252,7 @@ const TextEncryptorTool = memo(() => {
                                         <div className="w-20 h-20 bg-zinc-900 rounded-full flex items-center justify-center border border-zinc-800 shadow-inner">
                                             {isLockMode ? <Lock className="w-8 h-8 text-zinc-700" /> : <Unlock className="w-8 h-8 text-zinc-700" />}
                                         </div>
-                                        <p className="text-xs font-black uppercase tracking-widest text-zinc-700">Awaiting Node Synthesis</p>
+                                        <p className="text-xs font-black uppercase tracking-widest text-zinc-700">{t('awaitingNode')}</p>
                                     </div>
                                 )}
                             </AnimatePresence>
@@ -264,12 +264,12 @@ const TextEncryptorTool = memo(() => {
                 <div className="flex items-center justify-center gap-10 py-5 bg-zinc-900/30 border border-zinc-900 rounded-3xl">
                     <div className="flex items-center gap-4">
                         <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse" />
-                        <span className="text-xs font-black text-zinc-500 uppercase tracking-widest">Cipher Integrity Active</span>
+                        <span className="text-xs font-black text-zinc-500 uppercase tracking-widest">{t('cipherIntegrity')}</span>
                     </div>
                     <div className="w-px h-4 bg-zinc-800" />
                     <div className="flex items-center gap-4">
                         <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse" style={{ animationDelay: '0.2s' }} />
-                        <span className="text-xs font-black text-zinc-500 uppercase tracking-widest">Volatile Key Store</span>
+                        <span className="text-xs font-black text-zinc-500 uppercase tracking-widest">{t('volatileKey')}</span>
                     </div>
                 </div>
             </div>

@@ -26,6 +26,9 @@ import { cn } from "@/lib/utils";
  * Operates by re-rendering the image onto a clean canvas buffer.
  */
 const CleanExifTool = memo(() => {
+    const t = useTranslations('Tools.cleanExif');
+    const tc = useTranslations('Tools.common');
+
     // 📂 STATE ORCHESTRATION
     const [originalFile, setOriginalFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -131,8 +134,8 @@ const CleanExifTool = memo(() => {
 
     return (
         <ToolContainer
-            title="Clean Metadata"
-            description="Scrub digital fingerprints and hidden tags from your images."
+            title={t('title')}
+            description={t('description')}
             icon={ImageMinus}
             category="vault"
             toolId="clean-exif"
@@ -140,14 +143,14 @@ const CleanExifTool = memo(() => {
                 <div className="space-y-10">
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">Security Level</span>
-                            <span className="text-xl font-black text-white">ATOMIC</span>
+                            <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">{t('securityLevel')}</span>
+                            <span className="text-xl font-black text-white">{t('atomic')}</span>
                         </div>
                         <div className="h-1 bg-zinc-900 w-full overflow-hidden">
                             <div className="h-full bg-white w-full" />
                         </div>
                         <p className="text-[10px] text-zinc-500 font-bold uppercase leading-relaxed">
-                            Pixels are reconstructed via fresh canvas buffer. 0% metadata survival rate.
+                            {t('dropDesc')}
                         </p>
                     </div>
 
@@ -158,23 +161,23 @@ const CleanExifTool = memo(() => {
                                 disabled={!cleanUrl || isProcessing}
                                 className="w-full h-14 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-xs transition-all active:scale-95"
                             >
-                                Download Cleaned Image
+                                {t('downloadBtn')}
                             </Button>
                             <Button
                                 variant="outline"
                                 onClick={resetTool}
                                 className="w-full h-14 border-zinc-800 text-zinc-400 hover:text-white hover:border-white font-black uppercase tracking-widest text-xs transition-all"
                             >
-                                Scrub New Image
+                                {t('cleanBtn')}
                             </Button>
                         </div>
                     )}
                 </div>
             }
             howItWorks={[
-                { title: "Drop Your Photo", description: "Choose any photo you want to clean. No account needed." },
-                { title: "We Remove Hidden Data", description: "The tool strips out invisible info like your camera model, GPS location, and the date the photo was taken." },
-                { title: "Download the Clean Photo", description: "Save the image — it now contains zero personal metadata." }
+                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
             ]}
         >
             <div className="w-full min-h-[400px] flex items-center justify-center">
@@ -187,7 +190,7 @@ const CleanExifTool = memo(() => {
                         <Upload className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                         <div className="text-center">
                             <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                {isDragActive ? 'Drop it here' : 'Drop your photo here'}
+                                {isDragActive ? tc('dropActive') : t('dropTitle')}
                             </p>
                             <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">JPG · PNG · WebP</p>
                         </div>
@@ -195,18 +198,18 @@ const CleanExifTool = memo(() => {
                 ) : (
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-1 px-6 py-10">
                         <div className="aspect-square bg-zinc-950 flex flex-col items-center justify-center border border-zinc-800">
-                            <span className="text-[10px] font-bold uppercase text-zinc-600 tracking-widest mb-4">Original</span>
+                            <span className="text-[10px] font-bold uppercase text-zinc-600 tracking-widest mb-4">{t('original')}</span>
                             {previewUrl && <img src={previewUrl} className="max-h-[70%] opacity-60" />}
-                            {hasExif && <span className="mt-4 text-[10px] font-bold text-red-400 uppercase tracking-widest border border-red-500/20 px-4 py-1">Hidden Data Found</span>}
+                            {hasExif && <span className="mt-4 text-[10px] font-bold text-red-400 uppercase tracking-widest border border-red-500/20 px-4 py-1">{t('hiddenDetected')}</span>}
                         </div>
                         <div className="aspect-square bg-zinc-950 flex flex-col items-center justify-center border border-zinc-800">
-                            <span className="text-[10px] font-bold uppercase text-zinc-400 tracking-widest mb-4">Cleaned</span>
+                            <span className="text-[10px] font-bold uppercase text-zinc-400 tracking-widest mb-4">{t('cleaned')}</span>
                             {isProcessing ? (
                                 <Loader2 className="w-8 h-8 animate-spin text-white" />
                             ) : (
                                 cleanUrl && <img src={cleanUrl} className="max-h-[70%] p-4" />
                             )}
-                            {!isProcessing && <span className="mt-4 text-[10px] font-bold text-white uppercase tracking-widest border border-white/10 px-4 py-1">Metadata Removed</span>}
+                            {!isProcessing && <span className="mt-4 text-[10px] font-bold text-white uppercase tracking-widest border border-white/10 px-4 py-1">{t('metadataRemoved')}</span>}
                         </div>
                     </div>
                 )}

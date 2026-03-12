@@ -31,7 +31,8 @@ import { cn } from "@/lib/utils";
  */
 const BlurTool = memo(() => {
     // ✨ HOOKS & TRANSLATIONS
-    const t = useTranslations('HomePage');
+    const t = useTranslations('Tools.blur');
+    const commonT = useTranslations('Tools.common');
 
     // 📂 STATE ORCHESTRATION
     const [file, setFile] = useState<File | null>(null);
@@ -111,15 +112,15 @@ const BlurTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Drop Your Image', description: 'Pick any photo you want to sharpen or fix. It stays on your device — nothing is uploaded.' },
-        { title: 'Adjust the Strength', description: 'Use the slider to control how sharp the result should be. More strength means a clearer image.' },
-        { title: 'Save the Result', description: 'Click process and download your enhanced image instantly.' }
-    ], []);
+        { title: t('howItWorks.0.title'), description: t('howItWorks.0.description') },
+        { title: t('howItWorks.1.title'), description: t('howItWorks.1.description') },
+        { title: t('howItWorks.2.title'), description: t('howItWorks.2.description') }
+    ], [t]);
 
     return (
         <ToolContainer
-            title="Image Enhancer"
-            description="Sharpen blurry photos or smooth noise — your image stays on your device, never uploaded."
+            title={t('title')}
+            description={t('description')}
             icon={Eye}
             category="media"
             toolId="blur"
@@ -128,7 +129,7 @@ const BlurTool = memo(() => {
                     {/* 🎚️ INTENSITY CONTROL */}
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Blur Intensity</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('intensity')}</span>
                             <span className="text-sm font-black text-emerald-500 tabular-nums">{blurAmount[0]}px</span>
                         </div>
                         <Slider
@@ -148,7 +149,7 @@ const BlurTool = memo(() => {
                             className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
                             {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <RefreshCw className="w-5 h-5 me-2" />}
-                            {isProcessing ? "Synthesizing..." : "Apply Buffer Blur"}
+                            {isProcessing ? t('synthesizing') : t('applyBtn')}
                         </Button>
 
                         {exportBlob && (
@@ -157,7 +158,7 @@ const BlurTool = memo(() => {
                                 className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all shadow-xl"
                             >
                                 <Download className="w-4 h-4 me-2" />
-                                Download Node
+                                {t('downloadBtn')}
                             </Button>
                         )}
 
@@ -167,7 +168,7 @@ const BlurTool = memo(() => {
                                 onClick={resetTool}
                                 className="w-full h-10 text-zinc-600 hover:text-white text-[10px] font-black uppercase tracking-widest italic tracking-[0.15em]"
                             >
-                                New Sequence
+                                {t('resetBtn')}
                             </Button>
                         )}
                     </div>
@@ -176,11 +177,10 @@ const BlurTool = memo(() => {
                     <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-3.5 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">Canvas Sandbox</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{t('sandbox')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
-                            Pixels are transformed in a volatile HTML5 canvas.
-                            Zero persistent artifacts.
+                            {t('sandboxDesc')}
                         </p>
                     </div>
                 </div>
@@ -220,9 +220,9 @@ const BlurTool = memo(() => {
                                     <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? 'Drop it here' : 'Drop your image here'}
+                                            {isDragActive ? commonT('dropAnywhere') : t('dropTitle')}
                                         </p>
-                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">JPG · PNG · WebP</p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@ const BlurTool = memo(() => {
                             {/* 📂 SOURCE STREAM VIEW */}
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Original</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">{t('original')}</span>
                                     <div className="bg-zinc-950 px-2 py-0.5 rounded-lg border border-zinc-900">
                                         <ImageIcon className="w-3.5 h-3.5 text-zinc-700" />
                                     </div>
@@ -257,9 +257,9 @@ const BlurTool = memo(() => {
                             {/* 💧 SYNTHESIZED PREVIEW */}
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between px-2">
-                                    <span className="text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">Synthesized Output</span>
+                                    <span className="text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">{t('output')}</span>
                                     <div className="flex items-center gap-2.5 bg-emerald-500/5 px-2.5 py-1 rounded-full border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors group/eye">
-                                        <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-tighter">Live Monitor</span>
+                                        <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-tighter">{t('monitor')}</span>
                                         <Eye className="w-3.5 h-3.5 text-emerald-500 animate-pulse group-hover/eye:scale-110 transition-transform" />
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@ const BlurTool = memo(() => {
                                                 <div className="absolute -inset-4 bg-emerald-500/20 blur-2xl rounded-full animate-pulse" />
                                                 <Loader2 className="w-10 h-10 text-emerald-500 animate-spin relative" />
                                             </div>
-                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse">Encoding Node</span>
+                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse">{t('encoding')}</span>
                                         </div>
                                     )}
                                 </div>
@@ -289,12 +289,12 @@ const BlurTool = memo(() => {
                             <div className="md:col-span-2 flex items-center justify-center gap-12 py-6 bg-zinc-900/80 border border-zinc-800 rounded-[2.5rem] shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl mt-4">
                                 <div className="flex items-center gap-3.5 transition-all hover:scale-105">
                                     <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
-                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">Gaussian Protocol</span>
+                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">{t('protocol')}</span>
                                 </div>
                                 <div className="w-px h-6 bg-zinc-800" />
                                 <div className="flex items-center gap-3.5 transition-all hover:scale-105">
                                     <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]" style={{ animationDelay: '0.2s' }} />
-                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">Local Integrity</span>
+                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">{t('integrity')}</span>
                                 </div>
                             </div>
                         </motion.div>

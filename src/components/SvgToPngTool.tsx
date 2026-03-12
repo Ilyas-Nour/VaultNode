@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 import { useTranslations } from 'next-intl';
@@ -87,6 +87,12 @@ export default function SvgToPngTool() {
         setFileName('image');
     };
 
+    const howItWorks = useMemo(() => [
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') },
+    ], [t]);
+
     return (
         <ToolContainer
             title={t('title')}
@@ -115,11 +121,7 @@ export default function SvgToPngTool() {
                     </button>
                 </div>
             }
-            howItWorks={[
-                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
-                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
-                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') },
-            ]}
+            howItWorks={howItWorks}
         >
             <AnimatePresence mode="wait">
                 {!svgCode ? (

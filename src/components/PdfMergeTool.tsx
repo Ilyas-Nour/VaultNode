@@ -115,10 +115,10 @@ const PdfMergeTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Add Your Files', description: 'Drop all the PDF files you want to combine. You can add as many as you need.' },
-        { title: 'Set the Order', description: 'Drag files to arrange them in the order you want them to appear in the final document.' },
-        { title: 'Download the Merged PDF', description: 'Click merge and get a single, ready-to-share PDF file in seconds.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     return (
         <ToolContainer
@@ -131,9 +131,9 @@ const PdfMergeTool = memo(() => {
                 <div className="space-y-6">
                     {/* 🔘 DOCUMENT QUEUE STATUS */}
                     <div className="space-y-3.5">
-                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">Document Queue</span>
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('queueTitle')}</span>
                         <div className="p-4 rounded-2xl border border-zinc-900 bg-zinc-900/40 flex items-center justify-between shadow-inner">
-                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-tight italic">{files.length} Files Ready</span>
+                            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-tight italic">{t('queueStatus', { count: files.length })}</span>
                             <div className="bg-emerald-500/10 p-1.5 rounded-lg border border-emerald-500/20">
                                 <FileStack className="w-4 h-4 text-emerald-500" />
                             </div>
@@ -148,7 +148,7 @@ const PdfMergeTool = memo(() => {
                             className="w-full h-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all active:scale-95 shadow-lg shadow-emerald-500/10"
                         >
                             {isMerging ? <Loader2 className="w-5 h-5 animate-spin" /> : <Plus className="w-5 h-5 me-2" />}
-                            {isMerging ? "Merging..." : t('mergeButton')}
+                            {isMerging ? t('merging') : t('mergeButton')}
                         </Button>
 
                         {mergedBlob && (
@@ -157,7 +157,7 @@ const PdfMergeTool = memo(() => {
                                 className="w-full h-12 bg-zinc-950 border border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all"
                             >
                                 <Download className="w-4 h-4 me-2" />
-                                Download Merged
+                                {t('downloadMerged')}
                             </Button>
                         )}
 
@@ -167,7 +167,7 @@ const PdfMergeTool = memo(() => {
                             className="w-full h-12 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-[11px] font-black uppercase tracking-widest italic rounded-xl"
                         >
                             <Trash2 className="w-4 h-4 me-2" />
-                            Clear Queue
+                            {t('clearQueue')}
                         </Button>
                     </div>
 
@@ -175,11 +175,10 @@ const PdfMergeTool = memo(() => {
                     <div className="p-5 rounded-3xl border border-zinc-900 bg-zinc-900/40 space-y-4 shadow-inner">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-[11px] font-black uppercase tracking-widest">Local Assembly</span>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{t('localAssembly')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase tracking-tight">
-                            Everything happens safely inside your own screen.
-                            No persistent traces left on disk or network.
+                            {t('assemblyDesc')}
                         </p>
                     </div>
                 </div>
@@ -208,9 +207,9 @@ const PdfMergeTool = memo(() => {
                                 <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                 <div className="text-center">
                                     <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                        {isDragActive ? 'Drop files here' : 'Drop your PDFs here'}
+                                        {isDragActive ? t('dropFiles') : t('dropTitle')}
                                     </p>
-                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                                    <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropOnly')}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -223,11 +222,11 @@ const PdfMergeTool = memo(() => {
                         >
                             {/* 📑 QUEUE HEADER */}
                             <div className="flex items-center justify-between">
-                                <h3 className="text-base font-black uppercase tracking-tight text-white">Files to Merge</h3>
+                                <h3 className="text-base font-black uppercase tracking-tight text-white">{t('filesToMerge')}</h3>
                                 <div {...getRootProps()} className="cursor-pointer">
                                     <input {...getInputProps()} />
                                     <Button variant="ghost" size="sm" className="text-emerald-500 hover:text-emerald-400 uppercase tracking-widest text-[11px] font-black italic gap-2 group/add">
-                                        <Plus className="w-4 h-4 transition-transform group-hover/add:rotate-90" /> Add More
+                                        <Plus className="w-4 h-4 transition-transform group-hover/add:rotate-90" /> {t('addMore')}
                                     </Button>
                                 </div>
                             </div>
@@ -249,7 +248,7 @@ const PdfMergeTool = memo(() => {
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <p className="text-base font-black uppercase tracking-tighter text-white truncate group-hover:text-emerald-500 transition-colors">{file.name}</p>
-                                                <p className="text-[11px] font-bold uppercase text-zinc-500 tracking-widest">{formatSize(file.size)} &bull; Ready to Append</p>
+                                                <p className="text-[11px] font-bold uppercase text-zinc-500 tracking-widest">{formatSize(file.size)} &bull; {t('readyToAppend')}</p>
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <button
@@ -276,7 +275,7 @@ const PdfMergeTool = memo(() => {
                                         <div className="absolute -inset-8 bg-emerald-500/10 blur-3xl rounded-full animate-pulse" />
                                         <Loader2 className="w-16 h-16 text-emerald-500 animate-spin relative" />
                                     </div>
-                                    <p className="text-[11px] font-black uppercase tracking-[0.4em] text-emerald-500 animate-pulse italic">Synthesis in Progress</p>
+                                    <p className="text-[11px] font-black uppercase tracking-[0.4em] text-emerald-500 animate-pulse italic">{t('synthesisInProgress')}</p>
                                 </motion.div>
                             )}
 
@@ -292,15 +291,15 @@ const PdfMergeTool = memo(() => {
                                         <CheckCircle2 className="w-8 h-8 text-emerald-500" />
                                     </div>
                                     <div className="space-y-2">
-                                        <h4 className="text-2xl font-black uppercase italic tracking-tight text-white mb-2">Node Synthesis Complete</h4>
-                                        <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.2em] max-w-sm mx-auto">Done! Everything stayed inside your screen. Your multi-node PDF is ready for export.</p>
+                                        <h4 className="text-2xl font-black uppercase italic tracking-tight text-white mb-2">{t('synthesisComplete')}</h4>
+                                        <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.2em] max-w-sm mx-auto">{t('synthesisDesc')}</p>
                                     </div>
                                     <Button
                                         onClick={handleDownload}
                                         className="h-14 px-12 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-black rounded-xl shadow-[0_20px_40px_-10px_rgba(16,185,129,0.3)] transition-all hover:scale-105 active:scale-95 text-[11px] uppercase italic tracking-widest"
                                     >
                                         <Download className="w-4 h-4 me-2" />
-                                        Download Final PDF
+                                        {t('downloadFinal')}
                                     </Button>
                                 </motion.div>
                             )}
@@ -317,7 +316,7 @@ const PdfMergeTool = memo(() => {
                     <div className="w-px h-4 bg-zinc-800" />
                     <div className="flex items-center gap-2.5 text-emerald-500 transition-colors hover:text-emerald-400">
                         <RefreshCw className="w-4 h-4 animate-spin-slow" />
-                        <span className="text-[10px] font-black uppercase tracking-widest italic">Local-Only Logic</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest italic">{tc('local')}</span>
                     </div>
                 </div>
             </div>

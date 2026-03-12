@@ -52,7 +52,7 @@ const RepairTool = memo(() => {
         const url = URL.createObjectURL(fixedBlob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `repaired-${file.name}`;
+        link.download = `privaflow_repaired_${file.name}`;
         link.click();
     }, [fixedBlob, file]);
 
@@ -61,6 +61,12 @@ const RepairTool = memo(() => {
         setFixedBlob(null);
     }, []);
 
+    const howItWorks = React.useMemo(() => [
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
+
     return (
         <ToolContainer
             title={t('title')}
@@ -68,6 +74,7 @@ const RepairTool = memo(() => {
             icon={Wrench}
             category="docs"
             toolId="repair"
+            howItWorks={howItWorks}
         >
             <div className="w-full">
                 <AnimatePresence mode="wait">
@@ -132,18 +139,18 @@ const RepairTool = memo(() => {
                                             className="h-14 bg-emerald-500 text-white font-black uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-emerald-400 transition-all active:scale-95 shadow-[0_0_30px_rgba(16,185,129,0.3)]"
                                         >
                                             <Download className="w-4 h-4" />
-                                            Download Fixed File
+                                            {t('downloadBtn')}
                                         </motion.button>
                                     )}
                                     <button onClick={clear} className="text-zinc-600 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition-colors">
-                                        {fixedBlob ? 'Finish Session' : 'Discard Asset'}
+                                        {fixedBlob ? t('finishBtn') : t('discardBtn')}
                                     </button>
                                 </div>
 
                                 {fixedBlob && (
                                     <div className="pt-4 border-t border-white/5 w-full">
                                         <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">
-                                            VaultNode logic successfully sanitized and reconstructed the PDF structure.
+                                            {t('successDesc')}
                                         </p>
                                     </div>
                                 )}

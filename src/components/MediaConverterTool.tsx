@@ -33,6 +33,7 @@ import { useTranslations } from 'next-intl';
  */
 const MediaConverterTool = memo(() => {
     const t = useTranslations('Tools.mediaConverter');
+    const tc = useTranslations('Tools.common');
     const { ffmpeg, loaded, progress, load } = useFFmpeg();
 
     // 📂 STATE
@@ -139,7 +140,7 @@ const MediaConverterTool = memo(() => {
     }, []);
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
-    const howItWorks = [
+    const howItWorks = useMemo(() => [
         {
             title: t('howItWorks.step1.title'),
             description: t('howItWorks.step1.desc')
@@ -152,7 +153,7 @@ const MediaConverterTool = memo(() => {
             title: t('howItWorks.step3.title'),
             description: t('howItWorks.step3.desc')
         }
-    ];
+    ], [t]);
 
     return (
         <ToolContainer
@@ -289,7 +290,7 @@ const MediaConverterTool = memo(() => {
                                     <Video className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? t('dropActive') : t('dropTitle')}
+                                            {isDragActive ? tc('dropActive') : t('dropTitle')}
                                         </p>
                                         <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">MP4 · MOV · MP3 · WEBM</p>
                                     </div>

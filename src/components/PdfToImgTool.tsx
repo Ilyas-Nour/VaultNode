@@ -126,17 +126,17 @@ const PdfToImgTool = memo(() => {
 
     // 📦 HOW IT WORKS REGISTRY (Memoized)
     const howItWorks = useMemo(() => [
-        { title: 'Upload Your PDF', description: 'Drop any PDF — it can have one page or hundreds. Each page becomes its own image.' },
-        { title: 'Choose the Quality', description: 'Higher quality means sharper images but larger file sizes. Pick what works for your use case.' },
-        { title: 'Download All Pages', description: 'All images are bundled into a zip file. Open it and you\'ll find a separate image for every page.' }
-    ], []);
+        { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+        { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+        { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
+    ], [t]);
 
     // ⚙️ RENDER CONFIGURATIONS
     const scaleOptions = useMemo(() => [
-        { val: 1, label: "Standard", desc: '72 DPI' },
-        { val: 2, label: "High Definition", desc: '144 DPI' },
-        { val: 3, label: "Ultra Precision", desc: '216 DPI' },
-    ], []);
+        { val: 1, label: t('standard'), desc: t('standardDesc') },
+        { val: 2, label: t('highDef'), desc: t('highDefDesc') },
+        { val: 3, label: t('ultraPrecision'), desc: t('ultraDesc') },
+    ], [t]);
 
     return (
         <ToolContainer
@@ -149,7 +149,7 @@ const PdfToImgTool = memo(() => {
                 <div className="space-y-6">
                     {/* 🔘 RENDER DENSITY HUB */}
                     <div className="space-y-4">
-                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">Render Density</span>
+                        <span className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('renderDensity')}</span>
                         <div className="space-y-2">
                             {scaleOptions.map((s) => (
                                 <button
@@ -186,7 +186,7 @@ const PdfToImgTool = memo(() => {
                             className="w-full h-14 border-zinc-800 text-zinc-400 hover:bg-zinc-900 text-xs font-black uppercase tracking-widest italic"
                         >
                             <FileArchive className="w-5 h-5 me-2" />
-                            New Archive
+                            {t('newArchive')}
                         </Button>
                     </div>
 
@@ -194,11 +194,10 @@ const PdfToImgTool = memo(() => {
                     <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-900/40 space-y-4">
                         <div className="flex items-center gap-2 text-emerald-500">
                             <Shield className="w-4 h-4" />
-                            <span className="text-xs font-black uppercase tracking-widest">In-Browser PDF.js</span>
+                            <span className="text-xs font-black uppercase tracking-widest">{t('inBrowserPdfjs')}</span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-bold leading-relaxed uppercase">
-                            Uses Mozilla&apos;s PDF.js to render slices directly to canvas.
-                            Your documents never touch our infra.
+                            {t('pdfjsDesc')}
                         </p>
                     </div>
                 </div>
@@ -238,9 +237,9 @@ const PdfToImgTool = memo(() => {
                                     <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
                                     <div className="text-center">
                                         <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                            {isDragActive ? 'Drop it here' : 'Drop your PDF here'}
+                                            {isDragActive ? t('dropActive') : t('dropTitle')}
                                         </p>
-                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">PDF files only</p>
+                                        <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +271,7 @@ const PdfToImgTool = memo(() => {
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-2">
                                                 <Loader2 className="w-4 h-4 text-white animate-spin" />
-                                                <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Converting page {progress} of {totalPages}</span>
+                                                <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">{t('convertingPage', { current: progress, total: totalPages })}</span>
                                             </div>
                                             <span className="text-xs text-zinc-500">{Math.round((progress / totalPages) * 100)}%</span>
                                         </div>
