@@ -94,10 +94,11 @@ const RedactorTool = memo(() => {
         }
     }, [redactions, currentBox]);
 
+    const workspaceRef = useRef<HTMLDivElement>(null);
     const renderTaskRef = useRef<any>(null);
 
-    // 🚀 STABLE RENDER ENGINE (Decoupled from drawing state)
-    const renderPdfAsync = useCallback(async (pdfFile: File) => {
+    // 🚀 STABLE RENDER ENGINE (Container-Aware)
+    const renderPdfAsync = useCallback(async (pdfFile: File, containerWidth: number, containerHeight: number) => {
         try {
             if (renderTaskRef.current) {
                 renderTaskRef.current.cancel();
@@ -109,15 +110,12 @@ const RedactorTool = memo(() => {
 
             const originalViewport = page.getViewport({ scale: 1 });
             
-            const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-            const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-            
-            // Tight margins to maximize use of space
+            // Tight margins to maximize use of space within the container
             const horizontalPadding = 48; 
-            const verticalPadding = 200; 
+            const verticalPadding = 48; // HUD is absolute, container is padded, so we only need small inner padding
 
-            const targetWidth = vw - horizontalPadding;
-            const targetHeight = vh - verticalPadding;
+            const targetWidth = containerWidth - horizontalPadding;
+            const targetHeight = containerHeight - verticalPadding;
 
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
@@ -125,7 +123,7 @@ const RedactorTool = memo(() => {
             // The logical CSS scale needed to fit the screen
             const logicalScale = Math.min(scaleX, scaleY);
             
-            // High-DPI physical scale
+            // High-DPI physical scale for crispness
             const dpr = window.devicePixelRatio || 1;
             const physicalScale = logicalScale * dpr;
 
@@ -175,23 +173,28 @@ const RedactorTool = memo(() => {
             if (err.name === 'RenderingCancelledException') return;
             console.error("PDF Fail:", err);
         }
-    }, []); // ⚡ No dependencies = Stable function
+    }, []);
 
-    // Sync PDF render on file change
+    // 📏 ResizeObserver to accurately measure the workspace
+    // This fixes the "needs F12 to resize" bug by ensuring it renders based on the actual DOM element, not window size on mount.
     useEffect(() => {
-        if (file) renderPdfAsync(file);
+        if (!file || !workspaceRef.current) return;
+        
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                const { width, height } = entry.contentRect;
+                if (width > 0 && height > 0) {
+                     renderPdfAsync(file, width, height);
+                }
+            }
+        });
+
+        resizeObserver.observe(workspaceRef.current);
+
         return () => {
+            resizeObserver.disconnect();
             if (renderTaskRef.current) renderTaskRef.current.cancel();
         };
-    }, [file, renderPdfAsync]);
-
-    // Handle resize to re-render PDF
-    useEffect(() => {
-        const handleResize = () => {
-            if (file) renderPdfAsync(file);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
     }, [file, renderPdfAsync]);
 
     useEffect(() => {
@@ -383,7 +386,10 @@ const RedactorTool = memo(() => {
                     </div>
 
                     {/* --- Workspace --- */}
-                    <div className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-black to-black">
+                    <div 
+                        ref={workspaceRef}
+                        className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-black to-black"
+                    >
                         <div className="relative shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-zinc-800 bg-white shrink-0 mx-auto">
                             <canvas ref={pdfCanvasRef} className="block" />
                             <canvas
