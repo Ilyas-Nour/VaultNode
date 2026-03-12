@@ -109,19 +109,25 @@ const RedactorTool = memo(() => {
             // 📏 DYNAMIC SCALING CALCULATION
             const originalViewport = page.getViewport({ scale: 1 });
             
-            // Use window dimensions for immersive mode, fallback to container
+            // Use window dimensions for immersive mode
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
             
-            const padding = 120; // Room for immersive UI (Header/Footer + p-4)
-            const targetWidth = viewportWidth - padding;
-            const targetHeight = viewportHeight - (16 * 4 + 24 * 4 + 48); // Header + Footer + padding
+            // Tighter padding to maximize the document area
+            const horizontalPadding = 80; 
+            const verticalPadding = 200; // Space for Header (64) + Footer (96) + some margin
 
-            // Calculate scale to fit both width and height (with max zoom-out)
+            const targetWidth = viewportWidth - horizontalPadding;
+            const targetHeight = viewportHeight - verticalPadding;
+
+            // Calculate scale to fit both width and height gracefully
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
-            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.6), 2.5);
+            // Prioritize fitting to screen but allowing it to be larger if it's a small doc
+            // Clamp min to 0.5 (very large docs) and max to 6.0 (tiny docs/slides)
+            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.5), 6.0);
+            
             setActiveUIScale(dynamicUIScale);
 
             const uiViewport = page.getViewport({ scale: dynamicUIScale });
@@ -382,10 +388,10 @@ const RedactorTool = memo(() => {
                                     </div>
                                     <button 
                                         onClick={resetTool}
-                                        className="text-[10px] font-black text-zinc-500 hover:text-white uppercase tracking-widest transition-colors flex items-center gap-2"
+                                        className="text-[10px] font-black text-rose-500 hover:text-rose-400 uppercase tracking-widest transition-colors flex items-center gap-2"
                                     >
-                                        <Trash2 className="w-3 h-3" />
-                                        {t('resetBtn')}
+                                        <AlertTriangle className="w-3 h-3" />
+                                        {commonT('cancel')}
                                     </button>
                                 </div>
                             </div>
@@ -411,17 +417,23 @@ const RedactorTool = memo(() => {
                                         variant="outline"
                                         onClick={() => setRedactions([])}
                                         disabled={isProcessing || redactions.length === 0}
-                                        className="flex-1 h-12 border-zinc-800 text-zinc-400 hover:text-white hover:border-white font-black uppercase tracking-widest text-[10px] transition-all bg-transparent"
+                                        className="flex-1 h-12 border-zinc-800 text-zinc-500 hover:text-white hover:border-white font-black uppercase tracking-widest text-[10px] transition-all bg-transparent flex items-center gap-2"
                                     >
+                                        <Trash2 className="w-3 h-3" />
                                         {t('clearBtn')}
                                     </Button>
 
                                     <Button
                                         onClick={handleSecureRedact}
                                         disabled={isProcessing || redactions.length === 0}
-                                        className="flex-[2] h-12 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                                        className="flex-[2] h-12 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center gap-2"
                                     >
-                                        {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : t('burnBtn')}
+                                        {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : (
+                                            <>
+                                                <Shield className="w-4 h-4" />
+                                                {t('burnBtn')}
+                                            </>
+                                        )}
                                     </Button>
                                 </div>
                             </div>
