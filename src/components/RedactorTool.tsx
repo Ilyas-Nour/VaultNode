@@ -69,6 +69,8 @@ const RedactorTool = memo(() => {
         pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+
     const redrawOverlay = useCallback(() => {
         const ctx = drawCanvasRef.current?.getContext("2d");
         if (!ctx || !drawCanvasRef.current) return;
@@ -102,7 +104,17 @@ const RedactorTool = memo(() => {
             const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             const page = await pdf.getPage(1);
 
-            const uiViewport = page.getViewport({ scale: UI_RENDER_SCALE });
+            // 📏 DYNAMIC SCALING CALCULATION
+            const originalViewport = page.getViewport({ scale: 1 });
+            const containerWidth = containerRef.current?.clientWidth || 800;
+            const padding = 48; // Space for borders/padding
+            const targetWidth = containerWidth - padding;
+            
+            // Calculate a scale that fits the width but isn't TOO small
+            const fitScale = targetWidth / originalViewport.width;
+            const dynamicUIScale = Math.min(Math.max(fitScale, 0.8), 2.0);
+
+            const uiViewport = page.getViewport({ scale: dynamicUIScale });
             const exportViewport = page.getViewport({ scale: SECURE_EXPORT_SCALE });
 
             const pdfCanvas = pdfCanvasRef.current;
@@ -142,6 +154,15 @@ const RedactorTool = memo(() => {
         return () => {
             if (renderTaskRef.current) renderTaskRef.current.cancel();
         };
+    }, [file, renderPdfAsync]);
+
+    // Handle resize to re-render PDF
+    useEffect(() => {
+        const handleResize = () => {
+            if (file) renderPdfAsync(file);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, [file, renderPdfAsync]);
 
     useEffect(() => {
@@ -297,7 +318,7 @@ const RedactorTool = memo(() => {
                 { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.description') }
             ]}
         >
-            <div className="w-full">
+            <div className="w-full" ref={containerRef}>
                 {!file ? (
                     <div {...getRootProps()} className={cn(
                         "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
@@ -313,15 +334,15 @@ const RedactorTool = memo(() => {
                         </div>
                     </div>
                 ) : (
-                    <div className="w-full flex justify-center py-10">
-                        <div className="relative border border-zinc-800 p-4 bg-zinc-950/40">
-                            <canvas ref={pdfCanvasRef} className="block shadow-2xl bg-white" />
+                    <div className="w-full flex justify-center py-6 overflow-hidden">
+                        <div className="relative border border-zinc-800 p-4 bg-zinc-950/40 max-w-full overflow-auto scrollbar-thin scrollbar-thumb-zinc-800">
+                            <canvas ref={pdfCanvasRef} className="block shadow-2xl bg-white mx-auto" />
                             <canvas
                                 ref={drawCanvasRef}
                                 onMouseDown={onMouseDown}
                                 onMouseMove={onMouseMove}
                                 onMouseUp={onMouseUp}
-                                className="absolute top-4 left-4 touch-none"
+                                className="absolute top-4 left-4 touch-none cursor-crosshair mx-auto"
                             />
                         </div>
                     </div>
