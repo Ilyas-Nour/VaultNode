@@ -71,6 +71,8 @@ const RedactorTool = memo(() => {
 
     const containerRef = useRef<HTMLDivElement>(null);
 
+    const [activeUIScale, setActiveUIScale] = useState(UI_RENDER_SCALE);
+
     const redrawOverlay = useCallback(() => {
         const ctx = drawCanvasRef.current?.getContext("2d");
         if (!ctx || !drawCanvasRef.current) return;
@@ -106,13 +108,21 @@ const RedactorTool = memo(() => {
 
             // 📏 DYNAMIC SCALING CALCULATION
             const originalViewport = page.getViewport({ scale: 1 });
-            const containerWidth = containerRef.current?.clientWidth || 800;
-            const padding = 48; // Space for borders/padding
-            const targetWidth = containerWidth - padding;
             
-            // Calculate a scale that fits the width but isn't TOO small
-            const fitScale = targetWidth / originalViewport.width;
-            const dynamicUIScale = Math.min(Math.max(fitScale, 0.8), 2.0);
+            // Use window dimensions for immersive mode, fallback to container
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            const padding = 120; // Room for immersive UI (Header/Footer + p-4)
+            const targetWidth = viewportWidth - padding;
+            const targetHeight = viewportHeight - (16 * 4 + 24 * 4 + 48); // Header + Footer + padding
+
+            // Calculate scale to fit both width and height (with max zoom-out)
+            const scaleX = targetWidth / originalViewport.width;
+            const scaleY = targetHeight / originalViewport.height;
+            
+            const dynamicUIScale = Math.min(Math.max(Math.min(scaleX, scaleY), 0.6), 2.5);
+            setActiveUIScale(dynamicUIScale);
 
             const uiViewport = page.getViewport({ scale: dynamicUIScale });
             const exportViewport = page.getViewport({ scale: SECURE_EXPORT_SCALE });
@@ -214,7 +224,7 @@ const RedactorTool = memo(() => {
             const ctx = baseCanvas.getContext("2d");
             if (!ctx) throw new Error("Ctx failure");
 
-            const scaleFactor = SECURE_EXPORT_SCALE / UI_RENDER_SCALE;
+            const scaleFactor = SECURE_EXPORT_SCALE / activeUIScale;
             ctx.fillStyle = "rgb(0, 0, 0)";
 
             redactions.forEach(box => {
@@ -319,34 +329,105 @@ const RedactorTool = memo(() => {
             ]}
         >
             <div className="w-full" ref={containerRef}>
-                {!file ? (
-                    <div {...getRootProps()} className={cn(
-                        "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-10 gap-4",
-                        isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
-                    )}>
-                        <input {...getInputProps()} />
-                        <FileUp className={cn("w-8 h-8", isDragActive ? "text-white" : "text-zinc-600")} />
-                        <div className="text-center">
-                            <p className="text-sm font-bold text-white uppercase tracking-widest">
-                                {isDragActive ? commonT('dropAnywhere') : t('dropTitle')}
-                            </p>
-                            <p className="text-xs text-zinc-600 mt-1 uppercase tracking-widest">{t('dropDesc')}</p>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="w-full flex justify-center py-6 overflow-hidden">
-                        <div className="relative border border-zinc-800 p-4 bg-zinc-950/40 max-w-full overflow-auto scrollbar-thin scrollbar-thumb-zinc-800">
-                            <canvas ref={pdfCanvasRef} className="block shadow-2xl bg-white mx-auto" />
-                            <canvas
-                                ref={drawCanvasRef}
-                                onMouseDown={onMouseDown}
-                                onMouseMove={onMouseMove}
-                                onMouseUp={onMouseUp}
-                                className="absolute top-4 left-4 touch-none cursor-crosshair mx-auto"
-                            />
-                        </div>
-                    </div>
-                )}
+                <AnimatePresence mode="wait">
+                    {!file ? (
+                        <motion.div 
+                            key="upload-zone"
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            className="w-full"
+                        >
+                            <div 
+                                {...getRootProps()} 
+                                className={cn(
+                                    "w-full border border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-200 py-20 gap-4",
+                                    isDragActive ? "border-white/40 bg-white/[0.03]" : "border-zinc-800 hover:border-zinc-600 bg-zinc-950/40"
+                                )}
+                            >
+                                <input {...getInputProps()} />
+                                <FileUp className={cn("w-12 h-12 mb-2", isDragActive ? "text-white" : "text-zinc-600")} />
+                                <div className="text-center">
+                                    <p className="text-lg font-black text-white uppercase tracking-widest">
+                                        {isDragActive ? commonT('dropAnywhere') : t('dropTitle')}
+                                    </p>
+                                    <p className="text-xs text-zinc-600 mt-2 uppercase tracking-widest font-bold font-mono">{t('dropDesc')}</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ) : (
+                        <motion.div 
+                            key="immersive-editor"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center"
+                        >
+                            {/* --- Immersive Header --- */}
+                            <div className="absolute top-0 left-0 right-0 h-16 border-b border-zinc-900 bg-black/80 backdrop-blur-xl z-10 flex items-center justify-between px-8">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+                                        <Eraser className="w-4 h-4 text-black" />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-xs font-black text-white uppercase tracking-widest">{t('title')}</h2>
+                                        <p className="text-[10px] text-zinc-500 uppercase tracking-tighter font-bold">{file.name}</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-6">
+                                    <div className="flex items-center gap-3 pr-6 border-r border-zinc-800">
+                                        <span className="text-[10px] font-black uppercase text-zinc-500 tracking-widest">{t('activeLayers')}</span>
+                                        <span className="px-2 py-0.5 bg-zinc-900 text-white text-xs font-black rounded-sm border border-zinc-800">{redactions.length}</span>
+                                    </div>
+                                    <button 
+                                        onClick={resetTool}
+                                        className="text-[10px] font-black text-zinc-500 hover:text-white uppercase tracking-widest transition-colors flex items-center gap-2"
+                                    >
+                                        <Trash2 className="w-3 h-3" />
+                                        {t('resetBtn')}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* --- Workspace --- */}
+                            <div className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-900/20 via-black to-black">
+                                <div className="relative border border-zinc-800 p-4 shadow-[0_0_100px_rgba(0,0,0,0.5)] scale-100 origin-center bg-white/5">
+                                    <canvas ref={pdfCanvasRef} className="block shadow-2xl bg-white" />
+                                    <canvas
+                                        ref={drawCanvasRef}
+                                        onMouseDown={onMouseDown}
+                                        onMouseMove={onMouseMove}
+                                        onMouseUp={onMouseUp}
+                                        className="absolute top-4 left-4 touch-none cursor-crosshair"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* --- Immersive Footer / Action Bar --- */}
+                            <div className="absolute bottom-0 left-0 right-0 h-24 border-t border-zinc-900 bg-black/80 backdrop-blur-xl z-10 flex items-center justify-center px-8">
+                                <div className="max-w-md w-full flex gap-4">
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => setRedactions([])}
+                                        disabled={isProcessing || redactions.length === 0}
+                                        className="flex-1 h-12 border-zinc-800 text-zinc-400 hover:text-white hover:border-white font-black uppercase tracking-widest text-[10px] transition-all bg-transparent"
+                                    >
+                                        {t('clearBtn')}
+                                    </Button>
+
+                                    <Button
+                                        onClick={handleSecureRedact}
+                                        disabled={isProcessing || redactions.length === 0}
+                                        className="flex-[2] h-12 bg-white hover:bg-zinc-200 text-black font-black uppercase tracking-widest text-[10px] transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                                    >
+                                        {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : t('burnBtn')}
+                                    </Button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 <canvas ref={hiddenBaseCanvasRef} className="hidden" />
             </div>
         </ToolContainer>
