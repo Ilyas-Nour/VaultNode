@@ -58,6 +58,8 @@
             "linkConverter": "Media Converter",
             "linkPdfWord": "PDF to Word",
             "linkCompress": "Image Optimizer",
+            "linkEnhancer": "Image Enhancer",
+            "linkBgRemover": "Background Remover",
             "linkMerge": "PDF Merger",
             "linkBlur": "Blur Tool",
             "linkHeic": "HEIC to JPG",
@@ -84,6 +86,8 @@
         "subtitle": "Most websites steal your files. We don't. Everything you do stays inside your screen. It's 100% private and 100% free.",
         "launchRedactor": "Hide Sensitive Info",
         "imageCompressor": "Shrink Photo",
+        "imageEnhancer": "Image Enhancer",
+        "bgRemover": "Background Remover",
         "pdfMerger": "Merge PDF",
         "pdfToImg": "PDF to Image",
         "cleanExif": "Remove Photo Data",
@@ -107,6 +111,8 @@
             "password": "Make very strong secret codes that only you can know.",
             "textEncryptor": "Turn your writing into a secret code that only you can unlock.",
             "compress": "Make big files small so they send faster.",
+            "enhancer": "Make blurry or out-of-focus photos look sharp and professional.",
+            "bgRemover": "Remove the background from any photo instantly and keep the subject.",
             "heic": "Make iPhone pictures work on any computer without special apps.",
             "mediaConverter": "Change video or music files so they play perfectly on any device.",
             "svgToPng": "Take designer drawings and turn them into simple photos everyone can see.",
@@ -162,6 +168,14 @@
             "compress": {
                 "before": "A 'heavy' photo that is slow to send.",
                 "after": "A 'light' photo that looks exactly the same but sends instantly."
+            },
+            "enhancer": {
+                "before": "A blurry, low-fidelity image.",
+                "after": "A sharp, high-definition asset."
+            },
+            "bgRemover": {
+                "before": "A person in a busy street.",
+                "after": "The person isolated on a clean background."
             },
             "heic": {
                 "before": "An iPhone picture that won't open on PC.",
@@ -276,6 +290,14 @@
         "compress": {
             "title": "Make Photos Smaller",
             "description": "Shrink photo size for easier sharing."
+        },
+        "enhancer": {
+            "title": "Image Enhancer",
+            "description": "Improve clarity and sharpness of blurry photos."
+        },
+        "bgRemover": {
+            "title": "Background Remover",
+            "description": "Remove backgrounds from images locally."
         },
         "encrypt": {
             "title": "Secret Message",
@@ -991,8 +1013,8 @@
             "outputLabel": "Encrypted Buffer"
         },
         "blur": {
-            "title": "Image Enhancer",
-            "description": "Sharpen blurry photos or smooth noise — your image stays on your device, never uploaded.",
+            "title": "Blur Tool",
+            "description": "Hide faces or sensitive things in your photos with a privacy-first blur brush.",
             "titleHighlight": "Aesthetic Blur",
             "dropTitle": "Drop your image here to blur.",
             "dropDesc": "We'll process image pixels locally in your browser.",
@@ -1021,6 +1043,74 @@
                 "step3": {
                     "title": "Save the Result",
                     "description": "Click process and download your enhanced image instantly."
+                }
+            }
+        },
+        "enhancer": {
+            "title": "Image Enhancer",
+            "description": "Sharpen blurry photos and restore clarity with local professional-grade filters.",
+            "titleHighlight": "Clarity Synthesis",
+            "dropTitle": "Drop your blurry photo here.",
+            "dropDesc": "We'll restore fidelity and sharpen details locally.",
+            "intensity": "Sharpen Strength",
+            "applyBtn": "Enhance Image",
+            "downloadBtn": "Download Result",
+            "resetBtn": "New Session",
+            "synthesizing": "Synthesizing Details...",
+            "encoding": "Encoding Protocol",
+            "sandbox": "Canvas Sandbox Active",
+            "sandboxDesc": "Pixels are reconstructed in a volatile memory buffer. No persistent traces remain.",
+            "original": "Original",
+            "output": "Enhanced Asset",
+            "monitor": "Live Monitor",
+            "protocol": "Unsharp Mask Protocol",
+            "integrity": "Local Integrity",
+            "howItWorks": {
+                "step1": {
+                    "title": "Load Your Photo",
+                    "desc": "Drop any blurry or out-of-focus image. It stays on your hardware — zero uploads."
+                },
+                "step2": {
+                    "title": "Dial in Clarity",
+                    "desc": "Use the intensity slider to calibrate the sharpening strength for your specific image."
+                },
+                "step3": {
+                    "title": "Save High-Res",
+                    "desc": "Process the enhancement and download your crisp, professional resulting asset instantly."
+                }
+            }
+        },
+        "bgRemover": {
+            "title": "Background Remover",
+            "description": "Isolate subjects and remove backgrounds instantly — 100% locally.",
+            "titleHighlight": "Subject Isolation",
+            "dropTitle": "Drop your image here.",
+            "dropDesc": "We'll remove the background using local AI processing.",
+            "mode": "Removal Intensity",
+            "applyBtn": "Remove Background",
+            "downloadBtn": "Download PNG",
+            "resetBtn": "New Subject",
+            "processing": "Analyzing Scene...",
+            "encoding": "Isolating Pixels",
+            "sandbox": "Canvas Sandbox Active",
+            "sandboxDesc": "The removal model runs in your browser's RAM. No data is stored.",
+            "original": "Source Image",
+            "output": "Isolated Subject",
+            "monitor": "Live Trace",
+            "protocol": "Alpha Channel Synthesis",
+            "integrity": "Local Privacy",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Photo",
+                    "desc": "Drop any image with a clear subject (person, product, etc.). It stays on your device."
+                },
+                "step2": {
+                    "title": "AI Isolation",
+                    "desc": "Our local WASM model calculates the subject's edges and ignores the background."
+                },
+                "step3": {
+                    "title": "Save Transparent",
+                    "desc": "Download your subject as a high-quality transparent PNG file instantly."
                 }
             }
         }
@@ -1148,6 +1238,19 @@
             "modern": "Modern: 1.2 MB",
             "lossy": "Lossy Padding",
             "advanced": "Advanced LZ-Optimized"
+        },
+        "enhancer": {
+            "before": "Low Resolution",
+            "after": "High Fidelity",
+            "lowFid": "Low Fidelity",
+            "ultraRes": "Ultra Resolution",
+            "sharpened": "Details Preserved"
+        },
+        "bgRemover": {
+            "before": "Original Source",
+            "after": "Isolated Subject",
+            "raw": "Raw",
+            "purified": "Purified"
         }
     },
     "SecurityProof": {

@@ -23,6 +23,8 @@
         "repair": "Reparar Archivo Roto",
         "numberPages": "Numerar las Páginas",
         "organizePages": "Organizar Páginas",
+        "imageEnhancer": "Mejorar Imagen",
+        "bgRemover": "Quitar Fondo",
         "toolDescriptions": {
             "redactor": "Usa el pincel para pintar sobre los secretos y ocultarlos.",
             "cleanExif": "Elimina el 'mapa oculto' de tus fotos.",
@@ -42,7 +44,9 @@
             "stamp": "Pon tu nombre o logo encima de las fotos para protegerlas.",
             "repair": "Arregla un documento roto o que da error para que puedas abrirlo.",
             "numberPages": "Pon un número pequeño en la parte inferior de cada página.",
-            "organizePages": "Mueve, elimina o añade páginas a tu documento."
+            "organizePages": "Mueve, elimina o añade páginas a tu documento.",
+            "enhancer": "Aclara fotos borrosas y restaura la nitidez con filtros profesionales.",
+            "bgRemover": "Aísla el sujeto y elimina el fondo al instante — 100% local."
         },
         "beforeAfter": {
             "redactor": {
@@ -120,6 +124,14 @@
             "organizePages": {
                 "before": "Un montón desordenado de páginas.",
                 "after": "Un documento perfectamente ordenado."
+            },
+            "enhancer": {
+                "before": "Baja resolución",
+                "after": "Alta fidelidad"
+            },
+            "bgRemover": {
+                "before": "Fuente original",
+                "after": "Sujeto aislado"
             }
         },
         "categories": {
@@ -303,6 +315,14 @@
         "organizePages": {
             "title": "Organizar Páginas",
             "description": "Mueve páginas, elimina las que no necesites o añade nuevas a tu archivo."
+        },
+        "enhancer": {
+            "title": "Mejorador de Imágenes",
+            "description": "Aclara fotos borrosas y restaura la nitidez con filtros profesionales locales."
+        },
+        "bgRemover": {
+            "title": "Quitar Fondo",
+            "description": "Aísla el sujeto y elimina el fondo al instante — 100% local."
         }
     },
     "Tools": {
@@ -843,8 +863,8 @@
             }
         },
         "blur": {
-            "title": "Mejorador de Imágenes",
-            "description": "Mejora fotos borrosas o suaviza el ruido: tu imagen se queda en tu dispositivo, nunca se sube.",
+            "title": "Herramienta de Desenfoque",
+            "description": "Oculta caras o cosas privadas en tus fotos con un pincel de desenfoque.",
             "titleHighlight": "Desenfoque Estético",
             "dropTitle": "Suelte su image aquí para desenfocar.",
             "dropDesc": "Procesaremos los píxeles de la imagen localmente en su navegador.",
@@ -873,6 +893,74 @@
                 "step3": {
                     "title": "Guarde el resultado",
                     "description": "Haga clic en procesar y descargue su imagen mejorada al instante."
+                }
+            }
+        },
+        "enhancer": {
+            "title": "Mejorador de Imágenes",
+            "description": "Aclara fotos borrosas y restaura la nitidez con filtros profesionales locales.",
+            "titleHighlight": "Síntesis de Claridad",
+            "dropTitle": "Suelta tu foto borrosa aquí.",
+            "dropDesc": "Restauraremos la fidelidad y aclararemos los detalles localmente.",
+            "intensity": "Fuerza de Nitidez",
+            "applyBtn": "Mejorar Imagen",
+            "downloadBtn": "Descargar Resultado",
+            "resetBtn": "Nueva Sesión",
+            "synthesizing": "Sintetizando Detalles...",
+            "encoding": "Protocolo de Codificación",
+            "sandbox": "Sandbox de Lienzo Activo",
+            "sandboxDesc": "Los píxeles se reconstruyen en un búfer de memoria volátil. No quedan rastros persistentes.",
+            "original": "Original",
+            "output": "Activo Mejorado",
+            "monitor": "Monitor en Vivo",
+            "protocol": "Protocolo de Máscara de Enfoque",
+            "integrity": "Integridad Local",
+            "howItWorks": {
+                "step1": {
+                    "title": "Carga tu Foto",
+                    "desc": "Suelta cualquier foto borrosa o desenfocada. Se queda en tu hardware — cero subidas."
+                },
+                "step2": {
+                    "title": "Ajusta la Claridad",
+                    "desc": "Usa el deslizador de intensidad para calibrar la fuerza de nitidez para tu imagen específica."
+                },
+                "step3": {
+                    "title": "Guarda en Alta Res",
+                    "desc": "Procesa la mejora y descarga tu activo profesional nítido al instante."
+                }
+            }
+        },
+        "bgRemover": {
+            "title": "Quitar Fondo",
+            "description": "Aísla el sujeto y elimina el fondo al instante — 100% localmente.",
+            "titleHighlight": "Aislamiento de Sujeto",
+            "dropTitle": "Suelta tu imagen aquí.",
+            "dropDesc": "Eliminaremos el fondo mediante procesamiento de IA local.",
+            "mode": "Intensidad de Eliminación",
+            "applyBtn": "Quitar Fondo",
+            "downloadBtn": "Descargar PNG",
+            "resetBtn": "Nuevo Sujeto",
+            "processing": "Analizando Escena...",
+            "encoding": "Aislando Píxeles",
+            "sandbox": "Sandbox de Lienzo Activo",
+            "sandboxDesc": "El modelo de eliminación se ejecuta en la RAM de tu navegador. No se almacenan datos.",
+            "original": "Imagen Fuente",
+            "output": "Sujeto Aislado",
+            "monitor": "Trazo en Vivo",
+            "protocol": "Síntesis de Canal Alfa",
+            "integrity": "Privacidad Local",
+            "howItWorks": {
+                "step1": {
+                    "title": "Selecciona Foto",
+                    "desc": "Suelta cualquier image con un sujeto claro (persona, producto, etc.). Se queda en tu dispositivo."
+                },
+                "step2": {
+                    "title": "Aislamiento por IA",
+                    "desc": "Nuestro modelo WASM local calcula los bordes del sujeto e ignora el fondo."
+                },
+                "step3": {
+                    "title": "Guarda Transparente",
+                    "desc": "Descarga tu sujeto como un archivo PNG transparente de alta calidad al instante."
                 }
             }
         }
@@ -998,6 +1086,19 @@
             "modern": "Moderno: 1.2 MB",
             "lossy": "Relleno con pérdida",
             "advanced": "Avanzado optimizado para LZ"
+        },
+        "enhancer": {
+            "before": "Baja Resolución",
+            "after": "Alta Fidelidad",
+            "lowFid": "Baja Fidelidad",
+            "ultraRes": "Ultra Resolución",
+            "sharpened": "Detalles Preservados"
+        },
+        "bgRemover": {
+            "before": "Fuente Original",
+            "after": "Sujeto Aislado",
+            "raw": "Crudo",
+            "purified": "Purificado"
         }
     },
     "SecurityProof": {

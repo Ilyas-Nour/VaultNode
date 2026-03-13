@@ -16,6 +16,8 @@ export const Footer = memo(() => {
         { label: t('footer.linkConverter'), href: '/tools/media-converter' },
         { label: t('footer.linkPdfWord'), href: '/tools/pdf-to-docx' },
         { label: t('footer.linkCompress'), href: '/tools/compress' },
+        { label: t('footer.linkEnhancer'), href: '/tools/enhancer' },
+        { label: t('footer.linkBgRemover'), href: '/tools/bg-remover' },
         { label: t('footer.linkMerge'), href: '/tools/pdf-merge' },
         { label: t('footer.linkSign'), href: '/tools/sign' },
         { label: t('footer.linkRepair'), href: '/tools/repair' },

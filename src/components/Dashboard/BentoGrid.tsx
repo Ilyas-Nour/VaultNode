@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Eraser, ImageMinus, KeyRound, Lock, Zap, ImagePlus,
     Video, FileUp, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight,
-    PenTool, Stamp, Wrench, Hash, LayoutGrid
+    PenTool, Stamp, Wrench, Hash, LayoutGrid, Sparkles, UserCircle
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
@@ -33,6 +33,8 @@ const tools: ToolItem[] = [
     { id: 'heic', category: 'media', titleKey: 'heicToJpg', descKey: 'toolDescriptions.heic', icon: ImagePlus, href: '/tools/heic-to-jpg' },
     { id: 'media-converter', category: 'media', titleKey: 'mediaConverter', descKey: 'toolDescriptions.mediaConverter', icon: Video, href: '/tools/media-converter' },
     { id: 'svg-to-png', category: 'media', titleKey: 'svgToPng', descKey: 'toolDescriptions.svgToPng', icon: Wand2, href: '/tools/svg-to-png' },
+    { id: 'enhancer', category: 'media', titleKey: 'imageEnhancer', descKey: 'toolDescriptions.enhancer', icon: Sparkles, href: '/tools/enhancer' },
+    { id: 'bg-remover', category: 'media', titleKey: 'bgRemover', descKey: 'toolDescriptions.bgRemover', icon: UserCircle, href: '/tools/bg-remover' },
     { id: 'blur', category: 'media', titleKey: 'blurTool', descKey: 'toolDescriptions.blur', icon: Eye, href: '/tools/blur' },
     { id: 'stamp', category: 'media', titleKey: 'stamp', descKey: 'toolDescriptions.stamp', icon: Stamp, href: '/tools/stamp' },
 

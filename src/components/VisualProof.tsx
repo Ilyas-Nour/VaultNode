@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo } from 'react';
-import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code, CheckCircle2, Eye } from 'lucide-react';
+import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code, CheckCircle2, Eye, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
@@ -48,7 +48,9 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                                                 toolId === 'stamp' ? 'stamp.before' :
                                                                     toolId === 'repair' ? 'repair.before' :
                                                                         toolId === 'number-pages' ? 'numberPages.before' :
-                                                                            toolId === 'organize-pages' ? 'organizePages.before' : 'before');
+                                                                            toolId === 'enhancer' ? 'enhancer.before' :
+                                                                                toolId === 'bg-remover' ? 'bgRemover.before' :
+                                                                                    toolId === 'organize-pages' ? 'organizePages.before' : 'before');
 
         const afterLabel = vpT(toolId === 'redactor' ? 'redactor.after' :
             toolId === 'clean-exif' ? 'cleanExif.after' :
@@ -67,7 +69,9 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                                                 toolId === 'stamp' ? 'stamp.after' :
                                                                     toolId === 'repair' ? 'repair.after' :
                                                                         toolId === 'number-pages' ? 'numberPages.after' :
-                                                                            toolId === 'organize-pages' ? 'organizePages.after' : 'after');
+                                                                            toolId === 'enhancer' ? 'enhancer.after' :
+                                                                                toolId === 'bg-remover' ? 'bgRemover.after' :
+                                                                                    toolId === 'organize-pages' ? 'organizePages.after' : 'after');
 
         switch (toolId) {
             case 'redactor': return (
@@ -211,6 +215,60 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                         )}>
                             {type === 'before' ? vpT('blur.sharpFocus') : vpT('blur.fullyObscured')}
                         </div>
+                    </div>
+                </div>
+            );
+            case 'enhancer': return (
+                <div className="w-full h-full bg-zinc-950 flex items-center justify-center relative overflow-hidden group">
+                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <div
+                        className={cn(
+                            "absolute inset-0 bg-cover bg-center transition-all duration-[1.5s]",
+                            type === 'before' ? "blur-sm scale-100 grayscale opacity-40" : "blur-0 scale-105"
+                        )}
+                        style={{ backgroundImage: "url('/images/proofs/proof_enhancer.png')" }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+                    <div className="relative z-10 flex flex-col items-center gap-6">
+                        <div className={cn(
+                            "w-48 h-48 border-4 flex items-center justify-center transition-all duration-700 rounded-2xl",
+                            type === 'before' ? "border-zinc-800 bg-black/40" : "border-amber-500 bg-black/20 shadow-[0_0_50px_rgba(245,158,11,0.3)]"
+                        )}>
+                            <Sparkles className={cn("w-16 h-16 transition-all", type === 'after' ? "text-amber-500 shadow-xl" : "text-zinc-700")} />
+                        </div>
+                        <div className={cn(
+                            "px-6 py-2 rounded-full border text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-700 w-48 text-center",
+                            type === 'after' ? "bg-amber-500 border-amber-400 text-amber-950" : "bg-black/50 border-white/10 text-white/50 backdrop-blur-md"
+                        )}>
+                            {type === 'before' ? vpT('enhancer.lowRes') : vpT('enhancer.ultraRes')}
+                        </div>
+                    </div>
+                </div>
+            );
+            case 'bg-remover': return (
+                <div className="w-full h-full bg-zinc-950 flex items-center justify-center relative overflow-hidden group">
+                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    {type === 'before' ? (
+                        <div 
+                            className="absolute inset-0 bg-cover bg-center transition-all duration-[2s]"
+                            style={{ backgroundImage: "url('/images/proofs/proof_bg_remover.png')" }}
+                        />
+                    ) : (
+                        <div className="absolute inset-0 bg-black flex items-center justify-center">
+                            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3MhRAxpR+f8YYGC8vH/9H7dEWSkTPHIlSeGmaUQ3m8EBBA9K1/V7DfsAAAAASUVORK5CYII=')" }} />
+                            <div 
+                                className="w-full h-full bg-contain bg-center bg-no-repeat transition-all duration-[1s] scale-105 drop-shadow-[0_0_50px_rgba(255,255,255,0.1)]"
+                                style={{ backgroundImage: "url('/images/proofs/proof_bg_remover.png')", clipPath: 'inset(0 0 0 50%)' }}
+                            />
+                        </div>
+                    )}
+                    <div className="absolute bottom-10 flex gap-4 z-10">
+                         <div className={cn(
+                            "px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-[0.3em] transition-all",
+                            type === 'before' ? "bg-white text-black border-white" : "border-emerald-500 text-emerald-500 bg-emerald-500/10 backdrop-blur"
+                        )}>
+                             {type === 'before' ? vpT('bgRemover.raw') : vpT('bgRemover.purified')}
+                         </div>
                     </div>
                 </div>
             );
@@ -764,7 +822,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 {t(`${toolId.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.after`)}
             </h3>
 
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-hidden" dir="ltr">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-hidden">
                 <div className="relative aspect-video bg-black overflow-hidden">
                     {render('before')}
                 </div>

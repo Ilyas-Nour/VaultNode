@@ -23,6 +23,8 @@
         "repair": "Réparer un Fichier",
         "numberPages": "Numéroter les Pages",
         "organizePages": "Organiser les Pages",
+        "imageEnhancer": "Améliorer l'Image",
+        "bgRemover": "Supprimer le Fond",
         "toolDescriptions": {
             "redactor": "Utilisez le pinceau pour peindre sur les secrets afin de les cacher.",
             "cleanExif": "Supprimez la 'carte cachée' de vos photos.",
@@ -42,7 +44,9 @@
             "stamp": "Mettez votre nom ou logo sur vos photos pour les protéger.",
             "repair": "Réparez un document cassé ou qui affiche une erreur pour pouvoir l'ouvrir.",
             "numberPages": "Mettez un petit numéro en bas de chaque page pour organiser votre fichier.",
-            "organizePages": "Déplacez, supprimez ou ajoutez des pages à votre document."
+            "organizePages": "Déplacez, supprimez ou ajoutez des pages à votre document.",
+            "enhancer": "Éclaircit les photos floues et restaure la netteté avec des filtres professionnels.",
+            "bgRemover": "Isole le sujet et supprime le fond instantanément — 100% local."
         },
         "beforeAfter": {
             "redactor": {
@@ -120,6 +124,14 @@
             "organizePages": {
                 "before": "Une pile désordonnée de pages.",
                 "after": "Un document parfaitement ordonné."
+            },
+            "enhancer": {
+                "before": "Basse résolution",
+                "after": "Haute fidélité"
+            },
+            "bgRemover": {
+                "before": "Source originale",
+                "after": "Sujet isolé"
             }
         },
         "categories": {
@@ -302,6 +314,14 @@
         "organizePages": {
             "title": "Organiser les Pages",
             "description": "Déplacez des pages, supprimez celles inutiles ou ajoutez-en de nouvelles."
+        },
+        "enhancer": {
+            "title": "Améliorateur d'Images",
+            "description": "Éclaircit les photos floues et restaure la netteté avec des filtres professionnels locaux."
+        },
+        "bgRemover": {
+            "title": "Supprimer le Fond",
+            "description": "Isole le sujet et supprime le fond instantanément — 100% local."
         }
     },
     "Tools": {
@@ -839,7 +859,7 @@
             }
         },
         "blur": {
-            "title": "Améliorateur d'Images",
+            "title": "Outil de Flou",
             "description": "Améliore les photos floues ou lisse le bruit — votre image reste sur votre appareil, jamais téléchargée.",
             "titleHighlight": "Flou Esthétique",
             "dropTitle": "Déposez votre image ici pour flouter.",
@@ -869,6 +889,74 @@
                 "step3": {
                     "title": "Enregistrez le résultat",
                     "description": "Cliquez sur traiter et téléchargez instantanément votre image améliorée."
+                }
+            }
+        },
+        "enhancer": {
+            "title": "Améliorateur d'Images",
+            "description": "Éclaircit les photos floues et restaure la netteté avec des filtres professionnels locaux.",
+            "titleHighlight": "Synthèse de Clarté",
+            "dropTitle": "Déposez votre photo floue ici.",
+            "dropDesc": "Nous restaurerons la fidélité et éclaircirons les détails localement.",
+            "intensity": "Force de Netteté",
+            "applyBtn": "Améliorer l'Image",
+            "downloadBtn": "Télécharger le Résultat",
+            "resetBtn": "Nouvelle Session",
+            "synthesizing": "Synthèse des Détails...",
+            "encoding": "Protocole d'Encodage",
+            "sandbox": "Sandbox de Canevas Actif",
+            "sandboxDesc": "Les pixels sont reconstruits dans un tampon mémoire volatil. Aucune trace persistante ne subsiste.",
+            "original": "Original",
+            "output": "Actif Amélioré",
+            "monitor": "Moniteur en Direct",
+            "protocol": "Protocole de Masque Flou",
+            "integrity": "Intégrité Locale",
+            "howItWorks": {
+                "step1": {
+                    "title": "Chargez votre Photo",
+                    "desc": "Déposez n'importe quelle photo floue ou mal mise au point. Elle reste sur votre matériel — zéro upload."
+                },
+                "step2": {
+                    "title": "Réglez la Clarté",
+                    "desc": "Utilisez le curseur d'intensité pour calibrer la force de netteté pour votre image spécifique."
+                },
+                "step3": {
+                    "title": "Enregistrez en Haute Res",
+                    "desc": "Traitez l'amélioration et téléchargez votre actif professionnel net instantanément."
+                }
+            }
+        },
+        "bgRemover": {
+            "title": "Supprimer le Fond",
+            "description": "Isole le sujet et supprime le fond instantanément — 100% localement.",
+            "titleHighlight": "Isolation de Sujet",
+            "dropTitle": "Déposez votre image ici.",
+            "dropDesc": "Nous supprimerons le fond via un traitement IA local.",
+            "mode": "Intensité de Suppression",
+            "applyBtn": "Supprimer le Fond",
+            "downloadBtn": "Télécharger PNG",
+            "resetBtn": "Nouveau Sujet",
+            "processing": "Analyse de la Scène...",
+            "encoding": "Isolation des Pixels",
+            "sandbox": "Sandbox de Canevas Actif",
+            "sandboxDesc": "Le modèle de suppression s'exécute dans la RAM de votre navigateur. Aucune donnée n'est stockée.",
+            "original": "Image Source",
+            "output": "Sujet Isolé",
+            "monitor": "Tracé en Direct",
+            "protocol": "Synthèse de Canal Alpha",
+            "integrity": "Confidentialité Locale",
+            "howItWorks": {
+                "step1": {
+                    "title": "Sélectionnez une Photo",
+                    "desc": "Déposez n'importe quelle image avec un sujet clair (personne, produit, etc.). Elle reste sur votre appareil."
+                },
+                "step2": {
+                    "title": "Isolation par IA",
+                    "desc": "Notre modèle WASM local calcule les bords du sujet et ignorer le fond."
+                },
+                "step3": {
+                    "title": "Enregistrez Transparent",
+                    "desc": "Téléchargez votre sujet en tant que fichier PNG transparent de haute qualité instantanément."
                 }
             }
         }
@@ -994,6 +1082,19 @@
             "modern": "Moderne : 1.2 MO",
             "lossy": "Remplissage avec perte",
             "advanced": "Avancé optimisé LZ"
+        },
+        "enhancer": {
+            "before": "Basse Résolution",
+            "after": "Haute Fidélité",
+            "lowFid": "Basse Fidélité",
+            "ultraRes": "Ultra Résolution",
+            "sharpened": "Détails Préservés"
+        },
+        "bgRemover": {
+            "before": "Source Originale",
+            "after": "Sujet Isolé",
+            "raw": "Brut",
+            "purified": "Purifié"
         }
     },
     "SecurityProof": {
