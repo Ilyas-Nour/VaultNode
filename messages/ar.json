@@ -60,7 +60,7 @@
             "linkCleanMeta": "منظف الصور",
             "linkConverter": "محول الوسائط",
             "linkPdfWord": "PDF إلى Word",
-            "linkCompress": "محسن الصور",
+            "linkCompress": "تصغير حجم الصور",
             "linkMerge": "دمج PDF",
             "linkSign": "توقيع إلكتروني",
             "linkRepair": "إصلاح الملفات",
@@ -274,7 +274,7 @@
             "description": "إزالة الخريطة المخفية وتفاصيل EXIF."
         },
         "compress": {
-            "title": "تقليل حجم الصور",
+            "title": "تصغير حجم الصور",
             "description": "تصغير حجم الصور للمشاركة السهلة."
         },
         "encrypt": {
@@ -570,7 +570,7 @@
             "trim": "قص"
         },
         "compress": {
-            "title": "محسن صور الأصول",
+            "title": "تصغير حجم الصور",
             "description": "قلل حجم الملف مع الحفاظ على الجودة البصرية الاحترافية.",
             "titleHighlight": "منحف البكسلات",
             "dropTitle": "أسقط صورتك هنا.",
