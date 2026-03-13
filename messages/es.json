@@ -1128,7 +1128,7 @@
         "subtitle": "Cómo PrivaFlow protege tus datos sin verlos nunca.",
         "steps": {
             "step1Title": "Ejecución 100% en el cliente",
-            "step1Desc": "Cada cálculo, ya sea redacción de PDF o conversión de video, ocurre completamente en tu navegador usando WASM y FFmpeg.wasm. No se envían datos al servidor.",
+            "step1Desc": "Cada cálculo, ya sea redacción de PDF, eliminación de fondo o mejora de imagen, ocurre completamente en tu navegador usando WASM y FFmpeg.wasm. No se envían datos al servidor.",
             "step2Title": "Política de Cero Bases de Datos",
             "step2Desc": "No tenemos una base de datos para tus archivos. No tenemos almacenamiento para tus cargas. Tus datos no tienen a dónde ir excepto a tu propio almacenamiento local.",
             "step3Title": "Transparencia de Código Abierto",

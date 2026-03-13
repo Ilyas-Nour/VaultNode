@@ -1124,7 +1124,7 @@
         "subtitle": "Comment PrivaFlow protège vos données sans jamais les voir.",
         "steps": {
             "step1Title": "Exécution 100% côté client",
-            "step1Desc": "Chaque calcul — qu'il s'agisse de caviardage PDF ou de conversion vidéo — se produit entièrement dans votre navigateur via WASM et FFmpeg.wasm. Aucune donnée n'est envoyée au backend.",
+            "step1Desc": "Chaque calcul — qu'il s'agisse de caviardage PDF, de suppression de fond ou d'amélioration d'image — se produit entièrement dans votre navigateur via WASM et FFmpeg.wasm. Aucune donnée n'est envoyée au backend.",
             "step2Title": "Politique Zéro Base de Données",
             "step2Desc": "Nous n'avons pas de base de données pour vos fichiers. Pas de stockage pour vos uploads. Vos données ne vont nulle part ailleurs que sur votre stockage local.",
             "step3Title": "Transparence Open Source",

@@ -1280,7 +1280,7 @@
         "subtitle": "How PrivaFlow protects your data without ever seeing it.",
         "steps": {
             "step1Title": "100% Client-Side execution",
-            "step1Desc": "Every single computation — whether it's PDF redaction or video conversion — happens entirely within your browser using WASM (WebAssembly) and FFmpeg.wasm. No data is sent to a backend.",
+            "step1Desc": "Every single computation — whether it's PDF redaction, background removal, or image enhancement — happens entirely within your browser using WASM (WebAssembly) and FFmpeg.wasm. No data is sent to a backend.",
             "step2Title": "Zero Database Policy",
             "step2Desc": "We do not have a database for your files. We do not have a bucket for your uploads. There is nowhere for your data to go except your own local storage.",
             "step3Title": "Open Source Transparency",

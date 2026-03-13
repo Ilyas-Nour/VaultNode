@@ -802,6 +802,52 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     </div>
                 </div>
             );
+            case 'enhancer': return (
+                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
+                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center">
+                        <div
+                            className={cn(
+                                "absolute inset-0 bg-cover bg-center transition-all duration-1000",
+                                type === 'before' ? "blur-sm opacity-60 grayscale" : "blur-0 opacity-100"
+                            )}
+                            style={{ backgroundImage: "url('/images/proofs/proof_enhancer.png')" }}
+                        />
+                        {type === 'after' && (
+                            <div className="relative z-20 flex flex-col items-center gap-4">
+                                <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/50 backdrop-blur-xl rounded-full flex items-center gap-3 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                                    <Sparkles className="w-4 h-4 text-emerald-400 animate-pulse" />
+                                    <span className="text-[10px] font-black text-emerald-100 uppercase tracking-[0.2em]">{vpT('enhancer.sharpened')}</span>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+            case 'bg-remover': return (
+                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
+                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center">
+                        <div
+                            className={cn(
+                                "absolute inset-0 bg-cover bg-center transition-all duration-1000",
+                                type === 'before' ? "opacity-100" : "opacity-0"
+                            )}
+                            style={{ backgroundImage: "url('/images/proofs/proof_bg_remover.png')" }}
+                        />
+                        {type === 'after' && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-checkerboard opacity-20" />
+                        )}
+                        <div
+                            className={cn(
+                                "relative z-30 w-full h-full bg-contain bg-no-repeat bg-center transition-all duration-1000",
+                                type === 'after' ? "scale-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]" : "opacity-0 invisible"
+                            )}
+                            style={{ backgroundImage: "url('/images/proofs/proof_premium_portrait.png')" }}
+                        />
+                    </div>
+                </div>
+            );
             default: return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center">
                     <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
