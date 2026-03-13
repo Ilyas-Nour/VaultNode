@@ -945,6 +945,12 @@
             "monitor": "Tracé en Direct",
             "protocol": "Synthèse de Canal Alpha",
             "integrity": "Confidentialité Locale",
+            "refine": "Affinage Manuel",
+            "brushSize": "Taille du Pinceau",
+            "erase": "Effacer",
+            "restore": "Restaurer",
+            "refineBtn": "Affiner les Bords",
+            "saveRefine": "Appliquer les Modifications",
             "howItWorks": {
                 "step1": {
                     "title": "Sélectionnez une Photo",

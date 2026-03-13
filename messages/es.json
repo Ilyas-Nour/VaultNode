@@ -949,6 +949,12 @@
             "monitor": "Trazo en Vivo",
             "protocol": "Síntesis de Canal Alfa",
             "integrity": "Privacidad Local",
+            "refine": "Refinar Manualmente",
+            "brushSize": "Tamaño del Pincel",
+            "erase": "Borrar",
+            "restore": "Restaurar",
+            "refineBtn": "Refinar Bordes",
+            "saveRefine": "Aplicar Cambios",
             "howItWorks": {
                 "step1": {
                     "title": "Selecciona Foto",

@@ -38,6 +38,15 @@ const BackgroundRemoverTool = memo(() => {
     const [exportBlob, setExportBlob] = useState<Blob | null>(null);
     const [exportUrl, setExportUrl] = useState<string | null>(null);
     const [modelType, setModelType] = useState<'isnet' | 'isnet_fp16' | 'isnet_quint8'>('isnet_fp16');
+    
+    // -- Refinement States --
+    const [isRefining, setIsRefining] = useState(false);
+    const [brushSize, setBrushSize] = useState(30);
+    const [refineMode, setRefineMode] = useState<'erase' | 'restore'>('erase');
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isDrawing, setIsDrawing] = useState(false);
+    const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(null);
+    const [isolatedImage, setIsolatedImage] = useState<HTMLImageElement | null>(null);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
@@ -46,6 +55,7 @@ const BackgroundRemoverTool = memo(() => {
             setPreviewUrl(URL.createObjectURL(f));
             setExportBlob(null);
             setExportUrl(null);
+            setIsRefining(false);
         }
     }, []);
 
@@ -77,12 +87,118 @@ const BackgroundRemoverTool = memo(() => {
             
             setExportBlob(blob);
             setExportUrl(URL.createObjectURL(blob));
+            
+            // Prepare images for refinement
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            img.onload = () => setOriginalImage(img);
+            
+            const iso = new Image();
+            iso.src = URL.createObjectURL(blob);
+            iso.onload = () => setIsolatedImage(iso);
+
             setIsProcessing(false);
         } catch (error) {
             console.error("Background removal error:", error);
             setIsProcessing(false);
         }
     }, [file, modelType]);
+
+    // -- Refinement Logic --
+    const lastPos = useRef<{ x: number, y: number } | null>(null);
+
+    const startDrawing = (e: React.PointerEvent) => {
+        setIsDrawing(true);
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const rect = canvas.getBoundingClientRect();
+        lastPos.current = {
+            x: (e.clientX - rect.left) * (canvas.width / rect.width),
+            y: (e.clientY - rect.top) * (canvas.height / rect.height)
+        };
+        draw(e);
+    };
+
+    const stopDrawing = () => {
+        setIsDrawing(false);
+        lastPos.current = null;
+        const ctx = canvasRef.current?.getContext('2d');
+        ctx?.beginPath();
+    };
+
+    const draw = (e: React.PointerEvent) => {
+        if (!isDrawing || !canvasRef.current || !isRefining || !lastPos.current) return;
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        if (refineMode === 'erase') {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.strokeStyle = 'rgba(0,0,0,1)';
+            ctx.beginPath();
+            ctx.moveTo(lastPos.current.x, lastPos.current.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        } else {
+            ctx.globalCompositeOperation = 'source-over';
+            // Smooth restore using interpolation
+            const dist = Math.sqrt(Math.pow(x - lastPos.current.x, 2) + Math.pow(y - lastPos.current.y, 2));
+            const angle = Math.atan2(y - lastPos.current.y, x - lastPos.current.x);
+            
+            for (let i = 0; i < dist; i += brushSize / 4) {
+                const _x = lastPos.current.x + Math.cos(angle) * i;
+                const _y = lastPos.current.y + Math.sin(angle) * i;
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(_x, _y, brushSize / 2, 0, Math.PI * 2);
+                ctx.clip();
+                if (originalImage) {
+                    ctx.drawImage(originalImage, 0, 0, canvas.width, canvas.height);
+                }
+                ctx.restore();
+            }
+        }
+
+        lastPos.current = { x, y };
+    };
+
+    const handleApplyRefine = () => {
+        if (!canvasRef.current) return;
+        canvasRef.current.toBlob((blob) => {
+            if (blob) {
+                setExportBlob(blob);
+                if (exportUrl) URL.revokeObjectURL(exportUrl);
+                const newUrl = URL.createObjectURL(blob);
+                setExportUrl(newUrl);
+                
+                const iso = new Image();
+                iso.src = newUrl;
+                iso.onload = () => setIsolatedImage(iso);
+            }
+            setIsRefining(false);
+        }, 'image/png');
+    };
+
+    const initRefineCanvas = useCallback(() => {
+        if (!isolatedImage || !canvasRef.current) return;
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        canvas.width = isolatedImage.width;
+        canvas.height = isolatedImage.height;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(isolatedImage, 0, 0);
+        setIsRefining(true);
+    }, [isolatedImage]);
 
     const handleDownload = useCallback(() => {
         if (!exportUrl || !file) return;
@@ -97,6 +213,7 @@ const BackgroundRemoverTool = memo(() => {
         setPreviewUrl(null);
         setExportBlob(null);
         setExportUrl(null);
+        setIsRefining(false);
     }, []);
 
     const howItWorks = useMemo(() => [
@@ -146,14 +263,81 @@ const BackgroundRemoverTool = memo(() => {
                             {isProcessing ? t('processing') : t('applyBtn')}
                         </Button>
 
-                        {exportUrl && (
-                            <Button
-                                onClick={handleDownload}
-                                className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all shadow-xl"
-                            >
-                                <Download className="w-4 h-4 me-2" />
-                                {t('downloadBtn')}
-                            </Button>
+                        {exportUrl && !isRefining && (
+                            <div className="grid grid-cols-2 gap-2">
+                                <Button
+                                    onClick={handleDownload}
+                                    className="h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all shadow-xl"
+                                >
+                                    <Download className="w-4 h-4 me-2" />
+                                    {t('downloadBtn')}
+                                </Button>
+                                <Button
+                                    onClick={initRefineCanvas}
+                                    className="h-12 bg-zinc-800 text-white hover:bg-zinc-700 font-black rounded-xl text-[11px] uppercase tracking-widest italic transition-all"
+                                >
+                                    {t('refineBtn')}
+                                </Button>
+                            </div>
+                        )}
+
+                        {isRefining && (
+                            <div className="p-4 bg-zinc-950 rounded-2xl border border-zinc-900 space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500">{t('refine')}</span>
+                                    <div className="flex gap-1 bg-zinc-900 p-1 rounded-lg">
+                                        <button
+                                            onClick={() => setRefineMode('erase')}
+                                            className={cn(
+                                                "px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-md transition-all",
+                                                refineMode === 'erase' ? "bg-emerald-500 text-emerald-950" : "text-zinc-600 hover:text-white"
+                                            )}
+                                        >
+                                            {t('erase')}
+                                        </button>
+                                        <button
+                                            onClick={() => setRefineMode('restore')}
+                                            className={cn(
+                                                "px-3 py-1 text-[9px] font-black uppercase tracking-widest rounded-md transition-all",
+                                                refineMode === 'restore' ? "bg-emerald-500 text-emerald-950" : "text-zinc-600 hover:text-white"
+                                            )}
+                                        >
+                                            {t('restore')}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <div className="flex justify-between text-[9px] font-black uppercase tracking-widest text-zinc-600">
+                                        <span>{t('brushSize')}</span>
+                                        <span>{brushSize}px</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="5"
+                                        max="100"
+                                        value={brushSize}
+                                        onChange={(e) => setBrushSize(parseInt(e.target.value))}
+                                        className="w-full accent-emerald-500 h-1 bg-zinc-800 rounded-full appearance-none cursor-pointer"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2 mt-2">
+                                    <Button
+                                        onClick={handleApplyRefine}
+                                        className="h-10 bg-emerald-500 text-emerald-950 hover:bg-emerald-400 font-black rounded-lg text-[10px] uppercase tracking-widest"
+                                    >
+                                        {t('saveRefine')}
+                                    </Button>
+                                    <Button
+                                        onClick={() => setIsRefining(false)}
+                                        variant="ghost"
+                                        className="h-10 text-zinc-500 hover:text-white font-black rounded-lg text-[10px] uppercase tracking-widest"
+                                    >
+                                        {commonT('cancel')}
+                                    </Button>
+                                </div>
+                            </div>
                         )}
 
                         {file && (
@@ -255,11 +439,24 @@ const BackgroundRemoverTool = memo(() => {
                                 </div>
                                 <div className="aspect-square rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/10 overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)] transition-all duration-700 hover:border-emerald-500/40 group bg-checkerboard">
                                     {exportUrl ? (
-                                        <img
-                                            src={exportUrl}
-                                            className="w-full h-full object-contain transition-all duration-500 transform scale-[1.05] p-4 group-hover:scale-[1.02]"
-                                            alt="Removed Background"
-                                        />
+                                        <div className="w-full h-full relative p-4 group">
+                                            {isRefining ? (
+                                                <canvas
+                                                    ref={canvasRef}
+                                                    onPointerDown={startDrawing}
+                                                    onPointerMove={draw}
+                                                    onPointerUp={stopDrawing}
+                                                    onPointerLeave={stopDrawing}
+                                                    className="w-full h-full object-contain cursor-crosshair touch-none relative z-20"
+                                                />
+                                            ) : (
+                                                <img
+                                                    src={exportUrl}
+                                                    className="w-full h-full object-contain transition-all duration-500 transform scale-[1.05] group-hover:scale-[1.02]"
+                                                    alt="Removed Background"
+                                                />
+                                            )}
+                                        </div>
                                     ) : (
                                         <div className="w-full h-full flex flex-col items-center justify-center gap-4 opacity-40">
                                             <div className="w-32 h-32 bg-zinc-900 border border-zinc-800 rounded-3xl animate-pulse" />
