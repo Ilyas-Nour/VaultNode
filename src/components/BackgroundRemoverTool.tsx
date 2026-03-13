@@ -211,13 +211,15 @@ const BackgroundRemoverTool = memo(() => {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
             if (ctx) {
+                // Use a smaller scale for display but maintain internal resolution?
+                // Actually, let's just stick to isolatedImage dimensions for fidelity
                 canvas.width = isolatedImage.width;
                 canvas.height = isolatedImage.height;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(isolatedImage, 0, 0);
             }
         }
-    }, [isRefining, isolatedImage]);
+    }, [isRefining, isolatedImage, isImmersive]);
 
     const handleDownload = useCallback(() => {
         if (!exportUrl || !file) return;
@@ -470,7 +472,7 @@ const BackgroundRemoverTool = memo(() => {
                                 <div className="aspect-square rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/10 overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)] transition-all duration-700 hover:border-emerald-500/40 group bg-checkerboard">
                                     {exportUrl ? (
                                         <div className="w-full h-full relative p-4 group">
-                                            {isRefining ? (
+                                            {isRefining && !isImmersive ? (
                                                 <canvas
                                                     ref={canvasRef}
                                                     onPointerDown={startDrawing}
