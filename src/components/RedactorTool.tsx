@@ -390,7 +390,7 @@ const RedactorTool = memo(() => {
                         ref={workspaceRef}
                         className="w-full h-full pt-16 pb-24 overflow-auto scrollbar-hide flex items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-black to-black"
                     >
-                        <div className="relative shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-zinc-800 bg-white shrink-0 mx-auto">
+                        <div dir="ltr" className="relative shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-zinc-800 bg-white shrink-0 mx-auto">
                             <canvas ref={pdfCanvasRef} className="block" />
                             <canvas
                                 ref={drawCanvasRef}
