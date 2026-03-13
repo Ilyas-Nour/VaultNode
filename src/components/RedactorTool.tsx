@@ -176,37 +176,34 @@ const RedactorTool = memo(() => {
         }
     }, []);
 
-    // 📏 Accurate Sizing Engine (Fixes Resize Race Condition)
+    // 📏 Accurate Sizing Engine (Debounced ResizeObserver)
     useEffect(() => {
         if (!file || !workspaceRef.current) return;
         
-        let hasRendered = false;
-
-        // 1. Initial immediate render based on current layout
-        const rect = workspaceRef.current.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-            renderPdfAsync(file, rect.width, rect.height);
-            hasRendered = true;
-        }
+        let timeoutId: NodeJS.Timeout;
+        let lastWidth = 0;
+        let lastHeight = 0;
         
-        // 2. Continuous observation for window snags/resizes
         const resizeObserver = new ResizeObserver(entries => {
-            for (let entry of entries) {
-                const { width, height } = entry.contentRect;
-                if (width > 0 && height > 0) {
-                    // Skip the very first observer trigger if we already rendered immediately
-                    if (hasRendered) {
-                        hasRendered = false;
-                        continue;
-                    }
+            const { width, height } = entries[0].contentRect;
+            
+            // Only re-render if dimensions meaningfully change (ignore sub-pixel bouncing)
+            if (width > 10 && height > 10 && (Math.abs(width - lastWidth) > 5 || Math.abs(height - lastHeight) > 5)) {
+                lastWidth = width;
+                lastHeight = height;
+                
+                clearTimeout(timeoutId);
+                // Wait for layout/framer-motion transitions to settle before rendering
+                timeoutId = setTimeout(() => {
                     renderPdfAsync(file, width, height);
-                }
+                }, 200); 
             }
         });
 
         resizeObserver.observe(workspaceRef.current);
 
         return () => {
+            clearTimeout(timeoutId);
             resizeObserver.disconnect();
             if (renderTaskRef.current) renderTaskRef.current.cancel();
         };
