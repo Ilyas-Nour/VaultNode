@@ -115,14 +115,17 @@ const RedactorTool = memo(() => {
             const horizontalPadding = 48; 
             const verticalPadding = 48; // HUD is absolute, container is padded, so we only need small inner padding
 
-            const targetWidth = containerWidth - horizontalPadding;
-            const targetHeight = containerHeight - verticalPadding;
+            const targetWidth = Math.max(100, containerWidth - horizontalPadding);
+            const targetHeight = Math.max(100, containerHeight - verticalPadding);
 
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
             
             // The logical CSS scale needed to fit the screen
-            const logicalScale = Math.min(scaleX, scaleY);
+            let logicalScale = Math.min(scaleX, scaleY);
+            
+            // Safety guard: Don't render if scale is nonsensical
+            if (logicalScale < 0.01) return;
             
             // High-DPI physical scale for crispness
             const dpr = window.devicePixelRatio || 1;
@@ -176,27 +179,36 @@ const RedactorTool = memo(() => {
         }
     }, []);
 
-    // 📏 Accurate Sizing Engine (Debounced ResizeObserver)
+    // 📏 Robust Sizing Engine (Hybrid: Immediate + Debounced Observer)
     useEffect(() => {
         if (!file || !workspaceRef.current) return;
         
         let timeoutId: NodeJS.Timeout;
         let lastWidth = 0;
         let lastHeight = 0;
+
+        // 1. Immediate Layout Pass (captures size during mount)
+        const initialRect = workspaceRef.current.getBoundingClientRect();
+        if (initialRect.width > 20 && initialRect.height > 20) {
+            renderPdfAsync(file, initialRect.width, initialRect.height);
+            lastWidth = initialRect.width;
+            lastHeight = initialRect.height;
+        }
         
+        // 2. Continuous observation for layout settling and window resizes
         const resizeObserver = new ResizeObserver(entries => {
             const { width, height } = entries[0].contentRect;
             
-            // Only re-render if dimensions meaningfully change (ignore sub-pixel bouncing)
-            if (width > 10 && height > 10 && (Math.abs(width - lastWidth) > 5 || Math.abs(height - lastHeight) > 5)) {
+            // Meaningful change check (> 1px diff) to prevent jitter
+            if (width > 20 && height > 20 && (Math.abs(width - lastWidth) > 1 || Math.abs(height - lastHeight) > 1)) {
                 lastWidth = width;
                 lastHeight = height;
                 
                 clearTimeout(timeoutId);
-                // Wait for layout/framer-motion transitions to settle before rendering
+                // Snappy 50ms debounce for layout settling
                 timeoutId = setTimeout(() => {
                     renderPdfAsync(file, width, height);
-                }, 200); 
+                }, 50); 
             }
         });
 
