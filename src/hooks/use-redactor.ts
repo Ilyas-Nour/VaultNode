@@ -127,8 +127,14 @@ export const useRedactor = () => {
             const link = document.createElement("a");
             link.href = url;
             link.download = `redacted-${file.name}`;
+            document.body.appendChild(link);
             link.click();
-            URL.revokeObjectURL(url);
+            
+            // Cleanup with a small delay to ensure browser initiates the download
+            setTimeout(() => {
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }, 100);
         } catch (err) {
             console.error("Export failure:", err);
             throw err;
