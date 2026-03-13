@@ -951,6 +951,9 @@
             "restore": "Restaurer",
             "refineBtn": "Affiner les Bords",
             "saveRefine": "Appliquer les Modifications",
+            "fullScreen": "Mode Immersif",
+            "exitEditor": "Quitter l'Éditeur",
+            "settings": "Paramètres",
             "howItWorks": {
                 "step1": {
                     "title": "Sélectionnez une Photo",

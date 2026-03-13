@@ -16,7 +16,8 @@ import { useDropzone } from "react-dropzone";
 import { useTranslations } from 'next-intl';
 import {
     Loader2, Download, RefreshCw,
-    UserCircle, FileUp, Shield, Image as ImageIcon
+    UserCircle, FileUp, Shield, Image as ImageIcon,
+    Maximize2, Minimize2, Settings
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -38,6 +39,9 @@ const BackgroundRemoverTool = memo(() => {
     const [exportBlob, setExportBlob] = useState<Blob | null>(null);
     const [exportUrl, setExportUrl] = useState<string | null>(null);
     const [modelType, setModelType] = useState<'isnet' | 'isnet_fp16' | 'isnet_quint8'>('isnet_fp16');
+    
+    // -- Immersive States --
+    const [isImmersive, setIsImmersive] = useState(false);
     
     // -- Refinement States --
     const [isRefining, setIsRefining] = useState(false);
@@ -191,6 +195,15 @@ const BackgroundRemoverTool = memo(() => {
         if (!isolatedImage) return;
         setIsRefining(true);
     }, [isolatedImage]);
+
+    const handleToggleImmersive = useCallback(() => {
+        if (!isImmersive) {
+            if (!isRefining) initRefineCanvas();
+            setIsImmersive(true);
+        } else {
+            setIsImmersive(false);
+        }
+    }, [isImmersive, isRefining, initRefineCanvas]);
 
     // Initialize canvas after it mounts
     useEffect(() => {
@@ -438,10 +451,21 @@ const BackgroundRemoverTool = memo(() => {
                             <div className="space-y-4">
                                 <div className="flex items-center justify-between px-2">
                                     <span className="text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">{t('output')}</span>
-                                    <div className="flex items-center gap-2.5 bg-emerald-500/5 px-2.5 py-1 rounded-full border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors group/eye">
-                                        <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-tighter">{t('monitor')}</span>
-                                        <UserCircle className="w-3.5 h-3.5 text-emerald-500 animate-pulse group-hover/eye:scale-110 transition-transform" />
-                                    </div>
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-2.5 bg-emerald-500/5 px-2.5 py-1 rounded-full border border-emerald-500/10 hover:bg-emerald-500/10 transition-colors group/eye">
+                                                <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-tighter">{t('monitor')}</span>
+                                                <UserCircle className="w-3.5 h-3.5 text-emerald-500 animate-pulse group-hover/eye:scale-110 transition-transform" />
+                                            </div>
+                                            {exportUrl && (
+                                                <button
+                                                    onClick={handleToggleImmersive}
+                                                    className="p-1.5 rounded-lg bg-zinc-950 border border-zinc-900 text-zinc-600 hover:text-white transition-colors"
+                                                    title={t('fullScreen')}
+                                                >
+                                                    <Maximize2 className="w-3.5 h-3.5" />
+                                                </button>
+                                            )}
+                                        </div>
                                 </div>
                                 <div className="aspect-square rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/10 overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)] transition-all duration-700 hover:border-emerald-500/40 group bg-checkerboard">
                                     {exportUrl ? (
@@ -497,6 +521,134 @@ const BackgroundRemoverTool = memo(() => {
                     )}
                 </AnimatePresence>
             </div>
+
+            {/* -- Immersive Overlay -- */}
+            <AnimatePresence>
+                {isImmersive && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] bg-zinc-950 flex flex-col md:flex-row overflow-hidden isolate"
+                    >
+                        {/* Immersive Header (Mobile) */}
+                        <div className="md:hidden flex items-center justify-between p-4 border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-xl z-20">
+                            <span className="text-[11px] font-black uppercase tracking-widest text-emerald-500 italic">{t('fullScreen')}</span>
+                            <Button
+                                variant="ghost"
+                                onClick={() => setIsImmersive(false)}
+                                className="h-8 text-zinc-500 hover:text-white text-[10px] font-black uppercase"
+                            >
+                                {commonT('cancel')}
+                            </Button>
+                        </div>
+
+                        {/* Immersive Canvas Workspace */}
+                        <div className="flex-1 relative flex items-center justify-center p-4 md:p-12 overflow-hidden bg-checkerboard">
+                            {isRefining ? (
+                                <canvas
+                                    ref={canvasRef}
+                                    onPointerDown={startDrawing}
+                                    onPointerMove={draw}
+                                    onPointerUp={stopDrawing}
+                                    onPointerLeave={stopDrawing}
+                                    className="max-w-full max-h-full object-contain cursor-crosshair touch-none shadow-2xl z-10"
+                                />
+                            ) : (
+                                <img
+                                    src={exportUrl || ''}
+                                    className="max-w-full max-h-full object-contain shadow-2xl"
+                                    alt="Full Preview"
+                                />
+                            )}
+                            
+                            {/* Immersive Controls Tooltip */}
+                            <div className="absolute top-6 left-1/2 -translate-x-1/2 hidden md:flex items-center gap-4 px-6 py-2.5 bg-zinc-900/40 backdrop-blur-xl border border-white/5 rounded-full z-20">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{t('fullScreen')}</span>
+                                <div className="w-px h-3 bg-zinc-800" />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse">{t('sandbox')}</span>
+                            </div>
+                        </div>
+
+                        {/* Immersive Sidebar (Desktop) / HUD (Mobile) */}
+                        <motion.aside
+                            initial={{ x: 300 }}
+                            animate={{ x: 0 }}
+                            className="w-full md:w-80 h-auto md:h-full bg-zinc-950 border-t md:border-t-0 md:border-l border-zinc-900 p-6 md:p-8 flex flex-col gap-8 z-30"
+                        >
+                            <div className="hidden md:flex items-center gap-3">
+                                <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                                    <Settings className="w-4 h-4 text-emerald-500" />
+                                </div>
+                                <div className="flex flex-col gap-0.5">
+                                    <h3 className="text-[11px] font-black uppercase tracking-widest text-white leading-none">{t('settings')}</h3>
+                                    <span className="text-[9px] font-bold text-zinc-600 uppercase tracking-tighter">{t('refine')}</span>
+                                </div>
+                            </div>
+
+                            <div className="space-y-6">
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">{t('brushSize')}</span>
+                                        <span className="text-[10px] font-black text-emerald-500">{brushSize}px</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="5"
+                                        max="150"
+                                        value={brushSize}
+                                        onChange={(e) => setBrushSize(parseInt(e.target.value))}
+                                        className="w-full accent-emerald-500 h-1.5 bg-zinc-900 rounded-full appearance-none cursor-pointer"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2 bg-zinc-900/50 p-1.5 rounded-2xl border border-zinc-900">
+                                    <button
+                                        onClick={() => setRefineMode('erase')}
+                                        className={cn(
+                                            "h-10 flex items-center justify-center rounded-xl transition-all gap-2 border",
+                                            refineMode === 'erase' 
+                                                ? "bg-emerald-500 border-emerald-400 text-emerald-950 shadow-lg shadow-emerald-500/20" 
+                                                : "bg-transparent border-transparent text-zinc-500 hover:text-white"
+                                        )}
+                                    >
+                                        <RefreshCw className="w-3.5 h-3.5" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">{t('erase')}</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setRefineMode('restore')}
+                                        className={cn(
+                                            "h-10 flex items-center justify-center rounded-xl transition-all gap-2 border",
+                                            refineMode === 'restore' 
+                                                ? "bg-emerald-500 border-emerald-400 text-emerald-950 shadow-lg shadow-emerald-500/20" 
+                                                : "bg-transparent border-transparent text-zinc-500 hover:text-white"
+                                        )}
+                                    >
+                                        <ImageIcon className="w-3.5 h-3.5" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">{t('restore')}</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="mt-auto space-y-3">
+                                <Button
+                                    onClick={handleApplyRefine}
+                                    className="w-full h-12 bg-white text-black hover:bg-zinc-200 font-black rounded-xl text-[11px] uppercase tracking-widest italic"
+                                >
+                                    {t('saveRefine')}
+                                </Button>
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => setIsImmersive(false)}
+                                    className="w-full h-10 text-zinc-500 hover:text-red-400 font-black rounded-xl text-[10px] uppercase tracking-widest italic transition-colors"
+                                >
+                                    {t('exitEditor')}
+                                </Button>
+                            </div>
+                        </motion.aside>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </ToolContainer>
     );
 });

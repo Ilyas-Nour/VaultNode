@@ -1105,6 +1105,9 @@
             "restore": "استعادة",
             "refineBtn": "تحسين الحواف",
             "saveRefine": "تطبيق التعديلات",
+            "fullScreen": "وضع غامر",
+            "exitEditor": "الخروج من المحرر",
+            "settings": "الإعدادات",
             "howItWorks": {
                 "step1": {
                     "title": "اختر الصورة",

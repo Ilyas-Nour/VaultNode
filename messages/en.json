@@ -1105,6 +1105,9 @@
             "restore": "Restore",
             "refineBtn": "Refine Edges",
             "saveRefine": "Apply Edits",
+            "fullScreen": "Immersive Mode",
+            "exitEditor": "Exit Editor",
+            "settings": "Settings",
             "howItWorks": {
                 "step1": {
                     "title": "Select Photo",
