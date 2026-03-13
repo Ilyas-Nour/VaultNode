@@ -11,7 +11,7 @@
 
 "use client";
 
-import React, { useState, useCallback, useRef, memo, useMemo } from "react";
+import React, { useState, useCallback, useRef, memo, useMemo, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useTranslations } from 'next-intl';
 import {
@@ -188,17 +188,23 @@ const BackgroundRemoverTool = memo(() => {
     };
 
     const initRefineCanvas = useCallback(() => {
-        if (!isolatedImage || !canvasRef.current) return;
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        canvas.width = isolatedImage.width;
-        canvas.height = isolatedImage.height;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(isolatedImage, 0, 0);
+        if (!isolatedImage) return;
         setIsRefining(true);
     }, [isolatedImage]);
+
+    // Initialize canvas after it mounts
+    useEffect(() => {
+        if (isRefining && isolatedImage && canvasRef.current) {
+            const canvas = canvasRef.current;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                canvas.width = isolatedImage.width;
+                canvas.height = isolatedImage.height;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(isolatedImage, 0, 0);
+            }
+        }
+    }, [isRefining, isolatedImage]);
 
     const handleDownload = useCallback(() => {
         if (!exportUrl || !file) return;
