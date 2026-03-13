@@ -237,6 +237,7 @@ const BackgroundRemoverTool = memo(() => {
                 iso.onload = () => setIsolatedImage(iso);
             }
             setIsRefining(false);
+            setIsImmersive(false); // Exit immersive mode on apply
         }, 'image/png');
     };
 
