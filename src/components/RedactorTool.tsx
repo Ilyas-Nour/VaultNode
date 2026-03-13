@@ -98,64 +98,63 @@ const RedactorTool = memo(() => {
     const workspaceRef = useRef<HTMLDivElement>(null);
     const renderTaskRef = useRef<any>(null);
 
-    // 🚀 STABLE RENDER ENGINE (Container-Aware)
-    const renderPdfAsync = useCallback(async (pdfFile: File, containerWidth: number, containerHeight: number) => {
+    // 🚀 DETERMINISTIC RENDER ENGINE
+    const renderPdfAsync = useCallback(async (pdfFile: File) => {
+        if (!workspaceRef.current) return;
+        
         try {
-            if (renderTaskRef.current) {
-                renderTaskRef.current.cancel();
-            }
+            if (renderTaskRef.current) renderTaskRef.current.cancel();
+
+            // 1. Calculate strictly available space using window dimensions (bypass unreliable DOM measurements during animation)
+            const winW = window.innerWidth;
+            const winH = window.innerHeight;
+            
+            // Layout offsets (matching the CSS):
+            // Inline: w-full h-[70vh] min-h-[500px]
+            // Fullscreen: fixed inset-0
+            const rawW = isFullscreen ? winW : Math.min(winW, 1280); // VaultNode tools are usually centered/constrained
+            const rawH = isFullscreen ? winH : Math.max(500, winH * 0.7);
+            
+            // Subtract UI overhead (header/footer/margins)
+            const horizontalPadding = isFullscreen ? 64 : 48;
+            const verticalPadding = isFullscreen ? 160 : 120; // Inclusive of HUD and spacing
+
+            const targetWidth = Math.max(200, rawW - horizontalPadding);
+            const targetHeight = Math.max(200, rawH - verticalPadding);
 
             const arrayBuffer = await pdfFile.arrayBuffer();
             const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
             const page = await pdf.getPage(1);
-
             const originalViewport = page.getViewport({ scale: 1 });
             
-            // Tight margins to maximize use of space within the container
-            const horizontalPadding = 48; 
-            const verticalPadding = 48; // HUD is absolute, container is padded, so we only need small inner padding
-
-            const targetWidth = Math.max(100, containerWidth - horizontalPadding);
-            const targetHeight = Math.max(100, containerHeight - verticalPadding);
-
             const scaleX = targetWidth / originalViewport.width;
             const scaleY = targetHeight / originalViewport.height;
+            const logicalScale = Math.min(scaleX, scaleY);
             
-            // The logical CSS scale needed to fit the screen
-            let logicalScale = Math.min(scaleX, scaleY);
-            
-            // Safety guard: Don't render if scale is nonsensical
-            if (logicalScale < 0.01) return;
-            
-            // High-DPI physical scale for crispness
+            if (logicalScale < 0.05) return; // Guard against garbage values
+
             const dpr = window.devicePixelRatio || 1;
             const physicalScale = logicalScale * dpr;
 
             setActiveUIScale(logicalScale);
 
-            // Viewport for actual pixel rendering (High-Res)
             const renderViewport = page.getViewport({ scale: physicalScale });
-            // Viewport for CSS sizing (Logical-Res)
             const cssViewport = page.getViewport({ scale: logicalScale });
-            
             const exportViewport = page.getViewport({ scale: SECURE_EXPORT_SCALE });
 
             const pdfCanvas = pdfCanvasRef.current;
             const drawCanvas = drawCanvasRef.current;
             const baseCanvas = hiddenBaseCanvasRef.current;
-
             if (!pdfCanvas || !drawCanvas || !baseCanvas) return;
 
             const uiCtx = pdfCanvas.getContext("2d");
             if (!uiCtx) return;
 
-            // Physical Canvas Resolution (Actual Pixels)
             pdfCanvas.width = renderViewport.width;
             pdfCanvas.height = renderViewport.height;
             drawCanvas.width = renderViewport.width;
             drawCanvas.height = renderViewport.height;
 
-            // CSS Logical Size (How big it looks on screen, overriding flexbox)
             pdfCanvas.style.width = `${cssViewport.width}px`;
             pdfCanvas.style.height = `${cssViewport.height}px`;
             drawCanvas.style.width = `${cssViewport.width}px`;
@@ -165,58 +164,36 @@ const RedactorTool = memo(() => {
             await renderTaskRef.current.promise;
 
             const baseCtx = baseCanvas.getContext("2d");
-            if (!baseCtx) return;
-            baseCanvas.height = exportViewport.height;
-            baseCanvas.width = exportViewport.width;
-
-            renderTaskRef.current = page.render({ canvasContext: baseCtx, canvas: baseCanvas, viewport: exportViewport });
-            await renderTaskRef.current.promise;
+            if (baseCtx) {
+                baseCanvas.height = exportViewport.height;
+                baseCanvas.width = exportViewport.width;
+                renderTaskRef.current = page.render({ canvasContext: baseCtx, canvas: baseCanvas, viewport: exportViewport });
+                await renderTaskRef.current.promise;
+            }
 
             renderTaskRef.current = null;
         } catch (err: any) {
             if (err.name === 'RenderingCancelledException') return;
             console.error("PDF Fail:", err);
         }
-    }, []);
+    }, [isFullscreen]);
 
-    // 📏 Robust Sizing Engine (Hybrid: Immediate + Debounced Observer)
+    // 📏 Layout Trigger (Hybrid: Mount + Global Resize)
     useEffect(() => {
-        if (!file || !workspaceRef.current) return;
-        
+        if (!file) return;
+
         let timeoutId: NodeJS.Timeout;
-        let lastWidth = 0;
-        let lastHeight = 0;
-
-        // 1. Immediate Layout Pass (captures size during mount)
-        const initialRect = workspaceRef.current.getBoundingClientRect();
-        if (initialRect.width > 20 && initialRect.height > 20) {
-            renderPdfAsync(file, initialRect.width, initialRect.height);
-            lastWidth = initialRect.width;
-            lastHeight = initialRect.height;
-        }
-        
-        // 2. Continuous observation for layout settling and window resizes
-        const resizeObserver = new ResizeObserver(entries => {
-            const { width, height } = entries[0].contentRect;
-            
-            // Meaningful change check (> 1px diff) to prevent jitter
-            if (width > 20 && height > 20 && (Math.abs(width - lastWidth) > 1 || Math.abs(height - lastHeight) > 1)) {
-                lastWidth = width;
-                lastHeight = height;
-                
-                clearTimeout(timeoutId);
-                // Snappy 50ms debounce for layout settling
-                timeoutId = setTimeout(() => {
-                    renderPdfAsync(file, width, height);
-                }, 50); 
-            }
-        });
-
-        resizeObserver.observe(workspaceRef.current);
-
-        return () => {
+        const handleLayout = () => {
             clearTimeout(timeoutId);
-            resizeObserver.disconnect();
+            timeoutId = setTimeout(() => renderPdfAsync(file), 100);
+        };
+
+        handleLayout(); // Initial trigger
+
+        window.addEventListener('resize', handleLayout);
+        return () => {
+            window.removeEventListener('resize', handleLayout);
+            clearTimeout(timeoutId);
             if (renderTaskRef.current) renderTaskRef.current.cancel();
         };
     }, [file, renderPdfAsync]);
