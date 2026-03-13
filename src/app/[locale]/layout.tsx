@@ -110,7 +110,7 @@ export default async function RootLayout({
     };
 
     return (
-        <html lang={locale} dir={direction} className="dark">
+        <html lang={locale} dir={direction} className="dark" data-scroll-behavior="smooth">
             <head>
                 <script
                     type="application/ld+json"
