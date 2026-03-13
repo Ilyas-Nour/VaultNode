@@ -37,6 +37,7 @@ const BackgroundRemoverTool = memo(() => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [exportBlob, setExportBlob] = useState<Blob | null>(null);
     const [exportUrl, setExportUrl] = useState<string | null>(null);
+    const [modelType, setModelType] = useState<'isnet' | 'isnet_fp16' | 'isnet_quint8'>('isnet_fp16');
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
@@ -61,13 +62,18 @@ const BackgroundRemoverTool = memo(() => {
     const handleRemove = useCallback(async () => {
         if (!file) return;
         setIsProcessing(true);
-
         try {
             const blob = await removeBackground(file, {
+                model: modelType,
+                rescale: modelType === 'isnet' ? false : true,
+                output: {
+                    format: 'image/png',
+                    quality: 1.0
+                },
                 progress: (key: string, current: number, total: number) => {
                     console.log(`Removal progress: ${key} ${current}/${total}`);
                 }
-            } as Config);
+            } as any);
             
             setExportBlob(blob);
             setExportUrl(URL.createObjectURL(blob));
@@ -76,7 +82,7 @@ const BackgroundRemoverTool = memo(() => {
             console.error("Background removal error:", error);
             setIsProcessing(false);
         }
-    }, [file]);
+    }, [file, modelType]);
 
     const handleDownload = useCallback(() => {
         if (!exportUrl || !file) return;
@@ -108,7 +114,29 @@ const BackgroundRemoverTool = memo(() => {
             toolId="bg-remover"
             settingsContent={
                 <div className="space-y-6">
-                    <div className="space-y-3.5 pt-4">
+                    <div className="flex items-center justify-between pt-4">
+                        <span className="text-[11px] font-black uppercase tracking-widest text-zinc-500 italic">{t('mode')}</span>
+                        <div className="flex gap-1.5">
+                            {[
+                                { id: 'isnet_quint8', label: 'Fast' },
+                                { id: 'isnet_fp16', label: 'Balanced' },
+                                { id: 'isnet', label: 'Ultra' }
+                            ].map((m) => (
+                                <button
+                                    key={m.id}
+                                    onClick={() => setModelType(m.id as any)}
+                                    className={cn(
+                                        "px-2.5 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all",
+                                        modelType === m.id ? "bg-emerald-500 text-emerald-950" : "bg-zinc-900 text-zinc-500 hover:text-white"
+                                    )}
+                                >
+                                    {m.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="space-y-3.5">
                         <Button
                             onClick={handleRemove}
                             disabled={!file || isProcessing}
@@ -225,7 +253,7 @@ const BackgroundRemoverTool = memo(() => {
                                         <UserCircle className="w-3.5 h-3.5 text-emerald-500 animate-pulse group-hover/eye:scale-110 transition-transform" />
                                     </div>
                                 </div>
-                                <div className="aspect-square rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/10 overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)] transition-all duration-700 hover:border-emerald-500/40 group">
+                                <div className="aspect-square rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/10 overflow-hidden relative shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)] transition-all duration-700 hover:border-emerald-500/40 group bg-checkerboard">
                                     {exportUrl ? (
                                         <img
                                             src={exportUrl}

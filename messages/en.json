@@ -1086,7 +1086,7 @@
             "titleHighlight": "Subject Isolation",
             "dropTitle": "Drop your image here.",
             "dropDesc": "We'll remove the background using local AI processing.",
-            "mode": "Removal Intensity",
+            "mode": "Extraction Quality",
             "applyBtn": "Remove Background",
             "downloadBtn": "Download PNG",
             "resetBtn": "New Subject",

@@ -936,7 +936,7 @@
             "titleHighlight": "Aislamiento de Sujeto",
             "dropTitle": "Suelta tu imagen aquí.",
             "dropDesc": "Eliminaremos el fondo mediante procesamiento de IA local.",
-            "mode": "Intensidad de Eliminación",
+            "mode": "Calidad de Extracción",
             "applyBtn": "Quitar Fondo",
             "downloadBtn": "Descargar PNG",
             "resetBtn": "Nuevo Sujeto",

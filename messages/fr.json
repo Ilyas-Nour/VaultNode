@@ -932,7 +932,7 @@
             "titleHighlight": "Isolation de Sujet",
             "dropTitle": "Déposez votre image ici.",
             "dropDesc": "Nous supprimerons le fond via un traitement IA local.",
-            "mode": "Intensité de Suppression",
+            "mode": "Qualité d'extraction",
             "applyBtn": "Supprimer le Fond",
             "downloadBtn": "Télécharger PNG",
             "resetBtn": "Nouveau Sujet",
