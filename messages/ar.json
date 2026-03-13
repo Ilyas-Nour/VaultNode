@@ -12,7 +12,7 @@
         "heroStatLanguages": "لغات",
         "heroStatClient": "على جهازك",
         "sectionAllLabel": "جميع الأدوات",
-        "sectionAllTitle": "١٩ أداة خاصة. بدون أي رفع للملفات.",
+        "sectionAllTitle": "٢١ أداة خاصة. بدون أي رفع للملفات.",
         "philosophyLabel": "فلسفتنا",
         "philosophyTitle": "الخصوصية ليست ميزة. إنها ضرورة.",
         "philosophyBody1": "معظم المواقع تعمل عن طريق رفع ملفاتك إلى خادم، وهذا النموذج معطوب من أساسه من ناحية الخصوصية.",
@@ -42,7 +42,7 @@
             "shield": "Local Shield Active"
         },
         "logoTagline": "خاص · محلي · مجاني",
-        "heroStatValue1": "19",
+        "heroStatValue1": "21",
         "heroStatValue2": "0 بايت",
         "heroStatValue3": "4",
         "heroStatValue4": "100%",

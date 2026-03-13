@@ -1,6 +1,6 @@
 /**
  * ToolContainer — PrivaFlow Design System
- * Single layout shell for all 19 tool pages.
+ * Single layout shell for all 21 tool pages.
  *
  * Brand DNA:
  *  • Black background, white typography

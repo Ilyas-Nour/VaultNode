@@ -1,0 +1,16 @@
+--- AR ---
+No missing keys.
+Extra keys (2):
+  - VisualProof.bgRemover.edgeRefinement
+  - VisualProof.bgRemover.masking
+
+
+--- ES ---
+No missing keys.
+
+
+--- FR ---
+Missing keys (1):
+  - Tools.svgToPng.downloadBtn
+
+

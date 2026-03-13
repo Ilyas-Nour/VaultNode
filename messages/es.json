@@ -2,10 +2,92 @@
     "HomePage": {
         "title": "Tus archivos se quedan contigo. Siempre.",
         "titlePart1": "Tus Archivos.",
-        "titlePart2": "Tu Dispositivo.",
+        "titlePart2": "Tus Reglas.",
+        "titlePart3": "Tu Dispositivo.",
+        "heroBadge": "100% Nativo del Navegador · Cero Cargas · Gratis por Siempre",
+        "heroExplore": "Explorar Todas las Herramientas",
+        "heroProof": "Ver Evidencia Visual",
+        "heroStatTools": "Herramientas Privadas",
+        "heroStatUploaded": "Datos Subidos",
+        "heroStatLanguages": "Idiomas",
+        "heroStatClient": "Lado del Cliente",
+        "sectionAllLabel": "Todas las Herramientas",
+        "sectionAllTitle": "21 Herramientas Privadas. Cero Cargas.",
+        "philosophyLabel": "Nuestra Filosofía",
+        "philosophyTitle": "La Privacidad No Es Una Característica. Es Un Requisito.",
+        "philosophyBody1": "La mayoría de las herramientas en línea funcionan subiendo tus archivos a un servidor, procesándolos y devolviendo el resultado. Ese modelo está inherentemente roto desde el punto de vista de la privacidad.",
+        "philosophyBody2": "PrivaFlow se construyó desde cero para eliminar esto por completo. Tus archivos nunca abandonan tu dispositivo — ni siquiera por un milisegundo.",
+        "philosophyCta": "Empezar a Usar Herramientas Gratis",
+        "stepsLabel": "Cómo Funciona",
+        "stepsTitle": "Tres Pasos. Privacidad Total.",
+        "stepsBody": "Cada herramienta en PrivaFlow sigue la misma arquitectura: carga en RAM, procesamiento local, salida al dispositivo. El ciclo es autónomo — completamente invisible para cualquier sistema externo.",
+        "step1Title": "Suelta tu Archivo",
+        "step1Desc": "Arrastra y suelta, o haz clic para seleccionar. Tu archivo se carga directamente en la memoria del navegador — nada se envía a ninguna parte.",
+        "step2Title": "Proceso Local",
+        "step2Desc": "Nuestros motores WASM y Canvas ejecutan la operación de forma nativa en tu pestaña. Cero intervención del servidor, siempre.",
+        "step3Title": "Descargar Resultado",
+        "step3Desc": "Obtén tu resultado al instante. Se crea directamente en tu navegador y se descarga directo a tu dispositivo.",
+        "pillar1Title": "Cero Transferencia de Datos",
+        "pillar1Desc": "Cada byte de tus archivos se procesa dentro de la RAM de tu propio dispositivo. Nunca lo vemos. Sin registros, sin rastreo, sin peticiones al servidor.",
+        "pillar2Title": "Motores Nativos del Navegador",
+        "pillar2Desc": "Usamos Web APIs, Canvas, WebAssembly y PDF.js para ejecutar operaciones complejas enteramente en tu pestaña — sin necesidad de plugins.",
+        "pillar3Title": "Funciona Sin Internet",
+        "pillar3Desc": "Una vez cargadas, la mayoría de las herramientas funcionan completamente offline. Tus datos se quedan dentro de tu dispositivo incluso cuando no hay red.",
+        "nav": {
+            "vault": "Bóveda",
+            "media": "Medios",
+            "documents": "Docs",
+            "philosophy": "Filosofía",
+            "contact": "Contacto",
+            "shield": "Local Shield Activo"
+        },
+        "logoTagline": "Privado · Local · Gratis",
+        "heroStatValue1": "21",
+        "heroStatValue2": "0 bytes",
+        "heroStatValue3": "4",
+        "heroStatValue4": "100%",
+        "footer": {
+            "brandStatement": "Privacidad profesional.",
+            "brandHighlight": "En tu navegador.",
+            "colTools": "Bóveda",
+            "colMedia": "Medios y Docs",
+            "colPrivacy": "Privacidad",
+            "colInfo": "Información",
+            "linkRedact": "Redactor PDF",
+            "linkCleanMeta": "Limpiador Exif",
+            "linkConverter": "Convertidor Multimedia",
+            "linkPdfWord": "PDF a Word",
+            "linkCompress": "Optimizador de Imagen",
+            "linkEnhancer": "Mejorador de Imagen",
+            "linkBgRemover": "Quitar Fondo",
+            "linkMerge": "Unir PDF",
+            "linkBlur": "Herramienta de Desenfoque",
+            "linkHeic": "HEIC a JPG",
+            "linkSvg": "SVG a PNG",
+            "linkUnlock": "Eliminar Contraseña",
+            "linkPdfImg": "PDF a Imagen",
+            "linkSplit": "Dividir PDF",
+            "linkSign": "Firma Electrónica",
+            "linkStamp": "Sello / Marca de Agua",
+            "linkRepair": "Reparar Archivo",
+            "linkNumber": "Numerar Páginas",
+            "linkOrganize": "Organizar Páginas",
+            "linkZeroUpload": "Política de Cero Cargas",
+            "linkLocalProtocol": "Protocolo Local",
+            "linkEncryption": "Estándares de Cifrado",
+            "linkOpenArch": "Arquitectura Abierta",
+            "linkHowItWorks": "Cómo funciona",
+            "linkPhilosophy": "Filosofía",
+            "linkContact": "Contáctanos",
+            "linkAllTools": "Explorar todas las herramientas",
+            "copyright": "© 2026 · Cero rastreo · Cero cargas · Construido para la web abierta",
+            "footerCredits": "Hecho pensando en la Privacidad"
+        },
         "subtitle": "La mayoría de los sitios roban tus archivos. Nosotros no. Todo lo que haces se queda en tu pantalla. 100% privado y 100% gratis.",
         "launchRedactor": "Ocultar Información Sensible",
         "imageCompressor": "Reducir Foto",
+        "imageEnhancer": "Mejorador de Imagen",
+        "bgRemover": "Quitar Fondo",
         "pdfMerger": "Unir PDF",
         "pdfToImg": "PDF a Imagen",
         "cleanExif": "Borrar Datos de Foto",
@@ -18,20 +100,20 @@
         "textEncryptor": "Mensaje Secreto",
         "blurTool": "Difuminar Foto",
         "pdfSplit": "Dividir PDF",
-        "sign": "Firmar un Documento",
+        "sign": "Firmar un Papel",
         "stamp": "Sellar una Foto",
         "repair": "Reparar Archivo Roto",
         "numberPages": "Numerar las Páginas",
         "organizePages": "Organizar Páginas",
-        "imageEnhancer": "Mejorar Imagen",
-        "bgRemover": "Quitar Fondo",
         "toolDescriptions": {
-            "redactor": "Usa el pincel para pintar sobre los secretos y ocultarlos.",
+            "redactor": "Usa el pincel para pintar sobre los secretos.",
             "cleanExif": "Elimina el 'mapa oculto' de tus fotos.",
             "password": "Crea códigos secretos muy fuertes que solo tú puedas conocer.",
             "textEncryptor": "Convierte lo que escribes en un código secreto que solo tú puedas desbloquear.",
             "compress": "Haz que los archivos grandes sean pequeños para que se envíen más rápido.",
-            "heic": "Haz que las fotos de iPhone funcionen en cualquier computadora.",
+            "enhancer": "Haz que las fotos borrosas o desenfocadas se vean nítidas y profesionales.",
+            "bgRemover": "Elimina el fondo de cualquier foto al instante y mantén al sujeto.",
+            "heic": "Haz que las fotos de iPhone funcionen en cualquier computadora sin apps especiales.",
             "mediaConverter": "Cambia archivos de video o música para que funcionen en cualquier dispositivo.",
             "svgToPng": "Toma dibujos de diseñadores y conviértelos en fotos simples que todos puedan ver.",
             "blur": "Usa un pincel mágico para ocultar caras o cosas privadas en tus fotos.",
@@ -39,71 +121,17 @@
             "pdfToWord": "Cambia un archivo bloqueado a un documento que puedas editar.",
             "unlock": "Elimina una contraseña que ya conoces para que el archivo se quede abierto.",
             "pdfToImg": "Guarda cada página de tu archivo como una foto separada.",
-            "split": "Elige solo las páginas que necesitas.",
-            "sign": "Usa el ratón o el dedo para dibujar tu firma y ponerla en cualquier página.",
-            "stamp": "Pon tu nombre o logo encima de las fotos para protegerlas.",
-            "repair": "Arregla un documento roto o que da error para que puedas abrirlo.",
-            "numberPages": "Pon un número pequeño en la parte inferior de cada página.",
-            "organizePages": "Mueve, elimina o añade páginas a tu documento.",
-            "enhancer": "Aclara fotos borrosas y restaura la nitidez con filtros profesionales.",
-            "bgRemover": "Aísla el sujeto y elimina el fondo al instante — 100% local."
+            "split": "Elige solo las páginas que necesitas de un archivo grande y guárdalas por separado.",
+            "sign": "Usa el ratón o el dedo para dibujar tu firma y ponerla en cualquier página al instante.",
+            "stamp": "Pon tu nombre o logo encima de las fotos para protegerlas de robos.",
+            "repair": "Arregla un documento roto o que da error para que puedas abrirlo de nuevo.",
+            "numberPages": "Pon un número pequeño en la parte inferior de cada página para que tu archivo esté organizado.",
+            "organizePages": "Mueve páginas, elimina las que no necesites o añade nuevas a tu archivo."
         },
         "beforeAfter": {
             "redactor": {
                 "before": "Una carta con tu número de teléfono.",
                 "after": "El número desapareció bajo una línea negra para siempre."
-            },
-            "cleanExif": {
-                "before": "Una foto que muestra exactamente dónde vives.",
-                "after": "Una foto segura para compartir con extraños."
-            },
-            "password": {
-                "before": "Una contraseña débil como '123456'.",
-                "after": "Un código super fuerte como 'Xk9!pQ2m#Lz'."
-            },
-            "encrypt": {
-                "before": "Una nota secreta que cualquiera puede leer.",
-                "after": "Letras mezcladas que solo tú puedes desbloquear."
-            },
-            "compress": {
-                "before": "Una foto 'pesada' lenta de enviar.",
-                "after": "Una foto 'ligera' que se envía al instante."
-            },
-            "heic": {
-                "before": "Una foto de iPhone que no abre en PC.",
-                "after": "Una foto estándar que funciona en todas partes."
-            },
-            "mediaConverter": {
-                "before": "Un video que no funciona en tu teléfono.",
-                "after": "Un archivo perfecto que funciona en cualquier dispositivo."
-            },
-            "svgToPng": {
-                "before": "Un archivo de dibujo para diseñadores.",
-                "after": "Una foto simple para que todos la vean."
-            },
-            "blur": {
-                "before": "Una foto que muestra una cara privada.",
-                "after": "La misma foto con la cara oculta."
-            },
-            "merger": {
-                "before": "5 archivos diferentes esparcidos por ahí.",
-                "after": "Un documento limpio con todo adentro."
-            },
-            "pdfToDocx": {
-                "before": "Un archivo que no puedes editar ni escribir en él.",
-                "after": "Un archivo de Word que puedes cambiar."
-            },
-            "unlock": {
-                "before": "Un archivo que pide contraseña cada vez.",
-                "after": "Un archivo que abre al instante para cualquiera."
-            },
-            "pdfToImg": {
-                "before": "Un documento largo que requiere mucho desplazamiento.",
-                "after": "Una colección de fotos fáciles de compartir."
-            },
-            "split": {
-                "before": "Un libro de 100 páginas.",
-                "after": "Las 2 páginas exactas que necesitabas."
             },
             "sign": {
                 "before": "Una línea de firma vacía.",
@@ -125,13 +153,65 @@
                 "before": "Un montón desordenado de páginas.",
                 "after": "Un documento perfectamente ordenado."
             },
+            "cleanExif": {
+                "before": "Una foto que muestra exactamente dónde vives.",
+                "after": "Una foto segura para compartir con extraños."
+            },
+            "password": {
+                "before": "Una contraseña débil como '123456'.",
+                "after": "Un código super fuerte como 'Xk9!pQ2m#Lz'."
+            },
+            "encrypt": {
+                "before": "Una nota secreta que cualquiera puede leer.",
+                "after": "Letras mezcladas que solo tú puedes desbloquear."
+            },
+            "compress": {
+                "before": "Una foto 'pesada' lenta de enviar.",
+                "after": "Una foto 'ligera' que se ve igual pero se envía al instante."
+            },
             "enhancer": {
-                "before": "Baja resolución",
-                "after": "Alta fidelidad"
+                "before": "Una imagen borrosa de baja fidelidad.",
+                "after": "Un activo nítido en alta definición."
             },
             "bgRemover": {
-                "before": "Fuente original",
-                "after": "Sujeto aislado"
+                "before": "Una persona en una calle concurrida.",
+                "after": "La persona aislada en un fondo limpio."
+            },
+            "heic": {
+                "before": "Una foto de iPhone que no abre en PC.",
+                "after": "Una foto estándar que funciona en todas partes."
+            },
+            "mediaConverter": {
+                "before": "Un video que no funciona en tu teléfono.",
+                "after": "Un archivo perfecto que funciona en cualquier dispositivo."
+            },
+            "svgToPng": {
+                "before": "Un archivo de dibujo para diseñadores.",
+                "after": "Una foto simple para que todos la vean."
+            },
+            "blur": {
+                "before": "Una foto que muestra una cara privada.",
+                "after": "La misma foto con la cara oculta."
+            },
+            "merger": {
+                "before": "5 archivos diferentes esparcidos.",
+                "after": "Un documento limpio con todo adentro."
+            },
+            "pdfToDocx": {
+                "before": "Un archivo que no puedes editar ni escribir.",
+                "after": "Un archivo de Word que puedes corregir y cambiar."
+            },
+            "unlock": {
+                "before": "Un archivo que pide contraseña cada vez.",
+                "after": "Un archivo que abre al instante para cualquiera."
+            },
+            "pdfToImg": {
+                "before": "Un documento por el que tienes que desplazarte.",
+                "after": "Una colección de fotos fáciles de compartir."
+            },
+            "pdfSplit": {
+                "before": "Un libro de 100 páginas.",
+                "after": "Las 2 páginas exactas que realmente necesitabas."
             }
         },
         "categories": {
@@ -162,70 +242,29 @@
         },
         "adPlaceholder": "Apoya nuestras herramientas gratuitas",
         "cta": {
-            "title": "Tu privacidad es un derecho.",
+            "title": "Tu Privacidad es un Derecho.",
             "desc": "Construimos esto porque creemos que tus archivos deben ser solo tuyos. Sin costos, sin trucos, solo privacidad.",
-            "button": "Empezar (Gratis)"
+            "button": "Empezar a Usar Herramientas (Gratis)"
         },
-        "mergeDropDesc": "Selecciona archivos de tu computadora para unirlos.",
-        "mergeButton": "Combinar archivos",
-        "localOnly": "Se queda en tu pantalla",
+        "mergeDropDesc": "Selecciona tus documentos PDF para combinarlos en un solo archivo.",
+        "mergeButton": "Unir Documentos",
+        "localOnly": "100% Lado del Cliente",
         "howItWorks": {
-            "title": "¿Cómo funciona?",
-            "subtitle": "Una historia simple de seguridad",
+            "title": "Espacio de Trabajo Industrial",
+            "subtitle": "Un santuario para la privacidad de alto nivel.",
             "step1": {
-                "title": "Elige un archivo",
-                "desc": "Selecciona el documento o foto que quieras arreglar."
+                "title": "Prepara tus Archivos",
+                "desc": "Selecciona los documentos o medios que deseas transformar."
             },
             "step2": {
-                "title": "Arreglo privado",
-                "desc": "Nuestro sitio funciona como una herramienta mágica dentro de tu pantalla. Tu archivo nunca viaja por internet."
+                "title": "Síntesis Local",
+                "desc": "Nuestro motor reconstruye tus datos dentro de un entorno seguro en tu propio hardware. Ningún bit sale de tu máquina."
             },
             "step3": {
-                "title": "Guárdalo",
-                "desc": "Descarga tu archivo terminado. Como nunca salió de tu dispositivo, nadie más lo vio."
+                "title": "Exportación Segura",
+                "desc": "Descarga tu trabajo terminado. El entorno seguro se borra al cerrar la pestaña."
             }
         },
-        "heroStatValue1": "19",
-        "heroStatValue2": "0 bytes",
-        "heroStatValue3": "4",
-        "heroStatValue4": "100%",
-        "footer": {
-            "brandStatement": "Privacidad profesional.",
-            "brandHighlight": "En tu navegador.",
-            "colInfo": "Información",
-            "colTools": "Bóveda",
-            "colMedia": "Medios y Docs",
-            "linkHowItWorks": "Cómo funciona",
-            "linkPhilosophy": "Filosofía",
-            "linkAllTools": "Registro de Herramientas",
-            "linkContact": "Soporte y Feedback",
-            "linkRedact": "Redactor PDF",
-            "linkCleanMeta": "Limpiador Exif",
-            "linkConverter": "Convertidor Multimedia",
-            "linkPdfWord": "PDF a Word",
-            "linkCompress": "Optimizador de Imagen",
-            "linkMerge": "Fusionador PDF",
-            "linkSign": "Firma Electrónica",
-            "linkRepair": "Reparar Archivo",
-            "linkBlur": "Herramienta de Desenfoque",
-            "linkHeic": "HEIC a JPG",
-            "linkSvg": "SVG a PNG",
-            "linkUnlock": "Eliminar Contraseña",
-            "linkPdfImg": "PDF a Imagen",
-            "linkSplit": "Divisor PDF",
-            "linkStamp": "Marca de Agua",
-            "linkNumber": "Numerar Páginas",
-            "linkOrganize": "Organizar",
-            "copyright": "© 2026 PRIVaflow · Ningún dato sale de tu dispositivo.",
-            "footerCredits": "100% Abierto · Sin Telemetría · Sin Analíticas"
-        },
-        "nav": {
-            "vault": "Bóveda",
-            "media": "Medios",
-            "documents": "Docs",
-            "contact": "Contacto"
-        },
-        "logoTagline": "Privado · Local · Gratis",
         "visualProof": {
             "label": "Evidencia Visual",
             "title": "Mira la Magia",
@@ -331,6 +370,10 @@
             "processing": "Trabajando...",
             "success": "Tarea Completada",
             "error": "Algo salió mal",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar",
+            "reset": "Reiniciar",
+            "dropAnywhere": "Suelta en cualquier lugar",
             "backToHome": "Volver a Herramientas",
             "settings": "Ajustes",
             "howItWorks": "Cómo Funciona",
@@ -338,84 +381,100 @@
             "after": "Resultado",
             "specs": {
                 "network": "Red",
-                "local": "Sólo Local",
+                "local": "Solo Local",
                 "storage": "Almacenamiento",
                 "ram": "En RAM",
                 "privacy": "Privacidad",
-                "zero": "Cero Subidas"
+                "zero": "Cero Cargas"
             },
-            "dropActive": "Suéltalo aquí"
+            "dropActive": "Suéltalo aquí",
+            "change": "Cambiar",
+            "ready": "Listo",
+            "dropOnly": "Solo archivos PDF"
         },
         "redact": {
             "title": "Redactor PDF",
-            "description": "Destruya permanentemente datos sensibles en vectores de documentos.",
+            "description": "Destruye permanentemente datos sensibles en los vectores del documento.",
             "titleHighlight": "Redacción Segura",
-            "dropTitle": "Suelte el PDF aquí",
+            "dropTitle": "Suelta tu PDF aquí",
             "dropDesc": "Solo archivos PDF",
             "activeLayers": "Capas Activas",
             "burnBtn": "Quemar y Exportar PDF",
             "clearBtn": "Limpiar Selección",
             "resetBtn": "Reiniciar Espacio",
-            "initializing": "Iniciando Redactor...",
+            "initializing": "Inicializando Redactor...",
             "howItWorks": {
                 "step1": {
-                    "title": "Suba su PDF",
-                    "description": "Suelte cualquier PDF que contenga texto o información que desee ocultar permanentemente."
+                    "title": "Sube tu PDF",
+                    "description": "Suelta cualquier PDF que tenga texto o información que quieras ocultar permanentemente."
                 },
                 "step2": {
-                    "title": "Dibuje sobre el texto",
-                    "description": "Haga clic y arrastre un cuadro sobre cualquier palabra, nombre, número o section que desee eliminar."
+                    "title": "Dibuja sobre el texto",
+                    "description": "Haz clic y arrastra un cuadro sobre cualquier palabra, nombre, número o sección que quieras eliminar."
                 },
                 "step3": {
-                    "title": "Descargue el redactado",
-                    "description": "Guarde el PDF limpio; las partes ocultas desaparecen para siempre, no solo se cubren."
+                    "title": "Descarga el archivo saneado",
+                    "description": "Guarda el PDF limpio — las partes ocultas desaparecen para siempre, no solo se cubren."
                 }
             }
         },
         "unlockPdf": {
-            "title": "Desbloquear un PDF",
-            "description": "Elimina contraseñas de archivos protegidos al instante.",
-            "titleHighlight": "Desencriptador de Acceso",
+            "title": "Desbloquear un Archivo",
+            "description": "Desbloquea un archivo PDF protegido por contraseña al instante.",
+            "titleHighlight": "Descifrador de Acceso",
             "dropTitle": "Suelta tu archivo bloqueado aquí.",
-            "dropDesc": "Lo abriremos para que puedas acceder a tus datos con seguridad.",
+            "dropDesc": "Lo abriremos para que puedas acceder a tus datos de forma segura.",
             "unlocking": "Bypaseando el bloqueo...",
             "unlockBtn": "Desbloquear Documento",
             "successTitle": "¡Acceso Concedido!",
-            "successDesc": "Tu archivo ya está completamente abierto y listo para usar.",
+            "successDesc": "Tu archivo ahora está completamente abierto y listo para usar.",
             "downloadBtn": "Guardar Copia Desbloqueada",
             "passwordLabel": "Clave de Seguridad",
             "passwordPlaceholder": "Escribe la contraseña del archivo...",
+            "alreadyUnlocked": "Este PDF no está protegido por contraseña. Ya está desbloqueado.",
+            "invalidPdf": "PDF inválido o ocurrió un error inesperado.",
+            "incorrectPassword": "Contraseña incorrecta. Por favor, inténtalo de nuevo.",
+            "failedUnlock": "No se pudo desbloquear el PDF. El archivo podría estar corrupto o usar un cifrado no compatible.",
+            "encryption": "Cifrado",
+            "protected": "Protegido por Contraseña",
+            "unlockingBtn": "Desbloqueando...",
+            "startOver": "Empezar de Nuevo",
+            "privacyHint": "Tu contraseña nunca sale de tu dispositivo. Todo se ejecuta localmente en tu navegador.",
+            "registryLock": "Bloqueo de Registro",
+            "clearstreamRegistry": "Registro Clearstream",
+            "encryptedRegistry": "Registro Encriptado",
+            "transientMemory": "Este PDF se procesa en un búfer de memoria transitorio. Ningún dato sobrevive a la sesión.",
             "howItWorks": {
                 "step1": {
-                    "title": "Elige el PDF",
-                    "desc": "Sube el archivo encriptado que necesites abrir. Nunca vemos tu contraseña."
+                    "title": "Elige Archivo Bloqueado",
+                    "desc": "Sube el documento encriptado que necesitas abrir. Nunca vemos tu contraseña."
                 },
                 "step2": {
-                    "title": "Escribe la clave",
-                    "desc": "Introduce la contraseña actual para desencriptar localmente en tu navegador."
+                    "title": "Proporcionar Contraseña",
+                    "desc": "Proporciona la contraseña existente para descifrar la cabecera del documento localmente en tu navegador."
                 },
                 "step3": {
-                    "title": "Exporta abierto",
-                    "desc": "Se elimina la seguridad y puedes guardar un PDF libre para todos."
+                    "title": "Exportar Archivo Desbloqueado",
+                    "desc": "Se elimina la capa de seguridad y puedes guardar una versión de PDF totalmente accesible."
                 }
             }
         },
         "svgToPng": {
             "title": "Convertidor de Logos",
-            "description": "Convierte dibujos vectoriales (SVG) en fotos de alta calidad.",
+            "description": "Convierte dibujos vectoriales de diseñador en fotos de alta calidad.",
             "titleHighlight": "Vector a Raster",
             "dropTitle": "Suelta tu archivo SVG aquí",
-            "dropDesc": "Sólo archivos SVG",
+            "dropDesc": "Solo archivos SVG",
             "processing": "Convirtiendo...",
             "convertBtn": "Convertir a PNG",
             "downloadBtn": "Descargar PNG",
             "resetBtn": "Reiniciar",
-            "xmlPlaceholder": "Código XML de SVG...",
+            "xmlPlaceholder": "Código XML SVG...",
             "scaled": "Escalado 2×",
             "howItWorks": {
                 "step1": {
                     "title": "Suelta tu SVG",
-                    "desc": "Selecciona cualquier archivo SVG. Se carga directamente en tu navegador; nada se sube."
+                    "desc": "Selecciona cualquier archivo SVG. Se carga directamente en tu navegador — nada se sube."
                 },
                 "step2": {
                     "title": "Rasterización 2×",
@@ -436,18 +495,29 @@
             "processing": "Capturando buffers de página...",
             "convertPages": "Convertir a Galería",
             "initializing": "Calibrando la cámara virtual...",
+            "renderDensity": "Densidad de Renderizado",
+            "standard": "Estándar",
+            "highDef": "Alta Definición",
+            "ultraPrecision": "Ultra Precisión",
+            "standardDesc": "72 DPI",
+            "highDefDesc": "144 DPI",
+            "ultraDesc": "216 DPI",
+            "newArchive": "Nuevo Archivo",
+            "inBrowserPdfjs": "PDF.js en Navegador",
+            "pdfjsDesc": "Usa PDF.js de Mozilla para renderizar cortes directamente al lienzo. Tus documentos nunca tocan nuestra infraestructura.",
+            "convertingPage": "Convirtiendo página {current} de {total}",
             "howItWorks": {
                 "step1": {
                     "title": "Carga el PDF",
-                    "desc": "Suelta cualquier documento. Cada página se renderiza localmente como un original de alta resolución."
+                    "desc": "Suelta cualquier documento. Cada página se renderiza localmente como un activo de alta resolución."
                 },
                 "step2": {
-                    "title": "Pasa a píxeles",
-                    "desc": "Nuestro motor captura el contenido de cada página y lo convierte en JPG o PNG nitidísimos."
+                    "title": "Página a Píxel",
+                    "desc": "Nuestro motor captura cada búfer de página y los convierte en imágenes JPG o PNG nítidas."
                 },
                 "step3": {
-                    "title": "Guarda la galería",
-                    "desc": "Descarga páginas sueltas o el set completo en un archivo ZIP comprimido."
+                    "title": "Guarda la Galería",
+                    "desc": "Descarga páginas individuales o la colección completa como un archivo ZIP."
                 }
             }
         },
@@ -489,16 +559,16 @@
             "generateNew": "Generar Nuevo",
             "howItWorks": {
                 "step1": {
-                    "title": "Marca las opciones",
-                    "desc": "Elige el largo y la complejidad (símbolos, números) para tu nueva clave secreta."
+                    "title": "Configurar Entropía",
+                    "desc": "Elige la longitud y la complejidad (símbolos, números) para tu código secreto."
                 },
                 "step2": {
-                    "title": "Genera en local",
-                    "desc": "El motor criptográfico de tu navegador crea una cadena aleatoria de alta fuerza al instante."
+                    "title": "Generar en local",
+                    "desc": "El motor criptográfico de tu navegador crea una cadena de alta entropía al instante."
                 },
                 "step3": {
                     "title": "Copia y usa",
-                    "desc": "Copia tu clave fuerte. Nosotros nunca la vemos ni la guardamos."
+                    "desc": "Copia tu nueva contraseña blindada. Nosotros nunca la vemos ni la guardamos."
                 }
             },
             "localEntropy": "Entropía Local",
@@ -537,14 +607,14 @@
                 },
                 "step2": {
                     "title": "Elige qué hacer",
-                    "desc": "Selecciona el formato de salida (MP3, WAV) o recorta el video a la parte que desees."
+                    "desc": "Selecciona el formato de salida (MP3, WAV) o recorta el video a la parte exacta que desees."
                 },
                 "step3": {
                     "title": "Descarga el Resultado",
                     "desc": "Haz clic en Convertir y tu archivo estará listo en segundos. Todo ocurre dentro de tu navegador."
                 }
             },
-            "targetFormat": "Seleccionar Tipo de Salida",
+            "targetFormat": "Selecciona Tipo de Salida",
             "trim": "Recortar"
         },
         "compress": {
@@ -584,30 +654,46 @@
             }
         },
         "pdfMerge": {
-            "title": "Combinar PDFs",
+            "title": "Unir PDFs",
             "description": "Combina varios archivos PDF en un solo documento seguro en tu navegador.",
-            "titleHighlight": "Fusión de Documentos",
+            "titleHighlight": "Fusionador de Documentos",
             "dropTitle": "Suelta tus archivos PDF aquí.",
             "dropDesc": "Los combinaremos en un solo archivo localmente.",
             "processing": "Sintetizando catálogo de documentos...",
-            "mergeButton": "Combinar Archivos PDF",
+            "mergeButton": "Unir Archivos PDF",
+            "queueTitle": "Cola de Documentos",
+            "queueStatus": "{count} Archivos Listos",
+            "merging": "Uniendo...",
+            "downloadMerged": "Descargar Unido",
+            "clearQueue": "Limpiar Cola",
+            "localAssembly": "Ensamblaje Local",
+            "assemblyDesc": "Todo sucede de forma segura dentro de tu propia pantalla. Sin rastros persistentes en el disco o la red.",
+            "filesToMerge": "Archivos a Unir",
+            "addMore": "Añadir más",
+            "readyToAppend": "Listo para anexar",
+            "synthesisInProgress": "Síntesis en curso",
+            "synthesisComplete": "Síntesis de nodo completada",
+            "synthesisDesc": "¡Listo! Todo se mantuvo dentro de tu pantalla. Tu PDF multi-nodo está listo para exportar.",
+            "downloadFinal": "Descargar PDF Final",
+            "dropFiles": "Suelta archivos aquí",
+            "dropOnly": "Solo archivos PDF",
             "howItWorks": {
                 "step1": {
-                    "title": "Añade tus archivos",
-                    "desc": "Suelta todos los PDFs que quieras unir. Puedes añadir tantos como necesites."
+                    "title": "Añade tus Archivos",
+                    "desc": "Suelta todos los archivos PDF que quieras combinar. Puedes añadir tantos como necesites."
                 },
                 "step2": {
-                    "title": "Ordena la lista",
-                    "desc": "Arrastra los archivos para ponerlos en la secuencia exacta que quieres en el doc final."
+                    "title": "Establece el Orden",
+                    "desc": "Arrastra los archivos para organizarlos en el orden que quieres que aparezcan en el documento final."
                 },
                 "step3": {
-                    "title": "Descarga unido",
-                    "desc": "Dale a Combinar y obtén un solo PDF listo para compartir en segundos."
+                    "title": "Descarga Resultado",
+                    "desc": "Haz clic en unir y obtén un único archivo PDF listo para compartir en segundos."
                 }
             }
         },
         "sign": {
-            "title": "Firmar un Documento",
+            "title": "Firmar un Papel",
             "description": "Dibuja tu firma y colócala en cualquier página al instante.",
             "titleHighlight": "Firma Digital",
             "dropTitle": "Suelta tu PDF aquí.",
@@ -619,57 +705,72 @@
             "signHere": "Firma aquí con el ratón o el dedo",
             "dropDesc": "El PDF seleccionado se renderizará para firmar.",
             "saveBtn": "Guardar Papel Firmado",
-            "ready": "Firma Lista. Arrástrala a la vista previa.",
+            "ready": "Firma lista. Arrástrala en la vista previa.",
+            "placementTarget": "Objetivo de Colocación",
+            "pageIndicator": "Página {current} de {total}",
+            "placeBtn": "Colocar Firma",
+            "adjustBtn": "Ajustar Colocación",
+            "workspaceTitle": "Espacio de Trabajo de Firma",
+            "finishBtn": "Finalizar y Exportar",
+            "hint": "Usa las flechas para pasar las páginas. Arrastra tu firma al lugar exacto.",
+            "dragToPosition": "Arrastrar a Posición",
+            "docLoaded": "Documento Cargado",
+            "pagesDetected": "{count} Páginas Detectadas",
+            "sidebarHint": "Usa la barra lateral para dibujar tu firma y colocarla en el documento.",
+            "of": "de",
             "howItWorks": {
                 "step1": {
-                    "title": "Suelta el archivo",
-                    "desc": "Sube el documento que necesites firmar. Se muestra localmente para tu privacidad."
+                    "title": "Suelta tu PDF",
+                    "desc": "Carga el documento que necesitas firmar. Se renderiza localmente por privacidad."
                 },
                 "step2": {
-                    "title": "Dibuja la firma",
-                    "desc": "Usa tu ratón o pantalla táctil para crear una firma natural en el lienzo virtual."
+                    "title": "Dibuja tu Firma",
+                    "desc": "Usa tu ratón o pantalla táctil para dibujar una firma natural en el pad virtual."
                 },
                 "step3": {
-                    "title": "Coloca y guarda",
-                    "desc": "Arrastra tu firma sobre la página, ajusta el tamaño y guarda el documento firmado."
+                    "title": "Coloca y Exporta",
+                    "desc": "Arrastra tu firma a la página, ajusta el tamaño y guarda el documento firmado."
                 }
             }
         },
         "stamp": {
             "title": "Sellar una Foto",
-            "description": "Pon tu nombre o logo en tus fotos para protegerlas.",
+            "description": "Pon tu nombre o logo en tus fotos.",
             "titleHighlight": "Marca de Agua",
             "dropTitle": "Suelta tu imagen aquí.",
             "watermarkText": "Texto de Marca de Agua",
-            "watermarkPlaceholder": "ESCRIBE TU MARCA...",
+            "watermarkPlaceholder": "ESCRIBE TU MARCA DE AGUA...",
             "color": "Color",
             "opacity": "Opacidad",
             "size": "Tamaño",
             "processingImage": "Procesando Imagen...",
-            "startFresh": "Empezar de Cero",
+            "startFresh": "Empezar de cero",
             "dropToStamp": "Soltar para Sellar",
             "position": "Posición",
             "downloadBtn": "Descargar Imagen Sellada",
             "dropDesc": "Te ayudaremos a proteger tus activos visuales.",
             "saveBtn": "Guardar Foto Sellada",
+            "defaultText": "PrivaFlow Asegurado",
+            "stampPlaceholder": "SELLO",
+            "dragHint": "Arrastra para colocar",
             "howItWorks": {
                 "step1": {
-                    "title": "Sube la imagen",
-                    "desc": "Elige la foto que quieras proteger. Nada de tus datos sale de tu computadora."
+                    "title": "Subir Imagen",
+                    "desc": "Selecciona la foto que quieres proteger. Ningún dato sale de tu máquina."
                 },
                 "step2": {
-                    "title": "Diseña tu sello",
-                    "desc": "Escribe tu nombre o sube un logo. Ajusta la transparencia y la posición ideal."
+                    "title": "Diseñar Sello",
+                    "desc": "Escribe tu nombre o sube un logo. Ajusta la transparencia y la ubicación."
                 },
                 "step3": {
-                    "title": "Guarda la foto",
-                    "desc": "La marca se quema en los píxeles localmente. Tu foto original se queda privada."
+                    "title": "Guardar Sellada",
+                    "desc": "La marca de agua se funde con los píxeles localmente. Tu original sigue privado."
                 }
             }
         },
         "repair": {
-            "title": "Reparar Archivo Roto",
-            "description": "Arregla un documento PDF que está roto o da error.",
+            "title": "Arreglar Archivo Roto",
+            "description": "Arregla un documento que está roto o muestra un error.",
             "titleHighlight": "Reparación de Documentos",
             "dropTitle": "Suelta tu PDF roto aquí.",
             "processing": "Reconstruyendo cabeceras de archivo...",
@@ -679,153 +780,180 @@
             "downloadBtn": "Descargar PDF Arreglado",
             "dropDesc": "Intentaremos restaurar la integridad estructural.",
             "saveBtn": "Guardar Archivo Arreglado",
+            "finishBtn": "Finalizar Sesión",
+            "discardBtn": "Descartar Activo",
+            "successDesc": "La lógica de Privaflow saneó y reconstruyó con éxito la estructura del PDF.",
             "howItWorks": {
                 "step1": {
-                    "title": "Suelta el roto",
-                    "desc": "Elige el archivo que no abre. Nuestro motor analiza el código del archivo en local."
+                    "title": "Suelta PDF Corrupto",
+                    "desc": "Selecciona el archivo que no abre. Nuestro motor escanea el flujo de bits localmente."
                 },
                 "step2": {
-                    "title": "Restaura cabeceras",
-                    "desc": "Intentamos reconstruir las tablas de referencia internas y el encabezado del PDF."
+                    "title": "Recuperación de Cabecera",
+                    "desc": "Intentamos reconstruir las tablas de referencia cruzada y las cabeceras internas del PDF."
                 },
                 "step3": {
-                    "title": "Recupera y guarda",
-                    "desc": "Si los datos son salvables, se generará un PDF sano para que lo descargues."
+                    "title": "Restaurar y Guardar",
+                    "desc": "Si los datos son recuperables, se sintetiza un PDF sano para que lo descargues."
                 }
             }
         },
         "numberPages": {
             "title": "Numerar cada Página",
-            "description": "Pon números pequeños al final de cada página.",
+            "description": "Pon números pequeños en la parte inferior de cada página.",
             "titleHighlight": "Indexador de Páginas",
             "dropTitle": "Suelta tu PDF aquí.",
             "position": "Posición del Número",
-            "bottomCenter": "Abajo Centro",
-            "bottomLeft": "Abajo Izquierda",
-            "bottomRight": "Abajo Derecha",
+            "bottomCenter": "Centro Inferior",
+            "bottomLeft": "Inferior Izquierda",
+            "bottomRight": "Inferior Derecha",
             "applyingNumbers": "Aplicando Números...",
             "discardDocument": "Descartar Documento",
             "downloadBtn": "Descargar PDF Numerado",
             "dropDesc": "Te ayudaremos a organizar tu documento.",
             "saveBtn": "Guardar Archivo Numerado",
+            "pageLabel": "Página {num}",
+            "verifyLayout": "Verificar diseño de numeración",
+            "layoutDesc": "Los números se aplicarán a cada página del documento.",
             "howItWorks": {
                 "step1": {
-                    "title": "Carga el documento",
-                    "desc": "Suelta el PDF que quieras numerar. Todo se queda en la RAM de tu navegador."
+                    "title": "Subir Documento",
+                    "desc": "Suelta el PDF que quieras paginar. Todo se queda en la RAM de tu navegador."
                 },
                 "step2": {
-                    "title": "Elige posición",
-                    "desc": "¿Quieres los números abajo a la izquierda, al centro o a la derecha?"
+                    "title": "Elegir Posición",
+                    "desc": "Elige dónde quieres que aparezcan los números: abajo a la izquierda, al centro o a la derecha."
                 },
                 "step3": {
-                    "title": "Paginado automático",
-                    "desc": "Nuestro código inyecta el índice de páginas y crea tu nuevo archivo numerado."
+                    "title": "Auto-paginar",
+                    "desc": "Nuestro script inyecta los índices de página y genera tu nuevo archivo numerado."
                 }
             }
         },
         "organizePages": {
             "title": "Organizar Páginas",
-            "description": "Mueve páginas o elimina las que no necesites del PDF.",
+            "description": "Mueve páginas o elimina las que no necesites.",
             "titleHighlight": "Gestor de Páginas",
             "dropTitle": "Suelta tu PDF aquí.",
-            "processing": "Renderizando páginas...",
-            "scanning": "Escaneando Capas del Documento...",
-            "pagesLoaded": "{count} Páginas Cargadas. Arrastra para reordenar.",
-            "synthesizing": "Sintetizando estructura...",
+            "processing": "Renderizando páginas del documento...",
+            "scanning": "Escaneando capas del documento...",
+            "pagesLoaded": "{count} Páginas cargadas. Arrastra para reordenar.",
+            "synthesizing": "Sintetizando...",
             "discardBtn": "Descartar Documento",
             "downloadBtn": "Descargar PDF Organizado",
             "pageLabel": "Página",
             "delete": "Eliminar",
             "dropActive": "Soltar para Organizar",
             "dropDesc": "Arrastra para reordenar, haz clic para eliminar.",
+            "emptyQueue": "No quedan páginas en la cola.",
             "saveBtn": "Guardar Nuevo Archivo",
             "howItWorks": {
                 "step1": {
-                    "title": "Carga el documento",
-                    "desc": "Suelta el PDF que quieras editar. Mostramos miniaturas de cada página."
+                    "title": "Cargar Documento",
+                    "desc": "Suelta el PDF que quieras modificar. Renderizamos previsualizaciones en miniatura de cada página."
                 },
                 "step2": {
-                    "title": "Ordena y borra",
-                    "desc": "Arrastra las miniaturas para cambiar el orden. Pulsa el icono de borrar para quitar páginas."
+                    "title": "Reordenar y Podar",
+                    "desc": "Arrastra las miniaturas para cambiar la secuencia de páginas. Haz clic en el icono de la papelera para eliminar páginas innecesarias."
                 },
                 "step3": {
-                    "title": "Guarda la síntesis",
-                    "desc": "Nuestro motor ensambla el nuevo orden en un PDF limpio listo para exportar."
+                    "title": "Guardar Ensamblaje",
+                    "desc": "Nuestro motor sintetiza el nuevo orden de páginas en un PDF limpio listo para exportar."
                 }
             }
         },
         "pdfSplit": {
-            "title": "Dividir un PDF",
-            "description": "Extrae de forma segura páginas específicas o rangos de tus documentos.",
+            "title": "Extraer Páginas PDF",
+            "description": "Extrae de forma segura páginas o rangos específicos de tus documentos PDF.",
             "titleHighlight": "Extractor de Páginas",
             "dropTitle": "Suelta tu archivo PDF aquí.",
-            "dropDesc": "Te ayudaremos a sacar las páginas que necesites.",
-            "processing": "Extrayendo capas de página...",
+            "dropDesc": "Te ayudaremos a extraer las páginas que necesites.",
+            "processing": "Extrayendo buffers de página...",
             "splitBtn": "Extraer Páginas Seleccionadas",
+            "extractionLogic": "Lógica de Extracción",
+            "pageRange": "Rango de Páginas",
+            "rangePlaceholder": "ej. 1-3, 5, 8-10",
+            "rangeHint": "Déjalo vacío para extraer todas las páginas como archivos individuales.",
+            "extractBtn": "Extraer Páginas",
+            "downloadZip": "Descargar Paquete ZIP",
+            "downloadPdf": "Descargar PDF Extraído",
+            "inBrowserSplit": "División en Navegador",
+            "splitDesc": "Tu documento se analiza y recompone de forma totalmente privada. No se realizan escrituras persistentes en el sistema.",
+            "splitting": "Dividiendo...",
+            "splitComplete": "Extracción Completada",
+            "zipArchive": "Archivo ZIP",
+            "singlePdf": "Solo un PDF",
             "howItWorks": {
                 "step1": {
-                    "title": "Elige el PDF",
-                    "desc": "Sube el documento que quieras dividir. Se procesa íntegramente en tu RAM."
+                    "title": "Elegir PDF",
+                    "desc": "Sube el documento que quieras dividir. Se procesa enteramente en tu RAM."
                 },
                 "step2": {
-                    "title": "Marca los rangos",
-                    "desc": "Elige páginas sueltas o define un rango (ej: 5-12) para sacar del original."
+                    "title": "Seleccionar Rangos",
+                    "desc": "Elige páginas individuales o define un rango (ej. 5-12) para extraer del origen."
                 },
                 "step3": {
-                    "title": "Saca y guarda",
-                    "desc": "El contenido elegido se vuelca a un nuevo registro PDF para descarga inmediata."
+                    "title": "Extraer y Guardar",
+                    "desc": "Los flujos de bits seleccionados se agrupan en un nuevo registro PDF para descarga inmediata."
                 }
             }
         },
         "heicToJpg": {
             "title": "Arreglador de Fotos iPhone",
-            "description": "Convierte archivos HEIC de iPhone en fotos JPG compatibles.",
+            "description": "Convierte archivos HEIC de iPhone en fotos JPG de alta compatibilidad.",
             "titleHighlight": "Transcodificador HEIC",
             "dropTitle": "Suelta tu foto de iPhone aquí.",
-            "dropDesc": "La convertiremos en una foto estándar que funciona en todas partes.",
-            "processing": "Convirtiendo a JPG estándar...",
+            "dropDesc": "La convertiremos en una foto estándar que funcione en todas partes.",
+            "processing": "Convirtiendo a catálogo JPG...",
+            "errorDesc": "Error al transcodificar HEIC. Integridad de señal comprometida.",
             "downloadBtn": "Guardar Foto Estándar",
             "protocol": "Protocolo de Flujo de Salida",
             "to": "a {fmt}",
             "resetBtn": "Reiniciar Secuencia",
-            "sandbox": "Protocolo de Sandbox",
-            "sandboxDesc": "Los paquetes HEIF se deciman y reconstruyen localmente por completo. La conectividad a la nube está estrictamente restringida.",
+            "sandbox": "Protocolo Sandbox",
+            "sandboxDesc": "Los paquetes HEIF se diezman y reconstruyen completamente de forma local. La conectividad en la nube está estrictamente restringida.",
             "originalLabel": "HEIC Original",
             "purifiedLabel": "{format} Purificado",
-            "wasmDecryption": "Desencriptación WASM...",
+            "wasmDecryption": "Descifrado WASM...",
             "howItWorks": {
                 "step1": {
-                    "title": "Elige el HEIC",
-                    "desc": "Suelta una foto de iPhone (.heic). Estas fotos no suelen abrir en Windows o web."
+                    "title": "Seleccionar HEIC",
+                    "desc": "Suelta una imagen HEIC de Apple (contenedor de alta eficiencia). Se queda en tu dispositivo."
                 },
                 "step2": {
-                    "title": "Decodificación local",
-                    "desc": "Nuestro motor decodifica el archivo y saca el mapa de píxeles sin ayuda del servidor."
+                    "title": "Decodificación Local",
+                    "desc": "Nuestro motor decodifica el flujo HEIF y extrae el mapa de píxeles sin ayuda del servidor."
                 },
                 "step3": {
-                    "title": "Exportación JPG",
-                    "desc": "Se recodifican los datos a un JPG universal y se guarda en tu dispositivo."
+                    "title": "Exportar JPG",
+                    "desc": "Los datos de píxeles se recodifican en un archivo JPG universal y se guardan en tu dispositivo."
                 }
             }
         },
         "cleanExif": {
             "title": "Limpiador de Metadatos",
             "description": "Borra el 'mapa oculto' y los datos de rastreo privados de tus fotos.",
-            "titleHighlight": "Sanitizador de Privacidad",
-            "dropTitle": "Suelta tu foto aquí para sanitizarla.",
+            "titleHighlight": "Saneador de Privacidad",
+            "dropTitle": "Suelta tu foto aquí para sanearla.",
             "dropDesc": "Reconstruiremos la imagen en un lienzo limpio para borrar todos los metadatos.",
-            "cleaning": "Sanitizando capas de imagen...",
-            "scrubbing": "Limpiando metadatos EXIF...",
-            "cleanBtn": "Empezar Sanitización",
-            "downloadBtn": "Guardar Activo Sanitizado",
-            "downloadClean": "Guardar Activo Sanitizado",
+            "cleaning": "Saneando capas de imagen...",
+            "scrubbing": "Borrando metadatos EXIF...",
+            "cleanBtn": "Iniciar Saneamiento",
+            "downloadBtn": "Guardar Activo Saneado",
+            "downloadClean": "Guardar Activo Saneado",
+            "securityLevel": "Nivel de Seguridad",
+            "atomic": "ATÓMICO",
+            "hiddenDetected": "Datos Ocultos Encontrados",
+            "metadataRemoved": "Metadatos Eliminados",
+            "original": "Original",
+            "cleaned": "Limpio",
             "howItWorks": {
                 "step1": {
                     "title": "Seleccionar Imagen",
-                    "desc": "Elige la foto que quieras sanitizar."
+                    "desc": "Elige la foto que quieras sanear."
                 },
                 "step2": {
-                    "title": "Limpieza de Metadatos",
+                    "title": "Borrando Metadatos",
                     "desc": "Nuestro motor reconstruye la imagen en un lienzo limpio para borrar todos los datos EXIF."
                 },
                 "step3": {
@@ -835,64 +963,86 @@
             }
         },
         "encrypt": {
-            "title": "Encriptación de Notas Seguras",
-            "description": "Bloquea tu escritura privada dentro de una bóveda criptográfica.",
+            "title": "Cifrado de Notas Seguras",
+            "description": "Bloquea tu escritura privada dentro de una bóveda criptográfica que solo tú puedes abrir.",
             "titleHighlight": "Creador de Mensajes Secretos",
             "inputText": "Nodo de Texto Crudo",
             "inputPlaceholder": "Escribe tu mensaje secreto aquí...",
-            "passwordLabel": "Clave de Encriptación",
+            "passwordLabel": "Clave de Cifrado",
             "passwordPlaceholder": "Escribe una clave que solo tú sepas...",
             "encryptBtn": "Bloquear Mensaje",
-            "decryptBtn": "Abrir Mensaje",
-            "resultLabel": "Carga Encriptada",
+            "decryptBtn": "Desbloquear Mensaje",
+            "resultLabel": "Carga Cifrada",
             "copyBtn": "Copiar Carga",
             "copied": "¡Carga Copiada!",
             "howItWorks": {
                 "step1": {
-                    "title": "Escribe tu nota",
-                    "desc": "Escribe o pega el texto sensible que quieras proteger de ojos curiosos."
+                    "title": "Escribe tu Nota",
+                    "desc": "Escribe o pega el texto sensible que quieres asegurar de miradas indiscretas."
                 },
                 "step2": {
-                    "title": "Aplica el cifrado",
-                    "desc": "Introduce una clave. Usamos AES-256 para pasar tu texto a código ilegible."
+                    "title": "Aplicar Cifrado",
+                    "desc": "Escribe una clave secreta. Usamos AES-256 para convertir tu texto en un revoltijo ilegible."
                 },
                 "step3": {
-                    "title": "Guárdalo donde sea",
-                    "desc": "Copia el bloque encriptado. Solo con tu clave exacta podrá leerse de nuevo."
+                    "title": "Guarda en Cualquier Lugar",
+                    "desc": "Copia el bloque cifrado. Solo alguien con tu clave exacta podrá volver a leerlo."
                 }
-            }
+            },
+            "decryptTitle": "Descifrador de Texto",
+            "cryptoProtocol": "Protocolo Criptográfico",
+            "encryptionMode": "Modo de Cifrado",
+            "decryptionMode": "Modo de Descifrado",
+            "securityKey": "Clave de Seguridad",
+            "enterPassword": "Escribe la contraseña...",
+            "processing": "Procesando...",
+            "lockMessage": "Bloquear Mensaje",
+            "unlockMessage": "Desbloquear Mensaje",
+            "cryptoApi": "Web Crypto API",
+            "cryptoDesc": "Utiliza PBKDF2 para la derivación de claves y AES-256-GCM para el cifrado autenticado. Las claves nunca salen de la memoria del navegador.",
+            "sourceNode": "Nodo de Origen",
+            "encryptedBuffer": "Buffer Cifrado",
+            "awaitingNode": "Esperando Síntesis de Nodo",
+            "cipherIntegrity": "Integridad de Cifrado Activa",
+            "volatileKey": "Almacén de Claves Volátil",
+            "encryptLabel": "Cifrador de Texto",
+            "decryptLabel": "Descifrador de Texto",
+            "sourcePlaceholderLock": "Introduce texto crudo para cifrar...",
+            "sourcePlaceholderUnlock": "Pega el texto cifrado aquí...",
+            "inputLabel": "Nodo de Origen",
+            "outputLabel": "Buffer Cifrado"
         },
         "blur": {
-            "title": "Herramienta de Desenfoque",
-            "description": "Oculta caras o cosas privadas en tus fotos con un pincel de desenfoque.",
+            "title": "Difuminar Foto",
+            "description": "Oculta caras o cosas sensibles en tus fotos con un pincel de desenfoque que prioriza la privacidad.",
             "titleHighlight": "Desenfoque Estético",
-            "dropTitle": "Suelte su image aquí para desenfocar.",
+            "dropTitle": "Suelte su imagen aquí para desenfocar.",
             "dropDesc": "Procesaremos los píxeles de la imagen localmente en su navegador.",
-            "intensity": "Intensidad de desenfoque",
+            "intensity": "Intensidad de Desenfoque",
             "applyBtn": "Aplicar desenfoque de búfer",
-            "downloadBtn": "Descargar nodo",
-            "resetBtn": "Nueva secuencia",
+            "downloadBtn": "Descargar Nodo",
+            "resetBtn": "Nueva Secuencia",
             "synthesizing": "Sintetizando...",
-            "encoding": "Codificando nodo",
-            "sandbox": "Sandbox de lienzo",
+            "encoding": "Codificando Nodo",
+            "sandbox": "Sandbox de Lienzo",
             "sandboxDesc": "Los píxeles se transforman en un lienzo HTML5 volátil. Cero artefactos persistentes.",
             "original": "Original",
-            "output": "Salida sintetizada",
-            "monitor": "Monitor en vivo",
+            "output": "Salida Sintetizada",
+            "monitor": "Monitor en Vivo",
             "protocol": "Protocolo Gaussiano",
-            "integrity": "Integridad local",
+            "integrity": "Integridad Local",
             "howItWorks": {
                 "step1": {
-                    "title": "Suelte su imagen",
-                    "description": "Elija cualquier foto que desee enfocar o arreglar. Se queda en su dispositivo; nada se sube."
+                    "title": "Suelta tu Imagen",
+                    "description": "Elige cualquier foto que quieras desenfocar. Se queda en tu dispositivo; nada se sube."
                 },
                 "step2": {
-                    "title": "Ajuste la fuerza",
-                    "description": "Use el control deslizante para controlar qué tan nítido debe ser el resultado. Más fuerza significa una imagen más clara."
+                    "title": "Ajusta la fuerza",
+                    "description": "Usa el control deslizante para controlar qué tan desenfocado debe ser el resultado. Más fuerza significa una imagen más borrosa."
                 },
                 "step3": {
-                    "title": "Guarde el resultado",
-                    "description": "Haga clic en procesar y descargue su imagen mejorada al instante."
+                    "title": "Guarda el Resultado",
+                    "description": "Haga clic en procesar y descargar su imagen desenfocada al instante."
                 }
             }
         },
@@ -962,7 +1112,7 @@
             "howItWorks": {
                 "step1": {
                     "title": "Selecciona Foto",
-                    "desc": "Suelta cualquier image con un sujeto claro (persona, producto, etc.). Se queda en tu dispositivo."
+                    "desc": "Suelta cualquier imagen con un sujeto claro (persona, producto, etc.). Se queda en tu dispositivo."
                 },
                 "step2": {
                     "title": "Aislamiento por IA",
@@ -994,14 +1144,16 @@
             "removed": "[ELIMINADO]"
         },
         "blur": {
-            "before": "Enfoque Nítido",
-            "after": "Completamente Difuminado",
+            "before": "Ofuscado",
+            "after": "Profundidad mejorada",
             "sharpFocus": "Enfoque Nítido",
-            "fullyObscured": "Completamente Difuminado"
+            "fullyObscured": "Completamente Difuminado",
+            "lowFid": "Baja Fidelidad",
+            "ultraRes": "Ultra Resolución"
         },
         "encrypt": {
             "before": "Texto plano global",
-            "after": "Encriptado de 256 bits",
+            "after": "Cifrado de 256 bits",
             "origin": "Origen",
             "subject": "Asunto",
             "confidential": "MEMO CONFIDENCIAL",
@@ -1144,7 +1296,7 @@
             "step3Title": "Transparencia de Código Abierto",
             "step3Desc": "Todo nuestro código fuente está disponible en GitHub. Cualquiera puede inspeccionar cómo manejamos los datos y verificar que no existen scripts de rastreo.",
             "step4Title": "Ciclo de Vida Solo en Memoria",
-            "step4Desc": "Los archivos se procesent en la memoria efímera del navegador. Una vez que actualizas la página o cierras la pestaña, el entorno se borra por completó."
+            "step4Desc": "Los archivos se procesan en la memoria efímera del navegador. Una vez que actualizas la página o cierras la pestaña, el entorno se borra por completo."
         }
     },
     "ContactPage": {

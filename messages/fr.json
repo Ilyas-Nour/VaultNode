@@ -3,13 +3,27 @@
         "title": "Vos fichiers restent avec vous. Toujours.",
         "titlePart1": "Vos Fichiers.",
         "titlePart2": "Votre Appareil.",
-        "subtitle": "La plupart des sites volent vos fichiers. Pas nous. Tout ce que vous faites reste dans votre écran. 100% privé et 100% gratuit.",
+        "titlePart3": "Confidentialité Totale.",
+        "subtitle": "La plupart des services cloud analysent vos données. Pas nous. Tout ce que vous traitez reste dans votre navigateur. 100% privé, 100% local.",
+        "heroBadge": "Nouveau : Traitement IA local v4.0",
+        "heroExplore": "Explorer le Registre des Outils",
+        "heroProof": "Voir la Preuve Visuelle",
+        "heroStatValue1": "21",
+        "heroStatTools": "Outils Privés",
+        "heroStatValue2": "0",
+        "heroStatUploaded": "Octets Uploadés",
+        "heroStatValue3": "4",
+        "heroStatLanguages": "Langues Actives",
+        "heroStatValue4": "100%",
+        "heroStatClient": "Côté Client",
+        "sectionAllLabel": "SOLUTIONS DE SÉCURITÉ",
+        "sectionAllTitle": "21 Outils Privés. Zéro Upload.",
         "launchRedactor": "Masquer les Infos Sensibles",
         "imageCompressor": "Réduire la Photo",
         "pdfMerger": "Fusionner PDF",
         "pdfToImg": "PDF vers Image",
         "cleanExif": "Supprimer les Données Photo",
-        "password": "Créateur de Mot de Passe",
+        "password": "Générateur de Mots de Passe",
         "unlockPdf": "Déverrouiller PDF",
         "heicToJpg": "Photo iPhone vers JPG",
         "pdfToDocx": "PDF vers Word",
@@ -27,7 +41,7 @@
         "bgRemover": "Supprimer le Fond",
         "toolDescriptions": {
             "redactor": "Utilisez le pinceau pour peindre sur les secrets afin de les cacher.",
-            "cleanExif": "Supprimez la 'carte cachée' de vos photos.",
+            "cleanExif": "Supprimez la 'carte cachée' et les données de localisation de vos photos.",
             "password": "Créez des codes secrets très forts que vous seul pouvez connaître.",
             "textEncryptor": "Transformez votre texte en un code secret que vous seul pouvez déverrouiller.",
             "compress": "Rendez les gros fichiers petits pour qu'ils s'envoient plus vite.",
@@ -39,302 +53,335 @@
             "pdfToWord": "Changez un fichier verrouillé en un document que vous pouvez modifier.",
             "unlock": "Supprimez un mot de passe que vous connaissez déjà pour que le fichier reste ouvert.",
             "pdfToImg": "Enregistrez chaque page de votre fichier comme une image séparée.",
-            "split": "Choisissez uniquement les pages dont vous avez besoin.",
-            "sign": "Utilisez la souris ou le doigt pour dessiner votre signature et la placer sur n'importe quelle page.",
+            "split": "Choisissez uniquement les pages dont vous avez besoin de façon sécurisée.",
+            "sign": "Utilisez la souris ou le doigt pour dessiner votre signature sur n'importe quelle page.",
             "stamp": "Mettez votre nom ou logo sur vos photos pour les protéger.",
             "repair": "Réparez un document cassé ou qui affiche une erreur pour pouvoir l'ouvrir.",
             "numberPages": "Mettez un petit numéro en bas de chaque page pour organiser votre fichier.",
-            "organizePages": "Déplacez, supprimez ou ajoutez des pages à votre document.",
-            "enhancer": "Éclaircit les photos floues et restaure la netteté avec des filtres professionnels.",
-            "bgRemover": "Isole le sujet et supprime le fond instantanément — 100% local."
+            "organizePages": "Déplacez, supprimez ou ajoutez des pages à votre document PDF.",
+            "enhancer": "Éclaircit les photos floues et restaure la netteté avec des filtres locaux.",
+            "bgRemover": "Isole le sujet et supprime le fond instantanément via IA locale."
         },
         "beforeAfter": {
             "redactor": {
-                "before": "Une lettre avec votre numéro de téléphone.",
-                "after": "Le numéro a disparu sous une ligne noire pour toujours."
+                "before": "Document avec données personnelles.",
+                "after": "Informations sensibles masquées par caviardage."
             },
             "cleanExif": {
-                "before": "Une photo qui montre exactement où vous habitez.",
-                "after": "Une photo sûre à partager avec des inconnus."
+                "before": "Photo avec métadonnées GPS intégrées.",
+                "after": "Image anonymisée prête pour le partage."
             },
             "password": {
-                "before": "Un mot de passe faible comme '123456'.",
-                "after": "Un code super fort comme 'Xk9!pQ2m#Lz'."
+                "before": "Mot de passe simple et vulnérable.",
+                "after": "Clé sécurisée à haute entropie."
             },
             "encrypt": {
-                "before": "Une note secrète que tout le monde peut lire.",
-                "after": "Des lettres mélangées que vous seul pouvez débloquer."
+                "before": "Note confidentielle en clair.",
+                "after": "Texte crypté par AES-256."
             },
             "compress": {
-                "before": "Une photo 'lourde' lente à envoyer.",
-                "after": "Une photo 'légère' qui s'envoie instantanément."
+                "before": "Fichier d'image haute résolution lourd.",
+                "after": "Version optimisée pour le web."
             },
             "heic": {
-                "before": "Une photo d'iPhone qui ne s'ouvre pas sur PC.",
-                "after": "Une photo standard qui fonctionne partout."
+                "before": "Format HEIC propriétaire Apple.",
+                "after": "Format JPEG universellement compatible."
             },
             "mediaConverter": {
-                "before": "Une vidéo que ne fonctionne pas sur votre téléphone.",
-                "after": "Un fichier parfait qui fonctionne partout."
+                "before": "Codecs vidéo non supportés.",
+                "after": "Fichier multimédia prêt pour tout appareil."
             },
             "svgToPng": {
-                "before": "Un fichier de dessin pour les designers.",
-                "after": "Une photo simple pour tout le monde."
+                "before": "Lignes vectorielles mathématiques.",
+                "after": "Matrice de pixels haute définition."
             },
             "blur": {
-                "before": "Une photo montrant un visage privé.",
-                "after": "La même photo avec le visage caché."
+                "before": "Zone sensible exposée.",
+                "after": "Flou gaussien appliqué sélectivement."
             },
             "merger": {
-                "before": "5 fichiers différents éparpillés.",
-                "after": "Un document propre avec tout à l'intérieur."
+                "before": "Plusieurs fragments de PDF.",
+                "after": "Document fusionné unique."
             },
             "pdfToDocx": {
-                "before": "Un fichier que vous ne pouvez pas modifier.",
-                "after": "Un fichier Word que vous pouvez changer."
+                "before": "Contenu PDF immuable.",
+                "after": "Structure Word entièrement éditable."
             },
             "unlock": {
-                "before": "Un fichier qui demande un mot de passe à chaque fois.",
-                "after": "Un fichier qui s'ouvre instantanément pour tout le monde."
+                "before": "Fichier restreint par mot de passe.",
+                "after": "Permissions PDF restaurées."
             },
             "pdfToImg": {
-                "before": "Un document long à faire défiler.",
-                "after": "Une collection d'images faciles à partager."
+                "before": "Fichier document source.",
+                "after": "Séquence d'images rasterisées."
             },
-            "split": {
-                "before": "Un livre de 100 pages.",
-                "after": "Les 2 pages exactes dont vous aviez besoin."
+            "pdfSplit": {
+                "before": "Document volumineux.",
+                "after": "Pages spécifiques extraites."
             },
             "sign": {
-                "before": "Une ligne de signature vide.",
-                "after": "Un document signé légalement."
+                "before": "Zone de signature vide.",
+                "after": "Firma manuscrite appliquée."
             },
             "stamp": {
-                "before": "Une photo simple.",
-                "after": "Une photo avec votre filigrane."
+                "before": "Contenu visuel brut.",
+                "after": "Filigrane de propriété ajouté."
             },
             "repair": {
-                "before": "Un fichier qui ne s'ouvre pas.",
-                "after": "Un document complètement récupéré."
+                "before": "Structure de fichier corrompue.",
+                "after": "Intégrité du PDF restaurée."
             },
             "numberPages": {
-                "before": "Pages sans numéros.",
-                "after": "Un fichier paginé et organisé."
+                "before": "Document non paginé.",
+                "after": "Index de pages appliqué."
             },
             "organizePages": {
-                "before": "Une pile désordonnée de pages.",
-                "after": "Un document parfaitement ordonné."
+                "before": "Ordre des pages aléatoire.",
+                "after": "Séquence de document optimisée."
             },
             "enhancer": {
-                "before": "Basse résolution",
-                "after": "Haute fidélité"
+                "before": "Basse résolution / flou.",
+                "after": "Détails et netteté restaurés."
             },
             "bgRemover": {
-                "before": "Source originale",
-                "after": "Sujet isolé"
+                "before": "Sujet avec fond complexe.",
+                "after": "PNG transparent isolé."
             }
         },
         "categories": {
-            "vault": "Outils de Privacité",
-            "media": "Photo & Vidéo",
-            "docs": "Papiers & Fichiers"
+            "vault": "Outils de Sécurité",
+            "media": "Image & Vidéo",
+            "docs": "PDF & Documents"
         },
-        "searchPlaceholder": "Rechercher un outil...",
-        "noResults": "Aucun résultat trouvé.",
-        "toolSubtitle": "Des outils faciles pour vous aider avec {category}.",
+        "searchPlaceholder": "Rechercher un outil privé...",
+        "noResults": "Aucun module trouvé pour cette recherche.",
+        "toolSubtitle": "Solutions locales pour {category}.",
         "settings": {
-            "title": "Paramètres",
-            "subtitle": "Faites-le vôtre",
+            "title": "Paramètres Système",
+            "subtitle": "Configuration du nœud local",
             "language": {
-                "label": "Langue",
+                "label": "Langue du Système",
                 "en": "English",
                 "es": "Español",
                 "fr": "Français",
                 "ar": "العربية"
             },
             "session": {
-                "label": "Nettoyage",
-                "clear": "Effacer l'écran",
-                "clearDesc": "Effacez tout ce que vous avez fait et recommencez à zéro.",
-                "cleared": "Écran effacé"
+                "label": "Gestion du Cache",
+                "clear": "Purger la Session",
+                "clearDesc": "Effacez tous les buffers de mémoire et réinitialisez l'interface.",
+                "cleared": "Mémoire purgée avec succès"
             },
-            "close": "Fermer"
+            "close": "Fermer le Panneau"
         },
-        "adPlaceholder": "Soutenez nos outils gratuits",
+        "adPlaceholder": "Publicité sécurisée",
         "cta": {
-            "title": "Votre vie privée est un droit.",
-            "button": "Commencer (Gratuit)"
+            "title": "La vie privée n'est pas une option, c'est un droit.",
+            "desc": "Rejoignez des milliers d'utilisateurs qui traitent leurs données sans jamais les uploader vers le cloud.",
+            "button": "Activer le Coffre-fort (Gratuit)"
         },
-        "mergeDropDesc": "Sélectionnez des fichiers sur votre ordinateur.",
-        "mergeButton": "Combiner les fichiers",
-        "localOnly": "Reste dans votre écran",
-        "howItWorks": {
-            "title": "Comment ça marche ?",
-            "subtitle": "Une simple histoire de sécurité",
-            "step1": {
-                "title": "Choisir un fichier",
-                "desc": "Sélectionnez le document ou la photo à réparer."
-            },
-            "step2": {
-                "title": "Réparation privée",
-                "desc": "Notre site fonctionne comme un outil magique dans votre écran. Votre fichier ne voyage jamais sur internet."
-            },
-            "step3": {
-                "title": "Enregistrer",
-                "desc": "Téléchargez votre fichier terminé. Comme il n'a jamais quitté votre appareil, personne d'autre ne l'a vu."
-            }
-        },
-        "heroStatValue1": "19",
-        "heroStatValue2": "0 octets",
-        "heroStatValue3": "4",
-        "heroStatValue4": "100%",
+        "mergeDropDesc": "Déposez vos fichiers ici pour l'assemblage.",
+        "mergeButton": "Initier la Fusion",
+        "localOnly": "Exécution locale uniquement",
+        "stepsLabel": "LE PROTOCOLE PRIVaflow",
+        "stepsTitle": "Comment nous protégeons vos données",
+        "stepsBody": "Contrairement aux outils en ligne classiques, nous déplaçons l'application vers vos données, pas vos données vers l'application.",
+        "step1Title": "Sélection du Nœud",
+        "step1Desc": "Choisissez n'importe quel outil. L'interface se charge entièrement dans votre RAM locale.",
+        "step2Title": "Traitement WASM",
+        "step2Desc": "Nos moteurs de traitement (FFmpeg, PDF-lib) s'exécutent en sandbox dans votre navigateur.",
+        "step3Title": "Sortie Sécurisée",
+        "step3Desc": "Le résultat est généré instantanément. Aucun octet ne quitte jamais votre appareil.",
+        "philosophyLabel": "NOTRE ARCHITECTURE",
+        "philosophyTitle": "Zéro Confiance, Zéro Serveur.",
+        "philosophyBody1": "Nous avons construit PrivaFlow avec une conviction simple : vous ne devriez pas avoir à nous faire confiance avec vos fichiers. C'est pourquoi nous avons conçu un système où nous ne pouvons techniquement pas voir ce que vous faites.",
+        "philosophyBody2": "En utilisant WebAssembly et le traitement côté client, nous fournissons des outils puissants qui étaient auparavant réservés aux serveurs, tout en gardant vos documents 100% hors ligne.",
+        "philosophyCta": "Lire notre Manifeste de Sécurité",
+        "pillar1Title": "100% Local",
+        "pillar1Desc": "Vos fichiers ne touchent jamais nos serveurs. Tout se passe dans votre RAM.",
+        "pillar2Title": "Open Source",
+        "pillar2Desc": "Notre code est transparent et auditable par n'importe qui sur GitHub.",
+        "pillar3Title": "Sans Inscription",
+        "pillar3Desc": "Pas de compte, pas de cookies, pas de suivi. Juste des outils qui fonctionnent.",
         "footer": {
-            "brandStatement": "Confidentialité pro.",
-            "brandHighlight": "Dans votre navigateur.",
-            "colInfo": "Informations",
-            "colTools": "Coffre-fort",
-            "colMedia": "Médias & Docs",
-            "linkHowItWorks": "Comment ça marche",
-            "linkPhilosophy": "Philosophie",
-            "linkAllTools": "Registre des Outils",
-            "linkContact": "Support & Feedback",
-            "linkRedact": "Rédacteur PDF",
-            "linkCleanMeta": "Nettoyeur Exif",
-            "linkConverter": "Convertisseur Médias",
-            "linkPdfWord": "PDF vers Word",
-            "linkCompress": "Optimiseur d'Image",
-            "linkMerge": "Fusionneur PDF",
-            "linkSign": "Signature Électronique",
-            "linkRepair": "Réparer Fichier",
-            "linkBlur": "Outil de Flou",
-            "linkHeic": "HEIC vers JPG",
-            "linkSvg": "SVG vers PNG",
-            "linkUnlock": "Supprimer Mot de Passe",
-            "linkPdfImg": "PDF vers Image",
-            "linkSplit": "Diviseur PDF",
-            "linkStamp": "Filigrane",
-            "linkNumber": "Numéroter Pages",
-            "linkOrganize": "Organiser",
-            "copyright": "© 2026 PRIVaflow · Aucune donnée ne quitte votre appareil.",
-            "footerCredits": "100% Ouvert · Sans Télémétrie · Sans Analytique"
+            "brandStatement": "Expert en confidentialité.",
+            "brandHighlight": "Exécution sécurisée.",
+            "colInfo": "Ressources",
+            "colTools": "Sécurité",
+            "colMedia": "Documents",
+            "colPrivacy": "Légal",
+            "linkHowItWorks": "Développement Local",
+            "linkPhilosophy": "Architecture Zéro Serveur",
+            "linkAllTools": "Annuaire des Outils",
+            "linkContact": "Aide & Support",
+            "linkRedact": "Caviardage PDF",
+            "linkCleanMeta": "Nettoyage Exif",
+            "linkConverter": "Traitement Vidéo",
+            "linkPdfWord": "Extraction PDF/Word",
+            "linkCompress": "Compression Image",
+            "linkMerge": "Fusion de Documents",
+            "linkSign": "Signature Digitale",
+            "linkRepair": "Restauration PDF",
+            "linkBlur": "Flou de Confidentialité",
+            "linkHeic": "Support Apple HEIC",
+            "linkSvg": "Rendu Vectoriel",
+            "linkUnlock": "Décryptage PDF",
+            "linkPdfImg": "PDF vers Pixel",
+            "linkSplit": "Segmentation PDF",
+            "linkStamp": "Marque de Propriété",
+            "linkNumber": "Index de Pages",
+            "linkOrganize": "Gestion de Structure",
+            "linkBgRemover": "Isolation de Sujet",
+            "linkEncryption": "Chiffrement AES",
+            "linkEnhancer": "Clarification Visuelle",
+            "linkZeroUpload": "Garantie Zéro Upload",
+            "linkOpenArch": "Code Source Ouvert",
+            "linkLocalProtocol": "Protocole WASM",
+            "copyright": "© 2026 PRIVaflow · Souveraineté des données garantie.",
+            "footerCredits": "Zéro Télémétrie · Zéro Analytique · 100% Client-Side"
         },
         "nav": {
-            "vault": "Coffre-fort",
-            "media": "Médias",
-            "documents": "Docs",
-            "contact": "Contact"
+            "vault": "Sécurité",
+            "media": "Visuels",
+            "documents": "Papiers",
+            "contact": "Contact",
+            "philosophy": "Philosophie",
+            "shield": "Rapport"
         },
-        "logoTagline": "Privé · Local · Gratuit",
+        "logoTagline": "Souveraineté des Données",
+        "howItWorks": {
+            "title": "Espace de Travail Industriel",
+            "subtitle": "Un sanctuaire pour la confidentialité de haut niveau.",
+            "step1": {
+                "title": "Préparez vos Fichiers",
+                "desc": "Sélectionnez les documents ou médias que vous souhaitez transformer."
+            },
+            "step2": {
+                "title": "Synthèse Locale",
+                "desc": "Notre moteur reconstruit vos données dans un bac à sable sécurisé sur votre propre matériel. Aucun bit ne quitte jamais votre machine."
+            },
+            "step3": {
+                "title": "Exportation Sécurisée",
+                "desc": "Téléchargez votre travail terminé. Le bac à sable est effacé dès que vous fermez l'onglet."
+            }
+        },
         "visualProof": {
-            "label": "Preuve Visuelle",
-            "title": "Voir la Magie",
-            "desc": "Preuve visuelle de nos outils en action. Tout se passe en privé dans votre écran.",
-            "viewProof": "Voir la preuve",
-            "openTool": "Ouvrir l'outil"
+            "label": "Démonstration Technique",
+            "title": "Preuve de l'Algorithme",
+            "desc": "Observez comment nos moteurs manipulent les pixels et les vecteurs sans aucune Gateway réseau.",
+            "viewProof": "Analyser la Preuve",
+            "openTool": "Lancer l'Applet"
         }
     },
     "Metadata": {
         "default": {
             "title": "PrivaFlow | Vos Fichiers Restent Avec Vous",
             "description": "Tout ce que vous faites reste sur votre propre écran. Des outils sûrs, privés et 100% gratuits pour vos photos et fichiers.",
-            "keywords": "redacteur pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité"
+            "keywords": "caviardage pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité"
         },
         "blur": {
-            "title": "Cacher les Visages",
-            "description": "Flouter des parties de votre photo localement."
+            "title": "Flouter une Photo",
+            "description": "Masquez des visages ou des zones sensibles localement dans votre navigateur."
         },
         "cleanExif": {
-            "title": "Nettoyer les Infos Photo",
-            "description": "Supprimer la carte cachée et les détails EXIF."
+            "title": "Nettoyeur de Métadonnées",
+            "description": "Supprimez la localisation et les détails EXIF cachés de vos photos."
         },
         "compress": {
-            "title": "Réduire la Taille",
-            "description": "Rendre les photos plus petites pour un partage facile."
+            "title": "Optimiseur d'Image",
+            "description": "Réduisez la taille de vos fichiers sans perte de qualité visuelle."
         },
         "encrypt": {
-            "title": "Message Secret",
-            "description": "Verrouiller votre texte avec un code cryptographique."
+            "title": "Chiffrement de Texte",
+            "description": "Verrouillez vos messages confidentiels avec un cryptage AES-256 local."
         },
         "heicToJpg": {
-            "title": "Réparer Photos iPhone",
-            "description": "Transformer les fichiers iPhone en photos universelles."
+            "title": "Convertisseur HEIC iPhone",
+            "description": "Transformez les fichiers Apple HEIC en photos JPEG universelles."
         },
         "mediaConverter": {
-            "title": "Fixateur Vidéo/Audio",
-            "description": "Changer le type de fichier vidéo ou musique."
+            "title": "Outils Multimédia Privés",
+            "description": "Changez de format vidéo ou audio sans quitter votre navigateur."
         },
         "password": {
-            "title": "Créer des Codes Forts",
-            "description": "Générer des codes sécurisés que vous seul connaissez."
+            "title": "Générateur de Mots de Passe",
+            "description": "Créez des clés de sécurité ultra-fortes à haute entropie."
         },
         "pdfMerge": {
-            "title": "Combiner plusieurs Fichiers",
-            "description": "Rassembler plusieurs fichiers en un seul."
+            "title": "Fusion de PDF Sécurisée",
+            "description": "Combinez plusieurs documents PDF en un seul fichier localement."
         },
         "pdfSplit": {
-            "title": "Diviser les Fichiers",
-            "description": "Extraire des pages d'un gros fichier."
+            "title": "Division de PDF Privée",
+            "description": "Extrayez des pages spécifiques de vos documents en toute sécurité."
         },
         "pdfToDocx": {
-            "title": "Fichier vers Word",
-            "description": "Transformer des fichiers en documents éditables."
+            "title": "Conversion PDF vers Word",
+            "description": "Transformez vos PDF en documents .docx éditables localement."
         },
         "pdfToImg": {
-            "title": "Fichier vers Images",
-            "description": "Transformer des pages en fichiers image."
+            "title": "PDF vers Image Raster",
+            "description": "Convertissez chaque page d'un PDF en fichier image haute résolution."
         },
         "redact": {
-            "title": "Cacher Infos Privées",
-            "description": "Couvrir les secrets dans un document PDF."
+            "title": "Caviardage de Documents",
+            "description": "Masquez définitivement les informations sensibles dans vos PDF."
         },
         "svgToPng": {
-            "title": "Réparer les Logos",
-            "description": "Transformer les dessins de designer en images PNG."
+            "title": "Rendu Vectoriel SVG",
+            "description": "Convertissez des dessins SVG en images PNG haute définition."
         },
         "unlockPdf": {
-            "title": "Déverrouiller un Fichier",
-            "description": "Supprimer les mots de passe de vos fichiers."
+            "title": "Déverrouillage PDF Local",
+            "description": "Supprimez les restrictions de mot de passe de vos fichiers PDF."
         },
         "sign": {
-            "title": "Signer un Papier",
-            "description": "Utilisez votre souris ou votre doigt pour dessiner votre signature et la placer sur n'importe quelle page."
+            "title": "Signature Électronique",
+            "description": "Signez numériquement vos documents PDF sans les uploader."
         },
         "stamp": {
-            "title": "Tamponner une Photo",
-            "description": "Ajoutez votre nom ou logo sur vos photos pour les protéger contre le vol."
+            "title": "Filigrane de Propriété",
+            "description": "Ajoutez des tampons ou logos sur vos images pour les protéger."
         },
         "repair": {
-            "title": "Réparer un Fichier Cassé",
-            "description": "Réparer un document corrompu ou affichant une erreur pour pouvoir l'ouvrir à nouveau."
+            "title": "Restauration de PDF",
+            "description": "Reparez les structures de fichiers PDF corrompues localement."
         },
         "numberPages": {
-            "title": "Numéroter chaque Page",
-            "description": "Ajoutez un petit numéro au bas de chaque page pour organiser votre fichier."
+            "title": "Pagination de PDF",
+            "description": "Ajoutez des numéros de pages à vos documents PDF de manière privée."
         },
         "organizePages": {
-            "title": "Organiser les Pages",
-            "description": "Déplacez des pages, supprimez celles inutiles ou ajoutez-en de nouvelles."
+            "title": "Gestion de Pages PDF",
+            "description": "Réordonnez ou supprimez des pages au sein de vos documents."
         },
         "enhancer": {
-            "title": "Améliorateur d'Images",
-            "description": "Éclaircit les photos floues et restaure la netteté avec des filtres professionnels locaux."
+            "title": "Amélioration d'Image local",
+            "description": "Augmentez la clarté et la netteté de vos photos via IA locale."
         },
         "bgRemover": {
-            "title": "Supprimer le Fond",
-            "description": "Isole le sujet et supprime le fond instantanément — 100% local."
+            "title": "Suppression de Fond IA",
+            "description": "Isolez les sujets de vos photos avec un détourage IA 100% local."
         }
     },
     "Tools": {
         "common": {
             "loading": "Préparation de l'Espace de Travail...",
-            "processing": "Travail en cours...",
+            "processing": "Traitement en cours...",
             "success": "Tâche Terminée",
             "error": "Une erreur est survenue",
+            "cancel": "Annuler",
+            "confirm": "Confirmer",
+            "reset": "Réinitialiser",
+            "dropAnywhere": "Déposez n'importe où",
             "backToHome": "Retour aux Outils",
             "settings": "Paramètres",
             "howItWorks": "Comment ça marche",
             "before": "Original",
             "after": "Résultat",
+            "ready": "Prêt",
+            "dropOnly": "Fichiers PDF uniquement",
+            "change": "Changer",
             "specs": {
                 "network": "Réseau",
                 "local": "Local Uniquement",
@@ -343,7 +390,7 @@
                 "privacy": "Confidentialité",
                 "zero": "Zéro Upload"
             },
-            "dropActive": "Déposez ici"
+            "dropActive": "Relâchez maintenant"
         },
         "redact": {
             "title": "Rédacteur PDF",
@@ -384,6 +431,19 @@
             "downloadBtn": "Enregistrer la Copie Déverrouillée",
             "passwordLabel": "Clé de Sécurité",
             "passwordPlaceholder": "Tapez le mot de passe du fichier...",
+            "alreadyUnlocked": "Ce PDF n'est pas protégé par mot de passe. Il est déjà déverrouillé.",
+            "invalidPdf": "PDF invalide ou une erreur inattendue s'est produite.",
+            "incorrectPassword": "Mot de passe incorrect. Veuillez réessayer.",
+            "failedUnlock": "Échec du déverrouillage du PDF. Le fichier pourrait être corrompu ou utiliser un cryptage non pris en charge.",
+            "encryption": "Cryptage",
+            "protected": "Protégé par Mot de Passe",
+            "unlockingBtn": "Déverrouillage...",
+            "startOver": "Recommencer",
+            "privacyHint": "Votre mot de passe ne quitte jamais votre appareil. Tout fonctionne localement dans votre navigateur.",
+            "registryLock": "Verrouillage du Registre",
+            "clearstreamRegistry": "Registre Clearstream",
+            "encryptedRegistry": "Registre Crypté",
+            "transientMemory": "Ce PDF est traité dans un tampon mémoire transitoire. Aucune donnée ne survit à la session.",
             "howItWorks": {
                 "step1": {
                     "title": "Choisissez le PDF",
@@ -407,7 +467,10 @@
             "dropDesc": "Fichiers SVG uniquement",
             "processing": "Conversion en cours...",
             "convertBtn": "Convertir en PNG",
+            "downloadBtn": "Télécharger PNG",
             "resetBtn": "Réinitialiser",
+            "xmlPlaceholder": "Code XML SVG...",
+            "scaled": "Échelle 2×",
             "howItWorks": {
                 "step1": {
                     "title": "Déposez votre SVG",
@@ -432,6 +495,17 @@
             "processing": "Capture des buffers de page...",
             "convertPages": "Convertir en Galerie",
             "initializing": "Calibrage de la caméra virtuelle...",
+            "renderDensity": "Densité de Rendu",
+            "standard": "Standard",
+            "highDef": "Haute Définition",
+            "highDefDesc": "Idéal pour les documents avec de petits textes ou détails fins.",
+            "ultraPrecision": "Ultra Précision",
+            "ultraDesc": "Résolution maximale pour une fidélité parfaite.",
+            "standardDesc": "Optimal pour une lecture rapide et un partage léger.",
+            "convertingPage": "Conversion de la Page {num}...",
+            "inBrowserPdfjs": "Rendu dans le Navigateur",
+            "pdfjsDesc": "Nous utilisons PDF.js pour dessiner vos pages sur un canevas sécurisé.",
+            "newArchive": "Nouvelle Archive",
             "howItWorks": {
                 "step1": {
                     "title": "Chargez le PDF",
@@ -587,6 +661,22 @@
             "dropDesc": "Nous les combinerons en un seul fichier localement.",
             "processing": "Synthèse du catalogue de documents...",
             "mergeButton": "Fusionner les Fichiers PDF",
+            "queueTitle": "File d'attente des Documents",
+            "queueStatus": "{count} Fichiers Prêts",
+            "merging": "Fusion en cours...",
+            "downloadMerged": "Télécharger Fusionné",
+            "clearQueue": "Effacer la File d'attente",
+            "localAssembly": "Assemblage Local",
+            "assemblyDesc": "Tout se passe en toute sécurité sur votre propre écran. Aucune trace persistante n'est laissée sur le disque ou le réseau.",
+            "filesToMerge": "Fichiers à Fusionner",
+            "addMore": "Ajouter Plus",
+            "readyToAppend": "Prêt à Ajouter",
+            "synthesisInProgress": "Synthèse en cours",
+            "synthesisComplete": "Synthèse du Nœud Terminée",
+            "synthesisDesc": "Terminé ! Tout est resté sur votre écran. Votre PDF multi-nœuds est prêt pour l'exportation.",
+            "downloadFinal": "Télécharger le PDF Final",
+            "dropFiles": "Déposez les fichiers ici",
+            "dropOnly": "Fichiers PDF uniquement",
             "howItWorks": {
                 "step1": {
                     "title": "Ajoutez vos fichiers",
@@ -616,6 +706,18 @@
             "dropDesc": "Le PDF sélectionné sera affiché pour signature.",
             "saveBtn": "Enregistrer le Papier Signé",
             "ready": "Signature Prête. Faites-la glisser sur l'aperçu.",
+            "placementTarget": "Cible de Placement",
+            "pageIndicator": "Page {current} sur {total}",
+            "placeBtn": "Placer la Signature",
+            "adjustBtn": "Ajuster le Placement",
+            "workspaceTitle": "Espace de Signature",
+            "finishBtn": "Terminer & Exporter",
+            "hint": "Utilisez les flèches pour changer de page. Faites glisser votre signature à l'endroit précis.",
+            "dragToPosition": "Glisser pour Positionner",
+            "docLoaded": "Document Chargé",
+            "pagesDetected": "{count} Pages Détectées",
+            "sidebarHint": "Utilisez la barre latérale pour dessiner votre signature et la placer sur le document.",
+            "of": "sur",
             "howItWorks": {
                 "step1": {
                     "title": "Déposez le fichier",
@@ -648,6 +750,9 @@
             "downloadBtn": "Télécharger l'Image Tamponnée",
             "dropDesc": "Nous vous aiderons à protéger vos actifs visuels.",
             "saveBtn": "Enregistrer la Photo Tamponnée",
+            "defaultText": "Sécurisé par PrivaFlow",
+            "stampPlaceholder": "TAMPON",
+            "dragHint": "Glisser pour placer",
             "howItWorks": {
                 "step1": {
                     "title": "Chargez l'image",
@@ -675,6 +780,9 @@
             "downloadBtn": "Télécharger le PDF Réparé",
             "dropDesc": "Nous tenterons de restaurer l'intégrité structurelle.",
             "saveBtn": "Enregistrer le Fichier Réparé",
+            "finishBtn": "Terminer la Session",
+            "discardBtn": "Abandonner l'Actif",
+            "successDesc": "La logique VaultNode a réussi à assainir et à reconstruire la structure du PDF.",
             "howItWorks": {
                 "step1": {
                     "title": "Lâchez le cassé",
@@ -704,6 +812,9 @@
             "downloadBtn": "Télécharger le PDF Numéroté",
             "dropDesc": "Nous vous aiderons à organiser votre document.",
             "saveBtn": "Enregistrer le Fichier Numéroté",
+            "pageLabel": "Page {num}",
+            "verifyLayout": "Vérifier la mise en page de la numérotation",
+            "layoutDesc": "Les numéros seront appliqués à chaque page du document.",
             "howItWorks": {
                 "step1": {
                     "title": "Chargez le document",
@@ -732,8 +843,9 @@
             "downloadBtn": "Télécharger le PDF Organisé",
             "pageLabel": "Page",
             "delete": "Supprimer",
-            "dropActive": "Déposer pour Organiser",
+            "dropActive": "Déposer pour Organizer",
             "dropDesc": "Faites glisser pour réordonner, cliquez pour supprimer.",
+            "emptyQueue": "Plus aucune page dans la file d'attente.",
             "saveBtn": "Enregistrer le Nouveau Fichier",
             "howItWorks": {
                 "step1": {
@@ -758,6 +870,19 @@
             "dropDesc": "Nous vous aiderons à extraire les pages dont vous avez besoin.",
             "processing": "Extraction des couches de page...",
             "splitBtn": "Extraire les Pages Sélectionnées",
+            "extractionLogic": "Logique d'Extraction",
+            "pageRange": "Plage de Pages",
+            "rangePlaceholder": "ex: 1-3, 5, 8-10",
+            "rangeHint": "Laissez vide pour extraire toutes les pages sous forme de fichiers individuels.",
+            "extractBtn": "Extraire les Pages",
+            "downloadZip": "Télécharger le Pack ZIP",
+            "downloadPdf": "Télécharger le PDF Extrait",
+            "inBrowserSplit": "Division dans le Navigateur",
+            "splitDesc": "Votre document est analysé et recomposé de manière entièrement privée. Aucune écriture persistante sur le système de fichiers n'est effectuée.",
+            "splitting": "Division...",
+            "splitComplete": "Division Terminée",
+            "zipArchive": "Archive ZIP",
+            "singlePdf": "Un seul PDF",
             "howItWorks": {
                 "step1": {
                     "title": "Choisissez le PDF",
@@ -802,7 +927,8 @@
                     "title": "Exportation JPG",
                     "desc": "Les données sont recodées en un JPG universel et enregistrées sur votre appareil."
                 }
-            }
+            },
+            "errorDesc": "Échec de la conversion. Veuillez vous assurer que le fichier est un HEIC valide."
         },
         "cleanExif": {
             "title": "Nettoyeur de Métadonnées",
@@ -815,6 +941,12 @@
             "cleanBtn": "Démarrer l'Assainissement",
             "downloadBtn": "Enregistrer l'Actif Assaini",
             "downloadClean": "Enregistrer l'Actif Assaini",
+            "securityLevel": "Niveau de Sécurité",
+            "atomic": "ATOMIQUE",
+            "hiddenDetected": "Données Cachées Trouvées",
+            "metadataRemoved": "Métadonnées Supprimées",
+            "original": "Original",
+            "cleaned": "Nettoyé",
             "howItWorks": {
                 "step1": {
                     "title": "Sélectionner Image",
@@ -856,7 +988,29 @@
                     "title": "Stockez-le partout",
                     "desc": "Copiez le bloc crypté. Seule votre clé exacte permettra de le relire un jour."
                 }
-            }
+            },
+            "decryptTitle": "Décrypteur de Texte",
+            "cryptoProtocol": "Protocole Crypto",
+            "encryptionMode": "Mode Cryptage",
+            "decryptionMode": "Mode Décryptage",
+            "securityKey": "Clé de Sécurité",
+            "enterPassword": "Entrer le mot de passe...",
+            "processing": "Traitement...",
+            "lockMessage": "Verrouiller le Message",
+            "unlockMessage": "Déverrouiller le Message",
+            "awaitingNode": "En attente de la synthèse du nœud",
+            "cipherIntegrity": "Intégrité du Chiffre Active",
+            "cryptoApi": "Web Crypto API",
+            "cryptoDesc": "Utilise PBKDF2 pour la dérivation de clé et AES-256-GCM pour le cryptage authentifié. Les clés ne quittent jamais la mémoire du navigateur.",
+            "decryptLabel": "Décrypteur de Texte",
+            "encryptLabel": "Crypteur de Texte",
+            "encryptedBuffer": "Buffer Crypté",
+            "inputLabel": "Nœud Source",
+            "outputLabel": "Buffer Crypté",
+            "sourceNode": "Nœud Source",
+            "sourcePlaceholderLock": "Entrez le texte brut à crypter...",
+            "sourcePlaceholderUnlock": "Entrez la charge à déverrouiller...",
+            "volatileKey": "Clé Mémoire Volatile"
         },
         "blur": {
             "title": "Outil de Flou",
@@ -993,7 +1147,9 @@
             "before": "Mise au point nette",
             "after": "Entièrement obscurci",
             "sharpFocus": "Mise au point nette",
-            "fullyObscured": "Entièrement obscurci"
+            "fullyObscured": "Entièrement obscurci",
+            "lowFid": "Basse Fidélité",
+            "ultraRes": "Ultra Résolution"
         },
         "encrypt": {
             "before": "Texte clair global",

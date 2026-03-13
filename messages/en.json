@@ -12,7 +12,7 @@
         "heroStatLanguages": "Languages",
         "heroStatClient": "Client Side",
         "sectionAllLabel": "All Tools",
-        "sectionAllTitle": "19 Private Tools. Zero Uploads.",
+        "sectionAllTitle": "21 Private Tools. Zero Uploads.",
         "philosophyLabel": "Our Philosophy",
         "philosophyTitle": "Privacy Is Not a Feature. It's a Requirement.",
         "philosophyBody1": "Most online tools work by uploading your files to a server, processing them, and returning the result. That model is inherently broken from a privacy standpoint.",
@@ -42,7 +42,7 @@
             "shield": "Local Shield Active"
         },
         "logoTagline": "Private · Local · Free",
-        "heroStatValue1": "19",
+        "heroStatValue1": "21",
         "heroStatValue2": "0 bytes",
         "heroStatValue3": "4",
         "heroStatValue4": "100%",

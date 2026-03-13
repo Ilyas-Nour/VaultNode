@@ -219,50 +219,45 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 </div>
             );
             case 'enhancer': return (
-                <div className="w-full h-full bg-zinc-950 flex items-center justify-center relative overflow-hidden group">
+                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
                     <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
-                    <div
-                        className={cn(
-                            "absolute inset-0 bg-cover bg-center transition-all duration-[1.5s]",
-                            type === 'before' ? "blur-sm scale-100 grayscale opacity-40" : "blur-0 scale-105"
-                        )}
-                        style={{ backgroundImage: "url('/images/proofs/proof_enhancer.png')" }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
-                    <div className="relative z-10 flex flex-col items-center gap-6">
-                        <div className={cn(
-                            "w-48 h-48 border-4 flex items-center justify-center transition-all duration-700 rounded-2xl",
-                            type === 'before' ? "border-zinc-800 bg-black/40" : "border-amber-500 bg-black/20 shadow-[0_0_50px_rgba(245,158,11,0.3)]"
+                    <div className="relative z-10 w-full h-full flex items-center justify-center">
+                        <div 
+                            className={cn(
+                                "absolute inset-0 bg-no-repeat transition-all duration-[2s]",
+                                type === 'before' ? "blur-sm scale-110 grayscale opacity-40" : "blur-0 scale-[1.15]"
+                            )}
+                            style={{ 
+                                backgroundImage: "url('/images/proofs/proof_enhancer.png')",
+                                backgroundSize: '200% auto',
+                                backgroundPosition: type === 'before' ? '0% 50%' : '100% 50%'
+                            }}
+                        />
+                    </div>
+                    <div className="absolute bottom-6 flex gap-4 z-40">
+                         <div className={cn(
+                            "px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-[0.3em] transition-all",
+                            type === 'before' ? "bg-white text-black border-white" : "bg-amber-500 text-amber-950 border-amber-400"
                         )}>
-                            <Sparkles className={cn("w-16 h-16 transition-all", type === 'after' ? "text-amber-500 shadow-xl" : "text-zinc-700")} />
-                        </div>
-                        <div className={cn(
-                            "px-6 py-2 rounded-full border text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-700 w-48 text-center",
-                            type === 'after' ? "bg-amber-500 border-amber-400 text-amber-950" : "bg-black/50 border-white/10 text-white/50 backdrop-blur-md"
-                        )}>
-                            {type === 'before' ? vpT('enhancer.lowRes') : vpT('enhancer.ultraRes')}
-                        </div>
+                             {type === 'before' ? vpT('enhancer.lowFid') : vpT('enhancer.ultraRes')}
+                         </div>
                     </div>
                 </div>
             );
             case 'bg-remover': return (
-                <div className="w-full h-full bg-zinc-950 flex items-center justify-center relative overflow-hidden group">
+                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
                     <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
-                    {type === 'before' ? (
+                    <div className="relative z-10 w-full h-full flex items-center justify-center">
                         <div 
-                            className="absolute inset-0 bg-cover bg-center transition-all duration-[2s]"
-                            style={{ backgroundImage: "url('/images/proofs/proof_bg_remover.png')" }}
+                            className="absolute inset-0 bg-no-repeat transition-all duration-[2s]"
+                            style={{ 
+                                backgroundImage: "url('/images/proofs/proof_bg_remover.png')",
+                                backgroundSize: '200% auto',
+                                backgroundPosition: type === 'before' ? '0% 50%' : '100% 50%'
+                            }}
                         />
-                    ) : (
-                        <div className="absolute inset-0 bg-black flex items-center justify-center">
-                            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAQYcAP3MhRAxpR+f8YYGC8vH/9H7dEWSkTPHIlSeGmaUQ3m8EBBA9K1/V7DfsAAAAASUVORK5CYII=')" }} />
-                            <div 
-                                className="w-full h-full bg-contain bg-center bg-no-repeat transition-all duration-[1s] scale-105 drop-shadow-[0_0_50px_rgba(255,255,255,0.1)]"
-                                style={{ backgroundImage: "url('/images/proofs/proof_bg_remover.png')", clipPath: 'inset(0 0 0 50%)' }}
-                            />
-                        </div>
-                    )}
-                    <div className="absolute bottom-10 flex gap-4 z-10">
+                    </div>
+                    <div className="absolute bottom-6 flex gap-4 z-40">
                          <div className={cn(
                             "px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-[0.3em] transition-all",
                             type === 'before' ? "bg-white text-black border-white" : "border-emerald-500 text-emerald-500 bg-emerald-500/10 backdrop-blur"
@@ -802,52 +797,6 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     </div>
                 </div>
             );
-            case 'enhancer': return (
-                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
-                    <div className="relative z-10 w-full h-full flex items-center justify-center">
-                        <div
-                            className={cn(
-                                "absolute inset-0 bg-cover bg-center transition-all duration-1000",
-                                type === 'before' ? "blur-sm opacity-60 grayscale" : "blur-0 opacity-100"
-                            )}
-                            style={{ backgroundImage: "url('/images/proofs/proof_enhancer.png')" }}
-                        />
-                        {type === 'after' && (
-                            <div className="relative z-20 flex flex-col items-center gap-4">
-                                <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/50 backdrop-blur-xl rounded-full flex items-center gap-3 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-                                    <Sparkles className="w-4 h-4 text-emerald-400 animate-pulse" />
-                                    <span className="text-[10px] font-black text-emerald-100 uppercase tracking-[0.2em]">{vpT('enhancer.sharpened')}</span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            );
-            case 'bg-remover': return (
-                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
-                    <div className="relative z-10 w-full h-full flex items-center justify-center">
-                        <div
-                            className={cn(
-                                "absolute inset-0 bg-cover bg-center transition-all duration-1000",
-                                type === 'before' ? "opacity-100" : "opacity-0"
-                            )}
-                            style={{ backgroundImage: "url('/images/proofs/proof_bg_remover.png')" }}
-                        />
-                        {type === 'after' && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-checkerboard opacity-20" />
-                        )}
-                        <div
-                            className={cn(
-                                "relative z-30 w-full h-full bg-contain bg-no-repeat bg-center transition-all duration-1000",
-                                type === 'after' ? "scale-110 drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]" : "opacity-0 invisible"
-                            )}
-                            style={{ backgroundImage: "url('/images/proofs/proof_premium_portrait.png')" }}
-                        />
-                    </div>
-                </div>
-            );
             default: return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center">
                     <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
@@ -868,11 +817,17 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 {t(`${toolId.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.after`)}
             </h3>
 
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-hidden">
-                <div className="relative aspect-video bg-black overflow-hidden">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-hidden">
+                <div className={cn(
+                    "relative bg-black overflow-hidden",
+                    (toolId === 'bg-remover' || toolId === 'enhancer') ? "aspect-square max-w-sm mx-auto w-full" : "aspect-video"
+                )}>
                     {render('before')}
                 </div>
-                <div className="relative aspect-video bg-black overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.1)]">
+                <div className={cn(
+                    "relative bg-black overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.1)]",
+                    (toolId === 'bg-remover' || toolId === 'enhancer') ? "aspect-square max-w-sm mx-auto w-full" : "aspect-video"
+                )}>
                     {render('after')}
                 </div>
             </div>

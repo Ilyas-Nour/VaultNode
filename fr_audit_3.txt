@@ -1,0 +1,20 @@
+--- AR ---
+No missing keys.
+Extra keys (2):
+  - VisualProof.bgRemover.edgeRefinement
+  - VisualProof.bgRemover.masking
+
+
+--- ES ---
+No missing keys.
+
+
+--- FR ---
+Missing keys (3):
+  - Tools.svgToPng.downloadBtn
+  - Tools.svgToPng.scaled
+  - Tools.svgToPng.xmlPlaceholder
+Extra keys (1):
+  - Tools.encrypt.volatileKeyStore
+
+

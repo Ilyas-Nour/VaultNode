@@ -121,9 +121,9 @@ export default function PasswordClient() {
                 </div>
             }
             howItWorks={[
-                { title: "Hardware Entropy", description: "Uses window.crypto.getRandomValues for true randomness from your CPU." },
-                { title: "Zero Latency", description: "Generated in microseconds directly on your machine." },
-                { title: "Local Safety", description: "Your passwords never touch our servers. They exist only on your screen." }
+                { title: t('howItWorks.step1.title'), description: t('howItWorks.step1.desc') },
+                { title: t('howItWorks.step2.title'), description: t('howItWorks.step2.desc') },
+                { title: t('howItWorks.step3.title'), description: t('howItWorks.step3.desc') }
             ]}
         >
             <div className="p-12 md:p-20 space-y-12 text-center">
@@ -139,7 +139,7 @@ export default function PasswordClient() {
                         {password || "..."}
                     </motion.div>
                     <div className="mt-4 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                        Click to copy sequence
+                        {t('clickToCopy')}
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@ export default function PasswordClient() {
                         security.bg, security.border, security.color
                     )}>
                         <security.icon className="w-4 h-4" />
-                        <span>Security Level: {security.label}</span>
+                        <span>{t('status', { label: security.label })}</span>
                     </div>
 
                     <Button
