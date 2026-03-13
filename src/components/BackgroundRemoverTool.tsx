@@ -65,7 +65,7 @@ const BackgroundRemoverTool = memo(() => {
         try {
             const blob = await removeBackground(file, {
                 model: modelType,
-                rescale: modelType === 'isnet' ? false : true,
+                rescale: true,
                 output: {
                     format: 'image/png',
                     quality: 1.0
