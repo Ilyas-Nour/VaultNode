@@ -538,6 +538,20 @@
             "outputFormat": "Format de Sortie",
             "howThisWorks": "Comment ça marche",
             "howThisWorksDesc": "Le texte de votre PDF est extrait directement dans le navigateur et enregistré en fichier Word. Rien n'est uploadé.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Déposez le PDF",
+                    "desc": "Chargez le document dont vous voulez extraire le texte."
+                },
+                "step2": {
+                    "title": "Extraction Locale",
+                    "desc": "Le texte de votre PDF est extrait directement dans le navigateur. Rien n'est uploadé."
+                },
+                "step3": {
+                    "title": "Téléchargez Word",
+                    "desc": "Obtenez votre document Word éditable instantanément."
+                }
+            },
             "ready": "Prêt pour le Téléchargement",
             "converting": "Conversion..."
         },

@@ -538,6 +538,20 @@
             "outputFormat": "Formato de Salida",
             "howThisWorks": "Cómo Funciona",
             "howThisWorksDesc": "El texto de tu PDF se extrae directamente en el navegador y se guarda como archivo Word. Nada se sube.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Sube el PDF",
+                    "desc": "Carga el documento del que deseas extraer el texto."
+                },
+                "step2": {
+                    "title": "Extracción Local",
+                    "desc": "El texto de tu PDF se extrae directamente en el navegador. Nada se sube."
+                },
+                "step3": {
+                    "title": "Descarga Word",
+                    "desc": "Obtén tu documento Word editable al instante."
+                }
+            },
             "ready": "Listo para Descargar",
             "converting": "Convirtiendo..."
         },

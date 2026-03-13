@@ -316,7 +316,7 @@ const PdfMergeTool = memo(() => {
                     <div className="w-px h-4 bg-zinc-800" />
                     <div className="flex items-center gap-2.5 text-emerald-500 transition-colors hover:text-emerald-400">
                         <RefreshCw className="w-4 h-4 animate-spin-slow" />
-                        <span className="text-[10px] font-black uppercase tracking-widest italic">{tc('local')}</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest italic">{tc('specs.local')}</span>
                     </div>
                 </div>
             </div>

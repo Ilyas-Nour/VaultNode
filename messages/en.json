@@ -538,6 +538,20 @@
             "outputFormat": "Output Format",
             "howThisWorks": "How This Works",
             "howThisWorksDesc": "Your PDF text is extracted directly in the browser and saved as a Word file. Nothing is uploaded.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your PDF",
+                    "desc": "Load the document you want to extract text from."
+                },
+                "step2": {
+                    "title": "Local Extraction",
+                    "desc": "Your PDF text is extracted directly in the browser. Nothing is uploaded."
+                },
+                "step3": {
+                    "title": "Download Word",
+                    "desc": "Get your editable Word document instantly."
+                }
+            },
             "ready": "Ready to Download",
             "converting": "Converting..."
         },
