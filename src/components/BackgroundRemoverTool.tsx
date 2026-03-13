@@ -17,7 +17,7 @@ import { useTranslations } from 'next-intl';
 import {
     Loader2, Download, RefreshCw,
     UserCircle, FileUp, Shield, Image as ImageIcon,
-    Maximize2, Minimize2, Settings
+    Maximize2, Minimize2, Settings, Undo2, Redo2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
@@ -51,6 +51,13 @@ const BackgroundRemoverTool = memo(() => {
     const [isDrawing, setIsDrawing] = useState(false);
     const [originalImage, setOriginalImage] = useState<HTMLImageElement | null>(null);
     const [isolatedImage, setIsolatedImage] = useState<HTMLImageElement | null>(null);
+    
+    // -- History States --
+    const [undoStack, setUndoStack] = useState<ImageData[]>([]);
+    const [redoStack, setRedoStack] = useState<ImageData[]>([]);
+
+    // -- Cursor Tracking --
+    const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles.length > 0) {
@@ -111,7 +118,46 @@ const BackgroundRemoverTool = memo(() => {
     // -- Refinement Logic --
     const lastPos = useRef<{ x: number, y: number } | null>(null);
 
+    const saveHistory = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        setUndoStack(prev => [...prev, snapshot]);
+        setRedoStack([]); // Clear redo on new action
+    }, []);
+
+    const handleUndo = useCallback(() => {
+        if (undoStack.length === 0 || !canvasRef.current) return;
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const currentSnapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        setRedoStack(prev => [...prev, currentSnapshot]);
+
+        const prevSnapshot = undoStack[undoStack.length - 1];
+        setUndoStack(prev => prev.slice(0, -1));
+        ctx.putImageData(prevSnapshot, 0, 0);
+    }, [undoStack]);
+
+    const handleRedo = useCallback(() => {
+        if (redoStack.length === 0 || !canvasRef.current) return;
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const currentSnapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        setUndoStack(prev => [...prev, currentSnapshot]);
+
+        const nextSnapshot = redoStack[redoStack.length - 1];
+        setRedoStack(prev => prev.slice(0, -1));
+        ctx.putImageData(nextSnapshot, 0, 0);
+    }, [redoStack]);
+
     const startDrawing = (e: React.PointerEvent) => {
+        saveHistory();
         setIsDrawing(true);
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -139,6 +185,9 @@ const BackgroundRemoverTool = memo(() => {
         const rect = canvas.getBoundingClientRect();
         const x = (e.clientX - rect.left) * (canvas.width / rect.width);
         const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+        // Update cursor position
+        setMousePos({ x: e.clientX, y: e.clientY });
 
         ctx.lineWidth = brushSize;
         ctx.lineCap = 'round';
@@ -343,6 +392,26 @@ const BackgroundRemoverTool = memo(() => {
                                     />
                                 </div>
 
+                                <div className="flex items-center justify-between border-t border-zinc-900 pt-4">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-600">{t('history')}</span>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={handleUndo}
+                                            disabled={undoStack.length === 0}
+                                            className="p-2 rounded-lg bg-zinc-900 text-zinc-500 hover:text-white disabled:opacity-30 disabled:hover:text-zinc-500 transition-colors"
+                                        >
+                                            <Undo2 className="w-4 h-4" />
+                                        </button>
+                                        <button
+                                            onClick={handleRedo}
+                                            disabled={redoStack.length === 0}
+                                            className="p-2 rounded-lg bg-zinc-900 text-zinc-500 hover:text-white disabled:opacity-30 disabled:hover:text-zinc-500 transition-colors"
+                                        >
+                                            <Redo2 className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div className="grid grid-cols-2 gap-2 mt-2">
                                     <Button
                                         onClick={handleApplyRefine}
@@ -473,14 +542,32 @@ const BackgroundRemoverTool = memo(() => {
                                     {exportUrl ? (
                                         <div className="w-full h-full relative p-4 group">
                                             {isRefining && !isImmersive ? (
-                                                <canvas
-                                                    ref={canvasRef}
-                                                    onPointerDown={startDrawing}
-                                                    onPointerMove={draw}
-                                                    onPointerUp={stopDrawing}
-                                                    onPointerLeave={stopDrawing}
-                                                    className="w-full h-full object-contain cursor-crosshair touch-none relative z-20"
-                                                />
+                                                <div 
+                                                    className="w-full h-full relative cursor-none"
+                                                    onPointerMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+                                                    onPointerLeave={() => setMousePos({ x: -100, y: -100 })}
+                                                >
+                                                    <canvas
+                                                        ref={canvasRef}
+                                                        onPointerDown={startDrawing}
+                                                        onPointerMove={draw}
+                                                        onPointerUp={stopDrawing}
+                                                        onPointerLeave={stopDrawing}
+                                                        className="w-full h-full object-contain touch-none relative z-20"
+                                                    />
+                                                    {/* Brush Cursor */}
+                                                    <div 
+                                                        className="fixed pointer-events-none z-[100] rounded-full border border-white/50 bg-white/10 backdrop-blur-[2px] shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+                                                        style={{
+                                                            left: mousePos.x,
+                                                            top: mousePos.y,
+                                                            width: brushSize,
+                                                            height: brushSize,
+                                                            transform: 'translate(-50%, -50%)',
+                                                            display: mousePos.x === -100 ? 'none' : 'block'
+                                                        }}
+                                                    />
+                                                </div>
                                             ) : (
                                                 <img
                                                     src={exportUrl}
@@ -546,16 +633,36 @@ const BackgroundRemoverTool = memo(() => {
                         </div>
 
                         {/* Immersive Canvas Workspace */}
-                        <div className="flex-1 relative flex items-center justify-center p-4 md:p-12 overflow-hidden bg-checkerboard">
+                        <div 
+                            className="flex-1 relative flex items-center justify-center p-4 md:p-12 overflow-hidden bg-checkerboard cursor-none"
+                            onPointerMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+                            onPointerLeave={() => setMousePos({ x: -100, y: -100 })}
+                        >
                             {isRefining ? (
-                                <canvas
-                                    ref={canvasRef}
-                                    onPointerDown={startDrawing}
-                                    onPointerMove={draw}
-                                    onPointerUp={stopDrawing}
-                                    onPointerLeave={stopDrawing}
-                                    className="max-w-full max-h-full object-contain cursor-crosshair touch-none shadow-2xl z-10"
-                                />
+                                <>
+                                    <canvas
+                                        ref={canvasRef}
+                                        onPointerDown={startDrawing}
+                                        onPointerMove={draw}
+                                        onPointerUp={stopDrawing}
+                                        onPointerLeave={stopDrawing}
+                                        className="max-w-full max-h-full object-contain touch-none shadow-2xl z-10"
+                                    />
+                                    {/* Brush Cursor (Full Screen) */}
+                                    <div 
+                                        className="fixed pointer-events-none z-[110] rounded-full border border-white/80 bg-white/20 shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+                                        style={{
+                                            left: mousePos.x,
+                                            top: mousePos.y,
+                                            // Scale brush preview based on container scale? 
+                                            // Simple CSS approach for now:
+                                            width: brushSize, 
+                                            height: brushSize,
+                                            transform: 'translate(-50%, -50%)',
+                                            display: mousePos.x === -100 ? 'none' : 'block'
+                                        }}
+                                    />
+                                </>
                             ) : (
                                 <img
                                     src={exportUrl || ''}
@@ -629,6 +736,28 @@ const BackgroundRemoverTool = memo(() => {
                                         <ImageIcon className="w-3.5 h-3.5" />
                                         <span className="text-[10px] font-black uppercase tracking-widest">{t('restore')}</span>
                                     </button>
+                                </div>
+
+                                <div className="space-y-4 border-t border-zinc-900 pt-6">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-zinc-500 italic">{t('history')}</span>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={handleUndo}
+                                                disabled={undoStack.length === 0}
+                                                className="p-3 rounded-xl bg-zinc-900 text-zinc-500 hover:text-white disabled:opacity-30 transition-all active:scale-95"
+                                            >
+                                                <Undo2 className="w-5 h-5" />
+                                            </button>
+                                            <button
+                                                onClick={handleRedo}
+                                                disabled={redoStack.length === 0}
+                                                className="p-3 rounded-xl bg-zinc-900 text-zinc-500 hover:text-white disabled:opacity-30 transition-all active:scale-95"
+                                            >
+                                                <Redo2 className="w-5 h-5" />
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

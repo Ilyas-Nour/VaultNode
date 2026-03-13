@@ -958,6 +958,7 @@
             "fullScreen": "Modo Inmersivo",
             "exitEditor": "Salir del Editor",
             "settings": "Ajustes",
+            "history": "Historial de edición",
             "howItWorks": {
                 "step1": {
                     "title": "Selecciona Foto",

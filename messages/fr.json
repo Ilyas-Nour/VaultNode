@@ -954,6 +954,7 @@
             "fullScreen": "Mode Immersif",
             "exitEditor": "Quitter l'Éditeur",
             "settings": "Paramètres",
+            "history": "Historique des modifications",
             "howItWorks": {
                 "step1": {
                     "title": "Sélectionnez une Photo",
