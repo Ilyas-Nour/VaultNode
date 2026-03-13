@@ -175,16 +175,30 @@ const RedactorTool = memo(() => {
         }
     }, []);
 
-    // 📏 ResizeObserver to accurately measure the workspace
-    // This fixes the "needs F12 to resize" bug by ensuring it renders based on the actual DOM element, not window size on mount.
+    // 📏 Accurate Sizing Engine (Fixes Resize Race Condition)
     useEffect(() => {
         if (!file || !workspaceRef.current) return;
         
+        let hasRendered = false;
+
+        // 1. Initial immediate render based on current layout
+        const rect = workspaceRef.current.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+            renderPdfAsync(file, rect.width, rect.height);
+            hasRendered = true;
+        }
+        
+        // 2. Continuous observation for window snags/resizes
         const resizeObserver = new ResizeObserver(entries => {
             for (let entry of entries) {
                 const { width, height } = entry.contentRect;
                 if (width > 0 && height > 0) {
-                     renderPdfAsync(file, width, height);
+                    // Skip the very first observer trigger if we already rendered immediately
+                    if (hasRendered) {
+                        hasRendered = false;
+                        continue;
+                    }
+                    renderPdfAsync(file, width, height);
                 }
             }
         });
