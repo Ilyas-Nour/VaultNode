@@ -112,7 +112,10 @@ export const useRedactor = () => {
 
             const imgData = canvas.toDataURL("image/jpeg", quality);
             const pdfDoc = await PDFDocument.create();
-            const originalPdf = await PDFDocument.load(arrayBuffer);
+            
+            // Re-fetch buffer to avoid 'Detached ArrayBuffer' error if PDF.js worker took ownership
+            const freshBuffer = await file.arrayBuffer();
+            const originalPdf = await PDFDocument.load(freshBuffer);
             const originalPage = originalPdf.getPages()[0];
             const { width, height } = originalPage.getSize();
 
