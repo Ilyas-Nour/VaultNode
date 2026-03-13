@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 
 const Label = memo(({ text, type }: { text: string; type: 'before' | 'after' }) => (
     <div className={cn(
-        "absolute top-4 left-4 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest z-10",
+        "absolute top-4 start-4 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest z-10",
         type === 'before' ? "bg-white text-black" : "bg-black text-white border border-white/20"
     )}>
         {text}
@@ -196,7 +196,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                             "absolute inset-0 bg-cover bg-center transition-all duration-700",
                             type === 'before' ? "blur-0 scale-100" : "blur-3xl scale-110"
                         )}
-                        style={{ backgroundImage: "url('/images/proofs/proof_portrait_1773347685929.png')" }}
+                        style={{ backgroundImage: "url('/images/proofs/proof_premium_portrait.png')" }}
                     />
                     <div className="relative z-10 flex flex-col items-center gap-6">
                         <div className={cn(
@@ -764,7 +764,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 {t(`${toolId.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.after`)}
             </h3>
 
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-hidden">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-hidden" dir="ltr">
                 <div className="relative aspect-video bg-black overflow-hidden">
                     {render('before')}
                 </div>
