@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PrivaFlow
+### Your Files. Your Rules. Your Device.
 
-## Getting Started
+**PrivaFlow** is a suite of 23 professional, 100% client-side, privacy-centric tools for image, PDF, and media processing. Every operation happens locally in your browser leveraging WebAssembly—no files are ever uploaded, ensuring total confidentiality and industry-leading speed.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### <img src="https://raw.githubusercontent.com/lucide-react/lucide/main/icons/shield-check.svg" width="20" height="20"> Core Value Propositions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Zero Upload Policy**: Your data is processed in the browser's memory. It never touches a server.
+- **WASM Powered**: High-performance processing using WebAssembly (`FFmpeg.wasm`, `pdf-lib`).
+- **Fully Multilingual**: Native support for **English**, **Spanish**, **French**, and **Arabic**.
+- **Privacy-First Design**: No tracking, no cookies, no analytics, 100% open-source transparency.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### <img src="https://raw.githubusercontent.com/lucide-react/lucide/main/icons/layout-grid.svg" width="20" height="20"> The Toolset (23 Professional Tools)
 
-## Learn More
+#### 🔐 Vault (Security & Privacy)
+- **PDF Redactor**: Permanently black out sensitive information with industrial precision.
+- **Exif Cleaner**: Strip hidden metadata (GPS, device info) from photos for safe sharing.
+- **Secure Encryptor**: Lock messages with AES-256 cryptographic vaults.
+- **Password Maker**: Generate cryptographically strong, high-entropy passwords.
+- **File Repair**: Restore structural integrity to damaged or corrupted PDF files.
 
-To learn more about Next.js, take a look at the following resources:
+#### 🖼️ Media (Images & Video)
+- **Background Remover**: IA-powered subject isolation and PNG extraction (100% local).
+- **Image Enhancer**: IA clarification and noise reduction for blurry photos.
+- **iPhone (HEIC) to JPG**: Convert Apple HEIC photos to universal JPEG formats.
+- **Media Converter**: Professional video and audio transcoding via FFmpeg.wasm.
+- **Image Optimizer**: Shrink file size significantly without losing visual quality.
+- **Blur Tool**: Intelligently hide faces or sensitive zones in images.
+- **SVG to PNG**: Render high-definition vector graphics into raster formats.
+- **Watermark**: Protect visual assets with custom localized logos or stamps.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### 📄 Docs (PDF & Documents)
+- **PDF to Word**: intelligent reconstruction of editable Docx files from PDFs.
+- **Word to Text**: Clean extraction of raw data from Word documents.
+- **Text to Word**: Professional Docx synthesis from raw text inputs.
+- **PDF Merger**: Combine multiple documents into a single secure file.
+- **PDF Splitter**: Extract specific pages or ranges with total safety.
+- **Digital Sign**: Draw and place natural signatures securely in the browser.
+- **PDF to Image**: Export document pages as a high-resolution image gallery.
+- **Unlock PDF**: Remove password-based usage restrictions localy.
+- **Number Pages**: Precision pagination for document organization.
+- **Organize Pages**: Effortless reordering and deletion of document pages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### <img src="https://raw.githubusercontent.com/lucide-react/lucide/main/icons/cpu.svg" width="20" height="20"> Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Processing Power**: 
+  - `ffmpeg.wasm` for media transcoding
+  - `pdf-lib` & `pdfjs-dist` for document logic
+  - `@imgly/background-removal` for AI isolation
+  - `browser-image-compression` for pixel optimization
+- **Internationalization**: `next-intl` (Fully localized EN, ES, FR, AR)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+### <img src="https://raw.githubusercontent.com/lucide-react/lucide/main/icons/terminal.svg" width="20" height="20"> Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Ilyas-Nour/VaultNode.git
+   ```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+3. **Spin up the development server**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+### <img src="https://raw.githubusercontent.com/lucide-react/lucide/main/icons/search.svg" width="20" height="20"> Verifiability (Security Audit)
+
+We encourage you to verify our **Zero Upload** claim:
+1. Open your Browser DevTools (**F12**).
+2. Go to the **Network** tab and check **Fetch/XHR**.
+3. Process any file (remove a background, merge a PDF).
+4. You will notice **no data packets** are sent to any external server. Everything stays on your metal.
+
+---
+
+© 2026 PRIVaflow · Built for the Open Web.
