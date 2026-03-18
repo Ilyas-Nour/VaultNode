@@ -50,7 +50,9 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                                                         toolId === 'number-pages' ? 'numberPages.before' :
                                                                             toolId === 'enhancer' ? 'enhancer.before' :
                                                                                 toolId === 'bg-remover' ? 'bgRemover.before' :
-                                                                                    toolId === 'organize-pages' ? 'organizePages.before' : 'before');
+                                                                                     toolId === 'organize-pages' ? 'organizePages.before' : 
+                                                                                        toolId === 'text-to-word' ? 'textToWord.before' :
+                                                                                            toolId === 'word-to-text' ? 'wordToText.before' : 'before');
 
         const afterLabel = vpT(toolId === 'redactor' ? 'redactor.after' :
             toolId === 'clean-exif' ? 'cleanExif.after' :
@@ -71,7 +73,9 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                                                         toolId === 'number-pages' ? 'numberPages.after' :
                                                                             toolId === 'enhancer' ? 'enhancer.after' :
                                                                                 toolId === 'bg-remover' ? 'bgRemover.after' :
-                                                                                    toolId === 'organize-pages' ? 'organizePages.after' : 'after');
+                                                                                     toolId === 'organize-pages' ? 'organizePages.after' : 
+                                                                                        toolId === 'text-to-word' ? 'textToWord.after' :
+                                                                                            toolId === 'word-to-text' ? 'wordToText.after' : 'after');
 
         switch (toolId) {
             case 'redactor': return (
@@ -794,6 +798,75 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+            );
+            case 'text-to-word': return (
+                <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
+                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center gap-8">
+                        {type === 'before' ? (
+                            <div className="w-48 h-64 bg-zinc-900/50 border border-zinc-800 p-6 flex flex-col gap-3 font-mono text-[10px] text-zinc-500 overflow-hidden">
+                                <span>$ cat notes.txt</span>
+                                <div className="space-y-1 mt-2">
+                                    <div className="h-1.5 w-full bg-zinc-800" />
+                                    <div className="h-1.5 w-3/4 bg-zinc-800" />
+                                    <div className="h-1.5 w-full bg-zinc-800" />
+                                    <div className="h-1.5 w-1/2 bg-zinc-800" />
+                                </div>
+                                <div className="mt-auto flex items-center gap-2">
+                                    <FileText className="w-3 h-3" />
+                                    <span className="text-[8px] uppercase font-black uppercase tracking-widest text-zinc-600">Raw Stream</span>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="w-48 h-64 bg-white border border-zinc-200 shadow-2xl p-8 flex flex-col gap-5 overflow-hidden transform rotate-2">
+                                <div className="h-4 w-3/4 bg-zinc-100 rounded-sm mb-4" />
+                                <div className="space-y-3">
+                                    {[100, 90, 95, 80].map((w, i) => (
+                                        <div key={i} className="h-2 bg-zinc-50 rounded-full" style={{ width: `${w}%` }} />
+                                    ))}
+                                </div>
+                                <div className="mt-auto flex items-center justify-between">
+                                    <div className="w-12 h-12 bg-blue-50/50 border border-blue-100 flex items-center justify-center rounded-sm">
+                                        <FileText className="w-6 h-6 text-blue-600 opacity-60" />
+                                    </div>
+                                    <div className="h-6 w-16 bg-blue-600/10 border border-blue-600/20 rounded-full" />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+            case 'word-to-text': return (
+                <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
+                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <div className="relative z-10 w-full h-full flex items-center justify-center">
+                        {type === 'before' ? (
+                            <div className="w-48 h-64 bg-white border border-zinc-200 shadow-2xl p-8 flex flex-col gap-5 overflow-hidden filter grayscale opacity-60">
+                                <div className="h-4 w-3/4 bg-zinc-100 rounded-sm mb-4" />
+                                {[1, 2, 3].map(i => (
+                                    <div key={i} className="h-2 w-full bg-zinc-50 rounded-full" />
+                                ))}
+                                <div className="mt-8 text-zinc-200 font-black text-4xl uppercase tracking-tighter self-center transform -rotate-45 select-none">DOCX</div>
+                            </div>
+                        ) : (
+                            <div className="w-64 h-48 bg-zinc-900/90 border border-emerald-500/30 p-8 flex flex-col gap-4 shadow-[0_0_50px_rgba(16,185,129,0.1)] rounded-lg">
+                                <div className="flex items-center gap-3 border-b border-emerald-500/20 pb-4 mb-2">
+                                    <Sparkles className="w-4 h-4 text-emerald-500" />
+                                    <span className="text-emerald-400 font-mono text-[10px] uppercase font-black tracking-widest">Extracted Content</span>
+                                </div>
+                                <div className="space-y-2">
+                                    {[100, 95, 100, 60].map((w, i) => (
+                                        <div key={i} className="h-1.5 bg-emerald-500/10 rounded-full" style={{ width: `${w}%` }} />
+                                    ))}
+                                </div>
+                                <div className="mt-auto flex justify-between items-center bg-emerald-500/5 px-4 py-2 rounded border border-emerald-500/10">
+                                    <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest line-through decoration-emerald-500/40">binary data</span>
+                                    <span className="text-[9px] text-emerald-400 font-black uppercase tracking-widest font-mono">plain text ✓</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             );

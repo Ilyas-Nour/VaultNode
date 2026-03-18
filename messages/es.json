@@ -72,6 +72,8 @@
             "linkRepair": "Reparar Archivo",
             "linkNumber": "Numerar Páginas",
             "linkOrganize": "Organizar Páginas",
+            "linkTextToWord": "Texto a Word",
+            "linkWordToText": "Word a Texto",
             "linkZeroUpload": "Política de Cero Cargas",
             "linkLocalProtocol": "Protocolo Local",
             "linkEncryption": "Estándares de Cifrado",
@@ -105,6 +107,8 @@
         "repair": "Reparar Archivo Roto",
         "numberPages": "Numerar las Páginas",
         "organizePages": "Organizar Páginas",
+        "textToDocx": "Texto a Word",
+        "docxToText": "Word a Texto",
         "toolDescriptions": {
             "redactor": "Usa el pincel para pintar sobre los secretos.",
             "cleanExif": "Elimina el 'mapa oculto' de tus fotos.",
@@ -126,7 +130,9 @@
             "stamp": "Pon tu nombre o logo encima de las fotos para protegerlas de robos.",
             "repair": "Arregla un documento roto o que da error para que puedas abrirlo de nuevo.",
             "numberPages": "Pon un número pequeño en la parte inferior de cada página para que tu archivo esté organizado.",
-            "organizePages": "Mueve páginas, elimina las que no necesites o añade nuevas a tu archivo."
+            "organizePages": "Mueve páginas, elimina las que no necesites o añade nuevas a tu archivo.",
+            "textToDocx": "Convierte un archivo de texto simple en un documento de Word profesional.",
+            "docxToText": "Extrae todo el escrito de un archivo Word en un archivo de texto simple."
         },
         "beforeAfter": {
             "redactor": {
@@ -212,6 +218,14 @@
             "pdfSplit": {
                 "before": "Un libro de 100 páginas.",
                 "after": "Las 2 páginas exactas que realmente necesitabas."
+            },
+            "textToWord": {
+                "before": "Un archivo .txt plano.",
+                "after": "Un documento .docx formateado."
+            },
+            "wordToText": {
+                "before": "Un documento Word complejo.",
+                "after": "Texto limpio y reutilizable."
             }
         },
         "categories": {
@@ -362,6 +376,16 @@
         "bgRemover": {
             "title": "Quitar Fondo",
             "description": "Aísla el sujeto y elimina el fondo al instante — 100% local."
+        },
+        "textToDocx": {
+            "title": "Texto a Word",
+            "description": "Convierte tus archivos de texto en documentos Word sin salir de tu equipo.",
+            "keywords": "convertir txt a docx local, convertidor texto a word online, procesar word en navegador, extraer texto docx gratis, privacidad word"
+        },
+        "docxToText": {
+            "title": "Word a Texto",
+            "description": "Extrae todo el texto de tus archivos Word localmente.",
+            "keywords": "extraer texto docx local, convertidor word a texto navegador, docx a txt sin subir, leer archivos word gratis, extractor texto word"
         }
     },
     "Tools": {
@@ -1137,14 +1161,78 @@
                     "desc": "Descarga tu sujeto como un archivo PNG transparente de alta calidad al instante."
                 }
             }
+        },
+        "textToDocx": {
+            "title": "Texto a Word",
+            "description": "Convierte texto plano en un documento de Word editable.",
+            "titleHighlight": "Sintetizador de Documentos",
+            "dropTitle": "Suelta tu archivo de texto aquí.",
+            "dropDesc": "Solo archivos .txt",
+            "converting": "Sintetizando estructura de Word...",
+            "downloadBtn": "Guardar Documento Word",
+            "startOver": "Empezar de nuevo",
+            "howItWorks": {
+                "step1": {
+                    "title": "Suelta tu texto",
+                    "desc": "Carga el archivo de texto que deseas convertir en un documento."
+                },
+                "step2": {
+                    "title": "Síntesis Local",
+                    "desc": "Nuestro motor reconstruye tu texto dentro de un flujo de bits nativo .docx."
+                },
+                "step3": {
+                    "title": "Descargar Word",
+                    "desc": "Obtén tu documento de Word profesional al instante."
+                }
+            },
+            "readyToDownload": "Documento Sintetizado",
+            "errorDesc": "La síntesis falló. Asegúrate de que el archivo sea un archivo de texto válido.",
+            "howThisWorks": "Cómo funciona esto",
+            "howThisWorksDesc": "Tu texto se lee y se reconstruye como un documento de Word completamente en tu navegador."
+        },
+        "docxToText": {
+            "title": "Word a Texto",
+            "description": "Extrae texto sin formato de un documento de Word.",
+            "titleHighlight": "Extractor de Texto",
+            "dropTitle": "Suelta tu archivo Word aquí.",
+            "dropDesc": "Solo archivos .docx",
+            "extracting": "Cosechando datos textuales...",
+            "downloadBtn": "Guardar Archivo de Texto",
+            "startOver": "Empezar de nuevo",
+            "howItWorks": {
+                "step1": {
+                    "title": "Suelta tu archivo Word",
+                    "desc": "Carga el documento .docx del que deseas extraer el texto."
+                },
+                "step2": {
+                    "title": "Extracción Local",
+                    "desc": "Nuestro motor analiza la estructura OpenXML para recuperar todas las capas de texto."
+                },
+                "step3": {
+                    "title": "Descargar Texto",
+                    "desc": "Obtén tu archivo de texto limpio al instante."
+                }
+            },
+            "readyToDownload": "Texto Cosechado",
+            "errorDesc": "La extracción falló. Asegúrate de que el archivo sea un documento .docx válido.",
+            "howThisWorks": "Cómo funciona esto",
+            "howThisWorksDesc": "El archivo de Word se descomprime y su contenido XML se analiza para extraer todo el texto localmente."
         }
     },
     "VisualProof": {
         "before": "Fuente Original",
         "after": "Resultado Procesado",
         "label": "Evidencia Visual",
-        "integrity": "Integridad total de bits",
-        "metadata": "Cero metadatos en la nube",
+        "integrity": "Integridad a Nivel de Bit",
+        "metadata": "Sin Fugas de Metadatos",
+        "textToWord": {
+            "before": "Flujo de Texto Plano",
+            "after": "Doc Word Estructurado"
+        },
+        "wordToText": {
+            "before": "Binario No Editable",
+            "after": "Contenido Extraído"
+        },
         "redactor": {
             "before": "Fuente original",
             "after": "Datos saneados"

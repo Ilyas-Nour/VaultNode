@@ -63,6 +63,8 @@ export const Navbar = memo(() => {
                 { title: t('sign'), href: '/tools/sign', desc: t('toolDescriptions.sign') },
                 { title: t('numberPages'), href: '/tools/number-pages', desc: t('toolDescriptions.numberPages') },
                 { title: t('organizePages'), href: '/tools/organize-pages', desc: t('toolDescriptions.organizePages') },
+                { title: t('textToDocx'), href: '/tools/text-to-word', desc: t('toolDescriptions.textToDocx') },
+                { title: t('docxToText'), href: '/tools/word-to-text', desc: t('toolDescriptions.docxToText') },
             ]
         }
     ];
@@ -72,13 +74,15 @@ export const Navbar = memo(() => {
             <nav className="fixed top-0 inset-x-0 z-50 border-b border-white/[0.07]" style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(20px)' }}>
                 <div className="w-full px-5 lg:px-10 h-14 flex items-center justify-between gap-6">
 
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center shrink-0 group" onClick={close}>
-                        <Logo size="sm" />
-                    </Link>
+                    {/* Logo - Left column */}
+                    <div className="flex-1 flex justify-start">
+                        <Link href="/" className="flex items-center shrink-0 group" onClick={close}>
+                            <Logo size="sm" />
+                        </Link>
+                    </div>
 
-                    {/* Desktop nav - center */}
-                    <div ref={dropdownRef} className="hidden lg:flex items-center gap-1 flex-1 justify-center">
+                    {/* Desktop nav - center column */}
+                    <div ref={dropdownRef} className="hidden lg:flex items-center gap-1 flex-none justify-center">
                         {categories.map((cat) => (
                             <div key={cat.id} className="relative">
                                 <button
@@ -135,8 +139,8 @@ export const Navbar = memo(() => {
                         </Link>
                     </div>
 
-                    {/* Right side — privacy badge + mobile menu */}
-                    <div className="flex items-center gap-3 shrink-0">
+                    {/* Right side — privacy badge + mobile menu - Right column */}
+                    <div className="flex-1 flex justify-end items-center gap-3 shrink-0">
 
                         {/* Mobile hamburger */}
                         <button

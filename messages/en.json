@@ -72,6 +72,8 @@
             "linkRepair": "File Repair",
             "linkNumber": "Number Pages",
             "linkOrganize": "Organize",
+            "linkTextToWord": "Text to Word",
+            "linkWordToText": "Word to Text",
             "linkZeroUpload": "Zero Upload Policy",
             "linkLocalProtocol": "Local Protocol",
             "linkEncryption": "Encryption Standards",
@@ -105,6 +107,8 @@
         "repair": "Fix Broken File",
         "numberPages": "Number the Pages",
         "organizePages": "Organize Pages",
+        "textToDocx": "Text to Word",
+        "docxToText": "Word to Text",
         "toolDescriptions": {
             "redactor": "Use the brush to paint over secrets.",
             "cleanExif": "Remove the 'hidden map' from your pictures.",
@@ -126,7 +130,9 @@
             "stamp": "Put your name or your logo on top of your photos to protect them from being stolen.",
             "repair": "Fix a document that is broken or shows an error so you can open it again.",
             "numberPages": "Put a small number on the bottom of every page so your file is organized and easy to read.",
-            "organizePages": "Move pages around, delete the ones you don't need, or add new ones to your file."
+            "organizePages": "Move pages around, delete the ones you don't need, or add new ones to your file.",
+            "textToDocx": "Turn a simple text file into a professional Word document.",
+            "docxToText": "Extract all the writing from a Word file into a simple text file."
         },
         "beforeAfter": {
             "redactor": {
@@ -212,6 +218,14 @@
             "pdfSplit": {
                 "before": "A 100-page book file.",
                 "after": "The exact 2 pages you actually needed."
+            },
+            "textToWord": {
+                "before": "A plain .txt file.",
+                "after": "A formatted .docx document."
+            },
+            "wordToText": {
+                "before": "A complex Word document.",
+                "after": "Clean, reusable text."
             }
         },
         "categories": {
@@ -362,6 +376,16 @@
         "organizePages": {
             "title": "Organize Pages",
             "description": "Move pages around, delete the ones you don't need, or add new ones to your file."
+        },
+        "textToDocx": {
+            "title": "Text to Word",
+            "description": "Turn your text files into Word documents locally.",
+            "keywords": "convert txt to docx local, text to word converter online, browser native text to docx, convert script to word document, privacy first word converter"
+        },
+        "docxToText": {
+            "title": "Word to Text",
+            "description": "Take all the text out of your Word documents locally.",
+            "keywords": "extract text from docx local, word to text converter browser, docx to txt converter no upload, read word file online free, word text extractor"
         }
     },
     "Tools": {
@@ -1137,14 +1161,78 @@
                     "desc": "Download your subject as a high-quality transparent PNG file instantly."
                 }
             }
+        },
+        "textToDocx": {
+            "title": "Text to Word",
+            "description": "Convert plain text into an editable Word document.",
+            "titleHighlight": "Document Synthesizer",
+            "dropTitle": "Drop your text file here.",
+            "dropDesc": ".txt files only",
+            "converting": "Synthesizing Word structure...",
+            "downloadBtn": "Save Word Document",
+            "startOver": "Start Over",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your Text",
+                    "desc": "Load the text file you want to convert into a document."
+                },
+                "step2": {
+                    "title": "Local Synthesis",
+                    "desc": "Our engine reconstructs your text inside a native .docx bitstream."
+                },
+                "step3": {
+                    "title": "Download Word",
+                    "desc": "Get your professional Word document instantly."
+                }
+            },
+            "readyToDownload": "Document Synthesized",
+            "errorDesc": "Synthesis failed. Please ensure the file is a valid text file.",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "Your text is read and reconstructed as a Word document entirely in your browser."
+        },
+        "docxToText": {
+            "title": "Word to Text",
+            "description": "Extract raw text from a Word document.",
+            "titleHighlight": "Text Extractor",
+            "dropTitle": "Drop your Word file here.",
+            "dropDesc": ".docx files only",
+            "extracting": "Harvesting textual data...",
+            "downloadBtn": "Save Text File",
+            "startOver": "Start Over",
+            "howItWorks": {
+                "step1": {
+                    "title": "Drop Your Word File",
+                    "desc": "Load the .docx document you want to extract text from."
+                },
+                "step2": {
+                    "title": "Local Extraction",
+                    "desc": "Our engine parses the OpenXML structure to recover all text layers."
+                },
+                "step3": {
+                    "title": "Download Text",
+                    "desc": "Get your clean text file instantly."
+                }
+            },
+            "readyToDownload": "Text Harvested",
+            "errorDesc": "Extraction failed. Please ensure the file is a valid .docx document.",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "The Word file is decompressed and its XML content is parsed to extract all text locally."
         }
     },
     "VisualProof": {
         "before": "Original Source",
         "after": "Processed Result",
         "label": "Visual Evidence",
-        "integrity": "Full Bit Integrity",
-        "metadata": "Zero Cloud Metadata",
+        "integrity": "Bit-Level Integrity",
+        "metadata": "No Metadata Leakage",
+        "textToWord": {
+            "before": "Plain Text Stream",
+            "after": "Structured Word Doc"
+        },
+        "wordToText": {
+            "before": "Uneditable Binary",
+            "after": "Extracted Content"
+        },
         "redactor": {
             "before": "Original Source",
             "after": "Sanitized Data"

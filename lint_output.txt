@@ -1,0 +1,241 @@
+
+C:\Users\pc\VaultNode\compare_translations.js
+  1:12  error    A `require()` style import is forbidden    @typescript-eslint/no-require-imports
+  2:7   warning  'path' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  2:14  error    A `require()` style import is forbidden    @typescript-eslint/no-require-imports
+
+C:\Users\pc\VaultNode\src\app\[locale]\contact\page.tsx
+  3:27  warning  'memo' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\pc\VaultNode\src\app\[locale]\layout.tsx
+   4:23  warning  'getLocale' is defined but never used     @typescript-eslint/no-unused-vars
+  75:45  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\app\[locale]\privacy-report\page.tsx
+  138:25  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  138:35  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  138:52  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  138:63  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\pc\VaultNode\src\components\BackgroundRemoverTool.tsx
+   20:16  warning  'Minimize2' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   26:28  warning  'Config' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   39:12  warning  'exportBlob' is assigned a value but never used                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+   97:18  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  315:73  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  513:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  573:49  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  668:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\BlurTool.tsx
+   15:40  warning  'useRef' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  247:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  268:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\CleanExifTool.tsx
+   14:46  warning  'useMemo' is defined but never used                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   16:39  warning  'Download' is defined but never used                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+   16:49  warning  'AlertTriangle' is defined but never used                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   16:64  warning  'CheckCircle2' is defined but never used                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   16:78  warning  'Shield' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   20:10  warning  'motion' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   20:18  warning  'AnimatePresence' is defined but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+  202:44  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  202:44  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                jsx-a11y/alt-text
+  210:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  210:45  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                jsx-a11y/alt-text
+
+C:\Users\pc\VaultNode\src\components\DashboardSidebar.tsx
+   9:5   warning  'ChevronRight' is defined but never used     @typescript-eslint/no-unused-vars
+  10:5   warning  'ShieldCheck' is defined but never used      @typescript-eslint/no-unused-vars
+  15:5   warning  'Lock' is defined but never used             @typescript-eslint/no-unused-vars
+  23:10  warning  'motion' is defined but never used           @typescript-eslint/no-unused-vars
+  23:18  warning  'AnimatePresence' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\pc\VaultNode\src\components\DocxToTextTool.tsx
+  67:17  warning  'extractedText' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  92:25  error    Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\EnhancerTool.tsx
+   14:40  warning  'useRef' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   20:5   warning  'Zap' is defined but never used                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  245:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  265:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\HeicToJpgTool.tsx
+   76:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  269:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\ImageCompressor.tsx
+   25:10  warning  'Button' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  277:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  298:45  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\MediaConverterClient.tsx
+  6:10  warning  'useTranslations' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\pc\VaultNode\src\components\MediaConverterTool.tsx
+   19:29  warning  'Download' is defined but never used      @typescript-eslint/no-unused-vars
+  178:71  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\NumberTool.tsx
+    5:20  warning  'Download' is defined but never used         @typescript-eslint/no-unused-vars
+    5:30  warning  'Trash2' is defined but never used           @typescript-eslint/no-unused-vars
+   43:32  warning  'height' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   63:48  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  105:78  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\OrganizeTool.tsx
+    3:57  warning  'useRef' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+    5:10  warning  'FileText' is defined but never used                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+    5:73  warning  'Shield' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   97:48  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  219:53  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\PasswordClient.tsx
+  10:18  warning  'AnimatePresence' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  54:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\pc\VaultNode\src\components\PasswordClient.tsx:54:9
+  52 |
+  53 |     useEffect(() => {
+> 54 |         generatePassword();
+     |         ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  55 |     }, [generatePassword]);
+  56 |
+  57 |     const handleCopy = async () => {  react-hooks/set-state-in-effect
+
+C:\Users\pc\VaultNode\src\components\PasswordTool.tsx
+  77:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\pc\VaultNode\src\components\PasswordTool.tsx:77:9
+  75 |
+  76 |     useEffect(() => {
+> 77 |         generatePassword();
+     |         ^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  78 |     }, [generatePassword]);
+  79 |
+  80 |     const handleCopy = useCallback(async () => {  react-hooks/set-state-in-effect
+
+C:\Users\pc\VaultNode\src\components\PdfMergeTool.tsx
+  94:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\PdfSplitTool.tsx
+   20:5   warning  'Layers' is defined but never used        @typescript-eslint/no-unused-vars
+   20:13  warning  'CheckCircle2' is defined but never used  @typescript-eslint/no-unused-vars
+  120:49  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  136:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\PdfToDocxTool.tsx
+   17:61  warning  'Shield' is defined but never used        @typescript-eslint/no-unused-vars
+   18:10  warning  'Button' is defined but never used        @typescript-eslint/no-unused-vars
+   73:66  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\RedactorTool.tsx
+  27:7  warning  'UI_RENDER_SCALE' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\pc\VaultNode\src\components\RepairTool.tsx
+   5:10  warning  'FileText' is defined but never used      @typescript-eslint/no-unused-vars
+   5:30  warning  'Trash2' is defined but never used        @typescript-eslint/no-unused-vars
+  39:48  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\SignTool.tsx
+   31:11  warning  'pagesContainerRef' is assigned a value but never used                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  195:55  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  455:49  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\StampTool.tsx
+    3:48  warning  'useEffect' is defined but never used                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+    5:48  warning  'Shield' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  223:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\SvgToPngTool.tsx
+  183:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\pc\VaultNode\src\components\TextToDocxTool.tsx
+  78:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\ToolContainer.tsx
+  16:10  warning  'Lock' is defined but never used   @typescript-eslint/no-unused-vars
+  41:11  warning  '_Icon' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\pc\VaultNode\src\components\UnlockPdfTool.tsx
+   51:21   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:65   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:111  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  104:48   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  106:25   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\components\VisualProof.tsx
+    4:98  warning  'Sparkles' is defined but never used                                                                         @typescript-eslint/no-unused-vars
+   27:44  warning  'mode' is assigned a value but never used                                                                    @typescript-eslint/no-unused-vars
+   29:11  warning  'commonT' is assigned a value but never used                                                                 @typescript-eslint/no-unused-vars
+  168:42  warning  'i' is defined but never used                                                                                @typescript-eslint/no-unused-vars
+  402:29  warning  Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
+  564:45  warning  Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
+
+C:\Users\pc\VaultNode\src\components\redactor\RedactorWorkspace.tsx
+  11:126  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  28:12   warning  'renderInfo' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:77   error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\hooks\use-redactor.ts
+   18:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   78:23  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  127:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\pc\VaultNode\src\hooks\useFFmpeg.ts
+   6:7   warning  'CORE_URL' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   7:7   warning  'WASM_URL' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  29:12  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\pc\VaultNode\src\hooks\useFFmpeg.ts:29:12
+  27 |     }, []);
+  28 |
+> 29 |     return {
+     |            ^
+> 30 |         ffmpeg: ffmpegRef.current,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 31 |         loaded,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 32 |         progress,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 33 |         load,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 34 |     };
+     | ^^^^^^ Cannot access ref value during render
+  35 | };
+  36 |  react-hooks/refs
+  30:17  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\pc\VaultNode\src\hooks\useFFmpeg.ts:30:17
+  28 |
+  29 |     return {
+> 30 |         ffmpeg: ffmpegRef.current,
+     |                 ^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  31 |         loaded,
+  32 |         progress,
+  33 |         load,                                                                                                                                                                                                                     react-hooks/refs
+
+C:\Users\pc\VaultNode\src\i18n\request.ts
+  7:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 109 problems (38 errors, 71 warnings)
+

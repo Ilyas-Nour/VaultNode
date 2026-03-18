@@ -4,7 +4,7 @@ import React, { useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Eraser, ImageMinus, KeyRound, Lock, Zap, ImagePlus,
-    Video, FileUp, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight,
+    Video, FileUp, FileText, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight,
     PenTool, Stamp, Wrench, Hash, LayoutGrid, Sparkles, UserCircle
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
@@ -47,6 +47,8 @@ const tools: ToolItem[] = [
     { id: 'sign', category: 'docs', titleKey: 'sign', descKey: 'toolDescriptions.sign', icon: PenTool, href: '/tools/sign' },
     { id: 'number-pages', category: 'docs', titleKey: 'numberPages', descKey: 'toolDescriptions.numberPages', icon: Hash, href: '/tools/number-pages' },
     { id: 'organize-pages', category: 'docs', titleKey: 'organizePages', descKey: 'toolDescriptions.organizePages', icon: LayoutGrid, href: '/tools/organize-pages' },
+    { id: 'text-to-word', category: 'docs', titleKey: 'textToDocx', descKey: 'toolDescriptions.textToDocx', icon: FileUp, href: '/tools/text-to-word' },
+    { id: 'word-to-text', category: 'docs', titleKey: 'docxToText', descKey: 'toolDescriptions.docxToText', icon: FileText, href: '/tools/word-to-text' },
 ];
 
 export const BentoGrid = memo(() => {

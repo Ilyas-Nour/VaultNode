@@ -39,6 +39,8 @@
         "organizePages": "Organiser les Pages",
         "imageEnhancer": "Améliorer l'Image",
         "bgRemover": "Supprimer le Fond",
+        "textToDocx": "Texte vers Word",
+        "docxToText": "Word vers Texte",
         "toolDescriptions": {
             "redactor": "Utilisez le pinceau pour peindre sur les secrets afin de les cacher.",
             "cleanExif": "Supprimez la 'carte cachée' et les données de localisation de vos photos.",
@@ -60,7 +62,9 @@
             "numberPages": "Mettez un petit numéro en bas de chaque page pour organiser votre fichier.",
             "organizePages": "Déplacez, supprimez ou ajoutez des pages à votre document PDF.",
             "enhancer": "Éclaircit les photos floues et restaure la netteté avec des filtres locaux.",
-            "bgRemover": "Isole le sujet et supprime le fond instantanément via IA locale."
+            "bgRemover": "Isole le sujet et supprime le fond instantanément via IA locale.",
+            "textToDocx": "Transformez un simple fichier texte en un document Word professionnel.",
+            "docxToText": "Extrayez tout ce qui est écrit d'un fichier Word dans un fichier texte simple."
         },
         "beforeAfter": {
             "redactor": {
@@ -146,6 +150,14 @@
             "bgRemover": {
                 "before": "Sujet avec fond complexe.",
                 "after": "PNG transparent isolé."
+            },
+            "textToWord": {
+                "before": "Un fichier .txt brut.",
+                "after": "Un document .docx mis en forme."
+            },
+            "wordToText": {
+                "before": "Un document Word complexe.",
+                "after": "Texte propre et réutilisable."
             }
         },
         "categories": {
@@ -231,6 +243,8 @@
             "linkStamp": "Marque de Propriété",
             "linkNumber": "Index de Pages",
             "linkOrganize": "Gestion de Structure",
+            "linkTextToWord": "Texte à Word",
+            "linkWordToText": "Word à Texte",
             "linkBgRemover": "Isolation de Sujet",
             "linkEncryption": "Chiffrement AES",
             "linkEnhancer": "Clarification Visuelle",
@@ -362,6 +376,16 @@
         "bgRemover": {
             "title": "Suppression de Fond IA",
             "description": "Isolez les sujets de vos photos avec un détourage IA 100% local."
+        },
+        "textToDocx": {
+            "title": "Texte vers Word",
+            "description": "Transformez vos fichiers texte en documents Word localement.",
+            "keywords": "convertir txt en docx local, convertisseur texte vers word ligne, extraire texte docx gratuit, lire fichier word local, confidentialité word"
+        },
+        "docxToText": {
+            "title": "Word vers Texte",
+            "description": "Récupérez tout le texte de vos fichiers Word en toute sécurité.",
+            "keywords": "extraire texte docx local, convertisseur word vers texte navigateur, docx vers txt sans uploader, lire fichiers word gratuit, extracteur texte word"
         }
     },
     "Tools": {
@@ -1137,14 +1161,78 @@
                     "desc": "Téléchargez votre sujet en tant que fichier PNG transparent de haute qualité instantanément."
                 }
             }
+        },
+        "textToDocx": {
+            "title": "Texte vers Word",
+            "description": "Convertissez du texte brut en un document Word éditable.",
+            "titleHighlight": "Synthétiseur de Documents",
+            "dropTitle": "Déposez votre fichier texte ici.",
+            "dropDesc": "Fichiers .txt uniquement",
+            "converting": "Synthèse de la structure Word...",
+            "downloadBtn": "Enregistrer le Document Word",
+            "startOver": "Recommencer",
+            "howItWorks": {
+                "step1": {
+                    "title": "Déposez Votre Texte",
+                    "desc": "Chargez le fichier texte que vous souhaitez convertir en document."
+                },
+                "step2": {
+                    "title": "Synthèse Locale",
+                    "desc": "Notre moteur reconstruit votre texte dans un flux binaire .docx natif."
+                },
+                "step3": {
+                    "title": "Téléchargez Word",
+                    "desc": "Obtenez votre document Word professionnel instantanément."
+                }
+            },
+            "readyToDownload": "Document Synthétisé",
+            "errorDesc": "La synthèse a échoué. Veuillez vous assurer que le fichier est un fichier texte valide.",
+            "howThisWorks": "Comment ça marche",
+            "howThisWorksDesc": "Votre texte est lu et reconstruit sous forme de document Word entièrement dans votre navigateur."
+        },
+        "docxToText": {
+            "title": "Word vers Texte",
+            "description": "Extrayez le texte brut d'un document Word.",
+            "titleHighlight": "Extracteur de Texte",
+            "dropTitle": "Déposez votre fichier Word ici.",
+            "dropDesc": "Fichiers .docx uniquement",
+            "extracting": "Récolte des données textuelles...",
+            "downloadBtn": "Enregistrer le Fichier Texte",
+            "startOver": "Recommencer",
+            "howItWorks": {
+                "step1": {
+                    "title": "Déposez Votre Fichier Word",
+                    "desc": "Chargez le document .docx dont vous souhaitez extraire le texte."
+                },
+                "step2": {
+                    "title": "Extraction Locale",
+                    "desc": "Notre moteur analyse la structure OpenXML pour récupérer toutes les couches de texte."
+                },
+                "step3": {
+                    "title": "Téléchargez le Texte",
+                    "desc": "Obtenez votre fichier texte propre instantanément."
+                }
+            },
+            "readyToDownload": "Texte Récolté",
+            "errorDesc": "L'extraction a échoué. Veuillez vous assurer que le fichier est un document .docx valide.",
+            "howThisWorks": "Comment ça marche",
+            "howThisWorksDesc": "Le fichier Word est décompressé et son contenu XML est analysé pour extraire tout le texte localement."
         }
     },
     "VisualProof": {
         "before": "Source Originale",
         "after": "Résultat Traité",
         "label": "Preuve Visuelle",
-        "integrity": "Intégrité totale des bits",
-        "metadata": "Zéro métadonnées cloud",
+        "integrity": "Intégrité au Niveau du Bit",
+        "metadata": "Zéro Fuite de Métadonnées",
+        "textToWord": {
+            "before": "Flux de Texte Brut",
+            "after": "Doc Word Structuré"
+        },
+        "wordToText": {
+            "before": "Binaire Non Éditable",
+            "after": "Contenu Extrait"
+        },
         "redactor": {
             "before": "Source originale",
             "after": "Données assainies"

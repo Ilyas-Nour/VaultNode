@@ -30,6 +30,8 @@ export const Footer = memo(() => {
         { label: t('footer.linkStamp'), href: '/tools/stamp' },
         { label: t('footer.linkNumber'), href: '/tools/number-pages' },
         { label: t('footer.linkOrganize'), href: '/tools/organize-pages' },
+        { label: t('footer.linkTextToWord'), href: '/tools/text-to-word' },
+        { label: t('footer.linkWordToText'), href: '/tools/word-to-text' },
     ];
 
     const quickLinks = [
