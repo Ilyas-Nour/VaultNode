@@ -12,7 +12,7 @@
         "heroStatLanguages": "Languages",
         "heroStatClient": "Client Side",
         "sectionAllLabel": "All Tools",
-        "sectionAllTitle": "21 Private Tools. Zero Uploads.",
+        "sectionAllTitle": "23 Private Tools. Zero Uploads.",
         "philosophyLabel": "Our Philosophy",
         "philosophyTitle": "Privacy Is Not a Feature. It's a Requirement.",
         "philosophyBody1": "Most online tools work by uploading your files to a server, processing them, and returning the result. That model is inherently broken from a privacy standpoint.",
@@ -42,7 +42,7 @@
             "shield": "Local Shield Active"
         },
         "logoTagline": "Private · Local · Free",
-        "heroStatValue1": "21",
+        "heroStatValue1": "23",
         "heroStatValue2": "0 bytes",
         "heroStatValue3": "4",
         "heroStatValue4": "100%",
@@ -294,97 +294,118 @@
             "keywords": "private pdf redactor, unlock pdf offline, heic to jpg local, pdf to word converter, ffmpeg wasm converter, svg to png local, zero upload privacy"
         },
         "blur": {
-            "title": "Hide Faces",
-            "description": "Blur parts of your photo locally."
+            "title": "Blur Faces in Photos | Local Privacy Tool",
+            "description": "Hide faces or sensitive areas in your photos locally in your browser. No data upload, 100% private blur tool.",
+            "keywords": "blur face in photo, hide sensitive info image, local photo blur, browser blur tool, privacy first image editor"
         },
         "cleanExif": {
-            "title": "Clean Photo Info",
-            "description": "Remove hidden map and details."
+            "title": "Remove Photo Metadata | EXIF Cleaner",
+            "description": "Wipe away hidden GPS map and private tracking data from your pictures. 100% local metadata scrubbing.",
+            "keywords": "remove exif data, strip image metadata, hide photo location, private exif cleaner, local image sanitizer"
         },
         "compress": {
-            "title": "Make Photos Smaller",
-            "description": "Shrink photo size for easier sharing."
+            "title": "Compress Images Locally | Pixel Shrinker",
+            "description": "Reduce image file size while preserving high visual fidelity. Local optimization without server uploads.",
+            "keywords": "compress images locally, shrink photo size online, browser image optimizer, no upload image compressor, private photo shrinker"
         },
         "enhancer": {
-            "title": "Image Enhancer",
-            "description": "Improve clarity and sharpness of blurry photos."
+            "title": "AI Image Enhancer | Sharpen Blurry Photos",
+            "description": "Improve clarity and restore sharpness to blurry photos with professional-grade local filters.",
+            "keywords": "sharpen blurry photo online, ai image enhancer local, fix out of focus pictures, browser image sharpener, private photo restoration"
         },
         "bgRemover": {
-            "title": "Background Remover",
-            "description": "Remove backgrounds from images locally."
+            "title": "Remove Background Locally | AI Subject Isolation",
+            "description": "Isolate subjects and remove backgrounds instantly using local AI processing. 100% private PNG extraction.",
+            "keywords": "remove background from image online, local ai background remover, transparent png maker, private subject isolation, browser bg remover"
         },
         "encrypt": {
-            "title": "Secret Message",
-            "description": "Lock your writing with a code."
+            "title": "Secret Message Encryptor | AES-256",
+            "description": "Lock your private writing inside a cryptographic vault using AES-256 local encryption. Secure note maker.",
+            "keywords": "encrypt text online, aes-256 message locker, secure note maker, private text encryption, local cypher tool"
         },
         "heicToJpg": {
-            "title": "Fix iPhone Pictures",
-            "description": "Turn iPhone files into photos that work everywhere."
+            "title": "Convert HEIC to JPG | iPhone Photo Fixer",
+            "description": "Turn Apple iPhone HEIC files into universal JPG photos entirely in your browser. No data transfer.",
+            "keywords": "convert heic to jpg online, heif to jpeg converter local, open iphone photos on pc, private heic converter, browser photo transcoder"
         },
         "mediaConverter": {
-            "title": "Video/Audio Fixer",
-            "description": "Change video or music file types."
+            "title": "Video & Audio Converter | In-Browser Transcoder",
+            "description": "Change video or music file formats locally using FFmpeg.wasm. Privacy-first media conversion.",
+            "keywords": "video converter online no upload, convert mp4 to mp3 local, browser media transcoder, private video fixer, ffmpeg wasm converter"
         },
         "password": {
-            "title": "Create Strong Codes",
-            "description": "Make secure codes only you know."
+            "title": "Secure Password Generator | Entropy Engine",
+            "description": "Generate high-entropy, industrial-grade passwords locally on your device. We never see your codes.",
+            "keywords": "secure password generator, strong code maker, local entropy engine, private password creator, brute-force resistant codes"
         },
         "pdfMerge": {
-            "title": "Combine Many Files",
-            "description": "Put multiple files into one."
+            "title": "Merge PDF Files | Local Document Combiner",
+            "description": "Combine multiple PDF files into one secure document entirely in your browser. Secure local assembly.",
+            "keywords": "merge pdf online free, combine pdf files locally, browser pdf merger, no upload pdf joiner, private document assembly"
         },
         "pdfSplit": {
-            "title": "Split Files",
-            "description": "Take pages out of a large file."
+            "title": "Split & Extract PDF Pages | Local Page Manager",
+            "description": "Securely extract specific pages or ranges from your PDF documents without ever uploading them.",
+            "keywords": "split pdf online, extract pages from pdf local, private pdf splitter, browser document segmenter, no upload pdf extractor"
         },
         "pdfToDocx": {
-            "title": "File to Word",
-            "description": "Turn files into documents you can edit."
+            "title": "Convert PDF to Word | Editable Document Reconstruction",
+            "description": "Turn locked PDF files into editable Word documents locally in your browser. Privacy-first reconstruction.",
+            "keywords": "convert pdf to word online, pdf to docx converter local, edit locked pdf browser, private document restorer, no upload pdf to word"
         },
         "pdfToImg": {
-            "title": "File to Pictures",
-            "description": "Turn pages into image files."
+            "title": "PDF to Image Gallery | High-Res Page Snapshots",
+            "description": "Convert every page of your PDF into high-quality JPG or PNG images locally. Secure page-to-pixel synthesis.",
+            "keywords": "convert pdf to image online, save pdf as jpg local, pdf to gallery converter, private page snapshots, browser document renderer"
         },
         "redact": {
-            "title": "Hide Private Info",
-            "description": "Cover secrets in a document."
+            "title": "Redact PDF Online | Hide Sensitive Information",
+            "description": "Permanently destroy sensitive data and private info in your PDF documents. Industrial-grade local redaction.",
+            "keywords": "redact pdf online free, hide text in pdf permanently, local data sanitization, private document redactor, browser redaction tool"
         },
         "svgToPng": {
-            "title": "Fix Logos",
-            "description": "Turn designer drawings into images."
+            "title": "Convert SVG to PNG | Vector to Raster Tool",
+            "description": "Turn designer vector drawings into high-resolution PNG photos locally. 100% safe rasterization.",
+            "keywords": "convert svg to png online, svg to raster converter local, designer tool vector to photo, private svg renderer, browser logo converter"
         },
         "unlockPdf": {
-            "title": "Unlock a File",
-            "description": "Remove passwords from your files."
+            "title": "Unlock PDF | Remove Password Locally",
+            "description": "Remove password protection from your PDF files instantly. Everything runs locally in your browser.",
+            "keywords": "unlock pdf online free, remove password from pdf local, decrypt pdf browser, private document access, no upload pdf unlocker"
         },
         "sign": {
-            "title": "Sign a Paper",
-            "description": "Use your mouse or finger to draw your signature and place it on any page instantly."
+            "title": "Sign PDF Online | Hand-Drawn Digital Signature",
+            "description": "Draw your signature and place it on any PDF page instantly using local browser rendering.",
+            "keywords": "sign pdf online free, draw signature on document, local electronic sign, private pdf signer, browser signature pad"
         },
         "stamp": {
-            "title": "Stamp a Photo",
-            "description": "Put your name or your logo on top of your photos to protect them from being stolen."
+            "title": "Watermark Photos | Stamp Brand Logo",
+            "description": "Protect your visual assets by adding watermarks or logos locally. High-fidelity pixel-baked stamping.",
+            "keywords": "watermark photos online, add logo to image local, private photo stumper, protect visual assets browser, local branding tool"
         },
         "repair": {
-            "title": "Fix Broken File",
-            "description": "Fix a document that is broken or shows an error so you can open it again."
+            "title": "Fix Broken PDF | Structural Header Recovery",
+            "description": "Attempt to restore structural integrity to corrupted or broken PDF files locally in your browser.",
+            "keywords": "fix broken pdf online, repair corrupted document local, pdf header recovery browser, private file restoration, solve pdf opening error"
         },
         "numberPages": {
-            "title": "Number every Page",
-            "description": "Put a small number on the bottom of every page so your file is organized and easy to read."
+            "title": "Number PDF Pages | Document Pagination Tool",
+            "description": "Add page numbers to your documents for better organization. 100% local, no server involvement.",
+            "keywords": "number pdf pages online, add pagination to pdf local, organic document indexer, private file numbering, browser pdf organizer"
         },
         "organizePages": {
-            "title": "Organize Pages",
-            "description": "Move pages around, delete the ones you don't need, or add new ones to your file."
+            "title": "Organize PDF Pages | Reorder & Delete",
+            "description": "Move, delete, or add pages to your PDF files with a simple local drag-and-drop interface.",
+            "keywords": "organize pdf pages online, reorder pdf pages local, delete pages from pdf browser, private document manager, no upload pdf editor"
         },
         "textToDocx": {
-            "title": "Text to Word",
-            "description": "Turn your text files into Word documents locally.",
+            "title": "Text to Word Converter | Local Document Synthesis",
+            "description": "Turn your plain text files into professional Word documents locally. Privacy-first Word synthesis.",
             "keywords": "convert txt to docx local, text to word converter online, browser native text to docx, convert script to word document, privacy first word converter"
         },
         "docxToText": {
-            "title": "Word to Text",
-            "description": "Take all the text out of your Word documents locally.",
+            "title": "Word to Text Extractor | Direct Text Harvesting",
+            "description": "Extract raw text from Word documents locally in your browser. Clean, reusable text extraction.",
             "keywords": "extract text from docx local, word to text converter browser, docx to txt converter no upload, read word file online free, word text extractor"
         }
     },

@@ -8,7 +8,7 @@
         "heroBadge": "Nouveau : Traitement IA local v4.0",
         "heroExplore": "Explorer le Registre des Outils",
         "heroProof": "Voir la Preuve Visuelle",
-        "heroStatValue1": "21",
+        "heroStatValue1": "23",
         "heroStatTools": "Outils Privés",
         "heroStatValue2": "0",
         "heroStatUploaded": "Octets Uploadés",
@@ -17,7 +17,7 @@
         "heroStatValue4": "100%",
         "heroStatClient": "Côté Client",
         "sectionAllLabel": "SOLUTIONS DE SÉCURITÉ",
-        "sectionAllTitle": "21 Outils Privés. Zéro Upload.",
+        "sectionAllTitle": "23 Outils Privés. Zéro Upload.",
         "launchRedactor": "Masquer les Infos Sensibles",
         "imageCompressor": "Réduire la Photo",
         "pdfMerger": "Fusionner PDF",
@@ -294,97 +294,118 @@
             "keywords": "caviardage pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité"
         },
         "blur": {
-            "title": "Flouter une Photo",
-            "description": "Masquez des visages ou des zones sensibles localement dans votre navigateur."
+            "title": "Flouter des Visages sur Photos | Confidentialité Locale",
+            "description": "Masquez des visages ou des zones sensibles dans vos photos localement dans votre navigateur. Aucun upload de données, outil de flou 100% privé.",
+            "keywords": "flouter visage photo, masquer infos sensibles image, flou photo local, outil flou navigateur, éditeur image confidentialité"
         },
         "cleanExif": {
-            "title": "Nettoyeur de Métadonnées",
-            "description": "Supprimez la localisation et les détails EXIF cachés de vos photos."
+            "title": "Supprimer les Métadonnées Photo | Nettoyeur EXIF",
+            "description": "Effacez la carte GPS cachée et les données de suivi privées de vos photos. Nettoyage des métadonnées 100% local.",
+            "keywords": "supprimer données exif, enlever métadonnées image, masquer localisation photo, nettoyeur exif privé, désinfectant image local"
         },
         "compress": {
-            "title": "Optimiseur d'Image",
-            "description": "Réduisez la taille de vos fichiers sans perte de qualité visuelle."
-        },
-        "encrypt": {
-            "title": "Chiffrement de Texte",
-            "description": "Verrouillez vos messages confidentiels avec un cryptage AES-256 local."
-        },
-        "heicToJpg": {
-            "title": "Convertisseur HEIC iPhone",
-            "description": "Transformez les fichiers Apple HEIC en photos JPEG universelles."
-        },
-        "mediaConverter": {
-            "title": "Outils Multimédia Privés",
-            "description": "Changez de format vidéo ou audio sans quitter votre navigateur."
-        },
-        "password": {
-            "title": "Générateur de Mots de Passe",
-            "description": "Créez des clés de sécurité ultra-fortes à haute entropie."
-        },
-        "pdfMerge": {
-            "title": "Fusion de PDF Sécurisée",
-            "description": "Combinez plusieurs documents PDF en un seul fichier localement."
-        },
-        "pdfSplit": {
-            "title": "Division de PDF Privée",
-            "description": "Extrayez des pages spécifiques de vos documents en toute sécurité."
-        },
-        "pdfToDocx": {
-            "title": "Conversion PDF vers Word",
-            "description": "Transformez vos PDF en documents .docx éditables localement."
-        },
-        "pdfToImg": {
-            "title": "PDF vers Image Raster",
-            "description": "Convertissez chaque page d'un PDF en fichier image haute résolution."
-        },
-        "redact": {
-            "title": "Caviardage de Documents",
-            "description": "Masquez définitivement les informations sensibles dans vos PDF."
-        },
-        "svgToPng": {
-            "title": "Rendu Vectoriel SVG",
-            "description": "Convertissez des dessins SVG en images PNG haute définition."
-        },
-        "unlockPdf": {
-            "title": "Déverrouillage PDF Local",
-            "description": "Supprimez les restrictions de mot de passe de vos fichiers PDF."
-        },
-        "sign": {
-            "title": "Signature Électronique",
-            "description": "Signez numériquement vos documents PDF sans les uploader."
-        },
-        "stamp": {
-            "title": "Filigrane de Propriété",
-            "description": "Ajoutez des tampons ou logos sur vos images pour les protéger."
-        },
-        "repair": {
-            "title": "Restauration de PDF",
-            "description": "Reparez les structures de fichiers PDF corrompues localement."
-        },
-        "numberPages": {
-            "title": "Pagination de PDF",
-            "description": "Ajoutez des numéros de pages à vos documents PDF de manière privée."
-        },
-        "organizePages": {
-            "title": "Gestion de Pages PDF",
-            "description": "Réordonnez ou supprimez des pages au sein de vos documents."
+            "title": "Compresser des Images Localement | Optimiseur de Pixels",
+            "description": "Réduisez la taille de vos fichiers sans perte de qualité visuelle. Optimisation locale sans charges au serveur.",
+            "keywords": "compresser images localement, réduire taille photo ligne, optimiseur image navigateur, compresseur image sans uploader, réducteur photo privé"
         },
         "enhancer": {
-            "title": "Amélioration d'Image local",
-            "description": "Augmentez la clarté et la netteté de vos photos via IA locale."
+            "title": "Amélioration d'Image par IA | Corriger Photos Floues",
+            "description": "Améliorez la clarté et restaurez la netteté des photos floues avec des filtres professionnels de traitement local.",
+            "keywords": "sharpen flou photo ligne, améliorer image ia local, réparer photos floues, affûteur image navigateur, restauration photo privée"
         },
         "bgRemover": {
-            "title": "Suppression de Fond IA",
-            "description": "Isolez les sujets de vos photos avec un détourage IA 100% local."
+            "title": "Supprimer le Fond Localement | Isolation IA du Sujet",
+            "description": "Isolez les sujets et supprimez les fonds instantanément via IA locale. Extraction PNG transparente 100% privée.",
+            "keywords": "supprimer fond image ligne, effaceur fond ia local, créateur png transparent, isolation sujet privé, nettoyeur bg navigateur"
+        },
+        "encrypt": {
+            "title": "Chiffrement de Messages | Coffre-fort AES-256",
+            "description": "Verrouillez vos messages confidentiels dans un coffre-fort cryptographique via AES-256. Créateur de notes sécurisées.",
+            "keywords": "chiffrer texte ligne, bloqueur message aes-256, créateur notes sécurisées, cryptage texte privé, outil chiffrement local"
+        },
+        "heicToJpg": {
+            "title": "Convertir HEIC en JPG | Support Photos iPhone",
+            "description": "Transformez les fichiers Apple HEIC en photos JPEG universelles directement dans votre navigateur. Sans transfert.",
+            "keywords": "convertir heic vers jpg ligne, convertisseur heif jpeg local, ouvrir photos iphone sur pc, convertisseur heic privé, transcodeur photo navigateur"
+        },
+        "mediaConverter": {
+            "title": "Convertisseur Vidéo et Audio | Transcodeur Navigateur",
+            "description": "Changez les formats vidéo ou audio localement via FFmpeg.wasm. Conversion multimédia 100% privée.",
+            "keywords": "convertisseur vidéo ligne sans uploader, convertir mp4 vers mp3 local, transcodeur média navigateur, réparateur vidéo privé, convertisseur ffmpeg wasm"
+        },
+        "password": {
+            "title": "Générateur de Mots de Passe | Moteur d'Entropie",
+            "description": "Générez des mots de passe à haute entropie et de niveau industriel localement. Nous ne voyons jamais vos codes.",
+            "keywords": "générateur mot de passe sécurisé, créateur code fort, moteur entropie local, créateur mot de passe privé, codes résistants force brute"
+        },
+        "pdfMerge": {
+            "title": "Fusionner des PDF | Combinateur de Documents Local",
+            "description": "Combinez plusieurs documents PDF en un seul fichier sécurisé directement dans votre navigateur. Assemblage local.",
+            "keywords": "fusionner pdf ligne gratuit, combiner fichiers pdf localement, assembleur pdf navigateur, fusion pdf sans uploader, jointeur document privé"
+        },
+        "pdfSplit": {
+            "title": "Diviser et Extraire des Pages PDF | Gestionnaire Local",
+            "description": "Extrayez en toute sécurité des pages ou des plages de vos documents PDF sans jamais les uploader vers un serveur.",
+            "keywords": "diviser pdf ligne, extraire pages pdf local, diviseur pdf privé, segmenteur document navigateur, extracteur pdf sans uploader"
+        },
+        "pdfToDocx": {
+            "title": "Convertir PDF en Word | Récupération Éditable",
+            "description": "Transformez vos PDF verrouillés en documents Word éditables localement dans votre navigateur. Confidentialité totale.",
+            "keywords": "convertir pdf vers word ligne, convertisseur pdf docx local, éditer pdf verrouillé navigateur, restaurateur document privé, pdf vers word sans uploader"
+        },
+        "pdfToImg": {
+            "title": "PDF vers Galerie d'Images | Captures Haute Résolution",
+            "description": "Convertissez chaque page d'un PDF en fichiers images JPG ou PNG localement. Synthèse sécurisée page-vers-pixel.",
+            "keywords": "convertir pdf vers image ligne, enregistrer pdf en jpg local, convertisseur pdf galerie, captures page privées, moteur rendu document navigateur"
+        },
+        "redact": {
+            "title": "Caviarder des PDF | Masquer les Infos Sensibles",
+            "description": "Détruisez définitivement les données confidentielles dans vos PDF. Caviardage local industriel garanti.",
+            "keywords": "caviarder pdf ligne gratuit, masquer texte pdf définitivement, assainissement données local, redacteur document privé, outil caviardage navigateur"
+        },
+        "svgToPng": {
+            "title": "Convertir SVG en PNG | De Vectoriel à Raster",
+            "description": "Convertissez des dessins vectoriels en photos PNG haute résolution localement. Pixellisation 100% sécurisée.",
+            "keywords": "convertir svg vers png ligne, convertisseur svg raster local, outil design vecteur photo, moteur rendu svg privé, convertisseur logo navigateur"
+        },
+        "unlockPdf": {
+            "title": "Déverrouiller PDF | Supprimer Mot de Passe Localement",
+            "description": "Supprimez les restrictions de mot de passe de vos fichiers PDF instantanément. Tout s'exécute dans votre navigateur.",
+            "keywords": "déverrouiller pdf ligne gratuit, enlever mot de passe pdf local, décrypter pdf navigateur, accès privé documents, débloqueur pdf sans uploader"
+        },
+        "sign": {
+            "title": "Signer PDF en Ligne | Signature Digitale Naturelle",
+            "description": "Dessinez votre signature et placez-la sur n'importe quelle page PDF via le moteur de rendu local du navigateur.",
+            "keywords": "signer pdf ligne gratuit, dessiner signature document, signature électronique locale, signataire pdf privé, tablette signature navigateur"
+        },
+        "stamp": {
+            "title": "Filigrane sur Photos | Tampon de Propriété",
+            "description": "Protégez vos actifs visuels en ajoutant des filigranes ou logos localement. Application haute fidélité au niveau pixel.",
+            "keywords": "filigrane photos ligne, ajouter logo image local, tampon photo privé, protéger actifs visuels navigateur, outil branding local"
+        },
+        "repair": {
+            "title": "Réparer un PDF Corrompu | Restauration de Structure",
+            "description": "Tentez de restaurer l'intégrité structurelle des fichiers PDF cassés ou corrompus localement dans votre navigateur.",
+            "keywords": "réparer pdf cassé ligne, fixer document corrompu local, récupération entête pdf navigateur, restauration fichier privée, résoudre erreur ouverture pdf"
+        },
+        "numberPages": {
+            "title": "Numéroter les Pages PDF | Pagination de Documents",
+            "description": "Ajoutez des numéros de pages à vos documents pour une meilleure organisation. 100% local, sans serveur.",
+            "keywords": "numéroter pages pdf ligne, ajouter pagination pdf local, indexeur document organique, numérotation fichier privée, organisateur pdf navigateur"
+        },
+        "organizePages": {
+            "title": "Gérer les Pages PDF | Réordonner et Supprimer",
+            "description": "Déplacez, supprimez ou ajoutez des pages à vos PDF avec une interface simple par glisser-déposer locale.",
+            "keywords": "organiser pages pdf ligne, réordonner pages pdf local, supprimer pages pdf navigateur, gestionnaire document privé, éditeur pdf sans uploader"
         },
         "textToDocx": {
-            "title": "Texte vers Word",
-            "description": "Transformez vos fichiers texte en documents Word localement.",
+            "title": "Texte vers Word | Synthèse de Documents Local",
+            "description": "Transformez vos fichiers texte brut en documents Word professionnels localement. Synthèse Word avec confidentialité garantie.",
             "keywords": "convertir txt en docx local, convertisseur texte vers word ligne, extraire texte docx gratuit, lire fichier word local, confidentialité word"
         },
         "docxToText": {
-            "title": "Word vers Texte",
-            "description": "Récupérez tout le texte de vos fichiers Word en toute sécurité.",
+            "title": "Extracteur Word vers Texte | Récupération de Données",
+            "description": "Extrayez le texte brut des documents Word localement dans votre navigateur. Extraction de texte propre et réutilisable.",
             "keywords": "extraire texte docx local, convertisseur word vers texte navigateur, docx vers txt sans uploader, lire fichiers word gratuit, extracteur texte word"
         }
     },
