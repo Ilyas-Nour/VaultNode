@@ -245,6 +245,8 @@
             "linkOrganize": "Gestion de Structure",
             "linkTextToWord": "Texte à Word",
             "linkWordToText": "Word à Texte",
+            "linkPassword": "Générateur de Mots de Passe",
+            "linkEncrypt": "Message Secret",
             "linkBgRemover": "Isolation de Sujet",
             "linkEncryption": "Chiffrement AES",
             "linkEnhancer": "Clarification Visuelle",
@@ -291,7 +293,7 @@
         "default": {
             "title": "PrivaFlow | Vos Fichiers Restent Avec Vous",
             "description": "Tout ce que vous faites reste sur votre propre écran. Des outils sûrs, privés et 100% gratuits pour vos photos et fichiers.",
-            "keywords": "caviardage pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité"
+            "keywords": "caviardage pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité, texte vers word local, word vers texte navigateur"
         },
         "blur": {
             "title": "Flouter des Visages sur Photos | Confidentialité Locale",

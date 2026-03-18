@@ -74,6 +74,8 @@
             "linkOrganize": "Organizar Páginas",
             "linkTextToWord": "Texto a Word",
             "linkWordToText": "Word a Texto",
+            "linkPassword": "Creador de Contrasenas",
+            "linkEncrypt": "Mensaje Secreto",
             "linkZeroUpload": "Política de Cero Cargas",
             "linkLocalProtocol": "Protocolo Local",
             "linkEncryption": "Estándares de Cifrado",
@@ -291,7 +293,7 @@
         "default": {
             "title": "PrivaFlow | Tus Archivos Se Quedan Contigo",
             "description": "Todo lo que haces permanece en tu propia pantalla. Herramientas seguras, privadas y 100% gratuitas para tus fotos y archivos.",
-            "keywords": "redactor pdf privado, desbloquear pdf sin conexión, heic a jpg local, convertidor pdf a word, convertidor ffmpeg wasm, svg a png local, cero subidas privacidad"
+            "keywords": "redactor pdf privado, desbloquear pdf sin conexión, heic a jpg local, convertidor pdf a word, convertidor ffmpeg wasm, svg a png local, cero subidas privacidad, texto a word local, word a texto navegador"
         },
         "blur": {
             "title": "Desenfocar Caras en Fotos | Privacidad Local",
