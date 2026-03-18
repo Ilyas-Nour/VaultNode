@@ -1,3 +1,5 @@
+![PrivaFlow Banner](./public/vaultnode.png)
+
 # PrivaFlow
 ### Your Files. Your Rules. Your Device.
 
