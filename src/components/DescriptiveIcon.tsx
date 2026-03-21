@@ -9,7 +9,8 @@ import {
     FileCode, Scissors, FileStack, Hash, LayoutGrid, Sparkles
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { FileFormat } from '@/lib/tools-data';
+
+type FileFormat = 'pdf' | 'docx' | 'xlsx' | 'pptx' | 'html' | 'text' | 'img' | 'video' | 'camera';
 
 interface DescriptiveIconProps {
     type?: 'conversion' | 'standard' | 'grid' | 'file';
