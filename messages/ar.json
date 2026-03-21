@@ -42,7 +42,7 @@
             "shield": "Local Shield Active"
         },
         "logoTagline": "خاص · محلي · مجاني",
-        "heroStatValue1": "23",
+        "heroStatValue1": "30",
         "heroStatValue2": "0 بايت",
         "heroStatValue3": "4",
         "heroStatValue4": "100%",
@@ -85,7 +85,14 @@
             "linkZeroUpload": "Zero Upload Policy",
             "linkLocalProtocol": "Local Protocol",
             "linkEncryption": "Encryption Standards",
-            "linkOpenArch": "Open Architecture"
+            "linkOpenArch": "Open Architecture",
+            "linkWordToPdf": "وورد إلى PDF",
+            "linkPdfToPpt": "PDF إلى بوربوينت",
+            "linkPptToPdf": "بوربوينت إلى PDF",
+            "linkExcelToPdf": "إكسيل إلى PDF",
+            "linkPdfToExcel": "PDF إلى إكسيل",
+            "linkHtmlToPdf": "HTML إلى PDF",
+            "linkScanToPdf": "مسح إلى PDF"
         },
         "subtitle": "معظم المواقع تسرق ملفاتك. نحن لا نفعل ذلك. كل ما تفعله يبقى داخل شاشتك. خصوصية 100% ومجاني 100%.",
         "launchRedactor": "إخفاء المعلومات الحساسة",
@@ -134,7 +141,14 @@
             "numberPages": "ضع رقماً صغيراً في أسفل كل صفحة حتى يكون ملفك منظماً وسهل القراءة.",
             "organizePages": "قم بتحريك الصفحات، أو حذف الصفحات التي لا تحتاجها، أو إضافة صفحات جديدة إلى ملفك.",
             "textToDocx": "حول ملف نصي بسيط إلى مستند وورد احترافي.",
-            "docxToText": "استخرج كل النصوص من ملف وورد إلى ملف نصي بسيط."
+            "docxToText": "استخرج كل النصوص من ملف وورد إلى ملف نصي بسيط.",
+            "wordToPdf": "تحويل مستند وورد إلى PDF بشكل مثالي.",
+            "pdfToPpt": "تحويل ملف PDF إلى عرض تقديمي مع شرائح.",
+            "pptToPdf": "حفظ العرض التقديمي كملف PDF آمن.",
+            "excelToPdf": "إظهار جدول البيانات بوضوح كملف PDF.",
+            "pdfToExcel": "استخراج الجداول من PDF إلى إكسيل.",
+            "htmlToPdf": "حفظ ملف صفحة ويب كملف PDF نظيف.",
+            "scanToPdf": "استخدم الكاميرا لإنشاء مستند PDF مثالي."
         },
         "beforeAfter": {
             "redactor": {
@@ -166,7 +180,7 @@
                 "after": "صورة خاصة وآمنة للمشاركة مع الغرباء."
             },
             "password": {
-                "before": "كلمة مرور ضعيفة مثل '123456'.",
+                "before": "كلمة مرور ضعيفة مثل '130456'.",
                 "after": "رمز قوي جداً مثل 'Xk9!pQ2m#Lz'."
             },
             "encrypt": {
@@ -228,6 +242,34 @@
             "wordToText": {
                 "before": "مستند وورد معقد.",
                 "after": "نص نظيف وقابل للاستخدام."
+            },
+            "wordToPdf": {
+                "before": "ملف وورد يمكن لأي شخص الكتابة فوقه.",
+                "after": "ملف PDF نظيف واحترافي."
+            },
+            "pdfToPpt": {
+                "before": "ملف PDF تريد عرضه على الشاشة.",
+                "after": "عرض تفاعلي يمكنك النقر خلاله."
+            },
+            "pptToPdf": {
+                "before": "عرض تقديمي تريد قفله.",
+                "after": "ملف PDF آمن يبدو تمامًا مثل الشرائح."
+            },
+            "excelToPdf": {
+                "before": "جدول بيانات فوضوي.",
+                "after": "صفحة PDF مطبوعة بشكل مثالي."
+            },
+            "pdfToExcel": {
+                "before": "بيانات مقفلة داخل ملف PDF.",
+                "after": "جدول بيانات يمكنك تحريره بسهولة."
+            },
+            "htmlToPdf": {
+                "before": "كود الويب يصعب قراءته.",
+                "after": "مستند منسق بشكل جميل."
+            },
+            "scanToPdf": {
+                "before": "مستندات ورقية جالسة على مكتبك الفعلي.",
+                "after": "ملف PDF رقمي عالي الجودة."
             }
         },
         "categories": {
@@ -287,7 +329,14 @@
             "desc": "دليل مرئي لأدواتنا وهي تعمل. كل ما تراه يحدث بخصوصية داخل شاشتك.",
             "viewProof": "رؤية الدليل",
             "openTool": "فتح الأداة"
-        }
+        },
+        "wordToPdf": "وورد إلى PDF",
+        "pdfToPpt": "PDF إلى بوربوينت",
+        "pptToPdf": "بوربوينت إلى PDF",
+        "excelToPdf": "إكسيل إلى PDF",
+        "pdfToExcel": "PDF إلى إكسيل",
+        "htmlToPdf": "HTML إلى PDF",
+        "scanToPdf": "مسح إلى PDF"
     },
     "Metadata": {
         "default": {
@@ -409,6 +458,41 @@
             "title": "استخراج الوورد إلى نص | حصاد مباشر للنصوص",
             "description": "استخرج النص الخام من مستندات الوورد محلياً في متصفحك. استخراج نص نظيف وقابل لإعادة الاستخدام.",
             "keywords": "استخراج نص من وورد محلي, محول وورد إلى نص, docx إلى txt بدون رفع, قراءة ملف وورد أونلاين, مستخرج نصوص وورد"
+        },
+        "wordToPdf": {
+            "title": "وورد إلى PDF | PrivaFlow",
+            "description": "تحويل مستند وورد إلى PDF بشكل مثالي.",
+            "keywords": "وورد إلى pdf, wordToPdf"
+        },
+        "pdfToPpt": {
+            "title": "PDF إلى بوربوينت | PrivaFlow",
+            "description": "تحويل ملف PDF إلى عرض تقديمي مع شرائح.",
+            "keywords": "pdf إلى بوربوينت, pdfToPpt"
+        },
+        "pptToPdf": {
+            "title": "بوربوينت إلى PDF | PrivaFlow",
+            "description": "حفظ العرض التقديمي كملف PDF آمن.",
+            "keywords": "بوربوينت إلى pdf, pptToPdf"
+        },
+        "excelToPdf": {
+            "title": "إكسيل إلى PDF | PrivaFlow",
+            "description": "إظهار جدول البيانات بوضوح كملف PDF.",
+            "keywords": "إكسيل إلى pdf, excelToPdf"
+        },
+        "pdfToExcel": {
+            "title": "PDF إلى إكسيل | PrivaFlow",
+            "description": "استخراج الجداول من PDF إلى إكسيل.",
+            "keywords": "pdf إلى إكسيل, pdfToExcel"
+        },
+        "htmlToPdf": {
+            "title": "HTML إلى PDF | PrivaFlow",
+            "description": "حفظ ملف صفحة ويب كملف PDF نظيف.",
+            "keywords": "html إلى pdf, htmlToPdf"
+        },
+        "scanToPdf": {
+            "title": "مسح إلى PDF | PrivaFlow",
+            "description": "استخدم الكاميرا لإنشاء مستند PDF مثالي.",
+            "keywords": "مسح إلى pdf, scanToPdf"
         }
     },
     "Tools": {
@@ -1240,6 +1324,196 @@
             "errorDesc": "فشل الاستخراج. تأكد من صحة ملف الوورد.",
             "howThisWorks": "كيف يعمل هذا",
             "howThisWorksDesc": "يتم فك ضغط ملف الوورد وتحليل محتوى XML الخاص به لاستخراج كل النصوص محلياً."
+        },
+        "wordToPdf": {
+            "title": "وورد إلى PDF",
+            "description": "تحويل مستند وورد إلى PDF بشكل مثالي.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            }
+        },
+        "pdfToPpt": {
+            "title": "PDF إلى بوربوينت",
+            "description": "تحويل ملف PDF إلى عرض تقديمي مع شرائح.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            }
+        },
+        "pptToPdf": {
+            "title": "بوربوينت إلى PDF",
+            "description": "حفظ العرض التقديمي كملف PDF آمن.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            }
+        },
+        "excelToPdf": {
+            "title": "إكسيل إلى PDF",
+            "description": "إظهار جدول البيانات بوضوح كملف PDF.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            }
+        },
+        "pdfToExcel": {
+            "title": "PDF إلى إكسيل",
+            "description": "استخراج الجداول من PDF إلى إكسيل.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            }
+        },
+        "htmlToPdf": {
+            "title": "HTML إلى PDF",
+            "description": "حفظ ملف صفحة ويب كملف PDF نظيف.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            }
+        },
+        "scanToPdf": {
+            "title": "مسح إلى PDF",
+            "description": "استخدم الكاميرا لإنشاء مستند PDF مثالي.",
+            "dropTitle": "أسقط الملف هنا",
+            "dropDesc": "أو انقر لتصفح مجلداتك",
+            "downloadBtn": "تحميل",
+            "converting": "جاري التحويل...",
+            "readyToDownload": "جاهز للتحميل",
+            "startOver": "ابدأ من جديد",
+            "howThisWorks": "كيف يعمل هذا",
+            "howThisWorksDesc": "100٪ محليا في ذاكرة المتصفح الخاص بك.",
+            "errorDesc": "حدث خطأ أثناء التحويل.",
+            "howItWorks": {
+                "step1": {
+                    "title": "حدد المستند",
+                    "desc": "اختر الملف الذي تريد تحويله."
+                },
+                "step2": {
+                    "title": "معالجة محلية",
+                    "desc": "نقوم بتحويله بالكامل في متصفحك."
+                },
+                "step3": {
+                    "title": "تحميل آمن",
+                    "desc": "قم بتنزيل ملفك الجديد بأمان."
+                }
+            },
+            "compilePdf": "تجميع PDF"
         }
     },
     "VisualProof": {

@@ -1,0 +1,16 @@
+src/components/PdfToExcelTool.tsx(82,37): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/components/PdfToExcelTool.tsx(85,33): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.
+src/components/PdfToPptClient.tsx(5,10): error TS2724: '"lucide-react"' has no exported member named 'InputIcon'. Did you mean 'NutIcon'?
+src/components/PdfToPptTool.tsx(18,19): error TS2724: '"lucide-react"' has no exported member named 'InputIcon'. Did you mean 'NutIcon'?
+src/components/PdfToPptTool.tsx(79,35): error TS2345: Argument of type '{ canvasContext: CanvasRenderingContext2D; viewport: PageViewport; }' is not assignable to parameter of type 'RenderParameters'.
+  Property 'canvas' is missing in type '{ canvasContext: CanvasRenderingContext2D; viewport: PageViewport; }' but required in type 'RenderParameters'.
+src/components/PptToPdfTool.tsx(133,43): error TS2345: Argument of type '{ margin: number; filename: string; image: { type: string; quality: number; }; html2canvas: { scale: number; }; jsPDF: { unit: string; format: string; orientation: string; }; pagebreak: { mode: string; avoid: string; }; }' is not assignable to parameter of type 'Html2PdfOptions'.
+  The types of 'image.type' are incompatible between these types.
+    Type 'string' is not assignable to type '"png" | "webp" | "jpeg" | undefined'.
+src/components/ScanToPdfTool.tsx(89,36): error TS2322: Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'BlobPart'.
+  Type 'Uint8Array<ArrayBufferLike>' is not assignable to type 'ArrayBufferView<ArrayBuffer>'.
+    Types of property 'buffer' are incompatible.
+      Type 'ArrayBufferLike' is not assignable to type 'ArrayBuffer'.
+        Type 'SharedArrayBuffer' is missing the following properties from type 'ArrayBuffer': resizable, resize, detached, transfer, transferToFixedLength

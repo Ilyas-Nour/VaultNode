@@ -34,6 +34,13 @@ export const Footer = memo(() => {
         { label: t('footer.linkWordToText'), href: '/tools/word-to-text' },
         { label: t('footer.linkPassword'), href: '/tools/password' },
         { label: t('footer.linkEncrypt'), href: '/tools/encrypt' },
+        { label: t('footer.linkWordToPdf'), href: '/tools/word-to-pdf' },
+        { label: t('footer.linkPdfToPpt'), href: '/tools/pdf-to-ppt' },
+        { label: t('footer.linkPptToPdf'), href: '/tools/ppt-to-pdf' },
+        { label: t('footer.linkExcelToPdf'), href: '/tools/excel-to-pdf' },
+        { label: t('footer.linkPdfToExcel'), href: '/tools/pdf-to-excel' },
+        { label: t('footer.linkHtmlToPdf'), href: '/tools/html-to-pdf' },
+        { label: t('footer.linkScanToPdf'), href: '/tools/scan-to-pdf' },
     ];
 
     const quickLinks = [

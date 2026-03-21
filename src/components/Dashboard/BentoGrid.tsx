@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Eraser, ImageMinus, KeyRound, Lock, Zap, ImagePlus,
     Video, FileUp, FileText, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight,
-    PenTool, Stamp, Wrench, Hash, LayoutGrid, Sparkles, UserCircle
+    PenTool, Stamp, Wrench, Hash, LayoutGrid, Sparkles, UserCircle,
+    Projector, Table, FileSpreadsheet, Code, Camera
 } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
@@ -49,6 +50,13 @@ const tools: ToolItem[] = [
     { id: 'organize-pages', category: 'docs', titleKey: 'organizePages', descKey: 'toolDescriptions.organizePages', icon: LayoutGrid, href: '/tools/organize-pages' },
     { id: 'text-to-word', category: 'docs', titleKey: 'textToDocx', descKey: 'toolDescriptions.textToDocx', icon: FileUp, href: '/tools/text-to-word' },
     { id: 'word-to-text', category: 'docs', titleKey: 'docxToText', descKey: 'toolDescriptions.docxToText', icon: FileText, href: '/tools/word-to-text' },
+    { id: 'word-to-pdf', category: 'docs', titleKey: 'wordToPdf', descKey: 'toolDescriptions.wordToPdf', icon: FileText, href: '/tools/word-to-pdf' },
+    { id: 'pdf-to-ppt', category: 'docs', titleKey: 'pdfToPpt', descKey: 'toolDescriptions.pdfToPpt', icon: Projector, href: '/tools/pdf-to-ppt' },
+    { id: 'ppt-to-pdf', category: 'docs', titleKey: 'pptToPdf', descKey: 'toolDescriptions.pptToPdf', icon: FileUp, href: '/tools/ppt-to-pdf' },
+    { id: 'excel-to-pdf', category: 'docs', titleKey: 'excelToPdf', descKey: 'toolDescriptions.excelToPdf', icon: Table, href: '/tools/excel-to-pdf' },
+    { id: 'pdf-to-excel', category: 'docs', titleKey: 'pdfToExcel', descKey: 'toolDescriptions.pdfToExcel', icon: FileSpreadsheet, href: '/tools/pdf-to-excel' },
+    { id: 'html-to-pdf', category: 'docs', titleKey: 'htmlToPdf', descKey: 'toolDescriptions.htmlToPdf', icon: Code, href: '/tools/html-to-pdf' },
+    { id: 'scan-to-pdf', category: 'docs', titleKey: 'scanToPdf', descKey: 'toolDescriptions.scanToPdf', icon: Camera, href: '/tools/scan-to-pdf' },
 ];
 
 export const BentoGrid = memo(() => {

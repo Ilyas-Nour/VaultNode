@@ -12,7 +12,7 @@
         "heroStatLanguages": "Languages",
         "heroStatClient": "Client Side",
         "sectionAllLabel": "All Tools",
-        "sectionAllTitle": "23 Private Tools. Zero Uploads.",
+        "sectionAllTitle": "30 Private Tools. Zero Uploads.",
         "philosophyLabel": "Our Philosophy",
         "philosophyTitle": "Privacy Is Not a Feature. It's a Requirement.",
         "philosophyBody1": "Most online tools work by uploading your files to a server, processing them, and returning the result. That model is inherently broken from a privacy standpoint.",
@@ -42,7 +42,7 @@
             "shield": "Local Shield Active"
         },
         "logoTagline": "Private · Local · Free",
-        "heroStatValue1": "23",
+        "heroStatValue1": "30",
         "heroStatValue2": "0 bytes",
         "heroStatValue3": "4",
         "heroStatValue4": "100%",
@@ -85,7 +85,14 @@
             "linkContact": "Contact Us",
             "linkAllTools": "Explore All Tools",
             "copyright": "© 2026 · Zero tracking · Zero uploads · Built for the open web",
-            "footerCredits": "Made with Privacy in Mind"
+            "footerCredits": "Made with Privacy in Mind",
+            "linkWordToPdf": "Word to PDF",
+            "linkPdfToPpt": "PDF to PPT",
+            "linkPptToPdf": "PPT to PDF",
+            "linkExcelToPdf": "Excel to PDF",
+            "linkPdfToExcel": "PDF to Excel",
+            "linkHtmlToPdf": "HTML to PDF",
+            "linkScanToPdf": "Scan to PDF"
         },
         "subtitle": "Most websites steal your files. We don't. Everything you do stays inside your screen. It's 100% private and 100% free.",
         "launchRedactor": "Hide Sensitive Info",
@@ -134,7 +141,14 @@
             "numberPages": "Put a small number on the bottom of every page so your file is organized and easy to read.",
             "organizePages": "Move pages around, delete the ones you don't need, or add new ones to your file.",
             "textToDocx": "Turn a simple text file into a professional Word document.",
-            "docxToText": "Extract all the writing from a Word file into a simple text file."
+            "docxToText": "Extract all the writing from a Word file into a simple text file.",
+            "wordToPdf": "Change a Word document perfectly into a PDF.",
+            "pdfToPpt": "Turn your PDF into a presentation with slides.",
+            "pptToPdf": "Save your presentation as a secure PDF.",
+            "excelToPdf": "Show your spreadsheet clearly as a PDF.",
+            "pdfToExcel": "Pull the tables out of a PDF into Excel.",
+            "htmlToPdf": "Save a web page file as a clean PDF.",
+            "scanToPdf": "Use your camera to make a perfect PDF document."
         },
         "beforeAfter": {
             "redactor": {
@@ -166,7 +180,7 @@
                 "after": "A photo that is safe to share with strangers."
             },
             "password": {
-                "before": "A weak password like '123456'.",
+                "before": "A weak password like '130456'.",
                 "after": "A super-strong code like 'Xk9!pQ2m#Lz'."
             },
             "encrypt": {
@@ -228,6 +242,34 @@
             "wordToText": {
                 "before": "A complex Word document.",
                 "after": "Clean, reusable text."
+            },
+            "wordToPdf": {
+                "before": "A Word file that anyone can type over.",
+                "after": "A clean, professional PDF ready to share."
+            },
+            "pdfToPpt": {
+                "before": "A PDF file you want to present on screen.",
+                "after": "A slideshow you can click through."
+            },
+            "pptToPdf": {
+                "before": "A presentation you want to lock.",
+                "after": "A secure PDF that looks exactly like your slides."
+            },
+            "excelToPdf": {
+                "before": "A messy spreadsheet with random numbers.",
+                "after": "A perfectly printed PDF page."
+            },
+            "pdfToExcel": {
+                "before": "Data locked inside a PDF file.",
+                "after": "A spreadsheet you can easily edit and calculate."
+            },
+            "htmlToPdf": {
+                "before": "Web code that is hard to read.",
+                "after": "A beautifully formatted document."
+            },
+            "scanToPdf": {
+                "before": "Paper documents sitting on your physical desk.",
+                "after": "A high-quality digital PDF on your machine."
             }
         },
         "categories": {
@@ -287,7 +329,14 @@
             "desc": "Visual proof of our tools in action. Everything you see happens privately inside your screen.",
             "viewProof": "View Proof",
             "openTool": "Open Tool"
-        }
+        },
+        "wordToPdf": "Word to PDF",
+        "pdfToPpt": "PDF to PPT",
+        "pptToPdf": "PPT to PDF",
+        "excelToPdf": "Excel to PDF",
+        "pdfToExcel": "PDF to Excel",
+        "htmlToPdf": "HTML to PDF",
+        "scanToPdf": "Scan to PDF"
     },
     "Metadata": {
         "default": {
@@ -409,6 +458,41 @@
             "title": "Word to Text Extractor | Direct Text Harvesting",
             "description": "Extract raw text from Word documents locally in your browser. Clean, reusable text extraction.",
             "keywords": "extract text from docx local, word to text converter browser, docx to txt converter no upload, read word file online free, word text extractor"
+        },
+        "wordToPdf": {
+            "title": "Word to PDF | PrivaFlow",
+            "description": "Change a Word document perfectly into a PDF.",
+            "keywords": "word to pdf, wordToPdf"
+        },
+        "pdfToPpt": {
+            "title": "PDF to PPT | PrivaFlow",
+            "description": "Turn your PDF into a presentation with slides.",
+            "keywords": "pdf to ppt, pdfToPpt"
+        },
+        "pptToPdf": {
+            "title": "PPT to PDF | PrivaFlow",
+            "description": "Save your presentation as a secure PDF.",
+            "keywords": "ppt to pdf, pptToPdf"
+        },
+        "excelToPdf": {
+            "title": "Excel to PDF | PrivaFlow",
+            "description": "Show your spreadsheet clearly as a PDF.",
+            "keywords": "excel to pdf, excelToPdf"
+        },
+        "pdfToExcel": {
+            "title": "PDF to Excel | PrivaFlow",
+            "description": "Pull the tables out of a PDF into Excel.",
+            "keywords": "pdf to excel, pdfToExcel"
+        },
+        "htmlToPdf": {
+            "title": "HTML to PDF | PrivaFlow",
+            "description": "Save a web page file as a clean PDF.",
+            "keywords": "html to pdf, htmlToPdf"
+        },
+        "scanToPdf": {
+            "title": "Scan to PDF | PrivaFlow",
+            "description": "Use your camera to make a perfect PDF document.",
+            "keywords": "scan to pdf, scanToPdf"
         }
     },
     "Tools": {
@@ -1240,6 +1324,196 @@
             "errorDesc": "Extraction failed. Please ensure the file is a valid .docx document.",
             "howThisWorks": "How This Works",
             "howThisWorksDesc": "The Word file is decompressed and its XML content is parsed to extract all text locally."
+        },
+        "wordToPdf": {
+            "title": "Word to PDF",
+            "description": "Change a Word document perfectly into a PDF.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            }
+        },
+        "pdfToPpt": {
+            "title": "PDF to PPT",
+            "description": "Turn your PDF into a presentation with slides.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            }
+        },
+        "pptToPdf": {
+            "title": "PPT to PDF",
+            "description": "Save your presentation as a secure PDF.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            }
+        },
+        "excelToPdf": {
+            "title": "Excel to PDF",
+            "description": "Show your spreadsheet clearly as a PDF.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            }
+        },
+        "pdfToExcel": {
+            "title": "PDF to Excel",
+            "description": "Pull the tables out of a PDF into Excel.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            }
+        },
+        "htmlToPdf": {
+            "title": "HTML to PDF",
+            "description": "Save a web page file as a clean PDF.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            }
+        },
+        "scanToPdf": {
+            "title": "Scan to PDF",
+            "description": "Use your camera to make a perfect PDF document.",
+            "dropTitle": "Drop File Here",
+            "dropDesc": "or click to browse your folders",
+            "downloadBtn": "Download",
+            "converting": "Converting...",
+            "readyToDownload": "Ready to Download",
+            "startOver": "Start Over",
+            "howThisWorks": "How This Works",
+            "howThisWorksDesc": "100% locally in your browser memory.",
+            "errorDesc": "An error occurred during conversion.",
+            "howItWorks": {
+                "step1": {
+                    "title": "Select Document",
+                    "desc": "Choose the file you want to convert."
+                },
+                "step2": {
+                    "title": "Process Locally",
+                    "desc": "We convert it entirely in your browser."
+                },
+                "step3": {
+                    "title": "Download Safely",
+                    "desc": "Download your new file securely."
+                }
+            },
+            "compilePdf": "Compile PDF"
         }
     },
     "VisualProof": {
