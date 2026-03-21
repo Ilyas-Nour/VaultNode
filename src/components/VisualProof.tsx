@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo } from 'react';
-import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code, CheckCircle2, Eye, Sparkles, Presentation, Table } from 'lucide-react';
+import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code, CheckCircle2, Eye, Sparkles, Presentation, Table, PenTool } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
@@ -103,6 +103,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             'html-to-pdf': 'htmlToPdf',
             'scan-to-pdf': 'scanToPdf',
             'compress': 'compress',
+            'image-to-text': 'imageToText',
         };
 
         const key = LABEL_MAP[toolId] || 'default';
@@ -1016,6 +1017,47 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                             <Shield className="w-2.5 h-2.5 text-emerald-500" />
                                             <span>Sovereign Output</span>
                                         </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            case 'image-to-text':
+                return (
+                    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
+                        <Label text={finalLabel} type={type} />
+                        <div className="relative z-10 w-full h-full max-w-lg aspect-video flex items-center justify-center">
+                            {type === 'before' ? (
+                                <div className="w-[60%] h-full bg-[#fdfaf1] border border-zinc-200 shadow-2xl p-8 flex flex-col gap-4 overflow-hidden relative">
+                                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[repeating-linear-gradient(transparent,transparent_20px,#000_21px)]" />
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center">
+                                            <PenTool className="w-4 h-4 text-zinc-400" />
+                                        </div>
+                                        <div className="h-2 w-24 bg-zinc-200 rounded-full" />
+                                    </div>
+                                    <svg viewBox="0 0 200 100" className="w-full h-auto opacity-40">
+                                        <path d="M10 20 Q 30 10 50 25 T 90 20 T 130 30 T 180 15" stroke="currentColor" fill="none" strokeWidth="1.5" className="text-zinc-800" />
+                                        <path d="M15 45 Q 40 35 65 50 T 115 40 T 170 55" stroke="currentColor" fill="none" strokeWidth="1.2" className="text-zinc-700" />
+                                        <path d="M20 75 Q 50 65 80 80 T 140 70 T 185 85" stroke="currentColor" fill="none" strokeWidth="1.8" className="text-zinc-900" />
+                                    </svg>
+                                </div>
+                            ) : (
+                                <div className="w-full h-[70%] bg-zinc-900 border border-emerald-500/20 p-8 flex flex-col gap-4 shadow-[0_0_80px_rgba(16,185,129,0.05)] rounded-sm">
+                                    <div className="flex items-center justify-between border-b border-white/5 pb-4 text-white/90">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-6 h-6 rounded bg-emerald-500/10 flex items-center justify-center">
+                                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                                            </div>
+                                            <span className="text-emerald-500 font-black uppercase tracking-[0.2em] text-[10px]">OCR Success</span>
+                                        </div>
+                                        <span className="text-zinc-600 font-mono text-[9px]">Confidence: 99.4%</span>
+                                    </div>
+                                    <div className="space-y-3 font-mono text-[11px] text-zinc-300">
+                                        <p>&gt; Reconstructing semantic fragments...</p>
+                                        <p className="text-emerald-500/80">The quick brown fox jumps over the lazy dog.</p>
+                                        <div className="h-1.5 w-1/2 bg-zinc-800 rounded-full" />
                                     </div>
                                 </div>
                             )}

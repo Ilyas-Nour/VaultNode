@@ -68,7 +68,7 @@
         "heroStatLanguages": "Idiomas",
         "heroStatClient": "Lado del Cliente",
         "sectionAllLabel": "Todas las Herramientas",
-        "sectionAllTitle": "30 Herramientas Privadas. Cero Cargas.",
+        "sectionAllTitle": "31 Herramientas Privadas. Cero Cargas.",
         "philosophyLabel": "Nuestra Filosofía",
         "philosophyTitle": "La Privacidad No Es Una Característica. Es Un Requisito.",
         "philosophyBody1": "La mayoría de las herramientas en línea funcionan subiendo tus archivos a un servidor, procesándolos y devolviendo el resultado. Ese modelo está inherentemente roto desde el punto de vista de la privacidad.",
@@ -182,6 +182,7 @@
         "organizePages": "ORGANIZAR PDF",
         "textToDocx": "TEXTO A WORD",
         "docxToText": "WORD A TEXTO",
+        "imageToText": "IMAGEN A TEXTO",
         "toolDescriptions": {
             "redactor": "Cubre permanentemente datos sensibles para ocultarlos de tus documentos.",
             "cleanExif": "Elimina metadatos ocultos y etiquetas de ubicación de tus fotos para total privacidad.",
@@ -212,7 +213,8 @@
             "excelToPdf": "Haz que las hojas de cálculo EXCEL sean fáciles de leer convirtiéndolas a PDF.",
             "pdfToExcel": "Extrae datos directamente de PDFs a hojas de cálculo Excel en segundos.",
             "htmlToPdf": "Convierte páginas web o fragmentos HTML en documentos PDF limpios y archivados.",
-            "scanToPdf": "Usa tu cámara para capturar y agrupar documentos físicos en un PDF digital."
+            "scanToPdf": "Usa tu cámara para capturar y agrupar documentos físicos en un PDF digital.",
+            "imageToText": "Lee documentos impresos y notas para convertirlos en texto digital automáticamente."
         },
         "beforeAfter": {
             "redactor": {
@@ -334,6 +336,10 @@
             "scanToPdf": {
                 "before": "Documentos de papel en tu escritorio físico.",
                 "after": "Un PDF digital de alta calidad."
+            },
+            "imageToText": {
+                "before": "Notas desordenadas en papel.",
+                "after": "Un archivo de texto digital perfecto."
             }
         },
         "categories": {
@@ -557,6 +563,11 @@
             "title": "Escanear a PDF | Captura de Imágenes Local Optimizada para Móvil",
             "description": "Captura imágenes desde la cámara de tu dispositivo y agrúpalas en PDFs de alta calidad. Orden secuencial preservado con cero cargas.",
             "keywords": "escanear a pdf online, cámara a pdf local, escaneado móvil a pdf privado, escáner de documentos nativo del navegador, escáner móvil seguro"
+        },
+        "imageToText": {
+            "title": "Escritura a Texto | Escaneo OCR Profesional con IA",
+            "description": "Convierte notas escritas a mano en texto digital con precisión industrial. Motor OCR 100% local compatible con cámara y archivos. Privacidad total sin carga.",
+            "keywords": "convertir escritura a texto online, ocr escritura a mano local, pasar notas a texto digital, escáner ocr privado, lector de escritura en navegador, extraer texto de imagen offline"
         }
     },
     "Tools": {
@@ -1578,6 +1589,40 @@
                 }
             },
             "compilePdf": "Compilar PDF"
+        },
+        "imageToText": {
+            "title": "Imagen a Texto",
+            "description": "OCR local privado para extraer texto impreso de imágenes.",
+            "dropHint": "Arrastra una imagen de documento o haz clic para subir",
+            "orUseCamera": "o usa la cámara de la bóveda",
+            "openCamera": "Abrir Cámara",
+            "extractBtn": "Extraer Texto",
+            "downloadBtn": "Descargar .txt",
+            "copyBtn": "Copiar Texto",
+            "startOver": "Empezar de Nuevo",
+            "processing": "Analizando...",
+            "enhancing": "Mejorando Imagen...",
+            "enhancingDesc": "Aplicando filtros neuronales para mayor claridad.",
+            "awaitingExtraction": "Esperando Extracción",
+            "sourceInput": "Entrada de Origen",
+            "digitalArchive": "Archivo Digital",
+            "ocrSuccess": "OCR Exitoso",
+            "privacyNote": "Las imágenes se procesan localmente usando Tesseract.js. Los datos de los píxeles nunca salen de tu navegador.",
+            "operationMode": "Modo de Operación",
+            "howItWorks": {
+                "step1": {
+                    "title": "Capturar o Subir",
+                    "desc": "Toma una foto de tu documento o sube un archivo de imagen existente."
+                },
+                "step2": {
+                    "title": "Extracción por IA",
+                    "desc": "Nuestro motor OCR local analiza la estructura de la imagen y reconoce los patrones de texto impreso."
+                },
+                "step3": {
+                    "title": "Exportar Texto Digital",
+                    "desc": "Copia los resultados al portapapeles o descárgalos como un archivo de texto limpio."
+                }
+            }
         }
     },
     "VisualProof": {
@@ -1724,6 +1769,10 @@
             "after": "Sujeto Aislado",
             "raw": "Crudo",
             "purified": "Purificado"
+        },
+        "imageToText": {
+            "before": "Nota Manuscrita",
+            "after": "Archivo Digital"
         }
     },
     "SecurityProof": {

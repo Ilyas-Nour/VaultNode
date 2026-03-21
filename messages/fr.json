@@ -73,7 +73,7 @@
         "heroStatValue4": "100%",
         "heroStatClient": "Côté Client",
         "sectionAllLabel": "SOLUTIONS DE SÉCURITÉ",
-        "sectionAllTitle": "30 Outils Privés. Zéro Upload.",
+        "sectionAllTitle": "31 Outils Privés. Zéro Upload.",
         "launchRedactor": "CAVIARDER PDF",
         "imageCompressor": "COMPRESSER PDF",
         "pdfMerger": "FUSIONNER PDF",
@@ -97,6 +97,7 @@
         "bgRemover": "SUPPRIMER FOND",
         "textToDocx": "TEXTE EN WORD",
         "docxToText": "WORD EN TEXTE",
+        "imageToText": "IMAGE EN TEXTE",
         "toolDescriptions": {
             "redactor": "Utilisez le pinceau pour peindre sur les secrets afin de les cacher.",
             "cleanExif": "Supprimez la 'carte cachée' et les données de localisation de vos photos.",
@@ -127,7 +128,8 @@
             "excelToPdf": "Affichez clairement votre feuille de calcul sous forme de PDF.",
             "pdfToExcel": "Extrayez les tableaux d'un PDF vers Excel.",
             "htmlToPdf": "Enregistrez un fichier de page Web sous forme de PDF propre.",
-            "scanToPdf": "Utilisez votre appareil photo pour créer un document PDF parfait."
+            "scanToPdf": "Utilisez votre appareil photo pour créer un document PDF parfait.",
+            "imageToText": "Lisez des documents imprimés et des notes pour les convertir automatiquement en texte numérique."
         },
         "beforeAfter": {
             "redactor": {
@@ -249,6 +251,10 @@
             "scanToPdf": {
                 "before": "Documents papier sur votre bureau physique.",
                 "after": "Un PDF numérique de haute qualité."
+            },
+            "imageToText": {
+                "before": "Notes manuscrites sur papier.",
+                "after": "Un fichier texte numérique parfait."
             }
         },
         "categories": {
@@ -558,6 +564,11 @@
             "title": "Scanner en PDF | Capture d'Images Locale Optimisée Mobile",
             "description": "Capturez des images via la caméra de votre appareil et regroupez-les en PDF haute qualité. Ordre séquentiel préservé avec zéro transfert.",
             "keywords": "scanner en pdf ligne, caméra vers pdf local, scan mobile vers pdf privé, scanner de documents natif du navigateur, scanner mobile sécurisé"
+        },
+        "imageToText": {
+            "title": "Manuscrit en Texte | Scan OCR Professionnel local",
+            "description": "Convertissez vos notes manuscrites en texte numérique avec précision. Moteur OCR 100% local compatible avec caméra et fichiers. Confidentialité totale sans upload.",
+            "keywords": "convertir manuscrit en texte en ligne, ocr écriture manuscrite local, passer notes en texte numérique, scanner ocr privé, lecteur d'écriture navigateur, extraire texte image offline"
         }
     },
     "Tools": {
@@ -1579,6 +1590,40 @@
                 }
             },
             "compilePdf": "Compiler le PDF"
+        },
+        "imageToText": {
+            "title": "Image en Texte",
+            "description": "OCR local privé pour extraire du texte imprimé à partir d'images.",
+            "dropHint": "Déposez une image de document ou cliquez pour téléverser",
+            "orUseCamera": "ou utilisez la caméra du coffre",
+            "openCamera": "Ouvrir la Caméra",
+            "extractBtn": "Extraer le Texte",
+            "downloadBtn": "Télécharger .txt",
+            "copyBtn": "Copier le Texte",
+            "startOver": "Recommencer",
+            "processing": "Analyse en cours...",
+            "enhancing": "Amélioration de l'image...",
+            "enhancingDesc": "Application de filtres neuronaux pour plus de clarté.",
+            "awaitingExtraction": "En attente d'extraction",
+            "sourceInput": "Entrée Source",
+            "digitalArchive": "Archive Numérique",
+            "ocrSuccess": "Succès OCR",
+            "privacyNote": "Les images sont traitées localement avec Tesseract.js. Aucune donnée pixel ne quitte votre navigateur.",
+            "operationMode": "Mode d'Opération",
+            "howItWorks": {
+                "step1": {
+                    "title": "Capturer ou Téléverser",
+                    "desc": "Prenez une photo de votre document ou téléchargez un fichier image existant."
+                },
+                "step2": {
+                    "title": "Extraction par IA",
+                    "desc": "Notre moteur OCR local analyse la structure de l'image et reconnaît les motifs de texte imprimé."
+                },
+                "step3": {
+                    "title": "Exporter le Texte",
+                    "desc": "Copiez les résultats dans le presse-papier ou téléchargez-les sous forme de fichier texte."
+                }
+            }
         }
     },
     "VisualProof": {
@@ -1725,6 +1770,10 @@
             "after": "Sujet Isolé",
             "raw": "Brut",
             "purified": "Purifié"
+        },
+        "imageToText": {
+            "before": "Note Manuscrite",
+            "after": "Archive Numérique"
         }
     },
     "SecurityProof": {

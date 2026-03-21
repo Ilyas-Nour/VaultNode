@@ -68,7 +68,7 @@
         "heroStatLanguages": "Languages",
         "heroStatClient": "Client Side",
         "sectionAllLabel": "All Tools",
-        "sectionAllTitle": "30 Private Tools. Zero Uploads.",
+        "sectionAllTitle": "31 Private Tools. Zero Uploads.",
         "philosophyLabel": "Our Philosophy",
         "philosophyTitle": "Privacy Is Not a Feature. It's a Requirement.",
         "philosophyBody1": "Most online tools work by uploading your files to a server, processing them, and returning the result. That model is inherently broken from a privacy standpoint.",
@@ -183,6 +183,7 @@
         "organizePages": "ORGANIZE PDF",
         "textToDocx": "TEXT TO WORD",
         "docxToText": "WORD TO TEXT",
+        "imageToText": "IMAGE TO TEXT",
         "toolDescriptions": {
             "redactor": "Use the brush to paint over secrets.",
             "cleanExif": "Remove the 'hidden map' from your pictures.",
@@ -213,7 +214,8 @@
             "excelToPdf": "Show your spreadsheet clearly as a PDF.",
             "pdfToExcel": "Pull the tables out of a PDF into Excel.",
             "htmlToPdf": "Save a web page file as a clean PDF.",
-            "scanToPdf": "Use your camera to make a perfect PDF document."
+            "scanToPdf": "Use your camera to make a perfect PDF document.",
+            "imageToText": "Read printed documents, signs, and notes to turn them into clean digital type automatically."
         },
         "beforeAfter": {
             "redactor": {
@@ -335,6 +337,10 @@
             "scanToPdf": {
                 "before": "Paper documents sitting on your physical desk.",
                 "after": "A high-quality digital PDF on your machine."
+            },
+            "imageToText": {
+                "before": "Messy handwritten notes on paper.",
+                "after": "A perfectly typed digital text file."
             }
         },
         "categories": {
@@ -558,6 +564,11 @@
             "title": "Scan to PDF | Mobile-Optimized Local Image Capture",
             "description": "Capture images from your device camera and bundle them into high-quality PDFs. Sequential order preserved with zero uploads.",
             "keywords": "scan to pdf online, camera to pdf local, mobile scan to pdf privately, browser-native document scanner, secure mobile scanner"
+        },
+        "imageToText": {
+            "title": "Handwriting to Text | AI-Powered Pro OCR Scanner",
+            "description": "Convert handwritten notes into digital text with industrial accuracy. 100% local OCR engine with camera and file support. Zero-upload privacy.",
+            "keywords": "handwriting to text online, ocr for handwriting local, convert handwritten note to txt, private ocr scanner, browser-native handwriting reader, extract text from image offline"
         }
     },
     "Tools": {
@@ -1579,6 +1590,40 @@
                 }
             },
             "compilePdf": "Compile PDF"
+        },
+        "imageToText": {
+            "title": "Image to Text",
+            "description": "Private, local OCR for extracting printed text from images.",
+            "dropHint": "Drag document image or click to upload",
+            "orUseCamera": "or use vault cam",
+            "openCamera": "Open Camera",
+            "extractBtn": "Extract Text",
+            "downloadBtn": "Download .txt",
+            "copyBtn": "Copy Text",
+            "startOver": "Start Over",
+            "processing": "Analyzing...",
+            "enhancing": "Enhancing Image...",
+            "enhancingDesc": "Applying neural filters for clarity.",
+            "awaitingExtraction": "Awaiting Extraction",
+            "sourceInput": "Source Input",
+            "digitalArchive": "Digital Archive",
+            "ocrSuccess": "OCR Success",
+            "privacyNote": "Images are processed locally using Tesseract.js. No pixel data ever leaves your browser vault.",
+            "operationMode": "Operation Mode",
+            "howItWorks": {
+                "step1": {
+                    "title": "Capture or Upload",
+                    "desc": "Take a photo of your document or upload an existing image file."
+                },
+                "step2": {
+                    "title": "AI Extraction",
+                    "desc": "Our local OCR engine analyzes the image structure and identifies printed text patterns."
+                },
+                "step3": {
+                    "title": "Export Digital Text",
+                    "desc": "Copy the results to your clipboard or download them as a clean text file."
+                }
+            }
         }
     },
     "VisualProof": {
@@ -1755,6 +1800,10 @@
         "scanToPdf": {
             "before": "Paper Artifact",
             "after": "Digital Asset"
+        },
+        "imageToText": {
+            "before": "Handwritten Note",
+            "after": "Digital Archive"
         }
     },
     "SecurityProof": {

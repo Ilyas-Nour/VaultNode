@@ -50,7 +50,7 @@ export const Navbar = memo(() => {
         {
             id: 'fromPdf',
             title: t('footer.catFromPdf'),
-            tools: toolsData.filter(t => ['pdf-to-word', 'pdf-to-ppt', 'pdf-to-excel', 'pdf-to-img', 'word-to-text'].includes(t.id))
+            tools: toolsData.filter(t => ['pdf-to-word', 'pdf-to-ppt', 'pdf-to-excel', 'pdf-to-img', 'word-to-text', 'image-to-text'].includes(t.id))
         },
         {
             id: 'edit',

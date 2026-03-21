@@ -51,4 +51,5 @@ export const toolsData: ToolMetadata[] = [
     { id: 'pdf-to-excel', category: 'docs', titleKey: 'pdfToExcel', descKey: 'toolDescriptions.pdfToExcel', icon: FileSpreadsheet, href: '/tools/pdf-to-excel', color: 'text-white' },
     { id: 'html-to-pdf', category: 'docs', titleKey: 'htmlToPdf', descKey: 'toolDescriptions.htmlToPdf', icon: Code, href: '/tools/html-to-pdf', color: 'text-white' },
     { id: 'scan-to-pdf', category: 'docs', titleKey: 'scanToPdf', descKey: 'toolDescriptions.scanToPdf', icon: Camera, href: '/tools/scan-to-pdf', color: 'text-white' },
+    { id: 'image-to-text', category: 'docs', titleKey: 'imageToText', descKey: 'toolDescriptions.imageToText', icon: ImagePlus, href: '/tools/image-to-text', color: 'text-white' },
 ];
