@@ -1,4 +1,60 @@
 {
+    "NotFoundPage": {
+        "title": "404 - Path Corrupted",
+        "description": "The requested node could not be located in the vault. The path may have been moved or redacted.",
+        "btn": "Return to Vault"
+    },
+    "FAQPage": {
+        "title": "Frequent Questions",
+        "subtitle": "Everything you need to know about the Zero-Curve standard.",
+        "categories": {
+            "security": "Security & Privacy",
+            "usage": "Usage & Limits",
+            "technical": "Technical Details"
+        },
+        "questions": {
+            "q1": "Is PrivaFlow really private?",
+            "a1": "Yes. Unlike other tools, we never upload your files to a server. All processing happens 100% locally in your browser memory. Your data never leaves your device.",
+            "q2": "Is there a file size limit?",
+            "a2": "There is no artificial limit. However, since processing happens in your device's RAM, very large files (2GB+) may depend on your local hardware capabilities.",
+            "q3": "Does it work offline?",
+            "a3": "Once the tool is loaded in your browser, it can function completely offline. No internet connection is required for the actual file processing.",
+            "q4": "Is it completely free?",
+            "a4": "Yes. PrivaFlow is a privacy-first project committed to being free and accessible to everyone, forever."
+        }
+    },
+    "HowItWorksPage": {
+        "title": "Technical Protocol",
+        "subtitle": "How PrivaFlow ensures absolute data sovereignty.",
+        "protocol": "Zero-Upload Protocol",
+        "intro": "Every operation on our platform follows a strict 'Zero-Upload' architecture. Here is the technical breakdown of how we protect your data.",
+        "sections": {
+            "step1": "1. Local Isolation",
+            "step1Desc": "When you load a tool, the entire engine is downloaded to your browser. Your device then becomes a self-contained workstation.",
+            "step2": "2. Wasm Engines",
+            "step2Desc": "We use high-performance WebAssembly (Wasm) to run C++ and Rust code directly in your browser tab.",
+            "step3": "3. Sandbox Execution",
+            "step3Desc": "Files are processed in a secure browser sandbox. No data packets ever leave your machine.",
+            "verification": "Verification",
+            "verificationDesc": "You can verify our claims by opening your browser's 'Network' tab. You will see 0.0KB sent to our servers."
+        }
+    },
+    "PhilosophyPage": {
+        "title": "The Zero-Curve Manifesto",
+        "subtitle": "Uncompromising privacy in an era of surveillance.",
+        "vision": {
+            "title": "Privacy as a Standard",
+            "text": "We believe privacy shouldn't be a 'setting' you toggle. It must be the foundation."
+        },
+        "sovereignty": {
+            "title": "Data Sovereignty",
+            "text": "Your data is your property. We bring absolute sovereignty to the digital space."
+        },
+        "design": {
+            "title": "Zero-Curve Design",
+            "text": "Our brand aesthetic reflects our philosophy: sharp edges, no gray areas, and uncompromising lines."
+        }
+    },
     "HomePage": {
         "title": "Your Files Stay with You. Always.",
         "titlePart1": "Your Files.",
@@ -39,6 +95,7 @@
             "documents": "Docs",
             "philosophy": "Philosophy",
             "contact": "Contact",
+            "faq": "FAQ",
             "shield": "Local Shield Active"
         },
         "logoTagline": "Private · Local · Free",
@@ -49,75 +106,83 @@
         "footer": {
             "brandStatement": "Professional privacy.",
             "brandHighlight": "In your browser.",
-            "colTools": "Vault",
+            "colTools": "Tools",
             "colMedia": "Media & Docs",
             "colPrivacy": "Privacy",
             "colInfo": "Information",
-            "linkRedact": "PDF Redactor",
-            "linkCleanMeta": "Exif Cleaner",
-            "linkConverter": "Media Converter",
-            "linkPdfWord": "PDF to Word",
-            "linkCompress": "Image Optimizer",
-            "linkEnhancer": "Image Enhancer",
-            "linkBgRemover": "Background Remover",
-            "linkMerge": "PDF Merger",
-            "linkBlur": "Blur Tool",
-            "linkHeic": "HEIC to JPG",
-            "linkSvg": "SVG to PNG",
-            "linkUnlock": "Password Remover",
-            "linkPdfImg": "PDF to Image",
-            "linkSplit": "PDF Splitter",
-            "linkSign": "Electronic Sign",
-            "linkStamp": "Watermark",
-            "linkRepair": "File Repair",
-            "linkNumber": "Number Pages",
-            "linkOrganize": "Organize",
-            "linkTextToWord": "Text to Word",
-            "linkWordToText": "Word to Text",
-            "linkPassword": "Password Maker",
-            "linkEncrypt": "Secret Message",
+            "catOrganize": "ORGANIZE PDF",
+            "catOptimize": "OPTIMIZE PDF",
+            "catToPdf": "CONVERT TO PDF",
+            "catFromPdf": "CONVERT FROM PDF",
+            "catEdit": "EDIT PDF",
+            "catSecurity": "PDF SECURITY",
+            "catMedia": "MEDIA & IMAGES",
+            "linkRedact": "REDACT PDF",
+            "linkCleanMeta": "CLEAN EXIF",
+            "linkConverter": "VIDEO CONVERTER",
+            "linkPdfWord": "PDF TO WORD",
+            "linkCompress": "COMPRESS PDF",
+            "linkEnhancer": "IMAGE ENHANCER",
+            "linkBgRemover": "REMOVE BG",
+            "linkMerge": "MERGE PDF",
+            "linkBlur": "BLUR IMAGE",
+            "linkHeic": "HEIC TO JPG",
+            "linkSvg": "SVG TO PNG",
+            "linkUnlock": "UNLOCK PDF",
+            "linkPdfImg": "PDF TO JPG",
+            "linkSplit": "SPLIT PDF",
+            "linkSign": "SIGN PDF",
+            "linkStamp": "ADD WATERMARK",
+            "linkRepair": "REPAIR PDF",
+            "linkNumber": "ADD PAGE NUMBERS",
+            "linkOrganize": "ORGANIZE PDF",
+            "linkTextToWord": "TEXT TO WORD",
+            "linkWordToText": "WORD TO TEXT",
+            "linkPassword": "PASSWORD MAKER",
+            "linkEncrypt": "SECURE MESSAGE",
             "linkZeroUpload": "Zero Upload Policy",
             "linkLocalProtocol": "Local Protocol",
             "linkEncryption": "Encryption Standards",
             "linkOpenArch": "Open Architecture",
             "linkHowItWorks": "How it Works",
             "linkPhilosophy": "Philosophy",
+            "linkFAQ": "FAQ",
             "linkContact": "Contact Us",
             "linkAllTools": "Explore All Tools",
             "copyright": "© 2026 · Zero tracking · Zero uploads · Built for the open web",
             "footerCredits": "Made with Privacy in Mind",
-            "linkWordToPdf": "Word to PDF",
-            "linkPdfToPpt": "PDF to PPT",
-            "linkPptToPdf": "PPT to PDF",
-            "linkExcelToPdf": "Excel to PDF",
-            "linkPdfToExcel": "PDF to Excel",
-            "linkHtmlToPdf": "HTML to PDF",
-            "linkScanToPdf": "Scan to PDF"
+            "linkWordToPdf": "WORD TO PDF",
+            "linkPdfToPpt": "PDF TO POWERPOINT",
+            "linkPptToPdf": "POWERPOINT TO PDF",
+            "linkExcelToPdf": "EXCEL TO PDF",
+            "linkPdfToExcel": "PDF TO EXCEL",
+            "linkHtmlToPdf": "HTML TO PDF",
+            "linkScanToPdf": "SCAN TO PDF"
         },
         "subtitle": "Most websites steal your files. We don't. Everything you do stays inside your screen. It's 100% private and 100% free.",
-        "launchRedactor": "Hide Sensitive Info",
-        "imageCompressor": "Shrink Photo",
-        "imageEnhancer": "Image Enhancer",
-        "bgRemover": "Background Remover",
-        "pdfMerger": "Merge PDF",
-        "pdfToImg": "PDF to Image",
-        "cleanExif": "Remove Photo Data",
-        "password": "Password Maker",
-        "unlockPdf": "Unlock PDF",
-        "heicToJpg": "iPhone Photo to JPG",
-        "pdfToDocx": "PDF to Word",
-        "mediaConverter": "MP4 to MP3 / Video Fixer",
-        "svgToPng": "Logo to Photo",
-        "textEncryptor": "Secret Message",
-        "blurTool": "Blur Photo",
-        "pdfSplit": "Split PDF",
-        "sign": "Sign a Paper",
-        "stamp": "Stamp a Photo",
-        "repair": "Fix Broken File",
-        "numberPages": "Number the Pages",
-        "organizePages": "Organize Pages",
-        "textToDocx": "Text to Word",
-        "docxToText": "Word to Text",
+        "launchRedactor": "REDACT PDF",
+        "imageCompressor": "COMPRESS PDF",
+        "imageEnhancer": "IMAGE ENHANCER",
+        "bgRemover": "REMOVE BG",
+        "pdfMerger": "MERGE PDF",
+        "pdfToImg": "PDF TO JPG",
+        "cleanExif": "CLEAN EXIF",
+        "password": "PASSWORD MAKER",
+        "unlockPdf": "UNLOCK PDF",
+        "heicToJpg": "HEIC TO JPG",
+        "pdfToDocx": "PDF TO WORD",
+        "mediaConverter": "VIDEO CONVERTER",
+        "svgToPng": "SVG TO PNG",
+        "textEncryptor": "SECURE MESSAGE",
+        "blurTool": "BLUR IMAGE",
+        "pdfSplit": "SPLIT PDF",
+        "sign": "SIGN PDF",
+        "stamp": "ADD WATERMARK",
+        "repair": "REPAIR PDF",
+        "numberPages": "ADD PAGE NUMBERS",
+        "organizePages": "ORGANIZE PDF",
+        "textToDocx": "TEXT TO WORD",
+        "docxToText": "WORD TO TEXT",
         "toolDescriptions": {
             "redactor": "Use the brush to paint over secrets.",
             "cleanExif": "Remove the 'hidden map' from your pictures.",
@@ -340,159 +405,159 @@
     },
     "Metadata": {
         "default": {
-            "title": "PrivaFlow | Your Files Stay With You",
-            "description": "Everything you do stays inside your own screen. Safe, private, and 100% free tools for your photos and files.",
-            "keywords": "private pdf redactor, unlock pdf offline, heic to jpg local, pdf to word converter, ffmpeg wasm converter, svg to png local, zero upload privacy, text to word local, word to text browser"
-        },
-        "blur": {
-            "title": "Blur Faces in Photos | Local Privacy Tool",
-            "description": "Hide faces or sensitive areas in your photos locally in your browser. No data upload, 100% private blur tool.",
-            "keywords": "blur face in photo, hide sensitive info image, local photo blur, browser blur tool, privacy first image editor"
-        },
-        "cleanExif": {
-            "title": "Remove Photo Metadata | EXIF Cleaner",
-            "description": "Wipe away hidden GPS map and private tracking data from your pictures. 100% local metadata scrubbing.",
-            "keywords": "remove exif data, strip image metadata, hide photo location, private exif cleaner, local image sanitizer"
-        },
-        "compress": {
-            "title": "Compress Images Locally | Pixel Shrinker",
-            "description": "Reduce image file size while preserving high visual fidelity. Local optimization without server uploads.",
-            "keywords": "compress images locally, shrink photo size online, browser image optimizer, no upload image compressor, private photo shrinker"
-        },
-        "enhancer": {
-            "title": "AI Image Enhancer | Sharpen Blurry Photos",
-            "description": "Improve clarity and restore sharpness to blurry photos with professional-grade local filters.",
-            "keywords": "sharpen blurry photo online, ai image enhancer local, fix out of focus pictures, browser image sharpener, private photo restoration"
+            "title": "PrivaFlow | Pro-Grade Privacy Tools. Purely Local.",
+            "description": "The elite browser-native suite for PDF, Image, and Media processing. 100% private, zero-upload, and free. Your files never leave your device.",
+            "keywords": "private pdf editor, free local file tools, zero upload converter, browser-native media tool, secure document processing, offline pdf tools, privacy-first image editor, professional media converter"
         },
         "bgRemover": {
-            "title": "Remove Background Locally | AI Subject Isolation",
-            "description": "Isolate subjects and remove backgrounds instantly using local AI processing. 100% private PNG extraction.",
-            "keywords": "remove background from image online, local ai background remover, transparent png maker, private subject isolation, browser bg remover"
+            "title": "AI Background Remover | Remove BG Locally & Privately",
+            "description": "Isolate subjects and remove backgrounds instantly with local AI. Professional-grade subject isolation without ever uploading your photos.",
+            "keywords": "remove background from image online, local ai bg remover, isolate subject from photo, transparent png maker, private background removal, hd bg remover free"
+        },
+        "blur": {
+            "title": "Blur Faces in Photos | Secure Local Privacy Brush",
+            "description": "Obfuscate faces, license plates, or sensitive data in your photos locally. Pro-grade Gaussian blur running entirely in your browser memory.",
+            "keywords": "blur face in photo, hide sensitive info image, local photo blur, browser-native blur tool, privacy-first photo editor, redact images offline"
+        },
+        "cleanExif": {
+            "title": "Remove Photo Metadata | Pro EXIF Cleaner & GPS Scrubber",
+            "description": "Wipe hidden GPS coordinates and tracking data from your digital assets. 100% local metadata sanitization for professional privacy.",
+            "keywords": "remove exif data, strip image metadata, hide photo location, private exif cleaner, local image sanitizer, scrub gps from photos, anonymize images"
+        },
+        "compress": {
+            "title": "Compress Images Locally | Pro Pixel Optimizer & Shrinker",
+            "description": "Reduce image file sizes while maintaining maximum visual fidelity. Advanced local compression with zero server-side processing.",
+            "keywords": "compress images locally, shrink photo size online, browser-native image optimizer, no upload image compressor, private photo shrinker, webp compression online"
         },
         "encrypt": {
-            "title": "Secret Message Encryptor | AES-256",
-            "description": "Lock your private writing inside a cryptographic vault using AES-256 local encryption. Secure note maker.",
-            "keywords": "encrypt text online, aes-256 message locker, secure note maker, private text encryption, local cypher tool"
+            "title": "Secret Note Encryptor | AES-256 GCM Local Cryptography",
+            "description": "Lock sensitive text inside an industrial-grade cryptographic vault. Uses browser-native AES-256-GCM encryption. Zero server logs.",
+            "keywords": "encrypt text online, aes-256 message locker, secure note maker, private text encryption, local cypher tool, industrial grade encryption browser"
+        },
+        "enhancer": {
+            "title": "AI Image Enhancer | Fix Blurry & Out-of-Focus Photos",
+            "description": "Restore clarity and sharpen low-fidelity assets with high-performance local filters. Professional sharpening without data leakage.",
+            "keywords": "sharpen blurry photo online, ai image enhancer local, fix out of focus pictures, browser image sharpener, private photo restoration, upscale image browser"
         },
         "heicToJpg": {
-            "title": "Convert HEIC to JPG | iPhone Photo Fixer",
-            "description": "Turn Apple iPhone HEIC files into universal JPG photos entirely in your browser. No data transfer.",
-            "keywords": "convert heic to jpg online, heif to jpeg converter local, open iphone photos on pc, private heic converter, browser photo transcoder"
+            "title": "HEIC to JPG Converter | Fast iPhone Photo Transcoder",
+            "description": "Transcode Apple HEIC files into universal high-quality JPGs instantly. 100% local processing, respects all privacy protocols.",
+            "keywords": "convert heic to jpg online, heif to jpeg converter local, open iphone photos on pc, private heic converter, browser photo transcoder, fast heic to jpg"
         },
         "mediaConverter": {
-            "title": "Video & Audio Converter | In-Browser Transcoder",
-            "description": "Change video or music file formats locally using FFmpeg.wasm. Privacy-first media conversion.",
-            "keywords": "video converter online no upload, convert mp4 to mp3 local, browser media transcoder, private video fixer, ffmpeg wasm converter"
+            "title": "Video & Audio Converter | FFmpeg.wasm Local Transcoding",
+            "description": "Professional media format conversion using FFmpeg in your browser. MP4 to MP3, Video Fixer, and more — all zero-upload.",
+            "keywords": "video converter online no upload, convert mp4 to mp3 local, browser media transcoder, private video fixer, ffmpeg wasm converter, local m4a to mp3"
         },
         "password": {
-            "title": "Secure Password Generator | Entropy Engine",
-            "description": "Generate high-entropy, industrial-grade passwords locally on your device. We never see your codes.",
-            "keywords": "secure password generator, strong code maker, local entropy engine, private password creator, brute-force resistant codes"
+            "title": "Secure Password Generator | Pro-Grade Entropy Engine",
+            "description": "Generate cryptographically secure, high-entropy passwords locally. Protect your identity with codes we can never see.",
+            "keywords": "secure password generator, strong code maker, local entropy engine, private password creator, brute-force resistant codes, quantum safe password"
         },
         "pdfMerge": {
-            "title": "Merge PDF Files | Local Document Combiner",
-            "description": "Combine multiple PDF files into one secure document entirely in your browser. Secure local assembly.",
-            "keywords": "merge pdf online free, combine pdf files locally, browser pdf merger, no upload pdf joiner, private document assembly"
+            "title": "Merge PDF Files | Secure Local Document Combiner",
+            "description": "Unify multiple PDF documents into a single professional file. Processed entirely in RAM for maximum industrial privacy.",
+            "keywords": "merge pdf online free, combine pdf files locally, browser pdf merger, no upload pdf joiner, private document assembly, unify pdf pages"
         },
         "pdfSplit": {
-            "title": "Split & Extract PDF Pages | Local Page Manager",
-            "description": "Securely extract specific pages or ranges from your PDF documents without ever uploading them.",
-            "keywords": "split pdf online, extract pages from pdf local, private pdf splitter, browser document segmenter, no upload pdf extractor"
+            "title": "Extract PDF Pages | Local PDF Splitter & Segmenter",
+            "description": "Pull specific pages or ranges from any PDF with military-grade privacy. Zero persistent file-system writes. Purely local.",
+            "keywords": "split pdf online, extract pages from pdf local, private pdf splitter, browser document segmenter, no upload pdf extractor, rip pdf pages"
         },
         "pdfToDocx": {
-            "title": "Convert PDF to Word | Editable Document Reconstruction",
-            "description": "Turn locked PDF files into editable Word documents locally in your browser. Privacy-first reconstruction.",
-            "keywords": "convert pdf to word online, pdf to docx converter local, edit locked pdf browser, private document restorer, no upload pdf to word"
+            "title": "PDF to Word Converter | Pro Editable Reconstruction",
+            "description": "Highly accurate PDF to Word conversion running locally. Reconstructs document structure while preserving formatting and privacy.",
+            "keywords": "convert pdf to word online, pdf to docx converter local, edit locked pdf browser, private document restorer, no upload pdf to word, accurate pdf to docx"
         },
         "pdfToImg": {
-            "title": "PDF to Image Gallery | High-Res Page Snapshots",
-            "description": "Convert every page of your PDF into high-quality JPG or PNG images locally. Secure page-to-pixel synthesis.",
-            "keywords": "convert pdf to image online, save pdf as jpg local, pdf to gallery converter, private page snapshots, browser document renderer"
+            "title": "PDF to Image Gallery | High-DPI Page Snapshots",
+            "description": "Export PDF pages as lossless, high-definition PNG or JPG assets. Purely client-side rendering with Zero-Leakage protocols.",
+            "keywords": "convert pdf to image online, save pdf as jpg local, pdf to gallery converter, private page snapshots, browser document renderer, high res pdf to png"
         },
         "redact": {
-            "title": "Redact PDF Online | Hide Sensitive Information",
-            "description": "Permanently destroy sensitive data and private info in your PDF documents. Industrial-grade local redaction.",
-            "keywords": "redact pdf online free, hide text in pdf permanently, local data sanitization, private document redactor, browser redaction tool"
+            "title": "Redact PDF Online | Permanent Sensitive Data Deletion",
+            "description": "Destroy sensitive strings and vectors in your PDF documents. Industrial-grade local redaction ensures data is gone forever.",
+            "keywords": "redact pdf online free, hide text in pdf permanently, local data sanitization, private document redactor, browser redaction tool, sanitize pdf offline"
         },
         "svgToPng": {
-            "title": "Convert SVG to PNG | Vector to Raster Tool",
-            "description": "Turn designer vector drawings into high-resolution PNG photos locally. 100% safe rasterization.",
-            "keywords": "convert svg to png online, svg to raster converter local, designer tool vector to photo, private svg renderer, browser logo converter"
+            "title": "SVG to PNG Converter | Local Vector Animation & Raster",
+            "description": "Rasterize SVG vector graphics into high-resolution PNGs. Professional transparency preservation and zero-upload security.",
+            "keywords": "convert svg to png online, svg to raster converter local, designer tool vector to photo, private svg renderer, browser logo converter, high fidelity svg to png"
         },
         "unlockPdf": {
-            "title": "Unlock PDF | Remove Password Locally",
-            "description": "Remove password protection from your PDF files instantly. Everything runs locally in your browser.",
-            "keywords": "unlock pdf online free, remove password from pdf local, decrypt pdf browser, private document access, no upload pdf unlocker"
+            "title": "Unlock PDF Online | Local Password & Restriction Removal",
+            "description": "Instantly remove PDF copy/print/edit restrictions. Decrypts headers locally in your browser memory for absolute privacy.",
+            "keywords": "unlock pdf online free, remove password from pdf local, decrypt pdf browser, private document access, no upload pdf unlocker, strip pdf security"
         },
         "sign": {
-            "title": "Sign PDF Online | Hand-Drawn Digital Signature",
-            "description": "Draw your signature and place it on any PDF page instantly using local browser rendering.",
-            "keywords": "sign pdf online free, draw signature on document, local electronic sign, private pdf signer, browser signature pad"
+            "title": "Sign PDF Online | Industrial Electronic Signature Tool",
+            "description": "Securely sign any document with hand-drawn signatures. 100% browser-native rendering for legal and professional privacy.",
+            "keywords": "sign pdf online free, draw signature on document, local electronic sign, private pdf signer, browser signature pad, digital signature pdf maker"
         },
         "stamp": {
-            "title": "Watermark Photos | Stamp Brand Logo",
-            "description": "Protect your visual assets by adding watermarks or logos locally. High-fidelity pixel-baked stamping.",
-            "keywords": "watermark photos online, add logo to image local, private photo stumper, protect visual assets browser, local branding tool"
+            "title": "Watermark Photos | Pro Logo Stamping & Protection",
+            "description": "Protect your creative assets with high-fidelity local watermarking. Pixel-baked logos and text for maximum protection.",
+            "keywords": "watermark photos online, add logo to image local, private photo stumper, protect visual assets browser, local branding tool, mass watermark photos"
         },
         "repair": {
-            "title": "Fix Broken PDF | Structural Header Recovery",
-            "description": "Attempt to restore structural integrity to corrupted or broken PDF files locally in your browser.",
-            "keywords": "fix broken pdf online, repair corrupted document local, pdf header recovery browser, private file restoration, solve pdf opening error"
+            "title": "Repair Broken PDF | Local Header & Xref Stream Recovery",
+            "description": "Recover corrupted documents using advanced structural reconstruction filters. Privacy-first file repair running in RAM.",
+            "keywords": "fix broken pdf online, repair corrupted document local, pdf header recovery browser, private file restoration, solve pdf opening error, restore broken pdf"
         },
         "numberPages": {
-            "title": "Number PDF Pages | Document Pagination Tool",
-            "description": "Add page numbers to your documents for better organization. 100% local, no server involvement.",
-            "keywords": "number pdf pages online, add pagination to pdf local, organic document indexer, private file numbering, browser pdf organizer"
+            "title": "Number PDF Pages | Automatic Document Pagination",
+            "description": "Add precise page numbers and indices to your documents. Clean, professional pagination without server intervention.",
+            "keywords": "number pdf pages online, add pagination to pdf local, organic document indexer, private file numbering, browser pdf organizer, automatic pdf page numbers"
         },
         "organizePages": {
-            "title": "Organize PDF Pages | Reorder & Delete",
-            "description": "Move, delete, or add pages to your PDF files with a simple local drag-and-drop interface.",
-            "keywords": "organize pdf pages online, reorder pdf pages local, delete pages from pdf browser, private document manager, no upload pdf editor"
+            "title": "Organize PDF Pages | Pro Reorder, Delete & Rotate",
+            "description": "Take full control of your document structure with a local drag-and-drop workspace. Prune, sort, and organize privately.",
+            "keywords": "organize pdf pages online, reorder pdf pages local, delete pages from pdf browser, private document manager, no upload pdf editor, rotate pdf pages online"
         },
         "textToDocx": {
-            "title": "Text to Word Converter | Local Document Synthesis",
-            "description": "Turn your plain text files into professional Word documents locally. Privacy-first Word synthesis.",
-            "keywords": "convert txt to docx local, text to word converter online, browser native text to docx, convert script to word document, privacy first word converter"
+            "title": "Text to Word Converter | Pro Document Synthesis",
+            "description": "Turn plain text or scripts into professional Word documents. High-fidelity structure synthesis running purely locally.",
+            "keywords": "convert txt to docx local, text to word converter online, browser native text to docx, convert script to word document, privacy first word converter, .txt to .docx"
         },
         "docxToText": {
-            "title": "Word to Text Extractor | Direct Text Harvesting",
-            "description": "Extract raw text from Word documents locally in your browser. Clean, reusable text extraction.",
-            "keywords": "extract text from docx local, word to text converter browser, docx to txt converter no upload, read word file online free, word text extractor"
+            "title": "Word to Text Extractor | Industrial Content Harvesting",
+            "description": "Harvest raw data from Word documents with zero formatting loss. OpenXML parser running natively in your browser.",
+            "keywords": "extract text from docx local, word to text converter browser, docx to txt converter no upload, read word file online free, word text extractor, .docx text scraper"
         },
         "wordToPdf": {
-            "title": "Word to PDF | PrivaFlow",
-            "description": "Change a Word document perfectly into a PDF.",
-            "keywords": "word to pdf, wordToPdf"
+            "title": "Word to PDF Converter | Pro Fidelity Document Export",
+            "description": "Professional-grade DOCX to PDF conversion. Preserves document structure, fonts, and order with 100% offline security.",
+            "keywords": "word to pdf online, docx to pdf local, convert word to pdf privately, browser-native word converter, accurate word to pdf offline"
         },
         "pdfToPpt": {
-            "title": "PDF to PPT | PrivaFlow",
-            "description": "Turn your PDF into a presentation with slides.",
-            "keywords": "pdf to ppt, pdfToPpt"
+            "title": "PDF to PowerPoint | Pro-Grade Slide Deck Reconstruction",
+            "description": "Turn PDF pages into high-fidelity PowerPoint slides. Creates editable-ready presentations with zero server uploads.",
+            "keywords": "pdf to ppt online, convert pdf to powerpoint local, pdf to pptx converter, private presentation maker, browser-native pdf to ppt"
         },
         "pptToPdf": {
-            "title": "PPT to PDF | PrivaFlow",
-            "description": "Save your presentation as a secure PDF.",
-            "keywords": "ppt to pdf, pptToPdf"
+            "title": "PowerPoint to PDF | Secure Slide-to-Document Export",
+            "description": "Export PPTX presentations to secure, professional PDFs. Maintains visual layout and font weights with offline processing.",
+            "keywords": "ppt to pdf online, powerpoint to pdf converter local, save pptx as pdf privately, browser-native ppt to pdf, secure presentation export"
         },
         "excelToPdf": {
-            "title": "Excel to PDF | PrivaFlow",
-            "description": "Show your spreadsheet clearly as a PDF.",
-            "keywords": "excel to pdf, excelToPdf"
+            "title": "Excel to PDF Converter | Professional Spreadsheet Export",
+            "description": "Cast Excel workbooks into clean, styled PDFs. Preserves borders, striped rows, and sheet order for industrial reporting.",
+            "keywords": "excel to pdf online, xlsx to pdf local, convert excel to pdf privately, browser-native spreadsheet converter, professional excel to pdf"
         },
         "pdfToExcel": {
-            "title": "PDF to Excel | PrivaFlow",
-            "description": "Pull the tables out of a PDF into Excel.",
-            "keywords": "pdf to excel, pdfToExcel"
+            "title": "PDF to Excel Converter | Pro Row & Table Reconstruction",
+            "description": "Extract structured data from PDFs into clean Excel tables. Advanced Y-coordinate bucketing for maximum data fidelity.",
+            "keywords": "pdf to excel online, convert pdf to xlsx local, extract tables from pdf privately, browser-native pdf to excel, accurate pdf data extraction"
         },
         "htmlToPdf": {
-            "title": "HTML to PDF | PrivaFlow",
-            "description": "Save a web page file as a clean PDF.",
-            "keywords": "html to pdf, htmlToPdf"
+            "title": "HTML to PDF Converter | Secure Web-to-Doc Archiving",
+            "description": "Archive web pages or HTML snippets as professional PDF documents. 100% private rendering for secure information preservation.",
+            "keywords": "html to pdf online, web page to pdf local, convert html to pdf privately, browser-native html converter, secure web archiving"
         },
         "scanToPdf": {
-            "title": "Scan to PDF | PrivaFlow",
-            "description": "Use your camera to make a perfect PDF document.",
-            "keywords": "scan to pdf, scanToPdf"
+            "title": "Scan to PDF | Mobile-Optimized Local Image Capture",
+            "description": "Capture images from your device camera and bundle them into high-quality PDFs. Sequential order preserved with zero uploads.",
+            "keywords": "scan to pdf online, camera to pdf local, mobile scan to pdf privately, browser-native document scanner, secure mobile scanner"
         }
     },
     "Tools": {
@@ -1517,8 +1582,10 @@
         }
     },
     "VisualProof": {
-        "before": "Original Source",
-        "after": "Processed Result",
+        "default": {
+            "before": "Original Source",
+            "after": "Processed Result"
+        },
         "label": "Visual Evidence",
         "integrity": "Bit-Level Integrity",
         "metadata": "No Metadata Leakage",
@@ -1660,6 +1727,34 @@
             "after": "Isolated Subject",
             "raw": "Raw",
             "purified": "Purified"
+        },
+        "pdfToPpt": {
+            "before": "Locked PDF",
+            "after": "Editable Slides"
+        },
+        "pptToPdf": {
+            "before": "Slideshow Asset",
+            "after": "Static Document"
+        },
+        "wordToPdf": {
+            "before": "DOCX Layout",
+            "after": "Sovereign PDF"
+        },
+        "excelToPdf": {
+            "before": "XLSX Ledger",
+            "after": "Audit-Ready PDF"
+        },
+        "pdfToExcel": {
+            "before": "Table-Locked PDF",
+            "after": "Active Spreadsheet"
+        },
+        "htmlToPdf": {
+            "before": "Web Code",
+            "after": "Clean Print"
+        },
+        "scanToPdf": {
+            "before": "Paper Artifact",
+            "after": "Digital Asset"
         }
     },
     "SecurityProof": {
@@ -1701,6 +1796,8 @@
     "ContactPage": {
         "label": "Contact",
         "title": "Let's Talk.",
+        "statusLabel": "Sovereignty Status",
+        "statusValue": "Local Node Active",
         "body1": "We built PrivaFlow for you. Your feedback, bug reports, and feature ideas shape every update. Send us a message and we typically respond within 24 hours.",
         "response24h": "Response within 24h",
         "successTitle": "Message Sent",

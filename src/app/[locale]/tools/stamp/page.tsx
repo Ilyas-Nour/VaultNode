@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import StampTool from "@/components/StampTool";
 import { getTranslations } from "next-intl/server";
+import { SoftwareSchema } from "@/components/SoftwareSchema";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -8,9 +9,23 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
         title: t('title'),
         description: t('description'),
+        keywords: t('keywords').split(', ')
     };
 }
 
-export default function StampPage() {
-    return <StampTool />;
+export default async function StampPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Metadata.stamp' });
+    
+    return (
+        <>
+            <SoftwareSchema 
+                name={t('title')} 
+                description={t('description')} 
+                url={`https://privaflow.com/${locale}/tools/stamp`} 
+            />
+            <StampTool />
+        </>
+    );
 }
+

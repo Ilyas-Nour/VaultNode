@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const t = await getTranslations({ locale, namespace: 'Metadata.default' });
 
     return {
+        metadataBase: new URL('https://vaultnode.com'),
         title: {
             template: "%s | PrivaFlow",
             default: t('title'),
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         openGraph: {
             title: t('title'),
             description: t('description'),
-            url: 'https://privaflow.com',
+            url: 'https://vaultnode.com',
             siteName: "PrivaFlow",
             images: [{ url: '/og-image.png' }],
             locale: locale,
@@ -110,7 +111,7 @@ export default async function RootLayout({
     };
 
     return (
-        <html lang={locale} dir={direction} className="dark" data-scroll-behavior="smooth">
+        <html lang={locale} dir={direction} className="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
             <head>
                 <script
                     type="application/ld+json"
@@ -119,8 +120,6 @@ export default async function RootLayout({
             </head>
             <body
                 suppressHydrationWarning
-                data-debug-locale={locale}
-                data-debug-keys={Object.keys(messages).join(',')}
                 className={`${outfit.variable} ${inter.variable} ${isArabic ? ibmPlexArabic.className : inter.className} bg-background text-foreground antialiased min-h-screen selection:bg-white/20`}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>

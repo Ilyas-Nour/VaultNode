@@ -4,12 +4,16 @@ import React, { useState, memo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
-import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { ChevronDown, Menu, X, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Logo } from '@/components/Logo';
+import { toolsData } from '@/lib/tools-data';
+import { ToolIcon } from '@/components/ToolIcon';
 
 export const Navbar = memo(() => {
     const t = useTranslations('HomePage');
-    useLocale();
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -29,43 +33,39 @@ export const Navbar = memo(() => {
 
     const categories = [
         {
-            id: 'vault',
-            title: t('nav.vault'),
-            tools: [
-                { title: t('launchRedactor'), href: '/tools/redact', desc: t('toolDescriptions.redactor') },
-                { title: t('cleanExif'), href: '/tools/clean-exif', desc: t('toolDescriptions.cleanExif') },
-                { title: t('password'), href: '/tools/password', desc: t('toolDescriptions.password') },
-                { title: t('textEncryptor'), href: '/tools/encrypt', desc: t('toolDescriptions.textEncryptor') },
-                { title: t('repair'), href: '/tools/repair', desc: t('toolDescriptions.repair') },
-            ]
+            id: 'organize',
+            title: t('footer.catOrganize'),
+            tools: toolsData.filter(t => ['merger', 'split', 'organize-pages', 'scan-to-pdf'].includes(t.id))
+        },
+        {
+            id: 'optimize',
+            title: t('footer.catOptimize'),
+            tools: toolsData.filter(t => ['compress', 'repair'].includes(t.id))
+        },
+        {
+            id: 'toPdf',
+            title: t('footer.catToPdf'),
+            tools: toolsData.filter(t => ['word-to-pdf', 'ppt-to-pdf', 'excel-to-pdf', 'html-to-pdf', 'text-to-word'].includes(t.id))
+        },
+        {
+            id: 'fromPdf',
+            title: t('footer.catFromPdf'),
+            tools: toolsData.filter(t => ['pdf-to-word', 'pdf-to-ppt', 'pdf-to-excel', 'pdf-to-img', 'word-to-text'].includes(t.id))
+        },
+        {
+            id: 'edit',
+            title: t('footer.catEdit'),
+            tools: toolsData.filter(t => ['sign', 'stamp', 'number-pages', 'redactor'].includes(t.id))
+        },
+        {
+            id: 'security',
+            title: t('footer.catSecurity'),
+            tools: toolsData.filter(t => ['unlock', 'password', 'encrypt'].includes(t.id))
         },
         {
             id: 'media',
-            title: t('nav.media'),
-            tools: [
-                { title: t('imageCompressor'), href: '/tools/compress', desc: t('toolDescriptions.compress') },
-                { title: t('heicToJpg'), href: '/tools/heic-to-jpg', desc: t('toolDescriptions.heic') },
-                { title: t('mediaConverter'), href: '/tools/media-converter', desc: t('toolDescriptions.mediaConverter') },
-                { title: t('svgToPng'), href: '/tools/svg-to-png', desc: t('toolDescriptions.svgToPng') },
-                { title: t('blurTool'), href: '/tools/blur', desc: t('toolDescriptions.blur') },
-                { title: t('stamp'), href: '/tools/stamp', desc: t('toolDescriptions.stamp') },
-            ]
-        },
-        {
-            id: 'documents',
-            title: t('nav.documents'),
-            tools: [
-                { title: t('pdfMerger'), href: '/tools/pdf-merge', desc: t('toolDescriptions.merger') },
-                { title: t('pdfToDocx'), href: '/tools/pdf-to-docx', desc: t('toolDescriptions.pdfToWord') },
-                { title: t('unlockPdf'), href: '/tools/unlock-pdf', desc: t('toolDescriptions.unlock') },
-                { title: t('pdfToImg'), href: '/tools/pdf-to-img', desc: t('toolDescriptions.pdfToImg') },
-                { title: t('pdfSplit'), href: '/tools/pdf-split', desc: t('toolDescriptions.split') },
-                { title: t('sign'), href: '/tools/sign', desc: t('toolDescriptions.sign') },
-                { title: t('numberPages'), href: '/tools/number-pages', desc: t('toolDescriptions.numberPages') },
-                { title: t('organizePages'), href: '/tools/organize-pages', desc: t('toolDescriptions.organizePages') },
-                { title: t('textToDocx'), href: '/tools/text-to-word', desc: t('toolDescriptions.textToDocx') },
-                { title: t('docxToText'), href: '/tools/word-to-text', desc: t('toolDescriptions.docxToText') },
-            ]
+            title: t('footer.catMedia'),
+            tools: toolsData.filter(t => ['clean-exif', 'heic', 'media-converter', 'svg-to-png', 'blur', 'bg-remover', 'enhancer'].includes(t.id))
         }
     ];
 
@@ -83,58 +83,84 @@ export const Navbar = memo(() => {
 
                     {/* Desktop nav - center column */}
                     <div ref={dropdownRef} className="hidden lg:flex items-center gap-1 flex-none justify-center">
-                        {categories.map((cat) => (
-                            <div key={cat.id} className="relative">
-                                <button
-                                    onMouseEnter={() => setOpenDropdown(cat.id)}
-                                    onMouseLeave={() => setOpenDropdown(null)}
-                                    className={`flex items-center gap-1.5 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors rounded-sm ${openDropdown === cat.id ? 'text-white' : 'text-zinc-500 hover:text-zinc-200'}`}
-                                >
-                                    {cat.title}
-                                    <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${openDropdown === cat.id ? 'rotate-180 text-white' : ''}`} />
-                                </button>
+                        <div className="relative group/mega">
+                            <button
+                                onMouseEnter={() => setOpenDropdown('mega')}
+                                onMouseLeave={() => setOpenDropdown(null)}
+                                className={`flex items-center gap-2 px-6 py-2 text-[11px] font-bold uppercase tracking-[0.2em] transition-colors rounded-full border ${openDropdown === 'mega' ? 'text-white border-white/20 bg-white/5' : 'text-zinc-400 border-transparent hover:text-zinc-200'}`}
+                            >
+                                {t('footer.colTools')}
+                                <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${openDropdown === 'mega' ? 'rotate-180 text-white' : ''}`} />
+                            </button>
 
-                                <AnimatePresence>
-                                    {openDropdown === cat.id && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 6 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: 6 }}
-                                            transition={{ duration: 0.15 }}
-                                            onMouseEnter={() => setOpenDropdown(cat.id)}
-                                            onMouseLeave={() => setOpenDropdown(null)}
-                                            className="absolute top-[calc(100%+2px)] left-1/2 -translate-x-1/2 w-64 bg-zinc-950 border border-white/[0.08] shadow-2xl shadow-black/80 overflow-hidden"
-                                        >
-                                            {/* Dropdown header */}
-                                            <div className="px-4 py-2.5 border-b border-white/[0.06]">
-                                                <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-600">{cat.title}</span>
-                                            </div>
-                                            {/* Tools list */}
-                                            <div className="py-1.5">
-                                                {cat.tools.map((tool) => (
-                                                    <Link
-                                                        key={tool.href}
-                                                        href={tool.href}
-                                                        onClick={() => setOpenDropdown(null)}
-                                                        className="flex items-center justify-between px-4 py-2.5 hover:bg-white/[0.04] transition-colors group/item"
-                                                    >
-                                                        <span className="text-[12px] font-semibold text-zinc-300 group-hover/item:text-white transition-colors leading-snug">
-                                                            {tool.title}
-                                                        </span>
-                                                        <ArrowRight className="w-3 h-3 text-zinc-700 group-hover/item:text-zinc-400 group-hover/item:translate-x-0.5 transition-all shrink-0" />
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        ))}
+                            <AnimatePresence>
+                                {openDropdown === 'mega' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        transition={{ duration: 0.2, ease: "easeOut" }}
+                                        onMouseEnter={() => setOpenDropdown('mega')}
+                                        onMouseLeave={() => setOpenDropdown(null)}
+                                        className="fixed top-[56px] inset-x-5 lg:inset-x-10 bg-zinc-950 border border-white/[0.08] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] overflow-hidden rounded-2xl"
+                                    >
+                                        <div className="grid grid-cols-7 p-8 gap-8">
+                                            {categories.map((cat) => (
+                                                <div key={cat.id} className="flex flex-col gap-4">
+                                                    <div className="flex items-center gap-2 pb-2 border-b border-white/[0.04]">
+                                                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500 whitespace-nowrap">{cat.title}</span>
+                                                    </div>
+                                                    <div className="flex flex-col gap-1">
+                                                        {cat.tools.map((tool) => (
+                                                            <Link
+                                                                key={tool.href}
+                                                                href={tool.href}
+                                                                onClick={() => setOpenDropdown(null)}
+                                                                className="group/item py-2 px-1 rounded-lg hover:bg-white/[0.03] flex items-center gap-3 transition-colors"
+                                                            >
+                                                                <ToolIcon 
+                                                                    icon={tool.icon}
+                                                                    color={tool.color}
+                                                                    size="sm"
+                                                                />
+                                                                <span className="text-[11px] font-bold text-zinc-300 group-hover/item:text-white transition-colors uppercase tracking-tight">
+                                                                    {t(tool.titleKey)}
+                                                                </span>
+                                                                <ArrowRight className="w-3 h-3 ms-auto text-zinc-800 opacity-0 group-hover/item:opacity-100 group-hover/item:text-zinc-600 group-hover/item:translate-x-0.5 transition-all shrink-0" />
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        {/* Bottom bar */}
+                                        <div className="bg-white/[0.02] border-t border-white/[0.04] p-4 flex items-center justify-end">
+                                            <Link href="/contact" onClick={() => setOpenDropdown(null)} className="text-[10px] text-zinc-400 hover:text-white transition-colors font-bold uppercase tracking-widest flex items-center gap-2">
+                                                Support & Help <ArrowRight className="w-3 h-3" />
+                                            </Link>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
-                        {/* Divider */}
+                        <div className="w-px h-4 bg-white/[0.08] mx-2" />
+                        
+                        <Link href="/how-it-works" className="px-3 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors">
+                            {t('footer.linkHowItWorks')}
+                        </Link>
+                        
+                        <Link href="/philosophy" className="px-3 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors">
+                            {t('footer.linkPhilosophy')}
+                        </Link>
+
+                        <Link href="/faq" className="px-3 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors">
+                            {t('nav.faq')}
+                        </Link>
+
                         <div className="w-px h-4 bg-white/[0.08] mx-2" />
 
-                        <Link href="/contact" className="px-4 py-2 text-[11px] font-bold uppercase tracking-[0.15em] text-zinc-500 hover:text-zinc-200 transition-colors">
+                        <Link href="/contact" className="px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500 hover:text-zinc-200 transition-colors">
                             {t('nav.contact')}
                         </Link>
                     </div>
@@ -194,32 +220,59 @@ export const Navbar = memo(() => {
                             {/* Tool categories */}
                             <div className="flex-1 py-4 overflow-y-auto">
                                 {categories.map((cat, i) => (
-                                    <div key={cat.id} className={i > 0 ? 'mt-5' : ''}>
-                                        <div className="px-5 mb-2">
-                                            <span className="text-[8px] font-black uppercase tracking-[0.4em] text-zinc-700">{cat.title}</span>
+                                    <div key={cat.id} className={i > 0 ? 'mt-8' : ''}>
+                                        <div className="px-6 mb-3 flex items-center gap-2">
+                                            <div className="w-1 h-3 bg-zinc-800 rounded-full" />
+                                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-zinc-600 font-black">{cat.title}</span>
                                         </div>
-                                        {cat.tools.map((tool) => (
-                                            <Link
-                                                key={tool.href}
-                                                href={tool.href}
-                                                onClick={close}
-                                                className="flex items-center justify-between px-5 py-3 hover:bg-white/[0.04] transition-colors group"
-                                            >
-                                                <span className="text-[13px] font-semibold text-zinc-300 group-hover:text-white transition-colors">{tool.title}</span>
-                                                <ArrowRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors shrink-0" />
-                                            </Link>
-                                        ))}
+                                        <div className="flex flex-col">
+                                            {cat.tools.map((tool) => (
+                                                <Link
+                                                    key={tool.href}
+                                                    href={tool.href}
+                                                    onClick={close}
+                                                    className="flex items-center gap-4 px-6 py-4 hover:bg-white/[0.04] transition-colors group active:bg-white/[0.08]"
+                                                >
+                                                    <ToolIcon 
+                                                        icon={tool.icon}
+                                                        color={tool.color}
+                                                        size="md"
+                                                        className="shrink-0"
+                                                    />
+                                                    <span className="text-[14px] font-bold uppercase tracking-tight text-zinc-300 group-hover:text-white transition-colors">
+                                                        {t(tool.titleKey)}
+                                                    </span>
+                                                    <ArrowRight className={cn("w-4 h-4 ms-auto text-zinc-800 group-hover:text-zinc-500 transition-colors shrink-0", isRTL && "rotate-180")} />
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
 
                             {/* Drawer footer */}
-                            <div className="border-t border-white/[0.06] px-5 py-4 space-y-0.5 shrink-0">
-                                <Link href="/contact" onClick={close} className="flex items-center justify-between py-3 text-[13px] font-semibold text-zinc-500 hover:text-white transition-colors group">
-                                    {t('nav.contact')}
-                                    <ArrowRight className="w-3.5 h-3.5 text-zinc-700 group-hover:text-zinc-400 transition-colors" />
+                            <div className="border-t border-white/[0.06] px-5 py-6 space-y-4 shrink-0 bg-white/[0.01]">
+                                <Link href="/how-it-works" onClick={close} className="flex items-center justify-between text-[13px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors group">
+                                    {t('footer.linkHowItWorks')}
+                                    <ArrowRight className="w-4 h-4 text-zinc-800 group-hover:text-zinc-400 transition-colors" />
                                 </Link>
 
+                                <Link href="/philosophy" onClick={close} className="flex items-center justify-between text-[13px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors group">
+                                    {t('footer.linkPhilosophy')}
+                                    <ArrowRight className="w-4 h-4 text-zinc-800 group-hover:text-zinc-400 transition-colors" />
+                                </Link>
+
+                                <Link href="/faq" onClick={close} className="flex items-center justify-between text-[13px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors group">
+                                    {t('nav.faq')}
+                                    <ArrowRight className="w-4 h-4 text-zinc-800 group-hover:text-zinc-400 transition-colors" />
+                                </Link>
+
+                                <div className="h-px bg-white/[0.05] w-full" />
+
+                                <Link href="/contact" onClick={close} className="flex items-center justify-between py-2 text-[13px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors group">
+                                    {t('nav.contact')}
+                                    <ArrowRight className="w-4 h-4 text-zinc-800 group-hover:text-zinc-400 transition-colors" />
+                                </Link>
                             </div>
                         </motion.div>
                     </>

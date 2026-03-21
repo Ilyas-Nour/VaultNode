@@ -20,11 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '',
         '/privacy-report',
         '/contact',
+        '/tools/bg-remover',
         '/tools/blur',
         '/tools/clean-exif',
         '/tools/compress',
         '/tools/encrypt',
+        '/tools/enhancer',
+        '/tools/excel-to-pdf',
         '/tools/heic-to-jpg',
+        '/tools/html-to-pdf',
         '/tools/media-converter',
         '/tools/number-pages',
         '/tools/organize-pages',
@@ -32,13 +36,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/tools/pdf-merge',
         '/tools/pdf-split',
         '/tools/pdf-to-docx',
+        '/tools/pdf-to-excel',
         '/tools/pdf-to-img',
+        '/tools/pdf-to-ppt',
+        '/tools/ppt-to-pdf',
         '/tools/redact',
         '/tools/repair',
+        '/tools/scan-to-pdf',
         '/tools/sign',
         '/tools/stamp',
         '/tools/svg-to-png',
-        '/tools/unlock-pdf'
+        '/tools/text-to-word',
+        '/tools/unlock-pdf',
+        '/tools/word-to-pdf',
+        '/tools/word-to-text'
     ];
 
     const sitemapEntries: MetadataRoute.Sitemap = [];

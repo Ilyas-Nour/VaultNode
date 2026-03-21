@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo } from 'react';
-import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code, CheckCircle2, Eye, Sparkles } from 'lucide-react';
+import { Shield, Lock, FileText, FilePlus, Scissors, Key, Image, Video, Code, CheckCircle2, Eye, Sparkles, Presentation, Table } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
@@ -31,56 +31,89 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
     const vpT = useTranslations('VisualProof');
 
     const render = (type: 'before' | 'after') => {
-        const beforeLabel = vpT(toolId === 'redactor' ? 'redactor.before' :
-            toolId === 'clean-exif' ? 'cleanExif.before' :
-                toolId === 'blur' ? 'blur.before' :
-                    toolId === 'encrypt' ? 'encrypt.before' :
-                        toolId === 'password' ? 'password.before' :
-                            toolId === 'merger' ? 'merger.before' :
-                                toolId === 'heic' ? 'heic.before' :
-                                    toolId === 'unlock' ? 'unlock.before' :
-                                        toolId === 'svg-to-png' ? 'svgToPng.before' :
-                                            toolId === 'pdf-to-docx' ? 'pdfToDocx.before' :
-                                                toolId === 'pdf-to-img' ? 'pdfToImg.before' :
-                                                    toolId === 'pdf-split' ? 'pdfSplit.before' :
-                                                        toolId === 'media-converter' ? 'mediaConverter.before' :
-                                                            toolId === 'sign' ? 'sign.before' :
-                                                                toolId === 'stamp' ? 'stamp.before' :
-                                                                    toolId === 'repair' ? 'repair.before' :
-                                                                        toolId === 'number-pages' ? 'numberPages.before' :
-                                                                            toolId === 'enhancer' ? 'enhancer.before' :
-                                                                                toolId === 'bg-remover' ? 'bgRemover.before' :
-                                                                                     toolId === 'organize-pages' ? 'organizePages.before' : 
-                                                                                        toolId === 'text-to-word' ? 'textToWord.before' :
-                                                                                            toolId === 'word-to-text' ? 'wordToText.before' : 'before');
+        const getFileInfo = (toolId: string, type: 'before' | 'after') => {
+            const isWord = toolId.includes('word') || toolId.includes('docx');
+            const isPdf = toolId.includes('pdf');
+            const isPpt = toolId.includes('ppt');
+            const isExcel = toolId.includes('excel') || toolId.includes('xlsx');
+            const isText = toolId.includes('text') || toolId.includes('txt');
+            const isScan = toolId.includes('scan');
+            const isHtml = toolId.includes('html');
 
-        const afterLabel = vpT(toolId === 'redactor' ? 'redactor.after' :
-            toolId === 'clean-exif' ? 'cleanExif.after' :
-                toolId === 'blur' ? 'blur.after' :
-                    toolId === 'encrypt' ? 'encrypt.after' :
-                        toolId === 'password' ? 'password.after' :
-                            toolId === 'merger' ? 'merger.after' :
-                                toolId === 'heic' ? 'heic.after' :
-                                    toolId === 'unlock' ? 'unlock.after' :
-                                        toolId === 'svg-to-png' ? 'svgToPng.after' :
-                                            toolId === 'pdf-to-docx' ? 'pdfToDocx.after' :
-                                                toolId === 'pdf-to-img' ? 'pdfToImg.after' :
-                                                    toolId === 'pdf-split' ? 'pdfSplit.after' :
-                                                        toolId === 'media-converter' ? 'mediaConverter.after' :
-                                                            toolId === 'sign' ? 'sign.after' :
-                                                                toolId === 'stamp' ? 'stamp.after' :
-                                                                    toolId === 'repair' ? 'repair.after' :
-                                                                        toolId === 'number-pages' ? 'numberPages.after' :
-                                                                            toolId === 'enhancer' ? 'enhancer.after' :
-                                                                                toolId === 'bg-remover' ? 'bgRemover.after' :
-                                                                                     toolId === 'organize-pages' ? 'organizePages.after' : 
-                                                                                        toolId === 'text-to-word' ? 'textToWord.after' :
-                                                                                            toolId === 'word-to-text' ? 'wordToText.after' : 'after');
+            let ext = '';
+            let icon = <FileText className="w-4 h-4" />;
+            
+            if (type === 'before') {
+                if (isWord && toolId.startsWith('word')) ext = '.DOCX';
+                else if (isPdf && toolId.startsWith('pdf')) ext = '.PDF';
+                else if (isPpt && toolId.startsWith('ppt')) ext = '.PPTX';
+                else if (isExcel && toolId.startsWith('excel')) ext = '.XLSX';
+                else if (isText && toolId.startsWith('text')) ext = '.TXT';
+                else if (isHtml) ext = '.HTML';
+                else if (isScan) ext = 'PAPER';
+                else if (isPdf) ext = '.PDF';
+            } else {
+                if (toolId.endsWith('pdf')) ext = '.PDF';
+                else if (toolId.endsWith('docx') || toolId.endsWith('word')) ext = '.DOCX';
+                else if (toolId.endsWith('ppt')) ext = '.PPTX';
+                else if (toolId.endsWith('excel')) ext = '.XLSX';
+                else if (toolId.endsWith('text')) ext = '.TXT';
+            }
+
+            if (ext === '.PPTX') icon = <Presentation className="w-4 h-4 text-orange-500" />;
+            if (ext === '.XLSX') icon = <Table className="w-4 h-4 text-emerald-500" />;
+
+            return { ext, icon, isPpt: ext === '.PPTX' || (type === 'before' && isPpt) };
+        };
+
+        const { ext, icon, isPpt } = getFileInfo(toolId, type);
+
+        const LABEL_MAP: Record<string, string> = {
+            'redactor': 'redactor',
+            'redact': 'redactor',
+            'clean-exif': 'cleanExif',
+            'blur': 'blur',
+            'encrypt': 'encrypt',
+            'password': 'password',
+            'merger': 'merger',
+            'pdf-merge': 'merger',
+            'heic': 'heic',
+            'heic-to-jpg': 'heic',
+            'unlock': 'unlock',
+            'unlock-pdf': 'unlock',
+            'svg-to-png': 'svgToPng',
+            'pdf-to-docx': 'pdfToDocx',
+            'pdf-to-img': 'pdfToImg',
+            'pdf-split': 'pdfSplit',
+            'media-converter': 'mediaConverter',
+            'sign': 'sign',
+            'stamp': 'stamp',
+            'repair': 'repair',
+            'number-pages': 'numberPages',
+            'enhancer': 'enhancer',
+            'bg-remover': 'bgRemover',
+            'organize-pages': 'organizePages',
+            'text-to-word': 'textToWord',
+            'word-to-text': 'wordToText',
+            'excel-to-pdf': 'excelToPdf',
+            'pdf-to-excel': 'pdfToExcel',
+            'word-to-pdf': 'wordToPdf',
+            'pdf-to-ppt': 'pdfToPpt',
+            'ppt-to-pdf': 'pptToPdf',
+            'html-to-pdf': 'htmlToPdf',
+            'scan-to-pdf': 'scanToPdf',
+            'compress': 'compress',
+        };
+
+        const key = LABEL_MAP[toolId] || 'default';
+        const labelText = vpT(`${key}.${type}`);
+        const finalLabel = labelText.includes('VisualProof.') ? (type === 'before' ? 'Before' : 'After') : labelText;
 
         switch (toolId) {
-            case 'redactor': return (
+            case 'redactor':
+            case 'redact': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-[2s] opacity-50 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -151,7 +184,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'clean-exif': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_car_1773347841567.png')" }}
@@ -198,7 +231,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'blur': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className={cn(
                             "absolute inset-0 bg-cover bg-center transition-all duration-700",
@@ -224,7 +257,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'enhancer': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div className="relative z-10 w-full h-full flex items-center justify-center">
                         <div 
                             className={cn(
@@ -250,7 +283,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'bg-remover': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div className="relative z-10 w-full h-full flex items-center justify-center">
                         <div 
                             className="absolute inset-0 bg-no-repeat transition-all duration-[2s]"
@@ -273,7 +306,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'encrypt': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col gap-6 p-10 font-mono text-sm relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -316,7 +349,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'password': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center gap-10 p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -357,9 +390,10 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     )}
                 </div>
             );
-            case 'merger': return (
+            case 'merger':
+            case 'pdf-merge': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 gap-12 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -391,9 +425,10 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     )}
                 </div>
             );
-            case 'heic': return (
+            case 'heic':
+            case 'heic-to-jpg': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_car_1773347841567.png')" }}
@@ -425,9 +460,10 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     </div>
                 </div>
             );
-            case 'unlock': return (
+            case 'unlock':
+            case 'unlock-pdf': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center gap-4 p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -468,7 +504,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'svg-to-png': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_car_1773347841567.png')" }}
@@ -509,7 +545,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'pdf-to-docx': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -542,7 +578,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'pdf-to-img': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_car_1773347841567.png')" }}
@@ -579,7 +615,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'pdf-split': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -619,7 +655,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'media-converter': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_car_1773347841567.png')" }}
@@ -661,7 +697,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'sign': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -700,7 +736,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'stamp': return (
                 <div className="w-full h-full flex items-center justify-center bg-zinc-950 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div className="absolute inset-0 bg-cover bg-center opacity-40 transition-transform duration-[20s] linear animate-slow-zoom grayscale" style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }} />
                     {type === 'after' && (
                         <div className="absolute bottom-12 right-12 transition-all">
@@ -719,7 +755,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'repair': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 gap-12 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -751,7 +787,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'number-pages': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -779,7 +815,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'organize-pages': return (
                 <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
@@ -803,7 +839,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'text-to-word': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div className="relative z-10 w-full h-full flex items-center justify-center gap-8">
                         {type === 'before' ? (
                             <div className="w-48 h-64 bg-zinc-900/50 border border-zinc-800 p-6 flex flex-col gap-3 font-mono text-[10px] text-zinc-500 overflow-hidden">
@@ -840,7 +876,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
             );
             case 'word-to-text': return (
                 <div className="w-full h-full bg-zinc-950 flex items-center justify-center p-4 relative overflow-hidden group">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
+                    <Label text={finalLabel} type={type} />
                     <div className="relative z-10 w-full h-full flex items-center justify-center">
                         {type === 'before' ? (
                             <div className="w-48 h-64 bg-white border border-zinc-200 shadow-2xl p-8 flex flex-col gap-5 overflow-hidden filter grayscale opacity-60">
@@ -870,10 +906,171 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     </div>
                 </div>
             );
+            case 'excel-to-pdf':
+            case 'pdf-to-excel':
+                return (
+                    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
+                        <Label text={finalLabel} type={type} />
+                        <div className="absolute top-4 right-4 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded text-[9px] font-black text-emerald-500 z-20">
+                            {icon}
+                            <span>{ext}</span>
+                        </div>
+                        <div className="relative z-10 w-full h-full max-w-lg aspect-video flex items-center justify-center">
+                            {type === 'before' ? (
+                                <div className="w-full h-full bg-zinc-900/80 border border-zinc-800 flex flex-col shadow-2xl overflow-hidden">
+                                    <div className="h-6 bg-zinc-800/50 border-b border-zinc-700/50 flex items-center px-2 gap-4">
+                                        <div className="flex gap-1">
+                                            {['A', 'B', 'C', 'D', 'E'].map(l => <div key={l} className="w-10 text-[8px] text-zinc-600 font-bold text-center">{l}</div>)}
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 grid grid-cols-5 grid-rows-6 border-collapse">
+                                        {Array.from({ length: 30 }).map((_, i) => (
+                                            <div key={i} className="border border-zinc-800/20 p-2 flex items-center relative">
+                                                {i % 5 === 0 && <span className="absolute left-1 top-1 text-[6px] text-zinc-700">{Math.floor(i/5) + 1}</span>}
+                                                <div className={cn("h-1 rounded-full", i % 7 === 0 ? "w-1/2 bg-emerald-500/20" : "w-3/4 bg-zinc-800/40")} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="w-[75%] h-full bg-white border border-zinc-200 shadow-2xl p-6 flex flex-col gap-4 overflow-hidden transform rotate-1">
+                                    <div className="flex justify-between items-center bg-zinc-50 p-3 rounded border border-zinc-100 mb-2">
+                                        <div className="h-1.5 w-24 bg-zinc-900 rounded-full" />
+                                        <div className="h-1.5 w-12 bg-emerald-500/20 rounded-full" />
+                                    </div>
+                                    <div className="space-y-4">
+                                        {[1, 2, 3].map(i => (
+                                            <div key={i} className="flex gap-3 items-center">
+                                                <div className="h-1 w-full bg-zinc-100 rounded-full" />
+                                                <div className="h-1 w-16 bg-zinc-100 rounded-full" />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            case 'word-to-pdf':
+            case 'pdf-to-docx':
+            case 'ppt-to-pdf':
+            case 'pdf-to-ppt':
+            case 'html-to-pdf':
+            case 'scan-to-pdf':
+            case 'text-to-word':
+                return (
+                    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
+                        <Label text={finalLabel} type={type} />
+                        <div className="absolute top-4 right-4 flex items-center gap-2 bg-white/5 border border-white/10 px-2 py-1 rounded text-[9px] font-black text-zinc-400 z-20">
+                            {icon}
+                            <span>{ext}</span>
+                        </div>
+                        <div className="relative z-10 w-full h-full max-w-lg aspect-video flex items-center justify-center">
+                            {type === 'before' ? (
+                                <div className={cn(
+                                    "bg-zinc-900 border border-zinc-800 flex flex-col shadow-2xl overflow-hidden p-8 opacity-60",
+                                    isPpt ? "aspect-[16/9] w-[80%]" : "w-[60%] h-full"
+                                )}>
+                                    <div className="h-4 w-3/4 bg-zinc-800 rounded-sm mb-6" />
+                                    <div className="space-y-3">
+                                        {[90, 100, 95, 80, 100, 70, 90, 85].map((w, i) => (
+                                            <div key={i} className="h-1.5 bg-zinc-800 rounded-full" style={{ width: `${w}%` }} />
+                                        ))}
+                                    </div>
+                                    {isPpt && (
+                                        <div className="mt-auto flex gap-2">
+                                            {[1, 2, 3].map(i => <div key={i} className="w-8 h-6 bg-zinc-800/50 rounded-sm" />)}
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className={cn(
+                                    "bg-white border border-zinc-200 shadow-2xl flex flex-col gap-5 overflow-hidden transform",
+                                    isPpt ? "aspect-[16/9] w-[80%] p-6 -rotate-1" : "w-[60%] h-full p-10 -rotate-1"
+                                )}>
+                                    <div className="h-4 w-1/2 bg-zinc-900 rounded-sm mb-4" />
+                                    <div className="space-y-3">
+                                        {[100, 100, 95, 90, 100, 85].map((w, i) => (
+                                            <div key={i} className="h-2 bg-zinc-100 rounded-full" style={{ width: `${w}%` }} />
+                                        ))}
+                                    </div>
+                                    {isPpt ? (
+                                        <div className="mt-auto grid grid-cols-2 gap-4">
+                                            <div className="aspect-video bg-zinc-50 border border-zinc-100 rounded flex items-center justify-center">
+                                                <Presentation className="w-4 h-4 text-zinc-200" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="h-1.5 w-full bg-zinc-100 rounded-full" />
+                                                <div className="h-1.5 w-3/4 bg-zinc-100 rounded-full" />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="mt-10 p-6 border-2 border-dashed border-zinc-100 rounded-lg flex flex-col gap-2">
+                                            <div className="h-2 w-1/4 bg-zinc-200 rounded-full" />
+                                            <div className="h-4 w-1/2 bg-zinc-50 rounded-sm" />
+                                        </div>
+                                    )}
+                                    <div className="mt-auto flex justify-between items-center text-[8px] font-black text-zinc-300 uppercase tracking-widest border-t border-zinc-50 pt-4">
+                                        <span>Vault Manifest v2.1</span>
+                                        <div className="flex items-center gap-1">
+                                            <Shield className="w-2.5 h-2.5 text-emerald-500" />
+                                            <span>Sovereign Output</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            case 'word-to-text':
+                return (
+                    <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-4 relative overflow-hidden group">
+                        <Label text={finalLabel} type={type} />
+                        <div className="relative z-10 w-full h-full max-w-lg aspect-video flex items-center justify-center">
+                            {type === 'before' ? (
+                                <div className="w-[60%] h-full bg-white border border-zinc-200 shadow-2xl p-8 flex flex-col gap-5 overflow-hidden filter grayscale opacity-40">
+                                    <div className="h-4 w-3/4 bg-zinc-100 rounded-sm mb-4" />
+                                    {[1, 2, 3, 4, 5].map(i => (
+                                        <div key={i} className="h-1.5 w-full bg-zinc-50 rounded-full" />
+                                    ))}
+                                    <div className="mt-auto border-t pt-4">
+                                        <div className="h-1.5 w-1/2 bg-zinc-50 rounded-full" />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="w-full h-[60%] bg-zinc-900 border border-emerald-500/20 p-8 flex flex-col gap-3 shadow-[0_0_80px_rgba(16,185,129,0.05)] rounded-sm font-mono text-[10px]">
+                                    <div className="flex items-center gap-3 border-b border-white/5 pb-4 mb-2">
+                                        <span className="text-emerald-500 font-bold">$</span>
+                                        <span className="text-zinc-500 uppercase tracking-widest text-[9px]">Text Buffer Extracted</span>
+                                    </div>
+                                    <div className="space-y-2">
+                                        {[100, 95, 80, 100, 75].map((w, i) => (
+                                            <div key={i} className="h-1 bg-emerald-500/40 rounded-full" style={{ width: `${w}%` }} />
+                                        ))}
+                                    </div>
+                                    <div className="mt-auto text-emerald-500/40 text-[8px] uppercase tracking-[0.4em] text-center">Plaintext Isolation Complete</div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
             default: return (
-                <div className="w-full h-full bg-zinc-950 flex items-center justify-center">
-                    <Label text={type === 'before' ? beforeLabel : afterLabel} type={type} />
-                    <span className="text-zinc-700 font-mono text-xs italic tracking-widest">{toolId.toUpperCase()}</span>
+                <div className="w-full h-full bg-zinc-950 flex flex-col items-center justify-center p-8 relative overflow-hidden">
+                    <Label text={finalLabel} type={type} />
+                    <div className="relative z-10 flex flex-col items-center gap-6">
+                        <div className="w-24 h-24 border-2 border-zinc-800 bg-zinc-900 flex items-center justify-center relative shadow-2xl overflow-hidden">
+                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/[0.03] to-transparent" />
+                            <Lock className={cn("w-10 h-10 transition-all", type === 'after' ? "text-emerald-500" : "text-zinc-600")} />
+                        </div>
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="h-1 w-32 bg-zinc-800 rounded-full overflow-hidden">
+                                <div 
+                                    className={cn("h-full transition-all duration-1000", type === 'after' ? "w-full bg-emerald-500" : "w-1/3 bg-zinc-600")} 
+                                />
+                            </div>
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600">{toolId.replace(/-/g, ' ')}</span>
+                        </div>
+                    </div>
                 </div>
             );
         }

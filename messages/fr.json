@@ -1,4 +1,60 @@
 {
+    "NotFoundPage": {
+        "title": "404 - Chemin Corrompu",
+        "description": "Le nœud demandé n'a pas pu être localisé dans la voûte. Le chemin a peut-être été déplacé ou censuré.",
+        "btn": "Retour à la Voûte"
+    },
+    "FAQPage": {
+        "title": "Questions Fréquentes",
+        "subtitle": "Tout ce que vous devez savoir sur le standard Zéro-Courbe.",
+        "categories": {
+            "security": "Sécurité et Confidentialité",
+            "usage": "Utilisation et Limites",
+            "technical": "Détails Techniques"
+        },
+        "questions": {
+            "q1": "PrivaFlow est-il vraiment privé ?",
+            "a1": "Oui. Contrairement à d'autres outils, nous ne téléchargeons jamais vos fichiers sur un serveur. Tout le traitement se passe à 100 % localement dans la mémoire de votre navigateur. Vos données ne quittent jamais votre appareil.",
+            "q2": "Y a-t-il une limite de taille de fichier ?",
+            "a2": "Il n'y a pas de limite artificielle. Cependant, comme le traitement se fait dans la RAM de votre appareil, les fichiers très volumineux (2 Go+) peuvent dépendre des capacités de votre matériel local.",
+            "q3": "Cela fonctionne-t-il hors ligne ?",
+            "a3": "Une fois l'outil chargé dans votre navigateur, il peut fonctionner complètement hors ligne. Aucune connexion Internet n'est requise pour le traitement effectif des fichiers.",
+            "q4": "Est-ce complètement gratuit ?",
+            "a4": "Oui. PrivaFlow est un projet axé sur la confidentialité, engagé à être gratuit et accessible à tous, pour toujours."
+        }
+    },
+    "HowItWorksPage": {
+        "title": "Protocole Technique",
+        "subtitle": "Comment PrivaFlow assure une souveraineté absolue.",
+        "protocol": "Protocole Zéro-Téléchargement",
+        "intro": "Chaque opération suit une architecture 'Zéro-Téléchargement'. Voici comment nous protégeons vos données.",
+        "sections": {
+            "step1": "1. Isolation Locale",
+            "step1Desc": "Tout le moteur est téléchargé dans votre navigateur. Votre appareil devient une station autonome.",
+            "step2": "2. Moteurs Wasm",
+            "step2Desc": "Nous utilisons WebAssembly pour exécuter le code nativement dans votre navigateur.",
+            "step3": "3. Exécution Sandbox",
+            "step3Desc": "Les fichiers sont traités localement. Aucune donnée ne quitte votre machine.",
+            "verification": "Vérification",
+            "verificationDesc": "Vérifiez via l'onglet 'Réseau' : 0.0 Ko envoyés lors du traitement."
+        }
+    },
+    "PhilosophyPage": {
+        "title": "Le Manifeste Zéro-Courbe",
+        "subtitle": "Confidentialité sans compromis.",
+        "vision": {
+            "title": "La Confidentialité comme Norme",
+            "text": "La confidentialité doit être le fondement, pas un simple réglage."
+        },
+        "sovereignty": {
+            "title": "Souveraineté des Données",
+            "text": "Vos données sont votre propriété absolue dans l'espace numérique."
+        },
+        "design": {
+            "title": "Design Zéro-Courbe",
+            "text": "Notre esthétique reflète notre philosophie : des lignes sans compromis."
+        }
+    },
     "HomePage": {
         "title": "Vos fichiers restent avec vous. Toujours.",
         "titlePart1": "Vos Fichiers.",
@@ -18,29 +74,29 @@
         "heroStatClient": "Côté Client",
         "sectionAllLabel": "SOLUTIONS DE SÉCURITÉ",
         "sectionAllTitle": "30 Outils Privés. Zéro Upload.",
-        "launchRedactor": "Masquer les Infos Sensibles",
-        "imageCompressor": "Réduire la Photo",
-        "pdfMerger": "Fusionner PDF",
-        "pdfToImg": "PDF vers Image",
-        "cleanExif": "Supprimer les Données Photo",
-        "password": "Générateur de Mots de Passe",
-        "unlockPdf": "Déverrouiller PDF",
-        "heicToJpg": "Photo iPhone vers JPG",
-        "pdfToDocx": "PDF vers Word",
-        "mediaConverter": "MP4 vers MP3 / Vidéo Fixer",
-        "svgToPng": "Logo vers Photo",
-        "textEncryptor": "Message Secret",
-        "blurTool": "Flouter la Photo",
-        "pdfSplit": "Diviser PDF",
-        "sign": "Signer un Document",
-        "stamp": "Tamponner une Photo",
-        "repair": "Réparer un Fichier",
-        "numberPages": "Numéroter les Pages",
-        "organizePages": "Organiser les Pages",
-        "imageEnhancer": "Améliorer l'Image",
-        "bgRemover": "Supprimer le Fond",
-        "textToDocx": "Texte vers Word",
-        "docxToText": "Word vers Texte",
+        "launchRedactor": "CAVIARDER PDF",
+        "imageCompressor": "COMPRESSER PDF",
+        "pdfMerger": "FUSIONNER PDF",
+        "pdfToImg": "PDF EN JPG",
+        "cleanExif": "NETTOYER EXIF",
+        "password": "CRÉATEUR CLÉS",
+        "unlockPdf": "DÉVERROUILLER PDF",
+        "heicToJpg": "HEIC EN JPG",
+        "pdfToDocx": "PDF EN WORD",
+        "mediaConverter": "CONVERTIR VIDÉO",
+        "svgToPng": "SVG EN PNG",
+        "textEncryptor": "MESSAGE SECRET",
+        "blurTool": "FLOUTER IMAGE",
+        "pdfSplit": "DIVISER PDF",
+        "sign": "SIGNER PDF",
+        "stamp": "AJOUTER TAMPON",
+        "repair": "RÉPARER PDF",
+        "numberPages": "NUMÉROTER PAGES",
+        "organizePages": "ORGANISER PDF",
+        "imageEnhancer": "AMÉLIORER IMAGE",
+        "bgRemover": "SUPPRIMER FOND",
+        "textToDocx": "TEXTE EN WORD",
+        "docxToText": "WORD EN TEXTE",
         "toolDescriptions": {
             "redactor": "Utilisez le pinceau pour peindre sur les secrets afin de les cacher.",
             "cleanExif": "Supprimez la 'carte cachée' et les données de localisation de vos photos.",
@@ -254,49 +310,57 @@
             "brandStatement": "Expert en confidentialité.",
             "brandHighlight": "Exécution sécurisée.",
             "colInfo": "Ressources",
-            "colTools": "Sécurité",
+            "colTools": "Outils",
             "colMedia": "Documents",
             "colPrivacy": "Légal",
+            "catOrganize": "ORGANISER PDF",
+            "catOptimize": "OPTIMISER PDF",
+            "catToPdf": "CONVERTIR EN PDF",
+            "catFromPdf": "CONVERTIR DEPUIS PDF",
+            "catEdit": "MODIFIER PDF",
+            "catSecurity": "SÉCURITÉ PDF",
+            "catMedia": "MÉDIAS ET IMAGES",
             "linkHowItWorks": "Développement Local",
             "linkPhilosophy": "Architecture Zéro Serveur",
+            "linkFAQ": "FAQ",
             "linkAllTools": "Annuaire des Outils",
             "linkContact": "Aide & Support",
-            "linkRedact": "Caviardage PDF",
-            "linkCleanMeta": "Nettoyage Exif",
-            "linkConverter": "Traitement Vidéo",
-            "linkPdfWord": "Extraction PDF/Word",
-            "linkCompress": "Compression Image",
-            "linkMerge": "Fusion de Documents",
-            "linkSign": "Signature Digitale",
-            "linkRepair": "Restauration PDF",
-            "linkBlur": "Flou de Confidentialité",
-            "linkHeic": "Support Apple HEIC",
-            "linkSvg": "Rendu Vectoriel",
-            "linkUnlock": "Décryptage PDF",
-            "linkPdfImg": "PDF vers Pixel",
-            "linkSplit": "Segmentation PDF",
-            "linkStamp": "Marque de Propriété",
-            "linkNumber": "Index de Pages",
-            "linkOrganize": "Gestion de Structure",
-            "linkTextToWord": "Texte à Word",
-            "linkWordToText": "Word à Texte",
-            "linkPassword": "Générateur de Mots de Passe",
-            "linkEncrypt": "Message Secret",
-            "linkBgRemover": "Isolation de Sujet",
+            "linkRedact": "CAVIARDER PDF",
+            "linkCleanMeta": "NETTOYER EXIF",
+            "linkConverter": "CONVERTIR VIDÉO",
+            "linkPdfWord": "PDF EN WORD",
+            "linkCompress": "COMPRESSER PDF",
+            "linkMerge": "FUSIONNER PDF",
+            "linkSign": "SIGNER PDF",
+            "linkRepair": "RÉPARER PDF",
+            "linkBlur": "FLOUTER IMAGE",
+            "linkHeic": "HEIC EN JPG",
+            "linkSvg": "SVG EN PNG",
+            "linkUnlock": "DÉVERROUILLER PDF",
+            "linkPdfImg": "PDF EN JPG",
+            "linkSplit": "DIVISER PDF",
+            "linkStamp": "AJOUTER TAMPON",
+            "linkNumber": "NUMÉROTER PAGES",
+            "linkOrganize": "ORGANISER PDF",
+            "linkTextToWord": "TEXTE EN WORD",
+            "linkWordToText": "WORD EN TEXTE",
+            "linkPassword": "CRÉATEUR CLÉS",
+            "linkEncrypt": "MESSAGE SECRET",
+            "linkBgRemover": "SUPPRIMER FOND",
             "linkEncryption": "Chiffrement AES",
-            "linkEnhancer": "Clarification Visuelle",
+            "linkEnhancer": "AMÉLIORER IMAGE",
             "linkZeroUpload": "Garantie Zéro Upload",
             "linkOpenArch": "Code Source Ouvert",
             "linkLocalProtocol": "Protocole WASM",
             "copyright": "© 2026 PRIVaflow · Souveraineté des données garantie.",
             "footerCredits": "Zéro Télémétrie · Zéro Analytique · 100% Client-Side",
-            "linkWordToPdf": "Word vers PDF",
-            "linkPdfToPpt": "PDF vers PPT",
-            "linkPptToPdf": "PPT vers PDF",
-            "linkExcelToPdf": "Excel vers PDF",
-            "linkPdfToExcel": "PDF vers Excel",
-            "linkHtmlToPdf": "HTML vers PDF",
-            "linkScanToPdf": "Scanner en PDF"
+            "linkWordToPdf": "WORD EN PDF",
+            "linkPdfToPpt": "PDF EN POWERPOINT",
+            "linkPptToPdf": "POWERPOINT EN PDF",
+            "linkExcelToPdf": "EXCEL EN PDF",
+            "linkPdfToExcel": "PDF EN EXCEL",
+            "linkHtmlToPdf": "HTML EN PDF",
+            "linkScanToPdf": "SCANNER EN PDF"
         },
         "nav": {
             "vault": "Sécurité",
@@ -304,6 +368,7 @@
             "documents": "Papiers",
             "contact": "Contact",
             "philosophy": "Philosophie",
+            "faq": "FAQ",
             "shield": "Rapport"
         },
         "logoTagline": "Souveraineté des Données",
@@ -340,159 +405,159 @@
     },
     "Metadata": {
         "default": {
-            "title": "PrivaFlow | Vos Fichiers Restent Avec Vous",
-            "description": "Tout ce que vous faites reste sur votre propre écran. Des outils sûrs, privés et 100% gratuits pour vos photos et fichiers.",
-            "keywords": "caviardage pdf privé, déverrouiller pdf hors ligne, heic vers jpg local, convertisseur pdf vers word, convertisseur ffmpeg wasm, svg vers png local, zéro téléchargement confidentialité, texte vers word local, word vers texte navigateur"
-        },
-        "blur": {
-            "title": "Flouter des Visages sur Photos | Confidentialité Locale",
-            "description": "Masquez des visages ou des zones sensibles dans vos photos localement dans votre navigateur. Aucun upload de données, outil de flou 100% privé.",
-            "keywords": "flouter visage photo, masquer infos sensibles image, flou photo local, outil flou navigateur, éditeur image confidentialité"
-        },
-        "cleanExif": {
-            "title": "Supprimer les Métadonnées Photo | Nettoyeur EXIF",
-            "description": "Effacez la carte GPS cachée et les données de suivi privées de vos photos. Nettoyage des métadonnées 100% local.",
-            "keywords": "supprimer données exif, enlever métadonnées image, masquer localisation photo, nettoyeur exif privé, désinfectant image local"
-        },
-        "compress": {
-            "title": "Compresser des Images Localement | Optimiseur de Pixels",
-            "description": "Réduisez la taille de vos fichiers sans perte de qualité visuelle. Optimisation locale sans charges au serveur.",
-            "keywords": "compresser images localement, réduire taille photo ligne, optimiseur image navigateur, compresseur image sans uploader, réducteur photo privé"
-        },
-        "enhancer": {
-            "title": "Amélioration d'Image par IA | Corriger Photos Floues",
-            "description": "Améliorez la clarté et restaurez la netteté des photos floues avec des filtres professionnels de traitement local.",
-            "keywords": "sharpen flou photo ligne, améliorer image ia local, réparer photos floues, affûteur image navigateur, restauration photo privée"
+            "title": "PrivaFlow | Outils de Confidentialité Pro. Purement Locaux.",
+            "description": "La suite d'élite native du navigateur pour le traitement des PDF, des images et des médias. 100% privé, sans upload et gratuit. Vos fichiers ne quittent jamais votre appareil.",
+            "keywords": "éditeur pdf privé, outils de fichiers locaux gratuits, convertisseur sans upload, outil multimédia natif du navigateur, traitement sécurisé de documents, outils pdf hors ligne, éditeur d'images priorité confidentialité, convertisseur média professionnel"
         },
         "bgRemover": {
-            "title": "Supprimer le Fond Localement | Isolation IA du Sujet",
-            "description": "Isolez les sujets et supprimez les fonds instantanément via IA locale. Extraction PNG transparente 100% privée.",
-            "keywords": "supprimer fond image ligne, effaceur fond ia local, créateur png transparent, isolation sujet privé, nettoyeur bg navigateur"
+            "title": "Suppression de Fond par IA | Effacer l'Arrière-plan Localement et Privément",
+            "description": "Isolez les sujets et supprimez les fonds instantanément avec l'IA locale. Isolation de sujet de qualité professionnelle sans jamais uploader vos photos.",
+            "keywords": "supprimer fond image ligne, effaceur de fond ia local, isoler sujet photo, créateur de png transparent, suppression de fond privée, effaceur bg hd gratuit"
+        },
+        "blur": {
+            "title": "Flouter des Visages sur Photos | Pinceau de Confidentialité Local Sécurisé",
+            "description": "Obfusquez les visages, les plaques d'immatriculation ou les données sensibles dans vos photos localement. Flou gaussien de qualité pro s'exécutant entièrement dans la mémoire de votre navigateur.",
+            "keywords": "flouter visage photo, masquer infos sensibles image, flou photo local, outil de flou natif du navigateur, éditeur de photos priorité confidentialité, biffer images hors ligne"
+        },
+        "cleanExif": {
+            "title": "Supprimer les Métadonnées Photo | Nettoyeur EXIF Pro et Scrubber GPS",
+            "description": "Effacez les coordonnées GPS cachées et les données de suivi de vos actifs numériques. Assainissement des métadonnées 100% local pour une confidentialité professionnelle.",
+            "keywords": "supprimer données exif, enlever métadonnées image, masquer localisation photo, nettoyeur exif privé, désinfectant d'images local, supprimer gps des photos, anonymiser images"
+        },
+        "compress": {
+            "title": "Compresser des Images Localement | Optimiseur de Pixels Pro",
+            "description": "Réduisez la taille des fichiers images tout en conservant une fidélité visuelle maximale. Compression locale avancée sans traitement côté serveur.",
+            "keywords": "compresser images localement, réduire taille photo ligne, optimiseur d'images natif du navigateur, compresseur d'images sans upload, réducteur de photos privé, compression webp ligne"
         },
         "encrypt": {
-            "title": "Chiffrement de Messages | Coffre-fort AES-256",
-            "description": "Verrouillez vos messages confidentiels dans un coffre-fort cryptographique via AES-256. Créateur de notes sécurisées.",
-            "keywords": "chiffrer texte ligne, bloqueur message aes-256, créateur notes sécurisées, cryptage texte privé, outil chiffrement local"
+            "title": "Chiffreur de Notes Secrètes | Cryptographie Locale AES-256 GCM",
+            "description": "Verrouillez les textes sensibles dans un coffre-fort cryptographique de qualité industrielle. Utilise le chiffrement natif du navigateur AES-256-GCM. Aucun log serveur.",
+            "keywords": "chiffrer texte ligne, bloqueur de messages aes-256, créateur de notes sécurisées, cryptage de texte privé, outil de chiffrement local, chiffrement de qualité industrielle navigateur"
+        },
+        "enhancer": {
+            "title": "Amélioration d'Image par IA | Corriger les Photos Floues",
+            "description": "Restaurez la clarté et améliorez la netteté des actifs de faible fidélité avec des filtres locaux haute performance. Netteté professionnelle sans fuite de données.",
+            "keywords": "accentuer photo floue ligne, amélioration image ia locale, réparer photos floues, affûteur d'images navigateur, restauration photo privée, agrandir image navigateur"
         },
         "heicToJpg": {
-            "title": "Convertir HEIC en JPG | Support Photos iPhone",
-            "description": "Transformez les fichiers Apple HEIC en photos JPEG universelles directement dans votre navigateur. Sans transfert.",
-            "keywords": "convertir heic vers jpg ligne, convertisseur heif jpeg local, ouvrir photos iphone sur pc, convertisseur heic privé, transcodeur photo navigateur"
+            "title": "Convertisseur HEIC en JPG | Transcodeur Rapide de Photos iPhone",
+            "description": "Transcodez les fichiers Apple HEIC en JPG de haute qualité universellement. Traitement 100% local, respecte tous les protocoles de confidentialité.",
+            "keywords": "convertir heic vers jpg ligne, convertisseur heif vers jpeg local, ouvrir photos iphone sur pc, convertisseur heic privé, transcodeur photo navigateur, heic vers jpg rapide"
         },
         "mediaConverter": {
-            "title": "Convertisseur Vidéo et Audio | Transcodeur Navigateur",
-            "description": "Changez les formats vidéo ou audio localement via FFmpeg.wasm. Conversion multimédia 100% privée.",
-            "keywords": "convertisseur vidéo ligne sans uploader, convertir mp4 vers mp3 local, transcodeur média navigateur, réparateur vidéo privé, convertisseur ffmpeg wasm"
+            "title": "Convertisseur Vidéo et Audio | Transcodage Local FFmpeg.wasm",
+            "description": "Conversion professionnelle de formats multimédias via FFmpeg dans votre navigateur. De MP4 à MP3, Réparateur Vidéo et plus — tout sans upload.",
+            "keywords": "convertisseur vidéo ligne sans upload, convertir mp4 vers mp3 local, transcodeur multimédia navigateur, réparateur vidéo privé, convertisseur ffmpeg wasm, m4a vers mp3 local"
         },
         "password": {
-            "title": "Générateur de Mots de Passe | Moteur d'Entropie",
-            "description": "Générez des mots de passe à haute entropie et de niveau industriel localement. Nous ne voyons jamais vos codes.",
-            "keywords": "générateur mot de passe sécurisé, créateur code fort, moteur entropie local, créateur mot de passe privé, codes résistants force brute"
+            "title": "Générateur de Mots de Passe Sécurisé | Moteur d'Entropie Pro",
+            "description": "Générez des mots de passe cryptographiquement sûrs et à haute entropie localement. Protégez votre identité avec des codes que nous ne voyons jamais.",
+            "keywords": "générateur de mot de passe sécurisé, créateur de codes forts, moteur d'entropie local, créateur de mots de passe privé, codes résistants force brute, mot de passe quantique"
         },
         "pdfMerge": {
-            "title": "Fusionner des PDF | Combinateur de Documents Local",
-            "description": "Combinez plusieurs documents PDF en un seul fichier sécurisé directement dans votre navigateur. Assemblage local.",
-            "keywords": "fusionner pdf ligne gratuit, combiner fichiers pdf localement, assembleur pdf navigateur, fusion pdf sans uploader, jointeur document privé"
+            "title": "Fusionner des PDF | Combinateur de Documents Local Sécurisé",
+            "description": "Unifiez plusieurs documents PDF en un seul fichier professionnel. Traité entièrement en RAM pour une confidentialité industrielle maximale.",
+            "keywords": "fusionner pdf ligne gratuit, combiner fichiers pdf localement, assembleur pdf navigateur, fusion pdf sans upload, assemblage document privé, unifier pages pdf"
         },
         "pdfSplit": {
-            "title": "Diviser et Extraire des Pages PDF | Gestionnaire Local",
-            "description": "Extrayez en toute sécurité des pages ou des plages de vos documents PDF sans jamais les uploader vers un serveur.",
-            "keywords": "diviser pdf ligne, extraire pages pdf local, diviseur pdf privé, segmenteur document navigateur, extracteur pdf sans uploader"
+            "title": "Extraire des Pages PDF | Diviseur et Segmenteur PDF Local",
+            "description": "Extrayez des pages ou des plages spécifiques de n'importe quel PDF avec une confidentialité de niveau militaire. Aucune écriture persistante sur le système de fichiers.",
+            "keywords": "diviser pdf ligne, extraire des pages pdf local, diviseur pdf privé, segmenteur de documents du navigateur, extracteur pdf sans upload, séparer pages pdf"
         },
         "pdfToDocx": {
-            "title": "Convertir PDF en Word | Récupération Éditable",
-            "description": "Transformez vos PDF verrouillés en documents Word éditables localement dans votre navigateur. Confidentialité totale.",
-            "keywords": "convertir pdf vers word ligne, convertisseur pdf docx local, éditer pdf verrouillé navigateur, restaurateur document privé, pdf vers word sans uploader"
+            "title": "De PDF à Word | Reconstruction Éditable Professionnelle",
+            "description": "Conversion PDF vers Word de haute précision exécutée localement. Reconstruit la structure du document en préservant le formatage et la confidentialité.",
+            "keywords": "convertir pdf vers word ligne, convertisseur pdf docx local, éditer pdf verrouillé navigateur, restaurateur de documents privé, pdf vers word sans upload, de pdf vers docx précis"
         },
         "pdfToImg": {
-            "title": "PDF vers Galerie d'Images | Captures Haute Résolution",
-            "description": "Convertissez chaque page d'un PDF en fichiers images JPG ou PNG localement. Synthèse sécurisée page-vers-pixel.",
-            "keywords": "convertir pdf vers image ligne, enregistrer pdf en jpg local, convertisseur pdf galerie, captures page privées, moteur rendu document navigateur"
+            "title": "De PDF en Galerie d'Images | Captures de Pages Haute Résolution (DPI)",
+            "description": "Exportez les pages PDF en actifs PNG ou JPG haute définition sans perte. Rendu purement côté client avec protocoles Zéro-Fuite.",
+            "keywords": "convertir pdf vers image ligne, enregistrer pdf en jpg local, convertisseur pdf galerie, captures de pages privées, moteur de rendu navigateur, pdf vers png haute res"
         },
         "redact": {
-            "title": "Caviarder des PDF | Masquer les Infos Sensibles",
-            "description": "Détruisez définitivement les données confidentielles dans vos PDF. Caviardage local industriel garanti.",
-            "keywords": "caviarder pdf ligne gratuit, masquer texte pdf définitivement, assainissement données local, redacteur document privé, outil caviardage navigateur"
+            "title": "Caviarder des PDF | Suppression Permanente de Données Sensibles",
+            "description": "Détruisez définitivement les chaînes et vecteurs sensibles dans vos documents PDF. Le caviardage local de qualité industrielle garantit l'effacement définitif des données.",
+            "keywords": "caviarder pdf ligne gratuit, masquer texte pdf définitivement, assainissement de données local, rédacteur de documents privé, outil de caviardage navigateur, assainir pdf hors ligne"
         },
         "svgToPng": {
-            "title": "Convertir SVG en PNG | De Vectoriel à Raster",
-            "description": "Convertissez des dessins vectoriels en photos PNG haute résolution localement. Pixellisation 100% sécurisée.",
-            "keywords": "convertir svg vers png ligne, convertisseur svg raster local, outil design vecteur photo, moteur rendu svg privé, convertisseur logo navigateur"
+            "title": "Convertisseur SVG en PNG | Animation Vectorielle et Rasterisation Locale",
+            "description": "Pixellisez les graphiques vectoriels SVG en PNG haute résolution. Préservation professionnelle de la transparence et sécurité sans transfert.",
+            "keywords": "convertir svg vers png ligne, convertisseur svg raster local, outil design vecteur photo, moteur de rendu svg privé, convertisseur de logo navigateur, svg vers png haute fidélité"
         },
         "unlockPdf": {
-            "title": "Déverrouiller PDF | Supprimer Mot de Passe Localement",
-            "description": "Supprimez les restrictions de mot de passe de vos fichiers PDF instantanément. Tout s'exécute dans votre navigateur.",
-            "keywords": "déverrouiller pdf ligne gratuit, enlever mot de passe pdf local, décrypter pdf navigateur, accès privé documents, débloqueur pdf sans uploader"
+            "title": "Déverrouiller PDF en Ligne | Suppression de Mots de Passe et Restrictions Locale",
+            "description": "Supprimez instantanément les restrictions de copie/impression/édition de PDF. Décrypte les entêtes localement dans la mémoire du navigateur pour une confidentialité absolue.",
+            "keywords": "déverrouiller pdf ligne gratuit, enlever mot de passe pdf local, décrypter pdf navigateur, accès privé documents, débloqueur pdf sans upload, supprimer sécurité pdf"
         },
         "sign": {
-            "title": "Signer PDF en Ligne | Signature Digitale Naturelle",
-            "description": "Dessinez votre signature et placez-la sur n'importe quelle page PDF via le moteur de rendu local du navigateur.",
-            "keywords": "signer pdf ligne gratuit, dessiner signature document, signature électronique locale, signataire pdf privé, tablette signature navigateur"
+            "title": "Signer PDF en Ligne | Outil de Signature Électronique Industrielle",
+            "description": "Signez n'importe quel document en toute sécurité avec des signatures manuscrites. Rendu natif du navigateur pour une confidentialité légale et professionnelle.",
+            "keywords": "signer pdf ligne gratuit, dessiner signature sur document, signature électronique locale, signataire pdf privé, tablette de signature navigateur, créateur signature digitale pdf"
         },
         "stamp": {
-            "title": "Filigrane sur Photos | Tampon de Propriété",
-            "description": "Protégez vos actifs visuels en ajoutant des filigranes ou logos localement. Application haute fidélité au niveau pixel.",
-            "keywords": "filigrane photos ligne, ajouter logo image local, tampon photo privé, protéger actifs visuels navigateur, outil branding local"
+            "title": "Filigrane sur Photos | Marquage Pro de Logos et Protection",
+            "description": "Protégez vos actifs créatifs avec des filigranes locaux haute fidélité. Logos et textes intégrés aux pixels pour une protection maximale.",
+            "keywords": "filigrane photos ligne, ajouter logo image local, tampon photo privé, protéger actifs visuels navigateur, outil de marquage local, filigrane photos en masse"
         },
         "repair": {
-            "title": "Réparer un PDF Corrompu | Restauration de Structure",
-            "description": "Tentez de restaurer l'intégrité structurelle des fichiers PDF cassés ou corrompus localement dans votre navigateur.",
-            "keywords": "réparer pdf cassé ligne, fixer document corrompu local, récupération entête pdf navigateur, restauration fichier privée, résoudre erreur ouverture pdf"
+            "title": "Réparer un PDF Corrompu | Récupération Locale d'Entêtes et Xref",
+            "description": "Récupérez des documents corrompus via des filtres de reconstruction structurelle avancés. Réparation de fichiers priorité confidentialité en RAM.",
+            "keywords": "réparer pdf cassé ligne, fixer document corrompu local, récupération entête pdf navigateur, restauration de fichiers privée, résoudre erreur ouverture pdf, restaurer pdf cassé"
         },
         "numberPages": {
-            "title": "Numéroter les Pages PDF | Pagination de Documents",
-            "description": "Ajoutez des numéros de pages à vos documents pour une meilleure organisation. 100% local, sans serveur.",
-            "keywords": "numéroter pages pdf ligne, ajouter pagination pdf local, indexeur document organique, numérotation fichier privée, organisateur pdf navigateur"
+            "title": "Numéroter les Pages PDF | Pagination Automatique de Documents",
+            "description": "Ajoutez des numéros de pages et des index précis à vos documents. Pagination propre et professionnelle sans intervention du serveur.",
+            "keywords": "numéroter pages pdf ligne, ajouter pagination pdf local, indexeur de documents organique, numérotation de fichiers privée, organisateur pdf navigateur, numéros automatiques pages pdf"
         },
         "organizePages": {
-            "title": "Gérer les Pages PDF | Réordonner et Supprimer",
-            "description": "Déplacez, supprimez ou ajoutez des pages à vos PDF avec une interface simple par glisser-déposer locale.",
-            "keywords": "organiser pages pdf ligne, réordonner pages pdf local, supprimer pages pdf navigateur, gestionnaire document privé, éditeur pdf sans uploader"
+            "title": "Gérer les Pages PDF | Réordonner, Supprimer et Pivoter Pro",
+            "description": "Prenez le contrôle total de la structure de vos documents avec un espace de travail local. Élaguez, triez et organisez de manière privée.",
+            "keywords": "organiser pages pdf ligne, réordonner pages pdf local, supprimer pages pdf navigateur, gestionnaire de documents privé, éditeur pdf sans upload, pivoter pages pdf ligne"
         },
         "textToDocx": {
-            "title": "Texte vers Word | Synthèse de Documents Local",
-            "description": "Transformez vos fichiers texte brut en documents Word professionnels localement. Synthèse Word avec confidentialité garantie.",
-            "keywords": "convertir txt en docx local, convertisseur texte vers word ligne, extraire texte docx gratuit, lire fichier word local, confidentialité word"
+            "title": "Texte vers Word | Synthèse de Documents Pro",
+            "description": "Transformez du texte brut ou des scripts en documents Word professionnels. Synthèse de structure haute fidélité exécutée purement localement.",
+            "keywords": "convertir txt en docx local, convertisseur texte vers word ligne, texte vers word natif du navigateur, convertir script en document word, convertisseur word priorité confidentialité, de .txt vers .docx"
         },
         "docxToText": {
-            "title": "Extracteur Word vers Texte | Récupération de Données",
-            "description": "Extrayez le texte brut des documents Word localement dans votre navigateur. Extraction de texte propre et réutilisable.",
-            "keywords": "extraire texte docx local, convertisseur word vers texte navigateur, docx vers txt sans uploader, lire fichiers word gratuit, extracteur texte word"
+            "title": "Extracteur Word vers Texte | Récupération Industrielle de Contenu",
+            "description": "Récupérez les données brutes des documents Word sans perte de formatage. Analyseur OpenXML s'exécutant nativement dans votre navigateur.",
+            "keywords": "extraire texte docx local, convertisseur word vers texte navigateur, de docx vers txt sans upload, lire fichiers word ligne gratuit, extracteur texte word, scraper texte docx"
         },
         "wordToPdf": {
-            "title": "Word vers PDF | PrivaFlow",
-            "description": "Changez un document Word parfaitement en PDF.",
-            "keywords": "word vers pdf, wordToPdf"
+            "title": "De Word vers PDF | Exportation de Documents Haute Fidélité Pro",
+            "description": "Conversion DOCX vers PDF de niveau professionnel. Préserve la structure, les polices et l'ordre du document avec sécurité 100% hors ligne.",
+            "keywords": "de word vers pdf ligne, de docx vers pdf local, convertir word vers pdf privément, convertisseur word natif du navigateur, de word vers pdf précis hors ligne"
         },
         "pdfToPpt": {
-            "title": "PDF vers PPT | PrivaFlow",
-            "description": "Transformez votre PDF en une présentation avec des diapositives.",
-            "keywords": "pdf vers ppt, pdfToPpt"
+            "title": "De PDF en PowerPoint | Reconstruction de Présentations Pro",
+            "description": "Transformez les pages PDF en diapositives PowerPoint haute fidélité. Crée des présentations prêtes à être éditées sans upload serveur.",
+            "keywords": "de pdf vers ppt ligne, convertir pdf vers powerpoint local, convertisseur pdf vers pptx, créateur présentation privé, de pdf vers ppt natif du navigateur"
         },
         "pptToPdf": {
-            "title": "PPT vers PDF | PrivaFlow",
-            "description": "Enregistrez votre présentation sous forme de PDF sécurisé.",
-            "keywords": "ppt vers pdf, pptToPdf"
+            "title": "PowerPoint vers PDF | Exportation Sécurisée de Diapositives en Document",
+            "description": "Exportez vos présentations PPTX en PDF sécurisés et professionnels. Conserve la mise en page visuelle et les graisses de police via traitement hors ligne.",
+            "keywords": "de ppt vers pdf ligne, convertisseur powerpoint vers pdf local, enregistrer pptx en pdf privément, ppt vers pdf natif du navigateur, exportation sécurisée présentation"
         },
         "excelToPdf": {
-            "title": "Excel vers PDF | PrivaFlow",
-            "description": "Affichez clairement votre feuille de calcul sous forme de PDF.",
-            "keywords": "excel vers pdf, excelToPdf"
+            "title": "De Excel vers PDF | Exportation Professionnelle de Tableurs",
+            "description": "Transformez vos classeurs Excel en PDF propres et stylisés. Préserve les bordures, les lignes zébrées et l'ordre des feuilles pour reporting industriel.",
+            "keywords": "de excel vers pdf ligne, de xlsx vers pdf local, convertir excel vers pdf privément, convertisseur tableur natif du navigateur, excel vers pdf professionnel"
         },
         "pdfToExcel": {
-            "title": "PDF vers Excel | PrivaFlow",
-            "description": "Extrayez les tableaux d'un PDF vers Excel.",
-            "keywords": "pdf vers excel, pdfToExcel"
+            "title": "De PDF vers Excel | Reconstruction Pro de Lignes et Tableaux",
+            "description": "Extrayez les données structurées des PDF dans des tableaux Excel propres. Regroupement avancé par coordonnées Y pour une fidélité maximale.",
+            "keywords": "de pdf vers excel ligne, convertir pdf vers xlsx local, extraire tableaux pdf privément, de pdf vers excel nativo du navigateur, extraction précise données pdf"
         },
         "htmlToPdf": {
-            "title": "HTML vers PDF | PrivaFlow",
-            "description": "Enregistrez un fichier de page Web sous forme de PDF propre.",
-            "keywords": "html vers pdf, htmlToPdf"
+            "title": "De HTML vers PDF | Archivage Sécurisé du Web en Document",
+            "description": "Archivez des pages Web ou des extraits HTML en documents PDF professionnels. Rendu 100% privé pour une préservation sécurisée de l'information.",
+            "keywords": "de html vers pdf ligne, page web vers pdf local, convertir html vers pdf privément, convertisseur html natif du navigateur, archivage web sécurisé"
         },
         "scanToPdf": {
-            "title": "Scanner en PDF | PrivaFlow",
-            "description": "Utilisez votre appareil photo pour créer un document PDF parfait.",
-            "keywords": "scanner en pdf, scanToPdf"
+            "title": "Scanner en PDF | Capture d'Images Locale Optimisée Mobile",
+            "description": "Capturez des images via la caméra de votre appareil et regroupez-les en PDF haute qualité. Ordre séquentiel préservé avec zéro transfert.",
+            "keywords": "scanner en pdf ligne, caméra vers pdf local, scan mobile vers pdf privé, scanner de documents natif du navigateur, scanner mobile sécurisé"
         }
     },
     "Tools": {
@@ -1701,6 +1766,8 @@
     "ContactPage": {
         "label": "Contact",
         "title": "Parlons-en.",
+        "statusLabel": "Statut de Souveraineté",
+        "statusValue": "Nœud Local Actif",
         "body1": "Nous avons conçu PrivaFlow pour vous. Vos retours, rapports de bugs et idées de fonctionnalités façonnent chaque mise à jour. Envoyez-nous un message et nous répondons généralement sous 24 heures.",
         "response24h": "Réponse sous 24h",
         "successTitle": "Message Envoyé",

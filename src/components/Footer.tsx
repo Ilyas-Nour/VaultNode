@@ -6,46 +6,55 @@ import { useTranslations } from 'next-intl';
 import { ArrowUpRight } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { SecurityProof } from '@/components/SecurityProof';
+import { toolsData } from '@/lib/tools-data';
+import { cn } from '@/lib/utils';
+import { ToolIcon } from '@/components/ToolIcon';
 
 export const Footer = memo(() => {
     const t = useTranslations('HomePage');
 
-    const toolLinks = [
-        { label: t('footer.linkRedact'), href: '/tools/redact' },
-        { label: t('footer.linkCleanMeta'), href: '/tools/clean-exif' },
-        { label: t('footer.linkConverter'), href: '/tools/media-converter' },
-        { label: t('footer.linkPdfWord'), href: '/tools/pdf-to-docx' },
-        { label: t('footer.linkCompress'), href: '/tools/compress' },
-        { label: t('footer.linkEnhancer'), href: '/tools/enhancer' },
-        { label: t('footer.linkBgRemover'), href: '/tools/bg-remover' },
-        { label: t('footer.linkMerge'), href: '/tools/pdf-merge' },
-        { label: t('footer.linkSign'), href: '/tools/sign' },
-        { label: t('footer.linkRepair'), href: '/tools/repair' },
-        { label: t('footer.linkBlur'), href: '/tools/blur' },
-        { label: t('footer.linkHeic'), href: '/tools/heic-to-jpg' },
-        { label: t('footer.linkSvg'), href: '/tools/svg-to-png' },
-        { label: t('footer.linkUnlock'), href: '/tools/unlock-pdf' },
-        { label: t('footer.linkPdfImg'), href: '/tools/pdf-to-img' },
-        { label: t('footer.linkSplit'), href: '/tools/pdf-split' },
-        { label: t('footer.linkStamp'), href: '/tools/stamp' },
-        { label: t('footer.linkNumber'), href: '/tools/number-pages' },
-        { label: t('footer.linkOrganize'), href: '/tools/organize-pages' },
-        { label: t('footer.linkTextToWord'), href: '/tools/text-to-word' },
-        { label: t('footer.linkWordToText'), href: '/tools/word-to-text' },
-        { label: t('footer.linkPassword'), href: '/tools/password' },
-        { label: t('footer.linkEncrypt'), href: '/tools/encrypt' },
-        { label: t('footer.linkWordToPdf'), href: '/tools/word-to-pdf' },
-        { label: t('footer.linkPdfToPpt'), href: '/tools/pdf-to-ppt' },
-        { label: t('footer.linkPptToPdf'), href: '/tools/ppt-to-pdf' },
-        { label: t('footer.linkExcelToPdf'), href: '/tools/excel-to-pdf' },
-        { label: t('footer.linkPdfToExcel'), href: '/tools/pdf-to-excel' },
-        { label: t('footer.linkHtmlToPdf'), href: '/tools/html-to-pdf' },
-        { label: t('footer.linkScanToPdf'), href: '/tools/scan-to-pdf' },
+    const categories = [
+        {
+            id: 'organize',
+            title: t('footer.catOrganize'),
+            tools: toolsData.filter(t => ['merger', 'split', 'organize-pages', 'scan-to-pdf'].includes(t.id))
+        },
+        {
+            id: 'optimize',
+            title: t('footer.catOptimize'),
+            tools: toolsData.filter(t => ['compress', 'repair'].includes(t.id))
+        },
+        {
+            id: 'toPdf',
+            title: t('footer.catToPdf'),
+            tools: toolsData.filter(t => ['word-to-pdf', 'ppt-to-pdf', 'excel-to-pdf', 'html-to-pdf', 'text-to-word'].includes(t.id))
+        },
+        {
+            id: 'fromPdf',
+            title: t('footer.catFromPdf'),
+            tools: toolsData.filter(t => ['pdf-to-word', 'pdf-to-ppt', 'pdf-to-excel', 'pdf-to-img', 'word-to-text'].includes(t.id))
+        },
+        {
+            id: 'edit',
+            title: t('footer.catEdit'),
+            tools: toolsData.filter(t => ['sign', 'stamp', 'number-pages', 'redactor'].includes(t.id))
+        },
+        {
+            id: 'security',
+            title: t('footer.catSecurity'),
+            tools: toolsData.filter(t => ['unlock', 'password', 'encrypt'].includes(t.id))
+        },
+        {
+            id: 'media',
+            title: t('footer.catMedia'),
+            tools: toolsData.filter(t => ['clean-exif', 'heic', 'media-converter', 'svg-to-png', 'blur', 'bg-remover', 'enhancer'].includes(t.id))
+        }
     ];
 
     const quickLinks = [
-        { label: t('footer.linkHowItWorks'), href: '/#magic' },
-        { label: t('footer.linkPhilosophy'), href: '/#philosophy' },
+        { label: t('footer.linkHowItWorks'), href: '/how-it-works' },
+        { label: t('footer.linkPhilosophy'), href: '/philosophy' },
+        { label: t('footer.linkFAQ'), href: '/faq' },
         { label: t('footer.linkAllTools'), href: '/#magic' },
         { label: t('footer.linkContact'), href: '/contact' },
     ];
@@ -62,52 +71,64 @@ export const Footer = memo(() => {
             </div>
 
             {/* Main grid: brand statement + tool grid */}
-            <div className="w-full px-6 lg:px-10 py-12 lg:py-16 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 border-b border-white/[0.06]">
+            <div className="w-full px-6 lg:px-10 py-12 lg:py-16 flex flex-col gap-16 lg:gap-20 border-b border-white/[0.06]">
 
-                {/* Left: mission statement */}
-                <div className="flex flex-col justify-between items-center sm:items-start text-center sm:text-left gap-12">
+                {/* Top: mission statement + Quick links */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
                     <div>
-                        <p className="text-3xl sm:text-5xl lg:text-[56px] font-black uppercase tracking-tight leading-[0.9]">
+                        <p className="text-3xl sm:text-5xl lg:text-[64px] font-black uppercase tracking-tight leading-[0.85] mb-8">
                             <span className="text-white/10">{t('footer.brandStatement')}</span>
                             <br />
                             <span className="text-white">{t('footer.brandHighlight')}</span>
                         </p>
                     </div>
 
-                    {/* Quick links */}
-                    <div className="w-full">
-                        <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-700 block mb-6">{t('footer.colInfo')}</span>
-                        <div className="flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-3">
+                    <div className="flex flex-col gap-6 items-start lg:items-end">
+                        <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-700">{t('footer.colInfo')}</span>
+                        <div className="flex flex-wrap justify-start lg:justify-end gap-x-8 gap-y-3">
                             {quickLinks.map(link => (
                                 <Link
                                     key={link.href + link.label}
                                     href={link.href}
-                                    className="group flex items-center gap-1.5 text-[11px] font-bold text-zinc-500 hover:text-white transition-colors uppercase tracking-widest"
+                                    className="group flex items-center gap-1.5 text-[11px] font-bold text-emerald-500/50 hover:text-emerald-400 transition-colors uppercase tracking-widest"
                                 >
                                     {link.label}
-                                    <ArrowUpRight className="w-3 h-3 text-zinc-800 group-hover:text-emerald-500 transition-colors" />
+                                    <ArrowUpRight className="w-3 h-3 text-emerald-900 group-hover:text-emerald-500 transition-colors" />
                                 </Link>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                {/* Right: all tools grid */}
-                <div className="relative">
-                    <div className="absolute -top-8 left-0 right-0 h-px bg-white/[0.04] lg:hidden" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-700 block mb-6">{t('footer.colTools')} / {t('footer.colMedia')}</span>
-                    <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-x-10 gap-y-0">
-                        {toolLinks.map(link => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="group flex items-center justify-between py-2 border-b border-white/[0.04] hover:border-white/[0.12] transition-colors"
-                            >
-                                <span className="text-[12px] font-bold text-zinc-600 group-hover:text-zinc-200 transition-colors uppercase tracking-tight">{link.label}</span>
-                                <ArrowUpRight className="w-3 h-3 text-zinc-800 group-hover:text-emerald-500 opacity-0 group-hover:opacity-100 transition-all shrink-0" />
-                            </Link>
-                        ))}
-                    </div>
+                {/* Bottom: Tool Categorized Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-10">
+                    {categories.map((cat) => (
+                        <div key={cat.id} className="flex flex-col gap-6">
+                            <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-600 border-b border-white/[0.06] pb-3 whitespace-nowrap">
+                                {cat.title}
+                            </span>
+                            <div className="flex flex-col gap-4">
+                                {cat.tools.map((tool) => (
+                                    <Link
+                                        key={tool.href}
+                                        href={tool.href}
+                                        className="group flex items-center gap-3 py-1 transition-colors"
+                                    >
+                                        <ToolIcon 
+                                            icon={tool.icon}
+                                            color={tool.color}
+                                            size="sm"
+                                            className="opacity-60 group-hover:opacity-100"
+                                        />
+                                        <span className="text-[12px] font-bold text-zinc-600 group-hover:text-white transition-colors uppercase tracking-tight whitespace-nowrap">
+                                            {t(tool.titleKey)}
+                                        </span>
+                                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 text-zinc-500 transition-all ms-auto" />
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
 

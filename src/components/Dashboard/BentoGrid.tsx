@@ -2,62 +2,13 @@
 
 import React, { useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-    Eraser, ImageMinus, KeyRound, Lock, Zap, ImagePlus,
-    Video, FileUp, FileText, FileStack, Unlock, Wand2, Images, Scissors, Eye, ArrowRight,
-    PenTool, Stamp, Wrench, Hash, LayoutGrid, Sparkles, UserCircle,
-    Projector, Table, FileSpreadsheet, Code, Camera
-} from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { toolsData } from '@/lib/tools-data';
+import { ToolIcon } from '@/components/ToolIcon';
 
-interface ToolItem {
-    id: string;
-    category: 'vault' | 'media' | 'docs';
-    titleKey: string;
-    descKey: string;
-    icon: React.ElementType;
-    href: string;
-}
-
-const tools: ToolItem[] = [
-    // VAULT
-    { id: 'redactor', category: 'vault', titleKey: 'launchRedactor', descKey: 'toolDescriptions.redactor', icon: Eraser, href: '/tools/redact' },
-    { id: 'clean-exif', category: 'vault', titleKey: 'cleanExif', descKey: 'toolDescriptions.cleanExif', icon: ImageMinus, href: '/tools/clean-exif' },
-    { id: 'password', category: 'vault', titleKey: 'password', descKey: 'toolDescriptions.password', icon: KeyRound, href: '/tools/password' },
-    { id: 'encrypt', category: 'vault', titleKey: 'textEncryptor', descKey: 'toolDescriptions.textEncryptor', icon: Lock, href: '/tools/encrypt' },
-    { id: 'repair', category: 'vault', titleKey: 'repair', descKey: 'toolDescriptions.repair', icon: Wrench, href: '/tools/repair' },
-
-    // MEDIA
-    { id: 'compress', category: 'media', titleKey: 'imageCompressor', descKey: 'toolDescriptions.compress', icon: Zap, href: '/tools/compress' },
-    { id: 'heic', category: 'media', titleKey: 'heicToJpg', descKey: 'toolDescriptions.heic', icon: ImagePlus, href: '/tools/heic-to-jpg' },
-    { id: 'media-converter', category: 'media', titleKey: 'mediaConverter', descKey: 'toolDescriptions.mediaConverter', icon: Video, href: '/tools/media-converter' },
-    { id: 'svg-to-png', category: 'media', titleKey: 'svgToPng', descKey: 'toolDescriptions.svgToPng', icon: Wand2, href: '/tools/svg-to-png' },
-    { id: 'enhancer', category: 'media', titleKey: 'imageEnhancer', descKey: 'toolDescriptions.enhancer', icon: Sparkles, href: '/tools/enhancer' },
-    { id: 'bg-remover', category: 'media', titleKey: 'bgRemover', descKey: 'toolDescriptions.bgRemover', icon: UserCircle, href: '/tools/bg-remover' },
-    { id: 'blur', category: 'media', titleKey: 'blurTool', descKey: 'toolDescriptions.blur', icon: Eye, href: '/tools/blur' },
-    { id: 'stamp', category: 'media', titleKey: 'stamp', descKey: 'toolDescriptions.stamp', icon: Stamp, href: '/tools/stamp' },
-
-    // DOCS
-    { id: 'merger', category: 'docs', titleKey: 'pdfMerger', descKey: 'toolDescriptions.merger', icon: FileStack, href: '/tools/pdf-merge' },
-    { id: 'pdf-to-word', category: 'docs', titleKey: 'pdfToDocx', descKey: 'toolDescriptions.pdfToWord', icon: FileUp, href: '/tools/pdf-to-docx' },
-    { id: 'unlock', category: 'docs', titleKey: 'unlockPdf', descKey: 'toolDescriptions.unlock', icon: Unlock, href: '/tools/unlock-pdf' },
-    { id: 'pdf-to-img', category: 'docs', titleKey: 'pdfToImg', descKey: 'toolDescriptions.pdfToImg', icon: Images, href: '/tools/pdf-to-img' },
-    { id: 'split', category: 'docs', titleKey: 'pdfSplit', descKey: 'toolDescriptions.split', icon: Scissors, href: '/tools/pdf-split' },
-    { id: 'sign', category: 'docs', titleKey: 'sign', descKey: 'toolDescriptions.sign', icon: PenTool, href: '/tools/sign' },
-    { id: 'number-pages', category: 'docs', titleKey: 'numberPages', descKey: 'toolDescriptions.numberPages', icon: Hash, href: '/tools/number-pages' },
-    { id: 'organize-pages', category: 'docs', titleKey: 'organizePages', descKey: 'toolDescriptions.organizePages', icon: LayoutGrid, href: '/tools/organize-pages' },
-    { id: 'text-to-word', category: 'docs', titleKey: 'textToDocx', descKey: 'toolDescriptions.textToDocx', icon: FileUp, href: '/tools/text-to-word' },
-    { id: 'word-to-text', category: 'docs', titleKey: 'docxToText', descKey: 'toolDescriptions.docxToText', icon: FileText, href: '/tools/word-to-text' },
-    { id: 'word-to-pdf', category: 'docs', titleKey: 'wordToPdf', descKey: 'toolDescriptions.wordToPdf', icon: FileText, href: '/tools/word-to-pdf' },
-    { id: 'pdf-to-ppt', category: 'docs', titleKey: 'pdfToPpt', descKey: 'toolDescriptions.pdfToPpt', icon: Projector, href: '/tools/pdf-to-ppt' },
-    { id: 'ppt-to-pdf', category: 'docs', titleKey: 'pptToPdf', descKey: 'toolDescriptions.pptToPdf', icon: FileUp, href: '/tools/ppt-to-pdf' },
-    { id: 'excel-to-pdf', category: 'docs', titleKey: 'excelToPdf', descKey: 'toolDescriptions.excelToPdf', icon: Table, href: '/tools/excel-to-pdf' },
-    { id: 'pdf-to-excel', category: 'docs', titleKey: 'pdfToExcel', descKey: 'toolDescriptions.pdfToExcel', icon: FileSpreadsheet, href: '/tools/pdf-to-excel' },
-    { id: 'html-to-pdf', category: 'docs', titleKey: 'htmlToPdf', descKey: 'toolDescriptions.htmlToPdf', icon: Code, href: '/tools/html-to-pdf' },
-    { id: 'scan-to-pdf', category: 'docs', titleKey: 'scanToPdf', descKey: 'toolDescriptions.scanToPdf', icon: Camera, href: '/tools/scan-to-pdf' },
-];
 
 export const BentoGrid = memo(() => {
     const locale = useLocale();
@@ -66,15 +17,15 @@ export const BentoGrid = memo(() => {
     const [active, setActive] = useState('all');
 
     const categories = [
-        { id: 'all', label: t('sectionAllLabel'), count: tools.length },
-        { id: 'vault', label: t('categories.vault'), count: tools.filter(t => t.category === 'vault').length },
-        { id: 'media', label: t('categories.media'), count: tools.filter(t => t.category === 'media').length },
-        { id: 'docs', label: t('categories.docs'), count: tools.filter(t => t.category === 'docs').length },
+        { id: 'all', label: t('sectionAllLabel'), count: toolsData.length },
+        { id: 'vault', label: t('categories.vault'), count: toolsData.filter(t => t.category === 'vault').length },
+        { id: 'media', label: t('categories.media'), count: toolsData.filter(t => t.category === 'media').length },
+        { id: 'docs', label: t('categories.docs'), count: toolsData.filter(t => t.category === 'docs').length },
     ];
 
     const filtered = useMemo(() => {
-        if (active === 'all') return tools;
-        return tools.filter(t => t.category === active);
+        if (active === 'all') return toolsData;
+        return toolsData.filter(t => t.category === active);
     }, [active]);
 
     const getSpanClass = (index: number, total: number) => {
@@ -131,31 +82,34 @@ export const BentoGrid = memo(() => {
                             transition={{ duration: 0.2, delay: i * 0.03 }}
                             className={cn("h-full", getSpanClass(i, filtered.length))}
                         >
-                            <Link href={tool.href} className="group flex flex-col justify-between bg-black hover:bg-zinc-950/80 transition-colors p-7 lg:p-9 h-full min-h-[180px]">
+                            <Link href={tool.href} className="group flex flex-col justify-between bg-black hover:bg-zinc-950/40 transition-all duration-300 p-8 lg:p-10 h-full min-h-[220px] relative overflow-hidden">
+                                {/* Hover background effect */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                {/* Top row: icon + title */}
-                                <div className="flex items-start gap-4 mb-5">
-                                    <tool.icon className={cn(
-                                        "w-5 h-5 shrink-0 mt-0.5 transition-colors",
-                                        "text-zinc-700 group-hover:text-zinc-400"
-                                    )} />
-                                    <h3 className="text-[15px] font-black uppercase tracking-tight text-white leading-snug">
+                                <div className="relative z-10">
+                                    <div className="mb-6">
+                                        <ToolIcon icon={tool.icon} color={tool.color} size="md" />
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-[17px] font-bold uppercase tracking-tight text-white mb-3 group-hover:text-white transition-colors">
                                         {t(tool.titleKey)}
                                     </h3>
+
+                                    {/* Description */}
+                                    <p className="text-[14px] text-zinc-500 leading-relaxed group-hover:text-zinc-400 transition-colors line-clamp-2">
+                                        {t(tool.descKey)}
+                                    </p>
                                 </div>
 
-                                {/* Description */}
-                                <p className="text-[13px] text-zinc-600 leading-relaxed mb-6 ms-9">
-                                    {t(tool.descKey)}
-                                </p>
-
-                                {/* Bottom: open link */}
+                                {/* Bottom: Action */}
                                 <div className={cn(
-                                    "ms-9 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] transition-colors",
-                                    "text-zinc-800 group-hover:text-zinc-400"
+                                    "relative z-10 mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] transition-all",
+                                    "text-zinc-700 group-hover:text-white"
                                 )}>
+                                    <span className="w-0 group-hover:w-4 h-px bg-current transition-all duration-300" />
                                     {t('visualProof.openTool')}
-                                    <ArrowRight className={cn("w-3 h-3 group-hover:translate-x-0.5 transition-transform", isRTL && "rotate-180")} />
+                                    <ArrowRight className={cn("w-3.5 h-3.5 group-hover:translate-x-1 transition-transform", isRTL && "rotate-180 group-hover:-translate-x-1")} />
                                 </div>
                             </Link>
                         </motion.div>

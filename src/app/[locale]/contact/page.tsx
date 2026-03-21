@@ -2,7 +2,7 @@
 
 import React, { useState, memo } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MessageSquare, Send, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { Mail, MessageSquare, Send, CheckCircle, AlertCircle, ArrowRight, Shield, ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error';
@@ -43,15 +43,14 @@ export default function ContactPage() {
 
         setStatus('sending');
         try {
-            const response = await fetch('https://formspree.io/f/privaflow', {
+            const response = await fetch('/api/contact', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     name: form.name,
                     email: form.email,
                     topic: form.topic,
                     message: form.message,
-                    _subject: `[PrivaFlow ${form.topic}] from ${form.name}`,
                 }),
             });
 
@@ -67,183 +66,203 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white">
-            <div className="w-full px-6 lg:px-12 py-20 lg:py-32">
+        <div className="min-h-screen bg-black text-white relative overflow-hidden">
+            {/* Background elements */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+            
+            <div className="w-full px-6 lg:px-12 py-20 lg:py-32 relative z-10">
 
                 {/* Header */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24"
+                >
                     <div>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">{t('label')}</span>
-                        <h1 className="mt-4 text-5xl lg:text-7xl font-black uppercase tracking-tight leading-[0.9]">
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold tracking-widest uppercase text-white">
+                                <div className="w-1.5 h-1.5 bg-white/40" />
+                                {t('label')}
+                            </div>
+                        </div>
+                        <h1 className="text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.85] mb-8">
                             {t('title')}
                         </h1>
                     </div>
-                    <div className="flex flex-col justify-end gap-6 text-zinc-400 leading-relaxed">
-                        <p>
+                    <div className="flex flex-col justify-end gap-8 text-zinc-500 lg:ps-12 border-l border-white/5">
+                        <p className="text-lg leading-relaxed max-w-md">
                             {t('body1')}
                         </p>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-700">
-                            {t('response24h')}
-                        </p>
+                        <div className="flex items-center gap-6">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] uppercase tracking-[0.3em] font-black text-zinc-700 mb-1">{t('response24h')}</span>
+                                <span className="text-[11px] font-bold text-white/40 uppercase">24h Response</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </motion.div>
 
-                {/* Main grid: Form left, Info right */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/[0.06]">
+                {/* Main section */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/[0.08] border-y border-white/[0.08]">
 
-                    {/* Form — 2/3 width */}
-                    <div className="lg:col-span-2 bg-black p-10 lg:p-14">
+                    {/* Form area */}
+                    <div className="lg:col-span-2 bg-black p-8 lg:p-20">
                         {status === 'success' ? (
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.95 }}
+                                initial={{ opacity: 0, scale: 0.98 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className="h-full flex flex-col items-center justify-center gap-6 py-20 text-center"
+                                className="h-full flex flex-col items-center justify-center gap-8 py-20 text-center"
                             >
-                                <CheckCircle className="w-16 h-16 text-white/30" />
-                                <div>
-                                    <h2 className="text-3xl font-black uppercase tracking-tight">{t('successTitle')}</h2>
-                                    <p className="mt-3 text-zinc-500 max-w-sm mx-auto">
+                                <div className="w-20 h-20 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center">
+                                    <CheckCircle className="w-8 h-8 text-white/40" />
+                                </div>
+                                <div className="space-y-4">
+                                    <h2 className="text-4xl font-black uppercase tracking-tight">{t('successTitle')}</h2>
+                                    <p className="text-zinc-500 max-w-xs mx-auto text-lg">
                                         {t('successDesc')}
                                     </p>
                                 </div>
                                 <button
                                     onClick={() => setStatus('idle')}
-                                    className="mt-4 text-[11px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
+                                    className="group flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.3em] text-zinc-600 hover:text-white transition-colors"
                                 >
                                     {t('sendAnother')}
+                                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                                 </button>
                             </motion.div>
                         ) : (
-                            <form onSubmit={handleSubmit} className="space-y-8" noValidate>
-                                {/* Row 1: Name + Email */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <Field label={t('fieldName')} error={errors.name}>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={form.name}
-                                            onChange={handleChange}
-                                            placeholder={t('placeholderName')}
-                                            className="field-input"
-                                            autoComplete="name"
-                                        />
-                                    </Field>
-                                    <Field label={t('fieldEmail')} error={errors.email}>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={form.email}
-                                            onChange={handleChange}
-                                            placeholder={t('placeholderEmail')}
-                                            className="field-input"
-                                            autoComplete="email"
-                                        />
-                                    </Field>
+                            <form onSubmit={handleSubmit} className="space-y-12" noValidate>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
+                                        <Field label={t('fieldName')} error={errors.name}>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={form.name}
+                                                onChange={handleChange}
+                                                placeholder={t('placeholderName')}
+                                                className="field-input"
+                                            />
+                                        </Field>
+                                    </motion.div>
+                                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+                                        <Field label={t('fieldEmail')} error={errors.email}>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={form.email}
+                                                onChange={handleChange}
+                                                placeholder={t('placeholderEmail')}
+                                                className="field-input"
+                                            />
+                                        </Field>
+                                    </motion.div>
                                 </div>
 
-                                {/* Topic */}
-                                <Field label={t('fieldTopic')}>
-                                    <select
-                                        name="topic"
-                                        value={form.topic}
-                                        onChange={handleChange}
-                                        className="field-input"
-                                    >
-                                        <option value="feedback">{t('topics.feedback')}</option>
-                                        <option value="bug">{t('topics.bug')}</option>
-                                        <option value="feature">{t('topics.feature')}</option>
-                                        <option value="partnership">{t('topics.partnership')}</option>
-                                        <option value="other">{t('topics.other')}</option>
-                                    </select>
-                                </Field>
+                                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                                    <Field label={t('fieldTopic')}>
+                                        <div className="relative">
+                                            <select
+                                                name="topic"
+                                                value={form.topic}
+                                                onChange={handleChange}
+                                                className="field-input appearance-none cursor-pointer pr-10"
+                                            >
+                                                <option value="feedback">{t('topics.feedback')}</option>
+                                                <option value="bug">{t('topics.bug')}</option>
+                                                <option value="feature">{t('topics.feature')}</option>
+                                                <option value="partnership">{t('topics.partnership')}</option>
+                                                <option value="other">{t('topics.other')}</option>
+                                            </select>
+                                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-600 pointer-events-none" />
+                                        </div>
+                                    </Field>
+                                </motion.div>
 
-                                {/* Message */}
-                                <Field label={t('fieldMessage')} error={errors.message}>
-                                    <textarea
-                                        name="message"
-                                        value={form.message}
-                                        onChange={handleChange}
-                                        rows={7}
-                                        placeholder={t('placeholderMessage')}
-                                        className="field-input resize-none"
-                                    />
-                                </Field>
+                                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                                    <Field label={t('fieldMessage')} error={errors.message}>
+                                        <textarea
+                                            name="message"
+                                            value={form.message}
+                                            onChange={handleChange}
+                                            rows={6}
+                                            placeholder={t('placeholderMessage')}
+                                            className="field-input resize-none min-h-[160px]"
+                                        />
+                                    </Field>
+                                </motion.div>
 
-                                {/* Error banner */}
                                 {status === 'error' && (
-                                    <div className="flex items-center gap-3 p-4 border border-red-500/30 bg-red-500/5 text-red-400 text-sm">
+                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3 p-5 border border-red-500/20 bg-red-500/5 text-red-500 text-[11px] font-bold uppercase tracking-widest">
                                         <AlertCircle className="w-4 h-4 shrink-0" />
                                         {t('errorGeneral')}
-                                    </div>
+                                    </motion.div>
                                 )}
 
-                                <button
+                                <motion.button
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5 }}
                                     type="submit"
                                     disabled={status === 'sending'}
-                                    className="group h-14 px-10 bg-white hover:bg-zinc-100 text-black font-black text-xs uppercase tracking-widest flex items-center gap-3 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="group relative h-16 w-full md:w-auto px-12 bg-white hover:bg-zinc-100 text-black font-black text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-4 transition-all active:scale-[0.98] disabled:opacity-50"
                                 >
                                     {status === 'sending' ? (
-                                        <>
-                                            <span className="animate-pulse">{t('sending')}</span>
-                                        </>
+                                        <span className="animate-pulse">{t('sending')}</span>
                                     ) : (
                                         <>
                                             {t('sendBtn')}
                                             <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
-                                </button>
+                                </motion.button>
                             </form>
                         )}
                     </div>
 
-                    {/* Info sidebar — 1/3 width */}
-                    <div className="bg-black p-10 lg:p-14 space-y-12">
-
-                        <div className="space-y-6">
-                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('sidebarTitle')}</h3>
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-3">
-                                    <Mail className="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" />
-                                    <div>
-                                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">{t('sidebarEmail')}</p>
-                                        <a
-                                            href="mailto:hello@privaflow.com"
-                                            className="text-sm text-white hover:text-zinc-300 transition-colors"
-                                        >
+                    {/* Sidebar Area */}
+                    <div className="bg-black lg:border-l border-white/[0.08] flex flex-col">
+                        <div className="p-8 lg:p-14 space-y-16 flex-1">
+                            <div className="space-y-8">
+                                <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-700">{t('sidebarTitle')}</h3>
+                                <div className="space-y-8">
+                                    <div className="group">
+                                        <p className="text-[9px] text-zinc-700 uppercase tracking-widest font-black mb-3">{t('sidebarEmail')}</p>
+                                        <a href="mailto:hello@privaflow.com" className="text-xl font-bold text-zinc-400 group-hover:text-white transition-colors tracking-tight">
                                             hello@privaflow.com
                                         </a>
                                     </div>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <MessageSquare className="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" />
-                                    <div>
-                                        <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">{t('sidebarResponse')}</p>
-                                        <p className="text-sm text-white">{t('response24h')}</p>
+                                    <div className="group">
+                                        <p className="text-[9px] text-zinc-700 uppercase tracking-widest font-black mb-3">{t('sidebarResponse')}</p>
+                                        <p className="text-xl font-bold text-white tracking-tight">{t('response24h')}</p>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-8">
+                                <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-700">{t('expectTitle')}</h3>
+                                <div className="space-y-4">
+                                    {[
+                                        t('expectItems.item1'),
+                                        t('expectItems.item2'),
+                                        t('expectItems.item3'),
+                                        t('expectItems.item4'),
+                                    ].map((item, idx) => (
+                                        <div key={idx} className="flex items-center gap-4 text-xs font-bold text-zinc-500 uppercase tracking-wider group">
+                                            <div className="w-1 h-1 bg-zinc-800" />
+                                            <span className="group-hover:text-zinc-300 transition-colors">{item}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-black uppercase tracking-widest text-zinc-500">{t('expectTitle')}</h3>
-                            <ul className="space-y-3">
-                                {[
-                                    t('expectItems.item1'),
-                                    t('expectItems.item2'),
-                                    t('expectItems.item3'),
-                                    t('expectItems.item4'),
-                                ].map((item) => (
-                                    <li key={item} className="flex items-start gap-2.5 text-sm text-zinc-500">
-                                        <ArrowRight className="w-3.5 h-3.5 mt-0.5 shrink-0 text-zinc-700" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="pt-6 border-t border-white/[0.06]">
-                            <p className="text-xs text-zinc-700 leading-relaxed">
+                        <div className="p-8 lg:p-14 border-t border-white/[0.08] bg-white/[0.01]">
+                            <div className="flex items-center gap-3 mb-4">
+                                <Shield className="w-4 h-4 text-zinc-800" />
+                                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-800 underline decoration-zinc-900 underline-offset-4">Security Protocol Active</span>
+                            </div>
+                            <p className="text-[11px] text-zinc-600 leading-relaxed font-medium">
                                 {t('privacyNote')}
                             </p>
                         </div>
@@ -251,29 +270,31 @@ export default function ContactPage() {
                 </div>
             </div>
 
-            {/* Inline styles for form fields */}
+            {/* Global Style overrides */}
             <style jsx>{`
                 .field-input {
                     width: 100%;
-                    background: transparent;
+                    background: rgba(255,255,255,0.02);
                     border: 1px solid rgba(255,255,255,0.08);
                     color: white;
-                    padding: 12px 16px;
-                    font-size: 14px;
-                    font-family: inherit;
+                    padding: 16px 20px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    letter-spacing: -0.01em;
                     outline: none;
-                    transition: border-color 0.2s;
-                    -webkit-appearance: none;
+                    transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
                     border-radius: 0;
                 }
                 .field-input:focus {
-                    border-color: rgba(255,255,255,0.3);
+                    background: rgba(255,255,255,0.04);
+                    border-color: rgba(255,255,255,0.2);
+                    box-shadow: 0 0 40px -20px rgba(255,255,255,0.1);
                 }
                 .field-input::placeholder {
-                    color: rgba(255,255,255,0.2);
+                    color: rgba(255,255,255,0.15);
                 }
                 .field-input option {
-                    background: #111;
+                    background: #0a0a0a;
                     color: white;
                 }
             `}</style>
@@ -281,21 +302,17 @@ export default function ContactPage() {
     );
 }
 
-// ─── Field ─────────────────────────────────────────────────────────────────────
-
-function Field({ label, error, children }: {
-    label: string;
-    error?: string;
-    children: React.ReactNode;
-}) {
+function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
     return (
-        <div className="space-y-2">
-            <label className="block text-[10px] font-bold uppercase tracking-[0.25em] text-zinc-500">
-                {label}
-            </label>
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                <label className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 block">
+                    {label}
+                </label>
+            </div>
             {children}
             {error && (
-                <p className="text-[11px] text-red-400 font-semibold">{error}</p>
+                <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-[10px] text-red-500 font-black uppercase tracking-widest mt-2">{error}</motion.p>
             )}
         </div>
     );

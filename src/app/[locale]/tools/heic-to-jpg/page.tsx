@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HeicToJpgClient from "@/components/HeicToJpgClient";
 import { getTranslations } from "next-intl/server";
+import { SoftwareSchema } from "@/components/SoftwareSchema";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -8,10 +9,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
         title: t('title'),
         description: t('description'),
-        keywords: ["heic to jpg", "convert heic local", "iphone photo converter", "heic to webp browser", "vaultnode heic"]
+        keywords: t('keywords').split(', ')
     };
 }
 
-export default function HeicToJpgPage() {
-    return <HeicToJpgClient />;
+export default async function HeicToJpgPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Metadata.heicToJpg' });
+    
+    return (
+        <>
+            <SoftwareSchema 
+                name={t('title')} 
+                description={t('description')} 
+                url={`https://privaflow.com/${locale}/tools/heic-to-jpg`} 
+            />
+            <HeicToJpgClient />
+        </>
+    );
 }

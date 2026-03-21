@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CleanExifClient from "@/components/CleanExifClient";
 import { getTranslations } from "next-intl/server";
+import { SoftwareSchema } from "@/components/SoftwareSchema";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -8,10 +9,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
         title: t('title'),
         description: t('description'),
-        keywords: ["remove exif data", "clean metadata", "remove gps from photo", "local exif scrubber", "privacy photo cleaner", "vaultnode clean"]
+        keywords: t('keywords').split(', ')
     };
 }
 
-export default function CleanExifPage() {
-    return <CleanExifClient />;
+export default async function CleanExifPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'Metadata.cleanExif' });
+    
+    return (
+        <>
+            <SoftwareSchema 
+                name={t('title')} 
+                description={t('description')} 
+                url={`https://privaflow.com/${locale}/tools/clean-exif`} 
+            />
+            <CleanExifClient />
+        </>
+    );
 }
