@@ -64,7 +64,7 @@ export const Hero = memo(() => {
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                     <Link
-                        href="#magic"
+                        href="/privacy-report"
                         className="h-12 sm:h-14 px-8 sm:px-10 border border-white/10 text-white/50 hover:text-white hover:border-white/30 font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all"
                     >
                         {t('heroProof')}
