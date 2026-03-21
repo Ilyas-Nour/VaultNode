@@ -54,18 +54,32 @@ const ExcelToPdfTool = memo(() => {
 
             let fullHtml = `
             <style>
-                body { font-family: Arial, sans-serif; font-size: 10pt; color: #333; margin: 0; padding: 20px; }
-                table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                th { background-color: #f4f4f4; font-weight: bold; }
-                h2 { margin-top: 20px; color: #111; font-size: 16pt; }
+                body { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11pt; color: #111; margin: 0; padding: 0; }
+                .sheet-container { padding: 40px; background: #fff; }
+                .header { border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; }
+                .header h2 { margin: 0; font-size: 22pt; font-weight: 800; text-transform: uppercase; letter-spacing: -0.03em; color: #000; }
+                .brand { font-size: 9px; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 0.15em; }
+                table { width: 100%; border-collapse: collapse; margin-bottom: 50px; table-layout: auto; }
+                th, td { border: 1px solid #e0e0e0; padding: 12px 15px; text-align: left; line-height: 1.4; }
+                th { background-color: #f9f9f9; font-weight: 700; color: #444; text-transform: uppercase; font-size: 9px; letter-spacing: 0.05em; }
+                tr:nth-child(even) { background-color: #fafafa; }
+                .page-break { page-break-after: always; }
             </style>
             `;
 
-            workbook.SheetNames.forEach(sheetName => {
+            workbook.SheetNames.forEach((sheetName, index) => {
                 const sheet = workbook.Sheets[sheetName];
                 const html = XLSX.utils.sheet_to_html(sheet);
-                fullHtml += `<h2>${sheetName}</h2>${html}`;
+                const isLast = index === workbook.SheetNames.length - 1;
+                
+                fullHtml += `
+                <div class="sheet-container ${!isLast ? 'page-break' : ''}">
+                    <div class="header">
+                        <h2>${sheetName}</h2>
+                        <span class="brand">PrivaFlow Archive</span>
+                    </div>
+                    ${html}
+                </div>`;
             });
 
             const container = document.createElement("div");

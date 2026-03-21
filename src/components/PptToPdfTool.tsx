@@ -71,50 +71,63 @@ const PptToPdfTool = memo(() => {
                 throw new Error("Invalid PPTX structure or no slides found.");
             }
 
+            const parser = new DOMParser();
+            const slideCount = slideFiles.length;
             let fullHtml = `
             <style>
-                body { font-family: Arial, sans-serif; color: #000; margin: 0; padding: 0; }
+                body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #000; margin: 0; padding: 0; background: #fff; }
                 .slide-page { 
                     width: 100%; 
-                    height: 100vh;
+                    min-height: 100vh;
                     page-break-after: always;
-                    padding: 40px;
                     box-sizing: border-box;
                     display: flex;
                     flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    text-align: center;
+                    background: #fff;
+                    position: relative;
                 }
-                .slide-content { max-width: 800px; font-size: 18pt; line-height: 1.6; }
-                p { margin-bottom: 20px; }
+                .slide-content { padding: 80px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+                .para { margin-bottom: 25px; line-height: 1.3; }
+                .brand-footer { position: absolute; bottom: 30px; right: 50px; font-size: 9px; font-weight: 800; color: #f0f0f0; text-transform: uppercase; letter-spacing: 0.25em; }
             </style>
             `;
 
-            const parser = new DOMParser();
+            for (let i = 0; i < slideCount; i++) {
+                const slideXml = await contents.file(slideFiles[i])?.async("string");
+                if (!slideXml) continue;
 
-            for (let i = 0; i < slideFiles.length; i++) {
-                const xmlData = await contents.file(slideFiles[i])?.async("string");
-                if (xmlData) {
-                    const xmlDoc = parser.parseFromString(xmlData, "text/xml");
-                    // Extract all <a:t> elements which contain text
-                    const textNodes = xmlDoc.getElementsByTagName("a:t");
-                    let slideText = "";
-                    for (let j = 0; j < textNodes.length; j++) {
-                        slideText += textNodes[j].textContent + " ";
-                    }
+                const slideDoc = parser.parseFromString(slideXml, "application/xml");
+                const paragraphs = Array.from(slideDoc.querySelectorAll("a\\:p, p")); 
+                
+                let slideHtml = `<div class="slide-page"><div class="slide-content">`;
+                
+                paragraphs.forEach((p, pIdx) => {
+                    const textElements = Array.from(p.querySelectorAll("a\\:t, t"));
+                    const combinedText = textElements.map(t => t.textContent).join("");
                     
-                    if (slideText.trim() === "") slideText = "[Visual or empty slide]";
+                    if (combinedText.trim()) {
+                        const rPr = p.querySelector("a\\:rPr, rPr");
+                        const szAttr = rPr?.getAttribute("sz");
+                        // Sz is 1/100th of a point. 3600 = 36pt. Default titles to 36, body to 18.
+                        const fontSize = szAttr ? (parseInt(szAttr) / 100) : (pIdx === 0 ? 36 : 18);
+                        const isBold = p.querySelector("a\\:b, b") !== null;
 
-                    fullHtml += `
-                        <div class="slide-page">
-                            <div class="slide-content">
-                                <p>${slideText}</p>
+                        slideHtml += `
+                            <div class="para" style="
+                                font-size: ${fontSize}pt; 
+                                font-weight: ${isBold || pIdx === 0 ? '800' : '400'};
+                                color: ${pIdx === 0 ? '#000' : '#333'};
+                                text-align: ${pIdx === 0 ? 'center' : 'left'};
+                            ">
+                                ${combinedText}
                             </div>
-                        </div>
-                    `;
-                }
-                setProgress(Math.round(((i + 1) / slideFiles.length) * 50));
+                        `;
+                    }
+                });
+                
+                slideHtml += `</div><div class="brand-footer">PrivaFlow Archive · Slide ${i+1}</div></div>`;
+                fullHtml += slideHtml;
+                setProgress(Math.round(((i + 1) / slideCount) * 80));
             }
 
             const container = document.createElement("div");
@@ -126,10 +139,10 @@ const PptToPdfTool = memo(() => {
                 image:        { type: 'jpeg' as const, quality: 0.98 },
                 html2canvas:  { scale: 2 },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' as const },
-                pagebreak:    { mode: 'css', avoid: 'tr' }
+                pagebreak:    { mode: 'css', avoid: '.slide-page' }
             };
 
-            setProgress(75);
+            setProgress(90);
             const worker = html2pdf().set(opt).from(container);
             const pdfBlob = await worker.output('blob');
             const url = URL.createObjectURL(pdfBlob);

@@ -76,18 +76,16 @@ const PdfToExcelTool = memo(() => {
                     
                     if (!text) return;
 
-                    let rowY = Array.from(rowsMap.keys()).find(key => Math.abs(key - y) < rowEpsilon);
-                    if (rowY === undefined) {
-                        rowY = y;
-                        rowsMap.set(rowY, []);
-                    }
-                    
-                    rowsMap.get(rowY)?.push({ x, text });
+                    // Bucketing: group Y-coordinates within 5 units of each other
+                    let foundY = Array.from(rowsMap.keys()).find(key => Math.abs(key - y) < 5);
+                    const targetY = foundY !== undefined ? foundY : y;
+
+                    if (!rowsMap.has(targetY)) rowsMap.set(targetY, []);
+                    rowsMap.get(targetY)?.push({ x, text });
                 });
 
-                // Sort rows top to bottom (higher Y is higher on page typically in PDF space)
+                // Sort rows by Y coordinate (top to bottom)
                 const sortedY = Array.from(rowsMap.keys()).sort((a, b) => b - a);
-
                 sortedY.forEach(y => {
                     const rowItems = rowsMap.get(y) || [];
                     // Sort items in row left to right
