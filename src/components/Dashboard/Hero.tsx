@@ -45,7 +45,7 @@ export const Hero = memo(() => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto"
+                    className="flex flex-col sm:flex-row items-center sm:items-center justify-center gap-3 w-full sm:w-auto"
                 >
                     <Link
                         href="#tools"

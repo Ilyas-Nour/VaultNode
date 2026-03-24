@@ -33,7 +33,7 @@ export const Philosophy = memo(() => {
                         <p>{t('philosophyBody2')}</p>
                         <Link
                             href="#tools"
-                            className="self-start h-11 px-7 bg-white text-black text-[11px] font-bold uppercase tracking-[0.18em] flex items-center hover:bg-zinc-100 transition-colors mt-2"
+                            className="self-center lg:self-start h-11 px-7 bg-white text-black text-[11px] font-bold uppercase tracking-[0.18em] flex items-center hover:bg-zinc-100 transition-colors mt-2"
                         >
                             {t('philosophyCta')}
                         </Link>

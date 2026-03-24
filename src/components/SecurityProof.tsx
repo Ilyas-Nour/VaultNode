@@ -169,7 +169,7 @@ export const SecurityProof = memo(({ className, compact = false }: SecurityProof
                         </p>
 
                         {!showAudit ? (
-                            <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center pt-8 border-t border-white/[0.04]">
+                            <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-center justify-center lg:justify-start pt-8 border-t border-white/[0.04]">
                                 <button
                                     onClick={() => setShowAudit(true)}
                                     className="group/btn relative px-6 py-3 bg-white text-black text-[12px] font-black uppercase tracking-widest hover:bg-emerald-500 transition-colors"
@@ -198,10 +198,10 @@ export const SecurityProof = memo(({ className, compact = false }: SecurityProof
                                 ))}
                                 <button
                                     onClick={() => setShowAudit(false)}
-                                    className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 hover:text-white transition-colors pt-4 flex items-center gap-2"
+                                    className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 hover:text-white transition-colors pt-4 flex items-center justify-center sm:justify-start gap-2 w-full sm:w-auto"
                                 >
                                     <ArrowRight className="w-3 h-3 rotate-180" />
-                                    Back to Overview
+                                    {t('backToOverview')}
                                 </button>
                             </div>
                         )}

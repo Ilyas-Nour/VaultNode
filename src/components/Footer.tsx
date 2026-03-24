@@ -83,9 +83,9 @@ export const Footer = memo(() => {
                         </p>
                     </div>
 
-                    <div className="flex flex-col gap-6 items-start lg:items-end">
+                    <div className="flex flex-col gap-6 items-center lg:items-end">
                         <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-400">{t('footer.colInfo')}</span>
-                        <div className="flex flex-wrap justify-start lg:justify-end gap-x-8 gap-y-3">
+                        <div className="flex flex-wrap justify-center lg:justify-end gap-x-8 gap-y-3">
                             {quickLinks.map(link => (
                                 <Link
                                     key={link.href + link.label}

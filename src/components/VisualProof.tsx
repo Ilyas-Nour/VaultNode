@@ -1144,7 +1144,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 </div>
             </div>
 
-            <div className="flex items-center gap-6 pt-2">
+            <div className="flex items-center justify-center lg:justify-start gap-6 pt-2">
                 <div className="flex items-center gap-2 text-zinc-600">
                     <Shield className="w-3.5 h-3.5" />
                     <span className="text-[10px] font-semibold uppercase tracking-widest">{vpT('integrity')}</span>
