@@ -29,7 +29,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* Services */}
       <section id="tools" className="w-full px-6 lg:px-12 py-16 lg:py-24">
         <div>
-          <div className="mb-16 space-y-3">
+          <div className="mb-16 space-y-3 text-center sm:text-start">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">
               {t('sectionAllLabel')}
             </span>

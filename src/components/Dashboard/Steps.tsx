@@ -17,13 +17,13 @@ export const Steps = memo(() => {
 
                 {/* Header */}
                 <div className="mb-12 lg:mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-                    <div>
+                    <div className="text-center lg:text-left">
                         <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-400">{t('stepsLabel')}</span>
                         <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[0.9]">
                             {t('stepsTitle')}
                         </h2>
                     </div>
-                    <p className="text-zinc-400 text-[14px] leading-relaxed max-w-sm lg:text-right">
+                    <p className="text-zinc-400 text-[14px] leading-relaxed max-w-sm mx-auto lg:mx-0 lg:text-right text-center">
                         {t('stepsBody')}
                     </p>
                 </div>

@@ -20,7 +20,7 @@ export const Philosophy = memo(() => {
 
                 {/* Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-end mb-14 lg:mb-20">
-                    <div>
+                    <div className="text-center lg:text-start">
                         <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
                             {t('philosophyLabel')}
                         </span>
