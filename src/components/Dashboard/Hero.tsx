@@ -27,23 +27,20 @@ export const Hero = memo(() => {
                 </motion.div>
 
                 {/* Headline */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                    className="font-black leading-[0.87] tracking-tighter uppercase w-full"
+                <h1
+                    className="font-black leading-[0.87] tracking-tighter uppercase w-full animate-in fade-in slide-in-from-bottom-6 duration-700 fill-mode-both"
                     style={{ fontSize: 'clamp(2.5rem, 12vw, 160px)' }}
                 >
                     <span className="text-white block">{t('titlePart1')}</span>
                     <span className="text-white/30 block">{t('titlePart2')}</span>
                     <span className="text-white block">{t('titlePart3')}</span>
-                </motion.h1>
+                </h1>
 
                 {/* Subline */}
                 <motion.p
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.25 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                     className="max-w-2xl text-zinc-400 text-lg md:text-xl leading-relaxed font-normal"
                 >
                     {t('subtitle')}
@@ -53,7 +50,7 @@ export const Hero = memo(() => {
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
                     className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto"
                 >
                     <Link
@@ -75,7 +72,7 @@ export const Hero = memo(() => {
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
+                    transition={{ delay: 0.4 }}
                     className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 pt-4 border-t border-white/[0.06] w-full max-w-3xl"
                 >
                     {[
@@ -86,7 +83,7 @@ export const Hero = memo(() => {
                     ].map(s => (
                         <div key={s.label} className="flex flex-col items-center gap-1">
                             <span className="text-xl font-black text-white tracking-tight">{s.n}</span>
-                            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-600">{s.label}</span>
+                            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400">{s.label}</span>
                         </div>
                     ))}
                 </motion.div>

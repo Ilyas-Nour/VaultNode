@@ -84,16 +84,16 @@ export const Footer = memo(() => {
                     </div>
 
                     <div className="flex flex-col gap-6 items-start lg:items-end">
-                        <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-700">{t('footer.colInfo')}</span>
+                        <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-400">{t('footer.colInfo')}</span>
                         <div className="flex flex-wrap justify-start lg:justify-end gap-x-8 gap-y-3">
                             {quickLinks.map(link => (
                                 <Link
                                     key={link.href + link.label}
                                     href={link.href}
-                                    className="group flex items-center gap-1.5 text-[11px] font-bold text-emerald-500/50 hover:text-emerald-400 transition-colors uppercase tracking-widest"
+                                    className="group flex items-center gap-1.5 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 transition-colors uppercase tracking-widest"
                                 >
                                     {link.label}
-                                    <ArrowUpRight className="w-3 h-3 text-emerald-900 group-hover:text-emerald-500 transition-colors" />
+                                    <ArrowUpRight className="w-3 h-3 text-emerald-600 group-hover:text-emerald-400 transition-colors" />
                                 </Link>
                             ))}
                         </div>
@@ -104,7 +104,7 @@ export const Footer = memo(() => {
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-10">
                     {categories.map((cat) => (
                         <div key={cat.id} className="flex flex-col gap-6">
-                            <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-600 border-b border-white/[0.06] pb-3 whitespace-nowrap">
+                            <span className="text-[9px] font-black uppercase tracking-[0.35em] text-zinc-400 border-b border-white/[0.06] pb-3 whitespace-nowrap">
                                 {cat.title}
                             </span>
                             <div className="flex flex-col gap-4">
@@ -118,12 +118,12 @@ export const Footer = memo(() => {
                                             icon={tool.icon}
                                             color={tool.color}
                                             size="sm"
-                                            className="opacity-60 group-hover:opacity-100"
+                                            className="opacity-70 group-hover:opacity-100"
                                         />
-                                        <span className="text-[12px] font-bold text-zinc-600 group-hover:text-white transition-colors uppercase tracking-tight whitespace-nowrap">
+                                        <span className="text-[12px] font-bold text-zinc-400 group-hover:text-white transition-colors uppercase tracking-tight whitespace-nowrap">
                                             {t(tool.titleKey)}
                                         </span>
-                                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 text-zinc-500 transition-all ms-auto" />
+                                        <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover:opacity-100 text-zinc-400 transition-all ms-auto" />
                                     </Link>
                                 ))}
                             </div>
@@ -134,11 +134,11 @@ export const Footer = memo(() => {
 
             {/* Bottom bar */}
             <div className="w-full px-6 lg:px-10 py-8 flex flex-col sm:flex-row items-center sm:items-center justify-between gap-6">
-                <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-zinc-700 text-center sm:text-left">
+                <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-zinc-400 text-center sm:text-left">
                     {t('footer.copyright')}
                 </p>
                 <div className="flex items-center gap-6">
-                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-800 whitespace-nowrap">{t('footer.footerCredits')}</span>
+                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-500 whitespace-nowrap">{t('footer.footerCredits')}</span>
                 </div>
             </div>
         </footer>

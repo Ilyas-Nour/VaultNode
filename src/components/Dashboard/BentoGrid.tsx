@@ -58,11 +58,11 @@ export const BentoGrid = memo(() => {
                             "h-9 px-4 text-[10px] font-bold uppercase tracking-[0.18em] border transition-all",
                             active === cat.id
                                 ? "bg-white text-black border-white"
-                                : "bg-transparent text-zinc-600 border-white/[0.08] hover:border-white/25 hover:text-zinc-300"
+                                : "bg-transparent text-zinc-400 border-white/[0.08] hover:border-white/25 hover:text-zinc-200"
                         )}
                     >
                         {cat.label}
-                        <span className={cn("ms-2 tabular-nums font-normal", active === cat.id ? "text-black/40" : "text-zinc-700")}>
+                        <span className={cn("ms-2 tabular-nums font-normal", active === cat.id ? "text-black/40" : "text-zinc-500")}>
                             {cat.count}
                         </span>
                     </button>
@@ -97,7 +97,7 @@ export const BentoGrid = memo(() => {
                                     </h3>
 
                                     {/* Description */}
-                                    <p className="text-[14px] text-zinc-500 leading-relaxed group-hover:text-zinc-400 transition-colors line-clamp-2">
+                                    <p className="text-[14px] text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors line-clamp-2">
                                         {t(tool.descKey)}
                                     </p>
                                 </div>
@@ -105,7 +105,7 @@ export const BentoGrid = memo(() => {
                                 {/* Bottom: Action */}
                                 <div className={cn(
                                     "relative z-10 mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] transition-all",
-                                    "text-zinc-700 group-hover:text-white"
+                                    "text-zinc-500 group-hover:text-white"
                                 )}>
                                     <span className="w-0 group-hover:w-4 h-px bg-current transition-all duration-300" />
                                     {t('visualProof.openTool')}

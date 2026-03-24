@@ -18,12 +18,12 @@ export const Steps = memo(() => {
                 {/* Header */}
                 <div className="mb-12 lg:mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                     <div>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">{t('stepsLabel')}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-400">{t('stepsLabel')}</span>
                         <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[0.9]">
                             {t('stepsTitle')}
                         </h2>
                     </div>
-                    <p className="text-zinc-500 text-[14px] leading-relaxed max-w-sm lg:text-right">
+                    <p className="text-zinc-400 text-[14px] leading-relaxed max-w-sm lg:text-right">
                         {t('stepsBody')}
                     </p>
                 </div>
@@ -47,7 +47,7 @@ export const Steps = memo(() => {
                                 <h3 className="text-[15px] font-black uppercase tracking-[0.1em] text-white">
                                     {s.title}
                                 </h3>
-                                <p className="text-[13px] text-zinc-500 leading-relaxed">
+                                <p className="text-[13px] text-zinc-400 leading-relaxed">
                                     {s.desc}
                                 </p>
                             </div>

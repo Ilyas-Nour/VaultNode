@@ -156,12 +156,15 @@ const BackgroundRemoverTool = memo(() => {
         ctx.putImageData(nextSnapshot, 0, 0);
     }, [redoStack]);
 
+    const rectRef = useRef<DOMRect | null>(null);
+
     const startDrawing = (e: React.PointerEvent) => {
         saveHistory();
         setIsDrawing(true);
         const canvas = canvasRef.current;
         if (!canvas) return;
         const rect = canvas.getBoundingClientRect();
+        rectRef.current = rect;
         lastPos.current = {
             x: (e.clientX - rect.left) * (canvas.width / rect.width),
             y: (e.clientY - rect.top) * (canvas.height / rect.height)
@@ -182,7 +185,8 @@ const BackgroundRemoverTool = memo(() => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const rect = canvas.getBoundingClientRect();
+        const rect = rectRef.current;
+        if (!rect) return;
         const x = (e.clientX - rect.left) * (canvas.width / rect.width);
         const y = (e.clientY - rect.top) * (canvas.height / rect.height);
 

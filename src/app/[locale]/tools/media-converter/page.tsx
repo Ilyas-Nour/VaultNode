@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import MediaConverterClient from '@/components/MediaConverterClient';
 import { SoftwareSchema } from "@/components/SoftwareSchema";
+import dynamic from "next/dynamic";
+
+const MediaConverterClient = dynamic(() => import('@/components/MediaConverterClient'), {
+    loading: () => <div className="w-full h-[400px] flex items-center justify-center bg-zinc-900/50 rounded-2xl animate-pulse" />
+});
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;

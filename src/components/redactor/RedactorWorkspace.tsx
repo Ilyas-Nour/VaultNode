@@ -92,8 +92,11 @@ export const RedactorWorkspace: React.FC<RedactorWorkspaceProps> = ({
         redrawOverlay();
     }, [redrawOverlay, redactions, currentBox]);
 
+    const rectRef = useRef<DOMRect | null>(null);
+    const logicalSizeRef = useRef<{ w: number, h: number } | null>(null);
+
     const getMousePos = (e: React.MouseEvent) => {
-        const rect = drawCanvasRef.current?.getBoundingClientRect();
+        const rect = rectRef.current;
         if (!rect) return { x: 0, y: 0 };
         return {
             x: e.clientX - rect.left,
@@ -102,6 +105,13 @@ export const RedactorWorkspace: React.FC<RedactorWorkspaceProps> = ({
     };
 
     const onMouseDown = (e: React.MouseEvent) => {
+        if (drawCanvasRef.current) {
+            rectRef.current = drawCanvasRef.current.getBoundingClientRect();
+            logicalSizeRef.current = {
+                w: parseFloat(drawCanvasRef.current.style.width),
+                h: parseFloat(drawCanvasRef.current.style.height)
+            };
+        }
         const pos = getMousePos(e);
         setIsDrawing(true);
         setCurrentBox({ x: pos.x, y: pos.y, w: 0, h: 0 });
@@ -114,10 +124,8 @@ export const RedactorWorkspace: React.FC<RedactorWorkspaceProps> = ({
     };
 
     const onMouseUp = () => {
-        if (isDrawing && currentBox && drawCanvasRef.current) {
-            const canvas = drawCanvasRef.current;
-            const logicalWidth = parseFloat(canvas.style.width);
-            const logicalHeight = parseFloat(canvas.style.height);
+        if (isDrawing && currentBox && logicalSizeRef.current) {
+            const { w: logicalWidth, h: logicalHeight } = logicalSizeRef.current;
 
             const x = currentBox.w > 0 ? currentBox.x : currentBox.x + currentBox.w;
             const y = currentBox.h > 0 ? currentBox.y : currentBox.y + currentBox.h;

@@ -109,7 +109,7 @@ export const Logo = memo(({ size = 'md', invert = false, showTagline = false, cl
                             fontWeight: 700,
                             letterSpacing: '0.28em',
                             textTransform: 'uppercase',
-                            color: invert ? '#71717a' : '#52525b',
+                            color: invert ? '#52525b' : '#a1a1aa',
                             fontFamily: 'var(--font-outfit, system-ui, sans-serif)',
                         }}
                     >

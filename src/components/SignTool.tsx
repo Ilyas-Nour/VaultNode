@@ -92,10 +92,12 @@ const SignTool = memo(() => {
         multiple: false
     });
 
+    const rectRef = useRef<DOMRect | null>(null);
+
     const getCoordinates = (e: React.MouseEvent | React.TouchEvent | MouseEvent) => {
         const canvas = sigCanvasRef.current;
-        if (!canvas) return { x: 0, y: 0 };
-        const rect = canvas.getBoundingClientRect();
+        const rect = rectRef.current;
+        if (!canvas || !rect) return { x: 0, y: 0 };
 
         let clientX, clientY;
         if ('touches' in e) {
@@ -120,6 +122,7 @@ const SignTool = memo(() => {
     const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
         const canvas = sigCanvasRef.current;
         if (!canvas) return;
+        rectRef.current = canvas.getBoundingClientRect();
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 

@@ -108,7 +108,7 @@ export const Navbar = memo(() => {
                                             {categories.map((cat) => (
                                                 <div key={cat.id} className="flex flex-col gap-4">
                                                     <div className="flex items-center gap-2 pb-2 border-b border-white/[0.04]">
-                                                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500 whitespace-nowrap">{cat.title}</span>
+                                                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-400 whitespace-nowrap">{cat.title}</span>
                                                     </div>
                                                     <div className="flex flex-col gap-1">
                                                         {cat.tools.map((tool) => (
@@ -126,7 +126,7 @@ export const Navbar = memo(() => {
                                                                 <span className="text-[11px] font-bold text-zinc-300 group-hover/item:text-white transition-colors uppercase tracking-tight">
                                                                     {t(tool.titleKey)}
                                                                 </span>
-                                                                <ArrowRight className="w-3 h-3 ms-auto text-zinc-800 opacity-0 group-hover/item:opacity-100 group-hover/item:text-zinc-600 group-hover/item:translate-x-0.5 transition-all shrink-0" />
+                                                                <ArrowRight className="w-3 h-3 ms-auto text-zinc-600 opacity-0 group-hover/item:opacity-100 group-hover/item:text-zinc-400 group-hover/item:translate-x-0.5 transition-all shrink-0" />
                                                             </Link>
                                                         ))}
                                                     </div>
@@ -160,7 +160,7 @@ export const Navbar = memo(() => {
 
                         <div className="w-px h-4 bg-white/[0.08] mx-2" />
 
-                        <Link href="/contact" className="px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500 hover:text-zinc-200 transition-colors">
+                        <Link href="/contact" className="px-4 py-2 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-400 hover:text-zinc-200 transition-colors">
                             {t('nav.contact')}
                         </Link>
                     </div>
@@ -223,7 +223,7 @@ export const Navbar = memo(() => {
                                     <div key={cat.id} className={i > 0 ? 'mt-8' : ''}>
                                         <div className="px-6 mb-3 flex items-center gap-2">
                                             <div className="w-1 h-3 bg-zinc-800 rounded-full" />
-                                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-zinc-600 font-black">{cat.title}</span>
+                                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-zinc-400 font-black">{cat.title}</span>
                                         </div>
                                         <div className="flex flex-col">
                                             {cat.tools.map((tool) => (

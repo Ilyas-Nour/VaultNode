@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import SignTool from "@/components/SignTool";
 import { getTranslations } from "next-intl/server";
 import { SoftwareSchema } from "@/components/SoftwareSchema";
+import dynamic from "next/dynamic";
+
+const SignTool = dynamic(() => import("@/components/SignTool"), {
+    loading: () => <div className="w-full h-[400px] flex items-center justify-center bg-zinc-900/50 rounded-2xl animate-pulse" />
+});
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;

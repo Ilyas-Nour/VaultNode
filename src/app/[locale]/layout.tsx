@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing';
 import "../globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { cn } from "@/lib/utils";
 
 const outfit = Outfit({
     subsets: ["latin"],
@@ -22,7 +23,8 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
     weight: ['300', '400', '500', '600', '700'],
     subsets: ["arabic"],
     variable: '--font-ibm-plex',
-    display: 'swap'
+    display: 'swap',
+    preload: false // Disable global preloading, we'll handle it via locale check if possible
 });
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -76,7 +78,6 @@ export default async function RootLayout({
     if (!routing.locales.includes(locale as any)) {
         notFound();
     }
-
     // Enable static rendering
     setRequestLocale(locale);
 
@@ -120,7 +121,12 @@ export default async function RootLayout({
             </head>
             <body
                 suppressHydrationWarning
-                className={`${outfit.variable} ${inter.variable} ${isArabic ? ibmPlexArabic.className : inter.className} bg-background text-foreground antialiased min-h-screen selection:bg-white/20`}
+                className={cn(
+                    outfit.variable,
+                    inter.variable,
+                    isArabic ? ibmPlexArabic.className : inter.className,
+                    "bg-background text-foreground antialiased min-h-screen selection:bg-white/20"
+                )}
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     <div className="w-full min-h-screen flex flex-col">
