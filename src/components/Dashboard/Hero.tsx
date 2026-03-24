@@ -16,19 +16,16 @@ export const Hero = memo(() => {
             <div className="relative w-full px-4 sm:px-6 lg:px-12 py-6 -mt-[8vh] flex flex-col items-center text-center gap-5 sm:gap-6">
 
                 {/* Badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2.5 px-4 py-2 border border-white/10 rounded-full text-[10px] font-semibold uppercase tracking-[0.25em] text-zinc-400"
+                <div
+                    className="inline-flex items-center gap-2.5 px-4 py-2 border border-white/10 rounded-full text-[10px] font-semibold uppercase tracking-[0.25em] text-zinc-400 animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both"
                 >
                     <Lock className="w-3 h-3 shrink-0" />
                     {t('heroBadge')}
-                </motion.div>
+                </div>
 
                 {/* Headline */}
                 <h1
-                    className="font-black leading-[0.87] tracking-tighter uppercase w-full animate-in fade-in slide-in-from-bottom-6 duration-700 fill-mode-both"
+                    className="font-black leading-[0.87] tracking-tighter uppercase w-full animate-hero-in"
                     style={{ fontSize: 'clamp(2.5rem, 12vw, 160px)' }}
                 >
                     <span className="text-white block">{t('titlePart1')}</span>
@@ -37,14 +34,11 @@ export const Hero = memo(() => {
                 </h1>
 
                 {/* Subline */}
-                <motion.p
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="max-w-2xl text-zinc-400 text-lg md:text-xl leading-relaxed font-normal"
+                <p
+                    className="max-w-2xl text-zinc-400 text-lg md:text-xl leading-relaxed font-normal animate-hero-in [animation-delay:200ms]"
                 >
                     {t('subtitle')}
-                </motion.p>
+                </p>
 
                 {/* CTA row */}
                 <motion.div

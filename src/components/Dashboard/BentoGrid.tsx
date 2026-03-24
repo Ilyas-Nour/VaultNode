@@ -62,7 +62,7 @@ export const BentoGrid = memo(() => {
                         )}
                     >
                         {cat.label}
-                        <span className={cn("ms-2 tabular-nums font-normal", active === cat.id ? "text-black/40" : "text-zinc-500")}>
+                        <span className={cn("ms-2 tabular-nums font-normal", active === cat.id ? "text-black/60" : "text-zinc-400")}>
                             {cat.count}
                         </span>
                     </button>
@@ -105,7 +105,7 @@ export const BentoGrid = memo(() => {
                                 {/* Bottom: Action */}
                                 <div className={cn(
                                     "relative z-10 mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] transition-all",
-                                    "text-zinc-500 group-hover:text-white"
+                                    "text-zinc-400 group-hover:text-white"
                                 )}>
                                     <span className="w-0 group-hover:w-4 h-px bg-current transition-all duration-300" />
                                     {t('visualProof.openTool')}

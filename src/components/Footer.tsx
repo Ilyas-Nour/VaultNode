@@ -93,7 +93,7 @@ export const Footer = memo(() => {
                                     className="group flex items-center gap-1.5 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 transition-colors uppercase tracking-widest"
                                 >
                                     {link.label}
-                                    <ArrowUpRight className="w-3 h-3 text-emerald-600 group-hover:text-emerald-400 transition-colors" />
+                                    <ArrowUpRight className="w-3 h-3 text-emerald-500 group-hover:text-emerald-400 transition-colors" />
                                 </Link>
                             ))}
                         </div>
@@ -138,7 +138,7 @@ export const Footer = memo(() => {
                     {t('footer.copyright')}
                 </p>
                 <div className="flex items-center gap-6">
-                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-500 whitespace-nowrap">{t('footer.footerCredits')}</span>
+                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-300 whitespace-nowrap">{t('footer.footerCredits')}</span>
                 </div>
             </div>
         </footer>

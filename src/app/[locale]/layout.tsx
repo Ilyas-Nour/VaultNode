@@ -12,12 +12,14 @@ import { cn } from "@/lib/utils";
 const outfit = Outfit({
     subsets: ["latin"],
     variable: '--font-outfit',
-    display: 'swap'
+    display: 'swap',
+    preload: true
 });
 const inter = Inter({
     subsets: ["latin"],
     variable: '--font-inter',
-    display: 'swap'
+    display: 'swap',
+    preload: true
 });
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
     weight: ['300', '400', '500', '600', '700'],
@@ -114,6 +116,11 @@ export default async function RootLayout({
     return (
         <html lang={locale} dir={direction} className="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
             <head>
+                <style dangerouslySetInnerHTML={{ __html: `
+                    :root { --background: #000000; --foreground: #ffffff; }
+                    body { background: #000000; color: #ffffff; margin: 0; padding: 0; }
+                    .dark { --background: #000000; }
+                `}} />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
