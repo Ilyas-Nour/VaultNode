@@ -77,7 +77,7 @@ export const Footer = memo(() => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
                     <div>
                         <p className="text-3xl sm:text-5xl lg:text-[64px] font-black uppercase tracking-tight leading-[0.85] mb-8">
-                            <span className="text-white/10">{t('footer.brandStatement')}</span>
+                            <span className="text-zinc-600">{t('footer.brandStatement')}</span>
                             <br />
                             <span className="text-white">{t('footer.brandHighlight')}</span>
                         </p>

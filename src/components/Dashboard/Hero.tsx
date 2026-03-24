@@ -49,7 +49,7 @@ export const Hero = memo(() => {
                 >
                     <Link
                         href="#tools"
-                        className="group h-12 sm:h-14 px-8 sm:px-10 bg-white hover:bg-zinc-100 text-black font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95"
+                        className="cta-critical group h-12 sm:h-14 px-8 sm:px-10 bg-white hover:bg-zinc-100 text-black font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95"
                     >
                         {t('heroExplore')}
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

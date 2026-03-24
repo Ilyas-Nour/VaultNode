@@ -21,7 +21,7 @@ export const Philosophy = memo(() => {
                 {/* Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-end mb-14 lg:mb-20">
                     <div className="text-center lg:text-start">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-600">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-zinc-400">
                             {t('philosophyLabel')}
                         </span>
                         <h2 className="mt-3 text-4xl sm:text-5xl lg:text-[56px] font-black uppercase tracking-tight leading-[0.88]">
@@ -57,7 +57,7 @@ export const Philosophy = memo(() => {
                             <h3 className="text-[15px] font-black uppercase tracking-[0.1em] text-white leading-snug">
                                 {p.title}
                             </h3>
-                            <p className="text-[13px] text-zinc-500 leading-relaxed">
+                            <p className="text-[13px] text-zinc-400 leading-relaxed">
                                 {p.desc}
                             </p>
                         </motion.div>
