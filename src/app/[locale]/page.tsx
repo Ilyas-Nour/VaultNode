@@ -1,9 +1,11 @@
 import React from "react";
 import { getTranslations } from 'next-intl/server';
 import { Hero } from "@/components/Dashboard/Hero";
-import { Steps } from "@/components/Dashboard/Steps";
-import { BentoGrid } from "@/components/Dashboard/BentoGrid";
-import { Philosophy } from "@/components/Dashboard/Philosophy";
+import dynamic from "next/dynamic";
+
+const Steps = dynamic(() => import("@/components/Dashboard/Steps").then(m => m.Steps));
+const BentoGrid = dynamic(() => import("@/components/Dashboard/BentoGrid").then(m => m.BentoGrid));
+const Philosophy = dynamic(() => import("@/components/Dashboard/Philosophy").then(m => m.Philosophy));
 import { VisualProof } from "@/components/VisualProof";
 import { Metadata } from 'next';
 
@@ -28,7 +30,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <section id="tools" className="w-full px-6 lg:px-12 py-16 lg:py-24">
         <div>
           <div className="mb-16 space-y-3">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400">
               {t('sectionAllLabel')}
             </span>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[0.9]">
