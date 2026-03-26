@@ -44,7 +44,7 @@ export const ToolContainer = memo(({
     settingsContent,
     howItWorks,
     toolId,
-    hideAds = false
+    hideAds = true
 }: ToolContainerProps) => {
     const t = useTranslations('Tools.common');
     const tc = useTranslations('HomePage.categories');
