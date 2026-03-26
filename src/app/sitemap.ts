@@ -49,7 +49,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/tools/text-to-word',
         '/tools/unlock-pdf',
         '/tools/word-to-pdf',
-        '/tools/word-to-text'
+        '/tools/word-to-text',
+        '/tools/image-to-text'
     ];
 
     const sitemapEntries: MetadataRoute.Sitemap = [];

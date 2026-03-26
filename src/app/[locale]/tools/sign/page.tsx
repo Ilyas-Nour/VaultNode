@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { SoftwareSchema } from "@/components/SoftwareSchema";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import dynamic from "next/dynamic";
 
 const SignTool = dynamic(() => import("@/components/SignTool"), {
@@ -21,15 +23,34 @@ export default async function SignPage({ params }: { params: Promise<{ locale: s
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'Metadata.sign' });
     
+    const breadcrumbItems = [
+        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
+        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/sign` }
+    ];
+
+    const visualBreadcrumbs = [
+        { label: 'Documents', href: '/tools?category=documents' },
+        { label: t('title'), href: `/tools/sign`, active: true }
+    ];
+
     return (
-        <>
+        <div className="w-full">
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://privaflow.com/${locale}/tools/sign`} 
+                url={`https://vaultnode.com/${locale}/tools/sign`} 
+                category="OfficeApplication"
+                subCategory="e-Signature Tool"
+                featureList={['Local PDF Signing', 'Zero-Upload Privacy', 'Secure Digital Signature']}
             />
+            <BreadcrumbSchema items={breadcrumbItems} />
+
+            <div className="w-full px-5 sm:px-6 lg:px-12 pt-8">
+                <Breadcrumbs items={visualBreadcrumbs} />
+            </div>
+
             <SignTool />
-        </>
+        </div>
     );
 }
-

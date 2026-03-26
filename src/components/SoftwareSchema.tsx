@@ -11,8 +11,10 @@ interface SoftwareSchemaProps {
     description: string;
     url: string;
     category?: string;
+    subCategory?: string;
     operatingSystem?: string;
     price?: string;
+    featureList?: string[];
 }
 
 export const SoftwareSchema = ({
@@ -20,17 +22,24 @@ export const SoftwareSchema = ({
     description,
     url,
     category = "MultimediaApplication",
+    subCategory = "Privacy Tool",
     operatingSystem = "Windows, macOS, Linux, Android, iOS (Any Browser)",
-    price = "0"
+    price = "0",
+    featureList = []
 }: SoftwareSchemaProps) => {
+    // Ensure URL uses the primary domain
+    const correctedUrl = url.replace('privaflow.com', 'vaultnode.com');
+
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": `${name} - PrivaFlow Private Offline Tool`,
         "description": description,
-        "url": url,
+        "url": correctedUrl,
         "applicationCategory": category,
+        "applicationSubCategory": subCategory,
         "operatingSystem": operatingSystem,
+        "featureList": featureList,
         "offers": {
             "@type": "Offer",
             "price": price,
