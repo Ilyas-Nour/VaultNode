@@ -20,9 +20,9 @@ export default async function EnhancerPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: 'Metadata.enhancer' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/enhancer` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/enhancer` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function EnhancerPage({ params }: { params: Promise<{ local
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/enhancer`} 
+                url={`https://privaflow.com/${locale}/tools/enhancer`} 
                 category="MultimediaApplication"
                 subCategory="Image Enhancement Tool"
                 featureList={['AI Sharpening', 'Local Filtering', 'Privacy-Preserved Restoration']}

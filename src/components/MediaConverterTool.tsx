@@ -109,7 +109,7 @@ const MediaConverterTool = memo(() => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `vaultnode_${file.name.split('.')[0]}.${mode === 'trim' ? 'mp4' : mode}`;
+            a.download = `privaflow_${file.name.split('.')[0]}.${mode === 'trim' ? 'mp4' : mode}`;
             a.click();
             URL.revokeObjectURL(url);
         } catch (error) {
@@ -175,7 +175,7 @@ const MediaConverterTool = memo(() => {
                             ].map((item) => (
                                 <button
                                     key={item.id}
-                                    onClick={() => setMode(item.id as any)}
+                                    onClick={() => setMode(item.id as 'mp3' | 'wav' | 'trim')}
                                     className={cn(
                                         "py-3.5 rounded-xl flex flex-col items-center gap-1.5 transition-all",
                                         mode === item.id

@@ -20,9 +20,9 @@ export default async function HeicToJpgPage({ params }: { params: Promise<{ loca
     const t = await getTranslations({ locale, namespace: 'Metadata.heicToJpg' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/heic-to-jpg` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/heic-to-jpg` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function HeicToJpgPage({ params }: { params: Promise<{ loca
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/heic-to-jpg`} 
+                url={`https://privaflow.com/${locale}/tools/heic-to-jpg`} 
                 category="MultimediaApplication"
                 subCategory="Photo Transcoder"
                 featureList={['HEIC to JPG transcoding', 'Local Processing', 'Zero-Upload Privacy']}

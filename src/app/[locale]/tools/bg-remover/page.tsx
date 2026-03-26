@@ -24,9 +24,9 @@ export default async function BackgroundRemoverPage({ params }: { params: Promis
     const t = await getTranslations({ locale, namespace: 'Metadata.bgRemover' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/bg-remover` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/bg-remover` }
     ];
 
     const visualBreadcrumbs = [
@@ -39,7 +39,7 @@ export default async function BackgroundRemoverPage({ params }: { params: Promis
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/bg-remover`} 
+                url={`https://privaflow.com/${locale}/tools/bg-remover`} 
                 category="MultimediaApplication"
                 subCategory="Background Removal Tool"
                 featureList={['Local AI Isolation', 'Zero-Upload Privacy', 'WASM-Powered Engine']}

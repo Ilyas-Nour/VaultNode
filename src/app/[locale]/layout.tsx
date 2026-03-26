@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const t = await getTranslations({ locale, namespace: 'Metadata.default' });
 
     return {
-        metadataBase: new URL('https://vaultnode.com'),
+        metadataBase: new URL('https://privaflow.com'),
         title: {
             template: "%s | PrivaFlow",
             default: t('title'),
@@ -42,18 +42,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         description: t('description'),
         keywords: t('keywords').split(', '),
         alternates: {
-            canonical: "https://vaultnode.com",
+            canonical: "https://privaflow.com",
             languages: {
-                "en": "https://vaultnode.com/en",
-                "es": "https://vaultnode.com/es",
-                "fr": "https://vaultnode.com/fr",
-                "ar": "https://vaultnode.com/ar",
+                "en": "https://privaflow.com/en",
+                "es": "https://privaflow.com/es",
+                "fr": "https://privaflow.com/fr",
+                "ar": "https://privaflow.com/ar",
             },
         },
         openGraph: {
             title: t('title'),
             description: t('description'),
-            url: 'https://vaultnode.com',
+            url: 'https://privaflow.com',
             siteName: "PrivaFlow",
             images: [{ url: '/og-image.png' }],
             locale: locale,

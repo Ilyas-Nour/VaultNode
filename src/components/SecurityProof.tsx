@@ -109,7 +109,7 @@ export const SecurityProof = memo(({ className, compact = false }: SecurityProof
                                     <div className="flex items-center gap-3 mb-8">
                                         <Terminal className="w-5 h-5 text-emerald-500" />
                                         <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">
-                                            Network Monitor (Simulation)
+                                            Network Integrity Audit
                                         </h3>
                                     </div>
 

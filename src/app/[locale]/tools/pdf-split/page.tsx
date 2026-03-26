@@ -20,9 +20,9 @@ export default async function PdfSplitPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: 'Metadata.pdfSplit' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/pdf-split` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/pdf-split` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function PdfSplitPage({ params }: { params: Promise<{ local
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/pdf-split`} 
+                url={`https://privaflow.com/${locale}/tools/pdf-split`} 
                 category="OfficeApplication"
                 subCategory="PDF Splitter"
                 featureList={['Local PDF Splitting', 'Zero-Upload Privacy', 'Precise Page Extraction']}

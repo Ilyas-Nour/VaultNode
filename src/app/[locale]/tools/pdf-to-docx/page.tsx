@@ -20,9 +20,9 @@ export default async function PdfToDocxPage({ params }: { params: Promise<{ loca
     const t = await getTranslations({ locale, namespace: 'Metadata.pdfToDocx' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/pdf-to-docx` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/pdf-to-docx` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function PdfToDocxPage({ params }: { params: Promise<{ loca
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/pdf-to-docx`} 
+                url={`https://privaflow.com/${locale}/tools/pdf-to-docx`} 
                 category="OfficeApplication"
                 subCategory="PDF Converter"
                 featureList={['Local PDF to Word conversion', 'Zero-Upload Privacy', 'High Fidelity Formatting']}

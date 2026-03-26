@@ -20,9 +20,9 @@ export default async function PasswordPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: 'Metadata.password' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Privacy Tools', item: `https://vaultnode.com/${locale}/tools?category=vault` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/password` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Privacy Tools', item: `https://privaflow.com/${locale}/tools?category=vault` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/password` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function PasswordPage({ params }: { params: Promise<{ local
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/password`} 
+                url={`https://privaflow.com/${locale}/tools/password`} 
                 category="SecurityApplication"
                 subCategory="Password Generator"
                 featureList={['Local Entropy Generation', 'Zero-Upload Privacy', 'Cryptographically Secure']}

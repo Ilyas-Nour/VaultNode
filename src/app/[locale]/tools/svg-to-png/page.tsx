@@ -20,9 +20,9 @@ export default async function SvgToPngPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: 'Metadata.svgToPng' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/svg-to-png` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/svg-to-png` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function SvgToPngPage({ params }: { params: Promise<{ local
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/svg-to-png`} 
+                url={`https://privaflow.com/${locale}/tools/svg-to-png`} 
                 category="MultimediaApplication"
                 subCategory="Vector Converter"
                 featureList={['Local SVG to PNG conversion', 'Zero-Upload Privacy', 'High Resolution Export']}

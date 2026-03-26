@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 
-const baseUrl = 'https://vaultnode.com';
+const baseUrl = 'https://privaflow.com';
 
 function generateAlternates(path: string) {
     const alternates: Record<string, string> = {

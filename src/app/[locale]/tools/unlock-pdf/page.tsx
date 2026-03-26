@@ -20,9 +20,9 @@ export default async function UnlockPdfPage({ params }: { params: Promise<{ loca
     const t = await getTranslations({ locale, namespace: 'Metadata.unlockPdf' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/unlock-pdf` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/unlock-pdf` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function UnlockPdfPage({ params }: { params: Promise<{ loca
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/unlock-pdf`} 
+                url={`https://privaflow.com/${locale}/tools/unlock-pdf`} 
                 category="OfficeApplication"
                 subCategory="PDF Security Tool"
                 featureList={['Local PDF Unlocking', 'Zero-Upload Privacy', 'Fast Password Removal']}

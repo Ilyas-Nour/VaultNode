@@ -20,9 +20,9 @@ export default async function ScanToPdfPage({ params }: { params: Promise<{ loca
     const t = await getTranslations({ locale, namespace: 'Metadata.scanToPdf' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/scan-to-pdf` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/scan-to-pdf` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function ScanToPdfPage({ params }: { params: Promise<{ loca
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/scan-to-pdf`} 
+                url={`https://privaflow.com/${locale}/tools/scan-to-pdf`} 
                 category="OfficeApplication"
                 subCategory="PDF Scanner"
                 featureList={['Local Image to PDF', 'Zero-Upload Privacy', 'Direct Browser Capture']}

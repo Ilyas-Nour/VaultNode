@@ -1003,7 +1003,7 @@
             "saveBtn": "Save Fixed File",
             "finishBtn": "Finish Session",
             "discardBtn": "Discard Asset",
-            "successDesc": "VaultNode logic successfully sanitized and reconstructed the PDF structure.",
+            "successDesc": "PrivaFlow logic successfully sanitized and reconstructed the PDF structure.",
             "howItWorks": {
                 "step1": {
                     "title": "Drop Corrupt PDF",

@@ -20,9 +20,9 @@ export default async function PdfToPptPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: 'Metadata.pdfToPpt' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/pdf-to-ppt` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/pdf-to-ppt` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function PdfToPptPage({ params }: { params: Promise<{ local
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/pdf-to-ppt`} 
+                url={`https://privaflow.com/${locale}/tools/pdf-to-ppt`} 
                 category="OfficeApplication"
                 subCategory="PDF Converter"
                 featureList={['Local PDF to PPT conversion', 'Zero-Upload Privacy', 'Editable Slide Creation']}

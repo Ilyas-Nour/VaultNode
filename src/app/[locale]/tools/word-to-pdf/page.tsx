@@ -20,9 +20,9 @@ export default async function WordToPdfPage({ params }: { params: Promise<{ loca
     const t = await getTranslations({ locale, namespace: 'Metadata.wordToPdf' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/word-to-pdf` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/word-to-pdf` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function WordToPdfPage({ params }: { params: Promise<{ loca
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/word-to-pdf`} 
+                url={`https://privaflow.com/${locale}/tools/word-to-pdf`} 
                 category="OfficeApplication"
                 subCategory="PDF Converter"
                 featureList={['Local Word to PDF conversion', 'Zero-Upload Privacy', 'Clean Professional Output']}

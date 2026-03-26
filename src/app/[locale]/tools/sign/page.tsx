@@ -24,9 +24,9 @@ export default async function SignPage({ params }: { params: Promise<{ locale: s
     const t = await getTranslations({ locale, namespace: 'Metadata.sign' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/sign` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/sign` }
     ];
 
     const visualBreadcrumbs = [
@@ -39,7 +39,7 @@ export default async function SignPage({ params }: { params: Promise<{ locale: s
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/sign`} 
+                url={`https://privaflow.com/${locale}/tools/sign`} 
                 category="OfficeApplication"
                 subCategory="e-Signature Tool"
                 featureList={['Local PDF Signing', 'Zero-Upload Privacy', 'Secure Digital Signature']}

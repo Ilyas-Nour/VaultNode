@@ -1003,7 +1003,7 @@
             "saveBtn": "Enregistrer le Fichier Réparé",
             "finishBtn": "Terminer la Session",
             "discardBtn": "Abandonner l'Actif",
-            "successDesc": "La logique VaultNode a réussi à assainir et à reconstruire la structure du PDF.",
+            "successDesc": "La logique PrivaFlow a réussi à assainir et à reconstruire la structure du PDF.",
             "howItWorks": {
                 "step1": {
                     "title": "Lâchez le cassé",

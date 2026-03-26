@@ -20,9 +20,9 @@ export default async function WordToTextPage({ params }: { params: Promise<{ loc
     const t = await getTranslations({ locale, namespace: 'Metadata.docxToText' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/word-to-text` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/word-to-text` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function WordToTextPage({ params }: { params: Promise<{ loc
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/word-to-text`} 
+                url={`https://privaflow.com/${locale}/tools/word-to-text`} 
                 category="OfficeApplication"
                 subCategory="Text Extractor"
                 featureList={['Local Word to Text extraction', 'Zero-Upload Privacy', 'Clean Markdown/Text Output']}

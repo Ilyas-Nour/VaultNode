@@ -20,9 +20,9 @@ export default async function TextEncryptorPage({ params }: { params: Promise<{ 
     const t = await getTranslations({ locale, namespace: 'Metadata.encrypt' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Privacy Tools', item: `https://vaultnode.com/${locale}/tools?category=vault` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/encrypt` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Privacy Tools', item: `https://privaflow.com/${locale}/tools?category=vault` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/encrypt` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function TextEncryptorPage({ params }: { params: Promise<{ 
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/encrypt`} 
+                url={`https://privaflow.com/${locale}/tools/encrypt`} 
                 category="SecurityApplication"
                 subCategory="Cryptography Tool"
                 featureList={['AES-256-GCM Encryption', 'Zero-Server Interaction', 'Browser-Native WebCrypto API']}

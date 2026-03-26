@@ -136,7 +136,7 @@ const ImageCompressor = memo(() => {
         if (!result) return;
         const link = document.createElement("a");
         link.href = result.compressedUrl;
-        link.download = `vaultnode-optimized-${result.fileName}`;
+        link.download = `privaflow-optimized-${result.fileName}`;
         link.click();
     }, [result]);
 

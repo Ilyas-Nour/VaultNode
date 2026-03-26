@@ -20,9 +20,9 @@ export default async function RepairPage({ params }: { params: Promise<{ locale:
     const t = await getTranslations({ locale, namespace: 'Metadata.repair' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/repair` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/repair` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function RepairPage({ params }: { params: Promise<{ locale:
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/repair`} 
+                url={`https://privaflow.com/${locale}/tools/repair`} 
                 category="OfficeApplication"
                 subCategory="PDF Repair Tool"
                 featureList={['Local PDF Recovery', 'Zero-Upload Privacy', 'Corrupt Data Salvage']}

@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://vaultnode.com/sitemap.xml',
+        sitemap: 'https://privaflow.com/sitemap.xml',
     };
 }

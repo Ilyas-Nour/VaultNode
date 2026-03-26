@@ -20,9 +20,9 @@ export default async function StampPage({ params }: { params: Promise<{ locale: 
     const t = await getTranslations({ locale, namespace: 'Metadata.stamp' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/stamp` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/stamp` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function StampPage({ params }: { params: Promise<{ locale: 
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/stamp`} 
+                url={`https://privaflow.com/${locale}/tools/stamp`} 
                 category="OfficeApplication"
                 subCategory="PDF Stamping Tool"
                 featureList={['Local PDF Watermarking', 'Zero-Upload Privacy', 'Custom Image Stamps']}

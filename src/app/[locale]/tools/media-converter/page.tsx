@@ -24,9 +24,9 @@ export default async function MediaConverterPage({ params }: { params: Promise<{
     const t = await getTranslations({ locale, namespace: 'Metadata.mediaConverter' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/media-converter` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/media-converter` }
     ];
 
     const visualBreadcrumbs = [
@@ -39,7 +39,7 @@ export default async function MediaConverterPage({ params }: { params: Promise<{
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/media-converter`} 
+                url={`https://privaflow.com/${locale}/tools/media-converter`} 
                 category="MultimediaApplication"
                 subCategory="Video & Audio Transcoder"
                 featureList={['FFmpeg.wasm Engine', 'Local Transcoding', 'Zero-Upload Privacy']}

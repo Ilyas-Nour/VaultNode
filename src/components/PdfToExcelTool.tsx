@@ -77,7 +77,7 @@ const PdfToExcelTool = memo(() => {
                     if (!text) return;
 
                     // Bucketing: group Y-coordinates within 5 units of each other
-                    let foundY = Array.from(rowsMap.keys()).find(key => Math.abs(key - y) < 5);
+                    const foundY = Array.from(rowsMap.keys()).find(key => Math.abs(key - y) < 5);
                     const targetY = foundY !== undefined ? foundY : y;
 
                     if (!rowsMap.has(targetY)) rowsMap.set(targetY, []);

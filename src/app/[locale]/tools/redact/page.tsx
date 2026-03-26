@@ -24,9 +24,9 @@ export default async function RedactPage({ params }: { params: Promise<{ locale:
     const t = await getTranslations({ locale, namespace: 'Metadata.redact' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/redact` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/redact` }
     ];
 
     const visualBreadcrumbs = [
@@ -39,7 +39,7 @@ export default async function RedactPage({ params }: { params: Promise<{ locale:
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/redact`} 
+                url={`https://privaflow.com/${locale}/tools/redact`} 
                 category="OfficeApplication"
                 subCategory="Privacy Tool"
                 featureList={['Local PDF Redaction', 'Zero-Upload Privacy', 'Permanent Data Removal']}

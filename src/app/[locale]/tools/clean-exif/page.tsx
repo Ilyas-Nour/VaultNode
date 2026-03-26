@@ -20,9 +20,9 @@ export default async function CleanExifPage({ params }: { params: Promise<{ loca
     const t = await getTranslations({ locale, namespace: 'Metadata.cleanExif' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/clean-exif` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/clean-exif` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function CleanExifPage({ params }: { params: Promise<{ loca
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/clean-exif`} 
+                url={`https://privaflow.com/${locale}/tools/clean-exif`} 
                 category="MultimediaApplication"
                 subCategory="Metadata Sanitization Tool"
                 featureList={['EXIF Stripping', 'GPS Scrubbing', 'Privacy Sanitization']}

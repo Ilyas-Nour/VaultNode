@@ -20,9 +20,9 @@ export default async function CompressPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: 'Metadata.compress' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/compress` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/compress` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function CompressPage({ params }: { params: Promise<{ local
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/compress`} 
+                url={`https://privaflow.com/${locale}/tools/compress`} 
                 category="MultimediaApplication"
                 subCategory="Image Compression Tool"
                 featureList={['Local Pixel Optimization', 'Zero-Upload Compression', 'Fast Multi-threaded Processing']}

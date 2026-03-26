@@ -20,9 +20,9 @@ export default async function ExcelToPdfPage({ params }: { params: Promise<{ loc
     const t = await getTranslations({ locale, namespace: 'Metadata.excelToPdf' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/excel-to-pdf` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/excel-to-pdf` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function ExcelToPdfPage({ params }: { params: Promise<{ loc
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/excel-to-pdf`} 
+                url={`https://privaflow.com/${locale}/tools/excel-to-pdf`} 
                 category="OfficeApplication"
                 subCategory="PDF Converter"
                 featureList={['Local Document Conversion', 'Zero-Upload Privacy', 'Secure PDF Generation']}

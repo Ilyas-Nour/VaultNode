@@ -991,7 +991,7 @@
             },
             "finishBtn": "Finish Session",
             "discardBtn": "Discard Asset",
-            "successDesc": "VaultNode logic successfully sanitized and reconstructed the PDF structure."
+            "successDesc": "PrivaFlow logic successfully sanitized and reconstructed the PDF structure."
         },
         "numberPages": {
             "title": "ترقيم كل صفحة",

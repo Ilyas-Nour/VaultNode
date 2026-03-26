@@ -8,10 +8,17 @@ import { useTranslations } from 'next-intl';
 
 const Label = memo(({ text, type }: { text: string; type: 'before' | 'after' }) => (
     <div className={cn(
-        "absolute top-4 start-4 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest z-10",
-        type === 'before' ? "bg-white text-black" : "bg-black text-white border border-white/20"
+        "absolute top-3 start-3 sm:top-4 sm:start-4 flex items-center bg-black/60 backdrop-blur-md border border-white/10 overflow-hidden z-20 shadow-2xl",
     )}>
-        {text}
+        <div className={cn(
+            "px-2 py-1 text-[8px] sm:text-[9px] font-black uppercase tracking-[0.2em]",
+            type === 'before' ? "bg-white text-black" : "bg-emerald-500 text-black"
+        )}>
+            {type.toUpperCase()}
+        </div>
+        <div className="px-2.5 py-1 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-white/90">
+            {text}
+        </div>
     </div>
 ));
 Label.displayName = 'Label';
@@ -119,7 +126,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                         className="absolute inset-0 bg-cover bg-center transition-all duration-[2s] opacity-50 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
                     />
-                    <div className="relative z-10 w-full max-w-sm aspect-[3/4] bg-white border border-zinc-200 shadow-2xl p-8 flex flex-col gap-5 overflow-hidden">
+                    <div className="relative z-10 w-full max-w-sm aspect-[3/4] bg-white border border-zinc-200 shadow-2xl p-5 sm:p-8 flex flex-col gap-5 overflow-hidden">
                         <div className="h-4 w-3/4 bg-zinc-200 rounded-sm" />
                         <div className="space-y-3 mt-4">
                             <div className="flex gap-2 items-center">
@@ -306,14 +313,14 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 </div>
             );
             case 'encrypt': return (
-                <div className="w-full h-full bg-zinc-950 flex flex-col gap-6 p-10 font-mono text-sm relative overflow-hidden group">
+                <div className="w-full h-full bg-zinc-950 flex flex-col gap-4 sm:gap-6 p-5 sm:p-10 font-mono text-sm relative overflow-hidden group">
                     <Label text={finalLabel} type={type} />
                     <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-1000 opacity-20 grayscale"
                         style={{ backgroundImage: "url('/images/proofs/proof_document_1773347701051.png')" }}
                     />
                     {type === 'before' ? (
-                        <div className="relative z-10 space-y-4 mt-12 bg-zinc-900/50 backdrop-blur-md p-8 border border-white/5 rounded-xl h-full max-h-[80%] overflow-hidden shadow-2xl">
+                        <div className="relative z-10 space-y-4 mt-8 sm:mt-12 bg-zinc-900/50 backdrop-blur-md p-5 sm:p-8 border border-white/5 rounded-xl h-full max-h-[85%] sm:max-h-[80%] overflow-hidden shadow-2xl">
                             <div className="text-zinc-400 text-sm leading-relaxed">
                                 <span className="text-zinc-600 font-black uppercase tracking-widest text-xs">{vpT('encrypt.origin')}: </span>internal-hq-01.local
                             </div>
@@ -331,7 +338,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     ) : (
                         <div className="relative z-10 space-y-6 mt-12 h-full max-h-[80%] flex flex-col drop-shadow-2xl">
                             <div className="text-[11px] text-zinc-500 uppercase tracking-[0.3em] font-black backdrop-blur-sm self-start px-2 rounded-sm">{vpT('encrypt.algorithm')}</div>
-                            <div className="bg-zinc-900/90 backdrop-blur-xl border border-emerald-500/20 rounded-xl p-8 break-all text-[11px] text-emerald-400 leading-relaxed font-mono shadow-[0_0_80px_rgba(16,185,129,0.1)] flex-1 overflow-hidden">
+                            <div className="bg-zinc-900/90 backdrop-blur-xl border border-emerald-500/20 rounded-xl p-5 sm:p-8 break-all text-[10px] sm:text-[11px] text-emerald-400 leading-relaxed font-mono shadow-[0_0_80px_rgba(16,185,129,0.15)] flex-1 overflow-hidden">
                                 0x4829AABB...F39482CC<br />
                                 U2FsdGVkX1+mK9vXzT2qR8bN3cWpL7sH<br />
                                 4eA1YdFvGs6JtPw0lQrZ9uMxCk8nVhOi<br />
@@ -359,7 +366,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                         <div className="relative z-10 space-y-6 w-full max-w-sm">
                             <div className="space-y-4">
                                 {['password123', 'admin_2024', 'welcome1'].map((p, i) => (
-                                    <div key={i} className="flex items-center gap-6 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 px-8 py-4 shadow-2xl group">
+                                    <div key={i} className="flex items-center gap-4 sm:gap-6 bg-zinc-900/90 backdrop-blur-md border border-zinc-700/50 px-4 sm:px-8 py-3 sm:py-4 shadow-2xl group">
                                         <Key className="w-5 h-5 text-zinc-500" />
                                         <span className="text-zinc-400 font-mono text-base">{p}</span>
                                         <div className="ml-auto flex items-center gap-2">
@@ -377,7 +384,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                         <div className="relative z-10 space-y-6 w-full max-w-sm">
                             <div className="space-y-4">
                                 {['K@p9$2xL!m3#Qv', 'fN&5zW^4R*T9$G', 'sV!6hY#8nS@1kP'].map((p, i) => (
-                                    <div key={i} className="flex items-center gap-6 bg-zinc-900/90 backdrop-blur-md border border-emerald-500/30 px-8 py-4 shadow-[0_0_50px_rgba(16,185,129,0.15)]">
+                                    <div key={i} className="flex items-center gap-4 sm:gap-6 bg-zinc-900/90 backdrop-blur-md border border-emerald-500/30 px-4 sm:px-8 py-3 sm:py-4 shadow-[0_0_50px_rgba(16,185,129,0.15)]">
                                         <Key className="w-5 h-5 text-emerald-500" />
                                         <span className="text-emerald-300 font-mono text-lg tracking-[0.1em]">{p}</span>
                                     </div>
@@ -526,14 +533,14 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                     </div>
                                 </div>
                             ) : (
-                                <div className="text-center space-y-6 px-8">
-                                    <div className="w-48 h-48 mx-auto relative border border-emerald-500/30 rounded-xl overflow-hidden shadow-2xl bg-zinc-950">
+                                <div className="text-center space-y-4 sm:space-y-6 px-4 sm:px-8">
+                                    <div className="w-32 h-32 sm:w-48 sm:h-48 mx-auto relative border border-emerald-500/30 rounded-xl overflow-hidden shadow-2xl bg-zinc-950">
                                         <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#18181b_0px,#18181b_8px,#27272a_8px,#27272a_16px)] opacity-50" />
-                                        <div className="absolute inset-8 bg-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.4)] rounded-lg" />
+                                        <div className="absolute inset-6 sm:inset-8 bg-emerald-500 shadow-[0_0_40px_rgba(16,185,129,0.4)] rounded-lg" />
                                     </div>
                                     <div className="space-y-1 bg-zinc-950/50 py-2 border border-white/5 rounded backdrop-blur-sm">
-                                        <span className="text-emerald-400 font-mono text-xs font-black uppercase tracking-widest">4096 × 4096 PX</span>
-                                        <span className="text-zinc-400 text-[10px] block font-bold uppercase tracking-[0.25em]">{vpT('svgToPng.alpha')}</span>
+                                        <span className="text-emerald-400 font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest">4096 × 4096 PX</span>
+                                        <span className="text-zinc-400 text-[8px] sm:text-[10px] block font-bold uppercase tracking-[0.25em]">{vpT('svgToPng.alpha')}</span>
                                     </div>
                                 </div>
                             )}
@@ -663,7 +670,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     />
                     <div className="relative z-10 flex flex-col items-center justify-center gap-12 h-full max-h-[85%] w-full max-w-lg">
                         {type === 'before' ? (
-                            <div className="w-full aspect-video bg-zinc-900/80 backdrop-blur-xl border border-zinc-700/50 flex flex-col items-center justify-center gap-6 shadow-2xl relative overflow-hidden group">
+                            <div className="w-full aspect-square sm:aspect-video bg-zinc-900/80 backdrop-blur-xl border border-zinc-700/50 flex flex-col items-center justify-center gap-6 shadow-2xl relative overflow-hidden group">
                                 <Video className="w-16 h-16 text-zinc-400 relative z-10 drop-shadow-lg" />
                                 <div className="relative z-10 text-center bg-zinc-950/60 backdrop-blur py-2 px-6 rounded-lg border border-white/5">
                                     <span className="text-zinc-300 font-mono text-sm font-bold block uppercase tracking-widest">Global_Presentation.mp4</span>
@@ -674,7 +681,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                 </div>
                             </div>
                         ) : (
-                            <div className="w-full aspect-video bg-zinc-900/90 backdrop-blur-xl border border-emerald-500/30 flex flex-col items-center justify-center gap-8 shadow-[0_0_60px_rgba(16,185,129,0.15)] relative overflow-hidden">
+                            <div className="w-full aspect-square sm:aspect-video bg-zinc-900/90 backdrop-blur-xl border border-emerald-500/30 flex flex-col items-center justify-center gap-8 shadow-[0_0_60px_rgba(16,185,129,0.15)] relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/5 to-transparent" />
                                 <div className="w-16 h-16 rounded-full border-4 border-emerald-500 flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.4)] relative z-10 bg-zinc-950">
                                     <div className="w-6 h-6 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
@@ -705,7 +712,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                     />
                     <div className="relative z-10 flex flex-col items-center gap-4 w-full h-full max-h-[85%]">
                         <div className={cn(
-                            "w-auto aspect-[3/4] h-full bg-white shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col p-8 sm:p-12 gap-6 transition-all backdrop-blur-xl",
+                            "w-auto aspect-[3/4] h-full bg-white shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col p-5 sm:p-12 gap-6 transition-all backdrop-blur-xl",
                             type === 'before' ? "border-zinc-200/50 opacity-90" : "border-emerald-500/30"
                         )}>
                             <div className="h-2 w-full bg-zinc-200/80 rounded-full" />
@@ -745,7 +752,7 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                                 <div className="flex flex-col items-center gap-3">
                                     <Shield className="w-12 h-12 text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
                                     <div className="text-center">
-                                        <span className="text-xl font-black tracking-tighter text-emerald-500 uppercase italic block leading-none">VaultNode Secure</span>
+                                        <span className="text-xl font-black tracking-tighter text-emerald-500 uppercase italic block leading-none">PrivaFlow Secure</span>
                                         <span className="text-emerald-800 font-mono text-[10px] font-black uppercase tracking-[0.4em] block mt-1">{vpT('stamp.stamped')}</span>
                                     </div>
                                 </div>
@@ -1125,20 +1132,20 @@ export const VisualProof = memo(({ toolId, mode = 'full', className }: VisualPro
                 <div className="flex-1 h-px bg-white/[0.06]" />
             </div>
 
-            <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-white italic">
+            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white italic">
                 {t(`${toolId.replace(/-([a-z])/g, (g) => g[1].toUpperCase())}.after`)}
             </h3>
 
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-hidden">
                 <div className={cn(
                     "relative bg-black overflow-hidden",
-                    (toolId === 'bg-remover' || toolId === 'enhancer') ? "aspect-square max-w-sm mx-auto w-full" : "aspect-video"
+                    (toolId === 'bg-remover' || toolId === 'enhancer') ? "aspect-square max-w-sm mx-auto w-full" : "aspect-square sm:aspect-video"
                 )}>
                     {render('before')}
                 </div>
                 <div className={cn(
                     "relative bg-black overflow-hidden shadow-[0_0_50px_rgba(16,185,129,0.1)]",
-                    (toolId === 'bg-remover' || toolId === 'enhancer') ? "aspect-square max-w-sm mx-auto w-full" : "aspect-video"
+                    (toolId === 'bg-remover' || toolId === 'enhancer') ? "aspect-square max-w-sm mx-auto w-full" : "aspect-square sm:aspect-video"
                 )}>
                     {render('after')}
                 </div>

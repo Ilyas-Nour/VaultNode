@@ -28,8 +28,8 @@ export default async function FAQPage({ params }: { params: Promise<{ locale: st
     const faqSchemaData = faqs.map(f => ({ question: f.q, answer: f.a }));
 
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'FAQ', item: `https://vaultnode.com/${locale}/faq` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'FAQ', item: `https://privaflow.com/${locale}/faq` }
     ];
 
     return (

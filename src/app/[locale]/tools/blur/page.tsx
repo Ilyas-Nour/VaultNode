@@ -20,9 +20,9 @@ export default async function BlurPage({ params }: { params: Promise<{ locale: s
     const t = await getTranslations({ locale, namespace: 'Metadata.blur' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/blur` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/blur` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function BlurPage({ params }: { params: Promise<{ locale: s
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/blur`} 
+                url={`https://privaflow.com/${locale}/tools/blur`} 
                 category="MultimediaApplication"
                 subCategory="Photo Privacy Tool"
                 featureList={['Face Blurring', 'Privacy Brush', 'Zero-Upload Processing']}

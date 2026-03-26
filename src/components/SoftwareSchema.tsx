@@ -28,7 +28,7 @@ export const SoftwareSchema = ({
     featureList = []
 }: SoftwareSchemaProps) => {
     // Ensure URL uses the primary domain
-    const correctedUrl = url.replace('privaflow.com', 'vaultnode.com');
+    const correctedUrl = url;
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -48,7 +48,7 @@ export const SoftwareSchema = ({
         "author": {
             "@type": "Organization",
             "name": "PrivaFlow",
-            "url": "https://vaultnode.com"
+            "url": "https://privaflow.com"
         },
         "aggregateRating": {
             "@type": "AggregateRating",

@@ -20,9 +20,9 @@ export default async function OrganizePagesPage({ params }: { params: Promise<{ 
     const t = await getTranslations({ locale, namespace: 'Metadata.organizePages' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Documents', item: `https://vaultnode.com/${locale}/tools?category=documents` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/organize-pages` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Documents', item: `https://privaflow.com/${locale}/tools?category=documents` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/organize-pages` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function OrganizePagesPage({ params }: { params: Promise<{ 
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/organize-pages`} 
+                url={`https://privaflow.com/${locale}/tools/organize-pages`} 
                 category="OfficeApplication"
                 subCategory="PDF Reordering Tool"
                 featureList={['Local Page Sorting', 'Zero-Upload Privacy', 'Intuitive Drag-and-Drop']}

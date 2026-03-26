@@ -20,9 +20,9 @@ export default async function ImageToTextPage({ params }: { params: Promise<{ lo
     const t = await getTranslations({ locale, namespace: 'Metadata.imageToText' });
     
     const breadcrumbItems = [
-        { name: 'Vault', item: `https://vaultnode.com/${locale}` },
-        { name: 'Media', item: `https://vaultnode.com/${locale}/tools?category=media` },
-        { name: t('title'), item: `https://vaultnode.com/${locale}/tools/image-to-text` }
+        { name: 'Vault', item: `https://privaflow.com/${locale}` },
+        { name: 'Media', item: `https://privaflow.com/${locale}/tools?category=media` },
+        { name: t('title'), item: `https://privaflow.com/${locale}/tools/image-to-text` }
     ];
 
     const visualBreadcrumbs = [
@@ -35,7 +35,7 @@ export default async function ImageToTextPage({ params }: { params: Promise<{ lo
             <SoftwareSchema 
                 name={t('title')} 
                 description={t('description')} 
-                url={`https://vaultnode.com/${locale}/tools/image-to-text`} 
+                url={`https://privaflow.com/${locale}/tools/image-to-text`} 
                 category="MultimediaApplication"
                 subCategory="OCR Tool"
                 featureList={['Local OCR Engine', 'Zero-Upload Privacy', 'Fast Text Extraction']}
