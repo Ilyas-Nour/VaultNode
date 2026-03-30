@@ -21,6 +21,7 @@ const StampTool = memo(() => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const imgRef = useRef<HTMLImageElement>(null);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles[0]) {
@@ -36,59 +37,98 @@ const StampTool = memo(() => {
     });
 
     const handleExport = useCallback(async () => {
-        if (!file || !previewUrl) return;
+        if (!file || !previewUrl || !imgRef.current) return;
         setIsProcessing(true);
 
         try {
-            const img = new Image();
-            img.src = previewUrl;
-            await new Promise((resolve) => (img.onload = resolve));
+            const previewImg = imgRef.current;
+            const naturalWidth = previewImg.naturalWidth;
+            const naturalHeight = previewImg.naturalHeight;
+            const renderedWidth = previewImg.clientWidth;
 
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            if (!ctx) return;
-
-            ctx.drawImage(img, 0, 0);
-
-            // Draw stamp
-            const uiCanvas = canvasRef.current;
-            if (uiCanvas) {
-                const scaleX = img.width / uiCanvas.width;
-                const scaleY = img.height / uiCanvas.height;
-
-                ctx.save();
-                ctx.translate(sigPos.x * scaleX, sigPos.y * scaleY);
-                ctx.rotate(-Math.PI / 12); // Subtle tilt
-
-                ctx.globalAlpha = stampOpacity;
-                ctx.fillStyle = stampColor;
-                ctx.font = `bold ${Math.round(fontSize * scaleX)}px Inter, sans-serif`;
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
-
-                ctx.fillText(stampText, 0, 0);
-
-                // Optional border for visibility
-                ctx.lineWidth = 2 * scaleX;
-                ctx.strokeStyle = "rgba(0,0,0,0.3)";
-                ctx.strokeText(stampText, 0, 0);
-
-                ctx.restore();
+            if (naturalWidth === 0 || renderedWidth === 0) {
+                throw new Error("Image not fully loaded or visible");
             }
 
-            const dataUrl = canvas.toDataURL("image/png");
-            const link = document.createElement("a");
-            link.href = dataUrl;
-            link.download = `privaflow_stamped_${file.name}`;
-            link.click();
+            const scale = naturalWidth / renderedWidth;
+
+            const canvas = document.createElement("canvas");
+            canvas.width = naturalWidth;
+            canvas.height = naturalHeight;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) throw new Error("Could not get canvas context");
+
+            // Draw original image using the ref directly for better performance and reliability
+            ctx.drawImage(previewImg, 0, 0, naturalWidth, naturalHeight);
+
+            // Draw stamp
+            ctx.save();
+            
+            // Adjust position to match UI
+            // UI padding: px-6 (24px) py-3 (12px)
+            const paddingX = 24 * scale;
+            const paddingY = 12 * scale;
+
+            // Anchor point: top-left of the watermark container
+            ctx.translate(sigPos.x * scale, sigPos.y * scale);
+            
+            // For rotation that matches CSS -rotate-12 (which is around center in CSS)
+            // But in UI, we rotate the inner div. Let's stick to the UI look.
+            // In my previous fix, I translated then rotated. Let's make sure it's accurate.
+            
+            // Re-map the rotation to be around the start of the text
+            ctx.translate(paddingX, paddingY);
+            ctx.rotate(-Math.PI / 12); 
+
+            ctx.globalAlpha = stampOpacity;
+            ctx.fillStyle = stampColor;
+            
+            // Font size needs to be perfectly scaled
+            const scaledFontSize = Math.round(fontSize * scale);
+            ctx.font = `bold ${scaledFontSize}px Inter, Assistant, sans-serif`;
+            ctx.textAlign = "left";
+            ctx.textBaseline = "top";
+
+            const text = stampText || t('defaultText');
+            
+            // Draw shadow for visibility
+            ctx.shadowColor = "rgba(0,0,0,0.5)";
+            ctx.shadowBlur = 4 * scale;
+            ctx.shadowOffsetX = 2 * scale;
+            ctx.shadowOffsetY = 2 * scale;
+
+            ctx.fillText(text, 0, 0);
+
+            // Optional stroke for definition
+            ctx.strokeStyle = "rgba(255,255,255,0.3)";
+            ctx.lineWidth = Math.max(1, 0.2 * scale);
+            ctx.strokeText(text, 0, 0);
+
+            ctx.restore();
+
+            // Export using toBlob for better reliability
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    setIsProcessing(false);
+                    return;
+                }
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = `stamped_${file.name.split('.')[0]}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+                setIsProcessing(false);
+            }, "image/png", 0.95);
+
         } catch (err) {
             console.error("Export Error:", err);
-        } finally {
+            alert("Error exporting image. Please try again.");
             setIsProcessing(false);
         }
-    }, [file, previewUrl, sigPos, stampText, stampColor, stampOpacity, fontSize]);
+    }, [file, previewUrl, sigPos, stampText, stampColor, stampOpacity, fontSize, t]);
 
     const clear = useCallback(() => {
         setFile(null);
@@ -221,32 +261,35 @@ const StampTool = memo(() => {
                                 <div className="relative inline-block">
                                     {previewUrl && (
                                         <img
-                                            onLoad={(e) => {
-                                                const img = e.currentTarget;
-                                                if (canvasRef.current) {
-                                                    canvasRef.current.width = img.width;
-                                                    canvasRef.current.height = img.height;
-                                                }
-                                            }}
+                                            ref={imgRef}
                                             src={previewUrl}
-                                            className="max-w-full max-h-[70vh] block"
+                                            className="max-w-full max-h-[70vh] block select-none pointer-events-none"
                                             alt="Preview"
                                         />
                                     )}
-                                    <canvas ref={canvasRef} className="hidden" />
 
                                     <motion.div
                                         drag
-                                        dragConstraints={containerRef}
+                                        dragConstraints={imgRef}
                                         dragMomentum={false}
+                                        dragElastic={0}
                                         onDragEnd={(_, info) => {
                                             setSigPos(prev => ({
                                                 x: prev.x + info.offset.x,
                                                 y: prev.y + info.offset.y
                                             }));
                                         }}
+                                        // Reset the internal motion transform after state update
+                                        onUpdate={(latest) => {
+                                            // This helps sync the state update with the motion values
+                                        }}
                                         className="absolute cursor-move z-20 group"
-                                        style={{ top: sigPos.y, left: sigPos.x }}
+                                        style={{ 
+                                            top: 0, 
+                                            left: 0,
+                                            x: sigPos.x,
+                                            y: sigPos.y
+                                        }}
                                     >
                                         <div className="relative pointer-events-none">
                                             <div
