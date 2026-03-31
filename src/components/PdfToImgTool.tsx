@@ -40,7 +40,7 @@ const PdfToImgTool = memo(() => {
 
     // ⚙️ WORKER INITIALIZATION
     useEffect(() => {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
     /**

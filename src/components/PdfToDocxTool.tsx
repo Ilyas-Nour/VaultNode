@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { ToolContainer } from "@/components/ToolContainer";
 import { useTranslations } from "next-intl";
 import * as pdfjsLib from "pdfjs-dist";
-import { Document, Packer, Paragraph, TextRun } from "docx";
+import { Document, Packer, Paragraph, TextRun, ImageRun } from "docx";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -41,12 +41,12 @@ const PdfToDocxTool = memo(() => {
 
     // ⚙️ WORKER INITIALIZATION
     useEffect(() => {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
     /**
      * ⚡ Reconstruction Core
-     * Iterates through PDF primitives to synthesize a native Word document.
+     * Parses PDF structure to extract both text layers and image assets.
      */
     const processFile = useCallback(async (file: File) => {
         setOriginalFile(file);
@@ -60,26 +60,114 @@ const PdfToDocxTool = memo(() => {
             const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
             const pdfDocument = await loadingTask.promise;
 
-            setProgressStr(t('extractingText') || "Extracting Text...");
-
             const numPages = pdfDocument.numPages;
-            const paragraphs: Paragraph[] = [];
+            const docChildren: any[] = [];
 
             for (let pageNum = 1; pageNum <= numPages; pageNum++) {
                 setProgressStr(`${t('processingPage') || "Processing Page"} ${pageNum} / ${numPages}`);
                 const page = await pdfDocument.getPage(pageNum);
+                
+                // --- Part A: Text Extraction with Layout Awareness ---
                 const textContent = await page.getTextContent();
+                
+                // Group text items by their vertical position (Y-coordinate)
+                // transform[5] is the Y-coordinate in PDF space (starts from bottom)
+                const lineMap = new Map<number, any[]>();
+                textContent.items.forEach((item: any) => {
+                    const y = Math.round(item.transform[5]);
+                    // Use a small threshold for grouping items on the same line
+                    let foundKey = Array.from(lineMap.keys()).find(k => Math.abs(k - y) < 5);
+                    if (foundKey !== undefined) {
+                        lineMap.get(foundKey)?.push(item);
+                    } else {
+                        lineMap.set(y, [item]);
+                    }
+                });
 
-                const pageStrings = textContent.items.map((item: any) => item.str);
-                const pageText = pageStrings.join(" ");
+                // Sort lines from top to bottom (highest Y to lowest Y in PDF space)
+                const sortedY = Array.from(lineMap.keys()).sort((a, b) => b - a);
 
-                if (pageText.trim()) {
-                    paragraphs.push(
-                        new Paragraph({
-                            children: [new TextRun(pageText)],
-                            spacing: { after: 200 }
-                        })
-                    );
+                sortedY.forEach(y => {
+                    const items = lineMap.get(y) || [];
+                    // Sort items in the line from left to right (X-coordinate: transform[4])
+                    items.sort((a, b) => a.transform[4] - b.transform[4]);
+                    
+                    const lineText = items.map(it => it.str).join(" ");
+                    if (lineText.trim()) {
+                        docChildren.push(
+                            new Paragraph({
+                                children: [new TextRun(lineText)],
+                                spacing: { after: 200 }
+                            })
+                        );
+                    }
+                });
+
+                // --- Part B: Image extraction from page resources ---
+                try {
+                    const opList = await page.getOperatorList();
+                    const imgOps = [
+                        pdfjsLib.OPS.paintImageXObject,
+                        pdfjsLib.OPS.paintInlineImageXObject,
+                        pdfjsLib.OPS.paintImageMaskXObject
+                    ];
+
+                    for (let i = 0; i < opList.fnArray.length; i++) {
+                        if (imgOps.includes(opList.fnArray[i])) {
+                            const imgId = opList.argsArray[i][0];
+                            // Helper to get image data from PDF.js objects
+                            const imgObj = await new Promise<any>((resolve) => {
+                                // Try common objects first, then page objects
+                                page.commonObjs.get(imgId, (data: any) => {
+                                    if (data) resolve(data);
+                                    else page.objs.get(imgId, resolve);
+                                });
+                            });
+
+                            if (imgObj && imgObj.data) {
+                                // Convert raw pixels to temporary PNG for docx ingestion
+                                const canvas = document.createElement("canvas");
+                                canvas.width = imgObj.width;
+                                canvas.height = imgObj.height;
+                                const ctx = canvas.getContext("2d");
+                                if (ctx) {
+                                    const imageData = ctx.createImageData(imgObj.width, imgObj.height);
+                                    // Handle both RGB and RGBA formats
+                                    if (imgObj.data.length === imgObj.width * imgObj.height * 3) {
+                                        for (let j = 0, k = 0; j < imgObj.data.length; j += 3, k += 4) {
+                                            imageData.data[k] = imgObj.data[j];
+                                            imageData.data[k + 1] = imgObj.data[j + 1];
+                                            imageData.data[k + 2] = imgObj.data[j + 2];
+                                            imageData.data[k + 3] = 255;
+                                        }
+                                    } else {
+                                        imageData.data.set(imgObj.data);
+                                    }
+                                    ctx.putImageData(imageData, 0, 0);
+                                    
+                                    const imgDataUrl = canvas.toDataURL("image/png");
+                                    const imgBuffer = await (await fetch(imgDataUrl)).arrayBuffer();
+                                    
+                                    docChildren.push(
+                                        new Paragraph({
+                                            children: [
+                                                new ImageRun({
+                                                    data: new Uint8Array(imgBuffer),
+                                                    transformation: {
+                                                        width: Math.min(imgObj.width, 500),
+                                                        height: (Math.min(imgObj.width, 500) / imgObj.width) * imgObj.height,
+                                                    }
+                                                } as any) // Use as any to bypass strict version-specific type mismatch in docx v9
+                                            ],
+                                            spacing: { before: 200, after: 200 }
+                                        })
+                                    );
+                                }
+                            }
+                        }
+                    }
+                } catch (imgErr) {
+                    console.warn(`Could not extract images from page ${pageNum}:`, imgErr);
                 }
             }
 
@@ -88,9 +176,9 @@ const PdfToDocxTool = memo(() => {
             const doc = new Document({
                 sections: [{
                     properties: {},
-                    children: paragraphs.length > 0 ? paragraphs : [
+                    children: docChildren.length > 0 ? docChildren : [
                         new Paragraph({
-                            children: [new TextRun("No readable text found in this PDF (It might be scanned/image-based).")]
+                            children: [new TextRun("No readable content found in this PDF.")]
                         })
                     ],
                 }],

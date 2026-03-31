@@ -25,7 +25,7 @@ import pptxgen from "pptxgenjs";
 import { VisualProof } from "@/components/VisualProof";
 
 // Setup PDF worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/worker.ts";
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
 /**
  * 📄 PdfToPptTool Component

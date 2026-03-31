@@ -26,7 +26,7 @@ const OrganizeTool = memo(() => {
 
     // Initialise PDF.js worker
     useEffect(() => {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
     const loadPages = useCallback(async (file: File) => {

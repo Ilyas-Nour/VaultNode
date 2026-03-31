@@ -20,7 +20,7 @@ export const useRedactor = () => {
     const loadFile = useCallback((newFile: File) => {
         setFile(newFile);
         setRedactions([]);
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
     const reset = useCallback(() => {
