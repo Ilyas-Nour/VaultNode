@@ -122,8 +122,7 @@ export default async function RootLayout({
                     .dark { --background: #000000; }
                     .cta-critical { background: white; color: black; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 0; transition: all 0.2s; }
                 `}} />
-                <link rel="preload" href="/_next/static/css/12c41b2e25cf5e5b.css" as="style" />
-                <link rel="preload" href="/_next/static/css/1671b248c6058f11.css" as="style" />
+
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

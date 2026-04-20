@@ -4,10 +4,13 @@ import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, ArrowRight } from 'lucide-react';
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export const Hero = memo(() => {
     const t = useTranslations('HomePage');
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
+
     return (
         <section className="relative mt-14 sm:mt-16 min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100dvh-4rem)] flex flex-col items-center justify-center border-b border-white/[0.06] overflow-hidden w-full">
             <div className="absolute inset-0 bg-grid-canvas opacity-100 pointer-events-none" />
@@ -17,6 +20,7 @@ export const Hero = memo(() => {
 
                 {/* Badge */}
                 <div
+                    dir={isRTL ? 'rtl' : 'ltr'}
                     className="inline-flex items-center gap-2.5 px-4 py-2 border border-white/10 rounded-full text-[10px] font-semibold uppercase tracking-[0.25em] text-zinc-400 animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both"
                 >
                     <Lock className="w-3 h-3 shrink-0" />
@@ -26,7 +30,7 @@ export const Hero = memo(() => {
                 {/* Headline */}
                 <h1
                     className="font-black leading-[0.87] tracking-tighter uppercase w-full animate-hero-in"
-                    style={{ fontSize: 'clamp(2.5rem, 12vw, 160px)' }}
+                    style={{ fontSize: 'clamp(2rem, 10vw, 150px)' }}
                 >
                     <span className="text-white block">{t('titlePart1')}</span>
                     <span className="text-white/30 block">{t('titlePart2')}</span>
@@ -52,7 +56,7 @@ export const Hero = memo(() => {
                         className="cta-critical group h-12 sm:h-14 px-8 sm:px-10 bg-white hover:bg-zinc-100 text-black font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95"
                     >
                         {t('heroExplore')}
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className={`w-4 h-4 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`} />
                     </Link>
                     <Link
                         href="/privacy-report"
