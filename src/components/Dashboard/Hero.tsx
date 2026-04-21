@@ -16,7 +16,7 @@ export const Hero = memo(() => {
             <div className="absolute inset-0 bg-grid-canvas opacity-100 pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-white/3 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="relative w-full px-4 sm:px-6 lg:px-12 py-6 -mt-[8vh] flex flex-col items-center text-center gap-5 sm:gap-6">
+            <div className="relative w-full px-4 sm:px-6 lg:px-12 py-8 -mt-[4vh] flex flex-col items-center text-center gap-5 sm:gap-6">
 
                 {/* Badge */}
                 <div
