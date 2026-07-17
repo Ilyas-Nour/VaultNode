@@ -116,15 +116,39 @@ const PdfToDocxTool = memo(() => {
                         if (imgOps.includes(opList.fnArray[i])) {
                             const imgId = opList.argsArray[i][0];
                             // Helper to get image data from PDF.js objects
-                            const imgObj = await new Promise<any>((resolve) => {
-                                // Try common objects first, then page objects
-                                page.commonObjs.get(imgId, (data: any) => {
-                                    if (data) resolve(data);
-                                    else page.objs.get(imgId, resolve);
+                            let imgObj: any = null;
+                            
+                            if (typeof imgId === 'string') {
+                                imgObj = await new Promise<any>((resolve) => {
+                                    // Safety timeout to prevent infinite hanging on corrupted/inline images
+                                    const timeout = setTimeout(() => resolve(null), 2000);
+                                    
+                                    try {
+                                        // Try common objects first, then page objects
+                                        page.commonObjs.get(imgId, (data: any) => {
+                                            if (data) {
+                                                clearTimeout(timeout);
+                                                resolve(data);
+                                            } else {
+                                                page.objs.get(imgId, (data2: any) => {
+                                                    clearTimeout(timeout);
+                                                    resolve(data2);
+                                                });
+                                            }
+                                        });
+                                    } catch (err) {
+                                        clearTimeout(timeout);
+                                        resolve(null);
+                                    }
                                 });
-                            });
+                            } else if (opList.fnArray[i] === pdfjsLib.OPS.paintInlineImageXObject) {
+                                // Inline images contain the data directly in the args
+                                if (imgId && imgId.data && imgId.width && imgId.height) {
+                                    imgObj = imgId;
+                                }
+                            }
 
-                            if (imgObj && imgObj.data) {
+                            if (imgObj && imgObj.data && imgObj.width && imgObj.height) {
                                 // Convert raw pixels to temporary PNG for docx ingestion
                                 const canvas = document.createElement("canvas");
                                 canvas.width = imgObj.width;
