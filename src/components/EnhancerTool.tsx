@@ -281,18 +281,6 @@ const EnhancerTool = memo(() => {
                                     )}
                                 </div>
                             </div>
-
-                            <div className="md:col-span-2 flex items-center justify-center gap-12 py-6 bg-zinc-900/80 border border-zinc-800 rounded-[2.5rem] shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl mt-4">
-                                <div className="flex items-center gap-3.5 transition-all hover:scale-105">
-                                    <div className="w-2.5 rounded-full h-2.5 bg-amber-500 animate-pulse shadow-[0_0_15px_rgba(245,158,11,0.5)]" />
-                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">{t('protocol')}</span>
-                                </div>
-                                <div className="w-px h-6 bg-zinc-800" />
-                                <div className="flex items-center gap-3.5 transition-all hover:scale-105">
-                                    <div className="w-2.5 rounded-full h-2.5 bg-amber-500 animate-pulse shadow-[0_0_15px_rgba(245,158,11,0.5)]" style={{ animationDelay: '0.2s' }} />
-                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">{t('integrity')}</span>
-                                </div>
-                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>

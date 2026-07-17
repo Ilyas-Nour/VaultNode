@@ -39,6 +39,7 @@ const BackgroundRemoverTool = memo(() => {
     const [exportBlob, setExportBlob] = useState<Blob | null>(null);
     const [exportUrl, setExportUrl] = useState<string | null>(null);
     const [modelType, setModelType] = useState<'isnet' | 'isnet_fp16' | 'isnet_quint8'>('isnet_fp16');
+    const [progressText, setProgressText] = useState('');
     
     // -- Immersive States --
     const [isImmersive, setIsImmersive] = useState(false);
@@ -83,6 +84,7 @@ const BackgroundRemoverTool = memo(() => {
     const handleRemove = useCallback(async () => {
         if (!file) return;
         setIsProcessing(true);
+        setProgressText('');
         try {
             const blob = await removeBackground(file, {
                 model: modelType,
@@ -92,7 +94,11 @@ const BackgroundRemoverTool = memo(() => {
                     quality: 1.0
                 },
                 progress: (key: string, current: number, total: number) => {
-                    console.log(`Removal progress: ${key} ${current}/${total}`);
+                    if (key.includes('fetch')) {
+                        setProgressText(`DOWNLOADING MODEL... ${Math.round((current / total) * 100)}%`);
+                    } else if (key.includes('compute')) {
+                        setProgressText(`INFERENCING...`);
+                    }
                 }
             } as any);
             
@@ -594,21 +600,9 @@ const BackgroundRemoverTool = memo(() => {
                                                 <div className="absolute -inset-4 bg-emerald-500/20 blur-2xl rounded-full animate-pulse" />
                                                 <Loader2 className="w-10 h-10 text-emerald-500 animate-spin relative" />
                                             </div>
-                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse">{t('processing')}</span>
+                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-500 animate-pulse">{progressText || t('processing')}</span>
                                         </div>
                                     )}
-                                </div>
-                            </div>
-
-                            <div className="md:col-span-2 flex items-center justify-center gap-12 py-6 bg-zinc-900/80 border border-zinc-800 rounded-[2.5rem] shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl mt-4">
-                                <div className="flex items-center gap-3.5 transition-all hover:scale-105">
-                                    <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
-                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">{t('protocol')}</span>
-                                </div>
-                                <div className="w-px h-6 bg-zinc-800" />
-                                <div className="flex items-center gap-3.5 transition-all hover:scale-105">
-                                    <div className="w-2.5 rounded-full h-2.5 bg-emerald-500 animate-pulse shadow-[0_0_15px_rgba(16,185,129,0.5)]" style={{ animationDelay: '0.2s' }} />
-                                    <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic">{t('integrity')}</span>
                                 </div>
                             </div>
                         </motion.div>
