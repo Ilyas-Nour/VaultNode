@@ -100,8 +100,10 @@ const TextEncryptorTool = memo(() => {
 
                 setOutput(new TextDecoder().decode(decrypted));
             }
-        } catch (error) {
-            console.error("Crypto error:", error);
+        } catch (error: any) {
+            if (error.name !== 'OperationError') {
+                console.error("Crypto error:", error);
+            }
             setOutput(tc('error'));
         } finally {
             setIsProcessing(false);
