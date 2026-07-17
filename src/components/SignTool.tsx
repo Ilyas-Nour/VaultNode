@@ -9,7 +9,7 @@ import { ToolContainer } from "@/components/ToolContainer";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import * as pdfjsLib from "pdfjs-dist";
-import { PDFDocument } from "pdf-lib";
+import { PDFDocument, degrees } from "pdf-lib";
 
 const UI_RENDER_SCALE = 1.5;
 
@@ -35,6 +35,8 @@ const SignTool = memo(() => {
         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }, []);
 
+    const renderTasks = useRef<Map<number, pdfjsLib.RenderTask>>(new Map());
+
     const renderPage = useCallback(async (pdf: pdfjsLib.PDFDocumentProxy, pageNum: number) => {
         try {
             const page = await pdf.getPage(pageNum);
@@ -46,11 +48,26 @@ const SignTool = memo(() => {
                 if (context) {
                     canvas.height = viewport.height;
                     canvas.width = viewport.width;
-                    await page.render({ canvasContext: context, canvas, viewport }).promise;
+
+                    // Cancel any ongoing render task for this canvas
+                    if (renderTasks.current.has(pageNum)) {
+                        const oldTask = renderTasks.current.get(pageNum);
+                        if (oldTask) {
+                            oldTask.cancel();
+                        }
+                    }
+
+                    const renderTask = page.render({ canvasContext: context, canvas, viewport });
+                    renderTasks.current.set(pageNum, renderTask);
+
+                    await renderTask.promise;
+                    renderTasks.current.delete(pageNum);
                 }
             }
-        } catch (err) {
-            console.error(`Error rendering page ${pageNum}:`, err);
+        } catch (err: any) {
+            if (err.name !== "RenderingCancelledException") {
+                console.error(`Error rendering page ${pageNum}:`, err);
+            }
         }
     }, []);
 
@@ -175,22 +192,48 @@ const SignTool = memo(() => {
             const sigImage = await pdfDoc.embedPng(signature);
 
             const targetCanvas = canvasRefs.current[selectedPage];
-            if (targetCanvas) {
+            if (targetCanvas && pdfProxy) {
+                const pdfjsPage = await pdfProxy.getPage(selectedPage + 1);
+                const viewport = pdfjsPage.getViewport({ scale: UI_RENDER_SCALE });
+                
                 const rect = targetCanvas.getBoundingClientRect();
-                const x = sigX.get();
-                const y = sigY.get();
+                
+                // Calculate scale factor from CSS pixels to Canvas internal pixels
+                const canvasScaleX = viewport.width / rect.width;
+                const canvasScaleY = viewport.height / rect.height;
 
-                // PDF-lib coordinates are from bottom-left
-                const pdfX = (x / rect.width) * width;
-                const sigWidthPdf = (120 * UI_RENDER_SCALE * sigScale / rect.width) * width;
-                const sigHeightPdf = (60 * UI_RENDER_SCALE * sigScale / rect.height) * height;
-                const pdfY = ((rect.height - y) / rect.height) * height - sigHeightPdf;
+                // Original CSS pixel dimensions of the signature (unscaled)
+                const originalCssWidth = 120 * UI_RENDER_SCALE;
+                const originalCssHeight = 60 * UI_RENDER_SCALE;
+                
+                // Framer Motion scales from the center (transform-origin: center)
+                // We must calculate the true visual top-left corner
+                const visualCssLeft = sigX.get() + (originalCssWidth / 2) * (1 - sigScale);
+                const visualCssTop = sigY.get() + (originalCssHeight / 2) * (1 - sigScale);
+                const visualCssWidth = originalCssWidth * sigScale;
+                const visualCssHeight = originalCssHeight * sigScale;
+
+                // Map CSS visual bounds to Canvas internal pixels
+                const canvasLeft = visualCssLeft * canvasScaleX;
+                const canvasTop = visualCssTop * canvasScaleY;
+                const canvasWidth = visualCssWidth * canvasScaleX;
+                const canvasHeight = visualCssHeight * canvasScaleY;
+
+                // pdf-lib's drawImage rotates around the bottom-left corner.
+                // In the canvas, the bottom-left is (canvasLeft, canvasTop + canvasHeight).
+                // Use pdf.js viewport math to perfectly map this point to the PDF coordinate system.
+                const [pdfX, pdfY] = viewport.convertToPdfPoint(canvasLeft, canvasTop + canvasHeight);
+                
+                // Map dimensions to PDF points (viewport scale is uniform)
+                const pdfWidth = canvasWidth / UI_RENDER_SCALE;
+                const pdfHeight = canvasHeight / UI_RENDER_SCALE;
 
                 page.drawImage(sigImage, {
                     x: pdfX,
                     y: pdfY,
-                    width: sigWidthPdf,
-                    height: sigHeightPdf,
+                    width: pdfWidth,
+                    height: pdfHeight,
+                    rotate: degrees(-viewport.rotation),
                 });
             }
 
