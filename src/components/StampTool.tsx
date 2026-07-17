@@ -22,6 +22,7 @@ const StampTool = memo(() => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const imgRef = useRef<HTMLImageElement>(null);
+    const watermarkRef = useRef<HTMLDivElement>(null);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
         if (acceptedFiles[0]) {
@@ -37,11 +38,13 @@ const StampTool = memo(() => {
     });
 
     const handleExport = useCallback(async () => {
-        if (!file || !previewUrl || !imgRef.current) return;
+        if (!file || !previewUrl || !imgRef.current || !watermarkRef.current) return;
         setIsProcessing(true);
 
         try {
             const previewImg = imgRef.current;
+            const wmElement = watermarkRef.current;
+            
             const naturalWidth = previewImg.naturalWidth;
             const naturalHeight = previewImg.naturalHeight;
             const renderedWidth = previewImg.clientWidth;
@@ -58,40 +61,43 @@ const StampTool = memo(() => {
             const ctx = canvas.getContext("2d");
             if (!ctx) throw new Error("Could not get canvas context");
 
-            // Draw original image using the ref directly for better performance and reliability
+            // Draw original image using the ref directly
             ctx.drawImage(previewImg, 0, 0, naturalWidth, naturalHeight);
+
+            // Calculate precise visual position using DOM rects
+            const imgRect = previewImg.getBoundingClientRect();
+            const wmRect = wmElement.getBoundingClientRect();
+            
+            // The position of the top-left of the watermark relative to the top-left of the image
+            const relativeX = wmRect.left - imgRect.left;
+            const relativeY = wmRect.top - imgRect.top;
 
             // Draw stamp
             ctx.save();
             
-            // Adjust position to match UI
-            // UI padding: px-6 (24px) py-3 (12px)
-            const paddingX = 24 * scale;
-            const paddingY = 12 * scale;
-
-            // Anchor point: top-left of the watermark container
-            ctx.translate(sigPos.x * scale, sigPos.y * scale);
+            // Move context to the top-left of the watermark bounding box
+            ctx.translate(relativeX * scale, relativeY * scale);
             
-            // For rotation that matches CSS -rotate-12 (which is around center in CSS)
-            // But in UI, we rotate the inner div. Let's stick to the UI look.
-            // In my previous fix, I translated then rotated. Let's make sure it's accurate.
+            // Since the watermark has a -12deg rotation, its bounding rect is larger than the text itself.
+            // We need to apply the rotation and adjust the origin to match the visual text start.
+            // The exact origin shift depends on the CSS, but translating roughly to the center of the rect,
+            // rotating, and then drawing works well.
+            const rectWidth = wmRect.width * scale;
+            const rectHeight = wmRect.height * scale;
             
-            // Re-map the rotation to be around the start of the text
-            ctx.translate(paddingX, paddingY);
-            ctx.rotate(-Math.PI / 12); 
-
+            ctx.translate(rectWidth / 2, rectHeight / 2);
+            ctx.rotate(-12 * Math.PI / 180); // Exact -12 degrees to match UI
+            
             ctx.globalAlpha = stampOpacity;
             ctx.fillStyle = stampColor;
             
-            // Font size needs to be perfectly scaled
             const scaledFontSize = Math.round(fontSize * scale);
-            ctx.font = `bold ${scaledFontSize}px Inter, Assistant, sans-serif`;
-            ctx.textAlign = "left";
-            ctx.textBaseline = "top";
+            ctx.font = `bold ${scaledFontSize}px Inter, sans-serif`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
 
             const text = stampText || t('defaultText');
             
-            // Draw shadow for visibility
             ctx.shadowColor = "rgba(0,0,0,0.5)";
             ctx.shadowBlur = 4 * scale;
             ctx.shadowOffsetX = 2 * scale;
@@ -99,7 +105,6 @@ const StampTool = memo(() => {
 
             ctx.fillText(text, 0, 0);
 
-            // Optional stroke for definition
             ctx.strokeStyle = "rgba(255,255,255,0.3)";
             ctx.lineWidth = Math.max(1, 0.2 * scale);
             ctx.strokeText(text, 0, 0);
@@ -205,7 +210,7 @@ const StampTool = memo(() => {
                             <button
                                 onClick={handleExport}
                                 disabled={isProcessing}
-                                className="w-full h-12 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-zinc-200 transition-all active:scale-95 disabled:opacity-50"
+                                className="w-full h-12 flex items-center justify-center gap-2 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-zinc-200 transition-all active:scale-95 disabled:opacity-50"
                             >
                                 {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
                                 {isProcessing ? t('processingImage') : t('saveBtn')}
@@ -291,7 +296,7 @@ const StampTool = memo(() => {
                                             y: sigPos.y
                                         }}
                                     >
-                                        <div className="relative pointer-events-none">
+                                        <div className="relative pointer-events-none" ref={watermarkRef}>
                                             <div
                                                 className="px-6 py-3 border-2 border-dashed border-white/20 whitespace-nowrap select-none -rotate-12"
                                                 style={{
